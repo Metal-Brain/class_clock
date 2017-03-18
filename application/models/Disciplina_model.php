@@ -59,7 +59,7 @@
     }
 
     /**
-      * Deleta uma disciplina.
+      * Altera o status de uma disciplina para falso.
       * @author Caio de Freitas
       * @since 2017/03/17
       * @param INT $idDisciplina - ID da disciplina
@@ -67,7 +67,7 @@
       */
     public function deleteDisciplina ($idDisciplina) {
       $this->db->where('idDisciplina', $idDisciplina);
-      $result = $this->db->delete('Disciplina');
+      $result = $this->db->update('Disciplina',array('statusDisciplina'=>FALSE));
 
       return $result;
     }
