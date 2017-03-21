@@ -46,12 +46,14 @@
     }
 
     /**
-        *Essa função irá atualizar os dados do usuario.
-        *Se esses dados estiverem validos, Envia os dados para modelo.
-        *e ira altera-los.
-        *@author Felipe Ribeiro da Silva
-        *@since 2017/03/21
-      */
+    *Essa função irá atualizar os dados do usuario.
+    *Se esses dados estiverem validos, Envia os dados para modelo.
+    *e ira altera-los.
+    *@author Felipe Ribeiro da Silva
+    *@since 2017/03/21
+    *@param Int $idCurso - ID do Curso
+    *@return Função que irá atualizar os dados do usuario!
+    */
     public function atualizar () {
 
       $this->load->library('form_validation');
@@ -82,11 +84,13 @@
     }
 
     /**
-        *Essa função irá procurar o id do Curso
-        *e irá alterar a propriedade dele para True ou False,
-        *assim não exclindo do banco.
-        *@author Felipe Ribeiro da Silva
-        *@since 2017/03/21
+    *Essa função irá procurar o id do Curso
+    *e irá alterar a propriedade dele para True ou False,
+    *assim não exclindo do banco.
+    *@author Felipe Ribeiro da Silva
+    *@since 2017/03/21
+    *@param Int $idCurso - ID do Curso
+    *@return Função para deletar Curso através do id!
     */
     public function deletar ($id) {
 
