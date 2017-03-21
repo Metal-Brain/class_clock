@@ -13,9 +13,8 @@
 
 
     // =========================================================================
-    // ======================Cadastro de disciplinas============================
+    // ==========================CRUD de disciplinas============================
     // =========================================================================
-
 
     /**
       * Valida os dados do forumulário de cadastro de disciplinas.
@@ -40,7 +39,7 @@
 
       // Verifica se o formulario é valido
       if ($this->form_validation->run() == FALSE) {
-        $this->load->view('disciplina/cadastrar');
+
       } else {
 
         // Pega os dados do formulário
@@ -53,6 +52,19 @@
         // TODO: chamar o modelo de disciplina para realizar a persistencia dos dados
 
       }
+    }
+
+    /**
+      * Deleta uma disciplina.
+      * @author Caio de Freitas
+      * @since  2017/03/21
+      * @param $id ID da disciplina
+      */
+    public function deletar ($id) {
+      // Carrega os modelos necessarios
+      $this->load->model(array('Disciplina_model'));
+
+      $this->Disciplina_model->deleteDisciplina($id);
     }
 
   }
