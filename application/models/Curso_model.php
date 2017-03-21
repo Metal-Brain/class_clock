@@ -7,24 +7,68 @@
     */
   class Curso_model extends CI_Model {
 
+    /**
+    *@author Felipe Ribeiro da Silva
+    *@since 2017/03/21
+    *@param Int $idCurso - ID do Curso
+    *@return retorna um array com todos os cursos!
+    */
     function getCurso() {
-      // TODO: Criar função para buscar todos os cursos com o status de ativo
+      $result = $this->db->get('Curso');
+
+      return $result->result_array();
     }
 
+    /**
+    *@author Felipe Ribeiro da Silva
+    *@since 2017/03/21
+    *@param Int $idCurso - ID do Curso
+    *@return retorna um array do curso atraves do ID!
+    */
     function getCursoById($idCurso) {
-      // TODO: Criar função para retornar o curso pelo ID informado.
+    $this->db->where('idCurso', $idCurso);
+    $result = $this->db->get('Curso');
+
+    return $result->result_array();
     }
 
+    /**
+    *@author Felipe Ribeiro da Silva
+    *@since 2017/03/21
+    *@param Int $idCurso - ID do Curso
+    *@return Insere um curso na tabela Curso!
+    */
     function insertCurso($curso) {
-      // TODO: criar função para inserir um novo curso na base de dados.
+    return $this->db->insert('Curso', $curso);
+
     }
+
+    /**
+    *@author Felipe Ribeiro da Silva
+    *@since 2017/03/21
+    *@param Int $idCurso - ID do Curso
+    *@return retorna boolean TRUE ou False dos Dados Caso seja Atualizado
+    */
 
     function updateCurso($idCurso, $curso) {
-      // TODO: criar função para autalizar os dados do curso na base dados
+    $this->db->where('idCurso');
+    $result = $this->db->update('Curso', $curso);
+
+    return $result;
     }
 
-    function deleteCurso() {
-      // TODO: criar função para "deletar" o curso
+    /**
+    *@author Felipe Ribeiro da Silva
+    *@since 2017/03/21
+    *@param Int $idCurso - ID do Curso
+    *@return retorna boolean TRUE ou False dos Dados Caso Seja deletado
+    */
+
+    function deleteCurso($idCurso) {
+      $this->db->where('idCurso', $idCurso);
+      $result = $this->db->update('Curso', array('statusCurso' =>FALSE));
+
+      return $result;
     }
 
   }
