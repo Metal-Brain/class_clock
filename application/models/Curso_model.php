@@ -8,10 +8,10 @@
   class Curso_model extends CI_Model {
 
     /**
-    *@author Felipe Ribeiro da Silva
-    *@since 2017/03/21
-    *@param Int $idCurso - ID do Curso
-    *@return retorna um array com todos os cursos!
+          *Essa função ira pegar tudo da tabela Curso
+          *e colocar em um array.
+          *@author Felipe Ribeiro da Silva
+          *@since 2017/03/21
     */
     function getCurso() {
       $result = $this->db->get('Curso');
@@ -20,10 +20,12 @@
     }
 
     /**
+    *Essa função tem como objetivo encontrar um Curso
+    *pelo seu ID.
     *@author Felipe Ribeiro da Silva
     *@since 2017/03/21
-    *@param Int $idCurso - ID do Curso
-    *@return retorna um array do curso atraves do ID!
+    *@param  $idCurso - ID de Cursos
+    *@return array de Cursos
     */
     function getCursoById($idCurso) {
     $this->db->where('idCurso', $idCurso);
@@ -33,10 +35,13 @@
     }
 
     /**
+    *Essa função insere um Curso.
+    *Caso esteja tudo correto, o curso
+    *será inserido na tabela.
     *@author Felipe Ribeiro da Silva
     *@since 2017/03/21
-    *@param Int $idCurso - ID do Curso
-    *@return Insere um curso na tabela Curso!
+    *@param  pega como paramentro $curso
+    *@return uma inserção na tabela curso.
     */
     function insertCurso($curso) {
     return $this->db->insert('Curso', $curso);
@@ -44,10 +49,12 @@
     }
 
     /**
+    *Atualiza os dados do usuario.
+    *Caso seja preenchido corretamente.
+    *os dados do usuario serão atualizados.
     *@author Felipe Ribeiro da Silva
     *@since 2017/03/21
     *@param Int $idCurso - ID do Curso
-    *@return retorna boolean TRUE ou False dos Dados Caso seja Atualizado
     */
 
     function updateCurso($idCurso, $curso) {
@@ -58,10 +65,11 @@
     }
 
     /**
+    *Deleta um curso.
     *@author Felipe Ribeiro da Silva
     *@since 2017/03/21
     *@param Int $idCurso - ID do Curso
-    *@return retorna boolean TRUE ou False dos Dados Caso Seja deletado
+    *@return altera o boolean  para TRUE ou False dos Dados caso Seja deletado.
     */
 
     function deleteCurso($idCurso) {
