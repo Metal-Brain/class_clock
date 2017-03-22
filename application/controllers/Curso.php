@@ -7,6 +7,14 @@
     */
   class Curso extends CI_Controller {
 
+    /**
+          *Essa função irá cadastrar o Curso desejado
+          *Se os dados estiverem corretos, será enviado para modelo
+          *e cadastrado no banco.
+          *@author Felipe Ribeiro da Silva
+          *@since 2017/03/21
+      */
+
     public function cadastrar () {
       //Carregar as bibliotecas de validação
       $this->load->library('form_validation');
@@ -38,11 +46,12 @@
     }
 
     /**
-    *@author Felipe Ribeiro da Silva
-    *@since 2017/03/21
-    *@param Int $idCurso - ID do Curso
-    *@return Função que irá atualizar os dados do usuario!
-    */
+        *Essa função irá atualizar os dados do usuario.
+        *Se esses dados estiverem validos, Envia os dados para modelo.
+        *e ira altera-los.
+        *@author Felipe Ribeiro da Silva
+        *@since 2017/03/21
+      */
     public function atualizar () {
 
       $this->load->library('form_validation');
@@ -73,10 +82,11 @@
     }
 
     /**
-    *@author Felipe Ribeiro da Silva
-    *@since 2017/03/21
-    *@param Int $idCurso - ID do Curso
-    *@return Função para deletar Curso através do id!
+        *Essa função irá procurar o id do Curso
+        *e irá alterar a propriedade dele para True ou False,
+        *assim não exclindo do banco.
+        *@author Felipe Ribeiro da Silva
+        *@since 2017/03/21
     */
     public function deletar ($id) {
 
