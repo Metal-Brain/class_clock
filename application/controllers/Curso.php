@@ -46,14 +46,12 @@
     }
 
     /**
-    *Essa função irá atualizar os dados do usuario.
-    *Se esses dados estiverem validos, Envia os dados para modelo.
-    *e ira altera-los.
-    *@author Felipe Ribeiro da Silva
-    *@since 2017/03/21
-    *@param Int $idCurso - ID do Curso
-    *@return Função que irá atualizar os dados do usuario!
-    */
+        *Essa função irá atualizar os dados do usuario.
+        *Se esses dados estiverem validos, Envia os dados para modelo.
+        *e ira altera-los.
+        *@author Felipe Ribeiro da Silva
+        *@since 2017/03/21
+      */
     public function atualizar () {
 
       $this->load->library('form_validation');
