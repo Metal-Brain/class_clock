@@ -26,7 +26,7 @@
     public function cadastro () {
       // Carrega a biblioteca para validação dos dados.
       $this->load->library('form_validation');
-      $this->load->helper(array('form'));
+      $this->load->helper(array('form','url'));
       $this->load->model(array('Disciplina_model'));
 
       // Definir as regras de validação para cada campo do formulário.
@@ -40,6 +40,8 @@
       // Verifica se o formulario é valido
       if ($this->form_validation->run() == FALSE) {
 
+	  $this->load->view('disciplinas');
+	  
       } else {
 
         // Pega os dados do formulário
