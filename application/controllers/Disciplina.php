@@ -30,28 +30,32 @@
       $this->load->model(array('Disciplina_model'));
 
       // Definir as regras de validação para cada campo do formulário.
-      $this->form_validation->set_rules('nomeDisciplina', 'nome do curso', array('required','min_length[5]','ucwords'));
+      $this->form_validation->set_rules('nome', 'nome do curso', array('required','min_length[5]','ucwords'));
       $this->form_validation->set_rules('sigla', 'sigla', array('required', 'exact_length[3]','strtoupper'));
       // TODO adicionar a validação do curso
-      $this->form_validation->set_rules('nProfessores', 'quantidade de professores', array('required', 'integer', 'greater_than[0]'));
+      $this->form_validation->set_rules('qtdProf', 'quantidade de professores', array('required', 'integer', 'greater_than[0]'));
       // Definição dos delimitadores
-      $this->form_validation->set_error_delimiters('<span class="error">','</span>');
+      $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
 
       // Verifica se o formulario é valido
       if ($this->form_validation->run() == FALSE) {
 
-	  $this->load->view('disciplinas');
-	  
+	       $this->load->view('disciplinas');
+
       } else {
 
         // Pega os dados do formulário
         $disciplina = array(
-          'nomeDisciplina'  => $this->input->post("nomeDisciplina"),
-          'sigla'           => $this->input->post('sigla'),
-          'nProfessores'    => $this->input->post("nProfessores")
+          'nome'      => $this->input->post("nome"),
+          'sigla'     => $this->input->post('sigla'),
+          'qtdProf'   => $this->input->post("qtdProf")
         );
 
-        // TODO: chamar o modelo de disciplina para realizar a persistencia dos dados
+        if ($this->Disciplina_model->insertDisciplina($disciplina)){
+          // TODO: Create success message
+        } else {
+          // TODO: Create error message
+        }
 
       }
     }
