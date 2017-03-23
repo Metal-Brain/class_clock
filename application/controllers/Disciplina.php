@@ -40,7 +40,8 @@
       // Verifica se o formulario é valido
       if ($this->form_validation->run() == FALSE) {
 
-	       $this->load->view('disciplinas');
+        $dados['disciplinas'] = $this->Disciplina_model->getDisciplinas();
+	      $this->load->view('disciplinas', $dados);
 
       } else {
 

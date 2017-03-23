@@ -14,10 +14,11 @@
       * @return Retorna um array com todas as disciplinas
       */
     public function getDisciplinas () {
-        $result = $this->db->get('Disciplina');
+      $this->db->where('status', TRUE);
+      $result = $this->db->get('Disciplina');
 
-        return $result->result_array(); // converte o objeto em um array
-      }
+      return $result->result_array(); // converte o objeto em um array
+    }
 
     /**
       * Busca a disciplina a partir do ID
