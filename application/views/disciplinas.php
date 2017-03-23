@@ -3,8 +3,8 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Cadastro das Disciplinas</title>
-		<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+		<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/bootstrap.min.css')?>">
+		<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/style.css')?>">
 	</head>
 	<body>
 		<!-- as classes container-fluid, row e col-md-xx são do GRID do bootstrap -->
