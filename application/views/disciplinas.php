@@ -160,8 +160,8 @@
 									<input type="text" class="form-control" id="recipient-nome">
 								</div>
 								<div class="form-group">
-									<label for="curso-name" class="control-label">Curso (Sigla):</label>
-									<input type="text" class="form-control" id="recipient-curso">
+									<label for="qtd-prof" class="control-label">Quantidade de professores:</label>
+									<input type="text" class="form-control percent-10" id="recipient-qtd-prof">
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
