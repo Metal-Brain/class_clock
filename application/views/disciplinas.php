@@ -100,7 +100,7 @@
 								</div>
 								<div class="form-group">
 									<label>Quantidade de professores</label>
-									<input type="text" class="form-control percent-5" name="qtdProf" placeholder="ex: 1" value="<?= set_value('qtdProf')?>">
+									<input type="text" maxlength="1" pattern="[0-9]+$" class="form-control percent-5" name="qtdProf" placeholder="ex: 1" value="<?= set_value('qtdProf')?>">
 									<?= form_error('qtdProf') ?>
 								</div>
 								<div class="inline">
@@ -141,7 +141,7 @@
 								</div>
 								<div class="form-group">
 									<label for="qtd-prof" class="control-label">Quantidade de professores:</label>
-									<input type="text" class="form-control percent-10" name="recipient-qtd-prof" id="recipient-qtd-prof">
+									<input type="text" maxlength="1" pattern="[0-9]+$"  class="form-control percent-10" name="recipient-qtd-prof" id="recipient-qtd-prof">
 									<?= form_error('recipient-qtd-prof') ?>
 								</div>
 								<div class="modal-footer">
