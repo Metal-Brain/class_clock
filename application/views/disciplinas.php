@@ -61,36 +61,23 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>LOP1</td>
-										<td>Lógica de Programação 1</td>
-										<td>1</td>
-										<td>
-											<button type="button" class="btn btn-primary" title="Visualizar" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-eye-open"></span></button>
-											<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whateversigla="LOP1" data-whatevernome="Lógica de Programação 1" data-whatevercurso="ADS"><span class="glyphicon glyphicon-pencil"></span></button>
-											<button type="button" class="btn btn-danger" title="Excluir"><span class="glyphicon glyphicon-remove"></span></button>
-										</td>
-									</tr>
-									<tr>
-										<td>CALC1</td>
-										<td>Cálculo 1</td>
-										<td>1</td>
-										<td>
-											<button type="button" class="btn btn-primary" title="Visualizar" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-eye-open"></span></button>
-											<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whateversigla="CALC1" data-whatevernome="Cálculo 1" data-whatevercurso="MAT"><span class="glyphicon glyphicon-pencil"></span></button>
-											<button type="button" class="btn btn-danger" title="Excluir"><span class="glyphicon glyphicon-remove"></span></button>
-										</td>
-									</tr>
-									<tr>
-										<td>TERM</td>
-										<td>Termodinâmica</td>
-										<td>2</td>
-										<td>
-											<button type="button" class="btn btn-primary" title="Visualizar" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-eye-open"></span></button>
-											<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whateversigla="TERM" data-whatevernome="Termodinâmica" data-whatevercurso="FIS"><span class="glyphicon glyphicon-pencil"></span></button>
-											<button type="button" class="btn btn-danger" title="Excluir"><span class="glyphicon glyphicon-remove"></span></button>
-										</td>
-									</tr>
+									<?php
+										foreach ($disciplinas as $disciplina) {
+											$row = '<tr>
+												<td>'.$disciplina['sigla'].'</td>
+												<td>'.$disciplina['nome'].'</td>
+												<td>'.$disciplina['qtdProf'].'</td>
+												<td>
+													<button type="button" class="btn btn-primary" title="Visualizar" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-eye-open"></span></button>
+													<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whateversigla="LOP1" data-whatevernome="Lógica de Programação 1" data-whatevercurso="ADS"><span class="glyphicon glyphicon-pencil"></span></button>
+													<button type="button" class="btn btn-danger" title="Excluir"><span class="glyphicon glyphicon-remove"></span></button>
+												</td>
+											</tr>';
+
+											echo $row;
+										}
+									?>
+
 								</tbody>
 							</table>
 						</div>
@@ -98,21 +85,24 @@
 						<!-- Aqui é o formulário de registro do novo item-->
 						<div id="new" class="tab-pane fade">
 							<h3>Cadastrar Disciplina</h3>
-							<form>
+							<form action="" method="post">
 								<div class="form-group percent-40 inline">
 									<label>Nome</label>
-									<input type="text" class="form-control" name="nome" placeholder="Nome">
+									<input type="text" class="form-control" name="nome" placeholder="Nome" value="<?= set_value('nome')?>">
+									<?= form_error('nome') ?>
 								</div>
 								<div class="form-group percent-10 inline">
 									<label>Sigla</label>
-									<input type="text" class="form-control" name="sigla" placeholder="ex: LOPA1">
+									<input type="text" class="form-control" name="sigla" placeholder="ex: LOPA1" value="<?= set_value('sigla')?>">
+									<?= form_error('sigla') ?>
 								</div>
 								<div class="form-group">
 									<label>Quantidade de professores</label>
-									<input type="text" class="form-control percent-5" name="qtdProf" placeholder="ex: 1">
+									<input type="text" class="form-control percent-5" name="qtdProf" placeholder="ex: 1" value="<?= set_value('qtdProf')?>">
+									<?= form_error('qtdProf') ?>
 								</div>
 								<div class="inline">
-									<button type='button' class='btn bt-lg btn-primary'>Cadastrar</button>
+									<button type='submit' class='btn bt-lg btn-primary'>Cadastrar</button>
 									<button type='button' class='btn bt-lg btn-default'>Cancelar</button>
 								</div>
 							</form>
