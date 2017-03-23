@@ -5,7 +5,7 @@
 		<title>Cadastro das Disciplinas</title>
 		<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/bootstrap.min.css')?>">
 		<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/style.css')?>">
-		<link rel="stylesheet" type="text/css" href="<?= base_url('assets/DataTables/dataTables.bootstrap.min.css') ?>"></script>
+		<link rel="stylesheet" type="text/css" href="<?= base_url('assets/DataTables/datatables.min.css') ?>"></script>
 	</head>
 	<body>
 		<!-- as classes container-fluid, row e col-md-xx são do GRID do bootstrap -->
@@ -52,7 +52,8 @@
 
 						<!-- Aqui é a Listagem dos Itens -->
 						<div id="list" class="tab-pane fade in active">
-							<table id="disciplinaTable" class="table table-striped">
+							<div style="margin-top: 25px;">
+								<table id="disciplinaTable" class="table table-striped">
 								<thead>
 									<tr>
 										<th>Sigla</th>
@@ -80,6 +81,7 @@
 
 								</tbody>
 							</table>
+							</div>
 						</div>
 
 						<!-- Aqui é o formulário de registro do novo item-->
@@ -181,7 +183,11 @@
 		</script>
 		<script type="text/javascript">
 			$(document).ready(function () {
-				$("#disciplinaTable").DataTable();
+				$("#disciplinaTable").DataTable({
+					"language":{
+						"url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Portuguese-Brasil.json"
+					}
+				});
 			});
 		</script>
 	</body>
