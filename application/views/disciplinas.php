@@ -5,6 +5,7 @@
 		<title>Cadastro das Disciplinas</title>
 		<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/bootstrap.min.css')?>">
 		<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/style.css')?>">
+		<link rel="stylesheet" type="text/css" href="<?= base_url('assets/DataTables/dataTables.bootstrap.min.css') ?>"></script>
 	</head>
 	<body>
 		<!-- as classes container-fluid, row e col-md-xx são do GRID do bootstrap -->
@@ -51,7 +52,7 @@
 
 						<!-- Aqui é a Listagem dos Itens -->
 						<div id="list" class="tab-pane fade in active">
-							<table class="table table-striped">
+							<table id="disciplinaTable" class="table table-striped">
 								<thead>
 									<tr>
 										<th>Sigla</th>
@@ -69,8 +70,8 @@
 												<td>'.$disciplina['qtdProf'].'</td>
 												<td>
 													<button type="button" class="btn btn-primary" title="Visualizar" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-eye-open"></span></button>
-													<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whateversigla="LOP1" data-whatevernome="Lógica de Programação 1" data-whatevercurso="ADS"><span class="glyphicon glyphicon-pencil"></span></button>
-													<button type="button" class="btn btn-danger" title="Excluir"><span class="glyphicon glyphicon-remove"></span></button>
+													<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whateversigla="'.$disciplina['sigla'].'" data-whatevernome="'.$disciplina['nome'].'" data-whateverid="'.$disciplina['id'].'" data-whateverqtdprof="'.$disciplina['qtdProf'].'"><span class="glyphicon glyphicon-pencil"></span></button>
+													'.anchor('Disciplina/deletar/'.$disciplina['id'],'<span class="glyphicon glyphicon-remove"></span>',array('class'=>'btn btn-danger','title'=>'Excluir','style'=>'color: white;')).'
 												</td>
 											</tr>';
 
@@ -140,22 +141,28 @@
 							<h4 class="modal-title" id="exampleModalLabel">Disciplinas</h4>
 						</div>
 						<div class="modal-body">
-							<form>
+							<?= form_open('Disciplina/atualizar') ?>
+								<div class="form-group">
+									<input type="hidden" name="recipient-id" id="recipient-id">
+								</div>
 								<div class="form-group">
 									<label for="sigla-name" class="control-label">Sigla:</label>
-									<input type="text" class="form-control" id="recipient-sigla">
+									<input type="text" class="form-control" name="recipient-sigla" id="recipient-sigla">
+									<?= form_error('recipient-sigla') ?>
 								</div>
 								<div class="form-group">
 									<label for="nome-name" class="control-label">Nome:</label>
-									<input type="text" class="form-control" id="recipient-nome">
+									<input type="text" class="form-control" name="recipient-nome" id="recipient-nome">
+									<?= form_error('recipient-nome') ?>
 								</div>
 								<div class="form-group">
 									<label for="qtd-prof" class="control-label">Quantidade de professores:</label>
-									<input type="text" class="form-control percent-10" id="recipient-qtd-prof">
+									<input type="text" class="form-control percent-10" name="recipient-qtd-prof" id="recipient-qtd-prof">
+									<?= form_error('recipient-qtd-prof') ?>
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
-									<button type="button" class="btn btn-danger">Alterar</button>
+									<button type="submit" class="btn btn-danger">Alterar</button>
 								</div>
 							</form>
 						</div>
@@ -169,8 +176,9 @@
 			</div>
 
 		</div><!--Fecha container-fluid-->
-		<script type="text/javascript" src="assets/js/jquery-3.1.1.min.js"></script>
-		<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="<?= base_url('assets/js/jquery-3.1.1.min.js')?>"></script>
+		<script type="text/javascript" src="<?= base_url('assets/js/bootstrap.min.js') ?>"></script>
+		<script type="text/javascript" src="<?= base_url('assets/DataTables/datatables.min.js') ?>"></script>
 		<script type="text/javascript">
 				$('#exampleModal').on('show.bs.modal', function (event) {
 						var button = $(event.relatedTarget) // Button that triggered the modal
@@ -178,6 +186,8 @@
 						var recipientsigla = button.data('whateversigla')
 						var recipientnome = button.data('whatevernome')
 						var recipientcurso = button.data('whatevercurso')
+						var recipientQtdProf = button.data('whateverqtdprof')
+						var recipientId = button.data('whateverid')
 						// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
 						// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
 						var modal = $(this)
@@ -185,7 +195,14 @@
 						modal.find('#recipient-sigla').val(recipientsigla)
 						modal.find('#recipient-nome').val(recipientnome)
 						modal.find('#recipient-curso').val(recipientcurso)
+						modal.find('#recipient-qtd-prof').val(recipientQtdProf)
+						modal.find('#recipient-id').val(recipientId)
 				})
+		</script>
+		<script type="text/javascript">
+			$(document).ready(function () {
+				$("#disciplinaTable").DataTable();
+			});
 		</script>
 	</body>
 </html>

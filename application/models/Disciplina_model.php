@@ -24,11 +24,11 @@
       * Busca a disciplina a partir do ID
       * @author Caio de Freitas
       * @since 2017/03/17
-      * @param INT $idDisciplina
+      * @param INT $id ID da disciplina
       * @return Retorna um array que representa a tupla.
       */
     public function getDisciplinasById ($idDisciplina) {
-      $this->db->where('idDisciplina', $idDisciplina);
+      $this->db->where('id', $idDisciplina);
       $result = $this->db->get('Disciplina');
 
       return $result->result_array();
@@ -53,7 +53,7 @@
       * @return Retorna um boolean TRUE caso os dados sejam atualizados com sucesso
       */
     public function updateDisciplina ($idDisciplina, $disciplina) {
-      $this->db->where('idDisciplina', $idDisciplina);
+      $this->db->where('id', $idDisciplina);
       $result = $this->db->update('Disciplina', $disciplina);
 
       return $result;
@@ -63,12 +63,12 @@
       * Altera o status de uma disciplina para falso.
       * @author Caio de Freitas
       * @since 2017/03/17
-      * @param INT $idDisciplina - ID da disciplina
+      * @param INT $id - ID da disciplina
       * @return Retorna um boolean TRUE caso a disciplina seja deletada com sucesso
       */
-    public function deleteDisciplina ($idDisciplina) {
-      $this->db->where('idDisciplina', $idDisciplina);
-      $result = $this->db->update('Disciplina',array('statusDisciplina'=>FALSE));
+    public function deleteDisciplina ($id) {
+      $this->db->where('id', $id);
+      $result = $this->db->update('Disciplina',array('status'=>FALSE));
 
       return $result;
     }

@@ -25,13 +25,13 @@
       */
     public function cadastro () {
       // Carrega a biblioteca para validação dos dados.
-      $this->load->library('form_validation');
+      $this->load->library(array('form_validation','session'));
       $this->load->helper(array('form','url'));
       $this->load->model(array('Disciplina_model'));
 
       // Definir as regras de validação para cada campo do formulário.
       $this->form_validation->set_rules('nome', 'nome do curso', array('required','min_length[5]','ucwords'));
-      $this->form_validation->set_rules('sigla', 'sigla', array('required', 'exact_length[3]','strtoupper'));
+      $this->form_validation->set_rules('sigla', 'sigla', array('required', 'max_length[5]','strtoupper'));
       // TODO adicionar a validação do curso
       $this->form_validation->set_rules('qtdProf', 'quantidade de professores', array('required', 'integer', 'greater_than[0]'));
       // Definição dos delimitadores
@@ -53,10 +53,12 @@
         );
 
         if ($this->Disciplina_model->insertDisciplina($disciplina)){
-          // TODO: Create success message
+          $this->session->set_flashdata('success','Disciplina cadastrada com sucesso');
         } else {
-          // TODO: Create error message
+          $this->session->set_flashdata('danger','Não foi possivel cadastrar a disciplina, tente novamente ou entre em contato com o administrador do sistema');
         }
+
+        redirect('/');
 
       }
     }
@@ -71,7 +73,12 @@
       // Carrega os modelos necessarios
       $this->load->model(array('Disciplina_model'));
 
-      $this->Disciplina_model->deleteDisciplina($id);
+      if ( $this->Disciplina_model->deleteDisciplina($id) )
+        $this->session->set_flashdata('success','Disciplina deletada com sucesso');
+      else
+        $this->session->set_flashdata('danger','Não foi possivel deletar a disciplina, tente novamente ou entre em contato com o administrador do sistema');
+
+      redirect('/');
     }
 
     /**
@@ -80,31 +87,39 @@
       * @since 2017/03/21
       * @param $id ID da disciplina
       */
-    public function atualizar ($id) {
+    public function atualizar () {
 
       $this->load->library('form_validation');
       $this->load->model(array('Disciplina_model'));
 
       // Definir as regras de validação para cada campo do formulário.
-      $this->form_validation->set_rules('nomeDisciplina', 'nome do curso', array('required','min_length[5]','ucwords'));
-      $this->form_validation->set_rules('sigla', 'sigla', array('required', 'exact_length[3]','strtoupper'));
-      // TODO adicionar a validação do curso
-      $this->form_validation->set_rules('nProfessores', 'quantidade de professores', array('required', 'integer', 'greater_than[0]'));
+      $this->form_validation->set_rules('recipient-nome', 'nome do curso', array('required','min_length[5]','ucwords'));
+      $this->form_validation->set_rules('recipient-sigla', 'sigla', array('required', 'max_length[5]','strtoupper'));
+      $this->form_validation->set_rules('recipient-qtd-prof', 'quantidade de professores', array('required', 'integer', 'greater_than[0]'));
       // Definição dos delimitadores
-      $this->form_validation->set_error_delimiters('<span class="error">','</span>');
+      $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
 
       // Verifica se o formulario é valido
       if ($this->form_validation->run() == FALSE) {
+        $dados['disciplinas'] = $this->Disciplina_model->getDisciplinas();
+        $this->load->view('disciplinas', $dados);
       } else {
+
+        $id = $this->input->post('recipient-id');
 
         // Pega os dados do formulário
         $disciplina = array(
-          'nomeDisciplina'  => $this->input->post("nomeDisciplina"),
-          'sigla'           => $this->input->post('sigla'),
-          'nProfessores'    => $this->input->post("nProfessores")
+          'nome'        => $this->input->post("recipient-nome"),
+          'sigla'       => $this->input->post('recipient-sigla'),
+          'qtdProf'     => $this->input->post("recipient-qtd-prof")
         );
 
-        $this->Disciplina_model->updateDisciplina($id, $disciplina);
+        if ( $this->Disciplina_model->updateDisciplina($id, $disciplina) )
+          $this->session->set_flashdata('success', 'Disciplina atualizada com sucesso');
+        else
+          $this->session->set_flashdata('danger','Não foi possivel atualizar os dados da disciplina, tente novamente ou entre em contato com o administrador do sistema');
+
+        redirect('/');
 
       }
     }
