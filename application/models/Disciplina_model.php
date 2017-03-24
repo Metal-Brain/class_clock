@@ -13,7 +13,7 @@
       * @since 2017/03/17
       * @return Retorna um array com todas as disciplinas
       */
-    public function getDisciplinas () {
+    public function getAll() {
         $result = $this->db->get('Disciplina');
 
         return $result->result_array(); // converte o objeto em um array
