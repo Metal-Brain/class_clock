@@ -33,7 +33,7 @@
       $this->form_validation->set_rules('nome', 'nome do curso', array('required','min_length[5]','ucwords'));
       $this->form_validation->set_rules('sigla', 'sigla', array('required', 'max_length[5]','strtoupper'));
       // TODO adicionar a validação do curso
-      $this->form_validation->set_rules('qtdProf', 'quantidade de professores', array('required', 'integer', 'greater_than[0]'));
+      $this->form_validation->set_rules('qtdProf', 'quantidade de professores', array('required', 'integer', 'greater_than[0]', 'less_than[10]'));
       // Definição dos delimitadores
       $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
 
