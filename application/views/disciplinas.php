@@ -5,7 +5,7 @@
 		<title>Cadastro das Disciplinas</title>
 		<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/bootstrap.min.css')?>">
 		<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/style.css')?>">
-		<link rel="stylesheet" type="text/css" href="<?= base_url('assets/DataTables/datatables.min.css') ?>"></script>
+		<link rel="stylesheet" type="text/css" href="<?= base_url('assets/DataTables/datatables.min.css') ?>">
 	</head>
 	<body>
 		<!-- as classes container-fluid, row e col-md-xx são do GRID do bootstrap -->
@@ -71,14 +71,14 @@
 												<td>'.$disciplina['qtdProf'].'</td>
 												<td>
 													<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whateversigla="'.$disciplina['sigla'].'" data-whatevernome="'.$disciplina['nome'].'" data-whateverid="'.$disciplina['id'].'" data-whateverqtdprof="'.$disciplina['qtdProf'].'"><span class="glyphicon glyphicon-pencil"></span></button>
-													'.anchor('Disciplina/deletar/'.$disciplina['id'],'<span class="glyphicon glyphicon-remove"></span>',array('class'=>'btn btn-danger','title'=>'Excluir','style'=>'color: white;')).'
+													<button onClick="exclude('.$disciplina['id'].');" type="button" class="btn btn-danger delete" title="Editar" "><span class="glyphicon glyphicon-remove"></span></button>
+													
 												</td>
 											</tr>';
 
 											echo $row;
 										}
 									?>
-
 								</tbody>
 							</table>
 							</div>
@@ -163,6 +163,7 @@
 		<script type="text/javascript" src="<?= base_url('assets/js/jquery-3.1.1.min.js')?>"></script>
 		<script type="text/javascript" src="<?= base_url('assets/js/bootstrap.min.js') ?>"></script>
 		<script type="text/javascript" src="<?= base_url('assets/DataTables/datatables.min.js') ?>"></script>
+		<script type="text/javascript" src="<?= base_url('assets/js/bootbox.min.js') ?>"></script>
 		<script type="text/javascript">
 				$('#exampleModal').on('show.bs.modal', function (event) {
 						var button = $(event.relatedTarget) // Button that triggered the modal
@@ -189,6 +190,27 @@
 					}
 				});
 			});
+		</script>
+		<script>
+			function exclude(id){
+				bootbox.confirm({
+					message: "Realmente deseja excluir essa disciplina?",
+					buttons: {
+						confirm: {
+							label: 'Sim',
+							className: 'btn-success'
+						},
+						cancel: {
+							label: 'Não',
+							className: 'btn-danger'
+						}
+					},
+					callback: function (result) {
+						if(result)
+							window.location.href = 'Disciplina/deletar/'+id
+					}
+				});
+			}
 		</script>
 	</body>
 </html>
