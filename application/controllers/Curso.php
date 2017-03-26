@@ -21,8 +21,15 @@
     public function cadastrar () {
       //Carregar as bibliotecas de validação
       $this->load->library('form_validation');
-      $this->load->helper(array('form'));
-      $this->load->model(array('Curso_model','CursoTemPeriodo_model'));
+      $this->load->helper(array('form','dropdown'));
+      $this->load->model(array(
+        'Curso_model',
+        'CursoTemPeriodo_model',
+        'CursoTemDisciplina_model',
+        'Grau_model',
+        'Periodo_model',
+        'disciplina_model'
+      ));
 
       //Define regras de validação do formulario!!!
       $this->form_validation->set_rules('nome', 'nome do curso',array('required', 'min_length[5]','trim','ucwords'));
@@ -37,12 +44,10 @@
       //condição para o formulario
       if($this->form_validation->run() == FALSE){
 
-        $this->load->model(array('Grau_model','Periodo_model','disciplina_model'));
-        $this->load->helper(array('dropdown'));
-
         $dados['graus']         = convert($this->Grau_model->getAll(), True);
         $dados['periodo']       = convert($this->Periodo_model->getAll());
         $dados['disciplinas']   = convert($this->disciplina_model->getAll());
+        $dados['cursos']        = $this->Curso_model->getAll();
 
         $this->load->view('cursos',$dados);
 
@@ -65,7 +70,7 @@
             $this->CursoTemPeriodo_model->insert($idCurso,$idPeriodo);
 
           foreach ($disciplinas as $idDisciplina)
-            $this->CursoTemDisciplina_model->insert($idCurso,$idPeriodo);
+            $this->CursoTemDisciplina_model->insert($idCurso,$idDisciplina);
 
           $this->session->set_flashdata('success','Curso cadastrado com sucesso');
         } else {

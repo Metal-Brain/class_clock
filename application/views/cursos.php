@@ -72,42 +72,20 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                  <?php foreach ($cursos as $curso) : ?>
                                     <tr>
-                                        <td>ADS</td>
-                                        <td>Análise e Desenvolvimento de Sistemas</td>
-                                        <td>6</td>
-                                        <td>Noturno</td>
-                                        <td>Tecnólogo</td>
+                                        <td><?= $curso['sigla'] ?></td>
+                                        <td><?= $curso['nome'] ?></td>
+                                        <td><?= $curso['qtdSemestres'] ?></td>
+                                        <td><?= $curso['periodo'] ?></td>
+                                        <td><?= $curso['grauNome'] ?></td>
                                         <td>
                                             <button type="button" class="btn btn-primary" title="Visualizar" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-eye-open"></span></button>
                                             <button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whateversigla="LOP1" data-whatevernome="Lógica de Programação 1" data-whatevercurso="ADS"><span class="glyphicon glyphicon-pencil"></span></button>
                                             <button type="button" class="btn btn-danger" title="Excluir"><span class="glyphicon glyphicon-remove"></span></button>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>MAT</td>
-                                        <td>Matemática</td>
-                                        <td>8</td>
-                                        <td>Matutino</td>
-                                        <td>Bacharel</td>
-                                        <td>
-                                            <button type="button" class="btn btn-primary" title="Visualizar" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-eye-open"></span></button>
-                                            <button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whateversigla="LOP1" data-whatevernome="Lógica de Programação 1" data-whatevercurso="ADS"><span class="glyphicon glyphicon-pencil"></span></button>
-                                            <button type="button" class="btn btn-danger" title="Excluir"><span class="glyphicon glyphicon-remove"></span></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>FIS</td>
-                                        <td>Física</td>
-                                        <td>6</td>
-                                        <td>Noturno</td>
-                                        <td>Bacharel</td>
-                                        <td>
-                                            <button type="button" class="btn btn-primary" title="Visualizar" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-eye-open"></span></button>
-                                            <button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whateversigla="LOP1" data-whatevernome="Lógica de Programação 1" data-whatevercurso="ADS"><span class="glyphicon glyphicon-pencil"></span></button>
-                                            <button type="button" class="btn btn-danger" title="Excluir"><span class="glyphicon glyphicon-remove"></span></button>
-                                        </td>
-                                    </tr>
+                                  <?php endforeach; ?>
                                 </tbody>
                             </table>
                         </div>
