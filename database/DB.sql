@@ -6,9 +6,9 @@ USE CLASSCLOCK;
 CREATE TABLE IF NOT EXISTS Disciplina(
 	id             	INT         NOT NULL AUTO_INCREMENT,
 	nome           	VARCHAR(45) NOT NULL,
-	sigla          	CHAR(3)     NOT NULL,
-	qtdProf			INT         NOT NULL,
-	`status`       	BOOLEAN     NOT NULL DEFAULT FALSE,
+	sigla          	VARCHAR(5)  NOT NULL,
+	qtdProf					INT         NOT NULL,
+	`status`       	BOOLEAN     NOT NULL DEFAULT TRUE,
 	PRIMARY KEY (id)
 );
 
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS Curso (
   sigla         VARCHAR(5)  NOT NULL,
   qtdSemestres  INT         NOT NULL,
   grau          INT         NOT NULL,
-  `status`      BOOLEAN     NOT NULL  DEFAULT FALSE,
+  `status`      BOOLEAN     NOT NULL  DEFAULT TRUE,
   PRIMARY KEY (id),
   CONSTRAINT fk_curso_grau
     FOREIGN KEY (grau) REFERENCES Grau(id)
