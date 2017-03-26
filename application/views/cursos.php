@@ -80,9 +80,8 @@
                                         <td><?= $curso['periodo'] ?></td>
                                         <td><?= $curso['grauNome'] ?></td>
                                         <td>
-                                            <button type="button" class="btn btn-primary" title="Visualizar" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-eye-open"></span></button>
                                             <button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whateversigla="LOP1" data-whatevernome="Lógica de Programação 1" data-whatevercurso="ADS"><span class="glyphicon glyphicon-pencil"></span></button>
-                                            <?= anchor('Curso/deletar/'.$curso['id'],'<span class="glyphicon glyphicon-remove"></span>',array('class'=>'btn btn-danger','style'=>'color: white;')) ?>
+                                            <button onClick="exclude('.$curso['id'].');" type="button" class="btn btn-danger" title="Excluir"><span class="glyphicon glyphicon-remove"></span></button>
                                         </td>
                                     </tr>
                                   <?php endforeach; ?>
@@ -106,7 +105,7 @@
                                 </div>
                                 <div class="form-group">
                                   <?= form_label('Quantidade de semestres','qtdSemestres') ?>
-                                  <?= form_input(array('name'=>'qtdSemestres','value'=>set_value('qtdSemestres'),'type'=>'number','class'=>'form-control percent-10','placeholder'=>'ex: 6')) ?>
+                                  <?= form_input(array('name'=>'qtdSemestres','value'=>set_value('qtdSemestres'),'type'=>'number'',maxlength'=>'2','pattern'=>'[0-9]+$','class'=>'form-control percent-10','placeholder'=>'ex: 6')) ?>
                                   <?= form_error('qtdSemestres') ?>
                                 </div>
                                 <div class="form-group">
@@ -153,26 +152,6 @@
                 </div><!--Fecha content-->
             </div><!--Fecha row-->
 
-            <!-- Aqui é o Modal de visualização dos cursos-->
-            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title text-center" id="myModalLabel">Nome do Curso</h4>
-                        </div>
-                        <div class="modal-body">
-                            <p>Sigla</p>
-                            <p>Nome do Curso</p>
-                            <p>Quantidade de Semestres</p>
-                            <p>Período</p>
-                            <p>Grau</p>
-                            <p>Disciplinas</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <!-- Aqui é o Modal de alteração dos cursos-->
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
                 <div class="modal-dialog" role="document">
@@ -205,16 +184,14 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="curso-name" class="control-label">Quantidade de Semestres:</label>
-                                    <input type="text" class="form-control" id="recipient-curso">
+                                    <input type="text" maxlength="2" pattern="[0-9]+$" class="form-control"  name="recipient-curso" id="recipient-curso">
                                 </div>
                                 <!-- DropListPeriodo (Droplist) -->
                                 <div class="form-group percent-40 inline">
                                     <label for="curso-name" class="control-label">Período:</label>
                                     <select id="u0_input" class="form-control">
-                                        <option value="Vespertino">Vespertino</option>
                                         <option value="Matutino">Matutino</option>
-                                        <option value="Integral">Integral</option>
-                                        <option value="Diurno">Diurno</option>
+										<option value="Vespertino">Vespertino</option>
                                         <option value="Noturno">Noturno</option>
                                     </select>
                                 </div>
@@ -223,15 +200,17 @@
                                 <div class="form-group percent-40 inline">
                                     <label for="curso-name" class="control-label">Grau:</label>
                                     <select id="u1_input" class="form-control">
-                                        <option selected="" value="Bacharel">Bacharel</option>
-                                        <option value="Doutorado">Doutorado</option>
-                                        <option value="Mestrado">Mestrado</option>
-                                        <option value="Licenciatura">Licenciatura</option>
-                                        <option value="Pós-Graduação">Pós-Graduação</option>
+                                        <option selected="" value="Técnico">Técnico</option>
+										<option value="Tecnólogo">Tecnólogo</option>
+										<option value="Bacharel">Bacharel</option>
+										<option value="Licenciatura">Licenciatura</option>
+										<option value="Pós-Graduação">Pós-Graduação</option>
+                                        
+                                        
                                     </select>
                                 </div>
                                 <div class="form-group disc">
-                                    <label>Disciplinas </label>
+                                    <label>Disciplinas</label>
                                     <button onClick="addSelect()" type="button" class="btn btn-success glyphicon glyphicon-plus"></button>
 
                                     <br>
@@ -265,6 +244,7 @@
 
         <script type="text/javascript" src="<?= base_url('assets/js/jquery-3.1.1.min.js')?>"></script>
         <script type="text/javascript" src="<?= base_url('assets/js/bootstrap.min.js')?>"></script>
+		<script type="text/javascript" src="<?= base_url('assets/js/bootbox.min.js') ?>"></script>
 
         <script>
             //faz a contagens de divs com uma determinada classe
@@ -314,5 +294,26 @@
                 modal.find('#recipient-curso').val(recipientcurso)
             })
         </script>
+		<script>
+			function exclude(id){
+				bootbox.confirm({
+					message: "Realmente deseja excluir esse curso?",
+					buttons: {
+						confirm: {
+							label: 'Sim',
+							className: 'btn-success'
+						},
+						cancel: {
+							label: 'Não',
+							className: 'btn-danger'
+						}
+					},
+					callback: function (result) {
+						if(result)
+							window.location.href ='Curso/deletar/'+id
+					}
+				});
+			}
+		</script>
     </body>
 </html>
