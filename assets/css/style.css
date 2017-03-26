@@ -1,0 +1,129 @@
+#header{
+	float: left;
+	width: 100%;
+	padding: 15px 30px 5px 10px;
+}
+
+#classclock{
+	width: 300px;
+	float: left;
+}
+
+#ifsp{
+	float: right;
+}
+
+#sidebar{
+	background-color: #F2F9E8;
+	padding: 10px;
+	height: 100%;
+	/*z-index: 9999;*/
+	float: left;
+}
+
+#sidebar h2{
+	text-align: center;
+}
+
+#sidebar a{
+	color: #68B92E;
+}
+
+#sidebar>.nav-pills>li>a:hover{
+	color: #FFF;
+	background-color: #68B92E;
+}
+
+#sidebar>.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover{
+	color: #FFF;
+	background-color: #4CAF50;
+}
+
+#content{
+	background-color: #FFF;
+	padding: 10px;
+	float: left;
+}
+
+#content h1{
+	text-align: center;
+}
+
+#content a{
+	color: #68B92E;
+}
+
+/* Isso muda a cor dos 'botoes' do bootstrap nav-pills em #content */
+#content>.nav-pills>li>a:hover{
+	color: #FFF;
+	background-color: #68B92E;
+}
+
+/* Isso muda a cor dos 'botoes' 'ativos' do bootstrap nav-pills em #content */
+#content>.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover{
+	color: #FFF;
+	background-color: #4CAF50;
+}
+
+#disciplinas p{
+	font-family: Helvetica Neue,Helvetica,Arial,sans-serif !important;
+}
+
+#footer{
+	color: #E6E6E6;
+	text-align: center;
+	overflow: hidden;
+	margin-top: 10%;
+}
+
+/* Redefine o tamanho do logo */
+.logo{
+	height: 80px;
+}
+
+.disc{
+    width: 300px;
+}
+.disc button{
+    margin-left: 15px;
+    margin-bottom: 15px;
+    float: right;
+}
+
+/*tamanhos em porcentagem para qualquer bloco*/
+.percent-70{
+	width: 70%;
+}
+
+.percent-50{
+	width: 50%;
+}
+
+.percent-40{
+	width: 40%;
+}
+
+.percent-30{
+	width: 30%;
+}
+
+.percent-20{
+	width: 20%;
+}
+
+.percent-15{
+	width: 15%;
+}
+
+.percent-10{
+	width: 10%;
+}
+
+.percent-5{
+	width: 5%;
+}
+
+/*faz com que os blocos se alinhem*/
+.inline{
+	display: inline-block;
+}
