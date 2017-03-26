@@ -76,8 +76,8 @@
       * @return altera o boolean  para TRUE ou False dos Dados caso Seja deletado.
     */
     function deleteCurso($idCurso) {
-      $this->db->where('idCurso', $idCurso);
-      $result = $this->db->update('Curso', array('statusCurso' =>FALSE));
+      $this->db->where('id', $idCurso);
+      $result = $this->db->update('Curso', array('status' =>FALSE));
 
       return $result;
     }
