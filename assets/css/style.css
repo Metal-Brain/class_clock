@@ -77,7 +77,22 @@
 	height: 80px;
 }
 
+
 /*tamanhos em porcentagem para qualquer bloco*/
+.disc{
+    width: 300px;
+}
+.disc button{
+    margin-left: 15px;
+    margin-bottom: 15px;
+    float: right;
+}
+
+/*tamanhos em porcentagem para qualquer bloco*/
+.percent-70{
+	width: 70%;
+}
+
 .percent-50{
 	width: 50%;
 }
@@ -92,6 +107,10 @@
 
 .percent-20{
 	width: 20%;
+}
+
+.percent-15{
+	width: 15%;
 }
 
 .percent-10{

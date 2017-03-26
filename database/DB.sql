@@ -33,14 +33,11 @@ CREATE TABLE IF NOT EXISTS Curso (
   nome          VARCHAR(45) NOT NULL,
   sigla         VARCHAR(5)  NOT NULL,
   qtdSemestres  INT         NOT NULL,
-  periodo       INT					NOT NULL,
   grau          INT         NOT NULL,
   `status`      BOOLEAN     NOT NULL  DEFAULT FALSE,
   PRIMARY KEY (id),
   CONSTRAINT fk_curso_grau
-    FOREIGN KEY (grau) REFERENCES Grau(id),
-	CONSTRAINT fk_curso_periodo
-		FOREIGN KEY (periodo) REFERENCES Periodo (id)
+    FOREIGN KEY (grau) REFERENCES Grau(id)
 );
 
  CREATE TABLE IF NOT EXISTS Curso_tem_disciplina (
@@ -50,4 +47,14 @@ CREATE TABLE IF NOT EXISTS Curso (
     FOREIGN KEY (idDisciplina) REFERENCES Disciplina(id),
    CONSTRAINT fk_curso_disciplina
     FOREIGN KEY (idCurso) REFERENCES Curso(id)
+ );
+
+ CREATE TABLE IF NOT EXISTS Curso_tem_Periodo (
+	 idCurso			INT NOT NULL,
+	 idPeriodo		INT NOT NULL,
+	 PRIMARY KEY (idCurso,idPeriodo),
+	 CONSTRAINT fk
+	 	FOREIGN KEY (idCurso) REFERENCES Curso(id),
+	 CONSTRAINT fk_periodo_curso
+	 	FOREIGN KEY (idPeriodo) REFERENCES Periodo(id)
  );

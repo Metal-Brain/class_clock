@@ -22,17 +22,17 @@
       //Carregar as bibliotecas de validação
       $this->load->library('form_validation');
       $this->load->helper(array('form'));
-      $this->load->model(array('Curso_model'));
+      $this->load->model(array('Curso_model','CursoTemPeriodo_model'));
 
       //Define regras de validação do formulario!!!
-      $this->form_validation->set_rules('nome', 'nome do curso',array('required', 'min_length[5]','alpha','ucwords'));
+      $this->form_validation->set_rules('nome', 'nome do curso',array('required', 'min_length[5]','trim','ucwords'));
       $this->form_validation->set_rules('sigla', 'sigla do curso', array('required', 'max_length[5]','alpha', 'strtoupper'));
       $this->form_validation->set_rules('qtdSemestres','quantidade de semestres', array('required','integer','greater_than[0]','less_than[20]'));
       $this->form_validation->set_rules('periodo[]', 'periodo', array('required'));
       $this->form_validation->set_rules('grau','grau',array('greater_than[0]'));
 
       //delimitador
-      $this->form_validation->set_error_delimiters('<p class="error">','</p>');
+      $this->form_validation->set_error_delimiters('<p class="text-danger">','</p>');
 
       //condição para o formulario
       if($this->form_validation->run() == FALSE){
@@ -44,15 +44,35 @@
         $dados['periodo']       = convert($this->Periodo_model->getAll());
         $dados['disciplinas']   = convert($this->disciplina_model->getAll());
 
-        $this->load->view('curso/cadastrar',$dados);
+        $this->load->view('cursos',$dados);
 
       }else{
 
         $curso = array(
-          'nomeCurso'     => $this->input->post('nomeCurso'),
-          'siglaCurso'    => $this->input->post('siglaCurso'),
-          'qtdSemestres'  => $this->input->post('qtdSemestres')
+          'nome'          => $this->input->post('nome'),
+          'sigla'         => $this->input->post('sigla'),
+          'qtdSemestres'  => $this->input->post('qtdSemestres'),
+          'grau'          => $this->input->post('grau'),
         );
+
+        $disciplinas = $this->input->post('disciplinas[]');
+        $periodo = $this->input->post('periodo[]');
+
+
+        if ($this->Curso_model->insert($curso)) {
+          $idCurso = $this->db->insert_id(); // Pega o ID do Curso cadastrado
+          foreach ($periodo as $idPeriodo)
+            $this->CursoTemPeriodo_model->insert($idCurso,$idPeriodo);
+
+          foreach ($disciplinas as $idDisciplina)
+            $this->CursoTemDisciplina_model->insert($idCurso,$idPeriodo);
+
+          $this->session->set_flashdata('success','Curso cadastrado com sucesso');
+        } else {
+          $this->session->set_flashdata('danger','Não foi possivel cadastrar o curso, tente novamente ou entre em contato com o administrador do sistema');
+        }
+
+        redirect('Curso/cadastrar');
       }
 
     }

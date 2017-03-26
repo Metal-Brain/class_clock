@@ -43,7 +43,7 @@
       * @param  pega como paramentro $curso
       * @return uma inserção na tabela curso.
     */
-    function insertCurso($curso) {
+    function insert($curso) {
       return $this->db->insert('Curso', $curso);
     }
 
