@@ -129,7 +129,12 @@
 
       $this->load->model(array('Curso_model'));
 
-      $this->Curso_model->deleteCurso($id);
+      if ($this->Curso_model->deleteCurso($id))
+        $this->session->set_flashdata('success','Curso deletado com sucesso');
+      else
+        $this->session->set_flashdata('danger','Não foi possivel deletar o curso, tente novamente mais tarde ou entre em contato com o administrador do sistema');
+
+      redirect('Curso');
     }
 
   }

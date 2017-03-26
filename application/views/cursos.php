@@ -82,7 +82,7 @@
                                         <td>
                                             <button type="button" class="btn btn-primary" title="Visualizar" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-eye-open"></span></button>
                                             <button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whateversigla="LOP1" data-whatevernome="Lógica de Programação 1" data-whatevercurso="ADS"><span class="glyphicon glyphicon-pencil"></span></button>
-                                            <button type="button" class="btn btn-danger" title="Excluir"><span class="glyphicon glyphicon-remove"></span></button>
+                                            <?= anchor('Curso/deletar/'.$curso['id'],'<span class="glyphicon glyphicon-remove"></span>',array('class'=>'btn btn-danger','style'=>'color: white;')) ?>
                                         </td>
                                     </tr>
                                   <?php endforeach; ?>
