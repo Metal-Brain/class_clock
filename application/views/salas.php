@@ -7,18 +7,275 @@
 		<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/style.css')?>">
 	</head>
     <body>
-      <p class="alert-success"><?= $this->session->flashdata("success") ?></p>
-      <p class="alert-danger"><?= $this->session->flashdata("danger") ?></p>
-      <h1> Salas </h1>
-    <table class="table">
-    <?php foreach ($salas as $sala) : ?>
-      <tr>
-          <td><?= $sala["nSala"]?></td>
-          <td><?= $sala["capMax"]?></td>
-          <td><?= $sala["tipo"]?></td>
-      </tr>
-    <?php endforeach ?>
-  </table>
+		<div class="container-fluid">
+			<div class="row">
+				<div id="header" class="col">
+					<div id="classclock">
+						<h1>Class Clock</h1>
+					</div>
+					<div id="ifsp">
+						<img src="<?= base_url('assets/img/ifsp.png')?>" class="logo">
+					</div>
+				</div>
+			</div><!--Fecha row-->
+
+			<div class="row">
+
+				<div id="sidebar" class="col-md-2" role="navigation">
+					<h2>Menu</h2>
+					<ul class="nav nav-pills nav-stacked">
+						<li><a href="cursos.html">Cursos</a></li>
+						<li><a href="disciplinas.html">Disciplinas</a></li>
+						<li><a href="professores.html">Professores</a></li>
+						<li class="active"><a href="salas.html">Salas</a></li>
+						<hr>
+						<li><a href="index.html"><span class="glyphicon glyphicon-log-out"></span> Sair do Sistema</a></li>
+					</ul>
+				</div>
+
+				<div id="content" class="col-md-10">
+					<h1>Salas</h1>
+
+					<?php if(validation_errors()): ?>
+						<div class="alert alert-danger">
+							<strong>Atenção!</strong> Erros encontrados, verifique o formulário para mais detalhes.
+						</div>
+					<?php endif; ?>
+					
+					<!-- Lista de 'botoes' links do Bootstrap -->
+					<ul class="nav nav-pills">
+						<!-- 'botao' link para a listagem -->
+						<li class="active"><a data-toggle="pill" href="#list">Listar todas</a></li>
+						<!-- 'botao' link para novo registro -->
+						<li><a data-toggle="pill" href="#new">Cadastrar</a></li>
+					</ul>
+
+					<!-- Dentro dessa div vai o conteúdo que os botões acima exibem ou omitem -->
+					<div class="tab-content">
+
+						<!-- Aqui é a Listagem dos Itens -->
+						<div id="list" class="tab-pane fade in active">
+							<div style="margin-top: 25px;">
+								<table id="salaTable" class="table table-striped">
+									<thead>
+										<tr>
+											<th>Número da Sala</th>
+											<th>Capacidade Máxima</th>
+											<th>Tipo</th>
+											<th>Ação</th>
+										</tr>
+									</thead>
+									<tbody>
+										<?php
+											foreach ($salas as $sala) {
+												$row = '<tr>
+													<td>'.$sala['nSala'].'</td>
+													<td>'.$sala['capacidadeMaxima'].'</td>
+													<td>'.$sala['tipo'].'</td>
+													<td>
+														<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whatevernSala="'.$sala['nSala'].'" data-whatevercapacidadeMaxima="'.$sala['capacidadeMaxima'].'"  data-whatevertipo="'.$sala['tipo'].'"><span class="glyphicon glyphicon-pencil"></span></button>
+														<button onClick="exclude('.$sala['id'].');" type="button" class="btn btn-danger" title="Excluir"><span class="glyphicon glyphicon-remove"></span></button>
+													</td>
+												</tr>';
+												echo $row;
+											}
+										?>
+									</tbody>
+								</table>
+							</div>
+						</div>
+
+						<!-- Aqui é o formulário de registro do novo item-->
+						<div id="new" class="tab-pane fade">
+							<h3>Cadastrar Sala</h3>
+							<form action="" method="post">
+								<div class="form-group percent-40">
+									<div class="form-group percent-10 inline">
+									<label>Sala</label>
+									<input type="number" class="form-control" pattern="[0-9]+$"  name="nSala" placeholder="ex: 110">
+									<?= form_error('nSala') ?>
+								</div>
+								<div class="form-group percent-20 inline">
+									<label for="tipo">Tipo</label>
+									<select  class="form-control" name="tipo" id="tipo">
+										<option  selected>Laboratório</option>
+										<option>Teórica</option>
+									</select>
+									<!-- Aqui tem tratamento de erro? -->
+								</div>
+								</div>
+								<div class="form-group">
+									<label>Capacidade Máxima</label>
+									<input type="number" class="form-control percent-10" name="capacidadeMaxima" placeholder="ex: 30">
+									<?= form_error('capacidadeMaxima') ?>
+								</div>
+								<div class="inline">
+									<button type='reset' class='btn bt-lg btn-danger'>Limpar Campos</button>
+									<button type='submit' class='btn bt-lg btn-primary'>Cadastrar</button>
+								</div>
+							</form>
+						</div>
+
+					</div><!--Fecha tab-content-->
+
+				</div><!--Fecha content-->
+
+			</div><!--Fecha row-->
+
+			<!-- Aqui é o Modal de alteração das disciplinas-->
+			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title" id="exampleModalLabel">Salas</h4>
+						</div>
+						<div class="modal-body">
+							<?= form_open('Curso/atualizar') ?>
+							<div class="form-group">
+								<input type="hidden" name="recipient-id" id="recipient-id">
+							</div>
+							<div class="form-group">
+								<label for="sigla-name" class="control-label">Sigla:</label>
+								<input type="text" class="form-control" name="recipient-sigla" id="recipient-sigla">
+								<?= form_error('recipient-sigla') ?>
+							</div>
+							<div class="form-group">
+								<label for="nSala-name" class="control-label">Número da sala</label>
+									<input type="number" class="form-control" id="recipient-nSala">
+								<?= form_error('recipient-nSala') ?>
+							</div>
+							<div class="form-group">
+								<label for="capacidadeMaxima-name" class="control-label">Capacidade Máxima</label>
+								<input type="number" maxlength="3" pattern="[0-9]+$"class="form-control" id="recipient-capacidadeMaxima">
+								<?= form_error('recipient-capacidadeMaxima') ?>
+							</div>
+							<div class="form-group">								
+								<label for="tipo-name" class="control-label">Tipo</label>
+								<select  class="form-control" name="tipo" id="recipient-tipo">
+									<option>Laboratório</option>
+									<option>Teórica</option>
+								</select>
+								<?= form_error('recipient-tipo') ?>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+								<button type="submit" class="btn btn-primary">Alterar</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div id="footer" class="col">
+				<p>Desenvolvido por Metal Code</p>
+			</div>
+
+		</div><!--Fecha container-fluid-->
+		<script type="text/javascript" src="<?= base_url('assets/js/jquery-3.1.1.min.js')?>"></script>
+		<script type="text/javascript" src="<?= base_url('assets/js/bootstrap.min.js') ?>"></script>
+		<script type="text/javascript" src="<?= base_url('assets/DataTables/datatables.min.js') ?>"></script>
+		<script type="text/javascript" src="<?= base_url('assets/js/bootbox.min.js') ?>"></script>
+		<script type="text/javascript">
+				$('#exampleModal').on('show.bs.modal', function (event) {
+						var button = $(event.relatedTarget) // Button that triggered the modal
+						var recipient = button.data('whatever') // Extract info from data-* attributes
+						var recipientsigla = button.data('whateversigla')
+						var recipientnome = button.data('whatevernome')
+						var recipientQtdProf = button.data('whateverqtdprof')
+						var recipientId = button.data('whateverid')
+						// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+						// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+						var modal = $(this)
+						modal.find('.modal-title').text('Alterar Disciplina')
+						modal.find('#recipient-sigla').val(recipientsigla)
+						modal.find('#recipient-nome').val(recipientnome)
+						modal.find('#recipient-qtd-prof').val(recipientQtdProf)
+						modal.find('#recipient-id').val(recipientId)
+				})
+		</script>
+		<script type="text/javascript">
+			$(document).ready(function () {
+				$("#SalaTable").DataTable({
+					"language":{
+						"url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Portuguese-Brasil.json"
+					}
+				});
+			});
+		</script>
+		<script>
+			function exclude(id){
+				bootbox.confirm({
+					message: "Realmente deseja excluir essa sala?",
+					buttons: {
+						confirm: {
+							label: 'Sim',
+							className: 'btn-success'
+						},
+						cancel: {
+							label: 'Não',
+							className: 'btn-danger'
+						}
+					},
+					callback: function (result) {
+						if(result)
+							window.location.href = '<?= base_url("index.php/Sala/deletar/")?>'+id
+					}
+				});
+			}
+		</script>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<!-- Back-end, falta integrar certinho! Fui usando o código das disciplinas e alterando o que o Minato já tinha feito em salas. Ass: Minskinha fofinha :D -->
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<p class="alert-success"><?= $this->session->flashdata("success") ?></p>
+		<p class="alert-danger"><?= $this->session->flashdata("danger") ?></p>
+		<h1> Salas </h1>
+		<table class="table">
+		<?php foreach ($salas as $sala) : ?>
+			<tr>
+				<td><?= $sala["nSala"]?></td>
+				<td><?= $sala["capMax"]?></td>
+				<td><?= $sala["tipo"]?></td>
+			</tr>
+		<?php endforeach ?>
+		</table>
 
 
 <?php /*
