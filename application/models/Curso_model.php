@@ -14,7 +14,7 @@
           *@since 2017/03/21
     */
     function getAll() {
-      $this->db->select('Curso.*, Grau.nome AS grauNome, GROUP_CONCAT(Periodo.nome) AS periodo');
+      $this->db->select('Curso.*, Grau.nome AS grauNome, GROUP_CONCAT(Periodo.id) as idPeriodo, GROUP_CONCAT(Periodo.nome) AS periodo');
       $this->db->join('Grau','Grau.id = Curso.grau');
       $this->db->join('Curso_tem_Periodo AS cp','cp.idCurso = Curso.id');
       $this->db->join('Periodo','Periodo.id = cp.idPeriodo');

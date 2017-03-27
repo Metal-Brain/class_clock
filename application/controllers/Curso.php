@@ -92,21 +92,28 @@
     public function atualizar () {
 
       $this->load->library('form_validation');
-      $this->load->model(array('Curso_model'));
+      $this->load->helper('dropdown');
+      $this->load->model(array('Curso_model','Grau_model','Periodo_model','disciplina_model'));
 
       //Define regras de validação do formulario!!!
-      $this->form_validation->set_rules('nomeCurso', 'nome do curso',array('required', 'min_lenth[5]','ucwords'));
-      $this->form_validation->set_rules('siglaCurso', 'sigla do curso', array('required', 'exact_length[3]', 'strtoupper'));
-
-      //Adicionar validação ao curso
-      $this->form_validation->set_rules('qtdSemestres','quantidade de semestres', array('required','integer','greater_than[0]'));
+      $this->form_validation->set_rules('nomeCurso', 'nome do curso',array('required', 'min_length[5]','ucwords'));
+      $this->form_validation->set_rules('cursoSigla', 'sigla do curso', array('required', 'max_length[5]', 'strtoupper'));
+      $this->form_validation->set_rules('cursoQtdSemestres','quantidade de semestres', array('required','integer','greater_than[0]','less_than[10]'));
+      $this->form_validation->set_rules('cursoPeriodos[]','período',array('required'));
+      $this->form_validation->set_rules('cursoGrau','grau',array('greater_than[0]'));
 
       //delimitador
-      $this->form_validation->set_error_delimiters('<span class="error">','</span>');
+      $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
 
       //condição para o formulario
       if($this->form_validation->run() == FALSE){
 
+        $dados['graus']         = convert($this->Grau_model->getAll(), True);
+        $dados['periodo']       = convert($this->Periodo_model->getAll());
+        $dados['disciplinas']   = convert($this->disciplina_model->getAll());
+        $dados['cursos']        = $this->Curso_model->getAll();
+
+        $this->load->view('cursos',$dados);
       }else{
 
         $curso = array(
@@ -114,6 +121,8 @@
           'siglaCurso'    => $this->input->post('siglaCurso'),
           'qtdSemestres'  => $this->input->post('qtdSemestres')
         );
+
+        print_r($curso);
       }
 
     }
