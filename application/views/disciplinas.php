@@ -213,7 +213,7 @@
 					},
 					callback: function (result) {
 						if(result)
-							window.location.href = 'Disciplina/deletar/'+id
+							window.location.href = '<?= base_url("index.php/Disciplina/deletar/")?>'+id
 					}
 				});
 			}
