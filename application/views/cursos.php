@@ -81,7 +81,7 @@
                                         <td><?= $curso['grauNome'] ?></td>
                                         <td>
                                             <button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whateversigla="LOP1" data-whatevernome="Lógica de Programação 1" data-whatevercurso="ADS"><span class="glyphicon glyphicon-pencil"></span></button>
-                                            <button onClick="exclude('.$curso['id'].');" type="button" class="btn btn-danger" title="Excluir"><span class="glyphicon glyphicon-remove"></span></button>
+                                            <button onClick="exclude(<?= $curso['id']?>);" type="button" class="btn btn-danger" title="Excluir"><span class="glyphicon glyphicon-remove"></span></button>
                                         </td>
                                     </tr>
                                   <?php endforeach; ?>
@@ -105,7 +105,7 @@
                                 </div>
                                 <div class="form-group">
                                   <?= form_label('Quantidade de semestres','qtdSemestres') ?>
-                                  <?= form_input(array('name'=>'qtdSemestres','value'=>set_value('qtdSemestres'),'type'=>'number'',maxlength'=>'2','pattern'=>'[0-9]+$','class'=>'form-control percent-10','placeholder'=>'ex: 6')) ?>
+                                  <?= form_input(array('name'=>'qtdSemestres','value'=>set_value('qtdSemestres'),'type'=>'number','maxlength'=>'2','pattern'=>'[0-9]+$','class'=>'form-control percent-10','placeholder'=>'ex: 6')) ?>
                                   <?= form_error('qtdSemestres') ?>
                                 </div>
                                 <div class="form-group">
@@ -205,8 +205,8 @@
 										<option value="Bacharel">Bacharel</option>
 										<option value="Licenciatura">Licenciatura</option>
 										<option value="Pós-Graduação">Pós-Graduação</option>
-                                        
-                                        
+
+
                                     </select>
                                 </div>
                                 <div class="form-group disc">
@@ -244,7 +244,7 @@
 
         <script type="text/javascript" src="<?= base_url('assets/js/jquery-3.1.1.min.js')?>"></script>
         <script type="text/javascript" src="<?= base_url('assets/js/bootstrap.min.js')?>"></script>
-		<script type="text/javascript" src="<?= base_url('assets/js/bootbox.min.js') ?>"></script>
+		    <script type="text/javascript" src="<?= base_url('assets/js/bootbox.min.js') ?>"></script>
 
         <script>
             //faz a contagens de divs com uma determinada classe
@@ -310,7 +310,7 @@
 					},
 					callback: function (result) {
 						if(result)
-							window.location.href ='Curso/deletar/'+id
+							window.location.href ='<?= base_url('index.php/Curso/deletar/')?>'+id
 					}
 				});
 			}
