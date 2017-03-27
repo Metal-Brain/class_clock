@@ -94,14 +94,14 @@
 						<div id="new" class="tab-pane fade">
 							<h3>Cadastrar Disciplina</h3>
 							<form action="" method="post">
-								<div class="form-group percent-40 inline">
+								<div class="form-group percent-40">
 									<label>Nome</label>
 									<input type="text" class="form-control" name="nome" placeholder="Nome" value="<?= set_value('nome')?>">
 									<?= form_error('nome') ?>
 								</div>
-								<div class="form-group percent-10 inline">
+								<div class="form-group">
 									<label>Sigla</label>
-									<input type="text" class="form-control" name="sigla" placeholder="ex: LOPA1" value="<?= set_value('sigla')?>">
+									<input type="text" class="form-control percent-40" name="sigla" placeholder="ex: LOPA1" value="<?= set_value('sigla')?>">
 									<?= form_error('sigla') ?>
 								</div>
 								<div class="form-group">
