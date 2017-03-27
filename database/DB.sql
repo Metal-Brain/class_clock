@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS Curso (
 	 idCurso			INT NOT NULL,
 	 idPeriodo		INT NOT NULL,
 	 PRIMARY KEY (idCurso,idPeriodo),
-	 CONSTRAINT fk
+	 CONSTRAINT fk_curso_periodo
 	 	FOREIGN KEY (idCurso) REFERENCES Curso(id),
 	 CONSTRAINT fk_periodo_curso
 	 	FOREIGN KEY (idPeriodo) REFERENCES Periodo(id)
