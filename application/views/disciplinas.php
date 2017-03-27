@@ -39,6 +39,12 @@
 				<div id="content" class="col-md-10">
 					<h1>Disciplinas</h1>
 
+					<?php if(validation_errors()): ?>
+						<div class="alert alert-danger">
+							<strong>Atenção!</strong> Erros encontrados, verifique o formulário para mais detalhes.
+						</div>
+					<?php endif; ?>
+					
 					<!-- Lista de 'botoes' links do Bootstrap -->
 					<ul class="nav nav-pills">
 						<!-- 'botao' link para a listagem -->
@@ -104,8 +110,8 @@
 									<?= form_error('qtdProf') ?>
 								</div>
 								<div class="inline">
-									<button type='submit' class='btn bt-lg btn-primary'>Cadastrar</button>
 									<button type='reset' class='btn bt-lg btn-danger'>Limpar Campos</button>
+									<button type='submit' class='btn bt-lg btn-primary'>Cadastrar</button>
 								</div>
 							</form>
 						</div>
@@ -145,8 +151,8 @@
 									<?= form_error('recipient-qtd-prof') ?>
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
-									<button type="submit" class="btn btn-danger">Alterar</button>
+									<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+									<button type="submit" class="btn btn-primary">Alterar</button>
 								</div>
 							</form>
 						</div>
