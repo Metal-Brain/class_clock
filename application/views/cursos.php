@@ -80,7 +80,7 @@
                                         <td><?= $curso['periodo'] ?></td>
                                         <td><?= $curso['grauNome'] ?></td>
                                         <td>
-                                            <button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whateversigla="LOP1" data-whatevernome="Lógica de Programação 1" data-whatevercurso="ADS"><span class="glyphicon glyphicon-pencil"></span></button>
+                                            <button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whateversigla="<?= $curso['sigla']?>" data-whatevernome="<?= $curso['nome']?>" data-whateversemestres="<?= $curso['qtdSemestres']?>" data-whatevergrau="<?= $curso['grau']?>" data-whateverperiodo="<?= $curso['idPeriodo']?>"><span class="glyphicon glyphicon-pencil"></span></button>
                                             <button onClick="exclude(<?= $curso['id']?>);" type="button" class="btn btn-danger" title="Excluir"><span class="glyphicon glyphicon-remove"></span></button>
                                         </td>
                                     </tr>
@@ -173,41 +173,34 @@
                                 <span class="sr-only">Succes:</span>
                                 Alterado com sucesso!
                             </div>
-                            <form>
+                              <?= form_open('Curso/atualizar') ?>
                                 <div class="form-group">
-                                    <label for="sigla-name" class="control-label">Sigla:</label>
-                                    <input type="text" class="form-control" id="recipient-sigla">
+                                  <?= form_label('Sigla:','recipient-sigla',array('class'=>'control-label')) ?>
+                                  <?= form_input('cursoSigla',set_value('cursoSigla'),array('class'=>'form-control','id'=>'recipient-sigla')) ?>
+                                  <?= form_error('cursoSigla') ?>
                                 </div>
                                 <div class="form-group">
-                                    <label for="nome-name" class="control-label">Nome:</label>
-                                    <input type="text" class="form-control" id="recipient-nome">
+                                  <?= form_label('Nome:','recipient-nome',array('class'=>'control-label')) ?>
+                                  <?= form_input('nomeCurso',set_value('nomeCurso'),array('class'=>'form-control','id'=>'recipient-nome')) ?>
+                                  <?= form_error('nomeCurso') ?>
                                 </div>
                                 <div class="form-group">
-                                    <label for="curso-name" class="control-label">Quantidade de Semestres:</label>
-                                    <input type="text" maxlength="2" pattern="[0-9]+$" class="form-control"  name="recipient-curso" id="recipient-curso">
+                                  <?= form_label('Quantidade de Semestres:','recipient-semestres',array('class'=>'control-label')) ?>
+                                  <?= form_input('cursoQtdSemestres',set_value('cursoQtdSemestres'),array('pattern'=>'[0-9]+$','maxlength'=>'2','id'=>'recipient-semestres','class'=>'form-control')) ?>
+                                  <?= form_error('cursoQtdSemestres') ?>
                                 </div>
                                 <!-- DropListPeriodo (Droplist) -->
                                 <div class="form-group percent-40 inline">
-                                    <label for="curso-name" class="control-label">Período:</label>
-                                    <select id="u0_input" class="form-control">
-                                        <option value="Matutino">Matutino</option>
-										<option value="Vespertino">Vespertino</option>
-                                        <option value="Noturno">Noturno</option>
-                                    </select>
+                                  <?= form_label('Período:','cursoPeriodos',array('class'=>'control-label')) ?>
+                                  <?= form_dropdown('cursoPeriodos[]',$periodo,null,array('class'=>'form-control','multiple'=>'multiple','id'=>'cursoPeriodos')) ?>
+                                  <?= form_error('cursoPeriodos[]') ?>
                                 </div>
                                 <br/>
                                 <!-- DropListGrau (Droplist) -->
                                 <div class="form-group percent-40 inline">
                                     <label for="curso-name" class="control-label">Grau:</label>
-                                    <select id="u1_input" class="form-control">
-                                        <option selected="" value="Técnico">Técnico</option>
-										<option value="Tecnólogo">Tecnólogo</option>
-										<option value="Bacharel">Bacharel</option>
-										<option value="Licenciatura">Licenciatura</option>
-										<option value="Pós-Graduação">Pós-Graduação</option>
-
-
-                                    </select>
+                                  <?= form_dropdown('cursoGrau',$graus,null,array('class'=>'form-control')) ?>
+                                  <?= form_error('cursoGrau') ?>
                                 </div>
                                 <div class="form-group disc">
                                     <label>Disciplinas</label>
@@ -216,21 +209,16 @@
                                     <br>
                                     <div id="selects">
                                         <div id="select-disciplina" class="form-group s-disciplina">
-                                            <select class="form-control">
-                                                <option value="Lógica de Programação">Lógica de Programação</option>
-                                                <option value="Estrutura de Dados">Estrutura de Dados</option>
-                                                <option value="Linguagem de Programação">Linguagem de Programação</option>
-                                                <option value="Banco de Dados">Banco de Dados</option>
-                                            </select>
+                                          <?= form_dropdown('cursoDisciplinas[]',$disciplinas,null,array('class'=>'form-control')) ?>
                                         </div>
                                     </div>
                                     <button id="btn-remover" onClick="remSelect()" type="button" class="btn btn-danger" style="display: none;">Remover</button>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
-                                    <button type="button" class="btn btn-danger">Alterar</button>
+                                    <?= form_submit('submit','Alterar',array('class'=>'btn btn-danger')) ?>
                                 </div>
-                            </form>
+                            <?= form_close() ?>
                         </div>
                     </div>
                 </div>
@@ -284,14 +272,26 @@
                 var recipient = button.data('whatever') // Extract info from data-* attributes
                 var recipientsigla = button.data('whateversigla')
                 var recipientnome = button.data('whatevernome')
-                var recipientcurso = button.data('whatevercurso')
+                var recipientsemestre = button.data('whateversemestres')
+                var recipientgrau = button.data('whatevergrau')
+                var recipientPeriodo = button.data('whateverperiodo').toString()
                 // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
                 // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
                 var modal = $(this)
                 modal.find('.modal-title').text('Alterar Curso')
                 modal.find('#recipient-sigla').val(recipientsigla)
                 modal.find('#recipient-nome').val(recipientnome)
-                modal.find('#recipient-curso').val(recipientcurso)
+                modal.find('#recipient-semestres').val(recipientsemestre)
+                modal.find('select[name=cursoGrau] option[value='+recipientgrau+']').prop('selected',true)
+                if (recipientPeriodo.indexOf(',') != -1) {
+                  recipientPeriodo = recipientPeriodo.split(',')
+
+                  for (var i = 0; i < recipientPeriodo.length; i++)
+                    modal.find('#cursoPeriodos option[value='+recipientPeriodo[i]+']').prop('selected',true)
+                } else {
+                  modal.find('#cursoPeriodos option[value='+recipientPeriodo+']').prop('selected',true)
+                }
+
             })
         </script>
 		<script>
