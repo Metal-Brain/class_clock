@@ -31,7 +31,7 @@ INSERT INTO Periodo (nome) VALUES ('Matutino'),('Vespertino'),('Noturno'),('Inte
 CREATE TABLE IF NOT EXISTS Curso (
   id            INT         NOT NULL AUTO_INCREMENT,
   nome          VARCHAR(45) NOT NULL,
-  sigla         VARCHAR(5)  NOT NULL,
+  sigla         VARCHAR(5)  NOT NULL  UNIQUE,
   qtdSemestres  INT         NOT NULL,
   grau          INT         NOT NULL,
   `status`      BOOLEAN     NOT NULL  DEFAULT TRUE,
