@@ -27,8 +27,8 @@
 				<div id="sidebar" class="col-md-2" role="navigation">
 					<h2>Menu</h2>
 					<ul class="nav nav-pills nav-stacked">
-						<li><a href="cursos.html">Cursos</a></li>
-						<li class="active"><a href="disciplinas.html">Disciplinas</a></li>
+						<li><?= anchor('Curso','Cursos') ?></li>
+						<li class="active"><?= anchor('Disciplina','Disciplinas') ?></li>
 						<li><a href="professores.html">Professores</a></li>
 						<li><a href="professores.html">Salas</a></li>
 						<hr>
@@ -38,7 +38,7 @@
 
 				<div id="content" class="col-md-10">
 					<h1>Disciplinas</h1>
-					
+
 					<!-- Lista de 'botoes' links do Bootstrap -->
 					<ul class="nav nav-pills">
 						<!-- 'botao' link para a listagem -->
@@ -72,7 +72,7 @@
 												<td>
 													<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whateversigla="'.$disciplina['sigla'].'" data-whatevernome="'.$disciplina['nome'].'" data-whateverid="'.$disciplina['id'].'" data-whateverqtdprof="'.$disciplina['qtdProf'].'"><span class="glyphicon glyphicon-pencil"></span></button>
 													<button onClick="exclude('.$disciplina['id'].');" type="button" class="btn btn-danger delete" title="Editar" "><span class="glyphicon glyphicon-remove"></span></button>
-													
+
 												</td>
 											</tr>';
 

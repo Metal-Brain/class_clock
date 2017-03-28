@@ -5,6 +5,7 @@
         <title>Cadastro dos Cursos</title>
         <link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/bootstrap.min.css')?>">
         <link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/style.css') ?>">
+        <link rel="stylesheet" href="<?= base_url('assets/DataTables/datatables.min.css')?>">
     </head>
     <body>
         <!-- as classes container-fluid, row e col-md-xx são do GRID do bootstrap -->
@@ -26,12 +27,12 @@
                 <div id="sidebar" class="col-md-2" role="navigation">
                     <h2>Menu</h2>
                     <ul class="nav nav-pills nav-stacked">
-                        <li class="active" ><a href="cursos.html">Cursos</a></li>
-                        <li><a href="disciplinas.html">Disciplinas</a></li>
-                        <li><a href="professores.html">Professores</a></li>
-                        <li><a href="salas.html">Salas</a></li>
-                        <hr>
-                        <li><a href="index.html"><span class="glyphicon glyphicon-log-out"></span> Sair do Sistema</a></li>
+                      <li class="active"><?= anchor('Curso','Cursos') ?></li>
+                      <li><?= anchor('Disciplina','Disciplinas') ?></li>
+                      <li><a href="professores.html">Professores</a></li>
+                      <li><a href="salas.html">Salas</a></li>
+                      <hr>
+                      <li><a href="index.html"><span class="glyphicon glyphicon-log-out"></span> Sair do Sistema</a></li>
                     </ul>
                 </div>
 
@@ -59,8 +60,9 @@
                     <!-- Dentro dessa div vai o conteúdo que os botões acima exibem ou omitem -->
                     <div class="tab-content">
                         <!-- Aqui é a Listagem dos Itens -->
-                        <div id="list" class="tab-pane fade in active">
-                            <table class="table table-striped">
+                        <div class="tab-pane fade in active">
+                          <div style="margin-top:25px;">
+                            <table id="curso-table" class="table table-striped">
                                 <thead>
                                     <tr>
                                         <th>Sigla</th>
@@ -87,6 +89,7 @@
                                   <?php endforeach; ?>
                                 </tbody>
                             </table>
+                          </div>
                         </div>
 
                         <!-- Aqui é o formulário de registro do novo item-->
@@ -233,7 +236,7 @@
         <script type="text/javascript" src="<?= base_url('assets/js/jquery-3.1.1.min.js')?>"></script>
         <script type="text/javascript" src="<?= base_url('assets/js/bootstrap.min.js')?>"></script>
 		    <script type="text/javascript" src="<?= base_url('assets/js/bootbox.min.js') ?>"></script>
-
+        <script type="text/javascript" src="<?= base_url('assets/DataTables/datatables.min.js')?>"></script>
         <script>
             //faz a contagens de divs com uma determinada classe
             function contaClasse(classe) {
@@ -265,7 +268,6 @@
                     document.getElementById('btn-remover').style.display = 'none'
             }
         </script>
-
         <script type="text/javascript">
             $('#exampleModal').on('show.bs.modal', function (event) {
                 var button = $(event.relatedTarget) // Button that triggered the modal
@@ -294,6 +296,16 @@
 
             })
         </script>
+        <script type="text/javascript">
+    			$(document).ready(function () {
+    				$("#curso-table").DataTable({
+    					"language":{
+    						"url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Portuguese-Brasil.json"
+    					}
+    				});
+    			});
+    		</script>
+
 		<script>
 			function exclude(id){
 				bootbox.confirm({

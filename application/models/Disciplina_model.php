@@ -13,7 +13,7 @@
       * @since 2017/03/17
       * @return Retorna um array com todas as disciplinas
       */
-    public function getDisciplinas () {
+    public function getAll () {
       $this->db->where('status', TRUE);
       $result = $this->db->get('Disciplina');
 
@@ -27,7 +27,7 @@
       * @param INT $id ID da disciplina
       * @return Retorna um array que representa a tupla.
       */
-    public function getDisciplinasById ($idDisciplina) {
+    public function getById ($idDisciplina) {
       $this->db->where('id', $idDisciplina);
       $result = $this->db->get('Disciplina');
 
@@ -41,7 +41,7 @@
       * @param Array $disciplina - array com os dados da disciplina
       * @return Retorna um boolean TRUE caso a inserção seja realizada com sucesso
       */
-    public function insertDisciplina ($disciplina) {
+    public function insert ($disciplina) {
       return $this->db->insert('Disciplina', $disciplina);
     }
 
@@ -52,7 +52,7 @@
       * @param INT $idDisciplina - ID da disciplina
       * @return Retorna um boolean TRUE caso os dados sejam atualizados com sucesso
       */
-    public function updateDisciplina ($idDisciplina, $disciplina) {
+    public function update ($idDisciplina, $disciplina) {
       $this->db->where('id', $idDisciplina);
       $result = $this->db->update('Disciplina', $disciplina);
 
@@ -66,7 +66,7 @@
       * @param INT $id - ID da disciplina
       * @return Retorna um boolean TRUE caso a disciplina seja deletada com sucesso
       */
-    public function deleteDisciplina ($id) {
+    public function delete ($id) {
       $this->db->where('id', $id);
       $result = $this->db->update('Disciplina',array('status'=>FALSE));
 
