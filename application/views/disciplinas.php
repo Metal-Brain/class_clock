@@ -38,12 +38,6 @@
 
 				<div id="content" class="col-md-10">
 					<h1>Disciplinas</h1>
-
-					<?php if(validation_errors()): ?>
-						<div class="alert alert-danger">
-							<strong>Atenção!</strong> Erros encontrados, verifique o formulário para mais detalhes.
-						</div>
-					<?php endif; ?>
 					
 					<!-- Lista de 'botoes' links do Bootstrap -->
 					<ul class="nav nav-pills">
