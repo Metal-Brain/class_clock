@@ -1,13 +1,13 @@
-DROP DATABASE CLASSCLOCK;
+DROP DATABASE IF EXISTS CLASSCLOCK;
 CREATE DATABASE IF NOT EXISTS CLASSCLOCK;
-  
+
 USE CLASSCLOCK;
-  
+
 CREATE TABLE IF NOT EXISTS Disciplina(
-	idDisciplina INT NOT NULL AUTO_INCREMENT,
-	nomeDisciplina VARCHAR(45) NOT NULL,
-	sigla CHAR(3) NOT NULL,
-	nProfessores INT NOT NULL,
-	statusDisciplina BOOLEAN NOT NULL,
-	PRIMARY KEY (idDisciplina)
+ id                 INT           NOT NULL  AUTO_INCREMENT,
+ nome               VARCHAR(45)   NOT NULL,
+ sigla              VARCHAR(5)    NOT NULL,
+ qtdProf            INT           NOT NULL,
+ status             BOOLEAN       NOT NULL  DEFAULT TRUE,
+ PRIMARY KEY (id)
 );
