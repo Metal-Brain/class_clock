@@ -66,15 +66,9 @@
       * @param INT $id - ID da disciplina
       * @return Retorna um boolean TRUE caso a disciplina seja deletada com sucesso
       */
-<<<<<<< 158aac098ef9eb44f921b3c68181cecd103b6f23
     public function deleteDisciplina ($id) {
       $this->db->where('id', $id);
       $result = $this->db->update('Disciplina',array('status'=>FALSE));
-=======
-    public function deleteDisciplina ($idDisciplina) {
-      $this->db->where('idDisciplina', $idDisciplina);
-      $result = $this->db->update('Disciplina',array('statusDisciplina'=>FALSE));
->>>>>>> Realizada modificação no model e script da relação de disciplina
 
       return $result;
     }
