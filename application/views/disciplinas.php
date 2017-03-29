@@ -37,6 +37,22 @@
 				</div>
 
 				<div id="content" class="col-md-10">
+					<?php if ($this->session->flashdata('success')) : ?>
+            <!-- Alert de sucesso -->
+            <div class="text-center alert alert-success" role="alert">
+              <span class="glyphicon glyphicon glyphicon-ok" aria-hidden="true"></span>
+              <span class="sr-only">Succes:</span>
+              <?= $this->session->flashdata('success') ?>
+            </div>
+          <?php elseif ($this->session->flashdata('danger')) : ?>
+            <!-- Alert de erro -->
+            <div class="text-center alert alert-danger" role="alert">
+              <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+              <span class="sr-only">Error:</span>
+              <?= $this->session->flashdata('danger') ?>
+            </div>
+					<?php endif; ?>
+
 					<h1>Disciplinas</h1>
 
 					<!-- Lista de 'botoes' links do Bootstrap -->
