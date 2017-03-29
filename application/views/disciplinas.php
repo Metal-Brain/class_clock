@@ -37,8 +37,24 @@
 				</div>
 
 				<div id="content" class="col-md-10">
+					<?php if ($this->session->flashdata('success')) : ?>
+            <!-- Alert de sucesso -->
+            <div class="text-center alert alert-success" role="alert">
+              <span class="glyphicon glyphicon glyphicon-ok" aria-hidden="true"></span>
+              <span class="sr-only">Succes:</span>
+              <?= $this->session->flashdata('success') ?>
+            </div>
+          <?php elseif ($this->session->flashdata('danger')) : ?>
+            <!-- Alert de erro -->
+            <div class="text-center alert alert-danger" role="alert">
+              <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+              <span class="sr-only">Error:</span>
+              <?= $this->session->flashdata('danger') ?>
+            </div>
+					<?php endif; ?>
+
 					<h1>Disciplinas</h1>
-					
+
 					<!-- Lista de 'botoes' links do Bootstrap -->
 					<ul class="nav nav-pills">
 						<!-- 'botao' link para a listagem -->
@@ -72,7 +88,7 @@
 												<td>
 													<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whateversigla="'.$disciplina['sigla'].'" data-whatevernome="'.$disciplina['nome'].'" data-whateverid="'.$disciplina['id'].'" data-whateverqtdprof="'.$disciplina['qtdProf'].'"><span class="glyphicon glyphicon-pencil"></span></button>
 													<button onClick="exclude('.$disciplina['id'].');" type="button" class="btn btn-danger delete" title="Editar" "><span class="glyphicon glyphicon-remove"></span></button>
-													
+
 												</td>
 											</tr>';
 
