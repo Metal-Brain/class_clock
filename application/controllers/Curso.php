@@ -32,8 +32,8 @@
       ));
 
       //Define regras de validação do formulario!!!
-      $this->form_validation->set_rules('nome', 'nome do curso',array('required', 'min_length[5]','trim','ucwords'));
-      $this->form_validation->set_rules('sigla', 'sigla do curso', array('required', 'max_length[5]','alpha', 'strtoupper'));
+      $this->form_validation->set_rules('nome', 'nome',array('required', 'min_length[5]','trim','ucwords'));
+      $this->form_validation->set_rules('sigla', 'sigla', array('required', 'max_length[5]','alpha', 'strtoupper'));
       $this->form_validation->set_rules('qtdSemestres','quantidade de semestres', array('required','integer','greater_than[0]','less_than[20]'));
       $this->form_validation->set_rules('periodo[]', 'periodo', array('required'));
       $this->form_validation->set_rules('grau','grau',array('greater_than[0]'));
@@ -43,6 +43,8 @@
 
       //condição para o formulario
       if($this->form_validation->run() == FALSE){
+
+        $this->session->set_flashdata('formDanger', '<strong>Não foi possivel cadastrar o curso, pois foram encontrados erros no formulário:</strong>');
 
         $dados['graus']         = convert($this->Grau_model->getAll(), True);
         $dados['periodo']       = convert($this->Periodo_model->getAll());
@@ -107,6 +109,8 @@
 
       //condição para o formulario
       if($this->form_validation->run() == FALSE){
+
+        $this->session->set_flashdata('formDanger','<strong>Não foi possivel atualizar os dados do curso, pois foram encontrados erros no formulário</strong>');
 
         $dados['graus']         = convert($this->Grau_model->getAll(), True);
         $dados['periodo']       = convert($this->Periodo_model->getAll());

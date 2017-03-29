@@ -35,10 +35,12 @@
       // TODO adicionar a validação do curso
       $this->form_validation->set_rules('qtdProf', 'quantidade de professores', array('required', 'integer', 'greater_than[0]', 'less_than[10]'));
       // Definição dos delimitadores
-      $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
+      $this->form_validation->set_error_delimiters('<p class="text-danger">','</p>');
 
       // Verifica se o formulario é valido
       if ($this->form_validation->run() == FALSE) {
+
+        $this->session->set_flashdata('formDanger','<strong>Não foi possivel cadastrar a disciplinas, pois existem erros no formulário</strong>');
 
         $dados['disciplinas'] = $this->Disciplina_model->getAll();
 	      $this->load->view('disciplinas', $dados);
@@ -93,15 +95,18 @@
       $this->load->model(array('Disciplina_model'));
 
       // Definir as regras de validação para cada campo do formulário.
-      $this->form_validation->set_rules('recipient-nome', 'nome do curso', array('required','min_length[5]','ucwords'));
+      $this->form_validation->set_rules('recipient-nome', 'nome', array('required','min_length[5]','ucwords'));
       $this->form_validation->set_rules('recipient-sigla', 'sigla', array('required', 'max_length[5]','strtoupper'));
       $this->form_validation->set_rules('recipient-qtd-prof', 'quantidade de professores', array('required', 'integer', 'greater_than[0]'));
       // Definição dos delimitadores
-      $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
+      $this->form_validation->set_error_delimiters('<p class="text-danger">','</p>');
 
       // Verifica se o formulario é valido
       if ($this->form_validation->run() == FALSE) {
-        $dados['disciplinas'] = $this->Disciplina_model->getDisciplinas();
+
+        $this->session->set_flashdata('formDanger','<strong>Não foi possivel atualizar os dados da disciplina:</strong>');
+
+        $dados['disciplinas'] = $this->Disciplina_model->getAll();
         $this->load->view('disciplinas', $dados);
       } else {
 

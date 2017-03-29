@@ -53,6 +53,13 @@
             </div>
 					<?php endif; ?>
 
+					<?php if (validation_errors()): ?>
+						<div class="alert alert-danger text-center">
+							<p><?= $this->session->flashdata('formDanger') ?></p>
+							<?= validation_errors() ?>
+						</div>
+					<?php endif; ?>
+
 					<h1>Disciplinas</h1>
 
 					<!-- Lista de 'botoes' links do Bootstrap -->
