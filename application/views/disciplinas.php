@@ -28,7 +28,7 @@
 					<h2>Menu</h2>
 					<ul class="nav nav-pills nav-stacked">
 						<li><a href="cursos.html">Cursos</a></li>
-						<li class="active"><a href="disciplinas.html">Disciplinas</a></li>
+						<li class="active"><?= anchor('Disciplina','Disciplinas') ?></li>
 						<li><a href="professores.html">Professores</a></li>
 						<li><a href="professores.html">Salas</a></li>
 						<hr>
