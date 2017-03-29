@@ -52,7 +52,7 @@
           'qtdProf'   => $this->input->post("qtdProf")
         );
 
-        if ($this->Disciplina_model->insertDisciplina($disciplina)){
+        if ($this->Disciplina_model->insert($disciplina)){
           $this->session->set_flashdata('success','Disciplina cadastrada com sucesso');
         } else {
           $this->session->set_flashdata('danger','Não foi possivel cadastrar a disciplina, tente novamente ou entre em contato com o administrador do sistema');
