@@ -32,7 +32,6 @@
       // Definir as regras de validação para cada campo do formulário.
       $this->form_validation->set_rules('nome', 'nome do curso', array('required','min_length[5]','ucwords'));
       $this->form_validation->set_rules('sigla', 'sigla', array('required', 'max_length[5]', 'is_unique[Disciplina.sigla]','strtoupper'));
-      // TODO adicionar a validação do curso
       $this->form_validation->set_rules('qtdProf', 'quantidade de professores', array('required', 'integer', 'greater_than[0]', 'less_than[10]'));
       // Definição dos delimitadores
       $this->form_validation->set_error_delimiters('<p class="text-danger">','</p>');
