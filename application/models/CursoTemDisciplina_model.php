@@ -23,6 +23,14 @@
         'idDisciplina'  => $disciplina
       ));
     }
+
+    public function delete ($curso) {
+      $this->db->where('idCurso', $curso);
+      $result = $this->db->delete('Curso_tem_Disciplina');
+
+      return $result;
+    }
+
   }
 
 ?>

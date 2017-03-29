@@ -22,6 +22,13 @@
       return $this->db->insert('Curso_tem_periodo',array('idCurso'=>$curso,'idPeriodo'=>$periodo));
     }
 
+    public function delete ($curso) {
+      $this->db->where('idCurso', $curso);
+      $result = $this->db->delete('Curso_tem_Periodo');
+
+      return $result;
+    }
+
   }
 
 

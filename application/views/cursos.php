@@ -38,12 +38,18 @@
 
                 <div id="content" class="col-md-10">
                     <?php if ($this->session->flashdata('success')) : ?>
-                      <div class="alert alert-success text-center">
-                        <?= $this->session->flashdata('success') ?>
+                      <!-- Alert de sucesso -->
+                      <div class="text-center alert alert-success" role="alert">
+                          <span class="glyphicon glyphicon glyphicon-ok" aria-hidden="true"></span>
+                          <span class="sr-only">Succes:</span>
+                          <?= $this->session->flashdata('success') ?>
                       </div>
                     <?php elseif ($this->session->flashdata('danger')) : ?>
-                      <div class="alert alert-danger text-center">
-                        <?= $this->session->flashdata('danger') ?>
+                      <!-- Alert de erro -->
+                      <div class="text-center alert alert-danger" role="alert">
+                          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                          <span class="sr-only">Error:</span>
+                          <?= $this->session->flashdata('danger') ?>
                       </div>
                     <?php endif; ?>
 
@@ -60,7 +66,7 @@
                     <!-- Dentro dessa div vai o conteúdo que os botões acima exibem ou omitem -->
                     <div class="tab-content">
                         <!-- Aqui é a Listagem dos Itens -->
-                        <div class="tab-pane fade in active">
+                        <div id="list" class="tab-pane fade in active">
                           <div style="margin-top:25px;">
                             <table id="curso-table" class="table table-striped">
                                 <thead>
@@ -82,7 +88,7 @@
                                         <td><?= $curso['periodo'] ?></td>
                                         <td><?= $curso['grauNome'] ?></td>
                                         <td>
-                                            <button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whateversigla="<?= $curso['sigla']?>" data-whatevernome="<?= $curso['nome']?>" data-whateversemestres="<?= $curso['qtdSemestres']?>" data-whatevergrau="<?= $curso['grau']?>" data-whateverperiodo="<?= $curso['idPeriodo']?>"><span class="glyphicon glyphicon-pencil"></span></button>
+                                            <button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whateverid="<?= $curso['id']?>" data-whateversigla="<?= $curso['sigla']?>" data-whatevernome="<?= $curso['nome']?>" data-whateversemestres="<?= $curso['qtdSemestres']?>" data-whatevergrau="<?= $curso['grau']?>" data-whateverperiodo="<?= $curso['idPeriodo']?>"><span class="glyphicon glyphicon-pencil"></span></button>
                                             <button onClick="exclude(<?= $curso['id']?>);" type="button" class="btn btn-danger" title="Excluir"><span class="glyphicon glyphicon-remove"></span></button>
                                         </td>
                                     </tr>
@@ -164,19 +170,10 @@
                             <h4 class="modal-title" id="exampleModalLabel">Cursos</h4>
                         </div>
                         <div class="modal-body">
-                            <!-- Alert de erro -->
-                            <div class="alert alert-danger" role="alert">
-                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                                <span class="sr-only">Error:</span>
-                                Erro ao alterar!
-                            </div>
-                            <!-- Alert de sucesso -->
-                            <div class="alert alert-success" role="alert">
-                                <span class="glyphicon glyphicon glyphicon-ok" aria-hidden="true"></span>
-                                <span class="sr-only">Succes:</span>
-                                Alterado com sucesso!
-                            </div>
                               <?= form_open('Curso/atualizar') ?>
+                                <div class="form-group">
+                                  <input type="hidden" name="cursoId" value="" id="recipient-id">
+                                </div>
                                 <div class="form-group">
                                   <?= form_label('Sigla:','recipient-sigla',array('class'=>'control-label')) ?>
                                   <?= form_input('cursoSigla',set_value('cursoSigla'),array('class'=>'form-control','id'=>'recipient-sigla')) ?>
@@ -277,10 +274,12 @@
                 var recipientsemestre = button.data('whateversemestres')
                 var recipientgrau = button.data('whatevergrau')
                 var recipientPeriodo = button.data('whateverperiodo').toString()
+                var recipientid = button.data('whateverid')
                 // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
                 // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
                 var modal = $(this)
                 modal.find('.modal-title').text('Alterar Curso')
+                modal.find('#recipient-id').val(recipientid)
                 modal.find('#recipient-sigla').val(recipientsigla)
                 modal.find('#recipient-nome').val(recipientnome)
                 modal.find('#recipient-semestres').val(recipientsemestre)

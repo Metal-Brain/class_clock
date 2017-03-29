@@ -93,7 +93,7 @@
 
       $this->load->library('form_validation');
       $this->load->helper('dropdown');
-      $this->load->model(array('Curso_model','Grau_model','Periodo_model','disciplina_model'));
+      $this->load->model(array('CursoTemDisciplina_model','CursoTemPeriodo_model','Curso_model','Grau_model','Periodo_model','disciplina_model'));
 
       //Define regras de validação do formulario!!!
       $this->form_validation->set_rules('nomeCurso', 'nome do curso',array('required', 'min_length[5]','ucwords'));
@@ -116,13 +116,34 @@
         $this->load->view('cursos',$dados);
       }else{
 
+        $idCurso = $this->input->post('cursoId');
+
         $curso = array(
-          'nomeCurso'     => $this->input->post('nomeCurso'),
-          'siglaCurso'    => $this->input->post('siglaCurso'),
-          'qtdSemestres'  => $this->input->post('qtdSemestres')
+          'nome'          => $this->input->post('nomeCurso'),
+          'sigla'         => $this->input->post('cursoSigla'),
+          'qtdSemestres'  => $this->input->post('cursoQtdSemestres'),
+          'grau'          => $this->input->post('cursoGrau')
         );
 
-        print_r($curso);
+        $periodo = $this->input->post('cursoPeriodos[]');
+        $disciplinas = $this->input->post('cursoDisciplinas[]');
+
+        if($this->Curso_model->updateCurso($idCurso, $curso)) {
+          $this->CursoTemPeriodo_model->delete($idCurso);
+          foreach ($periodo as $idPeriodo)
+            $this->CursoTemPeriodo_model->insert($idCurso,$idPeriodo);
+
+          $this->CursoTemDisciplina_model->delete($idCurso);
+          foreach ($disciplinas as $disciplina)
+            $this->CursoTemDisciplina_model->insert($idCurso,$disciplina);
+
+          $this->session->set_flashdata('success','Curso atualizado com sucesso');
+        } else {
+          $this->session->set_flashdata('danger','Não foi possivel atualizar os dados do curso, tente novamente ou entre em contato com o administrador do sistema');
+        }
+
+        redirect('Curso');
+
       }
 
     }

@@ -62,7 +62,7 @@
       * @param Int $idCurso - ID do Curso
     */
     function updateCurso($idCurso, $curso) {
-      $this->db->where('idCurso');
+      $this->db->where('id', $idCurso);
       $result = $this->db->update('Curso', $curso);
 
       return $result;
