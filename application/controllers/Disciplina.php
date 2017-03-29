@@ -114,7 +114,7 @@
           'qtdProf'     => $this->input->post("recipient-qtd-prof")
         );
 
-        if ( $this->Disciplina_model->updateDisciplina($id, $disciplina) )
+        if ( $this->Disciplina_model->update($id, $disciplina) )
           $this->session->set_flashdata('success', 'Disciplina atualizada com sucesso');
         else
           $this->session->set_flashdata('danger','Não foi possivel atualizar os dados da disciplina, tente novamente ou entre em contato com o administrador do sistema');
