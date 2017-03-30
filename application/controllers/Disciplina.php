@@ -74,7 +74,7 @@
       // Carrega os modelos necessarios
       $this->load->model(array('Disciplina_model'));
 
-      if ( $this->Disciplina_model->deleteDisciplina($id) )
+      if ( $this->Disciplina_model->delete($id) )
         $this->session->set_flashdata('success','Disciplina deletada com sucesso');
       else
         $this->session->set_flashdata('danger','Não foi possivel deletar a disciplina, tente novamente ou entre em contato com o administrador do sistema');
