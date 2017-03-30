@@ -30,7 +30,7 @@
       $this->load->model(array('Disciplina_model'));
 
       // Definir as regras de validação para cada campo do formulário.
-      $this->form_validation->set_rules('nome', 'nome do curso', array('required','min_length[5]','ucwords'));
+      $this->form_validation->set_rules('nome', 'nome da disciplina', array('required','min_length[5]','ucwords'));
       $this->form_validation->set_rules('sigla', 'sigla', array('required', 'max_length[5]', 'is_unique[Disciplina.sigla]','strtoupper'));
       $this->form_validation->set_rules('qtdProf', 'quantidade de professores', array('required', 'integer', 'greater_than[0]', 'less_than[10]'));
       // Definição dos delimitadores
@@ -39,7 +39,7 @@
       // Verifica se o formulario é valido
       if ($this->form_validation->run() == FALSE) {
 
-        $this->session->set_flashdata('formDanger','<strong>Não foi possivel cadastrar a disciplinas, pois existem erros no formulário</strong>');
+        $this->session->set_flashdata('formDanger','<strong>Não foi possível cadastrar a disciplina, pois existe(m) erro(s) no formulário:</strong>');
 
         $dados['disciplinas'] = $this->Disciplina_model->getAll();
 	      $this->load->view('disciplinas', $dados);
