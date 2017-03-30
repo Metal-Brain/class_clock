@@ -1,0 +1,36 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
+
+  /**
+    * Essa classe representa o modelo da relação Curso_tem_Disciplina.
+    * @author Caio de Freitas
+    * @since 2017/03/25
+    */
+  class CursoTemDisciplina_model extends CI_Model {
+
+    /**
+      * Insere no banco de dados os dado do relacionamento entre curso e
+      * disciplina.
+      * @author Caio de Freitas
+      * @since 2017/03/
+      * @param INT $curso - ID do curso
+      * @param INT $disciplina - ID da disciplina
+      * @return boolean - Retorna TRUE caso os dados sejam inseridos no banco
+      * de dados com sucesso.
+      */
+    public function insert ($curso, $disciplina) {
+      return $this->db->insert('Curso_tem_Disciplina',array(
+        'idCurso'       => $curso,
+        'idDisciplina'  => $disciplina
+      ));
+    }
+
+    public function delete ($curso) {
+      $this->db->where('idCurso', $curso);
+      $result = $this->db->delete('Curso_tem_Disciplina');
+
+      return $result;
+    }
+
+  }
+
+?>
