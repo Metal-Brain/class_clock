@@ -70,7 +70,7 @@
 											foreach ($salas as $sala) {
 												$row = '<tr>
 													<td>'.$sala['nSala'].'</td>
-													<td>'.$sala['capacidadeMaxima'].'</td>
+													<td>'.$sala['capMax'].'</td>
 													<td>'.$sala['tipo'].'</td>
 													<td>
 														<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whatevernSala="'.$sala['nSala'].'" data-whatevercapacidadeMaxima="'.$sala['capacidadeMaxima'].'"  data-whatevertipo="'.$sala['tipo'].'"><span class="glyphicon glyphicon-pencil"></span></button>
@@ -91,12 +91,12 @@
 							<form action="" method="post">
 									<div class="form-group percent-10 inline">
 									<label>Sala</label>
-									<input type="number" class="form-control" pattern="[0-9]+$" name="nSala" placeholder="ex: 110">
+									<input type="number" class="form-control" pattern="[0-9]+$" name="nSala" placeholder="ex: 110" required>
 									<?= form_error('nSala') ?>
 								</div>
 								<div class="form-group percent-40 inline">
 									<label for="tipo">Tipo</label>
-									<select  class="form-control" name="tipo" id="tipo">
+									<select  class="form-control" name="tipo" id="tipo" required>
 										<option  selected>Laboratório</option>
 										<option>Teórica</option>
 									</select>
@@ -104,8 +104,8 @@
 								</div>
 								<div class="form-group">
 									<label>Capacidade Máxima</label>
-									<input type="number" class="form-control percent-10" name="capacidadeMaxima" placeholder="ex: 30">
-									<?= form_error('capacidadeMaxima') ?>
+									<input type="number" class="form-control percent-10" name="capMax" placeholder="ex: 30" required>
+									<?= form_error('capMax') ?>
 								</div>
 								<div class="inline">
 									<button type='submit' class='btn bt-lg btn-primary'>Cadastrar</button>
@@ -119,7 +119,7 @@
 
 			</div><!--Fecha row-->
 
-			<!-- Aqui é o Modal de alteração das disciplinas-->
+			<!-- Aqui é o Modal de alteração das salas-->
 			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
@@ -128,14 +128,9 @@
 							<h4 class="modal-title" id="exampleModalLabel">Salas</h4>
 						</div>
 						<div class="modal-body">
-							<?= form_open('Curso/atualizar') ?>
+							<?= form_open('Sala/atualizar') ?>
 							<div class="form-group">
 								<input type="hidden" name="recipient-id" id="recipient-id">
-							</div>
-							<div class="form-group">
-								<label for="sigla-name" class="control-label">Sigla:</label>
-								<input type="text" class="form-control" name="recipient-sigla" id="recipient-sigla">
-								<?= form_error('recipient-sigla') ?>
 							</div>
 							<div class="form-group">
 								<label for="nSala-name" class="control-label">Número da sala</label>
@@ -143,9 +138,9 @@
 								<?= form_error('recipient-nSala') ?>
 							</div>
 							<div class="form-group">
-								<label for="capacidadeMaxima-name" class="control-label">Capacidade Máxima</label>
-								<input type="number" maxlength="3" pattern="[0-9]+$"class="form-control" id="recipient-capacidadeMaxima">
-								<?= form_error('recipient-capacidadeMaxima') ?>
+								<label for="capMax-name" class="control-label">Capacidade Máxima</label>
+								<input type="number" maxlength="3" pattern="[0-9]+$"class="form-control" id="recipient-capMax">
+								<?= form_error('recipient-capMax') ?>
 							</div>
 							<div class="form-group">								
 								<label for="tipo-name" class="control-label">Tipo</label>
@@ -156,8 +151,8 @@
 								<?= form_error('recipient-tipo') ?>
 							</div>
 							<div class="modal-footer">
-								<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
 								<button type="submit" class="btn btn-primary">Alterar</button>
+								<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
 							</div>
 						</div>
 					</div>
@@ -222,106 +217,5 @@
 				});
 			}
 		</script>
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		<!-- Back-end, falta integrar certinho! Fui usando o código das disciplinas e alterando o que o Minato já tinha feito em salas. Ass: Minskinha fofinha :D -->
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		<p class="alert-success"><?= $this->session->flashdata("success") ?></p>
-		<p class="alert-danger"><?= $this->session->flashdata("danger") ?></p>
-		<h1> Salas </h1>
-		<table class="table">
-		<?php foreach ($salas as $sala) : ?>
-			<tr>
-				<td><?= $sala["nSala"]?></td>
-				<td><?= $sala["capMax"]?></td>
-				<td><?= $sala["tipo"]?></td>
-			</tr>
-		<?php endforeach ?>
-		</table>
-
-
-<?php /*
-  <h1>Cadastro</h1>
-  <form action="" method="post">
-  								<div class="form-group percent-40 inline">
-  									<label>nSALA</label>
-  									<input type="text" class="form-control" name="nSala" placeholder="Nome" value="<?= set_value('nSala')?>">
-  									<?= form_error('nSala') ?>
-  								</div>
-  								<div class="form-group percent-10 inline">
-  									<label>CAPMAX</label>
-  									<input type="text" class="form-control" name="capMax" placeholder="ex: LOPA1" value="<?= set_value('capMax')?>">
-  									<?= form_error('capMax') ?>
-  								</div>
-  								<div class="form-group">
-  									<label>TIPO</label>
-  									<input type="text" class="form-control percent-5" name="tipo" placeholder="ex: 1" value="<?= set_value('tipo')?>">
-  									<?= form_error('tipo') ?>
-  								</div>
-  								<div class="inline">
-  									<button type='submit' class='btn bt-lg btn-primary'>Cadastrar</button>
-  									<button type='button' class='btn bt-lg btn-default'>Cancelar</button>
-  								</div>
-
-       </form> */?>
-       <br>
-       <br>
-       <br>
-       <br>
-       <h1>Atualizar</h1>
-       <form method="post" action="<?=base_url('')?>" enctype="multipart/form-data">
-             <div>
-               <label>nSala:</label>
-               <input type="text" name="nome" value="<?=$sala['nSala']?>" required/>
-             </div>
-             <div>
-               <label>capMa:</label>
-               <input type="text" name="capMax" value="<?=$sala['capMax']?>" required/>
-             </div>
-             <div>
-               <label>tipo:</label>
-               <input type="text" name="tipo" value="<?=$sala['tipo']?>" required/>
-             </div>
-           <div>             
-             <input type="hidden" name="id" value="<?=$sala['id']?>"/>
-             <input type="submit" class="btn btn-danger" value="Atualizar" />
-           </div>
-         </form>
-</body>
-
+	</body>
 </html>
