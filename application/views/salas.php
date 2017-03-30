@@ -89,13 +89,12 @@
 						<div id="new" class="tab-pane fade">
 							<h3>Cadastrar Sala</h3>
 							<form action="" method="post">
-								<div class="form-group percent-40">
 									<div class="form-group percent-10 inline">
 									<label>Sala</label>
-									<input type="number" class="form-control" pattern="[0-9]+$"  name="nSala" placeholder="ex: 110">
+									<input type="number" class="form-control" pattern="[0-9]+$" name="nSala" placeholder="ex: 110">
 									<?= form_error('nSala') ?>
 								</div>
-								<div class="form-group percent-20 inline">
+								<div class="form-group percent-40 inline">
 									<label for="tipo">Tipo</label>
 									<select  class="form-control" name="tipo" id="tipo">
 										<option  selected>Laboratório</option>
@@ -103,14 +102,12 @@
 									</select>
 									<!-- Aqui tem tratamento de erro? -->
 								</div>
-								</div>
 								<div class="form-group">
 									<label>Capacidade Máxima</label>
 									<input type="number" class="form-control percent-10" name="capacidadeMaxima" placeholder="ex: 30">
 									<?= form_error('capacidadeMaxima') ?>
 								</div>
 								<div class="inline">
-									<button type='reset' class='btn bt-lg btn-danger'>Limpar Campos</button>
 									<button type='submit' class='btn bt-lg btn-primary'>Cadastrar</button>
 								</div>
 							</form>

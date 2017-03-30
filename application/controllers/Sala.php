@@ -37,8 +37,8 @@
            // Verifica se o formulario é valido
            if ($this->form_validation->run() == FALSE) {
 
-            $dados['salas'] = $this->Sala_model->getSalas();
-     	      $this->load->view('salas', $dados);
+            //$dados['salas'] = $this->Sala_model->getSalas();
+     	      $this->load->view('salas');
 
            } else {
 
