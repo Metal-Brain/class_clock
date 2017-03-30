@@ -127,7 +127,6 @@
 									<?= form_error('qtdProf') ?>
 								</div>
 								<div class="inline">
-									<button type='reset' class='btn bt-lg btn-danger'>Limpar Campos</button>
 									<button type='submit' class='btn bt-lg btn-primary'>Cadastrar</button>
 								</div>
 							</form>
