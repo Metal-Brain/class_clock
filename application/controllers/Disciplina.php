@@ -56,7 +56,7 @@
         if ($this->Disciplina_model->insert($disciplina)){
           $this->session->set_flashdata('success','Disciplina cadastrada com sucesso');
         } else {
-          $this->session->set_flashdata('danger','Não foi possivel cadastrar a disciplina, tente novamente ou entre em contato com o administrador do sistema');
+          $this->session->set_flashdata('danger','Não foi possível cadastrar a disciplina, tente novamente ou entre em contato com o administrador do sistema.');
         }
 
         redirect('/');
@@ -77,7 +77,7 @@
       if ( $this->Disciplina_model->delete($id) )
         $this->session->set_flashdata('success','Disciplina deletada com sucesso');
       else
-        $this->session->set_flashdata('danger','Não foi possivel deletar a disciplina, tente novamente ou entre em contato com o administrador do sistema');
+        $this->session->set_flashdata('danger','Não foi possivel deletar a disciplina, tente novamente ou entre em contato com o administrador do sistema.');
 
       redirect('/');
     }
@@ -103,7 +103,7 @@
       // Verifica se o formulario é valido
       if ($this->form_validation->run() == FALSE) {
 
-        $this->session->set_flashdata('formDanger','<strong>Não foi possivel atualizar os dados da disciplina:</strong>');
+        $this->session->set_flashdata('formDanger','<strong>Não foi possível atualizar os dados da disciplina:</strong>');
 
         $dados['disciplinas'] = $this->Disciplina_model->getAll();
         $this->load->view('disciplinas', $dados);
@@ -121,7 +121,7 @@
         if ( $this->Disciplina_model->update($id, $disciplina) )
           $this->session->set_flashdata('success', 'Disciplina atualizada com sucesso');
         else
-          $this->session->set_flashdata('danger','Não foi possivel atualizar os dados da disciplina, tente novamente ou entre em contato com o administrador do sistema');
+          $this->session->set_flashdata('danger','Não foi possível atualizar os dados da disciplina, tente novamente ou entre em contato com o administrador do sistema.');
 
         redirect('/');
 
