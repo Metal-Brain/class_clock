@@ -3,7 +3,6 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Cadastro dos Professores</title>
-
 				<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/bootstrap.min.css')?>">
 				<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/style.css')?>">
 				<link rel="stylesheet" type="text/css" href="<?= base_url('assets/DataTables/datatables.min.css') ?>">
@@ -19,9 +18,7 @@
 						<h1>Class Clock</h1>
 					</div>
 					<div id="ifsp">
-
 						<img src="<?= base_url('assets/img/ifsp.jpg')?>" class="logo">
-
 					</div>
 				</div>
 			</div><!--Fecha row-->
@@ -64,7 +61,6 @@
 							<?= $this->session->flashdata('danger') ?>
 						</div>
 					<?php endif; ?>
-
 
 					<h1>Professores</h1>
 
@@ -117,22 +113,23 @@
 
 						<!-- Aqui é o formulário de registro do novo item-->
 						<div id="new" class="tab-pane fade">
-							<h3>Cadastrar Professor</h3>
-							<form method="post">
-								<div class="form-group percent-40">
+							<h3>Cadastrar Professores</h3>
+							<form>
+								<div class="form-group percent-40 inline">
 									<label>Nome</label>
-									<input type="text" class="form-control" name="nome" placeholder="Nome" value="<?= set_value('nome')?>"/>
+									<input type="text" pattern="[A-Za-z]" class="form-control" name="nome" placeholder="Nome" value="<?= set_value('nome')?>"/>
 									<?= form_error('nome') ?>
 								</div>
-								<div class="form-group">
-									<label>Matrícula</label>
-									<input type="text" class="form-control percent-20" name="matricula"  maxlength="8" placeholder="ex: cg0000000" value="<?= set_value('matricula')?>"/>
+								<div class="form-group percent-20 inline">
+									<label>Matricula</label>
+									<input type="text" class="form-control" name="matricula"  maxlength="8" placeholder="ex: cg0000000" value="<?= set_value('matricula')?>"/>
 									<?= form_error('matricula') ?>
 								</div>
-								<div class="form-group disc">
-									<label>Disciplinas que pode lecionar</label>
-									<?= form_dropdown('disciplinas[]',$disciplinas,null,array('id'=>'disciplinas','multiple'=>'multiple')) ?>
-									<?= form_error('disciplinas[]') ?>
+								<div class="form-group percent-50">
+									<label>Disciplina que pode lecionar: </label>
+									<!-- Pessoal do back-end, aqui o campo de texto deverá auto-completar o que o usuário começar a digitar -->
+									<input type="text" class="form-control" name="nomeDisciplina" placeholder="ex: Arquitetura de Computadores" value="<?= set_value('nomeDisciplina')?>"/>
+									<?= form_error('nomeDisciplina') ?>
 								</div>
 								<div class="form-group percent-40">
 									<label>Data de Nascimento</label>
@@ -169,6 +166,23 @@
 				</div><!--Fecha content-->
 
 			</div><!--Fecha row-->
+			
+			<!-- Aqui é o Modal de visualização dos professores-->
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title text-center" id="myModalLabel">Professor</h4>
+						</div>
+						<div class="modal-body">
+							<p>Nome</p>
+							<p>Matricula</p>
+							<p>Nivel acadêmico</p>
+						</div>
+					</div>
+				</div>
+			</div>
 
 			<!-- Aqui é o Modal de alteração dos professores-->
 			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
@@ -204,6 +218,9 @@
 									<?= form_error('recipient-nascimento') ?>
 								</div>
 								<div class="form-group">
+
+									<!--<label for="tipo-name" class="control-label">Tipo</label>
+									<input type="text" class="form-control" id="recipient-tipo">-->
 									<label for="nivelAcademico-name" class="control-label">Nivel Acadêmico</label>
 										<select  class="form-control" name="nivelAcademico" id="recipient-nivelAcademico">
 											<option>Mestre</option>
@@ -234,9 +251,7 @@
 					</div>
 				</div>
 			</div>
-
-
-
+			
 			<div class="row">
 				<div id="footer" class="col">
 					<p>Desenvolvido por Metal Code</p>
@@ -244,8 +259,6 @@
 			</div><!--Fecha row-->
 
 		</div><!--Fecha container-fluid-->
-
-
 		<script type="text/javascript" src="<?= base_url('assets/js/jquery-3.1.1.min.js')?>"></script>
 		<script type="text/javascript" src="<?= base_url('assets/js/bootstrap.min.js') ?>"></script>
 		<script type="text/javascript" src="<?= base_url('assets/DataTables/datatables.min.js') ?>"></script>
@@ -257,45 +270,40 @@
     	$("#professorDisciplinas").multiSelect();
     	$("#disciplinas").multiSelect();
     </script>
-		<script type="text/javascript">
-			$('#exampleModal').on('show.bs.modal', function (event) {
-				("#professorDisciplinas").multiSelect('deselect_all');
-				var button = $(event.relatedTarget) // Button that triggered the modal
-				var recipient = button.data('whatever') // Extract info from data-* attributes
-				<!-- Foi criado todos os var caso seja necessario adicionar ou mudar os que já existem-->
-				var recipientnome = button.data('whatevernome')
-				var recipientmatricula = button.data('whatevermatricula')
-				var recipientnomeDisciplina = button.data('whatevernomeDisciplina')
-				var recipientnascimento = button.data('whatevernascimento')
-				var recipientnivelAcademico = button.data('whatevernivelAcademico')
-				var recipientregimeContrato = button.data('whateverregimeContrato')
-				var recipientcoordenador = button.data('whareevercoordenador')
-				var recipientid = button.data('whareeverid')
-				var url = '<?= base_url('index.php/Professor/disciplinas/') ?>'+recipientid;
-				$.getJSON(url,function (response) {
-					var disciplinas = [];
-					$.each(response,function (index,value) {
-						disciplinas.push(value.id);
-					});
-					$("#professorDisciplinas").multiSelect('select',disciplinas);
-				});
-
-
-				// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-				// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-				var modal = $(this)
-				modal.find('.modal-title').text('Alterar Professores')
-				<!-- Foi criado todos os modal caso seja necessario adicionar ou mudar os que já existem-->
-				modal.find('#recipient-nome').val(recipientnome)
-				modal.find('#recipient-matricula').val(recipientmatricula)
-				modal.find('#recipient-nomeDisciplina').val(recipientnomeDisciplina)
-				modal.find('#recipient-nascimento').val(recipientnascimento)
-				modal.find('#recipient-nivelAcademico').val(recipientnivelAcademico)
-				modal.find('#recipient-regimeContrato').val(recipientregimeContrato)
-				modal.find('#recipient-coordenador').val(recipientcoordenador)
-				modal.find('#recipient-id').val(recipientid)
-			})
+	
+		<script type="text/javascript"> 
+				$('#exampleModal').on('show.bs.modal', function (event) {
+						var button = $(event.relatedTarget) // Button that triggered the modal
+						var recipient = button.data('whatever') // Extract info from data-* attributes
+						<!-- Foi criado todos os var caso seja necessario adicionar ou mudar os que já existem-->			
+						var recipientnome = button.data('whatevernome')
+						var recipientmatricula = button.data('whatevermatricula')
+						var recipientnomeDisciplina = button.data('whatevernomeDisciplina')
+						var recipientnascimento = button.data('whatevernascimento')
+						var recipientnivelAcademico = button.data('whatevernivelAcademico')
+						var recipientregimeContrato = button.data('whateverregimeContrato')
+						var recipientcoordenador = button.data('whareevercoordenador')
+						var recipientid = button.data('whareeverid')
+						
+												
+						// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+						// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+						var modal = $(this)
+						modal.find('.modal-title').text('Alterar Professores')
+						<!-- Foi criado todos os modal caso seja necessario adicionar ou mudar os que já existem-->
+						modal.find('#recipient-nome').val(recipientnome)
+						modal.find('#recipient-matricula').val(recipientmatricula)
+						modal.find('#recipient-nomeDisciplina').val(recipientnomeDisciplina)
+						modal.find('#recipient-nascimento').val(recipientnascimento)
+						modal.find('#recipient-nivelAcademico').val(recipientnivelAcademico)
+						modal.find('#recipient-regimeContrato').val(recipientregimeContrato)
+						modal.find('#recipient-coordenador').val(recipientcoordenador)
+						modal.find('#recipient-id').val(recipientid)
+						
+						
+				})
 		</script>
+		
 		<script type="text/javascript">
 			$(document).ready(function () {
 				$("#ProfessorTable").DataTable({
