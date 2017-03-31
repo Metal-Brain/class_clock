@@ -61,7 +61,7 @@
 							<?= $this->session->flashdata('danger') ?>
 						</div>
 					<?php endif; ?>
-
+								
 					<h1>Professores</h1>
 
 					<!-- Lista de 'botoes' links do Bootstrap -->
@@ -114,19 +114,19 @@
 						<!-- Aqui é o formulário de registro do novo item-->
 						<div id="new" class="tab-pane fade">
 							<h3>Cadastrar Professores</h3>
-							<form>
+							<form method="post">
 								<div class="form-group percent-40 inline">
 									<label>Nome</label>
 									<input type="text" pattern="[A-Za-z]" class="form-control" name="nome" placeholder="Nome" value="<?= set_value('nome')?>"/>
 									<?= form_error('nome') ?>
 								</div>
 								<div class="form-group percent-20 inline">
-									<label>Matricula</label>
+									<label>Matrícula</label>
 									<input type="text" class="form-control" name="matricula"  maxlength="8" placeholder="ex: cg0000000" value="<?= set_value('matricula')?>"/>
 									<?= form_error('matricula') ?>
 								</div>
 								<div class="form-group percent-50">
-									<label>Disciplina que pode lecionar: </label>
+									<label>Disciplinas que pode lecionar</label>
 									<!-- Pessoal do back-end, aqui o campo de texto deverá auto-completar o que o usuário começar a digitar -->
 									<input type="text" class="form-control" name="nomeDisciplina" placeholder="ex: Arquitetura de Computadores" value="<?= set_value('nomeDisciplina')?>"/>
 									<?= form_error('nomeDisciplina') ?>
@@ -166,23 +166,6 @@
 				</div><!--Fecha content-->
 
 			</div><!--Fecha row-->
-			
-			<!-- Aqui é o Modal de visualização dos professores-->
-			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							<h4 class="modal-title text-center" id="myModalLabel">Professor</h4>
-						</div>
-						<div class="modal-body">
-							<p>Nome</p>
-							<p>Matricula</p>
-							<p>Nivel acadêmico</p>
-						</div>
-					</div>
-				</div>
-			</div>
 
 			<!-- Aqui é o Modal de alteração dos professores-->
 			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
@@ -217,10 +200,7 @@
 									<input type="date" class="form-control percent-40" name="nascimento" id="recipient-nascimento"/>
 									<?= form_error('recipient-nascimento') ?>
 								</div>
-								<div class="form-group">
-
-									<!--<label for="tipo-name" class="control-label">Tipo</label>
-									<input type="text" class="form-control" id="recipient-tipo">-->
+								<div class="form-group">									
 									<label for="nivelAcademico-name" class="control-label">Nivel Acadêmico</label>
 										<select  class="form-control" name="nivelAcademico" id="recipient-nivelAcademico">
 											<option>Mestre</option>
@@ -353,6 +333,7 @@
 				});
 			}
 		</script>
+
 		<script type="text/javascript">
 			$(document).ready(function () {
 				$("input[name=nascimento]").mask('00/00/0000', {placeholder: "__/__/____"});
