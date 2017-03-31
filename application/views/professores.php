@@ -43,23 +43,22 @@
 				<div id="content" class="col-md-10">
 					
 					<?php if ($this->session->flashdata('success')) : ?>
-            <!-- Alert de sucesso -->
-            <div class="text-center alert alert-success" role="alert">
-              <span class="glyphicon glyphicon glyphicon-ok" aria-hidden="true"></span>
-              <span class="sr-only">Succes:</span>
-              <?= $this->session->flashdata('success') ?>
-            </div>
-          <?php elseif ($this->session->flashdata('danger')) : ?>
-            <!-- Alert de erro -->
-            <div class="text-center alert alert-danger" role="alert">
-              <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-              <span class="sr-only">Error:</span>
-              <?= $this->session->flashdata('danger') ?>
-            </div>
+						<!-- Alert de sucesso -->
+						<div class="text-center alert alert-success" role="alert">
+							<span class="glyphicon glyphicon glyphicon-ok" aria-hidden="true"></span>
+							<span class="sr-only">Succes:</span>
+							<?= $this->session->flashdata('success') ?>
+						</div>
+						<?php elseif ($this->session->flashdata('danger')) : ?>
+						<!-- Alert de erro -->
+						<div class="text-center alert alert-danger" role="alert">
+							<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+							<span class="sr-only">Error:</span>
+							<?= $this->session->flashdata('danger') ?>
+						</div>
 					<?php endif; ?>
 				
-				
-				
+								
 					<h1>Professores</h1>
 
 					<!-- Lista de 'botoes' links do Bootstrap -->
@@ -80,17 +79,16 @@
 									<thead>
 										<tr>
 											<th>Nome</th>
-											<th>Matricula</th>
-											<th>Nivel Acadêmico</th>
-											<th>Visualizar</th>
+											<th>Matrícula</th>
+											<th>Nível Acadêmico</th>
+											<th>Ações</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tbody>
 										
-											
 											<?php
-												foreach ($Professor as $Professor) {
+												foreach ($professores as $professor) {
 													$row = '<tr>
 														<td>'.$professor['nome'].'</td>
 														<td>'.$professor['matricula'].'</td>
@@ -99,7 +97,7 @@
 														
 															
 															<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whatevernome="'.$professor['nome'].'" data-whateverid="'.$professor['id'].'" data-whatevermatricula= "'.$professor['matricula'].'" data-whatevernivelAcademico= "'.$professor['nivelAcademico'].'"><span class="glyphicon glyphicon-pencil"></span></button>
-															<button onClick="exclude('.$professor['id'].');" type="button" class="btn btn-danger delete" title="Editar" "><span class="glyphicon glyphicon-remove"></span></button>
+															<button onClick="exclude('.$professor['id'].');" type="button" class="btn btn-danger delete" title="Excluir" "><span class="glyphicon glyphicon-remove"></span></button>
 															
 														</td>
 													</tr>';
@@ -108,12 +106,6 @@
 												}
 									
 											?> 
-											
-											
-									
-									
-										
-										
 									</tbody>
 								</table>
 							</div>	
@@ -122,19 +114,19 @@
 						<!-- Aqui é o formulário de registro do novo item-->
 						<div id="new" class="tab-pane fade">
 							<h3>Cadastrar Professores</h3>
-							<form>
+							<form method="post">
 								<div class="form-group percent-40 inline">
 									<label>Nome</label>
 									<input type="text" pattern="[A-Za-z]" class="form-control" name="nome" placeholder="Nome" value="<?= set_value('nome')?>"/>
 									<?= form_error('nome') ?>
 								</div>
 								<div class="form-group percent-20 inline">
-									<label>Matricula</label>
+									<label>Matrícula</label>
 									<input type="text" class="form-control" name="matricula"  maxlength="8" placeholder="ex: cg0000000" value="<?= set_value('matricula')?>"/>
 									<?= form_error('matricula') ?>
 								</div>
 								<div class="form-group percent-50">
-									<label>Disciplina que pode lecionar: </label>
+									<label>Disciplinas que pode lecionar</label>
 									<!-- Pessoal do back-end, aqui o campo de texto deverá auto-completar o que o usuário começar a digitar -->
 									<input type="text" class="form-control" name="nomeDisciplina" placeholder="ex: Arquitetura de Computadores" value="<?= set_value('nomeDisciplina')?>"/>
 									<?= form_error('nomeDisciplina') ?>
@@ -145,14 +137,12 @@
 									<?= form_error('nascimento') ?>
 								</div>
 								<div class="form-group percent-30 inline">
-										<label for="nivelAcademico" >Nivel Acadêmcio:</label>
+										<label for="nivelAcademico" >Nivel Acadêmico</label>
 										<select  class="form-control" name="nivelAcademico" id="nivelAcademico" value="<?= set_value('nivelAcademico')?>">
 											<option  selected>Mestre</option>
 											<option>Doutor</option>
 											<?= form_error('nivelAcademico') ?>
 										</select>
-									
-									
 								</div>
 								<div class="form-group percent-30 inline">
 									<label>Regime de contrato</label>
@@ -167,12 +157,9 @@
 									<input type="checkbox" name="coordenador" class="form-group" value="<?= set_value('coordenador')?>"/>
 									<label>Coordenador</label>
 									<?= form_error('coordenador') ?>
-								</div>								
-
-								
+								</div>
 								<div class="inline">
 									<button type='submit' class='btn bt-lg btn-primary'>Cadastrar</button>
-									<button type='reset' class='btn bt-lg btn-default'>Limpar Campos</button>
 								</div>
 							</form>
 						</div>
@@ -182,25 +169,7 @@
 				</div><!--Fecha content-->
 
 			</div><!--Fecha row-->
-			
-			<!-- Aqui é o Modal de visualização dos professores-->
-			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							<h4 class="modal-title text-center" id="myModalLabel">Professor</h4>
-						</div>
-						<div class="modal-body">
-							<p>Nome</p>
-							<p>Matricula</p>
-							<p>Nivel acadêmico</p>
-						</div>
-					</div>
-				</div>
-			</div>
 
-			
 			<!-- Aqui é o Modal de alteração dos professores-->
 			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
 				<div class="modal-dialog" role="document">
@@ -220,12 +189,12 @@
 									<?= form_error('recipient-nome') ?>
 								</div>
 								<div class="form-group">
-									<label for="matricula-name" class="control-label">Matricula</label>
+									<label for="matricula-name" class="control-label">Matrícula</label>
 									<input type="text" class="form-control" id="recipient-matricula">
 									<?= form_error('recipient-matricula') ?>
 								</div>
 								<div class="form-group percent-50">
-								<label>Disciplina que pode lecionar: </label>
+								<label>Disciplinas que pode lecionar: </label>
 									<!-- Pessoal do back-end, aqui o campo de texto deverá auto-completar o que o usuário começar a digitar -->
 									<input type="text" class="form-control" name="nomeDisciplina" id="recipient-nomeDisciplina"/>
 								</div>
@@ -234,19 +203,13 @@
 									<input type="date" class="form-control percent-40" name="nascimento" id="recipient-nascimento"/>
 									<?= form_error('recipient-nascimento') ?>
 								</div>
-								<div class="form-group">
-									<!--<label for="tipo-name" class="control-label">Tipo</label>
-									<input type="text" class="form-control" id="recipient-tipo">-->
-									
+								<div class="form-group">									
 									<label for="nivelAcademico-name" class="control-label">Nivel Acadêmico</label>
 										<select  class="form-control" name="nivelAcademico" id="recipient-nivelAcademico">
 											<option>Mestre</option>
 											<option>Doutor</option>
 										</select>
 										<?= form_error('recipient-nivelAcademico') ?>
-									
-									
-									
 								</div>
 								<div class="form-group percent-30 inline">
 									<label>Regime de contrato</label>
@@ -257,26 +220,20 @@
 											<?= form_error('recipient-regimeContrato') ?>
 									</select>
 								</div>
-								
 								<div class="form-group percent-50">
 									<input type="checkbox" name="coordenador" class="form-group" id="recipient-coordenador"/>
 									<label>Coordenador</label>
 									<?= form_error('recipient-coordenador') ?>
-								</div>		
-								
-								
+								</div>	
 								<div class="modal-footer">
-									<button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
-									<button type="submit" class="btn btn-danger">Alterar</button>
+									<button type="submit" class="btn btn-primary">Alterar</button>
+									<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
 								</div>
 							</form>
 						</div>
 					</div>
 				</div>
 			</div>
-			
-			
-			
 			
 			
 			
@@ -293,8 +250,6 @@
 		<script type="text/javascript" src="<?= base_url('assets/js/bootstrap.min.js') ?>"></script>
 		<script type="text/javascript" src="<?= base_url('assets/DataTables/datatables.min.js') ?>"></script>
 		<script type="text/javascript" src="<?= base_url('assets/js/bootbox.min.js') ?>"></script>
-		
-	
 		<script type="text/javascript"> 
 		
 				$('#exampleModal').on('show.bs.modal', function (event) {
@@ -359,7 +314,5 @@
 				});
 			}
 		</script>
-		
-		
 	</body>
 </html>
