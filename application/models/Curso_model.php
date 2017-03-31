@@ -8,10 +8,10 @@
   class Curso_model extends CI_Model {
 
     /**
-          *Essa função ira pegar tudo da tabela Curso
-          *e colocar em um array.
-          *@author Felipe Ribeiro da Silva
-          *@since 2017/03/21
+      * Essa função ira pegar tudo da tabela Curso
+      * e colocar em um array.
+      * @author Felipe Ribeiro da Silva
+      * @since 2017/03/21
     */
     function getAll() {
       $this->db->select('Curso.*, Grau.nome AS grauNome, GROUP_CONCAT(Periodo.id) as idPeriodo, GROUP_CONCAT(Periodo.nome) AS periodo');

@@ -14,7 +14,6 @@
       * @return Retorna um array com todas as disciplinas
       */
     public function getAll () {
-      $this->db->where('status', TRUE);
       $result = $this->db->get('Disciplina');
 
       return $result->result_array(); // converte o objeto em um array
@@ -64,11 +63,25 @@
       * @author Caio de Freitas
       * @since 2017/03/17
       * @param INT $id - ID da disciplina
-      * @return Retorna um boolean TRUE caso a disciplina seja deletada com sucesso
+      * @return Retorna um boolean TRUE caso a disciplina seja desativada com sucesso
       */
-    public function delete ($id) {
+    public function disable ($id) {
       $this->db->where('id', $id);
       $result = $this->db->update('Disciplina',array('status'=>FALSE));
+
+      return $result;
+    }
+
+    /**
+      * Altera o status da disciplina para TRUE.
+      * @author Caio de Freitas
+      * @since 2017/03/31
+      * @param INT $id - ID da disciplina
+      * @return Retorna um boolean TRUE caso o status seja alterado
+      */
+    public function able ($id) {
+      $this->db->where('id',$id);
+      $result = $this->db->update('Disciplina',array('status'=>TRUE));
 
       return $result;
     }

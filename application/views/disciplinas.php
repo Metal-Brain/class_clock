@@ -86,22 +86,22 @@
 									</tr>
 								</thead>
 								<tbody>
-									<?php
-										foreach ($disciplinas as $disciplina) {
-											$row = '<tr>
-												<td>'.$disciplina['sigla'].'</td>
-												<td>'.$disciplina['nome'].'</td>
-												<td>'.$disciplina['qtdProf'].'</td>
+									<?php foreach ($disciplinas as $disciplina): ?>
+											<?= ($disciplina['status'] ? '<tr>' : '<tr class="danger">') ?>
+												<td><?= $disciplina['sigla']?></td>
+												<td><?= $disciplina['nome']?></td>
+												<td><?= $disciplina['qtdProf']?></td>
 												<td>
-													<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whateversigla="'.$disciplina['sigla'].'" data-whatevernome="'.$disciplina['nome'].'" data-whateverid="'.$disciplina['id'].'" data-whateverqtdprof="'.$disciplina['qtdProf'].'"><span class="glyphicon glyphicon-pencil"></span></button>
-													<button onClick="exclude('.$disciplina['id'].');" type="button" class="btn btn-danger delete" title="Editar" "><span class="glyphicon glyphicon-remove"></span></button>
+													<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whateversigla="<?= $disciplina['sigla']?>" data-whatevernome="<?= $disciplina['nome']?>" data-whateverid="<?= $disciplina['id']?>" data-whateverqtdprof="<?= $disciplina['qtdProf']?>"><span class="glyphicon glyphicon-pencil"></span></button>
+													<?php if ($disciplina['status']): ?>
+														<button onClick="disable(<?= $disciplina['id']?>)" type="button" class="btn btn-danger delete" title="Desativar"><span class="glyphicon glyphicon-remove"></span></button>
+													<?php else : ?>
+														<button onClick="able(<?= $disciplina['id']?>)" type="button" class="btn btn-success delete" title="Ativar"><span class="glyphicon glyphicon-ok"></span></button>
+													<?php endif; ?>
 
 												</td>
-											</tr>';
-
-											echo $row;
-										}
-									?>
+											</tr>
+									<?php endforeach;?>
 								</tbody>
 							</table>
 							</div>
@@ -214,9 +214,9 @@
 			});
 		</script>
 		<script>
-			function exclude(id){
+			function disable(id){
 				bootbox.confirm({
-					message: "Realmente deseja excluir essa disciplina?",
+					message: "Realmente deseja desativar essa disciplina?",
 					buttons: {
 						confirm: {
 							label: 'Sim',
@@ -229,7 +229,27 @@
 					},
 					callback: function (result) {
 						if(result)
-							window.location.href = '<?= base_url("index.php/Disciplina/deletar/")?>'+id
+							window.location.href = '<?= base_url("index.php/Disciplina/desativar/")?>'+id
+					}
+				});
+			}
+
+			function able(id){
+				bootbox.confirm({
+					message: "Realmente deseja ativar essa disciplina?",
+					buttons: {
+						confirm: {
+							label: 'Sim',
+							className: 'btn-success'
+						},
+						cancel: {
+							label: 'Não',
+							className: 'btn-danger'
+						}
+					},
+					callback: function (result) {
+						if(result)
+							window.location.href = '<?= base_url("index.php/Disciplina/ativar/")?>'+id
 					}
 				});
 			}
