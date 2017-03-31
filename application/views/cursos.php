@@ -6,6 +6,8 @@
         <link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/bootstrap.min.css')?>">
         <link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/style.css') ?>">
         <link rel="stylesheet" href="<?= base_url('assets/DataTables/datatables.min.css')?>">
+        <!-- Multi-Select -->
+        <link rel="stylesheet" href="<?= base_url('assets/multi-select/css/multi-select.css')?>">
     </head>
     <body>
         <!-- as classes container-fluid, row e col-md-xx são do GRID do bootstrap -->
@@ -146,16 +148,8 @@
                                     </div>
                                 </div>
                                 <div class="form-group disc">
-                                    <label>Disciplinas </label>
-                                    <button onClick="addSelect()" type="button" class="btn btn-success glyphicon glyphicon-plus"></button>
-
-                                    <br>
-                                    <div id="selects">
-                                        <div id="select-disciplina" class="form-group s-disciplina">
-                                          <?= form_dropdown('disciplinas[]',$disciplinas,null,array('class'=>'form-control')) ?>
-                                        </div>
-                                    </div>
-                                    <button id="btn-remover" onClick="remSelect()" type="button" class="btn btn-danger" style="display: none;">Remover</button>
+                                  <label>Disciplinas </label>
+                                  <?= form_dropdown('disciplinas[]',$disciplinas,null,array('id'=>'disciplinas','multiple'=>'multiple')) ?>
                                 </div>
 
                                 <div class="form-group">
@@ -210,17 +204,10 @@
                                   <?= form_error('cursoGrau') ?>
                                 </div>
                                 <div class="form-group disc">
-                                    <label>Disciplinas</label>
-                                    <button onClick="addSelect()" type="button" class="btn btn-success glyphicon glyphicon-plus"></button>
-
-                                    <br>
-                                    <div id="selects">
-                                        <div id="select-disciplina" class="form-group s-disciplina">
-                                          <?= form_dropdown('cursoDisciplinas[]',$disciplinas,null,array('class'=>'form-control')) ?>
-                                        </div>
-                                    </div>
-                                    <button id="btn-remover" onClick="remSelect()" type="button" class="btn btn-danger" style="display: none;">Remover</button>
+                                  <label>Disciplinas</label>
+                                  <?= form_dropdown('cursoDisciplinas[]',$disciplinas,null,array('id'=>'cursoDisciplinas','multiple'=>'multiple')) ?>
                                 </div>
+
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
                                     <?= form_submit('submit','Alterar',array('class'=>'btn btn-danger')) ?>
@@ -241,39 +228,15 @@
         <script type="text/javascript" src="<?= base_url('assets/js/bootstrap.min.js')?>"></script>
 		    <script type="text/javascript" src="<?= base_url('assets/js/bootbox.min.js') ?>"></script>
         <script type="text/javascript" src="<?= base_url('assets/DataTables/datatables.min.js')?>"></script>
+        <!-- multi-select -->
+        <script type="text/javascript" src="<?= base_url('assets/multi-select/js/jquery.multi-select.js')?>"></script>
         <script>
-            //faz a contagens de divs com uma determinada classe
-            function contaClasse(classe) {
-                return document.getElementsByClassName(classe).length
-            }
-
-            // adiciona um select dentro da div 'selects'
-            function addSelect() {
-                //pega o elemento/div que possui o id 'select-disciplina'
-                var select = document.getElementById('select-disciplina')
-                //pega o elemento/div que possui o id 'selects'
-                var area = document.getElementById('selects')
-                //faz a copia do elemento capturado na var select ( o 'select-disciplina')
-                var clone = select.cloneNode(true)
-                //insere o clone dentro da elemento da variavel area (o 'selects')
-                area.appendChild(clone)
-
-                //se quantidade de classes 's-disciplina' > 1 ele exibe o botao remover
-                if (contaClasse('s-disciplina') > 1)
-                    document.getElementById('btn-remover').style.display = 'inline'
-
-            }
-            function remSelect() {
-                //remove o ultimo elemento com id 'select-disciplina'
-                document.querySelector('#select-disciplina:last-child').remove()
-
-                //se quantidade de classes 's-disciplina' === 1 esconde o botao remover
-                if (contaClasse('s-disciplina') === 1)
-                    document.getElementById('btn-remover').style.display = 'none'
-            }
+          $("#cursoDisciplinas").multiSelect();
+          $("#disciplinas").multiSelect();
         </script>
         <script type="text/javascript">
             $('#exampleModal').on('show.bs.modal', function (event) {
+                $("#cursoDisciplinas").multiSelect('deselect_all');
                 var button = $(event.relatedTarget) // Button that triggered the modal
                 var recipient = button.data('whatever') // Extract info from data-* attributes
                 var recipientsigla = button.data('whateversigla')
@@ -282,6 +245,14 @@
                 var recipientgrau = button.data('whatevergrau')
                 var recipientPeriodo = button.data('whateverperiodo').toString()
                 var recipientid = button.data('whateverid')
+                var url = '<?= base_url('index.php/Curso/disciplinas/') ?>'+recipientid;
+                $.getJSON(url,function (response) {
+                  var disciplinas = [];
+                  $.each(response,function (index,value) {
+                    disciplinas.push(value.id);
+                  });
+                  $("#cursoDisciplinas").multiSelect('select',disciplinas);
+                });
                 // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
                 // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
                 var modal = $(this)

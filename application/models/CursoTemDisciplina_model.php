@@ -24,11 +24,31 @@
       ));
     }
 
+    /**
+      * Deleta um relação entre curso e disciplina
+      * @author Caio de Freitas
+      * @since 2017/03/28
+      * @param INT $curso - ID do curso
+      * @return Retorna um boolean True caso a relação foi desfeita
+      */
     public function delete ($curso) {
       $this->db->where('idCurso', $curso);
       $result = $this->db->delete('Curso_tem_Disciplina');
 
       return $result;
+    }
+
+    /**
+      * @param INT $curso - ID do curso
+      * @return Retorna um array com todas as disciplinas
+      */
+    public function getAllDisciplinas($curso) {
+      $this->db->select('Disciplina.*');
+      $this->db->where('idCurso',$curso);
+      $this->db->join('Disciplina','Disciplina.id = Curso_tem_Disciplina.idDisciplina');
+      $result = $this->db->get('Curso_tem_Disciplina');
+
+      return $result->result_array();
     }
 
   }

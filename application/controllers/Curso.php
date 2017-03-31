@@ -171,6 +171,19 @@
       redirect('Curso');
     }
 
+    /**
+      * Busca todas as disciplinas relacionadas ao curso informado
+      * @author Caio de Freitas
+      * @since 2017/03/31
+      * @param INT $id - ID do curso
+      */
+    public function disciplinas ($id) {
+      $this->load->model('CursoTemDisciplina_model');
+      $disciplinas = $this->CursoTemDisciplina_model->getAllDisciplinas($id);
+
+      echo json_encode($disciplinas);
+    }
+
   }
 
 ?>
