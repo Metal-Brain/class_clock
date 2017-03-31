@@ -27,7 +27,7 @@
       * @param INT $idSala
       * @return Retorna um array que representa a tupla.
       */
-    public function getSalaById ($idSala) {
+    public function getById ($idSala) {
       $this->db->where('id', $idSala);
       $result = $this->db->get('Sala');
 
@@ -41,7 +41,7 @@
       * @param Array $sala - array com os dados da salas
       * @return Retorna um boolean TRUE caso a inserção seja realizada com sucesso
       */
-    public function insertSala ($sala) {
+    public function insert($sala) {
       return $this->db->insert('Sala', $sala);
     }
 
@@ -52,10 +52,10 @@
       * @param INT $id - ID da sala
       * @return Retorna um boolean TRUE caso os dados sejam atualizados com sucesso
       */
-    public function updateSala ($idSala, $sala) {
+    public function update ($idSala, $sala) {
       $this->db->where('id', $idSala);
       $result = $this->db->update('Sala', $sala);
-
+    
       return $result;
     }
 
@@ -66,7 +66,7 @@
       * @param INT $id - ID da disciplina
       * @return Retorna um boolean TRUE caso a sala seja deletada com sucesso
       */
-    public function deleteSala ($idSala) {
+    public function delete ($idSala) {
       $this->db->where('id', $idSala);
       $result = $this->db->update('Sala',array('status'=>FALSE));
 

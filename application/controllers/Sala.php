@@ -49,7 +49,7 @@
                'tipo'       => $this->input->post("tipo")
              );
 
-             if ($this->Sala_model->insertSala($sala)){
+             if ($this->Sala_model->insert($sala)){
                $this->session->set_flashdata('success','Sala cadastrada com sucesso');
              } else {
                $this->session->set_flashdata('danger','Não foi possivel cadastrar a sala, tente novamente ou entre em contato com o administrador do sistema');
@@ -67,7 +67,7 @@
              // Carrega os modelos necessarios
              $this->load->model(array('Sala_model'));
 
-             if ( $this->Sala_model->deleteSala($id) )
+             if ( $this->Sala_model->delete($id) )
                 $this->session->set_flashdata('success','Sala deletada com sucesso');
               else
                 $this->session->set_flashdata('danger','Não foi possivel deletar a sala, tente novamente ou entre em contato com o administrador do sistema');
@@ -94,23 +94,26 @@
              // Verifica se o formulario é valido
              if ($this->form_validation->run() == FALSE) {
 
-              $dados['salas'] = $this->Sala_model->getSalas();
+               $this->session->set_flashdata('formDanger','<strong>Não foi possível atualizar os dados da Sala:</strong>');
+
+              $dados['salas'] = $this->Sala_model->getAll();
        	      $this->load->view('salas', $dados);
 
              } else {
 
                $id = $this->input->post('recipient-id');
+
                // Pega os dados do formulário
               $sala = array(
                 'nSala'        => $this->input->post("recipient-nSala"),
                 'capMax'       => $this->input->post('recipient-capMax'),
                 'tipo'         => $this->input->post("recipient-tipo")
               );
-              if ( $this->Sala_model->updateSala($id, $sala) )
+              if ( $this->Sala_model->update($id, $sala) )
                 $this->session->set_flashdata('success', 'Sala atualizada com sucesso');
               else
                 $this->session->set_flashdata('danger','Não foi possivel atualizar os dados da sala, tente novamente ou entre em contato com o administrador do sistema');
-               redirect("http://localhost/class_clock/");
+               redirect("/");
              }
            }
          }

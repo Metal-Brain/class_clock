@@ -73,7 +73,7 @@
 													<td>'.$sala['capMax'].'</td>
 													<td>'.$sala['tipo'].'</td>
 													<td>
-														<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whatevernSala="'.$sala['nSala'].'" data-whatevercapacidadeMaxima="'.$sala['capMax'].'"  data-whatevertipo="'.$sala['tipo'].'"><span class="glyphicon glyphicon-pencil"></span></button>
+														<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whatevernsala="'.$sala['nSala'].'" data-whateverid="'.$sala['id'].'" data-whatevercapmax="'.$sala['capMax'].'"  data-whatevertipo="'.$sala['tipo'].'"><span class="glyphicon glyphicon-pencil"></span></button>
 														<button onClick="exclude('.$sala['id'].');" type="button" class="btn btn-danger" title="Excluir"><span class="glyphicon glyphicon-remove"></span></button>
 													</td>
 												</tr>';
@@ -134,17 +134,17 @@
 							</div>
 							<div class="form-group">
 								<label for="nSala-name" class="control-label">Número da sala</label>
-									<input type="number" class="form-control" id="recipient-nSala">
+									<input type="text" class="form-control" name="recipient-nSala" id="recipient-nSala">
 								<?= form_error('recipient-nSala') ?>
 							</div>
 							<div class="form-group">
 								<label for="capMax-name" class="control-label">Capacidade Máxima</label>
-								<input type="number" maxlength="3" pattern="[0-9]+$"class="form-control" id="recipient-capMax">
+								<input type="number" maxlength="3" pattern="[0-9]+$"class="form-control" name="recipient-capMax" id="recipient-capMax">
 								<?= form_error('recipient-capMax') ?>
 							</div>
 							<div class="form-group">
 								<label for="tipo-name" class="control-label">Tipo</label>
-								<select  class="form-control" name="tipo" id="recipient-tipo">
+								<select  class="form-control" name="recipient-tipo" id="recipient-tipo">
 									<option>Laboratório</option>
 									<option>Teórica</option>
 								</select>
@@ -173,17 +173,17 @@
 				$('#exampleModal').on('show.bs.modal', function (event) {
 						var button = $(event.relatedTarget) // Button that triggered the modal
 						var recipient = button.data('whatever') // Extract info from data-* attributes
-						var recipientsigla = button.data('whateversigla')
-						var recipientnome = button.data('whatevernome')
-						var recipientQtdProf = button.data('whateverqtdprof')
+						var recipientnsala = button.data('whatevernsala')
+						var recipientcapmax = button.data('whatevercapmax')
+						var recipienttipo = button.data('whatevertipo')
 						var recipientId = button.data('whateverid')
 						// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
 						// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
 						var modal = $(this)
-						modal.find('.modal-title').text('Alterar Disciplina')
-						modal.find('#recipient-sigla').val(recipientsigla)
-						modal.find('#recipient-nome').val(recipientnome)
-						modal.find('#recipient-qtd-prof').val(recipientQtdProf)
+						modal.find('.modal-title').text('Alterar Sala')
+						modal.find('#recipient-nSala').val(recipientnsala)
+						modal.find('#recipient-capMax').val(recipientcapmax)
+						modal.find('#recipient-tipo').val(recipienttipo)
 						modal.find('#recipient-id').val(recipientId)
 				})
 		</script>
