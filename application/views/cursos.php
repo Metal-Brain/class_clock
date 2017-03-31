@@ -236,6 +236,7 @@
         </script>
         <script type="text/javascript">
             $('#exampleModal').on('show.bs.modal', function (event) {
+                $("#cursoDisciplinas").multiSelect('deselect_all');
                 var button = $(event.relatedTarget) // Button that triggered the modal
                 var recipient = button.data('whatever') // Extract info from data-* attributes
                 var recipientsigla = button.data('whateversigla')
@@ -244,6 +245,14 @@
                 var recipientgrau = button.data('whatevergrau')
                 var recipientPeriodo = button.data('whateverperiodo').toString()
                 var recipientid = button.data('whateverid')
+                var url = '<?= base_url('index.php/Curso/disciplinas/') ?>'+recipientid;
+                $.getJSON(url,function (response) {
+                  var disciplinas = [];
+                  $.each(response,function (index,value) {
+                    disciplinas.push(value.id);
+                  });
+                  $("#cursoDisciplinas").multiSelect('select',disciplinas);
+                });
                 // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
                 // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
                 var modal = $(this)
