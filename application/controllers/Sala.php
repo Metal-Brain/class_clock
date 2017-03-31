@@ -37,8 +37,8 @@
            // Verifica se o formulario é valido
            if ($this->form_validation->run() == FALSE) {
 
-            //$dados['salas'] = $this->Sala_model->getSalas();
-     	      $this->load->view('salas');
+            $dados['salas'] = $this->Sala_model->getAll();
+     	      $this->load->view('salas',$dados);
 
            } else {
 
@@ -54,7 +54,7 @@
              } else {
                $this->session->set_flashdata('danger','Não foi possivel cadastrar a sala, tente novamente ou entre em contato com o administrador do sistema');
              }
-             redirect("http://localhost/class_clock/");
+             redirect("/");
            }
          }
            /**
@@ -71,7 +71,7 @@
                 $this->session->set_flashdata('success','Sala deletada com sucesso');
               else
                 $this->session->set_flashdata('danger','Não foi possivel deletar a sala, tente novamente ou entre em contato com o administrador do sistema');
-               redirect("http://localhost/class_clock/");
+               redirect("/");
            }
 
            /**

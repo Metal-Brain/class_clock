@@ -24,10 +24,10 @@
 				<div id="sidebar" class="col-md-2" role="navigation">
 					<h2>Menu</h2>
 					<ul class="nav nav-pills nav-stacked">
-						<li><a href="cursos.html">Cursos</a></li>
-						<li><a href="disciplinas.html">Disciplinas</a></li>
+						<li><?= anchor('Curso','Cursos') ?></li>
+						<li class="active"><?= anchor('Disciplina','Disciplinas') ?></li>
 						<li><a href="professores.html">Professores</a></li>
-						<li class="active"><a href="salas.html">Salas</a></li>
+						<li><?= anchor('Sala','Sala') ?></li>
 						<hr>
 						<li><a href="index.html"><span class="glyphicon glyphicon-log-out"></span> Sair do Sistema</a></li>
 					</ul>
@@ -41,7 +41,7 @@
 							<strong>Atenção!</strong> Erros encontrados, verifique o formulário para mais detalhes.
 						</div>
 					<?php endif; ?>
-					
+
 					<!-- Lista de 'botoes' links do Bootstrap -->
 					<ul class="nav nav-pills">
 						<!-- 'botao' link para a listagem -->
@@ -73,7 +73,7 @@
 													<td>'.$sala['capMax'].'</td>
 													<td>'.$sala['tipo'].'</td>
 													<td>
-														<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whatevernSala="'.$sala['nSala'].'" data-whatevercapacidadeMaxima="'.$sala['capacidadeMaxima'].'"  data-whatevertipo="'.$sala['tipo'].'"><span class="glyphicon glyphicon-pencil"></span></button>
+														<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whatevernSala="'.$sala['nSala'].'" data-whatevercapacidadeMaxima="'.$sala['capMax'].'"  data-whatevertipo="'.$sala['tipo'].'"><span class="glyphicon glyphicon-pencil"></span></button>
 														<button onClick="exclude('.$sala['id'].');" type="button" class="btn btn-danger" title="Excluir"><span class="glyphicon glyphicon-remove"></span></button>
 													</td>
 												</tr>';
@@ -142,7 +142,7 @@
 								<input type="number" maxlength="3" pattern="[0-9]+$"class="form-control" id="recipient-capMax">
 								<?= form_error('recipient-capMax') ?>
 							</div>
-							<div class="form-group">								
+							<div class="form-group">
 								<label for="tipo-name" class="control-label">Tipo</label>
 								<select  class="form-control" name="tipo" id="recipient-tipo">
 									<option>Laboratório</option>

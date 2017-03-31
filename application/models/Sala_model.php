@@ -13,7 +13,7 @@
       * @since 2017/03/23
       * @return Retorna um array com todas as salas
       */
-    public function getSalas () {
+    public function getAll () {
       $this->db->where('status', TRUE);
       $result = $this->db->get('Sala');
 
