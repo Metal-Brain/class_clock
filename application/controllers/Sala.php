@@ -54,7 +54,7 @@
              } else {
                $this->session->set_flashdata('danger','Não foi possivel cadastrar a sala, tente novamente ou entre em contato com o administrador do sistema');
              }
-             redirect("/");
+             redirect("Sala/cadastro");
            }
          }
            /**
@@ -71,7 +71,7 @@
                 $this->session->set_flashdata('success','Sala deletada com sucesso');
               else
                 $this->session->set_flashdata('danger','Não foi possivel deletar a sala, tente novamente ou entre em contato com o administrador do sistema');
-               redirect("/");
+               redirect("Sala/cadastro");
            }
 
            /**
@@ -113,7 +113,7 @@
                 $this->session->set_flashdata('success', 'Sala atualizada com sucesso');
               else
                 $this->session->set_flashdata('danger','Não foi possivel atualizar os dados da sala, tente novamente ou entre em contato com o administrador do sistema. <br/> Caso tenha alterado a <b>SIGLA</b>, verifique se ela já não foi utilizada!');
-               redirect("/");
+               redirect("Sala/cadastro");
              }
            }
          }
