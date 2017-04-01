@@ -6,6 +6,8 @@
         <link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/bootstrap.min.css')?>">
         <link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/style.css') ?>">
         <link rel="stylesheet" href="<?= base_url('assets/DataTables/datatables.min.css')?>">
+        <!-- Multi-Select -->
+        <link rel="stylesheet" href="<?= base_url('assets/multi-select/css/multi-select.css')?>">
     </head>
     <body>
         <!-- as classes container-fluid, row e col-md-xx são do GRID do bootstrap -->
@@ -83,20 +85,26 @@
                                         <th>Qtd. Semestres</th>
                                         <th>Período</th>
                                         <th>Grau</th>
+										<th>Status</th>
                                         <th>Ação</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                   <?php foreach ($cursos as $curso) : ?>
-                                    <tr>
+                                    <?= ($curso['status'] ? '<tr>' : '<tr class="danger">') ?>
                                         <td><?= $curso['sigla'] ?></td>
                                         <td><?= $curso['nome'] ?></td>
                                         <td><?= $curso['qtdSemestres'] ?></td>
                                         <td><?= $curso['periodo'] ?></td>
-                                        <td><?= $curso['grauNome'] ?></td>
+										<td><?= $curso['grauNome'] ?></td>
+                                        <td><?php if($curso['status']): echo "Ativo"; else: echo "Inativo"; endif;?></td>
                                         <td>
+											<?php if($curso['status']): ?>
                                             <button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whateverid="<?= $curso['id']?>" data-whateversigla="<?= $curso['sigla']?>" data-whatevernome="<?= $curso['nome']?>" data-whateversemestres="<?= $curso['qtdSemestres']?>" data-whatevergrau="<?= $curso['grau']?>" data-whateverperiodo="<?= $curso['idPeriodo']?>"><span class="glyphicon glyphicon-pencil"></span></button>
                                             <button onClick="exclude(<?= $curso['id']?>);" type="button" class="btn btn-danger" title="Excluir"><span class="glyphicon glyphicon-remove"></span></button>
+											<?php else:?>
+											<button onClick="able(<?= $curso['id']?>)" type="button" class="btn btn-success delete" title="Ativar"><span class="glyphicon glyphicon-ok"></span></button>
+											<?php endif;?>
                                         </td>
                                     </tr>
                                   <?php endforeach; ?>
@@ -109,12 +117,12 @@
                         <div id="new" class="tab-pane fade">
                             <h3>Cadastrar Curso</h3>
                             <?= form_open('Curso/cadastrar') ?>
-                                <div class="form-group percent-40 inline">
+                                <div class="form-group percent-40">
                                     <?= form_label('Nome','nome') ?>
                                     <?= form_input('nome',set_value('nome'),array('class'=>'form-control','placeholder'=>'ex: Análise e Desenvolvimento de Sistemas')) ?>
                                     <?= form_error('nome') ?>
                                 </div>
-                                <div class="form-group percent-10 inline">
+                                <div class="form-group percent-40">
                                     <?= form_label('Sigla','sigla') ?>
                                     <?= form_input('sigla',set_value('sigla'),array('class'=>'form-control','placeholder'=>'ex: ADS')) ?>
                                     <?= form_error('sigla') ?>
@@ -146,16 +154,8 @@
                                     </div>
                                 </div>
                                 <div class="form-group disc">
-                                    <label>Disciplinas </label>
-                                    <button onClick="addSelect()" type="button" class="btn btn-success glyphicon glyphicon-plus"></button>
-
-                                    <br>
-                                    <div id="selects">
-                                        <div id="select-disciplina" class="form-group s-disciplina">
-                                          <?= form_dropdown('disciplinas[]',$disciplinas,null,array('class'=>'form-control')) ?>
-                                        </div>
-                                    </div>
-                                    <button id="btn-remover" onClick="remSelect()" type="button" class="btn btn-danger" style="display: none;">Remover</button>
+                                  <label>Disciplinas </label>
+                                  <?= form_dropdown('disciplinas[]',$disciplinas,null,array('id'=>'disciplinas','multiple'=>'multiple')) ?>
                                 </div>
 
                                 <div class="form-group">
@@ -210,20 +210,13 @@
                                   <?= form_error('cursoGrau') ?>
                                 </div>
                                 <div class="form-group disc">
-                                    <label>Disciplinas</label>
-                                    <button onClick="addSelect()" type="button" class="btn btn-success glyphicon glyphicon-plus"></button>
-
-                                    <br>
-                                    <div id="selects">
-                                        <div id="select-disciplina" class="form-group s-disciplina">
-                                          <?= form_dropdown('cursoDisciplinas[]',$disciplinas,null,array('class'=>'form-control')) ?>
-                                        </div>
-                                    </div>
-                                    <button id="btn-remover" onClick="remSelect()" type="button" class="btn btn-danger" style="display: none;">Remover</button>
+                                  <label>Disciplinas</label>
+                                  <?= form_dropdown('cursoDisciplinas[]',$disciplinas,null,array('id'=>'cursoDisciplinas','multiple'=>'multiple')) ?>
                                 </div>
+
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
-                                    <?= form_submit('submit','Alterar',array('class'=>'btn btn-danger')) ?>
+									<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+									<?= form_submit('submit','Alterar',array('class'=>'btn btn-primary')) ?>
                                 </div>
                             <?= form_close() ?>
                         </div>
@@ -241,39 +234,15 @@
         <script type="text/javascript" src="<?= base_url('assets/js/bootstrap.min.js')?>"></script>
 		    <script type="text/javascript" src="<?= base_url('assets/js/bootbox.min.js') ?>"></script>
         <script type="text/javascript" src="<?= base_url('assets/DataTables/datatables.min.js')?>"></script>
+        <!-- multi-select -->
+        <script type="text/javascript" src="<?= base_url('assets/multi-select/js/jquery.multi-select.js')?>"></script>
         <script>
-            //faz a contagens de divs com uma determinada classe
-            function contaClasse(classe) {
-                return document.getElementsByClassName(classe).length
-            }
-
-            // adiciona um select dentro da div 'selects'
-            function addSelect() {
-                //pega o elemento/div que possui o id 'select-disciplina'
-                var select = document.getElementById('select-disciplina')
-                //pega o elemento/div que possui o id 'selects'
-                var area = document.getElementById('selects')
-                //faz a copia do elemento capturado na var select ( o 'select-disciplina')
-                var clone = select.cloneNode(true)
-                //insere o clone dentro da elemento da variavel area (o 'selects')
-                area.appendChild(clone)
-
-                //se quantidade de classes 's-disciplina' > 1 ele exibe o botao remover
-                if (contaClasse('s-disciplina') > 1)
-                    document.getElementById('btn-remover').style.display = 'inline'
-
-            }
-            function remSelect() {
-                //remove o ultimo elemento com id 'select-disciplina'
-                document.querySelector('#select-disciplina:last-child').remove()
-
-                //se quantidade de classes 's-disciplina' === 1 esconde o botao remover
-                if (contaClasse('s-disciplina') === 1)
-                    document.getElementById('btn-remover').style.display = 'none'
-            }
+          $("#cursoDisciplinas").multiSelect();
+          $("#disciplinas").multiSelect();
         </script>
         <script type="text/javascript">
             $('#exampleModal').on('show.bs.modal', function (event) {
+                $("#cursoDisciplinas").multiSelect('deselect_all');
                 var button = $(event.relatedTarget) // Button that triggered the modal
                 var recipient = button.data('whatever') // Extract info from data-* attributes
                 var recipientsigla = button.data('whateversigla')
@@ -282,6 +251,14 @@
                 var recipientgrau = button.data('whatevergrau')
                 var recipientPeriodo = button.data('whateverperiodo').toString()
                 var recipientid = button.data('whateverid')
+                var url = '<?= base_url('index.php/Curso/disciplinas/') ?>'+recipientid;
+                $.getJSON(url,function (response) {
+                  var disciplinas = [];
+                  $.each(response,function (index,value) {
+                    disciplinas.push(value.id);
+                  });
+                  $("#cursoDisciplinas").multiSelect('select',disciplinas);
+                });
                 // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
                 // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
                 var modal = $(this)
@@ -329,6 +306,26 @@
 					callback: function (result) {
 						if(result)
 							window.location.href ='<?= base_url('index.php/Curso/deletar/')?>'+id
+					}
+				});
+			}
+			
+			function able(id){
+				bootbox.confirm({
+					message: "Realmente deseja ativar esse curso?",
+					buttons: {
+						confirm: {
+							label: 'Sim',
+							className: 'btn-success'
+						},
+						cancel: {
+							label: 'Não',
+							className: 'btn-danger'
+						}
+					},
+					callback: function (result) {
+						if(result)
+							window.location.href = '<?= base_url("index.php/Curso/ativar/")?>'+id
 					}
 				});
 			}

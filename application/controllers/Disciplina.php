@@ -30,7 +30,7 @@
       $this->load->model(array('Disciplina_model'));
 
       // Definir as regras de validação para cada campo do formulário.
-      $this->form_validation->set_rules('nome', 'nome do curso', array('required','min_length[5]','ucwords'));
+      $this->form_validation->set_rules('nome', 'nome da disciplina', array('required','min_length[5]','ucwords'));
       $this->form_validation->set_rules('sigla', 'sigla', array('required', 'max_length[5]', 'is_unique[Disciplina.sigla]','strtoupper'));
       $this->form_validation->set_rules('qtdProf', 'quantidade de professores', array('required', 'integer', 'greater_than[0]', 'less_than[10]'));
       // Definição dos delimitadores
@@ -39,7 +39,7 @@
       // Verifica se o formulario é valido
       if ($this->form_validation->run() == FALSE) {
 
-        $this->session->set_flashdata('formDanger','<strong>Não foi possivel cadastrar a disciplinas, pois existem erros no formulário</strong>');
+        $this->session->set_flashdata('formDanger','<strong>Não foi possível cadastrar a disciplina, pois existe(m) erro(s) no formulário:</strong>');
 
         $dados['disciplinas'] = $this->Disciplina_model->getAll();
 	      $this->load->view('disciplinas', $dados);
@@ -56,7 +56,7 @@
         if ($this->Disciplina_model->insert($disciplina)){
           $this->session->set_flashdata('success','Disciplina cadastrada com sucesso');
         } else {
-          $this->session->set_flashdata('danger','Não foi possivel cadastrar a disciplina, tente novamente ou entre em contato com o administrador do sistema');
+          $this->session->set_flashdata('danger','Não foi possível cadastrar a disciplina, tente novamente ou entre em contato com o administrador do sistema.');
         }
 
         redirect('/');
@@ -70,16 +70,27 @@
       * @since  2017/03/21
       * @param $id ID da disciplina
       */
-    public function deletar ($id) {
+    public function desativar ($id) {
       // Carrega os modelos necessarios
       $this->load->model(array('Disciplina_model'));
 
-      if ( $this->Disciplina_model->deleteDisciplina($id) )
-        $this->session->set_flashdata('success','Disciplina deletada com sucesso');
+      if ( $this->Disciplina_model->disable($id) )
+        $this->session->set_flashdata('success','Disciplina desativada com sucesso');
       else
-        $this->session->set_flashdata('danger','Não foi possivel deletar a disciplina, tente novamente ou entre em contato com o administrador do sistema');
+        $this->session->set_flashdata('danger','Não foi possível desativar a disciplina, tente novamente ou entre em contato com o administrador do sistema.');
 
       redirect('/');
+    }
+
+    public function ativar ($id) {
+      $this->load->model('Disciplina_model');
+
+      if ( $this->Disciplina_model->able($id) )
+        $this->session->set_flashdata('success','Disciplina ativada com sucesso!');
+      else
+        $this->session->set_flashdata('danger','Não foi possível ativar a disciplina, tente novamente ou entre em contato com o administrador do sistema');
+
+      redirect('Disciplina');
     }
 
     /**
@@ -103,7 +114,7 @@
       // Verifica se o formulario é valido
       if ($this->form_validation->run() == FALSE) {
 
-        $this->session->set_flashdata('formDanger','<strong>Não foi possivel atualizar os dados da disciplina:</strong>');
+        $this->session->set_flashdata('formDanger','<strong>Não foi possível atualizar os dados da disciplina:</strong>');
 
         $dados['disciplinas'] = $this->Disciplina_model->getAll();
         $this->load->view('disciplinas', $dados);
@@ -121,7 +132,7 @@
         if ( $this->Disciplina_model->update($id, $disciplina) )
           $this->session->set_flashdata('success', 'Disciplina atualizada com sucesso');
         else
-          $this->session->set_flashdata('danger','Não foi possivel atualizar os dados da disciplina, tente novamente ou entre em contato com o administrador do sistema');
+          $this->session->set_flashdata('danger','Não foi possível atualizar os dados da disciplina, tente novamente ou entre em contato com o administrador do sistema.<br/> Caso tenha alterado a <b>SIGLA</b>, verifique se ela já não foi utilizada!');
 
         redirect('/');
 
