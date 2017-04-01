@@ -89,12 +89,12 @@
 						<div id="new" class="tab-pane fade">
 							<h3>Cadastrar Sala</h3>
 							<form action="" method="post">
-									<div class="form-group percent-10 inline">
+									<div class="form-group percent-40">
 									<label>Sala</label>
 									<input type="number" class="form-control" pattern="[0-9]+$" name="nSala" placeholder="ex: 110" required>
 									<?= form_error('nSala') ?>
 								</div>
-								<div class="form-group percent-40 inline">
+								<div class="form-group percent-40">
 									<label for="tipo">Tipo</label>
 									<select  class="form-control" name="tipo" id="tipo" required>
 										<option  selected>Laboratório</option>
