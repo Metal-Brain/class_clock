@@ -28,7 +28,7 @@
            $this->load->model(array("Sala_model"));
 
            // Definir as regras de validação para cada campo do formulário.
-           $this->form_validation->set_rules('nSala', 'Numero Sala', array('required', 'max_length[5]','strtoupper'));
+           $this->form_validation->set_rules('nSala', 'Numero Sala', array('required', 'max_length[5]', 'is_unique[Sala.nSala]','strtoupper'));
            $this->form_validation->set_rules('capMax', 'Capacidade Maxima', array('required', 'integer', 'greater_than[0]'));
            $this->form_validation->set_rules('tipo', 'Tipo', array('required','min_length[5]','ucwords'));
           // Definição dos delimitadores
@@ -112,7 +112,7 @@
               if ( $this->Sala_model->update($id, $sala) )
                 $this->session->set_flashdata('success', 'Sala atualizada com sucesso');
               else
-                $this->session->set_flashdata('danger','Não foi possivel atualizar os dados da sala, tente novamente ou entre em contato com o administrador do sistema');
+                $this->session->set_flashdata('danger','Não foi possivel atualizar os dados da sala, tente novamente ou entre em contato com o administrador do sistema. <br/> Caso tenha alterado a <b>SIGLA</b>, verifique se ela já não foi utilizada!');
                redirect("/");
              }
            }
