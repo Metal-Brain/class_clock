@@ -117,12 +117,12 @@
                         <div id="new" class="tab-pane fade">
                             <h3>Cadastrar Curso</h3>
                             <?= form_open('Curso/cadastrar') ?>
-                                <div class="form-group percent-40 inline">
+                                <div class="form-group percent-40">
                                     <?= form_label('Nome','nome') ?>
                                     <?= form_input('nome',set_value('nome'),array('class'=>'form-control','placeholder'=>'ex: Análise e Desenvolvimento de Sistemas')) ?>
                                     <?= form_error('nome') ?>
                                 </div>
-                                <div class="form-group percent-10 inline">
+                                <div class="form-group percent-40">
                                     <?= form_label('Sigla','sigla') ?>
                                     <?= form_input('sigla',set_value('sigla'),array('class'=>'form-control','placeholder'=>'ex: ADS')) ?>
                                     <?= form_error('sigla') ?>
