@@ -82,6 +82,7 @@
 										<th>Sigla</th>
 										<th>Nome</th>
 										<th>Qtd. Professores</th>
+										<th>Status</th>
 										<th>Ação</th>
 									</tr>
 								</thead>
@@ -91,9 +92,10 @@
 												<td><?= $disciplina['sigla']?></td>
 												<td><?= $disciplina['nome']?></td>
 												<td><?= $disciplina['qtdProf']?></td>
+												<td><?php if($disciplina['status']): echo "Ativo"; else: echo "Inativo"; endif;?></td>
 												<td>
-													<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whateversigla="<?= $disciplina['sigla']?>" data-whatevernome="<?= $disciplina['nome']?>" data-whateverid="<?= $disciplina['id']?>" data-whateverqtdprof="<?= $disciplina['qtdProf']?>"><span class="glyphicon glyphicon-pencil"></span></button>
 													<?php if ($disciplina['status']): ?>
+														<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whateversigla="<?= $disciplina['sigla']?>" data-whatevernome="<?= $disciplina['nome']?>" data-whateverid="<?= $disciplina['id']?>" data-whateverqtdprof="<?= $disciplina['qtdProf']?>"><span class="glyphicon glyphicon-pencil"></span></button>
 														<button onClick="disable(<?= $disciplina['id']?>)" type="button" class="btn btn-danger delete" title="Desativar"><span class="glyphicon glyphicon-remove"></span></button>
 													<?php else : ?>
 														<button onClick="able(<?= $disciplina['id']?>)" type="button" class="btn btn-success delete" title="Ativar"><span class="glyphicon glyphicon-ok"></span></button>
