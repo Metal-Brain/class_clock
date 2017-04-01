@@ -85,20 +85,26 @@
                                         <th>Qtd. Semestres</th>
                                         <th>Período</th>
                                         <th>Grau</th>
+										<th>Status</th>
                                         <th>Ação</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                   <?php foreach ($cursos as $curso) : ?>
-                                    <tr>
+                                    <?= ($curso['status'] ? '<tr>' : '<tr class="danger">') ?>
                                         <td><?= $curso['sigla'] ?></td>
                                         <td><?= $curso['nome'] ?></td>
                                         <td><?= $curso['qtdSemestres'] ?></td>
                                         <td><?= $curso['periodo'] ?></td>
-                                        <td><?= $curso['grauNome'] ?></td>
+										<td><?= $curso['grauNome'] ?></td>
+                                        <td><?php if($curso['status']): echo "Ativo"; else: echo "Inativo"; endif;?></td>
                                         <td>
+											<?php if($curso['status']): ?>
                                             <button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whateverid="<?= $curso['id']?>" data-whateversigla="<?= $curso['sigla']?>" data-whatevernome="<?= $curso['nome']?>" data-whateversemestres="<?= $curso['qtdSemestres']?>" data-whatevergrau="<?= $curso['grau']?>" data-whateverperiodo="<?= $curso['idPeriodo']?>"><span class="glyphicon glyphicon-pencil"></span></button>
                                             <button onClick="exclude(<?= $curso['id']?>);" type="button" class="btn btn-danger" title="Excluir"><span class="glyphicon glyphicon-remove"></span></button>
+											<?php else:?>
+											<button onClick="able(<?= $curso['id']?>)" type="button" class="btn btn-success delete" title="Ativar"><span class="glyphicon glyphicon-ok"></span></button>
+											<?php endif;?>
                                         </td>
                                     </tr>
                                   <?php endforeach; ?>
@@ -300,6 +306,26 @@
 					callback: function (result) {
 						if(result)
 							window.location.href ='<?= base_url('index.php/Curso/deletar/')?>'+id
+					}
+				});
+			}
+			
+			function able(id){
+				bootbox.confirm({
+					message: "Realmente deseja ativar esse curso?",
+					buttons: {
+						confirm: {
+							label: 'Sim',
+							className: 'btn-success'
+						},
+						cancel: {
+							label: 'Não',
+							className: 'btn-danger'
+						}
+					},
+					callback: function (result) {
+						if(result)
+							window.location.href = '<?= base_url("index.php/Curso/ativar/")?>'+id
 					}
 				});
 			}

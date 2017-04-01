@@ -170,6 +170,16 @@
 
       redirect('Curso');
     }
+	public function ativar ($id) {
+      $this->load->model('Curso_model');
+
+      if ( $this->Curso_model->able($id) )
+        $this->session->set_flashdata('success','Curso ativado com sucesso!');
+      else
+        $this->session->set_flashdata('danger','Não foi possível ativar o Curso, tente novamente ou entre em contato com o administrador do sistema');
+
+      redirect('Curso');
+    }
 
     /**
       * Busca todas as disciplinas relacionadas ao curso informado
