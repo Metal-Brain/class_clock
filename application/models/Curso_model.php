@@ -8,17 +8,16 @@
   class Curso_model extends CI_Model {
 
     /**
-          *Essa função ira pegar tudo da tabela Curso
-          *e colocar em um array.
-          *@author Felipe Ribeiro da Silva
-          *@since 2017/03/21
+      * Essa função ira pegar tudo da tabela Curso
+      * e colocar em um array.
+      * @author Felipe Ribeiro da Silva
+      * @since 2017/03/21
     */
     function getAll() {
       $this->db->select('Curso.*, Grau.nome AS grauNome, GROUP_CONCAT(Periodo.id) as idPeriodo, GROUP_CONCAT(Periodo.nome) AS periodo');
       $this->db->join('Grau','Grau.id = Curso.grau');
       $this->db->join('Curso_tem_Periodo AS cp','cp.idCurso = Curso.id');
       $this->db->join('Periodo','Periodo.id = cp.idPeriodo');
-      $this->db->where('status',True);
       $this->db->group_by('Curso.id');
       $result = $this->db->get('Curso');
 
@@ -78,6 +77,20 @@
     function deleteCurso($idCurso) {
       $this->db->where('id', $idCurso);
       $result = $this->db->update('Curso', array('status' =>FALSE));
+
+      return $result;
+    }
+	
+	/**
+      * Altera o status da disciplina para TRUE.
+      * @author Caio de Freitas
+      * @since 2017/03/31
+      * @param INT $id - ID da disciplina
+      * @return Retorna um boolean TRUE caso o status seja alterado
+      */
+    public function able ($id) {
+      $this->db->where('id',$id);
+      $result = $this->db->update('Curso',array('status'=>TRUE));
 
       return $result;
     }
