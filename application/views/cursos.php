@@ -209,8 +209,8 @@
                                 </div>
 
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
-                                    <?= form_submit('submit','Alterar',array('class'=>'btn btn-danger')) ?>
+                                    <?= form_submit('submit','Alterar',array('class'=>'btn btn-primary')) ?>
+									<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                                 </div>
                             <?= form_close() ?>
                         </div>
