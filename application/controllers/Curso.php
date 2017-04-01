@@ -33,7 +33,7 @@
 
       //Define regras de validação do formulario!!!
       $this->form_validation->set_rules('nome', 'nome',array('required', 'min_length[5]','trim','ucwords'));
-      $this->form_validation->set_rules('sigla', 'sigla', array('required', 'max_length[5]','alpha', 'strtoupper'));
+      $this->form_validation->set_rules('sigla', 'sigla', array('required', 'max_length[5]','alpha', 'is_unique[Curso.sigla]', 'strtoupper'));
       $this->form_validation->set_rules('qtdSemestres','quantidade de semestres', array('required','integer','greater_than[0]','less_than[20]'));
       $this->form_validation->set_rules('periodo[]', 'periodo', array('required'));
       $this->form_validation->set_rules('grau','grau',array('greater_than[0]'));
@@ -143,7 +143,7 @@
 
           $this->session->set_flashdata('success','Curso atualizado com sucesso');
         } else {
-          $this->session->set_flashdata('danger','Não foi possivel atualizar os dados do curso, tente novamente ou entre em contato com o administrador do sistema');
+          $this->session->set_flashdata('danger','Não foi possivel atualizar os dados do curso, tente novamente ou entre em contato com o administrador do sistema. <br/> Caso tenha alterado a <b>SIGLA</b>, verifique se ela já não foi utilizada!');
         }
 
         redirect('Curso');
