@@ -75,9 +75,9 @@
       $this->load->model(array('Disciplina_model'));
 
       if ( $this->Disciplina_model->disable($id) )
-        $this->session->set_flashdata('success','Disciplina deletada com sucesso');
+        $this->session->set_flashdata('success','Disciplina desativada com sucesso');
       else
-        $this->session->set_flashdata('danger','Não foi possivel deletar a disciplina, tente novamente ou entre em contato com o administrador do sistema.');
+        $this->session->set_flashdata('danger','Não foi possível desativar a disciplina, tente novamente ou entre em contato com o administrador do sistema.');
 
       redirect('/');
     }
@@ -88,7 +88,7 @@
       if ( $this->Disciplina_model->able($id) )
         $this->session->set_flashdata('success','Disciplina ativada com sucesso!');
       else
-        $this->session->set_flashdata('danger','Não foi possivel ativar a disciplina, tente novamente ou entre em contato com o administrador do sistema');
+        $this->session->set_flashdata('danger','Não foi possível ativar a disciplina, tente novamente ou entre em contato com o administrador do sistema');
 
       redirect('Disciplina');
     }
