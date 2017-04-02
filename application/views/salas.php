@@ -5,6 +5,7 @@
 		<title>Cadastro das Salas</title>
 		<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/bootstrap.min.css')?>">
 		<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/style.css')?>">
+		<link rel="stylesheet" type="text/css" href="<?= base_url('assets/DataTables/datatables.min.css') ?>">
 	</head>
     <body>
 		<div class="container-fluid">
@@ -35,7 +36,16 @@
 
 				<div id="content" class="col-md-10">
 					<h1>Salas</h1>
-
+					<?php if ($this->session->flashdata('success')) : ?>
+					      <!-- Alert de sucesso -->
+            <div class="text-center alert alert-success" role="alert">
+              <span class="glyphicon glyphicon glyphicon-ok" aria-hidden="true"></span>
+              <span class="sr-only">Succes:</span>
+              <?= $this->session->flashdata('success') ?>
+            </div>
+					<?php endif; ?>
+					
+					
 					<?php if(validation_errors()): ?>
 						<div class="alert alert-danger">
 							<strong>Atenção!</strong> Erros encontrados, verifique o formulário para mais detalhes.
@@ -91,7 +101,7 @@
 							<form action="" method="post">
 									<div class="form-group percent-40">
 									<label>Sala</label>
-									<input type="number" class="form-control" pattern="[0-9]+$" name="nSala" placeholder="ex: 110" required>
+									<input type="number" min="0" class="form-control" pattern="[0-9]+$" name="nSala" placeholder="ex: 110" required>
 									<?= form_error('nSala') ?>
 								</div>
 								<div class="form-group percent-40">
@@ -104,7 +114,7 @@
 								</div>
 								<div class="form-group">
 									<label>Capacidade Máxima</label>
-									<input type="number" class="form-control percent-10" name="capMax" placeholder="ex: 30" required>
+									<input type="number" min="0" max="999" class="form-control percent-10" name="capMax" placeholder="ex: 30" required>
 									<?= form_error('capMax') ?>
 								</div>
 								<div class="inline">
@@ -134,12 +144,12 @@
 							</div>
 							<div class="form-group">
 								<label for="nSala-name" class="control-label">Número da sala</label>
-									<input type="text" class="form-control" name="recipient-nSala" id="recipient-nSala">
+									<input type="number" min="0" class="form-control" name="recipient-nSala" id="recipient-nSala">
 								<?= form_error('recipient-nSala') ?>
 							</div>
 							<div class="form-group">
 								<label for="capMax-name" class="control-label">Capacidade Máxima</label>
-								<input type="number" maxlength="3" pattern="[0-9]+$"class="form-control" name="recipient-capMax" id="recipient-capMax">
+								<input type="number" max="999" maxlength="3" pattern="[0-9]+$"class="form-control" name="recipient-capMax" id="recipient-capMax">
 								<?= form_error('recipient-capMax') ?>
 							</div>
 							<div class="form-group">
@@ -189,7 +199,7 @@
 		</script>
 		<script type="text/javascript">
 			$(document).ready(function () {
-				$("#SalaTable").DataTable({
+				$("#salaTable").DataTable({
 					"language":{
 						"url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Portuguese-Brasil.json"
 					}
