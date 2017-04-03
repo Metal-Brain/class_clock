@@ -113,23 +113,21 @@
 
 						<!-- Aqui é o formulário de registro do novo item-->
 						<div id="new" class="tab-pane fade">
-							<h3>Cadastrar Professores</h3>
+							<h3>Cadastrar Professor</h3>
 							<form method="post">
-								<div class="form-group percent-40 inline">
+								<div class="form-group percent-40">
 									<label>Nome</label>
 									<input type="text" pattern="[A-Za-z]" class="form-control" name="nome" placeholder="Nome" value="<?= set_value('nome')?>"/>
 									<?= form_error('nome') ?>
 								</div>
-								<div class="form-group percent-20 inline">
+								<div class="form-group">
 									<label>Matrícula</label>
-									<input type="text" class="form-control" name="matricula"  maxlength="8" placeholder="ex: cg0000000" value="<?= set_value('matricula')?>"/>
+									<input type="text" class="form-control percent-20" name="matricula"  maxlength="8" placeholder="ex: cg0000000" value="<?= set_value('matricula')?>"/>
 									<?= form_error('matricula') ?>
 								</div>
-								<div class="form-group percent-50">
+								<div class="form-group disc">
 									<label>Disciplinas que pode lecionar</label>
-									<!-- Pessoal do back-end, aqui o campo de texto deverá auto-completar o que o usuário começar a digitar -->
-									<input type="text" class="form-control" name="nomeDisciplina" placeholder="ex: Arquitetura de Computadores" value="<?= set_value('nomeDisciplina')?>"/>
-									<?= form_error('nomeDisciplina') ?>
+									<?= form_dropdown('disciplinas[]',$disciplinas,null,array('id'=>'disciplinas','multiple'=>'multiple')) ?>
 								</div>
 								<div class="form-group percent-40">
 									<label>Data de Nascimento</label>
