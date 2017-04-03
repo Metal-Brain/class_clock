@@ -27,12 +27,12 @@
       // Carrega a biblioteca para validação dos dados.
       $this->load->library(array('form_validation','session'));
       $this->load->helper(array('form','url'));
-      $this->load->model(array('Professor_model'));
+      $this->load->model(array('Professor_model', 'Disciplina_model'));
 
       // Definir as regras de validação para cada campo do formulário.
-      $this->form_validation->set_rules('nome', 'nome da disciplina', array('required','min_length[5]','ucwords'));
-      $this->form_validation->set_rules('sigla', 'sigla', array('required', 'max_length[5]', 'is_unique[Disciplina.sigla]','strtoupper'));
-      $this->form_validation->set_rules('qtdProf', 'quantidade de professores', array('required', 'integer', 'greater_than[0]', 'less_than[10]'));
+      $this->form_validation->set_rules('nome', 'nome do professor', array('required','min_length[5]','max_length[255]','ucwords'));
+      $this->form_validation->set_rules('matricula', 'matrícula', array('required','max_length[8]','is_unique[Professor.matricula]','strtoupper'));
+      $this->form_validation->set_rules('nascimento', 'data de nascimento', array('required','date'));
       // Definição dos delimitadores
       $this->form_validation->set_error_delimiters('<p class="text-danger">','</p>');
 
