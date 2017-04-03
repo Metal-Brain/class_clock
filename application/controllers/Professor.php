@@ -41,6 +41,7 @@
       $this->form_validation->set_rules('disciplinas[]', 'disciplinas', array('required'));
       $this->form_validation->set_rules('nivel', 'nivel', array('greater_than[0]'),array('greater_than'=>'Selecione o nivel acadêmico'));
       $this->form_validation->set_rules('contrato','contrato',array('greater_than[0]'),array('greater_than'=>'Selecione um contrato'));
+
       // Definição dos delimitadores
       $this->form_validation->set_error_delimiters('<p class="text-danger">','</p>');
 
@@ -53,7 +54,7 @@
         $dados['nivel']           = convert($this->Nivel_model->getAll(), TRUE);
         $dados['disciplinas']     = convert($this->Disciplina_model->getAll());
         $dados['professores']     = $this->Professor_model->getAll();
-	      $this->load->view('professores', $dados);
+	    $this->load->view('professores', $dados);
 
       } else {
 
@@ -118,6 +119,7 @@
         $this->session->set_flashdata('danger','Não foi possível desativar o professor, tente novamente ou entre em contato com o administrador do sistema.');
 
       redirect('Professor');
+	  
     }
 
     public function ativar ($id) {
