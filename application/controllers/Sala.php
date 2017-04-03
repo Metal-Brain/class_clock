@@ -24,19 +24,23 @@
            * @since 2017/03/23
            */
          public function cadastro () {
-
+		   // Carrega a biblioteca para validação dos dados.
+		   $this->load->library(array('form_validation','session'));
+		   $this->load->helper(array('form','url'));
            $this->load->model(array("Sala_model"));
 
            // Definir as regras de validação para cada campo do formulário.
-           $this->form_validation->set_rules('nSala', 'Numero Sala', array('required', 'max_length[5]', 'is_unique[Sala.nSala]','strtoupper'));
-           $this->form_validation->set_rules('capMax', 'Capacidade Maxima', array('required', 'integer', 'greater_than[0]'));
-           $this->form_validation->set_rules('tipo', 'Tipo', array('required','min_length[5]','ucwords'));
+           $this->form_validation->set_rules('nSala', 'número da sala', array('required', 'max_length[5]', 'is_unique[Sala.nSala]','strtoupper'));
+           $this->form_validation->set_rules('capMax', 'capacidade máxima', array('required', 'integer', 'greater_than[0]'));
+           $this->form_validation->set_rules('tipo', 'tipo', array('required','min_length[5]','ucwords'));
           // Definição dos delimitadores
            $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
 
            // Verifica se o formulario é valido
            if ($this->form_validation->run() == FALSE) {
-
+			
+			$this->session->set_flashdata('formDanger','<strong>Não foi possível cadastrar a sala, pois existe(m) erro(s) no formulário:</strong>');
+			
             $dados['salas'] = $this->Sala_model->getAll();
      	      $this->load->view('salas',$dados);
 
@@ -63,16 +67,27 @@
              * @since 2017/03/23
              * @param $id ID da sala
              */
-           public function deletar ($id) {
+           public function desativar ($id) {
              // Carrega os modelos necessarios
              $this->load->model(array('Sala_model'));
 
-             if ( $this->Sala_model->delete($id) )
+             if ( $this->Sala_model->disable($id) )
                 $this->session->set_flashdata('success','Sala desativada com sucesso');
               else
                 $this->session->set_flashdata('danger','Não foi possível desativar a sala, tente novamente ou entre em contato com o administrador do sistema.');
                redirect("Sala/cadastro");
            }
+		   
+			public function ativar ($id) {
+			  $this->load->model('Sala_model');
+
+			  if ( $this->Sala_model->able($id) )
+				$this->session->set_flashdata('success','Sala ativada com sucesso!');
+			  else
+				$this->session->set_flashdata('danger','Não foi possível ativar a sala, tente novamente ou entre em contato com o administrador do sistema.');
+
+			  redirect('Sala/cadastro');
+			}
 
            /**
              * Altera os dado da disciplina.
@@ -81,7 +96,7 @@
              * @param $id ID da sala
              */
            public function atualizar () {
-
+			 $this->load->library('form_validation');
              $this->load->model(array('Sala_model'));
 
              // Definir as regras de validação para cada campo do formulário.
@@ -94,10 +109,10 @@
              // Verifica se o formulario é valido
              if ($this->form_validation->run() == FALSE) {
 
-               $this->session->set_flashdata('formDanger','<strong>Não foi possível atualizar os dados da Sala:</strong>');
+               $this->session->set_flashdata('formDanger','<strong>Não foi possível atualizar os dados da sala:</strong>');
 
-              $dados['salas'] = $this->Sala_model->getAll();
-       	      $this->load->view('salas', $dados);
+               $dados['salas'] = $this->Sala_model->getAll();
+       	       $this->load->view('salas', $dados);
 
              } else {
 

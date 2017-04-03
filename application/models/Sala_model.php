@@ -58,17 +58,31 @@
     
       return $result;
     }
-
-    /**
+	
+	/**
       * Altera o status de uma sala para falso.
-      * @author Jean Brock
-      * @since 2017/03/23
-      * @param INT $id - ID da disciplina
-      * @return Retorna um boolean TRUE caso a sala seja deletada com sucesso
+      * @author Yasmin Sayad
+      * @since 2017/04/02
+      * @param INT $id - ID da sala
+      * @return Retorna um boolean TRUE caso a sala seja desativada com sucesso
       */
-    public function delete ($idSala) {
-      $this->db->where('id', $idSala);
+    public function disable ($id) {
+      $this->db->where('id', $id);
       $result = $this->db->update('Sala',array('status'=>FALSE));
+
+      return $result;
+    }
+	
+	/**
+      * Altera o status da sala para TRUE.
+      * @author Yasmin Sayad
+      * @since 2017/04/02
+      * @param INT $id - ID da sala
+      * @return Retorna um boolean TRUE caso o status seja alterado
+      */
+    public function able ($id) {
+      $this->db->where('id',$id);
+      $result = $this->db->update('Sala',array('status'=>TRUE));
 
       return $result;
     }

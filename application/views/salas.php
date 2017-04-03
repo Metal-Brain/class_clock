@@ -35,22 +35,30 @@
 				</div>
 
 				<div id="content" class="col-md-10">
-					<h1>Salas</h1>
 					<?php if ($this->session->flashdata('success')) : ?>
-					      <!-- Alert de sucesso -->
-            <div class="text-center alert alert-success" role="alert">
-              <span class="glyphicon glyphicon glyphicon-ok" aria-hidden="true"></span>
-              <span class="sr-only">Succes:</span>
-              <?= $this->session->flashdata('success') ?>
-            </div>
+					<!-- Alert de sucesso -->
+					<div class="text-center alert alert-success" role="alert">
+						<span class="glyphicon glyphicon glyphicon-ok" aria-hidden="true"></span>
+						<span class="sr-only">Succes:</span>
+						<?= $this->session->flashdata('success') ?>
+					</div>
+					<?php elseif ($this->session->flashdata('danger')) : ?>
+					<!-- Alert de erro -->
+					<div class="text-center alert alert-danger" role="alert">
+						<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+						<span class="sr-only">Error:</span>
+						<?= $this->session->flashdata('danger') ?>
+					</div>
+					<?php endif; ?>
+
+					<?php if (validation_errors()): ?>
+					<div class="alert alert-danger text-center">
+						<p><?= $this->session->flashdata('formDanger') ?></p>
+						<?= validation_errors() ?>
+					</div>
 					<?php endif; ?>
 					
-					
-					<?php if(validation_errors()): ?>
-						<div class="alert alert-danger">
-							<strong>Atenção!</strong> Erros encontrados, verifique o formulário para mais detalhes.
-						</div>
-					<?php endif; ?>
+					<h1>Salas</h1>
 
 					<!-- Lista de 'botoes' links do Bootstrap -->
 					<ul class="nav nav-pills">
@@ -209,7 +217,7 @@
 		<script>
 			function exclude(id){
 				bootbox.confirm({
-					message: "Realmente deseja excluir essa sala?",
+					message: "Realmente deseja desativar essa sala?",
 					buttons: {
 						confirm: {
 							label: 'Sim',
@@ -222,7 +230,7 @@
 					},
 					callback: function (result) {
 						if(result)
-							window.location.href = '<?= base_url("index.php/Sala/deletar/")?>'+id
+							window.location.href = '<?= base_url("index.php/Sala/desativar/")?>'+id
 					}
 				});
 			}
