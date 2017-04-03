@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS Professor(
 CREATE TABLE IF NOT EXISTS Competencia(
 	idProfessor			INT 			NOT NULL,
     idDisciplina		INT 			NOT NULL,
-    interesse 			tinyint(1) 		NOT NULL			DEFAULT '0',
+    interesse 			tinyint(1) 		NOT NULL			DEFAULT '1',
     PRIMARY KEY(idProfessor, idDisciplina),
     FOREIGN KEY(idProfessor) REFERENCES Professor(id),
     FOREIGN KEY(idDisciplina) REFERENCES Disciplina(id)
