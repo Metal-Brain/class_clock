@@ -52,7 +52,7 @@
              if ($this->Sala_model->insert($sala)){
                $this->session->set_flashdata('success','Sala cadastrada com sucesso');
              } else {
-               $this->session->set_flashdata('danger','Não foi possivel cadastrar a sala, tente novamente ou entre em contato com o administrador do sistema');
+               $this->session->set_flashdata('danger','Não foi possível cadastrar a sala, tente novamente ou entre em contato com o administrador do sistema.');
              }
              redirect("Sala/cadastro");
            }
@@ -68,9 +68,9 @@
              $this->load->model(array('Sala_model'));
 
              if ( $this->Sala_model->delete($id) )
-                $this->session->set_flashdata('success','Sala deletada com sucesso');
+                $this->session->set_flashdata('success','Sala desativada com sucesso');
               else
-                $this->session->set_flashdata('danger','Não foi possivel deletar a sala, tente novamente ou entre em contato com o administrador do sistema');
+                $this->session->set_flashdata('danger','Não foi possível desativar a sala, tente novamente ou entre em contato com o administrador do sistema.');
                redirect("Sala/cadastro");
            }
 
@@ -112,7 +112,7 @@
               if ( $this->Sala_model->update($id, $sala) )
                 $this->session->set_flashdata('success', 'Sala atualizada com sucesso');
               else
-                $this->session->set_flashdata('danger','Não foi possivel atualizar os dados da sala, tente novamente ou entre em contato com o administrador do sistema. <br/> Caso tenha alterado a <b>SIGLA</b>, verifique se ela já não foi utilizada!');
+                $this->session->set_flashdata('danger','Não foi possível atualizar os dados da sala, tente novamente ou entre em contato com o administrador do sistema. <br/> Caso tenha alterado o <b>número da sala</b>, verifique se ele já não foi utilizado!');
                redirect("Sala/cadastro");
              }
            }

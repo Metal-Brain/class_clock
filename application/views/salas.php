@@ -84,7 +84,7 @@
 													<td>'.$sala['tipo'].'</td>
 													<td>
 														<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whatevernsala="'.$sala['nSala'].'" data-whateverid="'.$sala['id'].'" data-whatevercapmax="'.$sala['capMax'].'"  data-whatevertipo="'.$sala['tipo'].'"><span class="glyphicon glyphicon-pencil"></span></button>
-														<button onClick="exclude('.$sala['id'].');" type="button" class="btn btn-danger" title="Excluir"><span class="glyphicon glyphicon-remove"></span></button>
+														<button onClick="exclude('.$sala['id'].');" type="button" class="btn btn-danger" title="Desativar"><span class="glyphicon glyphicon-remove"></span></button>
 													</td>
 												</tr>';
 												echo $row;
