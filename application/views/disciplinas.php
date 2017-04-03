@@ -30,7 +30,7 @@
 						<li><?= anchor('Curso','Cursos') ?></li>
 						<li class="active"><?= anchor('Disciplina','Disciplinas') ?></li>
 						<li><a href="professores.html">Professores</a></li>
-						<li><a href="professores.html">Salas</a></li>
+						<li><?= anchor('Sala','Sala') ?></li>
 						<hr>
 						<li><a href="index.html"><span class="glyphicon glyphicon-log-out"></span> Sair do Sistema</a></li>
 					</ul>
