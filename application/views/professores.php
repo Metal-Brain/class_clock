@@ -20,7 +20,7 @@
 					</div>
 					<div id="ifsp">
 						
-						<img src="<?= base_url('assets/img/ifsp.png')?>" class="logo">
+						<img src="<?= base_url('assets/img/ifsp.jpg')?>" class="logo">
 						
 					</div>
 				</div>
