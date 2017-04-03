@@ -32,9 +32,9 @@
 					<h2>Menu</h2>
 					<ul class="nav nav-pills nav-stacked">
 						<li><?= anchor('Curso','Cursos') ?></li>
-						<li><?= anchor('Disciplina','Disciplina') ?></li>
-						<li class="active"><?= anchor('Professor','Professor') ?></li>
-						<li><?= anchor('Sala','Sala') ?></li>
+						<li><?= anchor('Disciplina','Disciplinas') ?></li>
+						<li class="active"><?= anchor('Professor','Professores') ?></li>
+						<li><?= anchor('Sala','Salas') ?></li>
 						<hr>
 						<li><a href="index.html"><span class="glyphicon glyphicon-log-out"></span> Sair do Sistema</a></li>
 					</ul>
@@ -113,23 +113,21 @@
 
 						<!-- Aqui é o formulário de registro do novo item-->
 						<div id="new" class="tab-pane fade">
-							<h3>Cadastrar Professores</h3>
+							<h3>Cadastrar Professor</h3>
 							<form method="post">
-								<div class="form-group percent-40 inline">
+								<div class="form-group percent-40">
 									<label>Nome</label>
 									<input type="text" pattern="[A-Za-z]" class="form-control" name="nome" placeholder="Nome" value="<?= set_value('nome')?>"/>
 									<?= form_error('nome') ?>
 								</div>
-								<div class="form-group percent-20 inline">
+								<div class="form-group">
 									<label>Matrícula</label>
-									<input type="text" class="form-control" name="matricula"  maxlength="8" placeholder="ex: cg0000000" value="<?= set_value('matricula')?>"/>
+									<input type="text" class="form-control percent-20" name="matricula"  maxlength="8" placeholder="ex: cg0000000" value="<?= set_value('matricula')?>"/>
 									<?= form_error('matricula') ?>
 								</div>
-								<div class="form-group percent-50">
+								<div class="form-group disc">
 									<label>Disciplinas que pode lecionar</label>
-									<!-- Pessoal do back-end, aqui o campo de texto deverá auto-completar o que o usuário começar a digitar -->
-									<input type="text" class="form-control" name="nomeDisciplina" placeholder="ex: Arquitetura de Computadores" value="<?= set_value('nomeDisciplina')?>"/>
-									<?= form_error('nomeDisciplina') ?>
+									<?= form_dropdown('disciplinas[]',$disciplinas,null,array('id'=>'disciplinas','multiple'=>'multiple')) ?>
 								</div>
 								<div class="form-group percent-40">
 									<label>Data de Nascimento</label>
@@ -250,38 +248,43 @@
 		<script type="text/javascript" src="<?= base_url('assets/js/bootstrap.min.js') ?>"></script>
 		<script type="text/javascript" src="<?= base_url('assets/DataTables/datatables.min.js') ?>"></script>
 		<script type="text/javascript" src="<?= base_url('assets/js/bootbox.min.js') ?>"></script>
-		<script type="text/javascript"> 
 		
-				$('#exampleModal').on('show.bs.modal', function (event) {
-						var button = $(event.relatedTarget) // Button that triggered the modal
-						var recipient = button.data('whatever') // Extract info from data-* attributes
-						<!-- Foi criado todos os var caso seja necessario adicionar ou mudar os que já existem-->			
-						var recipientnome = button.data('whatevernome')
-						var recipientmatricula = button.data('whatevermatricula')
-						var recipientnomeDisciplina = button.data('whatevernomeDisciplina')
-						var recipientnascimento = button.data('whatevernascimento')
-						var recipientnivelAcademico = button.data('whatevernivelAcademico')
-						var recipientregimeContrato = button.data('whateverregimeContrato')
-						var recipientcoordenador = button.data('whareevercoordenador')
-						var recipientid = button.data('whareeverid')
-						
-												
-						// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-						// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-						var modal = $(this)
-						modal.find('.modal-title').text('Alterar Professores')
-						<!-- Foi criado todos os modal caso seja necessario adicionar ou mudar os que já existem-->
-						modal.find('#recipient-nome').val(recipientnome)
-						modal.find('#recipient-matricula').val(recipientmatricula)
-						modal.find('#recipient-nomeDisciplina').val(recipientnomeDisciplina)
-						modal.find('#recipient-nascimento').val(recipientnascimento)
-						modal.find('#recipient-nivelAcademico').val(recipientnivelAcademico)
-						modal.find('#recipient-regimeContrato').val(recipientregimeContrato)
-						modal.find('#recipient-coordenador').val(recipientcoordenador)
-						modal.find('#recipient-id').val(recipientid)
-						
-						
-				})
+		<!-- multi-select -->
+        <script type="text/javascript" src="<?= base_url('assets/multi-select/js/jquery.multi-select.js')?>"></script>
+        <script>
+          $("#cursoDisciplinas").multiSelect();
+          $("#disciplinas").multiSelect();
+        </script>
+		
+		<script type="text/javascript">
+			$('#exampleModal').on('show.bs.modal', function (event) {
+				var button = $(event.relatedTarget) // Button that triggered the modal
+				var recipient = button.data('whatever') // Extract info from data-* attributes
+				<!-- Foi criado todos os var caso seja necessario adicionar ou mudar os que já existem-->			
+				var recipientnome = button.data('whatevernome')
+				var recipientmatricula = button.data('whatevermatricula')
+				var recipientnomeDisciplina = button.data('whatevernomeDisciplina')
+				var recipientnascimento = button.data('whatevernascimento')
+				var recipientnivelAcademico = button.data('whatevernivelAcademico')
+				var recipientregimeContrato = button.data('whateverregimeContrato')
+				var recipientcoordenador = button.data('whareevercoordenador')
+				var recipientid = button.data('whareeverid')
+				
+										
+				// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+				// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+				var modal = $(this)
+				modal.find('.modal-title').text('Alterar Professores')
+				<!-- Foi criado todos os modal caso seja necessario adicionar ou mudar os que já existem-->
+				modal.find('#recipient-nome').val(recipientnome)
+				modal.find('#recipient-matricula').val(recipientmatricula)
+				modal.find('#recipient-nomeDisciplina').val(recipientnomeDisciplina)
+				modal.find('#recipient-nascimento').val(recipientnascimento)
+				modal.find('#recipient-nivelAcademico').val(recipientnivelAcademico)
+				modal.find('#recipient-regimeContrato').val(recipientregimeContrato)
+				modal.find('#recipient-coordenador').val(recipientcoordenador)
+				modal.find('#recipient-id').val(recipientid)
+			})
 		</script>
 		
 		<script type="text/javascript">
