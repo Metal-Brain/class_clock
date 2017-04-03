@@ -44,7 +44,7 @@
       //condição para o formulario
       if($this->form_validation->run() == FALSE){
 
-        $this->session->set_flashdata('formDanger', '<strong>Não foi possivel cadastrar o curso, pois foram encontrados erros no formulário:</strong>');
+        $this->session->set_flashdata('formDanger', '<strong>Não foi possível cadastrar o curso, pois foram encontrados erros no formulário:</strong>');
 
         $dados['graus']         = convert($this->Grau_model->getAll(), True);
         $dados['periodo']       = convert($this->Periodo_model->getAll());
@@ -76,7 +76,7 @@
 
           $this->session->set_flashdata('success','Curso cadastrado com sucesso');
         } else {
-          $this->session->set_flashdata('danger','Não foi possivel cadastrar o curso, tente novamente ou entre em contato com o administrador do sistema');
+          $this->session->set_flashdata('danger','Não foi possível cadastrar o curso, tente novamente ou entre em contato com o administrador do sistema.');
         }
 
         redirect('Curso/cadastrar');
@@ -110,7 +110,7 @@
       //condição para o formulario
       if($this->form_validation->run() == FALSE){
 
-        $this->session->set_flashdata('formDanger','<strong>Não foi possivel atualizar os dados do curso, pois foram encontrados erros no formulário</strong>');
+        $this->session->set_flashdata('formDanger','<strong>Não foi possível atualizar os dados do curso, pois foram encontrados erros no formulário:</strong>');
 
         $dados['graus']         = convert($this->Grau_model->getAll(), True);
         $dados['periodo']       = convert($this->Periodo_model->getAll());
@@ -143,7 +143,7 @@
 
           $this->session->set_flashdata('success','Curso atualizado com sucesso');
         } else {
-          $this->session->set_flashdata('danger','Não foi possivel atualizar os dados do curso, tente novamente ou entre em contato com o administrador do sistema. <br/> Caso tenha alterado a <b>SIGLA</b>, verifique se ela já não foi utilizada!');
+          $this->session->set_flashdata('danger','Não foi possível atualizar os dados do curso, tente novamente ou entre em contato com o administrador do sistema. <br/> Caso tenha alterado a <b>SIGLA</b>, verifique se ela já não foi utilizada!');
         }
 
         redirect('Curso');
@@ -164,9 +164,9 @@
       $this->load->model(array('Curso_model'));
 
       if ($this->Curso_model->deleteCurso($id))
-        $this->session->set_flashdata('success','Curso deletado com sucesso');
+        $this->session->set_flashdata('success','Curso desativado com sucesso');
       else
-        $this->session->set_flashdata('danger','Não foi possivel deletar o curso, tente novamente mais tarde ou entre em contato com o administrador do sistema');
+        $this->session->set_flashdata('danger','Não foi possível desativar o curso, tente novamente mais tarde ou entre em contato com o administrador do sistema.');
 
       redirect('Curso');
     }
@@ -174,9 +174,9 @@
       $this->load->model('Curso_model');
 
       if ( $this->Curso_model->able($id) )
-        $this->session->set_flashdata('success','Curso ativado com sucesso!');
+        $this->session->set_flashdata('success','Curso ativado com sucesso');
       else
-        $this->session->set_flashdata('danger','Não foi possível ativar o Curso, tente novamente ou entre em contato com o administrador do sistema');
+        $this->session->set_flashdata('danger','Não foi possível ativar o Curso, tente novamente ou entre em contato com o administrador do sistema.');
 
       redirect('Curso');
     }

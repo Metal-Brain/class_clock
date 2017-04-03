@@ -101,7 +101,7 @@
                                         <td>
 											<?php if($curso['status']): ?>
                                             <button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whateverid="<?= $curso['id']?>" data-whateversigla="<?= $curso['sigla']?>" data-whatevernome="<?= $curso['nome']?>" data-whateversemestres="<?= $curso['qtdSemestres']?>" data-whatevergrau="<?= $curso['grau']?>" data-whateverperiodo="<?= $curso['idPeriodo']?>"><span class="glyphicon glyphicon-pencil"></span></button>
-                                            <button onClick="exclude(<?= $curso['id']?>);" type="button" class="btn btn-danger" title="Excluir"><span class="glyphicon glyphicon-remove"></span></button>
+                                            <button onClick="exclude(<?= $curso['id']?>);" type="button" class="btn btn-danger" title="Desativar"><span class="glyphicon glyphicon-remove"></span></button>
 											<?php else:?>
 											<button onClick="able(<?= $curso['id']?>)" type="button" class="btn btn-success delete" title="Ativar"><span class="glyphicon glyphicon-ok"></span></button>
 											<?php endif;?>
@@ -215,8 +215,8 @@
                                 </div>
 
                                 <div class="modal-footer">
-									<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
 									<?= form_submit('submit','Alterar',array('class'=>'btn btn-primary')) ?>
+									<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                                 </div>
                             <?= form_close() ?>
                         </div>
@@ -292,7 +292,7 @@
 		<script>
 			function exclude(id){
 				bootbox.confirm({
-					message: "Realmente deseja excluir esse curso?",
+					message: "Realmente deseja desativar esse curso?",
 					buttons: {
 						confirm: {
 							label: 'Sim',
