@@ -80,22 +80,31 @@
 											<th>Número da Sala</th>
 											<th>Capacidade Máxima</th>
 											<th>Tipo</th>
+											<th>Status</th>
 											<th>Ação</th>
 										</tr>
 									</thead>
 									<tbody>
 										<?php
 											foreach ($salas as $sala) {
-												$row = '<tr>
-													<td>'.$sala['nSala'].'</td>
-													<td>'.$sala['capMax'].'</td>
-													<td>'.$sala['tipo'].'</td>
+												?>
+												<?= ($sala['status'] ? '<tr>' : '<tr class="danger">') ?>
+													<td><?= $sala['nSala']; ?></td>
+													<td><?= $sala['capMax']; ?></td>
+													<td><?= $sala['tipo']; ?></td>
+													<td><?php if($sala['status']): echo "Ativo"; else: echo "Inativo"; endif;?></td>
 													<td>
-														<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whatevernsala="'.$sala['nSala'].'" data-whateverid="'.$sala['id'].'" data-whatevercapmax="'.$sala['capMax'].'"  data-whatevertipo="'.$sala['tipo'].'"><span class="glyphicon glyphicon-pencil"></span></button>
-														<button onClick="exclude('.$sala['id'].');" type="button" class="btn btn-danger" title="Desativar"><span class="glyphicon glyphicon-remove"></span></button>
+													<?php if ($sala['status']): ?>
+														
+															<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whatevernsala="<?= $sala['nSala']; ?>" data-whateverid="<?= $sala['id']; ?>" data-whatevercapmax="<?= $sala['capMax']; ?>"  data-whatevertipo="<?= $sala['tipo']; ?>"><span class="glyphicon glyphicon-pencil"></span></button>
+															<button onClick="exclude(<?= $sala['id']?>);" type="button" class="btn btn-danger" title="Desativar"><span class="glyphicon glyphicon-remove"></span></button>
+														
+													<?php else : ?>
+														<button onClick="able(<?= $sala['id']?>)" type="button" class="btn btn-success delete" title="Ativar"><span class="glyphicon glyphicon-ok"></span></button>
+													<?php endif; ?>
 													</td>
-												</tr>';
-												echo $row;
+												</tr>
+										<?php
 											}
 										?>
 									</tbody>
@@ -231,6 +240,26 @@
 					callback: function (result) {
 						if(result)
 							window.location.href = '<?= base_url("index.php/Sala/desativar/")?>'+id
+					}
+				});
+			}
+
+			function able(id){
+				bootbox.confirm({
+					message: "Realmente deseja reativar essa sala?",
+					buttons: {
+						confirm: {
+							label: 'Sim',
+							className: 'btn-success'
+						},
+						cancel: {
+							label: 'Não',
+							className: 'btn-danger'
+						}
+					},
+					callback: function (result) {
+						if(result)
+							window.location.href = '<?= base_url("index.php/Sala/ativar/")?>'+id
 					}
 				});
 			}

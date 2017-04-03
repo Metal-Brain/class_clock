@@ -14,7 +14,6 @@
       * @return Retorna um array com todas as salas
       */
     public function getAll () {
-      $this->db->where('status', TRUE);
       $result = $this->db->get('Sala');
 
       return $result->result_array(); // converte o objeto em um array
