@@ -3,11 +3,11 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Cadastro dos Professores</title>
-					
+
 				<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/bootstrap.min.css')?>">
 				<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/style.css')?>">
 				<link rel="stylesheet" type="text/css" href="<?= base_url('assets/DataTables/datatables.min.css') ?>">
-				
+
 	</head>
 	<body>
 		<!-- as classes container-fluid, row e col-md-xx são do GRID do bootstrap -->
@@ -19,13 +19,13 @@
 						<h1>Class Clock</h1>
 					</div>
 					<div id="ifsp">
-						
+
 						<img src="<?= base_url('assets/img/ifsp.jpg')?>" class="logo">
-						
+
 					</div>
 				</div>
 			</div><!--Fecha row-->
-			
+
 			<div class="row">
 
 				<div id="sidebar" class="col-md-2" role="navigation">
@@ -41,7 +41,7 @@
 				</div>
 
 				<div id="content" class="col-md-10">
-					
+
 					<?php if ($this->session->flashdata('success')) : ?>
 						<!-- Alert de sucesso -->
 						<div class="text-center alert alert-success" role="alert">
@@ -57,8 +57,8 @@
 							<?= $this->session->flashdata('danger') ?>
 						</div>
 					<?php endif; ?>
-				
-								
+
+
 					<h1>Professores</h1>
 
 					<!-- Lista de 'botoes' links do Bootstrap -->
@@ -86,7 +86,7 @@
 									</thead>
 									<tbody>
 										<tbody>
-										
+
 											<?php
 												foreach ($professores as $professor) {
 													$row = '<tr>
@@ -94,21 +94,21 @@
 														<td>'.$professor['matricula'].'</td>
 														<td>'.$professor['nivelAcademico'].'</td>
 														<td>
-														
-															
+
+
 															<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whatevernome="'.$professor['nome'].'" data-whateverid="'.$professor['id'].'" data-whatevermatricula= "'.$professor['matricula'].'" data-whatevernivelAcademico= "'.$professor['nivelAcademico'].'"><span class="glyphicon glyphicon-pencil"></span></button>
 															<button onClick="exclude('.$professor['id'].');" type="button" class="btn btn-danger delete" title="Excluir" "><span class="glyphicon glyphicon-remove"></span></button>
-															
+
 														</td>
 													</tr>';
 
 													echo $row;
 												}
-									
-											?> 
+
+											?>
 									</tbody>
 								</table>
-							</div>	
+							</div>
 						</div>
 
 						<!-- Aqui é o formulário de registro do novo item-->
@@ -117,7 +117,7 @@
 							<form method="post">
 								<div class="form-group percent-40">
 									<label>Nome</label>
-									<input type="text" pattern="[A-Za-z]" class="form-control" name="nome" placeholder="Nome" value="<?= set_value('nome')?>"/>
+									<input type="text" class="form-control" name="nome" placeholder="Nome" value="<?= set_value('nome')?>"/>
 									<?= form_error('nome') ?>
 								</div>
 								<div class="form-group">
@@ -136,19 +136,17 @@
 								</div>
 								<div class="form-group percent-30 inline">
 										<label for="nivelAcademico" >Nivel Acadêmico</label>
-										<select  class="form-control" name="nivelAcademico" id="nivelAcademico" value="<?= set_value('nivelAcademico')?>">
-											<option  selected>Mestre</option>
-											<option>Doutor</option>
-											<?= form_error('nivelAcademico') ?>
-										</select>
+										<div id="u1" class="ax_default droplist" data-label="DropListNivel">
+											<?= form_dropdown('nivel',$nivel,set_value('nivel'),array('class'=>'form-control')) ?>
+											<?= form_error('nivel') ?>
+										</div>
 								</div>
 								<div class="form-group percent-30 inline">
 									<label>Regime de contrato</label>
-									<select  class="form-control" name="regimeContrato" id="regimeContrato" value="<?= set_value('regimeContrato')?>">
-											<option  selected>Dedicação exclusiva</option>
-											<option>Integral</option>
-											<option>Parcial</option>
-											<?= form_error('regimeContrato') ?>
+									<div id="u2" class="ax_default droplist" data-label="DropListContrato">
+										<?= form_dropdown('contrato',$contrato,set_value('contrato'),array('class'=>'form-control')) ?>
+										<?= form_error('contrato') ?>
+									</div>
 									</select>
 								</div>
 								<div class="form-group percent-50">
@@ -201,7 +199,7 @@
 									<input type="date" class="form-control percent-40" name="nascimento" id="recipient-nascimento"/>
 									<?= form_error('recipient-nascimento') ?>
 								</div>
-								<div class="form-group">									
+								<div class="form-group">
 									<label for="nivelAcademico-name" class="control-label">Nivel Acadêmico</label>
 										<select  class="form-control" name="nivelAcademico" id="recipient-nivelAcademico">
 											<option>Mestre</option>
@@ -222,7 +220,7 @@
 									<input type="checkbox" name="coordenador" class="form-group" id="recipient-coordenador"/>
 									<label>Coordenador</label>
 									<?= form_error('recipient-coordenador') ?>
-								</div>	
+								</div>
 								<div class="modal-footer">
 									<button type="submit" class="btn btn-primary">Alterar</button>
 									<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
@@ -232,9 +230,9 @@
 					</div>
 				</div>
 			</div>
-			
-			
-			
+
+
+
 			<div class="row">
 				<div id="footer" class="col">
 					<p>Desenvolvido por Metal Code</p>
@@ -242,25 +240,26 @@
 			</div><!--Fecha row-->
 
 		</div><!--Fecha container-fluid-->
-		
-		
+
+
 		<script type="text/javascript" src="<?= base_url('assets/js/jquery-3.1.1.min.js')?>"></script>
 		<script type="text/javascript" src="<?= base_url('assets/js/bootstrap.min.js') ?>"></script>
 		<script type="text/javascript" src="<?= base_url('assets/DataTables/datatables.min.js') ?>"></script>
 		<script type="text/javascript" src="<?= base_url('assets/js/bootbox.min.js') ?>"></script>
-		
+
 		<!-- multi-select -->
         <script type="text/javascript" src="<?= base_url('assets/multi-select/js/jquery.multi-select.js')?>"></script>
         <script>
-          $("#cursoDisciplinas").multiSelect();
+          $("#professorDisciplinas").multiSelect();
           $("#disciplinas").multiSelect();
         </script>
-		
+
 		<script type="text/javascript">
 			$('#exampleModal').on('show.bs.modal', function (event) {
+				("#professorDisciplinas").multiSelect('deselect_all');
 				var button = $(event.relatedTarget) // Button that triggered the modal
 				var recipient = button.data('whatever') // Extract info from data-* attributes
-				<!-- Foi criado todos os var caso seja necessario adicionar ou mudar os que já existem-->			
+				<!-- Foi criado todos os var caso seja necessario adicionar ou mudar os que já existem-->
 				var recipientnome = button.data('whatevernome')
 				var recipientmatricula = button.data('whatevermatricula')
 				var recipientnomeDisciplina = button.data('whatevernomeDisciplina')
@@ -269,8 +268,16 @@
 				var recipientregimeContrato = button.data('whateverregimeContrato')
 				var recipientcoordenador = button.data('whareevercoordenador')
 				var recipientid = button.data('whareeverid')
-				
-										
+				var url = '<?= base_url('index.php/Professor/disciplinas/') ?>'+recipientid;
+				$.getJSON(url,function (response) {
+					var disciplinas = [];
+					$.each(response,function (index,value) {
+						disciplinas.push(value.id);
+					});
+					$("#professorDisciplinas").multiSelect('select',disciplinas);
+				});
+
+
 				// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
 				// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
 				var modal = $(this)
@@ -286,7 +293,7 @@
 				modal.find('#recipient-id').val(recipientid)
 			})
 		</script>
-		
+
 		<script type="text/javascript">
 			$(document).ready(function () {
 				$("#ProfessorTable").DataTable({
