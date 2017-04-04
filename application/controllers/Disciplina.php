@@ -75,7 +75,7 @@
       $this->load->model(array('Disciplina_model','CursoTemDisciplina_model'));
 
       if ($this->CursoTemDisciplina_model->hasRelation($id) != 0)
-        $this->session->set_flashdata('danger','Essa disciplina não pode ser desativada');
+        $this->session->set_flashdata('danger','Essa disciplina não pode ser desativada pois ainda está vinculada a algum curso!');
       elseif ( $this->Disciplina_model->disable($id) )
         $this->session->set_flashdata('success','Disciplina desativada com sucesso');
       else
