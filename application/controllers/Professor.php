@@ -119,7 +119,7 @@
         $this->session->set_flashdata('danger','Não foi possível desativar o professor, tente novamente ou entre em contato com o administrador do sistema.');
 
       redirect('Professor');
-	  
+
     }
 
     public function ativar ($id) {
