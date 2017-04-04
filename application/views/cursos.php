@@ -134,12 +134,9 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Período</label>
-                                    <!-- DropListPeriodo (Droplist) -->
                                     <div class="form-group percent-15">
-                                        <div id="u0" class="ax_default droplist" data-label="DropListPeriodo">
-                                          <?= form_dropdown('periodo[]',$periodo,set_value('periodo[]'),array('class'=>'form-control','multiple'=>'multiple')) ?>
-                                          <?= form_error('periodo[]') ?>
-                                        </div>
+                                        <?= form_dropdown('periodo[]',$periodo,null,array('id'=>'periodos','multiple'=>'multiple')) ?>
+                                        <?= form_error('periodo[]') ?>
                                     </div>
                                 </div>
 
@@ -198,8 +195,7 @@
                                 </div>
                                 <!-- DropListPeriodo (Droplist) -->
                                 <div class="form-group percent-40 inline">
-                                  <?= form_label('Período:','cursoPeriodos',array('class'=>'control-label')) ?>
-                                  <?= form_dropdown('cursoPeriodos[]',$periodo,null,array('class'=>'form-control','multiple'=>'multiple','id'=>'cursoPeriodos')) ?>
+                                  <?= form_dropdown('cursoPeriodos[]',$periodo,null,array('id'=>'cursoPeriodos','multiple'=>'multiple')) ?>
                                   <?= form_error('cursoPeriodos[]') ?>
                                 </div>
                                 <br/>
@@ -237,12 +233,15 @@
         <!-- multi-select -->
         <script type="text/javascript" src="<?= base_url('assets/multi-select/js/jquery.multi-select.js')?>"></script>
         <script>
+          $("#cursoPeriodos").multiSelect();
+          $("#periodos").multiSelect();
           $("#cursoDisciplinas").multiSelect();
           $("#disciplinas").multiSelect();
         </script>
         <script type="text/javascript">
             $('#exampleModal').on('show.bs.modal', function (event) {
                 $("#cursoDisciplinas").multiSelect('deselect_all');
+                $("#cursoPeriodos").multiSelect('deselect_all');
                 var button = $(event.relatedTarget) // Button that triggered the modal
                 var recipient = button.data('whatever') // Extract info from data-* attributes
                 var recipientsigla = button.data('whateversigla')
@@ -268,14 +267,9 @@
                 modal.find('#recipient-nome').val(recipientnome)
                 modal.find('#recipient-semestres').val(recipientsemestre)
                 modal.find('select[name=cursoGrau] option[value='+recipientgrau+']').prop('selected',true)
-                if (recipientPeriodo.indexOf(',') != -1) {
+                if (recipientPeriodo.indexOf(',') != -1)
                   recipientPeriodo = recipientPeriodo.split(',')
-
-                  for (var i = 0; i < recipientPeriodo.length; i++)
-                    modal.find('#cursoPeriodos option[value='+recipientPeriodo[i]+']').prop('selected',true)
-                } else {
-                  modal.find('#cursoPeriodos option[value='+recipientPeriodo+']').prop('selected',true)
-                }
+                $("#cursoPeriodos").multiSelect('select',recipientPeriodo)
 
             })
         </script>
