@@ -48,7 +48,7 @@
 
         $dados['graus']         = convert($this->Grau_model->getAll(), True);
         $dados['periodo']       = convert($this->Periodo_model->getAll());
-        $dados['disciplinas']   = convert($this->disciplina_model->getAll());
+        $dados['disciplinas']   = convert($this->disciplina_model->getAll(TRUE));
         $dados['cursos']        = $this->Curso_model->getAll();
 
         $this->load->view('cursos',$dados);
@@ -114,7 +114,7 @@
 
         $dados['graus']         = convert($this->Grau_model->getAll(), True);
         $dados['periodo']       = convert($this->Periodo_model->getAll());
-        $dados['disciplinas']   = convert($this->disciplina_model->getAll());
+        $dados['disciplinas']   = convert($this->disciplina_model->getAll(TRUE));
         $dados['cursos']        = $this->Curso_model->getAll();
 
         $this->load->view('cursos',$dados);
@@ -170,7 +170,8 @@
 
       redirect('Curso');
     }
-	public function ativar ($id) {
+
+	   public function ativar ($id) {
       $this->load->model('Curso_model');
 
       if ( $this->Curso_model->able($id) )

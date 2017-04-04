@@ -72,9 +72,11 @@
       */
     public function desativar ($id) {
       // Carrega os modelos necessarios
-      $this->load->model(array('Disciplina_model'));
+      $this->load->model(array('Disciplina_model','CursoTemDisciplina_model'));
 
-      if ( $this->Disciplina_model->disable($id) )
+      if ($this->CursoTemDisciplina_model->hasRelation($id) != 0)
+        $this->session->set_flashdata('danger','Essa disciplina não pode ser desativada');
+      elseif ( $this->Disciplina_model->disable($id) )
         $this->session->set_flashdata('success','Disciplina desativada com sucesso');
       else
         $this->session->set_flashdata('danger','Não foi possível desativar a disciplina, tente novamente ou entre em contato com o administrador do sistema.');

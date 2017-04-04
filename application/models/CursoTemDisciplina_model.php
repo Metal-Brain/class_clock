@@ -51,6 +51,13 @@
       return $result->result_array();
     }
 
+    public function hasRelation($idDisciplina) {
+      $this->db->where('idDisciplina', $idDisciplina);
+      $result = $this->db->get('Curso_tem_Disciplina');
+
+      return $result->num_rows();
+    }
+
   }
 
 ?>
