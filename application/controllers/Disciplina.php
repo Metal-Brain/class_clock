@@ -59,7 +59,7 @@
           $this->session->set_flashdata('danger','Não foi possível cadastrar a disciplina, tente novamente ou entre em contato com o administrador do sistema.');
         }
 
-        redirect('/');
+        redirect('Disciplina');
 
       }
     }
@@ -81,7 +81,7 @@
       else
         $this->session->set_flashdata('danger','Não foi possível desativar a disciplina, tente novamente ou entre em contato com o administrador do sistema.');
 
-      redirect('/');
+      redirect('Disciplina');
     }
 
     public function ativar ($id) {
@@ -136,7 +136,7 @@
         else
           $this->session->set_flashdata('danger','Não foi possível atualizar os dados da disciplina, tente novamente ou entre em contato com o administrador do sistema.<br/> Caso tenha alterado a <b>SIGLA</b>, verifique se ela já não foi utilizada!');
 
-        redirect('/');
+        redirect('Disciplina');
 
       }
     }
