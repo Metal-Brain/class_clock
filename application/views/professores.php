@@ -80,32 +80,29 @@
 										<tr>
 											<th>Nome</th>
 											<th>Matrícula</th>
-											<th>Nível Acadêmico</th>
+											<th>Data Nascimento</th>
+											<th>Status</th>
 											<th>Ações</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tbody>
-
-											<?php
-												foreach ($professores as $professor) {
-													$row = '<tr>
-														<td>'.$professor['nome'].'</td>
-														<td>'.$professor['matricula'].'</td>
-														<td>'.$professor['nivelAcademico'].'</td>
-														<td>
-
-
-															<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whatevernome="'.$professor['nome'].'" data-whateverid="'.$professor['id'].'" data-whatevermatricula= "'.$professor['matricula'].'" data-whatevernivelAcademico= "'.$professor['nivelAcademico'].'"><span class="glyphicon glyphicon-pencil"></span></button>
-															<button onClick="exclude('.$professor['id'].');" type="button" class="btn btn-danger delete" title="Excluir" "><span class="glyphicon glyphicon-remove"></span></button>
-
+											<?php foreach ($professores as $professor) : ?>
+												<?= ($professor['status'] ? '<tr>' : '<tr class="danger">') ?>
+														<td><?= $professor['nome'] ?></td>
+														<td><?= $professor['matricula'] ?></td>
+														<td><?= $professor['nascimento'] ?></td>
+														<td><?php if($professor['status']): echo "Ativo"; else: echo "Inativo"; endif;?></td>
+													<td><?php if($professor['status']): ?>
+														<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whatevernome="<?= $professor['nome']?>" data-whateverid="<?= $professor['id']?>" data-whatevermatricula= "<?= $professor['matricula']?>" data-whatevernascimento= "<?= $professor['id']?>"><span class="glyphicon glyphicon-pencil"></span></button>
+														<button onClick="exclude(<?= $professor['id']?>);" type="button" class="btn btn-danger" title="Excluir"><span class="glyphicon glyphicon-remove"></span></button>
 														</td>
-													</tr>';
-
-													echo $row;
-												}
-
-											?>
+													<?php else:?>
+														<button onClick="able(<?= $professor['id']?>)" type="button" class="btn btn-success delete" title="Ativar"><span class="glyphicon glyphicon-ok"></span></button>
+															<?php endif;?>
+														</td>
+												</tr>
+											<?php endforeach; ?>
 									</tbody>
 								</table>
 							</div>
@@ -306,7 +303,7 @@
 		<script>
 			function exclude(id){
 				bootbox.confirm({
-					message: "Realmente deseja excluir esse Professor?",
+					message: "Realmente deseja desativar esse Professor?",
 					buttons: {
 						confirm: {
 							label: 'Sim',
@@ -319,7 +316,26 @@
 					},
 					callback: function (result) {
 						if(result)
-							window.location.href = 'Professor/deletar/'+id
+							window.location.href = 'Professor/desativar/'+id
+					}
+				});
+			}
+			function able(id){
+				bootbox.confirm({
+					message: "Realmente deseja ativar esse Professor?",
+					buttons: {
+						confirm: {
+							label: 'Sim',
+							className: 'btn-success'
+						},
+						cancel: {
+							label: 'Não',
+							className: 'btn-danger'
+						}
+					},
+					callback: function (result) {
+						if(result)
+							window.location.href = 'Professor/ativar/'+id
 					}
 				});
 			}
