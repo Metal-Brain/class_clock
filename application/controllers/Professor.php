@@ -103,7 +103,7 @@
       else
         $this->session->set_flashdata('danger','Não foi possível desativar o professor, tente novamente ou entre em contato com o administrador do sistema.');
 
-      redirect('/');
+      redirect('Professor/cadastrar');
     }
 
     public function ativar ($id) {
@@ -158,7 +158,7 @@
         else
           $this->session->set_flashdata('danger','Não foi possível atualizar os dados do professor, tente novamente ou entre em contato com o administrador do sistema.<br/> Caso tenha alterado a <b>SIGLA</b>, verifique se ela já não foi utilizada!');
 
-        redirect('/');
+        redirect('Professor/cadastrar');
 
       }
     }
