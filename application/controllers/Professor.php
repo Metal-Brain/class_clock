@@ -8,7 +8,7 @@
   class Professor extends CI_Controller {
 
     public function index () {
-      $this->cadastro();
+      $this->cadastrar();
     }
 
 
@@ -20,19 +20,28 @@
       * Valida os dados do forumulário de cadastro de professores.
       * Caso o formulario esteja valido, envia os dados para o modelo realizar
       * a persistencia dos dados.
-      * @author Yasmin Sayad 
+      * @author Yasmin Sayad
       * @since 2017/04/03
       */
-    public function cadastro () {
+    public function cadastrar() {
       // Carrega a biblioteca para validação dos dados.
       $this->load->library(array('form_validation','session'));
-      $this->load->helper(array('form','url'));
-      $this->load->model(array('Professor_model', 'Disciplina_model'));
+      $this->load->helper(array('form','url','dropdown'));
+      $this->load->model(array(
+        'Professor_model',
+        'Disciplina_model',
+        'Competencia_model',
+        'Nivel_model',
+        'Contrato_model'
+      ));
 
       // Definir as regras de validação para cada campo do formulário.
       $this->form_validation->set_rules('nome', 'nome do professor', array('required','min_length[5]','max_length[255]','ucwords'));
       $this->form_validation->set_rules('matricula', 'matrícula', array('required','max_length[8]','is_unique[Professor.matricula]','strtoupper'));
       $this->form_validation->set_rules('nascimento', 'data de nascimento', array('required','date'));
+      $this->form_validation->set_rules('disciplinas[]', 'disciplinas', array('required'));
+      $this->form_validation->set_rules('nivel', 'nivel', array('required'));
+      $this->form_validation->set_rules('contrato', 'contrato', array('required'));
       // Definição dos delimitadores
       $this->form_validation->set_error_delimiters('<p class="text-danger">','</p>');
 
@@ -41,6 +50,9 @@
 
         $this->session->set_flashdata('formDanger','<strong>Não foi possível cadastrar o professor, pois existe(m) erro(s) no formulário:</strong>');
 
+        $dados['contrato']       = convert($this->Contrato_model->getAll());
+        $dados['nivel']       = convert($this->Nivel_model->getAll());
+        $dados['disciplinas']   = convert($this->Disciplina_model->getAll());
         $dados['professores'] = $this->Professor_model->getAll();
 	      $this->load->view('professores', $dados);
 
@@ -48,18 +60,30 @@
 
         // Pega os dados do formulário
         $professor = array(
-          'nome'      => $this->input->post("nome"),
-          'sigla'     => $this->input->post('sigla'),
-          'qtdProf'   => $this->input->post("qtdProf")
+          'nome'          => $this->input->post("nome"),
+          'matricula'     => $this->input->post('matricula'),
+          'nascimento'    => $this->input->post("nascimento"),
+          'coordenador'   => $this->input->post("coordenador"),
+          'contrato'      => $this->input->post("contrato"),
+          'nivel'         => $this->input->post("nivel"),
         );
 
-        if ($this->Professor_model->insert($professor)){
+          $disciplinas = $this->input->post('disciplinas[]');
+
+
+
+        if ($this->Professor_model->insert($professor)) {
+          $idProfessor = $this->db->insert_id(); // Pega o ID do Professor cadastrado
+
+          foreach ($disciplinas as $idDisciplina)
+            $this->Competencia_model->insert($idProfessor,$idDisciplina);
+
           $this->session->set_flashdata('success','Professor cadastrado com sucesso');
         } else {
-          $this->session->set_flashdata('danger','Não foi possível cadastrar o professor, tente novamente ou entre em contato com o administrador do sistema.');
+          $this->session->set_flashdata('danger','Não foi possivel cadastrar o professor, tente novamente ou entre em contato com o administrador do sistema');
         }
 
-        redirect('/');
+        redirect('Professor/cadastrar');
 
       }
     }
