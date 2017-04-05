@@ -27,8 +27,8 @@
 					<ul class="nav nav-pills nav-stacked">
 						<li><?= anchor('Curso','Cursos') ?></li>
 						<li><?= anchor('Disciplina','Disciplinas') ?></li>
-						<li><a href="professores.html">Professores</a></li>
-						<li class="active"><?= anchor('Sala','Sala') ?></li>
+						<li><?= anchor('Professor', 'Professores') ?></li>
+						<li class="active"><?= anchor('Sala','Salas') ?></li>
 						<hr>
 						<li><a href="index.html"><span class="glyphicon glyphicon-log-out"></span> Sair do Sistema</a></li>
 					</ul>
@@ -57,7 +57,7 @@
 						<?= validation_errors() ?>
 					</div>
 					<?php endif; ?>
-					
+
 					<h1>Salas</h1>
 
 					<!-- Lista de 'botoes' links do Bootstrap -->
@@ -95,10 +95,10 @@
 													<td><?php if($sala['status']): echo "Ativo"; else: echo "Inativo"; endif;?></td>
 													<td>
 													<?php if ($sala['status']): ?>
-														
+
 															<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whatevernsala="<?= $sala['nSala']; ?>" data-whateverid="<?= $sala['id']; ?>" data-whatevercapmax="<?= $sala['capMax']; ?>"  data-whatevertipo="<?= $sala['tipo']; ?>"><span class="glyphicon glyphicon-pencil"></span></button>
 															<button onClick="exclude(<?= $sala['id']?>);" type="button" class="btn btn-danger" title="Desativar"><span class="glyphicon glyphicon-remove"></span></button>
-														
+
 													<?php else : ?>
 														<button onClick="able(<?= $sala['id']?>)" type="button" class="btn btn-success delete" title="Ativar"><span class="glyphicon glyphicon-ok"></span></button>
 													<?php endif; ?>

@@ -29,8 +29,8 @@
 					<ul class="nav nav-pills nav-stacked">
 						<li><?= anchor('Curso','Cursos') ?></li>
 						<li class="active"><?= anchor('Disciplina','Disciplinas') ?></li>
-						<li><a href="professores.html">Professores</a></li>
-						<li><?= anchor('Sala','Sala') ?></li>
+						<li><?= anchor('Professor', 'Professores') ?></li>
+						<li><?= anchor('Sala','Salas') ?></li>
 						<hr>
 						<li><a href="index.html"><span class="glyphicon glyphicon-log-out"></span> Sair do Sistema</a></li>
 					</ul>
