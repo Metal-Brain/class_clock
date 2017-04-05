@@ -42,6 +42,13 @@
 
 				<div id="content" class="col-md-10">
 
+					<?php if (validation_errors()): ?>
+						<div class="alert alert-danger text-center">
+							<p><?= $this->session->flashdata('formDanger') ?></p>
+							<?= validation_errors() ?>
+						</div>
+					<?php endif; ?>
+
 					<?php if ($this->session->flashdata('success')) : ?>
 						<!-- Alert de sucesso -->
 						<div class="text-center alert alert-success" role="alert">
@@ -125,6 +132,7 @@
 								<div class="form-group disc">
 									<label>Disciplinas que pode lecionar</label>
 									<?= form_dropdown('disciplinas[]',$disciplinas,null,array('id'=>'disciplinas','multiple'=>'multiple')) ?>
+									<?= form_error('disciplinas[]') ?>
 								</div>
 								<div class="form-group percent-40">
 									<label>Data de Nascimento</label>
@@ -147,9 +155,8 @@
 									</select>
 								</div>
 								<div class="form-group percent-50">
-									<input type="checkbox" name="coordenador" class="form-group" value="<?= set_value('coordenador')?>"/>
-									<label>Coordenador</label>
-									<?= form_error('coordenador') ?>
+									<input id="coordenador" type="checkbox" name="coordenador" class="form-group" value="<?= set_value('coordenador')?>"/>
+									<label for="coordenador">Coordenador</label>
 								</div>
 								<div class="inline">
 									<button type='submit' class='btn bt-lg btn-primary'>Cadastrar</button>
@@ -243,14 +250,13 @@
 		<script type="text/javascript" src="<?= base_url('assets/js/bootstrap.min.js') ?>"></script>
 		<script type="text/javascript" src="<?= base_url('assets/DataTables/datatables.min.js') ?>"></script>
 		<script type="text/javascript" src="<?= base_url('assets/js/bootbox.min.js') ?>"></script>
-
+		<script type="text/javascript" src="<?= base_url('assets/JqueryMask/jquery.mask.min.js')?>"></script>
 		<!-- multi-select -->
-        <script type="text/javascript" src="<?= base_url('assets/multi-select/js/jquery.multi-select.js')?>"></script>
-        <script>
-          $("#professorDisciplinas").multiSelect();
-          $("#disciplinas").multiSelect();
-        </script>
-
+    <script type="text/javascript" src="<?= base_url('assets/multi-select/js/jquery.multi-select.js')?>"></script>
+    <script>
+    	$("#professorDisciplinas").multiSelect();
+    	$("#disciplinas").multiSelect();
+    </script>
 		<script type="text/javascript">
 			$('#exampleModal').on('show.bs.modal', function (event) {
 				("#professorDisciplinas").multiSelect('deselect_all');
@@ -290,7 +296,6 @@
 				modal.find('#recipient-id').val(recipientid)
 			})
 		</script>
-
 		<script type="text/javascript">
 			$(document).ready(function () {
 				$("#ProfessorTable").DataTable({
@@ -300,7 +305,7 @@
 				});
 			});
 		</script>
-		<script>
+		<script type="text/javascript">
 			function exclude(id){
 				bootbox.confirm({
 					message: "Realmente deseja desativar esse Professor?",
@@ -340,5 +345,11 @@
 				});
 			}
 		</script>
+		<script type="text/javascript">
+			$(document).ready(function () {
+				$("input[name=nascimento]").mask('00/00/0000', {placeholder: "__/__/____"});
+			});
+		</script>
+
 	</body>
 </html>
