@@ -77,7 +77,6 @@
 					<div class="tab-content">
 
 						<!-- Aqui é a Listagem dos Itens -->
-						<div style="margin-top: 25px;">
 							<div id="list" class="tab-pane fade in active">
 								<table id="professorTable" class="table table-striped">
 									<thead>
@@ -110,7 +109,6 @@
 									</tbody>
 								</table>
 							</div>
-						</div>
 
 						<!-- Aqui é o formulário de registro do novo item-->
 						<div id="new" class="tab-pane fade">
