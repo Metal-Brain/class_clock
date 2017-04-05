@@ -129,6 +129,7 @@
 								<div class="form-group disc">
 									<label>Disciplinas que pode lecionar</label>
 									<?= form_dropdown('disciplinas[]',$disciplinas,null,array('id'=>'disciplinas','multiple'=>'multiple')) ?>
+									<?= form_error('disciplinas[]') ?>
 								</div>
 								<div class="form-group percent-40">
 									<label>Data de Nascimento</label>
@@ -243,14 +244,13 @@
 		<script type="text/javascript" src="<?= base_url('assets/js/bootstrap.min.js') ?>"></script>
 		<script type="text/javascript" src="<?= base_url('assets/DataTables/datatables.min.js') ?>"></script>
 		<script type="text/javascript" src="<?= base_url('assets/js/bootbox.min.js') ?>"></script>
-
+		<script type="text/javascript" src="<?= base_url('assets/JqueryMask/jquery.mask.min.js')?>"></script>
 		<!-- multi-select -->
-        <script type="text/javascript" src="<?= base_url('assets/multi-select/js/jquery.multi-select.js')?>"></script>
-        <script>
-          $("#professorDisciplinas").multiSelect();
-          $("#disciplinas").multiSelect();
-        </script>
-
+    <script type="text/javascript" src="<?= base_url('assets/multi-select/js/jquery.multi-select.js')?>"></script>
+    <script>
+    	$("#professorDisciplinas").multiSelect();
+    	$("#disciplinas").multiSelect();
+    </script>
 		<script type="text/javascript">
 			$('#exampleModal').on('show.bs.modal', function (event) {
 				("#professorDisciplinas").multiSelect('deselect_all');
@@ -290,7 +290,6 @@
 				modal.find('#recipient-id').val(recipientid)
 			})
 		</script>
-
 		<script type="text/javascript">
 			$(document).ready(function () {
 				$("#ProfessorTable").DataTable({
