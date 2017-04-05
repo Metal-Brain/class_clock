@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS Curso (
 	 CONSTRAINT fk_periodo_curso
 	 	FOREIGN KEY (idPeriodo) REFERENCES Periodo(id)
  );
- 
+
  CREATE TABLE IF NOT EXISTS Sala(
 	id 					INT NOT NULL 			AUTO_INCREMENT,
 	nSala 				VARCHAR(5) NOT NULL UNIQUE,
@@ -90,16 +90,16 @@ CREATE TABLE IF NOT EXISTS Login(
     `password` 			VARCHAR(32) 	NOT NULL,
     nivel 				INT 			NOT NULL,
     `status` 			BOOLEAN       	NOT NULL  			DEFAULT TRUE,
-     
+
      PRIMARY KEY(id)
-);     
+);
 
 
 CREATE TABLE IF NOT EXISTS Professor(
 	id 					INT 			NOT NULL 			AUTO_INCREMENT,
     nome 				VARCHAR(255) 	NOT NULL,
     matricula 			VARCHAR(8)		NOT NULL			UNIQUE,
-    nascimento 			DATE 			NOT NULL,    
+    nascimento 			DATE 			NOT NULL,
     coordenador 		BOOLEAN       	NOT NULL  			DEFAULT FALSE,
     `status` 			BOOLEAN       	NOT NULL  			DEFAULT TRUE,
     idContrato 			INT 			NOT NULL,
@@ -118,4 +118,4 @@ CREATE TABLE IF NOT EXISTS Competencia(
     PRIMARY KEY(idProfessor, idDisciplina),
     FOREIGN KEY(idProfessor) REFERENCES Professor(id),
     FOREIGN KEY(idDisciplina) REFERENCES Disciplina(id)
-);   
+);
