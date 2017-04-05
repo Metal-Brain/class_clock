@@ -90,7 +90,6 @@ CREATE TABLE IF NOT EXISTS Login(
     `password` 			VARCHAR(32) 	NOT NULL,
     nivel 				INT 			NOT NULL,
     `status` 			BOOLEAN       	NOT NULL  			DEFAULT TRUE,
-
      PRIMARY KEY(id)
 );
 

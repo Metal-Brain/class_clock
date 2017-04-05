@@ -69,40 +69,53 @@ CREATE TABLE IF NOT EXISTS Sala (
 );
 
 CREATE TABLE IF NOT EXISTS Contrato(
-	id					INT           NOT NULL 			AUTO_INCREMENT,
-  nome 				VARCHAR(45) 	NOT NULL,
-  PRIMARY KEY(id)
+	id					INT 			NOT NULL 			AUTO_INCREMENT,
+    nome 				VARCHAR(45) 	NOT NULL,
+    PRIMARY KEY(id)
 );
 
 INSERT INTO Contrato (nome) VALUES ('Exclusiva'),('Integral'),('Parcial');
 
-CREATE TABLE IF NOT EXISTS Nivel (
-	id					INT 			    NOT NULL 			AUTO_INCREMENT,
-  nome 				VARCHAR(45) 	NOT NULL,
-  PRIMARY KEY(id)
+CREATE TABLE IF NOT EXISTS Nivel(
+	id					INT 			NOT NULL 			AUTO_INCREMENT,
+    nome 				VARCHAR(45) 	NOT NULL,
+    PRIMARY KEY(id)
 );
 
 INSERT INTO Nivel (nome) VALUES ('Graduação'),('Pós-Graduação'),('Mestrado'),('Doutorado');
 
+CREATE TABLE IF NOT EXISTS Login(
+	id 					INT 			NOT NULL 			AUTO_INCREMENT,
+    username 			VARCHAR(32) 	NOT NULL 			UNIQUE,
+    `password` 			VARCHAR(32) 	NOT NULL,
+    nivel 				INT 			NOT NULL,
+    `status` 			BOOLEAN       	NOT NULL  			DEFAULT TRUE,
+     
+     PRIMARY KEY(id)
+);   
+
+
 CREATE TABLE IF NOT EXISTS Professor(
-	id 					INT 			    NOT NULL 			AUTO_INCREMENT,
-  nome 				VARCHAR(255) 	NOT NULL,
-  matricula 	CHAR(7)    		NOT NULL			UNIQUE,
-  nascimento 	DATE 			    NOT NULL,
-  coordenador tinyint(1) 		NOT NULL			DEFAULT 0,
-  `status` 		tinyint(1) 		NOT NULL			DEFAULT 1,
-  idContrato 	INT 			    NOT NULL,
-  idNivel			INT 			    NOT NULL,
-  PRIMARY KEY(id),
-  FOREIGN KEY(idContrato) REFERENCES Contrato(id),
-	FOREIGN KEY(idNivel) REFERENCES Nivel(id)
+	id 					INT 			NOT NULL 			AUTO_INCREMENT,
+    nome 				VARCHAR(255) 	NOT NULL,
+    matricula 			VARCHAR(8)		NOT NULL			UNIQUE,
+    nascimento 			DATE 			NOT NULL,    
+    coordenador 		BOOLEAN       	NOT NULL  			DEFAULT FALSE,
+    `status` 			BOOLEAN       	NOT NULL  			DEFAULT TRUE,
+    idContrato 			INT 			NOT NULL,
+    idNivel				INT 			NOT NULL,
+    idLogin				INT 			NOT NULL,
+    PRIMARY KEY(id),
+    FOREIGN KEY(idContrato) REFERENCES Contrato(id),
+	FOREIGN KEY(idNivel) REFERENCES Nivel(id),
+    FOREIGN KEY(idLogin) REFERENCES Login(id)
 );
 
 CREATE TABLE IF NOT EXISTS Competencia(
-	idProfessor			INT 			    NOT NULL,
-  idDisciplina		INT 			    NOT NULL,
-  interesse 			tinyint(1) 		NOT NULL			DEFAULT 0,
-  PRIMARY KEY(idProfessor, idDisciplina),
-  FOREIGN KEY(idProfessor) REFERENCES Professor(id),
-  FOREIGN KEY(idDisciplina) REFERENCES Disciplina(id)
+	idProfessor			INT 			NOT NULL,
+    idDisciplina		INT 			NOT NULL,
+    interesse 			BOOLEAN       	NOT NULL  DEFAULT FALSE,
+    PRIMARY KEY(idProfessor, idDisciplina),
+    FOREIGN KEY(idProfessor) REFERENCES Professor(id),
+    FOREIGN KEY(idDisciplina) REFERENCES Disciplina(id)
 );
