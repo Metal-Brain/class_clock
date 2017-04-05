@@ -11,7 +11,6 @@
       $this->cadastrar();
     }
 
-
     // =========================================================================
     // ==========================CRUD de professores============================
     // =========================================================================
@@ -25,8 +24,8 @@
       */
     public function cadastrar() {
       // Carrega a biblioteca para validação dos dados.
-      $this->load->library(array('form_validation','session'));
-      $this->load->helper(array('form','url','dropdown'));
+      $this->load->library(array('form_validation'));
+      $this->load->helper(array('form','dropdown'));
       $this->load->model(array(
         'Professor_model',
         'Disciplina_model',
@@ -37,11 +36,11 @@
 
       // Definir as regras de validação para cada campo do formulário.
       $this->form_validation->set_rules('nome', 'nome do professor', array('required','min_length[5]','max_length[255]','ucwords'));
-      $this->form_validation->set_rules('matricula', 'matrícula', array('required','max_length[8]','is_unique[Professor.matricula]','strtoupper'));
-      $this->form_validation->set_rules('nascimento', 'data de nascimento', array('required','date'));
+      $this->form_validation->set_rules('matricula', 'matrícula', array('required','exact_length[8]', 'alpha_numeric','is_unique[Professor.matricula]','strtoupper'));
+      $this->form_validation->set_rules('nascimento', 'data de nascimento', array('required','callback_date_check'));
       $this->form_validation->set_rules('disciplinas[]', 'disciplinas', array('required'));
-      $this->form_validation->set_rules('nivel', 'nivel', array('required'));
-      $this->form_validation->set_rules('contrato', 'contrato', array('required'));
+      $this->form_validation->set_rules('nivel', 'nivel', array('greater_than[0]'),array('greater_than'=>'Selecione o nivel acadêmico'));
+      $this->form_validation->set_rules('contrato','contrato',array('greater_than[0]'),array('greater_than'=>'Selecione um contrato'));
       // Definição dos delimitadores
       $this->form_validation->set_error_delimiters('<p class="text-danger">','</p>');
 
@@ -50,10 +49,10 @@
 
         $this->session->set_flashdata('formDanger','<strong>Não foi possível cadastrar o professor, pois existe(m) erro(s) no formulário:</strong>');
 
-        $dados['contrato']       = convert($this->Contrato_model->getAll());
-        $dados['nivel']       = convert($this->Nivel_model->getAll());
-        $dados['disciplinas']   = convert($this->Disciplina_model->getAll());
-        $dados['professores'] = $this->Professor_model->getAll();
+        $dados['contrato']        = convert($this->Contrato_model->getAll(), TRUE);
+        $dados['nivel']           = convert($this->Nivel_model->getAll(), TRUE);
+        $dados['disciplinas']     = convert($this->Disciplina_model->getAll());
+        $dados['professores']     = $this->Professor_model->getAll();
 	      $this->load->view('professores', $dados);
 
       } else {
@@ -68,9 +67,7 @@
           'nivel'         => $this->input->post("nivel"),
         );
 
-          $disciplinas = $this->input->post('disciplinas[]');
-
-
+        $disciplinas = $this->input->post('disciplinas[]');
 
         if ($this->Professor_model->insert($professor)) {
           $idProfessor = $this->db->insert_id(); // Pega o ID do Professor cadastrado
@@ -85,6 +82,23 @@
 
         redirect('Professor/cadastrar');
 
+      }
+    }
+
+    /**
+      * Valida a data no padrão BR
+      * @author Caio de Freitas
+      * @since 2017/04/05
+      * @param Data
+      * @return Retorna um boolean true caso a data sejá valida.
+      */
+    public function date_check ($date) {
+      $d = explode('/',$date);
+      if (!checkdate($d[1],$d[0],$d[2])) {
+        $this->form_validation->set_message('date_check','Informe uma data válida.');
+        return FALSE;
+      } else {
+        return TRUE;
       }
     }
 
