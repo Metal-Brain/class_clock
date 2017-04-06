@@ -320,7 +320,7 @@
 					},
 					callback: function (result) {
 						if(result)
-							window.location.href = 'Professor/desativar/'+id
+							window.location.href = '<?= base_url('index.php/Professor/desativar/')?>'+id
 					}
 				});
 			}
