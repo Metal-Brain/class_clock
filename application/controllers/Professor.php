@@ -36,7 +36,7 @@
 
       // Definir as regras de validação para cada campo do formulário.
       $this->form_validation->set_rules('nome', 'nome do professor', array('required','min_length[5]','max_length[255]','ucwords'));
-      $this->form_validation->set_rules('matricula', 'matrícula', array('required','exact_length[8]', 'alpha_numeric','is_unique[Professor.matricula]','strtoupper'));
+      $this->form_validation->set_rules('matricula', 'matrícula', array('required','exact_length[7]', 'numeric','is_unique[Professor.matricula]','strtoupper'));
       $this->form_validation->set_rules('nascimento', 'data de nascimento', array('callback_date_check'));
       $this->form_validation->set_rules('disciplinas[]', 'disciplinas', array('required'));
       $this->form_validation->set_rules('nivel', 'nivel', array('greater_than[0]'),array('greater_than'=>'Selecione o nivel acadêmico'));

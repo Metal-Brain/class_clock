@@ -87,7 +87,7 @@ INSERT INTO Nivel (nome) VALUES ('Graduação'),('Pós-Graduação'),('Mestrado'
 CREATE TABLE IF NOT EXISTS Professor(
 	id 					INT 			    NOT NULL 			AUTO_INCREMENT,
   nome 				VARCHAR(255) 	NOT NULL,
-  matricula 	VARCHAR(8)		NOT NULL			UNIQUE,
+  matricula 	CHAR(7)    		NOT NULL			UNIQUE,
   nascimento 	DATE 			    NOT NULL,
   coordenador tinyint(1) 		NOT NULL			DEFAULT 0,
   `status` 		tinyint(1) 		NOT NULL			DEFAULT 1,
