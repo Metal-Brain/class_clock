@@ -89,8 +89,8 @@ CREATE TABLE IF NOT EXISTS Professor(
   nome 				VARCHAR(255) 	NOT NULL,
   matricula 	VARCHAR(8)		NOT NULL			UNIQUE,
   nascimento 	DATE 			    NOT NULL,
-  coordenador tinyint(1) 		NOT NULL			DEFAULT '0',
-  `status` 		tinyint(1) 		NOT NULL			DEFAULT '1',
+  coordenador tinyint(1) 		NOT NULL			DEFAULT 0,
+  `status` 		tinyint(1) 		NOT NULL			DEFAULT 1,
   idContrato 	INT 			    NOT NULL,
   idNivel			INT 			    NOT NULL,
   PRIMARY KEY(id),
@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS Professor(
 CREATE TABLE IF NOT EXISTS Competencia(
 	idProfessor			INT 			    NOT NULL,
   idDisciplina		INT 			    NOT NULL,
-  interesse 			tinyint(1) 		NOT NULL			DEFAULT '0',
+  interesse 			tinyint(1) 		NOT NULL			DEFAULT 0,
   PRIMARY KEY(idProfessor, idDisciplina),
   FOREIGN KEY(idProfessor) REFERENCES Professor(id),
   FOREIGN KEY(idDisciplina) REFERENCES Disciplina(id)
