@@ -42,7 +42,10 @@
         $this->session->set_flashdata('formDanger','<strong>Não foi possível cadastrar a disciplina, pois existe(m) erro(s) no formulário:</strong>');
 
         $dados['disciplinas'] = $this->Disciplina_model->getAll();
-	      $this->load->view('disciplinas', $dados);
+	      
+         $this->load->view('includes/header',$dados);
+        $this->load->view('includes/sidebar');
+        $this->load->view('disciplinas');
 
       } else {
 
@@ -119,7 +122,10 @@
         $this->session->set_flashdata('formDanger','<strong>Não foi possível atualizar os dados da disciplina:</strong>');
 
         $dados['disciplinas'] = $this->Disciplina_model->getAll();
-        $this->load->view('disciplinas', $dados);
+        
+        $this->load->view('includes/header',$dados);
+        $this->load->view('includes/sidebar');
+        $this->load->view('disciplinas');
       } else {
 
         $id = $this->input->post('recipient-id');
