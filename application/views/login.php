@@ -21,11 +21,10 @@
 					<h1 style="text-align:center">Class Clock</h1>
 					<div class="tab-content">
 							<!-- tela login -->
-
-
-										<div id="principal" class="col-md-6 col-md-offset-3 tab-pane fade in active">
+												<div id="principal" class="col-md-6 col-md-offset-3 tab-pane fade in active">
 													<h2 style="text-align:center">Login</h2>
 													<form action="" id="login" method="post"  align="center">
+														<?php echo form_open('VerificaLogin'); ?>
 													  <div class="form-group input-group" align="center">
 														<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
 														<input class="form-control" type="text" name='username' placeholder="ex: cg0000000"/>
@@ -36,37 +35,11 @@
 													  </div>
 
 													  <div class="form-group">
-
-													  		<!-- Alert de sucesso -->
-																<?php if ($this->session->flashdata('success')) : ?>
-
-																<div class="text-center alert alert-success" role="alert">
-																  <span class="glyphicon glyphicon glyphicon-ok" aria-hidden="true"></span>
-																  <span class="sr-only">Succes:</span>
-																  <?= $this->session->flashdata('success') ?>
-																</div>
-
-																	<!-- Alert de erro -->
-																  <?php elseif ($this->session->flashdata('danger')) : ?>
-
-																<div class="text-center alert alert-danger" role="alert">
-																  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-																  <span class="sr-only">Error:</span>
-																  <?= $this->session->flashdata('danger') ?>
-																  	<?php endif; ?>
-
-																	<?php if (validation_errors()): ?>
-																		<div class="alert alert-danger text-center">
-																			<p><?= $this->session->flashdata('formDanger') ?></p>
-																			<?= validation_errors() ?>
-																		</div>
-																	<?php endif; ?>
-																</div>
-
-															<button type="submit" class="btn btn-def btn-block" style="background-color: #4CAF50">Entrar</button>
-															<a  data-toggle="pill" href="#recupera">Clique aqui para recuperar a senha</a>
+														<button type="submit" class="btn btn-def btn-block" style="background-color: #4CAF50">Entrar</button>
 													  </div>
-
+													  <div class="form-group" >
+														<a  data-toggle="pill" href="#recupera">Clique aqui para recuperar a senha</a>
+													  </div>
 													</form>
 												</div>
 							<!-- fim tela login-->
@@ -103,7 +76,6 @@
 
 			  </div>
 			</div>
-
 
 
 			<div class="row">
