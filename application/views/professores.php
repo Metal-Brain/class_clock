@@ -7,6 +7,7 @@
 				<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/bootstrap.min.css')?>">
 				<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/style.css')?>">
 				<link rel="stylesheet" type="text/css" href="<?= base_url('assets/DataTables/datatables.min.css') ?>">
+				<link rel="stylesheet" type="text/css" href="<?= base_url('assets/multi-select/css/multi-select.css')?>">
 
 	</head>
 	<body>
@@ -94,9 +95,9 @@
 												<?= ($professor['status'] ? '<tr>' : '<tr class="danger">') ?>
 														<td><?= $professor['nome'] ?></td>
 														<td><?= $professor['matricula'] ?></td>
-														<td><?= $professor['nascimento'] ?></td>
+														<td><?= sqlToBr($professor['nascimento']) ?></td>
 														<td><?php if($professor['status']): echo "Ativo"; else: echo "Inativo"; endif;?></td>
-													<td><?php if($professor['status']): ?>
+														<td><?php if($professor['status']): ?>
 														<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whatevernome="<?= $professor['nome']?>" data-whateverid="<?= $professor['id']?>" data-whatevermatricula= "<?= $professor['matricula']?>" data-whatevernascimento= "<?= $professor['id']?>"><span class="glyphicon glyphicon-pencil"></span></button>
 														<button onClick="exclude(<?= $professor['id']?>);" type="button" class="btn btn-danger" title="Excluir"><span class="glyphicon glyphicon-remove"></span></button>
 														</td>
@@ -126,7 +127,7 @@
 								</div>
 								<div class="form-group disc">
 									<label>Disciplinas que pode lecionar</label>
-									<?= form_dropdown('disciplinas[]',$disciplinas,null,array('id'=>'disciplinas','multiple'=>'multiple')) ?>
+									<?= form_dropdown('disciplinas[]',$disciplinas,set_value('disciplinas[]'),array('id'=>'disciplinas','multiple'=>'multiple')) ?>
 									<?= form_error('disciplinas[]') ?>
 								</div>
 								<div class="form-group percent-40">

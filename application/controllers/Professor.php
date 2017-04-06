@@ -25,7 +25,7 @@
     public function cadastrar() {
       // Carrega a biblioteca para validação dos dados.
       $this->load->library(array('form_validation'));
-      $this->load->helper(array('form','dropdown'));
+      $this->load->helper(array('form','dropdown','date'));
       $this->load->model(array(
         'Professor_model',
         'Disciplina_model',
@@ -60,12 +60,12 @@
 
         // Pega os dados do formulário
         $professor = array(
-          'nome'          => $this->input->post("nome"),
-          'matricula'     => $this->input->post('matricula'),
-          'nascimento'    => $this->input->post("nascimento"),
-          'coordenador'   => $this->input->post("coordenador"),
-          'contrato'      => $this->input->post("contrato"),
-          'nivel'         => $this->input->post("nivel"),
+          'nome'            => $this->input->post("nome"),
+          'matricula'       => $this->input->post('matricula'),
+          'nascimento'      => brToSql($this->input->post("nascimento")),
+          'coordenador'     => ($this->input->post("coordenador") == NULL) ? FALSE : TRUE,
+          'idContrato'      => $this->input->post("contrato"),
+          'idNivel'         => $this->input->post("nivel"),
         );
 
         $disciplinas = $this->input->post('disciplinas[]');
