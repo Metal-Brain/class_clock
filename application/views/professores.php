@@ -258,7 +258,7 @@
     </script>
 		<script type="text/javascript">
 			$('#exampleModal').on('show.bs.modal', function (event) {
-				("#professorDisciplinas").multiSelect('deselect_all');
+				$("#professorDisciplinas").multiSelect('deselect_all');
 				var button = $(event.relatedTarget) // Button that triggered the modal
 				var recipient = button.data('whatever') // Extract info from data-* attributes
 				<!-- Foi criado todos os var caso seja necessario adicionar ou mudar os que já existem-->
