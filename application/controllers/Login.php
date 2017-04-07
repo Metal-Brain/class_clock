@@ -7,18 +7,9 @@
    */
   class Login extends CI_Controller {
     function index(){
-      $this->isLogado();
+      $this->load->view('login');
+      $this->verificaLogin();
     }
-
-    function isLogado(){
-      if (autoriza()) {
-       redirect('Disciplina');
-      }else{
-        $this->verificaLogin();
-      }
-    }
-
-
     function verificaLogin(){
         $this->load->model(array('Login_model'));
         $username =($this->input->post("username"));

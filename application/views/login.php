@@ -24,7 +24,6 @@
 												<div id="principal" class="col-md-6 col-md-offset-3 tab-pane fade in active">
 													<h2 style="text-align:center">Login</h2>
 													<form action="" id="login" method="post"  align="center">
-														<?php echo form_open('VerificaLogin'); ?>
 													  <div class="form-group input-group" align="center">
 														<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
 														<input class="form-control" type="text" name='username' placeholder="ex: cg0000000"/>
