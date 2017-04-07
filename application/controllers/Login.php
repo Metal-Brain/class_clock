@@ -6,19 +6,32 @@
    * @since 2017/04/05
    */
   class Login extends CI_Controller {
+    function index(){
+      $this->load->view('login');
+      $this->verificaLogin();
+    }
+    function verificaLogin(){
+        $this->load->model(array('Login_model'));
+        $username =($this->input->post("username"));
+        $password= $this->input->post("password");
 
-    function __construct(){
-   parent::__construct();
- }
+        $usuario = $this->Login_model->validate($username,$password);
+        if($usuario){
+          $this->session->set_userdata("usuario_logado", $usuario);
+          $this->session->set_flashdata("success", "Logado com Sucesso!");
+          redirect('Disciplina');
+        } else {          
+          $this->session->set_flashdata("danger", "Usuário ou senha inválida!");
+          $this->load->view('login');
+        }
+      }
 
- function index(){
-   $this->load->helper(array('form'));
-   $this->load->view('login');
- }
 
- function logout(){
-   $this->session->sess_destroy();
-   redirect('login', 'refresh');
- }
-}
-?>
+    function logout(){
+      $this->session->unset_userdata("usuario_logado");
+      $this->session->set_flashdata("success", "Deslogado com Sucesso!");
+      $this->session->sess_destroy();
+      redirect('login', 'refresh');
+    }
+   }
+   ?>
