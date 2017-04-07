@@ -89,6 +89,8 @@
 											<th>Nome</th>
 											<th>Matrícula</th>
 											<th>Data Nascimento</th>
+											<th>Nível acadêmico<th>
+											<th>Contrato<th>
 											<th>Status</th>
 											<th>Ações</th>
 										</tr>
@@ -99,12 +101,14 @@
 														<td><?= $professor['nome'] ?></td>
 														<td><?= $professor['matricula'] ?></td>
 														<td><?= sqlToBr($professor['nascimento']) ?></td>
+														<!-- <td><?= $professor['nivel'] ?></td> -->
+														<!-- <td><?= $professor['contrato'] ?></td> -->
 														<td><?php if($professor['status']): echo "Ativo"; else: echo "Inativo"; endif;?></td>
 														<td><?php if($professor['status']): ?>
 															<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whatevernome="<?= $professor['nome']?>" data-whateverid="<?= $professor['id']?>" data-whatevermatricula= "<?= $professor['matricula']?>" data-whatevernascimento= "<?= sqlToBr($professor['nascimento']) ?>"><span class="glyphicon glyphicon-pencil"></span></button>
 															<button onClick="exclude(<?= $professor['id']?>);" type="button" class="btn btn-danger" title="Excluir"><span class="glyphicon glyphicon-remove"></span></button>
 													<?php else:?>
-														<button onClick="able(<?= $professor['id']?>)" type="button" class="btn btn-success delete" title="Ativar"><span class="glyphicon glyphicon-ok"></span></button>
+														<button onClick="able(<?= $professor['id']?>)" type="button" class="btn btn-success" title="Ativar"><span class="glyphicon glyphicon-ok"></span></button>
 													<?php endif;?>
 													</td>
 												</tr>
@@ -200,7 +204,7 @@
 								</div>
 								<div class="form-group percent-40">
 									<label>Data de Nascimento</label>
-									<input type="text" class="form-control percent-40" name="nascimento" id="recipient-nascimento" value="<?= set_value('nascimento')?>"/>
+									<input type="text" class="form-control percent-50" name="nascimento" id="recipient-nascimento" value="<?= set_value('nascimento')?>"/>
 									<?= form_error('recipient-nascimento') ?>
 								</div>
 								<div class="form-group">
