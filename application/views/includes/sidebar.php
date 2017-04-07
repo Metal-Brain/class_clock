@@ -10,7 +10,7 @@
       <li><a href="index.html"><span class="glyphicon glyphicon-log-out"></span> Sair do Sistema</a></li>
     </ul>
     
-    <script>
+     <script>
         var active = 0;
         for (var i = 0; i < document.links.length; i++) {
             if (document.links[i].href === document.URL) {

@@ -10,9 +10,7 @@
         <link rel="stylesheet" href="<?= base_url('assets/multi-select/css/multi-select.css')?>">
         
         <style>
-            ul { margin:0; padding:0;}
-            li {display:inline; }
-            a.active { background: #68B92E; color:#FFF!important;}
+            a.active { background: #4CAF50; color:#FFF!important;}
         </style>
     </head>
     <body>

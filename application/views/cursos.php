@@ -51,6 +51,7 @@
                                 </thead>
                                 <tbody>
                                   <?php foreach ($cursos as $curso) : ?>
+                                   <tr>
                                     <?= ($curso['status'] ? '<tr>' : '<tr class="danger">') ?>
                                         <td><?= $curso['sigla'] ?></td>
                                         <td><?= $curso['nome'] ?></td>
