@@ -147,45 +147,82 @@
       */
     public function atualizar () {
 
-      $this->load->library('form_validation');
-      $this->load->model(array('Professor_model'));
+        // Carrega a biblioteca para validação dos dados.
+        $this->load->library(array('form_validation'));
+        $this->load->helper(array('form','dropdown','date'));
+        $this->load->model(array(
+          'Professor_model',
+          'Disciplina_model',
+          'Competencia_model',
+          'Nivel_model',
+          'Contrato_model'
+        ));
 
-      // Definir as regras de validação para cada campo do formulário.
-      $this->form_validation->set_rules('recipient-nome', 'nome', array('required','min_length[5]','ucwords'));
-      $this->form_validation->set_rules('recipient-sigla', 'sigla', array('required', 'max_length[5]','strtoupper'));
-      $this->form_validation->set_rules('recipient-qtd-prof', 'quantidade de professores', array('required', 'integer', 'greater_than[0]'));
-      // Definição dos delimitadores
-      $this->form_validation->set_error_delimiters('<p class="text-danger">','</p>');
+        // Definir as regras de validação para cada campo do formulário.
+        $this->form_validation->set_rules('recipient-nome', 'nome do professor', array('required','min_length[5]','max_length[255]','ucwords'));
+        $this->form_validation->set_rules('recipient-matricula', 'matrícula', array('required','exact_length[7]', 'numeric','is_unique[Professor.matricula]','strtoupper'));
+        $this->form_validation->set_rules('recipient-nascimento', 'data de nascimento', array('callback_date_check'));
+        $this->form_validation->set_rules('professorDisciplinas[]', 'disciplinas', array('required'));
+        $this->form_validation->set_rules('recipient-nivelAcademico', 'nivel', array('greater_than[0]'),array('greater_than'=>'Selecione o nivel acadêmico'));
+        $this->form_validation->set_rules('recipient-contrato','contrato',array('greater_than[0]'),array('greater_than'=>'Selecione um contrato'));
+        // Definição dos delimitadores
+        $this->form_validation->set_error_delimiters('<p class="text-danger">','</p>');
 
-      // Verifica se o formulario é valido
-      if ($this->form_validation->run() == FALSE) {
+        // Verifica se o formulario é valido
+        if ($this->form_validation->run() == FALSE) {
 
-        $this->session->set_flashdata('formDanger','<strong>Não foi possível atualizar os dados do professor:</strong>');
+          $this->session->set_flashdata('formDanger','<strong>Não foi possível cadastrar o professor, pois existe(m) erro(s) no formulário:</strong>');
 
-        $dados['professores'] = $this->Professor_model->getAll();
-        $this->load->view('professores', $dados);
-      } else {
+          $dados['contrato']        = convert($this->Contrato_model->getAll(), TRUE);
+          $dados['nivel']           = convert($this->Nivel_model->getAll(), TRUE);
+          $dados['disciplinas']     = convert($this->Disciplina_model->getAll());
+          $dados['professores']     = $this->Professor_model->getAll();
+  	      $this->load->view('professores', $dados);
 
-        $id = $this->input->post('recipient-id');
+        } else {
 
-        // Pega os dados do formulário
-        $professor = array(
-          'nome'        => $this->input->post("recipient-nome"),
-          'sigla'       => $this->input->post('recipient-sigla'),
-          'qtdProf'     => $this->input->post("recipient-qtd-prof")
-        );
+          // Pega os dados do formulário
+          $professor = array(
+            'nome'            => $this->input->post("nome"),
+            'matricula'       => $this->input->post('matricula'),
+            'nascimento'      => brToSql($this->input->post("nascimento")),
+            'coordenador'     => ($this->input->post("coordenador") == NULL) ? FALSE : TRUE,
+            'idContrato'      => $this->input->post("contrato"),
+            'idNivel'         => $this->input->post("nivel"),
+          );
 
-        if ( $this->Professor_model->update($id, $professor) )
-          $this->session->set_flashdata('success', 'Professor atualizado com sucesso');
-        else
-          $this->session->set_flashdata('danger','Não foi possível atualizar os dados do professor, tente novamente ou entre em contato com o administrador do sistema.<br/> Caso tenha alterado a <b>SIGLA</b>, verifique se ela já não foi utilizada!');
+          $disciplinas = $this->input->post('disciplinas[]');
 
-        redirect('Professor');
+          exit();
 
-      }
+          if ($this->Professor_model->insert($professor)) {
+            $idProfessor = $this->db->insert_id(); // Pega o ID do Professor cadastrado
+
+            foreach ($disciplinas as $idDisciplina)
+              $this->Competencia_model->insert($idProfessor,$idDisciplina);
+
+            $this->session->set_flashdata('success','Dados atualizados com sucesso');
+          } else {
+            $this->session->set_flashdata('danger','Não foi possivel atualizar os dados do professor, tente novamente ou entre em contato com o administrador do sistema');
+          }
+
+          redirect('Professor/atualizar');
+
+        }
     }
 
+    /**
+     * Busca as disciplinas vinculada ao professor.
+     * @author Caio de Freitas
+     * @since 2017/04/07
+     * @param INT $id - ID do professor
+     */
+    public function disciplinas ($id) {
+      $this->load->model(array('Competencia_model'));
+      $disciplinas = $this->Competencia_model->getAllDisciplinas($id);
 
+      echo json_encode($disciplinas);
+     }
 
   }
 

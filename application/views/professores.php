@@ -65,7 +65,6 @@
 					<?php endif; ?>
 
 					<h1>Professores</h1>
-
 					<!-- Lista de 'botoes' links do Bootstrap -->
 					<ul class="nav nav-pills">
 						<!-- 'botao' link para a listagem -->
@@ -102,7 +101,7 @@
 														<!-- <td><?= $professor['contrato'] ?></td> -->
 														<td><?php if($professor['status']): echo "Ativo"; else: echo "Inativo"; endif;?></td>
 														<td><?php if($professor['status']): ?>
-															<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whatevernome="<?= $professor['nome']?>" data-whateverid="<?= $professor['id']?>" data-whatevermatricula= "<?= $professor['matricula']?>" data-whatevernascimento= "<?= sqlToBr($professor['nascimento']) ?>"><span class="glyphicon glyphicon-pencil"></span></button>
+															<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whatevernome="<?= $professor['nome']?>" data-whateverid="<?= $professor['id']?>" data-whateverregimeContrato="<?= $professor['idContrato']?>" data-whatevernivelAcademico="<?= $professor['idNivel']?>" data-whatevermatricula= "<?= $professor['matricula']?>" data-whatevernascimento= "<?= sqlToBr($professor['nascimento']) ?>"><span class="glyphicon glyphicon-pencil"></span></button>
 															<button onClick="exclude(<?= $professor['id']?>);" type="button" class="btn btn-danger" title="Excluir"><span class="glyphicon glyphicon-remove"></span></button>
 													<?php else:?>
 														<button onClick="able(<?= $professor['id']?>)" type="button" class="btn btn-success" title="Ativar"><span class="glyphicon glyphicon-ok"></span></button>
@@ -185,42 +184,41 @@
 								</div>
 								<div class="form-group">
 									<label>Nome</label>
-									<input type="text" class="form-control" name="nome" placeholder="Nome" id="recipient-nome" value="<?= set_value('nome')?>"/>
+									<input type="text" class="form-control" name="recipient-nome" placeholder="Nome" id="recipient-nome" value="<?= set_value('nome')?>"/>
 									<?= form_error('recipient-nome') ?>
 								</div>
 								<div class="form-group">
-										<label>Matrícula</label>
-										<input type="text" class="form-control percent-20" name="matricula"  id="recipient-matricula" maxlength="7" placeholder="ex: cg0000000" value="<?= set_value('matricula')?>"/>
+									<label>Matrícula</label>
+									<input type="text" class="form-control percent-20" name="recipient-matricula"  id="recipient-matricula" maxlength="7" placeholder="ex: cg0000000" value="<?= set_value('recipient-matricula')?>"/>
 									<?= form_error('recipient-matricula') ?>
 								</div>
 								<div class="form-group percent-50">
-								<label>Disciplinas que pode lecionar: </label>
+									<label>Disciplinas que pode lecionar: </label>
 									<!-- Pessoal do back-end, aqui o campo de texto deverá auto-completar o que o usuário começar a digitar -->
-									<?= form_dropdown('disciplinas[]',$disciplinas,set_value('disciplinas[]'),array('id'=>'disciplinas','multiple'=>'multiple')) ?>
-									<?= form_error('disciplinas[]') ?>
+									<?= form_dropdown('professorDisciplinas[]',$disciplinas,set_value('professorDisciplinas[]'),array('id'=>'professorDisciplinas','multiple'=>'multiple')) ?>
+									<?= form_error('professorDisciplinas[]') ?>
 								</div>
-								<div class="form-group percent-40">
+								<div class="form-group percent-50">
 									<label>Data de Nascimento</label>
-									<input type="text" class="form-control percent-50" name="nascimento" id="recipient-nascimento" value="<?= set_value('nascimento')?>"/>
+									<input type="text" class="form-control percent-40" name="recipient-nascimento" id="recipient-nascimento" value="<?= set_value('nascimento')?>"/>
 									<?= form_error('recipient-nascimento') ?>
 								</div>
 								<div class="form-group">
 									<label for="nivelAcademico" >Nivel Acadêmico</label>
 									<div id="u1" class="ax_default droplist" data-label="DropListNivel">
-										<?= form_dropdown('nivel',$nivel,set_value('nivel'),array('class'=>'form-control')) ?>
+										<?= form_dropdown('recipient-nivelAcademico',$nivel,set_value('recipient-nivelAcademico'),array('class'=>'form-control')) ?>
 										<?= form_error('recipient-nivelAcademico') ?>
 								</div>
 								<div class="form-group percent-30 inline">
 									<label>Regime de contrato</label>
 									<div id="u2" class="ax_default droplist" data-label="DropListContrato">
-										<?= form_dropdown('contrato',$contrato,set_value('contrato'),array('class'=>'form-control')) ?>
-										<?= form_error('contrato') ?>
+										<?= form_dropdown('recipient-contrato',$contrato,set_value('recipient-contrato'),array('class'=>'form-control')) ?>
+										<?= form_error('recipient-contrato') ?>
 									</div>
 								</div>
 								<div class="form-group percent-50">
 									<input type="checkbox" name="coordenador" class="form-group" id="recipient-coordenador"/>
-									<label>Coordenador</label>
-									<?= form_error('recipient-coordenador') ?>
+									<label for="recipient-coordenador">Coordenador</label>
 								</div>
 								<div class="modal-footer">
 									<button type="submit" class="btn btn-primary">Alterar</button>
@@ -264,7 +262,7 @@
 				var recipientnivelAcademico = button.data('whatevernivelAcademico')
 				var recipientregimeContrato = button.data('whateverregimeContrato')
 				var recipientcoordenador = button.data('whareevercoordenador')
-				var recipientid = button.data('whareeverid')
+				var recipientid = button.data('whateverid')
 				var url = '<?= base_url('index.php/Professor/disciplinas/') ?>'+recipientid;
 				$.getJSON(url,function (response) {
 					var disciplinas = [];
@@ -274,6 +272,7 @@
 					$("#professorDisciplinas").multiSelect('select',disciplinas);
 				});
 
+				console.log(recipientregimeContrato);
 
 				// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
 				// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
