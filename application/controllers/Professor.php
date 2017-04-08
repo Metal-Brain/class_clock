@@ -63,9 +63,9 @@
           'nome'            => $this->input->post("nome"),
           'matricula'       => $this->input->post('matricula'),
           'nascimento'      => brToSql($this->input->post("nascimento")),
-          'coordenador'     => ($this->input->post("coordenador") == NULL) ? FALSE : TRUE,
+          'coordenador'     => ($this->input->post("coordenador") == null) ? 0 : 1,
           'idContrato'      => $this->input->post("contrato"),
-          'idNivel'         => $this->input->post("nivel"),
+          'idNivel'         => $this->input->post("nivel")
         );
 
         $disciplinas = $this->input->post('disciplinas[]');
@@ -181,25 +181,24 @@
 
         } else {
 
+          $id = $this->input->post('recipient-id');
+
           // Pega os dados do formulário
           $professor = array(
-            'nome'            => $this->input->post("nome"),
-            'matricula'       => $this->input->post('matricula'),
-            'nascimento'      => brToSql($this->input->post("nascimento")),
-            'coordenador'     => ($this->input->post("coordenador") == NULL) ? FALSE : TRUE,
-            'idContrato'      => $this->input->post("contrato"),
-            'idNivel'         => $this->input->post("nivel"),
+            'nome'            => $this->input->post("recipient-nome"),
+            'matricula'       => $this->input->post('recipient-matricula'),
+            'nascimento'      => brToSql($this->input->post("recipient-nascimento")),
+            'coordenador'     => ($this->input->post("recipient-coordenador") == null) ? 0 : 1,
+            'idContrato'      => $this->input->post("recipient-contrato"),
+            'idNivel'         => $this->input->post("recipient-nivelAcademico"),
           );
 
-          $disciplinas = $this->input->post('disciplinas[]');
+          $disciplinas = $this->input->post('professorDisciplinas[]');
 
-          exit();
-
-          if ($this->Professor_model->insert($professor)) {
-            $idProfessor = $this->db->insert_id(); // Pega o ID do Professor cadastrado
-
+          if ($this->Professor_model->update($id, $professor)) {
+            $this->Competencia_model->delete($id);
             foreach ($disciplinas as $idDisciplina)
-              $this->Competencia_model->insert($idProfessor,$idDisciplina);
+              $this->Competencia_model->insert($id,$idDisciplina);
 
             $this->session->set_flashdata('success','Dados atualizados com sucesso');
           } else {
