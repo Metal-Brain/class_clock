@@ -65,6 +65,7 @@
 					<?php endif; ?>
 
 					<h1>Professores</h1>
+					<?php print_r($professores) ?>
 					<!-- Lista de 'botoes' links do Bootstrap -->
 					<ul class="nav nav-pills">
 						<!-- 'botao' link para a listagem -->
@@ -97,9 +98,11 @@
 														<td><?= $professor['nome'] ?></td>
 														<td><?= $professor['matricula'] ?></td>
 														<td><?= sqlToBr($professor['nascimento']) ?></td>
-														<!-- <td><?= $professor['nivel'] ?></td> -->
-														<!-- <td><?= $professor['contrato'] ?></td> -->
-														<td><?php if($professor['status']): echo "Ativo"; else: echo "Inativo"; endif;?></td>
+														<td><?= $professor['nivel'] ?></td>
+														<td></td>
+														<td><?= $professor['contrato'] ?></td>
+														<td></td>
+														<td><?= ($professor['status']) ? "Ativo" : "Inativo"?></td>
 														<td><?php if($professor['status']): ?>
 															<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whatevernome="<?= $professor['nome']?>" data-whateverid="<?= $professor['id']?>" data-whatevercontrato="<?= $professor['idContrato']?>" data-whatevernivel="<?= $professor['idNivel']?>" data-whatevermatricula= "<?= $professor['matricula']?>" data-whatevernascimento= "<?= sqlToBr($professor['nascimento']) ?>"><span class="glyphicon glyphicon-pencil"></span></button>
 															<button onClick="exclude(<?= $professor['id']?>);" type="button" class="btn btn-danger" title="Excluir"><span class="glyphicon glyphicon-remove"></span></button>
@@ -117,7 +120,7 @@
 						<!-- Aqui é o formulário de registro do novo item-->
 						<div id="new" class="tab-pane fade">
 							<h3>Cadastrar Professor</h3>
-							<form method="post">
+							<?= form_open('Professor') ?>
 								<div class="form-group percent-40">
 									<label>Nome</label>
 									<input type="text" class="form-control" name="nome" placeholder="Nome" value="<?= set_value('nome')?>"/>
@@ -142,7 +145,7 @@
 										<label for="nivelAcademico" >Nivel Acadêmico</label>
 										<div id="u1" class="ax_default droplist" data-label="DropListNivel">
 											<?= form_dropdown('nivel',$nivel,set_value('nivel'),array('class'=>'form-control')) ?>
-											<?= form_error('recipient-nivel') ?>
+											<?= form_error('nivel') ?>
 										</div>
 								</div>
 								<div class="form-group percent-30 inline">
