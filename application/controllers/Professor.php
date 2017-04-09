@@ -160,7 +160,7 @@
 
         // Definir as regras de validação para cada campo do formulário.
         $this->form_validation->set_rules('recipient-nome', 'nome do professor', array('required','min_length[5]','max_length[255]','ucwords'));
-        $this->form_validation->set_rules('recipient-matricula', 'matrícula', array('required','exact_length[7]', 'numeric','is_unique[Professor.matricula]','strtoupper'));
+        $this->form_validation->set_rules('recipient-matricula', 'matrícula', array('required','exact_length[7]', 'numeric','strtoupper'));
         $this->form_validation->set_rules('recipient-nascimento', 'data de nascimento', array('callback_date_check'));
         $this->form_validation->set_rules('professorDisciplinas[]', 'disciplinas', array('required'));
         $this->form_validation->set_rules('recipient-nivelAcademico', 'nivel', array('greater_than[0]'),array('greater_than'=>'Selecione o nivel acadêmico'));
@@ -202,7 +202,7 @@
 
             $this->session->set_flashdata('success','Dados atualizados com sucesso');
           } else {
-            $this->session->set_flashdata('danger','Não foi possivel atualizar os dados do professor, tente novamente ou entre em contato com o administrador do sistema');
+            $this->session->set_flashdata('danger','Não foi possivel atualizar os dados do professor, tente novamente ou entre em contato com o administrador do sistema. Caso tenha <strong>alterado a matrícula</strong> verifique se já não esteja em uso.');
           }
 
           redirect('Professor/atualizar');
