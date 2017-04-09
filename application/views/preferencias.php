@@ -37,7 +37,7 @@
 				<div id="content" class="col-md-10">
 					<!-- Cadastro das preferências do professor -->
 					<?= form_open('Preferencia/cadastrar') ?>
-						<div class="modal-content col-md-offset-3 col-md-5">
+						<div class="modal-content col-md-offset-4 col-md-4">
 							<h1>Preferências</h1>
 							<!-- Aqui entra o multi select -->
 							<div class="form-group disc col-md-offset-1">
@@ -50,8 +50,6 @@
 						</div>
 					<?= form_close() ?>
 				</div><!--Fecha content-->
-
-
 				<div id="footer" class="col">
 					<p>Desenvolvido por Metal Code</p>
 				</div>
@@ -76,6 +74,8 @@
 				$.each(response,function (index,value) {
 					disciplinas.push(value.id);
 				});
+
+				$("#professorDisciplinas").multiSelect('select',disciplinas);
 			});
 		</script>
 	</body>
