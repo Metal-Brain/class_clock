@@ -60,23 +60,28 @@
 
 		<script type="text/javascript" src="<?= base_url('assets/js/jquery-3.1.1.min.js')?>"></script>
 		<script type="text/javascript" src="<?= base_url('assets/js/bootstrap.min.js')?>"></script>
-		<!-- multi-select -->
+		     <!-- multi-select -->
         <script type="text/javascript" src="<?= base_url('assets/multi-select/js/jquery.multi-select.js')?>"></script>
       	<script>
-		    $("#disciplinas").multiSelect({
-				selectableHeader: "<div class='multiselect'>Selecione as disciplinas</div>",
-				selectionHeader: "<div class='multiselect'>Disciplinas selecionadas</div>"
-			});
+		              $("#disciplinas").multiSelect();
         </script>
+
+			<!-- nao manjei mas acho que vai precisar desse trexo alterado...
+
         <script type="text/javascript">
-			var recipientid = button.data('whateverid')
-			var url = '<?= base_url('index.php/Professor/disciplinas/') ?>'+recipientid;
-			$.getJSON(url,function (response) {
-				var disciplinas = [];
-				$.each(response,function (index,value) {
-					disciplinas.push(value.id);
-				});
-			});
-		</script>
+
+				var recipientid = button.data('whateverid')
+                var url = '<?= base_url('index.php/????????/disciplinas/') ?>'+recipientid;
+                $.getJSON(url,function (response) {
+                  var disciplinas = [];
+                  $.each(response,function (index,value) {
+                    disciplinas.push(value.id);
+                  });
+                  $("#professorDisciplinas").multiSelect('select',disciplinas);
+                });
+
+		     </script>
+
+		-->
 	</body>
 </html>
