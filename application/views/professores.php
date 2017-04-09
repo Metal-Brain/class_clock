@@ -254,8 +254,14 @@
 		<!-- multi-select -->
     <script type="text/javascript" src="<?= base_url('assets/multi-select/js/jquery.multi-select.js')?>"></script>
     <script>
-    	$("#professorDisciplinas").multiSelect();
-    	$("#disciplinas").multiSelect();
+    	$("#professorDisciplinas").multiSelect({
+			selectableHeader: "<div class='multiselect'>Selecione as disciplinas</div>",
+			selectionHeader: "<div class='multiselect'>Disciplinas selecionadas</div>"
+		});
+    	$("#disciplinas").multiSelect({
+			selectableHeader: "<div class='multiselect'>Selecione as disciplinas</div>",
+			selectionHeader: "<div class='multiselect'>Disciplinas selecionadas</div>"
+		});
     </script>
 		<script type="text/javascript">
 			$('#exampleModal').on('show.bs.modal', function (event) {
