@@ -125,3 +125,8 @@
 .inline{
 	display: inline-block;
 }
+
+/*Alteração da cor da fonte do cabeçalho usado no multi-select*/
+.multiselect{
+	color: #4CAF50;
+}
