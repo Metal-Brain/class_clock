@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang ="pt-br">
 	<head>
+		<meta charset="utf-8">
 		<title>Class Clock</title>
-		<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="assets/css/style.css">
-		<p class="alert-success"><?= $this->session->flashdata("success") ?></p>
-    <p class="alert-danger"><?= $this->session->flashdata("danger") ?></p>
+		<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/bootstrap.min.css')?>">
+		<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/style.css')?>">
+
 	</head>
 	<body>
 		<!-- as classes container-fluid, row e col-md-xx são do GRID do bootstrap -->
@@ -21,7 +21,9 @@
 					<h1 style="text-align:center">Class Clock</h1>
 					<div class="tab-content">
 							<!-- tela login -->
-												<div id="principal" class="col-md-6 col-md-offset-3 tab-pane fade in active">
+							
+							
+										<div id="principal" class="col-md-6 col-md-offset-3 tab-pane fade in active">
 													<h2 style="text-align:center">Login</h2>
 													<form action="" id="login" method="post"  align="center">
 													  <div class="form-group input-group" align="center">
@@ -34,11 +36,37 @@
 													  </div>
 
 													  <div class="form-group">
-														<button type="submit" class="btn btn-def btn-block" style="background-color: #4CAF50">Entrar</button>
+													  
+													  		<!-- Alert de sucesso -->
+																<?php if ($this->session->flashdata('success')) : ?>
+														
+																<div class="text-center alert alert-success" role="alert">
+																  <span class="glyphicon glyphicon glyphicon-ok" aria-hidden="true"></span>
+																  <span class="sr-only">Succes:</span>
+																  <?= $this->session->flashdata('success') ?>
+																</div>
+																
+																	<!-- Alert de erro -->
+																  <?php elseif ($this->session->flashdata('danger')) : ?>
+																
+																<div class="text-center alert alert-danger" role="alert">
+																  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+																  <span class="sr-only">Error:</span>
+																  <?= $this->session->flashdata('danger') ?>
+																  	<?php endif; ?>
+
+																	<?php if (validation_errors()): ?>
+																		<div class="alert alert-danger text-center">
+																			<p><?= $this->session->flashdata('formDanger') ?></p>
+																			<?= validation_errors() ?>
+																		</div>
+																	<?php endif; ?>
+																</div>
+																													
+															<button type="submit" class="btn btn-def btn-block" style="background-color: #4CAF50">Entrar</button>
+															<a  data-toggle="pill" href="#recupera">Clique aqui para recuperar a senha</a>	
 													  </div>
-													  <div class="form-group" >
-														<a  data-toggle="pill" href="#recupera">Clique aqui para recuperar a senha</a>
-													  </div>
+													 
 													</form>
 												</div>
 							<!-- fim tela login-->
@@ -66,7 +94,7 @@
 
 
 					</div>
-															<!-- img logo -->
+												<!-- img logo -->
 												<div style="border-bottom: 1px #606060 solid;">
 														<img class="logo" src="assets/img/ifsp.jpg" style="margin: 20px auto 40px; display: block;"/>
 												</div>
@@ -85,7 +113,7 @@
 			</div><!--Fecha row-->
 
 		</div><!--Fecha container-fluid-->
-		<script type="text/javascript" src="assets/js/jquery-3.1.1.min.js"></script>
-		<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="<?= base_url('assets/js/jquery-3.1.1.min.js')?>"></script>
+		<script type="text/javascript" src="<?= base_url('assets/js/bootstrap.min.js') ?>"></script>
 	</body>
 </html>
