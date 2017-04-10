@@ -1,3 +1,19 @@
+
+			<div class="row">
+
+				<div id="sidebar" class="col-md-2" role="navigation">
+					<h2>Menu</h2>
+					<ul class="nav nav-pills nav-stacked">
+						<li><?= anchor('Curso','Cursos') ?></li>
+						<li class="active"><?= anchor('Disciplina','Disciplinas') ?></li>
+						<li><a href="professores.html">Professores</a></li>
+						<li><?= anchor('Sala','Sala') ?></li>
+						<li><?= anchor('Login/logout','Sair do Sistema') ?></li>
+						<hr>
+						<li><a href="index.html"><span class="glyphicon glyphicon-log-out"></span> Sair do Sistema</a></li>
+					</ul>
+				</div>
+
 				<div id="content" class="col-md-10">
 					<?php if ($this->session->flashdata('success')) : ?>
 					<!-- Alert de sucesso -->
