@@ -1,5 +1,8 @@
 <?php
+<<<<<<< 27842a51129a7cfe55853c96b70a930dae567d93
 
+=======
+>>>>>>> Corrigindo alguns bugs
   /**
     * Converte uma data em formato BR para SQL
     * @author Caio de Freitas
@@ -11,7 +14,10 @@
     $d = explode('/',$date);
     return $d[2].'-'.$d[1].'-'.$d[0];
   }
+<<<<<<< 27842a51129a7cfe55853c96b70a930dae567d93
 
+=======
+>>>>>>> Corrigindo alguns bugs
   /**
    * Converte uma data em formato SQL para BR
    * @author Caio de Freitas
@@ -23,5 +29,8 @@
     $d = explode('-',$date);
     return $d[2].'/'.$d[1].'/'.$d[0];
   }
+<<<<<<< 27842a51129a7cfe55853c96b70a930dae567d93
 
+=======
+>>>>>>> Corrigindo alguns bugs
 ?>
