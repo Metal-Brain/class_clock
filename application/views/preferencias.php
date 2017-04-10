@@ -37,7 +37,7 @@
 				<div id="content" class="col-md-10">
 					<!-- Cadastro das preferências do professor -->
 					<?= form_open('Preferencia/cadastrar') ?>
-						<div class="modal-content col-md-offset-4 col-md-4">
+						<div class="modal-content col-md-offset-3 col-md-5">
 							<h1>Preferências</h1>
 							<!-- Aqui entra o multi select -->
 							<div class="form-group disc col-md-offset-1">
