@@ -8,7 +8,12 @@
   class Disciplina extends CI_Controller {
 
     public function index () {
-      $this->cadastro();
+      if (autoriza()) {
+        $this->cadastro();
+      }else{        
+        redirect('Login');
+      }
+
     }
 
 

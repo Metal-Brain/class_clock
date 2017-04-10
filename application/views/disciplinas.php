@@ -31,6 +31,7 @@
 						<li class="active"><?= anchor('Disciplina','Disciplinas') ?></li>
 						<li><a href="professores.html">Professores</a></li>
 						<li><?= anchor('Sala','Sala') ?></li>
+						<li><?= anchor('Login/logout','Sair do Sistema') ?></li>
 						<hr>
 						<li><a href="index.html"><span class="glyphicon glyphicon-log-out"></span> Sair do Sistema</a></li>
 					</ul>
