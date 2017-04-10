@@ -51,7 +51,7 @@
 
         $dados['contrato']        = convert($this->Contrato_model->getAll(), TRUE);
         $dados['nivel']           = convert($this->Nivel_model->getAll(), TRUE);
-        $dados['disciplinas']     = convert($this->Disciplina_model->getAll());
+        $dados['disciplinas']     = convert($this->Disciplina_model->getAll(TRUE));
         $dados['professores']     = $this->Professor_model->getAll();
 	      $this->load->view('professores', $dados);
 
@@ -173,7 +173,7 @@
 
           $dados['contrato']        = convert($this->Contrato_model->getAll(), TRUE);
           $dados['nivel']           = convert($this->Nivel_model->getAll(), TRUE);
-          $dados['disciplinas']     = convert($this->Disciplina_model->getAll());
+          $dados['disciplinas']     = convert($this->Disciplina_model->getAll(TRUE));
           $dados['professores']     = $this->Professor_model->getAll();
   	      $this->load->view('professores', $dados);
 
