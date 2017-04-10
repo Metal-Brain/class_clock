@@ -22,6 +22,7 @@
       return $result->result_array(); // converte o objeto em um array
     }
 
+
     /**
       * Busca o professor a partir do ID
       * @author Yasmin Sayad
@@ -35,6 +36,7 @@
 
       return $result->result_array();
     }
+
 
     /**
       * Insere um novo professor na base de dados.
@@ -61,6 +63,7 @@
       return $result;
     }
 
+
     /**
       * Altera o status de um professor para falso.
       * @author Yasmin Sayad
@@ -74,6 +77,7 @@
 
       return $result;
     }
+
 
     /**
       * Altera o status do professor para TRUE.
@@ -90,6 +94,7 @@
     }
 
   }
+
 
 
 ?>
