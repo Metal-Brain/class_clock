@@ -7,9 +7,19 @@
    */
   class Login extends CI_Controller {
     function index(){
-      $this->load->view('login');
-      $this->verificaLogin();
+      $this->isLogado();
     }
+
+    function isLogado(){
+      if (autoriza()) {
+       redirect('Disciplina');
+      }else{
+        $this->load->view('login');
+        $this->verificaLogin();
+      }
+    }
+
+
     function verificaLogin(){
         $this->load->model(array('Login_model'));
         $username =($this->input->post("username"));
@@ -20,12 +30,11 @@
           $this->session->set_userdata("usuario_logado", $usuario);
           $this->session->set_flashdata("success", "Logado com Sucesso!");
           redirect('Disciplina');
-        } else {          
+        } else {
           $this->session->set_flashdata("danger", "Usuário ou senha inválida!");
           $this->load->view('login');
         }
       }
-
 
     function logout(){
       $this->session->unset_userdata("usuario_logado");
