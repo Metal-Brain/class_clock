@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?php
 
 defined('BASEPATH') OR exit('No direct script access allowed');
@@ -213,7 +212,6 @@ class Professor extends CI_Controller {
         }
     }
 
-=======
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
   /**
    *  Essa classe é responsavel por todas regras de negócio sobre professores.
@@ -384,14 +382,13 @@ class Professor extends CI_Controller {
           redirect('Professor/atualizar');
         }
     }
->>>>>>> Corrigindo alguns bugs
+
     /**
      * Busca as disciplinas vinculada ao professor.
      * @author Caio de Freitas
      * @since 2017/04/07
      * @param INT $id - ID do professor
      */
-<<<<<<< HEAD
     public function disciplinas($id) {
         $this->load->model(array('Competencia_model'));
         $disciplinas = $this->Competencia_model->getAllDisciplinas($id);
@@ -401,12 +398,5 @@ class Professor extends CI_Controller {
 
 }
 
-=======
-    public function disciplinas ($id) {
-      $this->load->model(array('Competencia_model'));
-      $disciplinas = $this->Competencia_model->getAllDisciplinas($id);
-      echo json_encode($disciplinas);
-     }
-  }
->>>>>>> Corrigindo alguns bugs
+
 ?>
