@@ -389,14 +389,20 @@ class Professor extends CI_Controller {
      * @since 2017/04/07
      * @param INT $id - ID do professor
      */
-    public function disciplinas($id) {
-        $this->load->model(array('Competencia_model'));
-        $disciplinas = $this->Competencia_model->getAllDisciplinas($id);
 
-        echo json_encode($disciplinas);
-    }
+    public function disciplinas ($id) {
+      $this->load->model(array('Competencia_model'));
+      $disciplinas = $this->Competencia_model->getAllDisciplinas($id);
+      echo json_encode($disciplinas);
+     }
 
-}
+     public function preferencia(){
+       $this->load->model('Disciplina_model');
+       $this->load->helper('dropdown');
 
+       $dados['disciplinas'] = convert($this->Disciplina_model->getAll());
+       $this->load->view('preferencias', $dados);
+     }
+  }
 
 ?>
