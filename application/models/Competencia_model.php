@@ -1,5 +1,4 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
-
   /**
     * Essa classe representa o modelo da relação Curso_tem_Disciplina.
     * @author Jean Brock
@@ -66,7 +65,5 @@
 
 
   }
-
-
 
 ?>

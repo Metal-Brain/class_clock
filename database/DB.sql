@@ -69,9 +69,9 @@ CREATE TABLE IF NOT EXISTS Sala (
 );
 
 CREATE TABLE IF NOT EXISTS Contrato(
-	id					INT 			NOT NULL 			AUTO_INCREMENT,
-    nome 				VARCHAR(45) 	NOT NULL,
-    PRIMARY KEY(id)
+	id					INT           NOT NULL 			AUTO_INCREMENT,
+  nome 				VARCHAR(45) 	NOT NULL,
+  PRIMARY KEY(id)
 );
 
 INSERT INTO Contrato (nome) VALUES ('Exclusiva'),('Integral'),('Parcial');
