@@ -143,14 +143,14 @@
 									<input type="text" class="form-control percent-40" name="nascimento" value="<?= set_value('nascimento')?>"/>
 									<?= form_error('nascimento') ?>
 								</div>
-								<div class="form-group percent-30 inline">
+								<div class="form-group percent-40">
 										<label for="nivelAcademico" >Nivel Acadêmico</label>
 										<div id="u1" class="ax_default droplist" data-label="DropListNivel">
 											<?= form_dropdown('nivel',$nivel,set_value('nivel'),array('class'=>'form-control')) ?>
 											<?= form_error('nivel') ?>
 										</div>
 								</div>
-								<div class="form-group percent-30 inline">
+								<div class="form-group percent-40">
 									<label>Regime de contrato</label>
 									<div id="u2" class="ax_default droplist" data-label="DropListContrato">
 										<?= form_dropdown('contrato',$contrato,set_value('contrato'),array('class'=>'form-control')) ?>
