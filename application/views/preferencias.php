@@ -26,9 +26,9 @@
 				<div id="sidebar" class="col-md-2" role="navigation">
 					<h2>Menu</h2>
 					<ul class="nav nav-pills nav-stacked">
-						<li><?= anchor('Disponibilidade','Disponibilidade') ?>Disponibilidade</a></li>
-						<li class="active"><?= anchor('Preferencia','Preferencias') ?>Preferências</a></li>
-						<li><?= anchor('Grade','Grade') ?>Visualizar Grade</a></li>
+						<li><?= anchor('Disponibilidade','Disponibilidade') ?></a></li>
+						<li class="active"><?= anchor('Preferencia','Preferências') ?></a></li>
+						<li><?= anchor('Grade','Grade') ?></a></li>
 						<hr>
 						<li><span class="glyphicon glyphicon-log-out"></span> Sair do Sistema</a></li>
 					</ul>
@@ -37,15 +37,15 @@
 				<div id="content" class="col-md-10">
 					<!-- Cadastro das preferências do professor -->
 					<?= form_open('Preferencia/cadastrar') ?>
-						<div class="modal-content col-md-offset-4 col-md-4">
+						<div class="modal-content col-md-offset-3 col-md-5">
 							<h1>Preferências</h1>
 							<!-- Aqui entra o multi select -->
 							<div class="form-group disc col-md-offset-1">
 							  <label>Disciplinas que deseja lecionar</label>
 							  <?= form_dropdown('disciplinas[]',$disciplinas,null,array('id'=>'disciplinas','multiple'=>'multiple')) ?>
 							</div>
-							<div class="form-group col-md-offset-4">
-								<?= form_submit('submit','Salvar preferências',array('class'=>'btn btn-primary')) ?>
+							<div class="form-group col-md-offset-5">
+								<?= form_submit('submit','Cadastrar',array('class'=>'btn btn-primary')) ?>
 							</div>
 						</div>
 					<?= form_close() ?>
@@ -61,7 +61,10 @@
 		<!-- multi-select -->
         <script type="text/javascript" src="<?= base_url('assets/multi-select/js/jquery.multi-select.js')?>"></script>
       	<script>
-		    $("#disciplinas").multiSelect();
+		    $("#disciplinas").multiSelect({
+				selectableHeader: "<div class='multiselect'>Selecione as disciplinas</div>",
+				selectionHeader: "<div class='multiselect'>Disciplinas selecionadas</div>"
+			});
         </script>
 
 			<!-- nao manjei mas acho que vai precisar desse trexo alterado... -->
