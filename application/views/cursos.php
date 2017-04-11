@@ -77,7 +77,7 @@
                         <!-- Aqui é o formulário de registro do novo item-->
                         <div id="new" class="tab-pane fade">
                             <h3>Cadastrar Curso</h3>
-							
+
 							<?= form_open('Curso/cadastrar') ?>
 								<div class="row">
 									<div class="form-group col-md-5">
@@ -86,21 +86,21 @@
 										<?= form_error('nome') ?>
 									</div>
 								</div>
-								
+
 								<div class="row">
 									<div class="form-group col-md-2">
 										<?= form_label('Sigla','sigla') ?>
 										<?= form_input('sigla',set_value('sigla'),array('class'=>'form-control','placeholder'=>'ex: ADS')) ?>
 									</div>
-									
+
 									<!-- Parei aqui! Minska -->
 									<div class="block">
 										<?= form_error('sigla') ?>
 									</div>
 								</div>
-								
-								
-								
+
+
+
 								<div class="row">
 									<?= form_label('Quantidade de semestres','qtdSemestres', array('class'=>'block padding-15-lr')) ?>
 									<div class="form-group col-md-2">
@@ -108,7 +108,7 @@
 									  <?= form_error('qtdSemestres') ?>
 									</div>
 								</div>
-								
+
 								<div class="row">
 									<div class="form-group col-md-5">
 										<label>Período</label>
@@ -116,7 +116,7 @@
 										<?= form_error('periodo[]') ?>
 									</div>
 								</div>
-								
+
 								<div class="row">
 									<div class="form-group col-md-4">
 										<label>Grau</label>
@@ -129,7 +129,7 @@
 										</div>
 									</div>
 								</div>
-								
+
 								<div class="row">
 									<div class="form-group col-md-5">
 										<label>Disciplinas </label>

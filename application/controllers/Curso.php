@@ -118,7 +118,7 @@
         $dados['periodo']       = convert($this->Periodo_model->getAll());
         $dados['disciplinas']   = convert($this->disciplina_model->getAll(TRUE));
         $dados['cursos']        = $this->Curso_model->getAll();
-        
+
         $this->load->view('includes/header',$dados);
         $this->load->view('includes/sidebar');
         $this->load->view('cursos');

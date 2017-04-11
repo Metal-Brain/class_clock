@@ -38,11 +38,11 @@
 
            // Verifica se o formulario é valido
            if ($this->form_validation->run() == FALSE) {
-			
+
 			$this->session->set_flashdata('formDanger','<strong>Não foi possível cadastrar a sala, pois existe(m) erro(s) no formulário:</strong>');
-			
+
             $dados['salas'] = $this->Sala_model->getAll();
-     	    
+
 			$this->load->view('includes/header',$dados);
 			$this->load->view('includes/sidebar');
 			$this->load->view('salas');
@@ -80,7 +80,7 @@
                 $this->session->set_flashdata('danger','Não foi possível desativar a sala, tente novamente ou entre em contato com o administrador do sistema.');
                redirect("Sala/cadastro");
            }
-		   
+
 			public function ativar ($id) {
 			  $this->load->model('Sala_model');
 
