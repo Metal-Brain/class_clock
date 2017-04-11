@@ -13,8 +13,7 @@
     function isLogado(){
       if (autoriza()) {
        redirect('Disciplina');
-      }else{
-        $this->load->view('login');
+      }else{        
         $this->verificaLogin();
       }
     }

@@ -8,7 +8,11 @@
   class Curso extends CI_Controller {
 
     public function index () {
-      $this->cadastrar();
+      if (autoriza()) {
+          $this->cadastrar();
+        }else{
+          redirect('Login');
+        }
     }
 
     /**
@@ -51,7 +55,9 @@
         $dados['disciplinas']   = convert($this->disciplina_model->getAll(TRUE));
         $dados['cursos']        = $this->Curso_model->getAll();
 
-        $this->load->view('cursos',$dados);
+        $this->load->view('includes/header',$dados);
+        $this->load->view('includes/sidebar');
+        $this->load->view('cursos');
 
       }else{
 
@@ -117,7 +123,9 @@
         $dados['disciplinas']   = convert($this->disciplina_model->getAll(TRUE));
         $dados['cursos']        = $this->Curso_model->getAll();
 
-        $this->load->view('cursos',$dados);
+        $this->load->view('includes/header',$dados);
+        $this->load->view('includes/sidebar');
+        $this->load->view('cursos');
       }else{
 
         $idCurso = $this->input->post('cursoId');
