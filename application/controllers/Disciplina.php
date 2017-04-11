@@ -43,7 +43,7 @@
 
         $dados['disciplinas'] = $this->Disciplina_model->getAll();
 	      
-         $this->load->view('includes/header',$dados);
+        $this->load->view('includes/header',$dados);
         $this->load->view('includes/sidebar');
         $this->load->view('disciplinas');
 
