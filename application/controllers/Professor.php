@@ -288,6 +288,7 @@ class Professor extends CI_Controller {
       echo json_encode($disciplinas);
      }
      /**
+     *
      */
      public function preferencia(){
        $this->load->model('Disciplina_model');
