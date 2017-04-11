@@ -180,6 +180,7 @@
       echo json_encode($disciplinas);
      }
      /**
+     *
      */
      public function preferencia(){
        $this->load->model('Disciplina_model');
