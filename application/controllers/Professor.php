@@ -180,7 +180,8 @@
       echo json_encode($disciplinas);
      }
      /**
-     *
+     *Busca todas as disciplinas vinculadas ao professor e enviar para view de preferencias
+     *@author Felipe Ribeiro
      */
      public function preferencia(){
        $this->load->model('Disciplina_model');
