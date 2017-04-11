@@ -395,7 +395,8 @@ class Professor extends CI_Controller {
       $disciplinas = $this->Competencia_model->getAllDisciplinas($id);
       echo json_encode($disciplinas);
      }
-
+     /**
+     */
      public function preferencia(){
        $this->load->model('Disciplina_model');
        $this->load->helper('dropdown');
