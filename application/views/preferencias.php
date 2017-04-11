@@ -44,8 +44,8 @@
 							  <label>Disciplinas que deseja lecionar</label>
 							  <?= form_dropdown('disciplinas[]',$disciplinas,null,array('id'=>'disciplinas','multiple'=>'multiple')) ?>
 							</div>
-							<div class="form-group col-md-offset-5">
-								<?= form_submit('submit','Cadastrar',array('class'=>'btn btn-primary')) ?>
+							<div class="form-group col-md-offset-4">
+								<?= form_submit('submit','Salvar preferências',array('class'=>'btn btn-primary')) ?>
 							</div>
 						</div>
 					<?= form_close() ?>
