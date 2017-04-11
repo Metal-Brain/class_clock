@@ -194,22 +194,10 @@
         <!-- multi-select -->
         <script type="text/javascript" src="<?= base_url('assets/multi-select/js/jquery.multi-select.js')?>"></script>
         <script>
-			$("#cursoPeriodos").multiSelect({
-				selectableHeader: "<div class='multiselect'>Selecione o(s) período(s)</div>",
-				selectionHeader: "<div class='multiselect'>Período(s) selecionado(s)</div>"
-			});
-			$("#periodos").multiSelect({
-				selectableHeader: "<div class='multiselect'>Selecione o(s) período(s)</div>",
-				selectionHeader: "<div class='multiselect'>Período(s) selecionado(s)</div>"
-			});
-			$("#cursoDisciplinas").multiSelect({
-				selectableHeader: "<div class='multiselect'>Selecione as disciplinas</div>",
-				selectionHeader: "<div class='multiselect'>Disciplinas selecionadas</div>"
-			});
-			$("#disciplinas").multiSelect({
-				selectableHeader: "<div class='multiselect'>Selecione as disciplinas</div>",
-				selectionHeader: "<div class='multiselect'>Disciplinas selecionadas</div>"
-			});
+          $("#cursoPeriodos").multiSelect();
+          $("#periodos").multiSelect();
+          $("#cursoDisciplinas").multiSelect();
+          $("#disciplinas").multiSelect();
         </script>
         <script type="text/javascript">
             $('#exampleModal').on('show.bs.modal', function (event) {
