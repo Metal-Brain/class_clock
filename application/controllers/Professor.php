@@ -8,15 +8,11 @@
   class Professor extends CI_Controller {
 
     public function index () {
-<<<<<<< 3d66e457cfc96dd56b2d25f67dc14d9fce32ea42
-      $this->cadastrar();
-=======
       if (autoriza()) {
         $this->cadastrar();
       }else{
         redirect('Login');
       }
->>>>>>> Criado helper auth_helper para controle de sessão
     }
 
     // =========================================================================
