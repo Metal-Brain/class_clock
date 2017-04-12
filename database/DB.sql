@@ -87,6 +87,7 @@ INSERT INTO Nivel (nome) VALUES ('Graduação'),('Pós-Graduação'),('Mestrado'
 CREATE TABLE IF NOT EXISTS Usuario (
 	id 					  INT 			    NOT NULL 			AUTO_INCREMENT,
   nome 			    VARCHAR(32) 	NOT NULL,
+  matricula 		VARCHAR(8)		NOT NULL			UNIQUE,
   email         varchar(255)  NOT NULL      UNIQUE,
   senha 		    CHAR(64) 	    NOT NULL,
   `status` 			BOOLEAN       NOT NULL  		DEFAULT TRUE,
@@ -96,7 +97,6 @@ CREATE TABLE IF NOT EXISTS Usuario (
 
 CREATE TABLE IF NOT EXISTS Professor(
 	id 					    INT 			    NOT NULL 			AUTO_INCREMENT,
-  matricula 			VARCHAR(8)		NOT NULL			UNIQUE,
   nascimento 			DATE 			    NOT NULL,
   coordenador 		BOOLEAN       NOT NULL  		DEFAULT FALSE,
   idContrato 			INT 			    NOT NULL,
