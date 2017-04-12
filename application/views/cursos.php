@@ -16,11 +16,11 @@
                     <?php endif; ?>
 
                     <?php if (validation_errors()): ?>
-          						<div class="alert alert-danger text-center">
-          							<p><?= $this->session->flashdata('formDanger') ?></p>
-          							<?= validation_errors() ?>
-          						</div>
-          					<?php endif; ?>
+						<div class="alert alert-danger text-center">
+							<p><?= $this->session->flashdata('formDanger') ?></p>
+							<?= validation_errors() ?>
+						</div>
+					<?php endif; ?>
 
                     <h1>Cursos</h1>
 

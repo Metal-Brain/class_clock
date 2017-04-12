@@ -54,7 +54,10 @@
         $dados['nivel']           = convert($this->Nivel_model->getAll(), TRUE);
         $dados['disciplinas']     = convert($this->Disciplina_model->getAll(TRUE));
         $dados['professores']     = $this->Professor_model->getAll();
-	    $this->load->view('professores', $dados);
+		
+		$this->load->view('includes/header',$dados);
+        $this->load->view('includes/sidebar');
+	    $this->load->view('professores');
 
       } else {
 
