@@ -84,31 +84,31 @@ CREATE TABLE IF NOT EXISTS Nivel(
 
 INSERT INTO Nivel (nome) VALUES ('Graduação'),('Pós-Graduação'),('Mestrado'),('Doutorado');
 
-CREATE TABLE IF NOT EXISTS Login(
-	id 					INT 			NOT NULL 			AUTO_INCREMENT,
-    username 			VARCHAR(32) 	NOT NULL 			UNIQUE,
-    `password` 			VARCHAR(32) 	NOT NULL,
-    nivel 				INT 			NOT NULL,
-    `status` 			BOOLEAN       	NOT NULL  			DEFAULT TRUE,
-     
-     PRIMARY KEY(id)
-);   
+CREATE TABLE IF NOT EXISTS Usuario (
+	id 					  INT 			    NOT NULL 			AUTO_INCREMENT,
+  nome 			    VARCHAR(32) 	NOT NULL,
+  email         varchar(255)  NOT NULL      UNIQUE,
+  senha 		    CHAR(64) 	    NOT NULL,
+  `status` 			BOOLEAN       NOT NULL  		DEFAULT TRUE,
+  PRIMARY KEY(id)
+);
 
 
 CREATE TABLE IF NOT EXISTS Professor(
-	id 					INT 			NOT NULL 			AUTO_INCREMENT,
-    nome 				VARCHAR(255) 	NOT NULL,
-    matricula 			VARCHAR(8)		NOT NULL			UNIQUE,
-    nascimento 			DATE 			NOT NULL,    
-    coordenador 		BOOLEAN       	NOT NULL  			DEFAULT FALSE,
-    `status` 			BOOLEAN       	NOT NULL  			DEFAULT TRUE,
-    idContrato 			INT 			NOT NULL,
-    idNivel				INT 			NOT NULL,
-    idLogin				INT 			NOT NULL,
-    PRIMARY KEY(id),
+	id 					    INT 			    NOT NULL 			AUTO_INCREMENT,
+  matricula 			VARCHAR(8)		NOT NULL			UNIQUE,
+  nascimento 			DATE 			    NOT NULL,
+  coordenador 		BOOLEAN       NOT NULL  		DEFAULT FALSE,
+  idContrato 			INT 			    NOT NULL,
+  idNivel				  INT 			    NOT NULL,
+  idUsuario			  INT 			    NOT NULL,
+  PRIMARY KEY(id,idUsuario),
+  CONSTRAINT fk_professor_contrato
     FOREIGN KEY(idContrato) REFERENCES Contrato(id),
-	FOREIGN KEY(idNivel) REFERENCES Nivel(id),
-    FOREIGN KEY(idLogin) REFERENCES Login(id)
+  CONSTRAINT fk_professor_nivel
+	  FOREIGN KEY(idNivel) REFERENCES Nivel(id),
+  CONSTRAINT fk_professor_usuario
+    FOREIGN KEY(idUsuario) REFERENCES Usuario(id)
 );
 
 CREATE TABLE IF NOT EXISTS Competencia(
