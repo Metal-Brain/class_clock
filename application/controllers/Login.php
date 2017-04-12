@@ -6,18 +6,20 @@
    * @since 2017/04/05
    */
   class Login extends CI_Controller {
-    function index(){
-      $this->isLogado();
-    }
 
-    function isLogado(){
-      if (autoriza()) {
-       redirect('Disciplina');
-      }else{        
-        $this->verificaLogin();
+    public function index(){
+
+      $this->form_validation->set_rules('username','matrícula',array('required','numeric','exact_length[7]'));
+      $this->form_validation->set_rules('password','Senha',array('required'));
+
+      if ($this->form_validation->run() == false) {
+
+        $this->load->view('login');
+      } else {
+        // TODO: Pegar os dados de Login
       }
-    }
 
+    }
 
     function verificaLogin(){
         $this->load->model(array('Login_model'));
@@ -41,5 +43,6 @@
       $this->session->sess_destroy();
       redirect('login', 'refresh');
     }
+
    }
    ?>

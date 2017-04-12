@@ -5,105 +5,90 @@
 		<title>Class Clock</title>
 		<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/bootstrap.min.css')?>">
 		<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/style.css')?>">
-
 	</head>
 	<body>
 		<!-- as classes container-fluid, row e col-md-xx são do GRID do bootstrap -->
 		<!-- procure por 'bootstrap grid' e estude-as -->
 		<div class="Absolute-Center is-Responsive">
-
-
 			<div class="container">
 			  <div class="row">
-
-
 				  <div class="col-sm-12 col-md-10 col-md-offset-1">
-					<h1 style="text-align:center">Class Clock</h1>
-					<div class="tab-content">
+						<h1 style="text-align:center">Class Clock</h1>
+						<div class="tab-content">
 							<!-- tela login -->
-							
-							
-										<div id="principal" class="col-md-6 col-md-offset-3 tab-pane fade in active">
-													<h2 style="text-align:center">Login</h2>
-													<form action="" id="login" method="post"  align="center">
-													  <div class="form-group input-group" align="center">
-														<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-														<input class="form-control" type="text" name='username' placeholder="ex: cg0000000"/>
-													  </div>
-													  <div class="form-group input-group ">
-														<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-														<input class="form-control" type="password" name='password' id="password" placeholder="password"/>
-													  </div>
+							<div id="principal" class="col-md-6 col-md-offset-3 tab-pane fade in active">
+								<h2 style="text-align:center">Login</h2>
+								<?= form_open('',array('id'=>'login','class'=>'form-horizontal')); ?>
+									<div class="form-group input-group" align="center">
+										<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+										<?= form_input('username',set_value('username'), array('class'=>'form-control','placeholder'=>'ex: 0000000','maxlength'=>'7')) ?>
+									</div>
 
-													  <div class="form-group">
-													  
-													  		<!-- Alert de sucesso -->
-																<?php if ($this->session->flashdata('success')) : ?>
-														
-																<div class="text-center alert alert-success" role="alert">
-																  <span class="glyphicon glyphicon glyphicon-ok" aria-hidden="true"></span>
-																  <span class="sr-only">Succes:</span>
-																  <?= $this->session->flashdata('success') ?>
-																</div>
-																
-																	<!-- Alert de erro -->
-																  <?php elseif ($this->session->flashdata('danger')) : ?>
-																
-																<div class="text-center alert alert-danger" role="alert">
-																  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-																  <span class="sr-only">Error:</span>
-																  <?= $this->session->flashdata('danger') ?>
-																  	<?php endif; ?>
+									<div class="form-group input-group ">
+										<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+										<?= form_password('password',null,array('id'=>'password','class'=>'form-control','placeholder'=>'Senha')) ?>
+									</div>
 
-																	<?php if (validation_errors()): ?>
-																		<div class="alert alert-danger text-center">
-																			<p><?= $this->session->flashdata('formDanger') ?></p>
-																			<?= validation_errors() ?>
-																		</div>
-																	<?php endif; ?>
-																</div>
-																													
-															<button type="submit" class="btn btn-def btn-block" style="background-color: #4CAF50">Entrar</button>
-															<a  data-toggle="pill" href="#recupera">Clique aqui para recuperar a senha</a>	
-													  </div>
-													 
-													</form>
-												</div>
+									<div class="form-group">
+										<!-- Alert de sucesso -->
+										<?php if ($this->session->flashdata('success')) : ?>
+											<div class="text-center alert alert-success" role="alert">
+												<span class="glyphicon glyphicon glyphicon-ok" aria-hidden="true"></span>
+												<span class="sr-only">Succes:</span>
+												<?= $this->session->flashdata('success') ?>
+											</div>
+										<!-- Alert de erro -->
+										<?php elseif ($this->session->flashdata('danger')) : ?>
+											<div class="text-center alert alert-danger" role="alert">
+												<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+												<span class="sr-only">Error:</span>
+												<?= $this->session->flashdata('danger') ?>
+											</div>
+										<?php endif; ?>
+
+										<?php if (validation_errors()): ?>
+											<div class="alert alert-danger text-center">
+												<p><?= $this->session->flashdata('formDanger') ?></p>
+												<?= validation_errors() ?>
+											</div>
+										<?php endif; ?>
+
+										<button type="submit" class="btn btn-def btn-block" style="background-color: #4CAF50">Entrar</button>
+										<a  data-toggle="pill" href="#recupera">Clique aqui para recuperar a senha</a>
+									</div>
+								<?= form_close() ?>
+							</div>
 							<!-- fim tela login-->
 
 							<!-- modal da recuperação de senha -->
-												<div id="recupera" class="col-md-6 col-md-offset-3 tab-pane fade">
+							<div id="recupera" class="col-md-6 col-md-offset-3 tab-pane fade">
+								<h2 style="text-align:center">Recuperar Senha</h2>
 
-															 <h2 style="text-align:center">Recuperar Senha</h2>
-																<div class="help">
-																	<p><strong>Ex: a1502794 </strong> Informe seu login, composto por "a + prontuário" para alunos e "cg + prontuário" para servidores. <br>Instruções serão enviadas para o e-mail cadastrado em nosso sistema.<br><strong>Aluno</strong>, caso tenha problemas, procure a secretaria do Câmpus para atualizar seu e-mail no sistema acadêmico.<br><strong>Servidor</strong>, se necessário, procure a CTI.</p>
-																</div>
-																	<div class="form-group input-group">
-																		<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-																		<input class="form-control" type="text" name='username' placeholder="ex: cg0000000"/>
+								<div class="help">
+									<p><strong>Ex: a1502794 </strong> Informe seu login, composto por "a + prontuário" para alunos e "cg + prontuário" para servidores. <br>Instruções serão enviadas para o e-mail cadastrado em nosso sistema.<br><strong>Aluno</strong>, caso tenha problemas, procure a secretaria do Câmpus para atualizar seu e-mail no sistema acadêmico.<br><strong>Servidor</strong>, se necessário, procure a CTI.</p>
+								</div>
 
-																	 </div>
-																	<div class="col-md-6 col-md-offset-3 inline">
-																					<button type='submit' class='btn bt-lg btn-primary' style="background-color: #4CAF50">Redefinir</button>
-																					<button type='button' class='btn bt-lg btn-default'  data-toggle="pill" href="#principal">Cancelar</button>
-																	</div>
+								<div class="form-group input-group">
+									<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+									<input class="form-control" type="text" name='username' placeholder="ex: cg0000000"/>
+								</div>
 
-
-												</div>
+								<div class="col-md-6 col-md-offset-3 inline">
+									<button type='submit' class='btn bt-lg btn-primary' style="background-color: #4CAF50">Redefinir</button>
+									<button type='button' class='btn bt-lg btn-default'  data-toggle="pill" href="#principal">Cancelar</button>
+								</div>
+							</div>
 							<!-- Fim modal da recuperação de senha -->
+						</div>
 
-
+						<!-- img logo -->
+						<div style="border-bottom: 1px #606060 solid;">
+							<img class="logo" src="assets/img/ifsp.jpg" style="margin: 20px auto 40px; display: block;"/>
+						</div>
+						<!-- Fim logo -->
 					</div>
-												<!-- img logo -->
-												<div style="border-bottom: 1px #606060 solid;">
-														<img class="logo" src="assets/img/ifsp.jpg" style="margin: 20px auto 40px; display: block;"/>
-												</div>
-															<!-- Fim logo -->
-					</div>
-
-			  </div>
+				</div>
 			</div>
-
 
 			<div class="row">
 				<div id="footer" class="col" style="text-align:center">
@@ -112,6 +97,7 @@
 			</div><!--Fecha row-->
 
 		</div><!--Fecha container-fluid-->
+
 		<script type="text/javascript" src="<?= base_url('assets/js/jquery-3.1.1.min.js')?>"></script>
 		<script type="text/javascript" src="<?= base_url('assets/js/bootstrap.min.js') ?>"></script>
 	</body>
