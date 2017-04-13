@@ -9,14 +9,36 @@
 
     public function index(){
 
-      $this->form_validation->set_rules('username','matrícula',array('required','numeric','exact_length[7]'));
+      $this->load->model('Login_model');
+
+      $this->form_validation->set_rules('matricula','matrícula',array('required','numeric','exact_length[7]'));
       $this->form_validation->set_rules('password','Senha',array('required'));
 
       if ($this->form_validation->run() == false) {
 
         $this->load->view('login');
       } else {
-        // TODO: Pegar os dados de Login
+
+        $usuario = array(
+          'matricula' => $this->input->post('matricula'),
+          'senha'     => hash('sha256', $this->input->post('password'))
+        );
+
+        $usuario = $this->Login_model->validate($usuario);
+
+        // verifica se foi encontrado o usuário
+        if ($usuario == NULL) {
+          $this->session->set_flashdata('danger','Matrícula ou senha incorretos');
+        } else {
+          $this->session->set_userdata($usuario);
+
+          if ($this->Login_model->isProfessor($usuario))
+            redirect('Professor/preferencia');
+
+          redirect('Curso');
+
+        }
+
       }
 
     }
@@ -38,10 +60,12 @@
       }
 
     function logout(){
+
       $this->session->unset_userdata("usuario_logado");
       $this->session->set_flashdata("success", "Deslogado com Sucesso!");
       $this->session->sess_destroy();
-      redirect('login', 'refresh');
+
+      redirect('/');
     }
 
    }

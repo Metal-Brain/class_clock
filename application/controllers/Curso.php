@@ -8,11 +8,7 @@
   class Curso extends CI_Controller {
 
     public function index () {
-      if (autoriza()) {
           $this->cadastrar();
-        }else{
-          redirect('Login');
-        }
     }
 
     /**

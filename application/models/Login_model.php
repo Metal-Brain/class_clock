@@ -13,17 +13,27 @@
       * @since 2017/04/05
       * @return Retorna um objeto login
       */
-
-    public function validate($username, $password){
-      $this->db->where("username", $username);
-      $this->db->where("password", $password);
+    public function validate($usuario){
+      $this->db->where("matricula", $usuario['matricula']);
+      $this->db->where("senha", $usuario['senha']);
       $this->db->where('status', TRUE); // Verifica o status do usuário
-      $usuario = $this->db->get("Login")->row_array();
+      $usuario = $this->db->get("Usuario")->row_array();
       return $usuario;
     }
-    
-    public function EnviarEmail()
-    {
+
+    /**
+     *  @author Caio de Freitas
+     */
+    public function isProfessor($usuario) {
+      $this->db->where('id',$usuario['id']);
+      $result = $this->db->get('Professor')->num_rows();
+
+      return ($result == 1) ? TRUE : FALSE;
+    }
+
+
+
+    public function EnviarEmail() {
         // Carrega a library email
         $this->load->library('email');
         //Recupera os dados do formulário
