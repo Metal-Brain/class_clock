@@ -94,7 +94,7 @@ CREATE TABLE IF NOT EXISTS Usuario (
   PRIMARY KEY(id)
 );
 
-INSERT INTO Usuario VALUES (NULL, 'admin','1234567','admin@admin.com','9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08', TRUE);
+INSERT INTO Usuario VALUES (NULL, 'admin','1234567','admin@admin.com','46070d4bf934fb0d4b06d9e2c46e346944e322444900a435d7d9a95e6d7435f5', TRUE);
 
 CREATE TABLE IF NOT EXISTS Professor(
 	id 					    INT 			    NOT NULL 			AUTO_INCREMENT,
