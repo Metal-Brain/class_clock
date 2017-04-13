@@ -8,3 +8,16 @@ function autoriza(){
   }
   return $usuarioLogado;
 }
+
+
+function verificaSessao () {
+  $CI = get_instance();
+  $usuario = $CI->session->userdata();
+
+  return (sizeof($usuario) > 1) ? TRUE : FALSE;
+}
+
+function verificaNivelPagina($niveis) {
+  $CI = get_instance();
+  return in_array($CI->session->nivel, $niveis);
+}

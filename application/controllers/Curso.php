@@ -8,7 +8,11 @@
   class Curso extends CI_Controller {
 
     public function index () {
-      $this->cadastrar();
+
+      if (verificaSessao() && verificaNivelPagina(array(1,2)))
+        $this->cadastrar();
+      else
+        redirect('/');
     }
 
     /**
@@ -19,69 +23,74 @@
       * @since 2017/03/21
     */
     public function cadastrar () {
-      //Carregar as bibliotecas de validação
-      $this->load->library('form_validation');
-      $this->load->helper(array('form','dropdown'));
-      $this->load->model(array(
-        'Curso_model',
-        'CursoTemPeriodo_model',
-        'CursoTemDisciplina_model',
-        'Grau_model',
-        'Periodo_model',
-        'disciplina_model'
-      ));
 
-      //Define regras de validação do formulario!!!
-      $this->form_validation->set_rules('nome', 'nome',array('required', 'min_length[5]','trim','ucwords'));
-      $this->form_validation->set_rules('sigla', 'sigla', array('required', 'max_length[5]','alpha', 'is_unique[Curso.sigla]', 'strtoupper'));
-      $this->form_validation->set_rules('qtdSemestres','quantidade de semestres', array('required','integer','greater_than[0]','less_than[20]'));
-      $this->form_validation->set_rules('periodo[]', 'periodo', array('required'));
-      $this->form_validation->set_rules('grau','grau',array('greater_than[0]'));
+      if (verificaSessao() && verificaNivelPagina(1)) {
+        //Carregar as bibliotecas de validação
+        $this->load->library('form_validation');
+        $this->load->helper(array('form','dropdown'));
+        $this->load->model(array(
+          'Curso_model',
+          'CursoTemPeriodo_model',
+          'CursoTemDisciplina_model',
+          'Grau_model',
+          'Periodo_model',
+          'disciplina_model'
+        ));
 
-      //delimitador
-      $this->form_validation->set_error_delimiters('<p class="text-danger">','</p>');
+        //Define regras de validação do formulario!!!
+        $this->form_validation->set_rules('nome', 'nome',array('required', 'min_length[5]','trim','ucwords'));
+        $this->form_validation->set_rules('sigla', 'sigla', array('required', 'max_length[5]','alpha', 'is_unique[Curso.sigla]', 'strtoupper'));
+        $this->form_validation->set_rules('qtdSemestres','quantidade de semestres', array('required','integer','greater_than[0]','less_than[20]'));
+        $this->form_validation->set_rules('periodo[]', 'periodo', array('required'));
+        $this->form_validation->set_rules('grau','grau',array('greater_than[0]'));
 
-      //condição para o formulario
-      if($this->form_validation->run() == FALSE){
+        //delimitador
+        $this->form_validation->set_error_delimiters('<p class="text-danger">','</p>');
 
-        $this->session->set_flashdata('formDanger', '<strong>Não foi possível cadastrar o curso, pois foram encontrados erros no formulário:</strong>');
+        //condição para o formulario
+        if($this->form_validation->run() == FALSE){
 
-        $dados['graus']         = convert($this->Grau_model->getAll(), True);
-        $dados['periodo']       = convert($this->Periodo_model->getAll());
-        $dados['disciplinas']   = convert($this->disciplina_model->getAll(TRUE));
-        $dados['cursos']        = $this->Curso_model->getAll();
+          $this->session->set_flashdata('formDanger', '<strong>Não foi possível cadastrar o curso, pois foram encontrados erros no formulário:</strong>');
 
-        $this->load->view('includes/header',$dados);
-        $this->load->view('includes/sidebar');
-        $this->load->view('cursos');
+          $dados['graus']         = convert($this->Grau_model->getAll(), True);
+          $dados['periodo']       = convert($this->Periodo_model->getAll());
+          $dados['disciplinas']   = convert($this->disciplina_model->getAll(TRUE));
+          $dados['cursos']        = $this->Curso_model->getAll();
 
-      }else{
+          $this->load->view('includes/header',$dados);
+          $this->load->view('includes/sidebar');
+          $this->load->view('cursos');
 
-        $curso = array(
-          'nome'          => $this->input->post('nome'),
-          'sigla'         => $this->input->post('sigla'),
-          'qtdSemestres'  => $this->input->post('qtdSemestres'),
-          'grau'          => $this->input->post('grau'),
-        );
+        }else{
 
-        $disciplinas = $this->input->post('disciplinas[]');
-        $periodo = $this->input->post('periodo[]');
+          $curso = array(
+            'nome'          => $this->input->post('nome'),
+            'sigla'         => $this->input->post('sigla'),
+            'qtdSemestres'  => $this->input->post('qtdSemestres'),
+            'grau'          => $this->input->post('grau'),
+          );
+
+          $disciplinas = $this->input->post('disciplinas[]');
+          $periodo = $this->input->post('periodo[]');
 
 
-        if ($this->Curso_model->insert($curso)) {
-          $idCurso = $this->db->insert_id(); // Pega o ID do Curso cadastrado
-          foreach ($periodo as $idPeriodo)
-            $this->CursoTemPeriodo_model->insert($idCurso,$idPeriodo);
+          if ($this->Curso_model->insert($curso)) {
+            $idCurso = $this->db->insert_id(); // Pega o ID do Curso cadastrado
+            foreach ($periodo as $idPeriodo)
+              $this->CursoTemPeriodo_model->insert($idCurso,$idPeriodo);
 
-          foreach ($disciplinas as $idDisciplina)
-            $this->CursoTemDisciplina_model->insert($idCurso,$idDisciplina);
+            foreach ($disciplinas as $idDisciplina)
+              $this->CursoTemDisciplina_model->insert($idCurso,$idDisciplina);
 
-          $this->session->set_flashdata('success','Curso cadastrado com sucesso');
-        } else {
-          $this->session->set_flashdata('danger','Não foi possível cadastrar o curso, tente novamente ou entre em contato com o administrador do sistema.');
+            $this->session->set_flashdata('success','Curso cadastrado com sucesso');
+          } else {
+            $this->session->set_flashdata('danger','Não foi possível cadastrar o curso, tente novamente ou entre em contato com o administrador do sistema.');
+          }
+
+          redirect('Curso/cadastrar');
         }
-
-        redirect('Curso/cadastrar');
+      } else {
+        redirect('/');
       }
 
     }

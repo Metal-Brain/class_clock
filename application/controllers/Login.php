@@ -32,9 +32,12 @@
         } else {
           $this->session->set_userdata($usuario);
 
-          if ($this->Login_model->isProfessor($usuario))
+          if ($this->Login_model->isProfessor($usuario)) {
+            $this->session->set_userdata('nivel', 2);
             redirect('Professor/preferencia');
+          }
 
+          $this->session->set_userdata('nivel', 1);
           redirect('Curso');
 
         }
