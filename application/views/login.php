@@ -116,7 +116,7 @@
 
 						<!-- img logo -->
 						<div style="border-bottom: 1px #606060 solid;">
-							<img class="logo" src="assets/img/ifsp.jpg" style="margin: 20px auto 40px; display: block;"/>
+							  <img src="<?= base_url('assets/img/ifsp.jpg')?>"  class="logo" style="margin: 20px auto 40px; display: block;"/>
 						</div>
 						<!-- Fim logo -->
 					</div>
