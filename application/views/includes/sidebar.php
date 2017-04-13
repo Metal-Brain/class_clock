@@ -1,5 +1,5 @@
 <div class="row">
-	<div id="sidebar" class="col-md-2" role="navigation">
+	<div id="sidebar" class="col-xs-12 col-sm-2 col-md-2" role="navigation">
 		<h2>Menu</h2>
 		<ul class="nav nav-pills nav-stacked">
 		  <li><?= anchor('Curso','Cursos') ?></li>
