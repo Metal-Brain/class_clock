@@ -87,13 +87,14 @@ INSERT INTO Nivel (nome) VALUES ('Graduação'),('Pós-Graduação'),('Mestrado'
 CREATE TABLE IF NOT EXISTS Usuario (
 	id 					  INT 			    NOT NULL 			AUTO_INCREMENT,
   nome 			    VARCHAR(32) 	NOT NULL,
-  matricula 		VARCHAR(8)		NOT NULL			UNIQUE,
+  matricula 		VARCHAR(7)		NOT NULL			UNIQUE,
   email         varchar(255)  NOT NULL      UNIQUE,
   senha 		    CHAR(64) 	    NOT NULL,
   `status` 			BOOLEAN       NOT NULL  		DEFAULT TRUE,
   PRIMARY KEY(id)
 );
 
+INSERT INTO Usuario VALUES (NULL, 'admin','1234567','admin@admin.com','9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08', TRUE);
 
 CREATE TABLE IF NOT EXISTS Professor(
 	id 					    INT 			    NOT NULL 			AUTO_INCREMENT,
@@ -101,14 +102,13 @@ CREATE TABLE IF NOT EXISTS Professor(
   coordenador 		BOOLEAN       NOT NULL  		DEFAULT FALSE,
   idContrato 			INT 			    NOT NULL,
   idNivel				  INT 			    NOT NULL,
-  idUsuario			  INT 			    NOT NULL,
-  PRIMARY KEY(id,idUsuario),
+  PRIMARY KEY(id),
   CONSTRAINT fk_professor_contrato
     FOREIGN KEY(idContrato) REFERENCES Contrato(id),
   CONSTRAINT fk_professor_nivel
 	  FOREIGN KEY(idNivel) REFERENCES Nivel(id),
   CONSTRAINT fk_professor_usuario
-    FOREIGN KEY(idUsuario) REFERENCES Usuario(id)
+    FOREIGN KEY(id) REFERENCES Usuario(id)
 );
 
 CREATE TABLE IF NOT EXISTS Competencia(
