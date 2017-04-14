@@ -24,7 +24,7 @@
     */
     public function cadastrar () {
 
-      if (verificaSessao() && verificaNivelPagina(1)) {
+      if (verificaSessao() && verificaNivelPagina(array(1,2))) {
         //Carregar as bibliotecas de validação
         $this->load->library('form_validation');
         $this->load->helper(array('form','dropdown'));
@@ -104,64 +104,69 @@
     */
     public function atualizar () {
 
-      $this->load->library('form_validation');
-      $this->load->helper('dropdown');
-      $this->load->model(array('CursoTemDisciplina_model','CursoTemPeriodo_model','Curso_model','Grau_model','Periodo_model','disciplina_model'));
+      if (verificaSessao() && verificaNivelPagina(array(1,2))) {
+        $this->load->library('form_validation');
+        $this->load->helper('dropdown');
+        $this->load->model(array('CursoTemDisciplina_model','CursoTemPeriodo_model','Curso_model','Grau_model','Periodo_model','disciplina_model'));
 
-      //Define regras de validação do formulario!!!
-      $this->form_validation->set_rules('nomeCurso', 'nome do curso',array('required', 'min_length[5]','ucwords'));
-      $this->form_validation->set_rules('cursoSigla', 'sigla do curso', array('required', 'max_length[5]', 'strtoupper'));
-      $this->form_validation->set_rules('cursoQtdSemestres','quantidade de semestres', array('required','integer','greater_than[0]','less_than[10]'));
-      $this->form_validation->set_rules('cursoPeriodos[]','período',array('required'));
-      $this->form_validation->set_rules('cursoGrau','grau',array('greater_than[0]'));
+        //Define regras de validação do formulario!!!
+        $this->form_validation->set_rules('nomeCurso', 'nome do curso',array('required', 'min_length[5]','ucwords'));
+        $this->form_validation->set_rules('cursoSigla', 'sigla do curso', array('required', 'max_length[5]', 'strtoupper'));
+        $this->form_validation->set_rules('cursoQtdSemestres','quantidade de semestres', array('required','integer','greater_than[0]','less_than[10]'));
+        $this->form_validation->set_rules('cursoPeriodos[]','período',array('required'));
+        $this->form_validation->set_rules('cursoGrau','grau',array('greater_than[0]'));
 
-      //delimitador
-      $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
+        //delimitador
+        $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
 
-      //condição para o formulario
-      if($this->form_validation->run() == FALSE){
+        //condição para o formulario
+        if($this->form_validation->run() == FALSE){
 
-        $this->session->set_flashdata('formDanger','<strong>Não foi possível atualizar os dados do curso, pois foram encontrados erros no formulário:</strong>');
+          $this->session->set_flashdata('formDanger','<strong>Não foi possível atualizar os dados do curso, pois foram encontrados erros no formulário:</strong>');
 
-        $dados['graus']         = convert($this->Grau_model->getAll(), True);
-        $dados['periodo']       = convert($this->Periodo_model->getAll());
-        $dados['disciplinas']   = convert($this->disciplina_model->getAll(TRUE));
-        $dados['cursos']        = $this->Curso_model->getAll();
+          $dados['graus']         = convert($this->Grau_model->getAll(), True);
+          $dados['periodo']       = convert($this->Periodo_model->getAll());
+          $dados['disciplinas']   = convert($this->disciplina_model->getAll(TRUE));
+          $dados['cursos']        = $this->Curso_model->getAll();
 
-        $this->load->view('includes/header',$dados);
-        $this->load->view('includes/sidebar');
-        $this->load->view('cursos');
-      }else{
+          $this->load->view('includes/header',$dados);
+          $this->load->view('includes/sidebar');
+          $this->load->view('cursos');
+        }else{
 
-        $idCurso = $this->input->post('cursoId');
+          $idCurso = $this->input->post('cursoId');
 
-        $curso = array(
-          'nome'          => $this->input->post('nomeCurso'),
-          'sigla'         => $this->input->post('cursoSigla'),
-          'qtdSemestres'  => $this->input->post('cursoQtdSemestres'),
-          'grau'          => $this->input->post('cursoGrau')
-        );
+          $curso = array(
+            'nome'          => $this->input->post('nomeCurso'),
+            'sigla'         => $this->input->post('cursoSigla'),
+            'qtdSemestres'  => $this->input->post('cursoQtdSemestres'),
+            'grau'          => $this->input->post('cursoGrau')
+          );
 
-        $periodo = $this->input->post('cursoPeriodos[]');
-        $disciplinas = $this->input->post('cursoDisciplinas[]');
+          $periodo = $this->input->post('cursoPeriodos[]');
+          $disciplinas = $this->input->post('cursoDisciplinas[]');
 
-        if($this->Curso_model->updateCurso($idCurso, $curso)) {
-          $this->CursoTemPeriodo_model->delete($idCurso);
-          foreach ($periodo as $idPeriodo)
-            $this->CursoTemPeriodo_model->insert($idCurso,$idPeriodo);
+          if($this->Curso_model->updateCurso($idCurso, $curso)) {
+            $this->CursoTemPeriodo_model->delete($idCurso);
+            foreach ($periodo as $idPeriodo)
+              $this->CursoTemPeriodo_model->insert($idCurso,$idPeriodo);
 
-          $this->CursoTemDisciplina_model->delete($idCurso);
-          foreach ($disciplinas as $disciplina)
-            $this->CursoTemDisciplina_model->insert($idCurso,$disciplina);
+            $this->CursoTemDisciplina_model->delete($idCurso);
+            foreach ($disciplinas as $disciplina)
+              $this->CursoTemDisciplina_model->insert($idCurso,$disciplina);
 
-          $this->session->set_flashdata('success','Curso atualizado com sucesso');
-        } else {
-          $this->session->set_flashdata('danger','Não foi possível atualizar os dados do curso, tente novamente ou entre em contato com o administrador do sistema. <br/> Caso tenha alterado a <b>SIGLA</b>, verifique se ela já não foi utilizada!');
+            $this->session->set_flashdata('success','Curso atualizado com sucesso');
+          } else {
+            $this->session->set_flashdata('danger','Não foi possível atualizar os dados do curso, tente novamente ou entre em contato com o administrador do sistema. <br/> Caso tenha alterado a <b>SIGLA</b>, verifique se ela já não foi utilizada!');
+          }
+
+          redirect('Curso');
+
         }
-
-        redirect('Curso');
-
+      }else{
+        redirect('/');
       }
+
 
     }
 
@@ -174,25 +179,34 @@
     */
     public function deletar ($id) {
 
-      $this->load->model(array('Curso_model'));
+      if (verificaSessao() && verificaNivelPagina(array(1,2))) {
+        $this->load->model(array('Curso_model'));
 
-      if ($this->Curso_model->deleteCurso($id))
-        $this->session->set_flashdata('success','Curso desativado com sucesso');
-      else
-        $this->session->set_flashdata('danger','Não foi possível desativar o curso, tente novamente mais tarde ou entre em contato com o administrador do sistema.');
+        if ($this->Curso_model->deleteCurso($id))
+          $this->session->set_flashdata('success','Curso desativado com sucesso');
+        else
+          $this->session->set_flashdata('danger','Não foi possível desativar o curso, tente novamente mais tarde ou entre em contato com o administrador do sistema.');
 
-      redirect('Curso');
+        redirect('Curso');
+      }else{
+          redirect('/');
+      }
     }
 
 	   public function ativar ($id) {
-      $this->load->model('Curso_model');
+       if (verificaSessao() && verificaNivelPagina(array(1,2))){
+         $this->load->model('Curso_model');
 
-      if ( $this->Curso_model->able($id) )
-        $this->session->set_flashdata('success','Curso ativado com sucesso');
-      else
-        $this->session->set_flashdata('danger','Não foi possível ativar o Curso, tente novamente ou entre em contato com o administrador do sistema.');
+         if ( $this->Curso_model->able($id) )
+           $this->session->set_flashdata('success','Curso ativado com sucesso');
+         else
+           $this->session->set_flashdata('danger','Não foi possível ativar o Curso, tente novamente ou entre em contato com o administrador do sistema.');
 
-      redirect('Curso');
+         redirect('Curso');
+       }else{
+           redirect('/');
+       }
+
     }
 
     /**

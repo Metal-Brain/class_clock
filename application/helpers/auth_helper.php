@@ -19,5 +19,5 @@ function verificaSessao () {
 
 function verificaNivelPagina($niveis) {
   $CI = get_instance();
-  return in_array($CI->session->nivel, $niveis);
+  return ((in_array($CI->session->nivel, $niveis) == 1) ? TRUE : FALSE);
 }

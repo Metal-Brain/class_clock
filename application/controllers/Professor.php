@@ -8,11 +8,10 @@
   class Professor extends CI_Controller {
 
     public function index () {
-      if (autoriza()) {
+      if (verificaSessao() && verificaNivelPagina(array(1)))
         $this->cadastrar();
-      }else{
-        redirect('Login');
-      }
+      else
+        redirect('/');
     }
 
     // =========================================================================
@@ -27,66 +26,70 @@
       * @since 2017/04/03
       */
     public function cadastrar() {
-      // Carrega a biblioteca para validação dos dados.
-      $this->load->library(array('form_validation'));
-      $this->load->helper(array('form','dropdown','date'));
-      $this->load->model(array(
-        'Professor_model',
-        'Disciplina_model',
-        'Competencia_model',
-        'Nivel_model',
-        'Contrato_model'
-      ));
+      if (verificaSessao() && verificaNivelPagina(array(1))){
+        // Carrega a biblioteca para validação dos dados.
+        $this->load->library(array('form_validation'));
+        $this->load->helper(array('form','dropdown','date'));
+        $this->load->model(array(
+          'Professor_model',
+          'Disciplina_model',
+          'Competencia_model',
+          'Nivel_model',
+          'Contrato_model'
+        ));
 
-      // Definir as regras de validação para cada campo do formulário.
-      $this->form_validation->set_rules('nome', 'nome do professor', array('required','min_length[5]','max_length[255]','ucwords'));
-      $this->form_validation->set_rules('matricula', 'matrícula', array('required','exact_length[7]', 'numeric','is_unique[Professor.matricula]','strtoupper'));
-      $this->form_validation->set_rules('nascimento', 'data de nascimento', array('callback_date_check'));
-      $this->form_validation->set_rules('disciplinas[]', 'disciplinas', array('required'));
-      $this->form_validation->set_rules('nivel', 'nivel', array('greater_than[0]'),array('greater_than'=>'Selecione o nivel acadêmico'));
-      $this->form_validation->set_rules('contrato','contrato',array('greater_than[0]'),array('greater_than'=>'Selecione um contrato'));
+        // Definir as regras de validação para cada campo do formulário.
+        $this->form_validation->set_rules('nome', 'nome do professor', array('required','min_length[5]','max_length[255]','ucwords'));
+        $this->form_validation->set_rules('matricula', 'matrícula', array('required','exact_length[7]', 'numeric','is_unique[Professor.matricula]','strtoupper'));
+        $this->form_validation->set_rules('nascimento', 'data de nascimento', array('callback_date_check'));
+        $this->form_validation->set_rules('disciplinas[]', 'disciplinas', array('required'));
+        $this->form_validation->set_rules('nivel', 'nivel', array('greater_than[0]'),array('greater_than'=>'Selecione o nivel acadêmico'));
+        $this->form_validation->set_rules('contrato','contrato',array('greater_than[0]'),array('greater_than'=>'Selecione um contrato'));
 
-      // Definição dos delimitadores
-      $this->form_validation->set_error_delimiters('<p class="text-danger">','</p>');
+        // Definição dos delimitadores
+        $this->form_validation->set_error_delimiters('<p class="text-danger">','</p>');
 
-      // Verifica se o formulario é valido
-      if ($this->form_validation->run() == FALSE) {
+        // Verifica se o formulario é valido
+        if ($this->form_validation->run() == FALSE) {
 
-        $this->session->set_flashdata('formDanger','<strong>Não foi possível cadastrar o professor, pois existe(m) erro(s) no formulário:</strong>');
+          $this->session->set_flashdata('formDanger','<strong>Não foi possível cadastrar o professor, pois existe(m) erro(s) no formulário:</strong>');
 
-        $dados['contrato']        = convert($this->Contrato_model->getAll(), TRUE);
-        $dados['nivel']           = convert($this->Nivel_model->getAll(), TRUE);
-        $dados['disciplinas']     = convert($this->Disciplina_model->getAll(TRUE));
-        $dados['professores']     = $this->Professor_model->getAll();
-	    $this->load->view('professores', $dados);
+          $dados['contrato']        = convert($this->Contrato_model->getAll(), TRUE);
+          $dados['nivel']           = convert($this->Nivel_model->getAll(), TRUE);
+          $dados['disciplinas']     = convert($this->Disciplina_model->getAll(TRUE));
+          $dados['professores']     = $this->Professor_model->getAll();
+  	    $this->load->view('professores', $dados);
 
-      } else {
-
-        // Pega os dados do formulário
-        $professor = array(
-          'nome'            => $this->input->post("nome"),
-          'matricula'       => $this->input->post('matricula'),
-          'nascimento'      => brToSql($this->input->post("nascimento")),
-          'coordenador'     => ($this->input->post("coordenador") == null) ? 0 : 1,
-          'idContrato'      => $this->input->post("contrato"),
-          'idNivel'         => $this->input->post("nivel")
-        );
-
-        $disciplinas = $this->input->post('disciplinas[]');
-
-        if ($this->Professor_model->insert($professor)) {
-          $idProfessor = $this->db->insert_id(); // Pega o ID do Professor cadastrado
-
-          foreach ($disciplinas as $idDisciplina)
-            $this->Competencia_model->insert($idProfessor,$idDisciplina);
-
-          $this->session->set_flashdata('success','Professor cadastrado com sucesso');
         } else {
-          $this->session->set_flashdata('danger','Não foi possivel cadastrar o professor, tente novamente ou entre em contato com o administrador do sistema');
+
+          // Pega os dados do formulário
+          $professor = array(
+            'nome'            => $this->input->post("nome"),
+            'matricula'       => $this->input->post('matricula'),
+            'nascimento'      => brToSql($this->input->post("nascimento")),
+            'coordenador'     => ($this->input->post("coordenador") == null) ? 0 : 1,
+            'idContrato'      => $this->input->post("contrato"),
+            'idNivel'         => $this->input->post("nivel")
+          );
+
+          $disciplinas = $this->input->post('disciplinas[]');
+
+          if ($this->Professor_model->insert($professor)) {
+            $idProfessor = $this->db->insert_id(); // Pega o ID do Professor cadastrado
+
+            foreach ($disciplinas as $idDisciplina)
+              $this->Competencia_model->insert($idProfessor,$idDisciplina);
+
+            $this->session->set_flashdata('success','Professor cadastrado com sucesso');
+          } else {
+            $this->session->set_flashdata('danger','Não foi possivel cadastrar o professor, tente novamente ou entre em contato com o administrador do sistema');
+          }
+
+          redirect('Professor/cadastrar');
+
         }
-
-        redirect('Professor/cadastrar');
-
+      }else{
+        redirect('/');
       }
     }
 
@@ -120,27 +123,35 @@
       * @param $id ID do professor
       */
     public function desativar ($id) {
-      // Carrega os modelos necessarios
-      $this->load->model(array('Professor_model'));
+      if (verificaSessao() && verificaNivelPagina(array(1))){
+        // Carrega os modelos necessarios
+        $this->load->model(array('Professor_model'));
 
-      if ( $this->Professor_model->disable($id) )
-        $this->session->set_flashdata('success','Professor desativado com sucesso');
-      else
-        $this->session->set_flashdata('danger','Não foi possível desativar o professor, tente novamente ou entre em contato com o administrador do sistema.');
+        if ( $this->Professor_model->disable($id) )
+          $this->session->set_flashdata('success','Professor desativado com sucesso');
+        else
+          $this->session->set_flashdata('danger','Não foi possível desativar o professor, tente novamente ou entre em contato com o administrador do sistema.');
 
-      redirect('Professor');
+        redirect('Professor');
+      }else{
+        redirect('/');
+      }
 
     }
 
     public function ativar ($id) {
-      $this->load->model('Professor_model');
+      if (verificaSessao() && verificaNivelPagina(array(1))){
+        $this->load->model('Professor_model');
 
-      if ( $this->Professor_model->able($id) )
-        $this->session->set_flashdata('success','Professor ativado com sucesso!');
-      else
-        $this->session->set_flashdata('danger','Não foi possível ativar o professor, tente novamente ou entre em contato com o administrador do sistema.');
+        if ( $this->Professor_model->able($id) )
+          $this->session->set_flashdata('success','Professor ativado com sucesso!');
+        else
+          $this->session->set_flashdata('danger','Não foi possível ativar o professor, tente novamente ou entre em contato com o administrador do sistema.');
 
-      redirect('Professor');
+        redirect('Professor');
+      }else{
+        redirect('/');
+      }
     }
 
     /**
@@ -150,7 +161,7 @@
       * @param $id ID do professor
       */
     public function atualizar () {
-
+      if (verificaSessao() && verificaNivelPagina(array(1))){
         // Carrega a biblioteca para validação dos dados.
         $this->load->library(array('form_validation'));
         $this->load->helper(array('form','dropdown','date'));
@@ -181,7 +192,7 @@
           $dados['nivel']           = convert($this->Nivel_model->getAll(), TRUE);
           $dados['disciplinas']     = convert($this->Disciplina_model->getAll(TRUE));
           $dados['professores']     = $this->Professor_model->getAll();
-  	      $this->load->view('professores', $dados);
+          $this->load->view('professores', $dados);
 
         } else {
 
@@ -210,8 +221,11 @@
           }
 
           redirect('Professor/atualizar');
-
         }
+      }else{
+        redirect('/');
+      }
+
     }
 
     /**
