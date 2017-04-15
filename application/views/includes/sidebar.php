@@ -7,9 +7,9 @@
 		  <li><?= anchor('Professor', 'Professores') ?></li>
 		  <li><?= anchor('Sala','Salas') ?></li>
 		  <hr>
-		  <li><a href="index.html"><span class="glyphicon glyphicon-log-out"></span> Sair do Sistema</a></li>
+		  <li><?= anchor('Login/logout', '<span class="glyphicon glyphicon-log-out"></span> Sair do Sistema') ?></li>
 		</ul>
-		
+
 		 <script>
 			var active = 0;
 			for (var i = 0; i < document.links.length; i++) {
@@ -20,3 +20,4 @@
 			document.links[active].className = 'active';
 		</script>
 	</div>
+<span class="glyphicon glyphicon-log-out"></span>
