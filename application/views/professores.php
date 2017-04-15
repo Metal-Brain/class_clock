@@ -119,7 +119,7 @@
 						<!-- Aqui é o formulário de registro do novo item-->
 						<div id="new" class="tab-pane fade">
 							<h3>Cadastrar Professor</h3>
-							<?= form_open('Professor') ?>
+							<?= form_open('Professor/cadastrar') ?>
 								<div class="form-group percent-40">
 									<label>Nome</label>
 									<input type="text" class="form-control" name="nome" placeholder="Nome" value="<?= set_value('nome')?>"/>
@@ -134,6 +134,11 @@
 									<label>Disciplinas que pode lecionar</label>
 									<?= form_dropdown('disciplinas[]',$disciplinas,set_value('disciplinas[]'),array('id'=>'disciplinas','multiple'=>'multiple')) ?>
 									<?= form_error('disciplinas[]') ?>
+								</div>
+								<div class="form-group percent-40">
+									<?= form_label('Email','email') ?>
+									<?= form_input('email',set_value('email'), array('class'=>'form-control','id'=>'email','placeholder'=>'example@example.com')) ?>
+									<?= form_error('email') ?>
 								</div>
 								<div class="form-group percent-40">
 									<label>Data de Nascimento</label>
