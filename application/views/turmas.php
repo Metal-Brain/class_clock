@@ -80,10 +80,10 @@
 								<table id="turmaTable" class="table table-striped">
 								<thead>
 									<tr>
-										<th>ID</th>
-										<th>Curso</th>
-										<th>Semestre</th>
+										<th>Nome</th>
+										<th>Disciplina</th>
 										<th>Qtd. Alunos</th>
+										<th>Turma DP</th>
 										<th>Status</th>
 										<th>Ação</th>
 									</tr>
@@ -91,14 +91,14 @@
 								<tbody>
 									<?php foreach ($turmas as $turma): ?>
 											<?= ($turma['status'] ? '<tr>' : '<tr class="danger">') ?>
-												<td><?= $turma['id']?></td>
 												<td><?= $turma['nome']?></td>
-												<td><?= $turma['qtdSemestre']?></td>
+												<td><?= $turma['disciplina']?></td>
 												<td><?= $turma['qtdAluno']?></td>
+												<td><?= $turma['dp']?></td>
 												<td><?php if($turma['status']): echo "Ativo"; else: echo "Inativo"; endif;?></td>
 												<td>
 													<?php if ($turma['status']): ?>
-														<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whateverqtdSemestre="<?= $turma['qtdSemestre']?>" data-whatevernome="<?= $turma['nome']?>" data-whateverid="<?= $turma['id']?>" data-whateverqtdAluno="<?= $turma['qtdAluno']?>"><span class="glyphicon glyphicon-pencil"></span></button>
+														<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal"  data-whateverdisciplina="<?= $turma['disciplina']?>" data-whateverid="<?= $turma['id']?>"  data-whatevernome="<?= $turma['nome']?>"  data-whateverqtdAluno="<?= $turma['qtdAluno']?> data-whateverdp="<?= $turma['dp']?>"><span class="glyphicon glyphicon-pencil"></span></button>
 														<button onClick="disable(<?= $turma['id']?>)" type="button" class="btn btn-danger delete" title="Desativar"><span class="glyphicon glyphicon-remove"></span></button>
 													<?php else : ?>
 														<button onClick="able(<?= $turma['id']?>)" type="button" class="btn btn-success delete" title="Ativar"><span class="glyphicon glyphicon-ok"></span></button>
@@ -117,30 +117,32 @@
 							<h3>Cadastrar Turmas</h3>
 							<form action="" method="post">
 							
+							<div class="form-group">
+									<label>Nome</label>
+									<input type="text" class="form-control" name="nome" placeholder="Nome" maxlength="10" value="<?= set_value('nome')?>">
+									<?= form_error('nome') ?>
+								</div>
 								
 								<div class="form-group">
                                     <label>Curso</label>
-                                    <!-- DropListNome (Droplist) -->
+                                    <!-- DropListDisciplina (Droplist) -->
                                     <div class="form-group percent-15">
-                                        <div id="u1" class="ax_default droplist" data-label="DropListNome">
-                                          <?= form_dropdown('nome',$nome,set_value('nome'),array('class'=>'form-control')) ?>
-                                          <?= form_error('nome') ?>
+                                        <div id="u1" class="ax_default droplist" data-label="DropListDisciplina">
+                                          <?= form_dropdown('disciplina',$disciplina,set_value('disciplina'),array('class'=>'form-control')) ?>
+                                          <?= form_error('disciplina') ?>
                                         </div>
                                     </div>
                                 </div>
 								
-															
-								
-								<div class="form-group">
-									<label>Semestre</label>
-									<input type="number" class="form-control percent-40" name="qtdSemestre" value="<?= set_value('qtdSemestre')?>" readonly>
-									<?= form_error('qtdSemestre') ?>
-								</div>
 								<div class="form-group">
 									<label>Quantidade de Alunos</label>
 									<input type="text" maxlength="3" pattern="[0-9]+$" class="form-control percent-5" name="qtdAluno" placeholder="ex: 30" value="<?= set_value('qtdAluno')?>">
 									<?= form_error('qtdAluno') ?>
 								</div>
+								<div class="form-group">
+									<input id="dp" type="checkbox" name="dp" class="form-group" value="true"/>
+									<label for="dp">Cursando Dependência</label>
+								</div
 								<div class="inline">
 									<button type='submit' class='btn bt-lg btn-primary'>Cadastrar</button>
 								</div>
@@ -164,30 +166,35 @@
 						<div class="modal-body">
 							<?= form_open('Turma/atualizar') ?>
 								<div class="form-group">
-									<input type="text" name="recipient-id" id="recipient-id" readonly>
+									<input type="hidden" name="recipient-id" id="recipient-id">
 								</div>
-						
 								
-								   <!-- DropListNome (Droplist) -->
+								<div class="form-group">
+									<label for="nome-name" class="control-label">Nome:</label>
+									<input type="text" class="form-control" name="recipient-nome" id="recipient-nome" maxlength="10">
+									<?= form_error('recipient-nome') ?>
+								</div>
+								
+								   <!-- DropListDisciplina (Droplist) -->
                                 <div class="form-group percent-40 inline">
-                                    <label for="nome-name" class="control-label">Curso:</label>
-                                  <?= form_dropdown('nome',$nome,null,array('class'=>'form-control')) ?>
-                                  <?= form_error('nome') ?>
+                                    <label for="disciplina-name" class="control-label">Curso:</label>
+                                  <?= form_dropdown('disciplina',$disciplina,null,array('class'=>'form-control')) ?>
+                                  <?= form_error('disciplina') ?>
                                 </div>
 														
 								
 								
-								
-								<div class="form-group">
-									<label for="qtdSemestre-name" class="control-label">Semestre</label>
-									<input type="number" class="form-control" name="recipient-qtdSemestre" id="recipient-qtdSemestre" readonly>
-									<?= form_error('recipient-qtdSemestre') ?>
-								</div>
 								<div class="form-group">
 									<label for="qtd-aluno" class="control-label">Quantidade de Alunos:</label>
 									<input type="text" maxlength="3" pattern="[0-9]+$"  class="form-control percent-10" name="recipient-qtd-aluno" id="recipient-qtd-aluno">
 									<?= form_error('recipient-qtd-aluno') ?>
 								</div>
+								
+								<div class="form-group">
+									<input type="checkbox" name="recipient-dp" value="true" class="form-group" id="recipient-dp"/>
+									<label for="recipient-dp">Cursando Dependência</label>
+								</div>
+								
 								<div class="modal-footer">
 									<button type="submit" class="btn btn-primary">Alterar</button>
 									<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
@@ -212,18 +219,20 @@
 				$('#exampleModal').on('show.bs.modal', function (event) {
 						var button = $(event.relatedTarget) // Button that triggered the modal
 						var recipient = button.data('whatever') // Extract info from data-* attributes
-						var recipientqtdSemestre = button.data('whateverqtdSemestre')
-						var recipientnome = button.data('whatevernome')
+						var recipientdisciplina = button.data('whateverdisciplina')
 						var recipientQtdAluno = button.data('whateverqtdAluno')
 						var recipientId = button.data('whateverid')
+						var recipientNome = button.data('whatevernome')
+						var recipientDp = button.data('whateverdp')
 						// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
 						// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
 						var modal = $(this)
 						modal.find('.modal-title').text('Alterar Turma')
-						modal.find('#recipient-qtdSemestre').val(recipientqtdSemestre)
-						modal.find('#recipient-nome').val(recipientnome)
+						modal.find('#recipient-disciplina').val(recipientdisciplina)
 						modal.find('#recipient-qtd-aluno').val(recipientQtdAluno)
 						modal.find('#recipient-id').val(recipientId)
+						modal.find('#recipient-nome').val(recipientNome)
+						modal.find('#recipient-dp').val(recipientDp)
 				})
 		</script>
 		<script type="text/javascript">
