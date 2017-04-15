@@ -18,6 +18,7 @@
       $this->db->where("senha", $usuario['senha']);
       $this->db->where('status', TRUE); // Verifica o status do usuário
       $usuario = $this->db->get("Usuario")->row_array();
+
       return $usuario;
     }
 
@@ -29,6 +30,13 @@
       $result = $this->db->get('Professor')->num_rows();
 
       return ($result == 1) ? TRUE : FALSE;
+    }
+
+    public function verificaEmail($usuario){
+      $this->db->where("matricula", $usuario['matricula']);
+      $this->db->where('status', TRUE); // Verifica o status do usuário
+      $usuario = $this->db->get("Usuario")->row_array();
+      return $usuario;
     }
 
 

@@ -1,0 +1,9 @@
+$config['protocol'] = 'smtp';
+$config['smtp_host'] = 'ssl://smtp.gmail.com'; //change this with your smtp host
+$config['smtp_port'] = '465';
+$config['smtp_user'] = 'colocar_email_origem';
+$config['smtp_pass'] = 'colocar_senha';
+$config['mailtype'] = 'html';
+$config['charset']   = 'utf-8';
+$config['wordwrap'] = TRUE;
+$config['newline'] = "\r\n";
