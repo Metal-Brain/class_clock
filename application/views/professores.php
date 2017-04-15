@@ -1,46 +1,4 @@
-<!DOCTYPE html>
-<html lang ="pt-br">
-	<head>
-		<meta charset="utf-8">
-		<title>Cadastro dos Professores</title>
-
-				<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/bootstrap.min.css')?>">
-				<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/style.css')?>">
-				<link rel="stylesheet" type="text/css" href="<?= base_url('assets/DataTables/datatables.min.css') ?>">
-				<link rel="stylesheet" type="text/css" href="<?= base_url('assets/multi-select/css/multi-select.css')?>">
-
-	</head>
-	<body>
-		<!-- as classes container-fluid, row e col-md-xx são do GRID do bootstrap -->
-		<!-- procure por 'bootstrap grid' e estude-as -->
-		<div class="container-fluid">
-			<div class="row">
-				<div id="header" class="col">
-					<div id="classclock">
-						<h1>Class Clock</h1>
-					</div>
-					<div id="ifsp">
-						<img src="<?= base_url('assets/img/ifsp.jpg')?>" class="logo">
-					</div>
-				</div>
-			</div><!--Fecha row-->
-
-			<div class="row">
-
-				<div id="sidebar" class="col-md-2" role="navigation">
-					<h2>Menu</h2>
-					<ul class="nav nav-pills nav-stacked">
-						<li><?= anchor('Curso','Cursos') ?></li>
-						<li><?= anchor('Disciplina','Disciplinas') ?></li>
-						<li class="active"><?= anchor('Professor','Professores') ?></li>
-						<li><?= anchor('Sala','Salas') ?></li>
-						<hr>
-						<li><a href="index.html"><span class="glyphicon glyphicon-log-out"></span> Sair do Sistema</a></li>
-					</ul>
-				</div>
-
 				<div id="content" class="col-md-10">
-
 					<?php if (validation_errors()): ?>
 						<div class="alert alert-danger text-center">
 							<p><?= $this->session->flashdata('formDanger') ?></p>
@@ -96,6 +54,7 @@
 												<?= ($professor['status'] ? '<tr>' : '<tr class="danger">') ?>
 														<td><?= $professor['nome'] ?></td>
 														<td><?= $professor['matricula'] ?></td>
+														<td><?= $professor['email'] ?></td>
 														<td><?= sqlToBr($professor['nascimento']) ?></td>
 														<td><?= $professor['nivel'] ?></td>
 														<td></td>
@@ -103,7 +62,7 @@
 														<td></td>
 														<td><?= ($professor['status']) ? "Ativo" : "Inativo"?></td>
 														<td><?php if($professor['status']): ?>
-															<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whatevernome="<?= $professor['nome']?>" data-whateverid="<?= $professor['id']?>" data-whatevercoordenador="<?= $professor['coordenador']?>" data-whatevercontrato="<?= $professor['idContrato']?>" data-whatevernivel="<?= $professor['idNivel']?>" data-whatevermatricula= "<?= $professor['matricula']?>" data-whatevernascimento= "<?= sqlToBr($professor['nascimento']) ?>"><span class="glyphicon glyphicon-pencil"></span></button>
+															<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whatevernome="<?= $professor['nome']?>" data-whateverid="<?= $professor['id']?>" data-whatevercoordenador="<?= $professor['coordenador']?>" data-whatevercontrato="<?= $professor['idContrato']?>" data-whatevernivel="<?= $professor['idNivel']?>" data-whatevermatricula= "<?= $professor['matricula']?>" data-whateveremail= "<?= $professor['email']?>" data-whatevernascimento= "<?= sqlToBr($professor['nascimento']) ?>"><span class="glyphicon glyphicon-pencil"></span></button>
 															<button onClick="exclude(<?= $professor['id']?>);" type="button" class="btn btn-danger" title="Excluir"><span class="glyphicon glyphicon-remove"></span></button>
 													<?php else:?>
 														<button onClick="able(<?= $professor['id']?>)" type="button" class="btn btn-success" title="Ativar"><span class="glyphicon glyphicon-ok"></span></button>
@@ -119,7 +78,7 @@
 						<!-- Aqui é o formulário de registro do novo item-->
 						<div id="new" class="tab-pane fade">
 							<h3>Cadastrar Professor</h3>
-							<?= form_open('Professor/cadastrar') ?>
+							<?= form_open('Professor') ?>
 								<div class="form-group percent-40">
 									<label>Nome</label>
 									<input type="text" class="form-control" name="nome" placeholder="Nome" value="<?= set_value('nome')?>"/>
@@ -130,15 +89,15 @@
 									<input type="text" class="form-control percent-20" name="matricula"  maxlength="7" placeholder="ex: cg0000000" value="<?= set_value('matricula')?>"/>
 									<?= form_error('matricula') ?>
 								</div>
+									<div class="form-group percent-40">
+									<label>Email</label>
+									<input type="email" class="form-control percent-40" name="email" placeholder="Email" value="<?= set_value('email')?>"/>
+									<?= form_error('email') ?>
+								</div>
 								<div class="form-group disc">
 									<label>Disciplinas que pode lecionar</label>
 									<?= form_dropdown('disciplinas[]',$disciplinas,set_value('disciplinas[]'),array('id'=>'disciplinas','multiple'=>'multiple')) ?>
 									<?= form_error('disciplinas[]') ?>
-								</div>
-								<div class="form-group percent-40">
-									<?= form_label('Email','email') ?>
-									<?= form_input('email',set_value('email'), array('class'=>'form-control','id'=>'email','placeholder'=>'example@example.com')) ?>
-									<?= form_error('email') ?>
 								</div>
 								<div class="form-group percent-40">
 									<label>Data de Nascimento</label>
@@ -197,6 +156,11 @@
 									<label>Matrícula</label>
 									<input type="text" class="form-control percent-20" name="recipient-matricula"  id="recipient-matricula" maxlength="7" placeholder="ex: cg0000000" value="<?= set_value('recipient-matricula')?>"/>
 									<?= form_error('recipient-matricula') ?>
+								</div>
+									<div class="form-group">
+									<label>Email</label>
+									<input type="email" class="form-control" name="recipient-email" placeholder="Email" id="recipient-email" value="<?= set_value('email')?>"/>
+									<?= form_error('recipient-email') ?>
 								</div>
 								<div class="form-group percent-50">
 									<label>Disciplinas que pode lecionar: </label>
@@ -270,11 +234,12 @@
 				<!-- Foi criado todos os var caso seja necessario adicionar ou mudar os que já existem-->
 				var recipientnome = button.data('whatevernome')
 				var recipientmatricula = button.data('whatevermatricula')
+				var recipientemail = button.data('whateveremail')
 				var recipientnomeDisciplina = button.data('whatevernomeDisciplina')
 				var recipientnascimento = button.data('whatevernascimento')
 				var recipientnivelAcademico = button.data('whatevernivel')
 				var recipientregimeContrato = button.data('whatevercontrato')
-				var recipientcoordenador = button.data('whatevercoordenador')
+				var recipientcoordenador = button.data('whatevercoordenador')				
 				var recipientid = button.data('whateverid')
 				var url = '<?= base_url('index.php/Professor/disciplinas/') ?>'+recipientid;
 				$.getJSON(url,function (response) {
@@ -292,6 +257,7 @@
 				<!-- Foi criado todos os modal caso seja necessario adicionar ou mudar os que já existem-->
 				modal.find('#recipient-nome').val(recipientnome)
 				modal.find('#recipient-matricula').val(recipientmatricula)
+				modal.find('#recipient-email').val(recipientemail)
 				modal.find('#recipient-nomeDisciplina').val(recipientnomeDisciplina)
 				modal.find('#recipient-nascimento').val(recipientnascimento)
 				modal.find('select[name=recipient-nivelAcademico] option[value='+recipientnivelAcademico+']').prop('selected',true)
