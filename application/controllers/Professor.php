@@ -28,8 +28,8 @@
     public function cadastrar() {
       if (verificaSessao() && verificaNivelPagina(array(1))){
         // Carrega a biblioteca para validação dos dados.
-        $this->load->library(array('form_validation'));
-        $this->load->helper(array('form','dropdown','date'));
+        $this->load->library(array('form_validation','My_PHPMailer'));
+        $this->load->helper(array('form','dropdown','date','password'));
         $this->load->model(array(
           'Professor_model',
           'Disciplina_model',
@@ -40,8 +40,9 @@
 
         // Definir as regras de validação para cada campo do formulário.
         $this->form_validation->set_rules('nome', 'nome do professor', array('required','min_length[5]','max_length[255]','ucwords'));
-        $this->form_validation->set_rules('matricula', 'matrícula', array('required','exact_length[7]', 'numeric','is_unique[Professor.matricula]','strtoupper'));
+        $this->form_validation->set_rules('matricula', 'matrícula', array('required','exact_length[7]', 'numeric','is_unique[Usuario.matricula]','strtoupper'));
         $this->form_validation->set_rules('nascimento', 'data de nascimento', array('callback_date_check'));
+        $this->form_validation->set_rules('email','email',array('required','valid_email','is_unique[Usuario.email]'));
         $this->form_validation->set_rules('disciplinas[]', 'disciplinas', array('required'));
         $this->form_validation->set_rules('nivel', 'nivel', array('greater_than[0]'),array('greater_than'=>'Selecione o nivel acadêmico'));
         $this->form_validation->set_rules('contrato','contrato',array('greater_than[0]'),array('greater_than'=>'Selecione um contrato'));
@@ -58,21 +59,50 @@
           $dados['nivel']           = convert($this->Nivel_model->getAll(), TRUE);
           $dados['disciplinas']     = convert($this->Disciplina_model->getAll(TRUE));
           $dados['professores']     = $this->Professor_model->getAll();
-  	    $this->load->view('professores', $dados);
+  	      $this->load->view('professores', $dados);
 
         } else {
+
+          // Gera uma senha para o usuário
+          $senha = gerate(10);
 
           // Pega os dados do formulário
           $professor = array(
             'nome'            => $this->input->post("nome"),
             'matricula'       => $this->input->post('matricula'),
             'nascimento'      => brToSql($this->input->post("nascimento")),
+            'email'           => $this->input->post('email'),
+            'senha'           => hash('sha256',$senha),
             'coordenador'     => ($this->input->post("coordenador") == null) ? 0 : 1,
             'idContrato'      => $this->input->post("contrato"),
-            'idNivel'         => $this->input->post("nivel")
+            'idNivel'         => $this->input->post("nivel"),
+            'disciplinas'     => $this->input->post('disciplinas[]')
           );
 
-          $disciplinas = $this->input->post('disciplinas[]');
+          $mail = new PHPMailer();
+
+          $mail->IsSMTP();
+          $mail->SMTPAuth = true;
+          $mail->SMTPSecure = "ssl";
+          $mail->Host = "smtp.gmail.com";
+          $mail->Port = 465;
+          $mail->Username = "metalcodeifsp@gmail.com";
+          $mail->Password = "#metalcode2017#";
+          $mail->SetFrom('metalcodeifsp@gmail.com');
+          $mail->Subject = "teste";
+          $mail->Body = "<strong>Essa é uma mensagem de teste</strong>";
+          $mail->AltBody = "teste";
+          $mail->AddAddress($professor['email']);
+
+          if ($mail->Send())
+            echo 'Email enviado com sucesso';
+          else
+            echo 'Erro ao enviar o email: '.$mail->ErrorInfo;
+
+          echo "<pre>";
+          print_r($professor);
+          echo "</pre>";
+          exit();
 
           if ($this->Professor_model->insert($professor)) {
             $idProfessor = $this->db->insert_id(); // Pega o ID do Professor cadastrado
