@@ -8,7 +8,7 @@
   class Disciplina extends CI_Controller {
 
     public function index () {
-      if (verificaSessao() && verificaNivelPagina(array(1,2)))
+      if (verificaSessao() && verificaNivelPagina(array(1)))
         $this->cadastro();
       else
         redirect('/');
@@ -28,7 +28,7 @@
       */
     public function cadastro () {
       // Carrega a biblioteca para validação dos dados.
-      if (verificaSessao() && verificaNivelPagina(array(1,2))) {
+      if (verificaSessao() && verificaNivelPagina(array(1))) {
         $this->load->library(array('form_validation','session'));
         $this->load->helper(array('form','url'));
         $this->load->model(array('Disciplina_model'));
@@ -82,7 +82,7 @@
       */
     public function desativar ($id) {
       // Carrega os modelos necessarios
-      if (verificaSessao() && verificaNivelPagina(array(1,2))) {
+      if (verificaSessao() && verificaNivelPagina(array(1))) {
         $this->load->model(array('Disciplina_model','CursoTemDisciplina_model'));
 
         if ($this->CursoTemDisciplina_model->hasRelation($id) != 0)
@@ -99,7 +99,7 @@
     }
 
     public function ativar ($id) {
-      if (verificaSessao() && verificaNivelPagina(array(1,2))) {
+      if (verificaSessao() && verificaNivelPagina(array(1))) {
         $this->load->model('Disciplina_model');
 
         if ( $this->Disciplina_model->able($id) )
@@ -120,7 +120,7 @@
       * @param $id ID da disciplina
       */
     public function atualizar () {
-      if (verificaSessao() && verificaNivelPagina(array(1,2))) {
+      if (verificaSessao() && verificaNivelPagina(array(1))) {
         $this->load->library('form_validation');
         $this->load->model(array('Disciplina_model'));
 

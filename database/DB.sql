@@ -95,6 +95,8 @@ CREATE TABLE IF NOT EXISTS Usuario (
 );
 
 INSERT INTO Usuario VALUES (NULL, 'admin','1234567','admin@admin.com','46070d4bf934fb0d4b06d9e2c46e346944e322444900a435d7d9a95e6d7435f5', TRUE);
+INSERT INTO Usuario VALUES(NULL, 'Mario', '7654321', 'mario@mario','46070d4bf934fb0d4b06d9e2c46e346944e322444900a435d7d9a95e6d7435f5',TRUE); 
+
 
 CREATE TABLE IF NOT EXISTS Professor(
 	id 					    INT 			    NOT NULL 			AUTO_INCREMENT,
@@ -110,6 +112,7 @@ CREATE TABLE IF NOT EXISTS Professor(
   CONSTRAINT fk_professor_usuario
     FOREIGN KEY(id) REFERENCES Usuario(id)
 );
+INSERT INTO Professor VALUES(2, '1980-06-21',TRUE, 1,1,);
 
 CREATE TABLE IF NOT EXISTS Competencia(
 	idProfessor			INT 			NOT NULL,

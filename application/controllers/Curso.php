@@ -9,7 +9,7 @@
 
     public function index () {
 
-      if (verificaSessao() && verificaNivelPagina(array(1,2)))
+      if (verificaSessao() && verificaNivelPagina(array(1)))
         $this->cadastrar();
       else
         redirect('/');
@@ -24,7 +24,7 @@
     */
     public function cadastrar () {
 
-      if (verificaSessao() && verificaNivelPagina(array(1,2))) {
+      if (verificaSessao() && verificaNivelPagina(array(1))) {
         //Carregar as bibliotecas de validação
         $this->load->library('form_validation');
         $this->load->helper(array('form','dropdown'));
@@ -104,7 +104,7 @@
     */
     public function atualizar () {
 
-      if (verificaSessao() && verificaNivelPagina(array(1,2))) {
+      if (verificaSessao() && verificaNivelPagina(array(1))) {
         $this->load->library('form_validation');
         $this->load->helper('dropdown');
         $this->load->model(array('CursoTemDisciplina_model','CursoTemPeriodo_model','Curso_model','Grau_model','Periodo_model','disciplina_model'));
@@ -179,7 +179,7 @@
     */
     public function deletar ($id) {
 
-      if (verificaSessao() && verificaNivelPagina(array(1,2))) {
+      if (verificaSessao() && verificaNivelPagina(array(1))) {
         $this->load->model(array('Curso_model'));
 
         if ($this->Curso_model->deleteCurso($id))
@@ -194,7 +194,7 @@
     }
 
 	   public function ativar ($id) {
-       if (verificaSessao() && verificaNivelPagina(array(1,2))){
+       if (verificaSessao() && verificaNivelPagina(array(1))){
          $this->load->model('Curso_model');
 
          if ( $this->Curso_model->able($id) )
