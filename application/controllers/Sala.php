@@ -42,11 +42,12 @@
 
                  // Verifica se o formulario é valido
                  if ($this->form_validation->run() == FALSE) {
+                   $this->session->set_flashdata('formDanger','<strong>Não foi possível cadastrar a sala, pois existe(m) erro(s) no formulário:</strong>');
 
-      			$this->session->set_flashdata('formDanger','<strong>Não foi possível cadastrar a sala, pois existe(m) erro(s) no formulário:</strong>');
-
-                  $dados['salas'] = $this->Sala_model->getAll();
-           	      $this->load->view('salas',$dados);
+                   $dados['salas'] = $this->Sala_model->getAll();
+           	       $this->load->view('includes/header',$dados);
+                   $this->load->view('includes/sidebar');
+                   $this->load->view('salas');
 
                  } else {
 

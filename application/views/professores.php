@@ -42,6 +42,7 @@
 										<tr>
 											<th>Nome</th>
 											<th>Matrícula</th>
+											<th>Email</th>
 											<th>Data Nascimento</th>
 											<th>Nível acadêmico<th>
 											<th>Contrato<th>
@@ -218,13 +219,13 @@
     <script type="text/javascript" src="<?= base_url('assets/multi-select/js/jquery.multi-select.js')?>"></script>
     <script>
     	$("#professorDisciplinas").multiSelect({
-			selectableHeader: "<div class='multiselect'>Selecione as disciplinas</div>",
-			selectionHeader: "<div class='multiselect'>Disciplinas selecionadas</div>"
-		});
+				selectableHeader: "<div class='multiselect'>Selecione as disciplinas</div>",
+				selectionHeader: "<div class='multiselect'>Disciplinas selecionadas</div>"
+			});
     	$("#disciplinas").multiSelect({
-			selectableHeader: "<div class='multiselect'>Selecione as disciplinas</div>",
-			selectionHeader: "<div class='multiselect'>Disciplinas selecionadas</div>"
-		});
+				selectableHeader: "<div class='multiselect'>Selecione as disciplinas</div>",
+				selectionHeader: "<div class='multiselect'>Disciplinas selecionadas</div>"
+			});
     </script>
 		<script type="text/javascript">
 			$('#exampleModal').on('show.bs.modal', function (event) {
@@ -239,7 +240,7 @@
 				var recipientnascimento = button.data('whatevernascimento')
 				var recipientnivelAcademico = button.data('whatevernivel')
 				var recipientregimeContrato = button.data('whatevercontrato')
-				var recipientcoordenador = button.data('whatevercoordenador')				
+				var recipientcoordenador = button.data('whatevercoordenador')
 				var recipientid = button.data('whateverid')
 				var url = '<?= base_url('index.php/Professor/disciplinas/') ?>'+recipientid;
 				$.getJSON(url,function (response) {
@@ -319,6 +320,7 @@
 		<script type="text/javascript">
 			$(document).ready(function () {
 				$("input[name=nascimento]").mask('00/00/0000', {placeholder: "__/__/____"});
+				$("input[name='recipient-nascimento']").mask('00/00/0000', {placeholder: "__/__/____"});
 			});
 		</script>
 
