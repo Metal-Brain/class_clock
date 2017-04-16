@@ -239,7 +239,7 @@
 				var recipientnascimento = button.data('whatevernascimento')
 				var recipientnivelAcademico = button.data('whatevernivel')
 				var recipientregimeContrato = button.data('whatevercontrato')
-				var recipientcoordenador = button.data('whatevercoordenador')
+				var recipientcoordenador = button.data('whatevercoordenador')				
 				var recipientid = button.data('whateverid')
 				var url = '<?= base_url('index.php/Professor/disciplinas/') ?>'+recipientid;
 				$.getJSON(url,function (response) {
