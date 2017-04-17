@@ -35,8 +35,8 @@
       $this->form_validation->set_rules('nome', 'nome',array('required', 'min_length[5]','trim','ucwords'));
       $this->form_validation->set_rules('sigla', 'sigla', array('required', 'max_length[5]','alpha', 'is_unique[Curso.sigla]', 'strtoupper'));
       $this->form_validation->set_rules('qtdSemestres','quantidade de semestres', array('required','integer','greater_than[0]','less_than[20]'));
-      $this->form_validation->set_rules('periodo[]', 'periodo', array('required'));
-      $this->form_validation->set_rules('grau','grau',array('greater_than[0]'));
+      $this->form_validation->set_rules('periodo[]', 'período', array('required'));
+      $this->form_validation->set_rules('grau','grau',array('greater_than[0]'), array('greater_than' => 'Selecione o grau.'));
 
       //delimitador
       $this->form_validation->set_error_delimiters('<p class="text-danger">','</p>');
@@ -106,7 +106,7 @@
       $this->form_validation->set_rules('cursoSigla', 'sigla do curso', array('required', 'max_length[5]', 'strtoupper'));
       $this->form_validation->set_rules('cursoQtdSemestres','quantidade de semestres', array('required','integer','greater_than[0]','less_than[10]'));
       $this->form_validation->set_rules('cursoPeriodos[]','período',array('required'));
-      $this->form_validation->set_rules('cursoGrau','grau',array('greater_than[0]'));
+      $this->form_validation->set_rules('cursoGrau','grau',array('greater_than[0]'), array('greater_than' => 'Selecione o grau.'));
 
       //delimitador
       $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');

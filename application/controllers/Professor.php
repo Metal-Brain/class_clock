@@ -42,7 +42,7 @@ class Professor extends CI_Controller {
         $this->form_validation->set_rules('nascimento', 'data de nascimento', array('callback_date_check'));
         $this->form_validation->set_rules('disciplinas[]', 'disciplinas', array('required'));
         $this->form_validation->set_rules('nivel', 'nivel', array('greater_than[0]'), array('greater_than' => 'Selecione o nivel acadêmico'));
-        $this->form_validation->set_rules('contrato', 'contrato', array('greater_than[0]'), array('greater_than' => 'Selecione um contrato'));
+        $this->form_validation->set_rules('contrato', 'contrato', array('greater_than[0]'), array('greater_than' => 'Selecione um contrato.'));
 
         // Definição dos delimitadores
         $this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
