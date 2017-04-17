@@ -1,4 +1,4 @@
-                <div id="content" class="col-md-10">
+                <div id="content" class="col-xs-12 col-sm-10 col-md-10">
                     <?php if ($this->session->flashdata('success')) : ?>
                       <!-- Alert de sucesso -->
                       <div class="text-center alert alert-success" role="alert">
@@ -16,11 +16,11 @@
                     <?php endif; ?>
 
                     <?php if (validation_errors()): ?>
-          						<div class="alert alert-danger text-center">
-          							<p><?= $this->session->flashdata('formDanger') ?></p>
-          							<?= validation_errors() ?>
-          						</div>
-          					<?php endif; ?>
+						<div class="alert alert-danger text-center">
+							<p><?= $this->session->flashdata('formDanger') ?></p>
+							<?= validation_errors() ?>
+						</div>
+					<?php endif; ?>
 
                     <h1>Cursos</h1>
 
@@ -77,44 +77,65 @@
                         <!-- Aqui é o formulário de registro do novo item-->
                         <div id="new" class="tab-pane fade">
                             <h3>Cadastrar Curso</h3>
-                            <?= form_open('Curso/cadastrar') ?>
-                                <div class="form-group percent-40">
-                                    <?= form_label('Nome','nome') ?>
-                                    <?= form_input('nome',set_value('nome'),array('class'=>'form-control','placeholder'=>'ex: Análise e Desenvolvimento de Sistemas')) ?>
-                                    <?= form_error('nome') ?>
-                                </div>
-                                <div class="form-group percent-40">
-                                    <?= form_label('Sigla','sigla') ?>
-                                    <?= form_input('sigla',set_value('sigla'),array('class'=>'form-control','placeholder'=>'ex: ADS')) ?>
-                                    <?= form_error('sigla') ?>
-                                </div>
-                                <div class="form-group">
-                                  <?= form_label('Quantidade de semestres','qtdSemestres') ?>
-                                  <?= form_input(array('name'=>'qtdSemestres','value'=>set_value('qtdSemestres'),'type'=>'number','maxlength'=>'2','pattern'=>'[0-9]+$','class'=>'form-control percent-10','placeholder'=>'ex: 6')) ?>
-                                  <?= form_error('qtdSemestres') ?>
-                                </div>
-                                <div class="form-group">
-                                    <label>Período</label>
-                                    <div class="form-group percent-15">
-                                        <?= form_dropdown('periodo[]',$periodo,null,array('id'=>'periodos','multiple'=>'multiple')) ?>
-                                        <?= form_error('periodo[]') ?>
-                                    </div>
-                                </div>
 
-                                <div class="form-group">
-                                    <label>Grau</label>
-                                    <!-- DropListGrau (Droplist) -->
-                                    <div class="form-group percent-15">
-                                        <div id="u1" class="ax_default droplist" data-label="DropListGrau">
-                                          <?= form_dropdown('grau',$graus,set_value('grau'),array('class'=>'form-control')) ?>
-                                          <?= form_error('grau') ?>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group disc">
-                                  <label>Disciplinas </label>
-                                  <?= form_dropdown('disciplinas[]',$disciplinas,null,array('id'=>'disciplinas','multiple'=>'multiple')) ?>
-                                </div>
+							<?= form_open('Curso/cadastrar') ?>
+								<div class="row">
+									<div class="form-group col-md-5">
+										<?= form_label('Nome','nome') ?>
+										<?= form_input('nome',set_value('nome'),array('class'=>'form-control','placeholder'=>'ex: Análise e Desenvolvimento de Sistemas')) ?>
+										<?= form_error('nome') ?>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="form-group col-md-2">
+										<?= form_label('Sigla','sigla') ?>
+										<?= form_input('sigla',set_value('sigla'),array('class'=>'form-control','placeholder'=>'ex: ADS')) ?>
+									</div>
+
+									<!-- Parei aqui! Minska -->
+									<div class="block">
+										<?= form_error('sigla') ?>
+									</div>
+								</div>
+
+
+
+								<div class="row">
+									<?= form_label('Quantidade de semestres','qtdSemestres', array('class'=>'block padding-15-lr')) ?>
+									<div class="form-group col-md-2">
+									  <?= form_input(array('name'=>'qtdSemestres','value'=>set_value('qtdSemestres'),'type'=>'number','maxlength'=>'2','pattern'=>'[0-9]+$','class'=>'form-control','placeholder'=>'ex: 6')) ?>
+									  <?= form_error('qtdSemestres') ?>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="form-group col-md-5">
+										<label>Período</label>
+										<?= form_dropdown('periodo[]',$periodo,null,array('id'=>'periodos','multiple'=>'multiple')) ?>
+										<?= form_error('periodo[]') ?>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="form-group col-md-4">
+										<label>Grau</label>
+										<!-- DropListGrau (Droplist) -->
+										<div class="form-group percent-15">
+											<div id="u1" class="ax_default droplist" data-label="DropListGrau">
+											  <?= form_dropdown('grau',$graus,set_value('grau'),array('class'=>'form-control')) ?>
+											  <?= form_error('grau') ?>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="form-group col-md-5">
+										<label>Disciplinas </label>
+										<?= form_dropdown('disciplinas[]',$disciplinas,null,array('id'=>'disciplinas','multiple'=>'multiple')) ?>
+									</div>
+								</div>
 
                                 <div class="form-group">
                                     <?= form_submit('submit','Cadastrar',array('class'=>'btn btn-primary')) ?>
@@ -194,10 +215,22 @@
         <!-- multi-select -->
         <script type="text/javascript" src="<?= base_url('assets/multi-select/js/jquery.multi-select.js')?>"></script>
         <script>
-          $("#cursoPeriodos").multiSelect();
-          $("#periodos").multiSelect();
-          $("#cursoDisciplinas").multiSelect();
-          $("#disciplinas").multiSelect();
+			$("#cursoPeriodos").multiSelect({
+				selectableHeader: "<div class='multiselect'>Selecione o(s) período(s)</div>",
+				selectionHeader: "<div class='multiselect'>Período(s) selecionado(s)</div>"
+			});
+			$("#periodos").multiSelect({
+				selectableHeader: "<div class='multiselect'>Selecione o(s) período(s)</div>",
+				selectionHeader: "<div class='multiselect'>Período(s) selecionado(s)</div>"
+			});
+			$("#cursoDisciplinas").multiSelect({
+				selectableHeader: "<div class='multiselect'>Selecione as disciplinas</div>",
+				selectionHeader: "<div class='multiselect'>Disciplinas selecionadas</div>"
+			});
+			$("#disciplinas").multiSelect({
+				selectableHeader: "<div class='multiselect'>Selecione as disciplinas</div>",
+				selectionHeader: "<div class='multiselect'>Disciplinas selecionadas</div>"
+			});
         </script>
         <script type="text/javascript">
             $('#exampleModal').on('show.bs.modal', function (event) {

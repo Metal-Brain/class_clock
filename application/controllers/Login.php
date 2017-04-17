@@ -9,7 +9,7 @@
 
     public function index(){
 
-      $this->load->model('Login_model');
+      $this->load->model('Usuario_model');
 
       $this->form_validation->set_rules('matricula','matrícula',array('required','numeric','exact_length[7]'));
       $this->form_validation->set_rules('password','Senha',array('required'));
@@ -24,7 +24,7 @@
           'senha'     => hash('sha256', $this->input->post('password'))
         );
 
-        $usuario = $this->Login_model->validate($usuario);
+        $usuario = $this->Usuario_model->validate($usuario);
 
         // verifica se foi encontrado o usuário
         if ($usuario == NULL) {
@@ -32,7 +32,7 @@
         } else {
           $this->session->set_userdata($usuario);
 
-          if ($this->Login_model->isProfessor($usuario)) {
+          if ($this->Usuario_model->isProfessor($usuario)) {
             $this->session->set_userdata('nivel', 2);
             redirect('Professor/preferencia');
           }
@@ -41,7 +41,7 @@
           redirect('Curso');
 
         }
-
+        redirect('/');
       }
 
     }

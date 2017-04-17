@@ -31,44 +31,43 @@
              // Carrega a biblioteca para validação dos dados.
       		   $this->load->library(array('form_validation','session'));
       		   $this->load->helper(array('form','url'));
-                 $this->load->model(array("Sala_model"));
+             $this->load->model(array("Sala_model"));
 
-                 // Definir as regras de validação para cada campo do formulário.
-                 $this->form_validation->set_rules('nSala', 'número da sala', array('required', 'max_length[5]', 'is_unique[Sala.nSala]','strtoupper'));
-                 $this->form_validation->set_rules('capMax', 'capacidade máxima', array('required', 'integer', 'greater_than[0]'));
-                 $this->form_validation->set_rules('tipo', 'tipo', array('required','min_length[5]','ucwords'));
-                // Definição dos delimitadores
-                 $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
+             // Definir as regras de validação para cada campo do formulário.
+             $this->form_validation->set_rules('nSala', 'número da sala', array('required', 'max_length[5]', 'is_unique[Sala.nSala]','strtoupper'));
+             $this->form_validation->set_rules('capMax', 'capacidade máxima', array('required', 'integer', 'greater_than[0]'));
+             $this->form_validation->set_rules('tipo', 'tipo', array('required','min_length[5]','ucwords'));
+             // Definição dos delimitadores
+             $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
 
-                 // Verifica se o formulario é valido
-                 if ($this->form_validation->run() == FALSE) {
+             // Verifica se o formulario é valido
+             if ($this->form_validation->run() == FALSE) {
+               $this->session->set_flashdata('formDanger','<strong>Não foi possível cadastrar a sala, pois existe(m) erro(s) no formulário:</strong>');
 
-      			$this->session->set_flashdata('formDanger','<strong>Não foi possível cadastrar a sala, pois existe(m) erro(s) no formulário:</strong>');
+               $dados['salas'] = $this->Sala_model->getAll();
+           	   $this->load->view('includes/header',$dados);
+               $this->load->view('includes/sidebar');
+               $this->load->view('salas');
 
-                  $dados['salas'] = $this->Sala_model->getAll();
-                  $this->load->view('includes/header', $dados);
-                  $this->load->view('includes/sidebar');
-           	      $this->load->view('salas',$dados);
+             } else {
 
-                 } else {
+               // Pega os dados do formulário
+               $sala = array(
+                 'nSala'      => $this->input->post("nSala"),
+                 'capMax'     => $this->input->post('capMax'),
+                 'tipo'       => $this->input->post("tipo")
+               );
 
-                   // Pega os dados do formulário
-                   $sala = array(
-                     'nSala'      => $this->input->post("nSala"),
-                     'capMax'     => $this->input->post('capMax'),
-                     'tipo'       => $this->input->post("tipo")
-                   );
-
-                   if ($this->Sala_model->insert($sala)){
-                     $this->session->set_flashdata('success','Sala cadastrada com sucesso');
-                   } else {
-                     $this->session->set_flashdata('danger','Não foi possível cadastrar a sala, tente novamente ou entre em contato com o administrador do sistema.');
-                   }
-                   redirect("Sala/cadastro");
-                }
-           }else{
-             redirect('/');
-           }
+               if ($this->Sala_model->insert($sala)){
+                 $this->session->set_flashdata('success','Sala cadastrada com sucesso');
+               } else {
+                 $this->session->set_flashdata('danger','Não foi possível cadastrar a sala, tente novamente ou entre em contato com o administrador do sistema.');
+               }
+               redirect("Sala/cadastro");
+            }
+          } else {
+            redirect('/');
+          }
          }
            /**
              * Deleta uma sala.

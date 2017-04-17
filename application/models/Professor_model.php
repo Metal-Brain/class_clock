@@ -14,7 +14,8 @@
       * @return Retorna um array com todos os professores
       */
     public function getAll () {
-      $this->db->select('Professor.*, Contrato.nome AS contrato, Nivel.nome AS nivel');
+      $this->db->select('Usuario.*, Professor.*, Contrato.nome AS contrato, Nivel.nome AS nivel');
+      $this->db->join('Usuario','Usuario.id = Professor.id');
       $this->db->join('Contrato','Contrato.id = Professor.idContrato');
       $this->db->join('Nivel','Nivel.id = Professor.idNivel');
       $result = $this->db->get('Professor');
@@ -39,12 +40,21 @@
     /**
       * Insere um novo professor na base de dados.
       * @author Yasmin Sayad
-	  * @since 2017/04/03
+	    * @since 2017/04/03
       * @param Array $professor - array com os dados do professor
       * @return Retorna um boolean TRUE caso a inserção seja realizada com sucesso
       */
-    public function insert ($professor) {
-      return $this->db->insert('Professor', $professor);
+    public function insert ($idUsuario, $professor) {
+
+      $dados = array(
+        'id'          => $idUsuario,
+        'nascimento'  => $professor['nascimento'],
+        'coordenador' => $professor['coordenador'],
+        'idContrato'  => $professor['idContrato'],
+        'idNivel'     => $professor['idNivel']
+      );
+
+      return $this->db->insert('Professor', $dados);
     }
 
     /**
@@ -55,8 +65,16 @@
       * @return Retorna um boolean TRUE caso os dados sejam atualizados com sucesso
       */
     public function update ($idProfessor, $professor) {
+
+      $dados = array(
+        'nascimento'  => $professor['nascimento'],
+        'coordenador' => $professor['coordenador'],
+        'idContrato'  => $professor['idContrato'],
+        'idNivel'     => $professor['idNivel']
+      );
+
       $this->db->where('id', $idProfessor);
-      $result = $this->db->update('Professor', $professor);
+      $result = $this->db->update('Professor', $dados);
 
       return $result;
     }
@@ -70,7 +88,7 @@
       */
     public function disable ($id) {
       $this->db->where('id', $id);
-      $result = $this->db->update('Professor',array('status'=>FALSE));
+      $result = $this->db->update('Usuario',array('status'=>FALSE));
 
       return $result;
     }
@@ -84,7 +102,7 @@
       */
     public function able ($id) {
       $this->db->where('id',$id);
-      $result = $this->db->update('Professor',array('status'=>TRUE));
+      $result = $this->db->update('Usuario',array('status'=>TRUE));
 
       return $result;
     }

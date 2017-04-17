@@ -1,7 +1,4 @@
-
-
 				<div id="content" class="col-md-10">
-
 					<?php if (validation_errors()): ?>
 						<div class="alert alert-danger text-center">
 							<p><?= $this->session->flashdata('formDanger') ?></p>
@@ -45,6 +42,7 @@
 										<tr>
 											<th>Nome</th>
 											<th>Matrícula</th>
+											<th>Email</th>
 											<th>Data Nascimento</th>
 											<th>Nível acadêmico<th>
 											<th>Contrato<th>
@@ -57,6 +55,7 @@
 												<?= ($professor['status'] ? '<tr>' : '<tr class="danger">') ?>
 														<td><?= $professor['nome'] ?></td>
 														<td><?= $professor['matricula'] ?></td>
+														<td><?= $professor['email'] ?></td>
 														<td><?= sqlToBr($professor['nascimento']) ?></td>
 														<td><?= $professor['nivel'] ?></td>
 														<td></td>
@@ -64,7 +63,7 @@
 														<td></td>
 														<td><?= ($professor['status']) ? "Ativo" : "Inativo"?></td>
 														<td><?php if($professor['status']): ?>
-															<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whatevernome="<?= $professor['nome']?>" data-whateverid="<?= $professor['id']?>" data-whatevercoordenador="<?= $professor['coordenador']?>" data-whatevercontrato="<?= $professor['idContrato']?>" data-whatevernivel="<?= $professor['idNivel']?>" data-whatevermatricula= "<?= $professor['matricula']?>" data-whatevernascimento= "<?= sqlToBr($professor['nascimento']) ?>"><span class="glyphicon glyphicon-pencil"></span></button>
+															<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whatevernome="<?= $professor['nome']?>" data-whateverid="<?= $professor['id']?>" data-whatevercoordenador="<?= $professor['coordenador']?>" data-whatevercontrato="<?= $professor['idContrato']?>" data-whatevernivel="<?= $professor['idNivel']?>" data-whatevermatricula= "<?= $professor['matricula']?>" data-whateveremail= "<?= $professor['email']?>" data-whatevernascimento= "<?= sqlToBr($professor['nascimento']) ?>"><span class="glyphicon glyphicon-pencil"></span></button>
 															<button onClick="exclude(<?= $professor['id']?>);" type="button" class="btn btn-danger" title="Excluir"><span class="glyphicon glyphicon-remove"></span></button>
 													<?php else:?>
 														<button onClick="able(<?= $professor['id']?>)" type="button" class="btn btn-success" title="Ativar"><span class="glyphicon glyphicon-ok"></span></button>
@@ -90,6 +89,11 @@
 									<label>Matrícula</label>
 									<input type="text" class="form-control percent-20" name="matricula"  maxlength="7" placeholder="ex: cg0000000" value="<?= set_value('matricula')?>"/>
 									<?= form_error('matricula') ?>
+								</div>
+									<div class="form-group percent-40">
+									<label>Email</label>
+									<input type="email" class="form-control percent-40" name="email" placeholder="Email" value="<?= set_value('email')?>"/>
+									<?= form_error('email') ?>
 								</div>
 								<div class="form-group disc">
 									<label>Disciplinas que pode lecionar</label>
@@ -154,6 +158,11 @@
 									<input type="text" class="form-control percent-20" name="recipient-matricula"  id="recipient-matricula" maxlength="7" placeholder="ex: cg0000000" value="<?= set_value('recipient-matricula')?>"/>
 									<?= form_error('recipient-matricula') ?>
 								</div>
+									<div class="form-group">
+									<label>Email</label>
+									<input type="email" class="form-control" name="recipient-email" placeholder="Email" id="recipient-email" value="<?= set_value('email')?>"/>
+									<?= form_error('recipient-email') ?>
+								</div>
 								<div class="form-group percent-50">
 									<label>Disciplinas que pode lecionar: </label>
 									<!-- Pessoal do back-end, aqui o campo de texto deverá auto-completar o que o usuário começar a digitar -->
@@ -210,13 +219,13 @@
     <script type="text/javascript" src="<?= base_url('assets/multi-select/js/jquery.multi-select.js')?>"></script>
     <script>
     	$("#professorDisciplinas").multiSelect({
-			selectableHeader: "<div class='multiselect'>Selecione as disciplinas</div>",
-			selectionHeader: "<div class='multiselect'>Disciplinas selecionadas</div>"
-		});
+				selectableHeader: "<div class='multiselect'>Selecione as disciplinas</div>",
+				selectionHeader: "<div class='multiselect'>Disciplinas selecionadas</div>"
+			});
     	$("#disciplinas").multiSelect({
-			selectableHeader: "<div class='multiselect'>Selecione as disciplinas</div>",
-			selectionHeader: "<div class='multiselect'>Disciplinas selecionadas</div>"
-		});
+				selectableHeader: "<div class='multiselect'>Selecione as disciplinas</div>",
+				selectionHeader: "<div class='multiselect'>Disciplinas selecionadas</div>"
+			});
     </script>
 		<script type="text/javascript">
 			$('#exampleModal').on('show.bs.modal', function (event) {
@@ -226,6 +235,7 @@
 				<!-- Foi criado todos os var caso seja necessario adicionar ou mudar os que já existem-->
 				var recipientnome = button.data('whatevernome')
 				var recipientmatricula = button.data('whatevermatricula')
+				var recipientemail = button.data('whateveremail')
 				var recipientnomeDisciplina = button.data('whatevernomeDisciplina')
 				var recipientnascimento = button.data('whatevernascimento')
 				var recipientnivelAcademico = button.data('whatevernivel')
@@ -248,6 +258,7 @@
 				<!-- Foi criado todos os modal caso seja necessario adicionar ou mudar os que já existem-->
 				modal.find('#recipient-nome').val(recipientnome)
 				modal.find('#recipient-matricula').val(recipientmatricula)
+				modal.find('#recipient-email').val(recipientemail)
 				modal.find('#recipient-nomeDisciplina').val(recipientnomeDisciplina)
 				modal.find('#recipient-nascimento').val(recipientnascimento)
 				modal.find('select[name=recipient-nivelAcademico] option[value='+recipientnivelAcademico+']').prop('selected',true)
@@ -309,6 +320,7 @@
 		<script type="text/javascript">
 			$(document).ready(function () {
 				$("input[name=nascimento]").mask('00/00/0000', {placeholder: "__/__/____"});
+				$("input[name='recipient-nascimento']").mask('00/00/0000', {placeholder: "__/__/____"});
 			});
 		</script>
 
