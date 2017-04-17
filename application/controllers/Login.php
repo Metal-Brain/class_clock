@@ -103,26 +103,36 @@
           $this->session->set_flashdata('danger','Matrícula incorreta ou usuário não cadastrado');
         } else {
           $email = ($usuario['email']);// Pega o email na array referente ao usuário
-          $senha = ($usuario['senha']);// Pega o senha na array referente ao usuário
+          $senha = $this->geraSenha();//gera uma nova senha para o usuario
+          $usuario['senha'] = hash('sha256',$senha);//aplica hash na nova senha
+          if ($this->Login_model->updateSenha($usuario['id'], $usuario)){
+            $this->email->from("jeanfelipe.brock@gmail.com", 'Suporte Class_Clock');//Cria a origem do email
+            $this->email->subject("Recuperação de Senha");//Seta o titulo do email
 
-          $this->email->from("jeanfelipe.brock@gmail.com", 'Meu E-mail');//Cria a origem do email
-          $this->email->subject("Recuperação de Senha");//Seta o titulo do email
+            $this->email->to($email);//Seta o destinatario do email no caso a variavel $email da array usuario
+            $this->email->message("Senha de Recuperação: $senha");//Seta a mensagem do email no caso passando a senha
 
-          $this->email->to($email);//Seta o destinatario do email no caso a variavel $email da array usuario
-
-          $this->email->message("Senha de Recuperação: $senha");//Seta a mensagem do email no caso passando a senha
-
-          $this->email->attach('assets/img/ifsp.jpg');//Seta uma imagem pro corpo do email
-          if($this->email->send())//Verifica se obteve sucesso no envio do email
-          {
-              $this->session->set_flashdata('success','Email enviado com sucesso!');//Apresenta mensagem de sucesso
-              $this->load->view('login');//Carrega a view login
+            $this->email->attach('assets/img/ifsp.jpg');//Seta uma imagem pro corpo do email
+            if($this->email->send())//Verifica se obteve sucesso no envio do email
+            {
+                $this->session->set_flashdata('success','Email enviado com sucesso!');//Apresenta mensagem de sucesso
+                redirect('/');//Carrega a view login
+            }else{
+                $this->session->set_flashdata('error',$this->email->print_debugger());//Debuga caso tenha algum erro no envio do email
+                redirect('/');//Carrega a view login
+            }
           }else{
-              $this->session->set_flashdata('error',$this->email->print_debugger());//Debuga caso tenha algum erro no envio do email
-              $this->load->view('login');//Carrega a view login
+            $this->session->set_flashdata('danger','Erro ao gerar nova senha');//Apresenta mensagem de sucesso
+            redirect('/');//Carrega a view login
           }
         }
     }
+   }
+
+   function geraSenha(){
+     $caracteres = "0123456789ABCDEFGHIJKLMNOPQRSTUVYXWZabcdefghijklmnopqrstuvwxyz!@#$%¨&*()_+=";
+     $senha = substr(str_shuffle($caracteres),0,10);
+     return $senha;
    }
  }
 ?>
