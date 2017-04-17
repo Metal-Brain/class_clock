@@ -53,7 +53,9 @@
 
         $this->load->view('includes/header',$dados);
         $this->load->view('includes/sidebar');
-        $this->load->view('cursos');
+        $this->load->view('cursos/cursos');
+        $this->load->view('includes/footer');
+        $this->load->view('cursos/js_cursos');
 
       }else{
 
@@ -121,7 +123,9 @@
         
         $this->load->view('includes/header',$dados);
         $this->load->view('includes/sidebar');
-        $this->load->view('cursos');
+        $this->load->view('cursos/cursos');
+        $this->load->view('includes/footer');
+        $this->load->view('cursos/js_cursos');
       }else{
 
         $idCurso = $this->input->post('cursoId');
