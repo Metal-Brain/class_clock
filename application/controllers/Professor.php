@@ -252,7 +252,7 @@
 
             $this->session->set_flashdata('success','Dados atualizados com sucesso');
           } else {
-            $this->session->set_flashdata('danger','Não foi possivel atualizar os dados do professor, tente novamente ou entre em contato com o administrador do sistema. Caso tenha <strong>alterado a matrícula</strong> verifique se a mesma já está em uso.');
+            $this->session->set_flashdata('danger','Não foi possivel atualizar os dados do professor, tente novamente ou entre em contato com o administrador do sistema. Caso tenha <strong>alterado a matrícula</strong> verifique se a mesma já está existe.');
           }
 
           redirect('Professor/atualizar');
