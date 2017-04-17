@@ -106,7 +106,7 @@
           $senha = $this->geraSenha();//gera uma nova senha para o usuario
           $usuario['senha'] = hash('sha256',$senha);//aplica hash na nova senha
           if ($this->Login_model->updateSenha($usuario['id'], $usuario)){
-            $this->email->from("jeanfelipe.brock@gmail.com", 'Suporte Class_Clock');//Cria a origem do email
+            $this->email->from("metalcodeifsp@gmail.com", 'Suporte Class_Clock');//Cria a origem do email
             $this->email->subject("Recuperação de Senha");//Seta o titulo do email
 
             $this->email->to($email);//Seta o destinatario do email no caso a variavel $email da array usuario
