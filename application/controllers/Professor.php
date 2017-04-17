@@ -44,7 +44,6 @@
         $this->form_validation->set_rules('matricula', 'matrícula', array('required','exact_length[7]', 'numeric','is_unique[Usuario.matricula]','strtoupper'));
         $this->form_validation->set_rules('nascimento', 'data de nascimento', array('callback_date_check'));
         $this->form_validation->set_rules('email','email',array('required','valid_email','is_unique[Usuario.email]'));
-        $this->form_validation->set_rules('disciplinas[]', 'disciplinas', array('required'));
         $this->form_validation->set_rules('nivel', 'nivel', array('greater_than[0]'),array('greater_than'=>'Selecione o nivel acadêmico'));
         $this->form_validation->set_rules('contrato','contrato',array('greater_than[0]'),array('greater_than'=>'Selecione um contrato'));
 
@@ -208,7 +207,6 @@
         $this->form_validation->set_rules('recipient-matricula', 'matrícula', array('required','exact_length[7]', 'numeric','strtoupper'));
         $this->form_validation->set_rules('recipient-nascimento', 'data de nascimento', array('callback_date_check'));
         $this->form_validation->set_rules('recipient-email','email',array('required','valid_email'));
-        $this->form_validation->set_rules('professorDisciplinas[]', 'disciplinas', array('required'));
         $this->form_validation->set_rules('recipient-nivelAcademico', 'nivel', array('greater_than[0]'),array('greater_than'=>'Selecione o nivel acadêmico'));
         $this->form_validation->set_rules('recipient-contrato','contrato',array('greater_than[0]'),array('greater_than'=>'Selecione um contrato'));
         // Definição dos delimitadores
@@ -254,7 +252,7 @@
 
             $this->session->set_flashdata('success','Dados atualizados com sucesso');
           } else {
-            $this->session->set_flashdata('danger','Não foi possivel atualizar os dados do professor, tente novamente ou entre em contato com o administrador do sistema. Caso tenha <strong>alterado a matrícula</strong> verifique se já não esteja em uso.');
+            $this->session->set_flashdata('danger','Não foi possivel atualizar os dados do professor, tente novamente ou entre em contato com o administrador do sistema. Caso tenha <strong>alterado a matrícula</strong> verifique se a mesma já está em uso.');
           }
 
           redirect('Professor/atualizar');
