@@ -84,7 +84,7 @@
       $this->load->model(array('Login_model'));// Carrega o model Login_model
 
       //Define regras de validação do formulario!!!
-      $this->form_validation->set_rules('matricula','matrícula',array('required','numeric','exact_length[7]'));
+      $this->form_validation->set_rules('matricula','matrícula',array('required','exact_length[8]'));
       //delimitador
       $this->form_validation->set_error_delimiters('<p class="text-danger">','</p>');
 
@@ -102,6 +102,7 @@
 
         if ($usuario == NULL) {//verifica se o usuario retornado é NULL
           $this->session->set_flashdata('danger','Matrícula incorreta ou usuário não cadastrado');
+          redirect('/');//Carrega a view login
         } else {
           $email = ($usuario['email']);// Pega o email na array referente ao usuário
           $senha = gerate(10);//gera uma nova senha para o usuario
