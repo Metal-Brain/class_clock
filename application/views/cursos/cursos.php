@@ -83,8 +83,9 @@
             <h3>Cadastrar Curso</h3>
 
             <?= form_open('Curso/cadastrar') ?>
+			
             <div class="row">
-                <div class="form-group col-md-5">
+                <div class="form-group col-md-6">
                     <?= form_label('Nome', 'nome') ?>
                     <?= form_input('nome', set_value('nome'), array('class' => 'form-control', 'placeholder' => 'ex: Análise e Desenvolvimento de Sistemas')) ?>
                     <?= form_error('nome') ?>
@@ -92,22 +93,16 @@
             </div>
 
             <div class="row">
-                <div class="form-group col-md-2">
+                <div class="form-group col-md-4">
                     <?= form_label('Sigla', 'sigla') ?>
                     <?= form_input('sigla', set_value('sigla'), array('class' => 'form-control', 'placeholder' => 'ex: ADS')) ?>
-                </div>
-
-                <!-- Parei aqui! Minska -->
-                <div class="block">
-                    <?= form_error('sigla') ?>
+					<?= form_error('sigla') ?>
                 </div>
             </div>
 
-
-
             <div class="row">
                 <?= form_label('Quantidade de semestres', 'qtdSemestres', array('class' => 'block padding-15-lr')) ?>
-                <div class="form-group col-md-2">
+                <div class="form-group col-md-4">
                     <?= form_input(array('name' => 'qtdSemestres', 'value' => set_value('qtdSemestres'), 'type' => 'number', 'maxlength' => '2', 'pattern' => '[0-9]+$', 'class' => 'form-control', 'placeholder' => 'ex: 6')) ?>
                     <?= form_error('qtdSemestres') ?>
                 </div>
@@ -154,53 +149,76 @@
 <!-- Aqui é o Modal de alteração dos cursos-->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
     <div class="modal-dialog" role="document">
-        <div class="modal-content">
+        <div class="modal-content col-md-12">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="exampleModalLabel">Cursos</h4>
             </div>
             <div class="modal-body">
-                <?= form_open('Curso/atualizar') ?>
-                <div class="form-group">
-                    <input type="hidden" name="cursoId" value="" id="recipient-id">
-                </div>
-                <div class="form-group">
-                    <?= form_label('Sigla:', 'recipient-sigla', array('class' => 'control-label')) ?>
-                    <?= form_input('cursoSigla', set_value('cursoSigla'), array('class' => 'form-control', 'id' => 'recipient-sigla')) ?>
-                    <?= form_error('cursoSigla') ?>
-                </div>
-                <div class="form-group">
-                    <?= form_label('Nome:', 'recipient-nome', array('class' => 'control-label')) ?>
-                    <?= form_input('nomeCurso', set_value('nomeCurso'), array('class' => 'form-control', 'id' => 'recipient-nome')) ?>
-                    <?= form_error('nomeCurso') ?>
-                </div>
-                <div class="form-group">
-                    <?= form_label('Quantidade de Semestres:', 'recipient-semestres', array('class' => 'control-label')) ?>
-                    <?= form_input('cursoQtdSemestres', set_value('cursoQtdSemestres'), array('pattern' => '[0-9]+$', 'maxlength' => '2', 'id' => 'recipient-semestres', 'class' => 'form-control')) ?>
-                    <?= form_error('cursoQtdSemestres') ?>
-                </div>
-                <!-- DropListPeriodo (Droplist) -->
-                <div class="form-group percent-40 inline">
-                    <?= form_dropdown('cursoPeriodos[]', $periodo, null, array('id' => 'cursoPeriodos', 'multiple' => 'multiple')) ?>
-                    <?= form_error('cursoPeriodos[]') ?>
-                </div>
-                <br/>
-                <!-- DropListGrau (Droplist) -->
-                <div class="form-group percent-40 inline">
-                    <label for="curso-name" class="control-label">Grau:</label>
-                    <?= form_dropdown('cursoGrau', $graus, null, array('class' => 'form-control')) ?>
-                    <?= form_error('cursoGrau') ?>
-                </div>
-                <div class="form-group disc">
-                    <label>Disciplinas</label>
-                    <?= form_dropdown('cursoDisciplinas[]', $disciplinas, null, array('id' => 'cursoDisciplinas', 'multiple' => 'multiple')) ?>
-                </div>
+				
+				<?= form_open('Curso/atualizar') ?>
+				
+				<div class="form-group">
+					<input type="hidden" name="cursoId" value="" id="recipient-id">
+				</div>
+				
+				<div class="row">
+					<div class="form-group col-md-11">
+						<?= form_label('Nome:', 'recipient-nome', array('class' => 'control-label')) ?>
+						<?= form_input('nomeCurso', set_value('nomeCurso'), array('class' => 'form-control', 'id' => 'recipient-nome')) ?>
+						<?= form_error('nomeCurso') ?>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="form-group col-md-8">
+						<?= form_label('Sigla:', 'recipient-sigla', array('class' => 'control-label')) ?>
+						<?= form_input('cursoSigla', set_value('cursoSigla'), array('class' => 'form-control', 'id' => 'recipient-sigla')) ?>
+						<?= form_error('cursoSigla') ?>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="form-group col-md-8">
+						<?= form_label('Quantidade de Semestres:', 'recipient-semestres', array('class' => 'control-label')) ?>
+						<?= form_input('cursoQtdSemestres', set_value('cursoQtdSemestres'), array('pattern' => '[0-9]+$', 'maxlength' => '2', 'id' => 'recipient-semestres', 'class' => 'form-control')) ?>
+						<?= form_error('cursoQtdSemestres') ?>
+					</div>
+				</div>
+				
+				<div class="row">
+					<!-- DropListPeriodo (Droplist) -->
+					<div class="form-group col-md-9" style="background-color: #FE1232">
+						<label>Período:</label>
+						<?= form_dropdown('cursoPeriodos[]', $periodo, null, array('id' => 'cursoPeriodos', 'multiple' => 'multiple')) ?>
+						<?= form_error('cursoPeriodos[]') ?>
+					</div>
+				</div>
+				
+				<br/>
+				
+				<div class="row">
+					<!-- DropListGrau (Droplist) -->
+					<div class="form-group col-md-7">
+						<label for="curso-name" class="control-label">Grau:</label>
+						<?= form_dropdown('cursoGrau', $graus, null, array('class' => 'form-control')) ?>
+						<?= form_error('cursoGrau') ?>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="form-group col-md-9">
+						<label>Disciplinas:</label>
+						<?= form_dropdown('cursoDisciplinas[]', $disciplinas, null, array('id' => 'cursoDisciplinas', 'multiple' => 'multiple')) ?>
+					</div>
+				</div>
 
-                <div class="modal-footer">
-                    <?= form_submit('submit', 'Alterar', array('class' => 'btn btn-primary')) ?>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                </div>
-                <?= form_close() ?>
+				<div class="modal-footer">
+				<?= form_submit('submit', 'Alterar', array('class' => 'btn btn-primary')) ?>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+				</div>
+			
+				<?= form_close() ?>
             </div>
         </div>
     </div>

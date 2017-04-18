@@ -109,7 +109,7 @@
       $this->form_validation->set_rules('cursoGrau','grau',array('greater_than[0]'), array('greater_than' => 'Selecione o grau.'));
 
       //delimitador
-      $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
+      $this->form_validation->set_error_delimiters('<p class="text-danger">','</p>');
 
       //condição para o formulario
       if($this->form_validation->run() == FALSE){
