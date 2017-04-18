@@ -71,7 +71,7 @@
 								<form>
 									<div class="form-group input-group">
 										<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-										<input class="form-control" type="text" name='matricula' placeholder="ex: 0000000"/>
+										<?= form_input('matricula',set_value('matricula'), array('class'=>'form-control','placeholder'=>'ex: 0000000','maxlength'=>'7')) ?>
 
 									</div>
 

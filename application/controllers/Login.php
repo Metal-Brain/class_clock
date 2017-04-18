@@ -79,7 +79,8 @@
       */
 
     function enviaEmail(){
-      $this->load->library('email');//Carrega a library email
+      $this->load->library('My_PHPMailer');//Carrega a library My_PHPMailer
+      $this->load->helper('password');//Carrega o helper password
       $this->load->model(array('Login_model'));// Carrega o model Login_model
 
       //Define regras de validação do formulario!!!
@@ -103,18 +104,27 @@
           $this->session->set_flashdata('danger','Matrícula incorreta ou usuário não cadastrado');
         } else {
           $email = ($usuario['email']);// Pega o email na array referente ao usuário
-          $senha = $this->geraSenha();//gera uma nova senha para o usuario
+          $senha = gerate(10);//gera uma nova senha para o usuario
           $usuario['senha'] = hash('sha256',$senha);//aplica hash na nova senha
           if ($this->Login_model->updateSenha($usuario['id'], $usuario)){
-            $this->email->from("metalcodeifsp@gmail.com", 'Suporte Class_Clock');//Cria a origem do email
-            $this->email->subject("Recuperação de Senha");//Seta o titulo do email
 
-            $this->email->to($email);//Seta o destinatario do email no caso a variavel $email da array usuario
-            $this->email->message("Senha de Recuperação: $senha");//Seta a mensagem do email no caso passando a senha
 
-            $this->email->attach('assets/img/ifsp.jpg');//Seta uma imagem pro corpo do email
-            if($this->email->send())//Verifica se obteve sucesso no envio do email
-            {
+            $mail = new PHPMailer();
+            $mail->CharSet = 'UTF-8';
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->Port = 587;
+            $mail->SMTPSecure = 'tls';
+            $mail->SMTPAuth = true;
+            $mail->Username = "metalcodeifsp@gmail.com";
+            $mail->Password = "#metalcode2017#";
+            $mail->setFrom('metalcodeifsp@gmail.com', 'Metalcode');//Cria a origem do email
+            $mail->addAddress($usuario['email'], $usuario['nome']);//add o email e nome
+            $mail->Subject = 'Senha de Recuperação';//Seta o titulo do email
+            $mail->msgHTML('Sua senha: <strong>'.$senha. '</strong>');//Seta a mensagem do email no caso passando a senha
+            $mail->AltBody = 'This is a plain-text message body';
+
+            if ($mail->send()){//Verifica se obteve sucesso no envio do email
                 $this->session->set_flashdata('success','Email enviado com sucesso!');//Apresenta mensagem de sucesso
                 redirect('/');//Carrega a view login
             }else{
@@ -129,10 +139,6 @@
     }
    }
 
-   function geraSenha(){
-     $caracteres = "0123456789ABCDEFGHIJKLMNOPQRSTUVYXWZabcdefghijklmnopqrstuvwxyz!@#$%¨&*()_+=";
-     $senha = substr(str_shuffle($caracteres),0,10);
-     return $senha;
-   }
+
  }
 ?>
