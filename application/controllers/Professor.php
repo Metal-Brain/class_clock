@@ -1,30 +1,32 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php
 
-  /**
-   *  Essa classe é responsavel por todas regras de negócio sobre professores.
-   *  @since 2017/04/03
-   *  @author Yasmin Sayad
-   */
-  class Professor extends CI_Controller {
+defined('BASEPATH') OR exit('No direct script access allowed');
 
-    public function index () {
+/**
+ *  Essa classe é responsavel por todas regras de negócio sobre professores.
+ *  @since 2017/04/03
+ *  @author Yasmin Sayad
+ */
+class Professor extends CI_Controller {
+
+	public function index () {
       if (verificaSessao() && verificaNivelPagina(array(1)))
         $this->cadastrar();
       else
         redirect('/');
-    }
+	}
 
     // =========================================================================
     // ==========================CRUD de professores============================
     // =========================================================================
 
     /**
-      * Valida os dados do forumulário de cadastro de professores.
-      * Caso o formulario esteja valido, envia os dados para o modelo realizar
-      * a persistencia dos dados.
-      * @author Yasmin Sayad
-      * @since 2017/04/03
-      */
+     * Valida os dados do forumulário de cadastro de professores.
+     * Caso o formulario esteja valido, envia os dados para o modelo realizar
+     * a persistencia dos dados.
+     * @author Yasmin Sayad
+     * @since 2017/04/03
+     */
     public function cadastrar() {
       if (verificaSessao() && verificaNivelPagina(array(1))){
         // Carrega a biblioteca para validação dos dados.
@@ -166,6 +168,7 @@
         redirect('/');
       }
 
+        redirect('Professor');
     }
 
     public function ativar ($id) {
@@ -193,7 +196,7 @@
       if (verificaSessao() && verificaNivelPagina(array(1))){
         // Carrega a biblioteca para validação dos dados.
         $this->load->library(array('form_validation'));
-        $this->load->helper(array('form','dropdown','date'));
+        $this->load->helper(array('form', 'dropdown', 'date'));
         $this->load->model(array(
           'Usuario_model',
           'Professor_model',
@@ -211,7 +214,7 @@
         $this->form_validation->set_rules('recipient-nivelAcademico', 'nivel', array('greater_than[0]'),array('greater_than'=>'Selecione o nivel acadêmico'));
         $this->form_validation->set_rules('recipient-contrato','contrato',array('greater_than[0]'),array('greater_than'=>'Selecione um contrato'));
         // Definição dos delimitadores
-        $this->form_validation->set_error_delimiters('<p class="text-danger">','</p>');
+        $this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
 
         // Verifica se o formulario é valido
         if ($this->form_validation->run() == FALSE) {
@@ -227,9 +230,14 @@
           $this->load->view('includes/sidebar');
           $this->load->view('professores');
 
+            $dados['contrato'] = convert($this->Contrato_model->getAll(), TRUE);
+            $dados['nivel'] = convert($this->Nivel_model->getAll(), TRUE);
+            $dados['disciplinas'] = convert($this->Disciplina_model->getAll(TRUE));
+            $dados['professores'] = $this->Professor_model->getAll();
+            $this->load->view('professores/professores',$dados);
         } else {
 
-          $id = $this->input->post('recipient-id');
+            $id = $this->input->post('recipient-id');
 
           // Pega os dados do formulário
           $professor = array(
@@ -270,13 +278,13 @@
      * @since 2017/04/07
      * @param INT $id - ID do professor
      */
-    public function disciplinas ($id) {
-      $this->load->model(array('Competencia_model'));
-      $disciplinas = $this->Competencia_model->getAllDisciplinas($id);
+    public function disciplinas($id) {
+        $this->load->model(array('Competencia_model'));
+        $disciplinas = $this->Competencia_model->getAllDisciplinas($id);
 
-      echo json_encode($disciplinas);
-     }
+        echo json_encode($disciplinas);
+    }
 
-  }
+}
 
 ?>
