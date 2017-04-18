@@ -87,7 +87,7 @@
 								</div>
 								<div class="form-group">
 									<label>Matrícula</label>
-									<input type="text" class="form-control percent-20" name="matricula"  maxlength="7" placeholder="ex: cg0000000" value="<?= set_value('matricula')?>"/>
+									<input type="text" class="form-control percent-20" name="matricula"  maxlength="8" placeholder="ex: cg0000000" value="<?= set_value('matricula')?>"/>
 									<?= form_error('matricula') ?>
 								</div>
 									<div class="form-group percent-40">
@@ -155,7 +155,7 @@
 								</div>
 								<div class="form-group">
 									<label>Matrícula</label>
-									<input type="text" class="form-control percent-20" name="recipient-matricula"  id="recipient-matricula" maxlength="7" placeholder="ex: cg0000000" value="<?= set_value('recipient-matricula')?>"/>
+									<input type="text" class="form-control percent-20" name="recipient-matricula"  id="recipient-matricula" maxlength="8" placeholder="ex: cg0000000" value="<?= set_value('recipient-matricula')?>"/>
 									<?= form_error('recipient-matricula') ?>
 								</div>
 									<div class="form-group">

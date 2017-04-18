@@ -87,14 +87,14 @@ INSERT INTO Nivel (nome) VALUES ('Graduação'),('Pós-Graduação'),('Mestrado'
 CREATE TABLE IF NOT EXISTS Usuario (
 	id 					  INT 			    NOT NULL 			AUTO_INCREMENT,
   nome 			    VARCHAR(32) 	NOT NULL,
-  matricula 		VARCHAR(7)		NOT NULL			UNIQUE,
+  matricula 		VARCHAR(8)		NOT NULL			UNIQUE,
   email         varchar(255)  NOT NULL      UNIQUE,
   senha 		    CHAR(64) 	    NOT NULL,
   `status` 			BOOLEAN       NOT NULL  		DEFAULT TRUE,
   PRIMARY KEY(id)
 );
 
-INSERT INTO Usuario VALUES (NULL, 'admin','1234567','admin@admin.com','46070d4bf934fb0d4b06d9e2c46e346944e322444900a435d7d9a95e6d7435f5', TRUE);
+INSERT INTO Usuario VALUES (NULL, 'admin','cg123456','admin@admin.com','46070d4bf934fb0d4b06d9e2c46e346944e322444900a435d7d9a95e6d7435f5', TRUE);
 
 
 CREATE TABLE IF NOT EXISTS Professor(

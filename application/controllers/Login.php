@@ -11,7 +11,7 @@
 
       $this->load->model('Usuario_model');
 
-      $this->form_validation->set_rules('matricula','matrícula',array('required','numeric','exact_length[7]'));
+      $this->form_validation->set_rules('matricula','matrícula',array('required','exact_length[8]'));
       $this->form_validation->set_rules('password','Senha',array('required'));
 
       if ($this->form_validation->run() == false) {

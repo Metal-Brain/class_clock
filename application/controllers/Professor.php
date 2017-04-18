@@ -41,7 +41,7 @@
 
         // Definir as regras de validação para cada campo do formulário.
         $this->form_validation->set_rules('nome', 'nome do professor', array('required','min_length[5]','max_length[255]','ucwords'));
-        $this->form_validation->set_rules('matricula', 'matrícula', array('required','exact_length[7]', 'numeric','is_unique[Usuario.matricula]','strtoupper'));
+        $this->form_validation->set_rules('matricula', 'matrícula', array('required','exact_length[8]','is_unique[Usuario.matricula]','strtoupper'));
         $this->form_validation->set_rules('nascimento', 'data de nascimento', array('callback_date_check'));
         $this->form_validation->set_rules('email','email',array('required','valid_email','is_unique[Usuario.email]'));
         $this->form_validation->set_rules('nivel', 'nivel', array('greater_than[0]'),array('greater_than'=>'Selecione o nivel acadêmico'));
@@ -75,6 +75,7 @@
             'matricula'       => $this->input->post('matricula'),
             'nascimento'      => brToSql($this->input->post("nascimento")),
             'email'           => $this->input->post('email'),
+            'senhaLimpa'      => $senha,
             'senha'           => hash('sha256',$senha),
             'coordenador'     => ($this->input->post("coordenador") == null) ? 0 : 1,
             'idContrato'      => $this->input->post("contrato"),
@@ -82,6 +83,7 @@
             'disciplinas'     => $this->input->post('disciplinas[]')
           );
 
+          $content = $this->load->view('email/novo',array('professor'=>$professor),TRUE);
 
           $mail = new PHPMailer();
           $mail->CharSet = 'UTF-8';
@@ -92,11 +94,10 @@
           $mail->SMTPAuth = true;
           $mail->Username = "metalcodeifsp@gmail.com";
           $mail->Password = "#metalcode2017#";
-          $mail->setFrom('metalcodeifsp@gmail.com', 'Metalcode');
+          $mail->setFrom('metalcodeifsp@gmail.com', 'Suporte Metalcode');
           $mail->addAddress($professor['email'], $professor['nome']);
-          $mail->Subject = 'PHPMailer GMail SMTP test';
-          $mail->msgHTML('Sua senha: <strong>'.$senha. '</strong>');
-          $mail->AltBody = 'This is a plain-text message body';
+          $mail->Subject = 'Novo usuário';
+          $mail->msgHTML($content);
 
           $mail->send();
 
@@ -131,7 +132,7 @@
     public function date_check ($date) {
 
       if ($date == null) {
-        $this->form_validation->set_message('date_check','Informe uma data');
+        $this->form_validation->set_message('date_check','Informe sua data de nascimento');
         return FALSE;
       }
 
@@ -204,7 +205,7 @@
 
         // Definir as regras de validação para cada campo do formulário.
         $this->form_validation->set_rules('recipient-nome', 'nome do professor', array('required','min_length[5]','max_length[255]','ucwords'));
-        $this->form_validation->set_rules('recipient-matricula', 'matrícula', array('required','exact_length[7]', 'numeric','strtoupper'));
+        $this->form_validation->set_rules('recipient-matricula', 'matrícula', array('required','exact_length[8]','strtoupper'));
         $this->form_validation->set_rules('recipient-nascimento', 'data de nascimento', array('callback_date_check'));
         $this->form_validation->set_rules('recipient-email','email',array('required','valid_email'));
         $this->form_validation->set_rules('recipient-nivelAcademico', 'nivel', array('greater_than[0]'),array('greater_than'=>'Selecione o nivel acadêmico'));

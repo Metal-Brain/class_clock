@@ -21,7 +21,7 @@
 								<?= form_open('',array('id'=>'login','class'=>'form-horizontal')); ?>
 									<div class="form-group input-group" align="center">
 										<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-										<?= form_input('matricula',set_value('matricula'), array('class'=>'form-control','placeholder'=>'ex: 0000000','maxlength'=>'7')) ?>
+										<?= form_input('matricula',set_value('matricula'), array('class'=>'form-control','placeholder'=>'ex: 0000000','maxlength'=>'8')) ?>
 									</div>
 
 									<div class="form-group input-group ">
