@@ -49,7 +49,7 @@
 
           $this->session->set_flashdata('formDanger','<strong>Não foi possível cadastrar a turma, pois existe(m) erro(s) no formulário:</strong>');
 
-          $dados['disciplinas']   = convert($this->Disciplina_model->getAll(TRUE));
+          $dados['disciplina']   = convert($this->Disciplina_model->getAll(TRUE));
           $dados['turmas'] = $this->Turma_model->getAll();
 
           $this->load->view('includes/header', $dados);
@@ -64,13 +64,13 @@
             'sigla'         => $this->input->post('sigla'),
             'qtdAlunos'     => $this->input->post('qtdAlunos'),
             'dp'            => ($this->input->post("dp") == NULL) ? 0 : 1,
-            'disciplinas'   =>$this->input->post('disciplinas')
+            'disciplina'   =>$this->input->post('disciplina')
           );
           /**echo '<pre>'.
           print_r($turma,1);
           '</pre>';
-          exit();
-          */
+          exit();*/
+
           if ($this->Turma_model->insert($turma)) {
             $this->session->set_flashdata('success','Turma cadastrada com sucesso');
           } else {
@@ -94,56 +94,61 @@
 
     public function atualizar () {
 
-      // Carrega a biblioteca para validação dos dados.
-      $this->load->library(array('form_validation','session'));
-      $this->load->helper(array('form','url','dropdown'));
-      $this->load->model(array(
-        'Turma_model',
-        'Disciplina_model'
-      ));
+
+            //if (verificaSessao() && verificaNivelPagina(array(1))) {
+              // Carrega a biblioteca para validação dos dados.
+              $this->load->library(array('form_validation','session'));
+              $this->load->helper(array('form','url','dropdown'));
+              $this->load->model(array(
+                'Turma_model',
+                'Disciplina_model'
+              ));
 
 
-      // Definir as regras de validação para cada campo do formulário.
-      $this->form_validation->set_rules('sigla', 'sigla', array('required', 'max_length[10]', 'is_unique[Turma.sigla]','strtoupper'));
-      $this->form_validation->set_rules('qtdAlunos', 'quantidade de alunos', array('required', 'integer', 'greater_than[0]'));
-      // Definição dos delimitadores
-      $this->form_validation->set_error_delimiters('<p class="text-danger">','</p>');
+              // Definir as regras de validação para cada campo do formulário.
+              $this->form_validation->set_rules('sigla', 'sigla', array('required', 'max_length[10]', 'is_unique[Turma.sigla]','strtoupper'));
+              $this->form_validation->set_rules('qtdAlunos', 'quantidade de alunos', array('required', 'integer', 'greater_than[0]'));
+              // Definição dos delimitadores
+              $this->form_validation->set_error_delimiters('<p class="text-danger">','</p>');
 
-      // Verifica se o formulario é valido
-      if ($this->form_validation->run() == FALSE) {
+              // Verifica se o formulario é valido
+              if ($this->form_validation->run() == FALSE) {
 
-        $this->session->set_flashdata('formDanger','<strong>Não foi possível cadastrar a turma, pois existe(m) erro(s) no formulário:</strong>');
+                $this->session->set_flashdata('formDanger','<strong>Não foi possível cadastrar a turma, pois existe(m) erro(s) no formulário:</strong>');
 
-        $dados['disciplinas']   = convert($this->Disciplina_model->getAll(TRUE));
-        $dados['turmas'] = $this->Turma_model->getAll();
+                $dados['disciplina']   = convert($this->Disciplina_model->getAll(TRUE));
+                $dados['turmas'] = $this->Turma_model->getAll();
 
-        $this->load->view('includes/header', $dados);
-        $this->load->view('includes/sidebar');
-        $this->load->view('turmas/turmas');
-        $this->load->view('includes/footer');
-        $this->load->view('turmas/js_turmas');
+                $this->load->view('includes/header', $dados);
+                $this->load->view('includes/sidebar');
+                $this->load->view('turmas/turmas');
+                $this->load->view('includes/footer');
+                $this->load->view('turmas/js_turmas');
 
-      }else{
+              }else{
 
-        $turma = array(
-          'sigla'         => $this->input->post('sigla'),
-          'qtdAlunos'     => $this->input->post('qtdAlunos'),
-          'dp'            => ($this->input->post("dp") == NULL) ? 0 : 1,
-          'disciplinas'   =>$this->input->post('disciplinas')
-        );
-        /**echo '<pre>'.
-        print_r($turma,1);
-        '</pre>';
-        exit();
-        */
-        if ($this->Turma_model->insert($turma)) {
-          $this->session->set_flashdata('success','Turma cadastrada com sucesso');
-        } else {
-          $this->session->set_flashdata('danger','Não foi possível cadastrar o turma, tente novamente ou entre em contato com o administrador do sistema.');
-        }
-          redirect('Turma/cadastrar');
+                $turma = array(
+                  'sigla'         => $this->input->post('sigla'),
+                  'qtdAlunos'     => $this->input->post('qtdAlunos'),
+                  'dp'            => ($this->input->post("dp") == NULL) ? 0 : 1,
+                  'disciplina'   =>$this->input->post('disciplina')
+                );
+                /**echo '<pre>'.
+                print_r($turma,1);
+                '</pre>';
+                exit();*/
 
-      }
+                if ($this->Turma_model->insert($turma)) {
+                  $this->session->set_flashdata('success','Turma cadastrada com sucesso');
+                } else {
+                  $this->session->set_flashdata('danger','Não foi possível cadastrar o turma, tente novamente ou entre em contato com o administrador do sistema.');
+                }
+                  redirect('Turma/cadastrar');
+
+              }
+            /**}else{
+              redirect('/');
+            }**/
 
     }
 
@@ -154,7 +159,7 @@
       * @since 2017/04/15
       * @author Jean Brock
     */
-    public function deletar ($id) {
+    public function desativar ($id) {
 
       $this->load->model(array('Turma_model'));
 

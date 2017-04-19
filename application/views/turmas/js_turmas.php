@@ -1,11 +1,3 @@
-<script>
-    $("#disciplinas").multiSelect({
-        selectableHeader: "<div class='multiselect'>Selecione as disciplinas</div>",
-        selectionHeader: "<div class='multiselect'>Disciplinas selecionadas</div>"
-    });
-</script>
-
-
 <script type="text/javascript">
     $('#exampleModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget) // Button that triggered the modal
@@ -13,22 +5,23 @@
         var recipientsigla = button.data('whateversigla')
         var recipientqtdAlunos = button.data('whateverqtdAlunos')
         var recipientdp = button.data('whateverdp')
-        var recipientdisciplina = button.data('whateverdisciplina').toString()
+        var recipientdisciplina = button.data('whateverdisciplina')
         var recipientId = button.data('whateverid')
         // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
         // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
         var modal = $(this)
         modal.find('.modal-title').text('Alterar Turma')
-        modal.find('#recipient-sigla').val(recipientnsigla)
+        modal.find('#recipient-sigla').val(recipientsigla)
         modal.find('#recipient-qtdAlunos').val(recipientqtdAlunos)
-        modal.find('#recipient-dp').val(recipientdp)
+        modal.find('#recipient-dp').prop('checked',recipientdp)       
+        modal.find('select[name=recipient-disciplina] option[value='+recipientdisciplina+']').prop('selected',true)
         modal.find('#recipient-id').val(recipientId)
     })
 </script>
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#salaTable").DataTable({
+        $("#turmaTable").DataTable({
             "language": {
                 "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Portuguese-Brasil.json"
             }
