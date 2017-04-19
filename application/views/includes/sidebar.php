@@ -6,6 +6,7 @@
 		  <li><?= anchor('Disciplina','Disciplinas') ?></li>
 		  <li><?= anchor('Professor', 'Professores') ?></li>
 		  <li><?= anchor('Sala','Salas') ?></li>
+		   <li><?= anchor('Turma','Turmas') ?></li>
 		  <hr>
 		  <li><?= anchor('Login/logout', '<span class="glyphicon glyphicon-log-out"></span> Sair do Sistema') ?></li>
 		</ul>
