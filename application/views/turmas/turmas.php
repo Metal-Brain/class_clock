@@ -1,5 +1,3 @@
-
-
 				<div id="content" class="col-md-10">
 					<?php if ($this->session->flashdata('success')) : ?>
             <!-- Alert de sucesso -->
@@ -78,38 +76,40 @@
 						<!-- Aqui é o formulário de registro do novo item-->
 						<div id="new" class="tab-pane fade">
 							<h3>Cadastrar Turmas</h3>
-							<form action="" method="post">
-							
+							<?= form_open('Turma/cadastrar') ?>
+
+	            <div class="row">
+	                <div class="form-group col-md-4">
+	                    <?= form_label('Sigla', 'sigla') ?>
+	                    <?= form_input('sigla', set_value('sigla'), array('class' => 'form-control', 'placeholder' => 'ex: ADS5S')) ?>
+						<?= form_error('sigla') ?>
+	                </div>
+	            </div>
+
+	            <div class="row">
+	                <div class="form-group col-md-5">
+	                    <label>Disciplinas </label>
+	                    <?= form_dropdown('disciplinas[]', $disciplinas, null, array('id' => 'disciplinas', 'multiple' => 'multiple')) ?>
+	                </div>
+	            </div>
+
+							<div class="row">
+	                <div class="form-group col-md-4">
+											<?= form_label('Quantidade de alunos', 'qtdAlunos') ?>
+	                    <?= form_input(array('name' => 'qtdAlunos', 'value' => set_value('qtdAlunos'), 'type' => 'number', 'maxlength' => '3', 'pattern' => '[0-9]+$', 'class' => 'form-control', 'placeholder' => 'ex:25')) ?>
+	                    <?= form_error('qtdAlunos') ?>
+	                </div>
+	            </div>
 							<div class="form-group">
-									<label>Nome</label>
-									<input type="text" class="form-control" name="nome" placeholder="Nome" maxlength="10" value="<?= set_value('nome')?>">
-									<?= form_error('nome') ?>
-								</div>
-								
-								<div class="form-group">
-                                    <label>Curso</label>
-                                    <!-- DropListDisciplina (Droplist) -->
-                                    <div class="form-group percent-15">
-                                        <div id="u1" class="ax_default droplist" data-label="DropListDisciplina">
-                                          <?= form_dropdown('disciplina',$disciplina,set_value('disciplina'),array('class'=>'form-control')) ?>
-                                          <?= form_error('disciplina') ?>
-                                        </div>
-                                    </div>
-                                </div>
-								
-								<div class="form-group">
-									<label>Quantidade de Alunos</label>
-									<input type="text" maxlength="3" pattern="[0-9]+$" class="form-control percent-5" name="qtdAluno" placeholder="ex: 30" value="<?= set_value('qtdAluno')?>">
-									<?= form_error('qtdAluno') ?>
-								</div>
-								<div class="form-group">
-									<input id="dp" type="checkbox" name="dp" class="form-group" value="true"/>
-									<label for="dp">Cursando Dependência</label>
-								</div
-								<div class="inline">
-									<button type='submit' class='btn bt-lg btn-primary'>Cadastrar</button>
-								</div>
-							</form>
+								<input id="dp" type="checkbox" name="dp" class="form-group" value="true"/>
+								<label for="dp">Cursando Dependência</label>
+							</div>
+
+	            <div class="form-group">
+	                <?= form_submit('submit', 'Cadastrar', array('class' => 'btn btn-primary')) ?>
+	            </div>
+
+	            <?= form_close() ?>
 						</div>
 
 					</div><!--fecha tab-content-->
@@ -131,33 +131,33 @@
 								<div class="form-group">
 									<input type="hidden" name="recipient-id" id="recipient-id">
 								</div>
-								
+
 								<div class="form-group">
 									<label for="nome-name" class="control-label">Nome:</label>
 									<input type="text" class="form-control" name="recipient-nome" id="recipient-nome" maxlength="10">
 									<?= form_error('recipient-nome') ?>
 								</div>
-								
+
 								   <!-- DropListDisciplina (Droplist) -->
                                 <div class="form-group percent-40 inline">
                                     <label for="disciplina-name" class="control-label">Curso:</label>
                                   <?= form_dropdown('disciplina',$disciplina,null,array('class'=>'form-control')) ?>
                                   <?= form_error('disciplina') ?>
                                 </div>
-														
-								
-								
+
+
+
 								<div class="form-group">
 									<label for="qtd-aluno" class="control-label">Quantidade de Alunos:</label>
 									<input type="text" maxlength="3" pattern="[0-9]+$"  class="form-control percent-10" name="recipient-qtd-aluno" id="recipient-qtd-aluno">
 									<?= form_error('recipient-qtd-aluno') ?>
 								</div>
-								
+
 								<div class="form-group">
 									<input type="checkbox" name="recipient-dp" value="true" class="form-group" id="recipient-dp"/>
 									<label for="recipient-dp">Cursando Dependência</label>
 								</div>
-								
+
 								<div class="modal-footer">
 									<button type="submit" class="btn btn-primary">Alterar</button>
 									<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
@@ -168,3 +168,85 @@
 				</div>
 			</div>
 
+
+			<div id="footer" class="col">
+				<p>Desenvolvido por Metal Code</p>
+			</div>
+
+		</div><!--Fecha container-fluid-->
+		<script type="text/javascript" src="<?= base_url('assets/js/jquery-3.1.1.min.js')?>"></script>
+		<script type="text/javascript" src="<?= base_url('assets/js/bootstrap.min.js') ?>"></script>
+		<script type="text/javascript" src="<?= base_url('assets/DataTables/datatables.min.js') ?>"></script>
+		<script type="text/javascript" src="<?= base_url('assets/js/bootbox.min.js') ?>"></script>
+		<script type="text/javascript">
+				$('#exampleModal').on('show.bs.modal', function (event) {
+						var button = $(event.relatedTarget) // Button that triggered the modal
+						var recipient = button.data('whatever') // Extract info from data-* attributes
+						var recipientdisciplina = button.data('whateverdisciplina')
+						var recipientQtdAluno = button.data('whateverqtdAluno')
+						var recipientId = button.data('whateverid')
+						var recipientNome = button.data('whatevernome')
+						var recipientDp = button.data('whateverdp')
+						// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+						// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+						var modal = $(this)
+						modal.find('.modal-title').text('Alterar Turma')
+						modal.find('#recipient-disciplina').val(recipientdisciplina)
+						modal.find('#recipient-qtd-aluno').val(recipientQtdAluno)
+						modal.find('#recipient-id').val(recipientId)
+						modal.find('#recipient-nome').val(recipientNome)
+						modal.find('#recipient-dp').val(recipientDp)
+				})
+		</script>
+		<script type="text/javascript">
+			$(document).ready(function () {
+				$("#TurmaTable").DataTable({
+					"language":{
+						"url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Portuguese-Brasil.json"
+					}
+				});
+			});
+		</script>
+		<script>
+			function disable(id){
+				bootbox.confirm({
+					message: "Realmente deseja desativar essa turma?",
+					buttons: {
+						confirm: {
+							label: 'Sim',
+							className: 'btn-success'
+						},
+						cancel: {
+							label: 'Não',
+							className: 'btn-danger'
+						}
+					},
+					callback: function (result) {
+						if(result)
+							window.location.href = '<?= base_url("index.php/Turma/desativar/")?>'+id
+					}
+				});
+			}
+
+			function able(id){
+				bootbox.confirm({
+					message: "Realmente deseja ativar essa Turma?",
+					buttons: {
+						confirm: {
+							label: 'Sim',
+							className: 'btn-success'
+						},
+						cancel: {
+							label: 'Não',
+							className: 'btn-danger'
+						}
+					},
+					callback: function (result) {
+						if(result)
+							window.location.href = '<?= base_url("index.php/Turma/ativar/")?>'+id
+					}
+				});
+			}
+		</script>
+	</body>
+</html>
