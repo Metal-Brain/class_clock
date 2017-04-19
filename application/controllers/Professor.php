@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 
 defined('BASEPATH') OR exit('No direct script access allowed');
@@ -212,6 +213,8 @@ class Professor extends CI_Controller {
         }
     }
 
+=======
+>>>>>>> 1979f79d960aa0ab3b35bc6e265fd19826e5519e
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
   /**
    *  Essa classe é responsavel por todas regras de negócio sobre professores.
@@ -382,14 +385,20 @@ class Professor extends CI_Controller {
           redirect('Professor/atualizar');
         }
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1979f79d960aa0ab3b35bc6e265fd19826e5519e
     /**
      * Busca as disciplinas vinculada ao professor.
      * @author Caio de Freitas
      * @since 2017/04/07
      * @param INT $id - ID do professor
      */
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1979f79d960aa0ab3b35bc6e265fd19826e5519e
     public function disciplinas ($id) {
       $this->load->model(array('Competencia_model'));
       $disciplinas = $this->Competencia_model->getAllDisciplinas($id);
@@ -407,5 +416,8 @@ class Professor extends CI_Controller {
        $this->load->view('preferencias', $dados);
      }
   }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1979f79d960aa0ab3b35bc6e265fd19826e5519e
 ?>
