@@ -41,6 +41,7 @@
         // Definir as regras de validação para cada campo do formulário.
         $this->form_validation->set_rules('sigla', 'sigla', array('required', 'max_length[10]', 'is_unique[Turma.sigla]','strtoupper'));
         $this->form_validation->set_rules('qtdAlunos', 'quantidade de alunos', array('required', 'integer', 'greater_than[0]'));
+        $this->form_validation->set_rules('disciplina', 'disciplina', array('greater_than[0]'), array('greater_than' => 'Selecione a disciplina'));
         // Definição dos delimitadores
         $this->form_validation->set_error_delimiters('<p class="text-danger">','</p>');
 
@@ -106,8 +107,9 @@
 
 
               // Definir as regras de validação para cada campo do formulário.
-              $this->form_validation->set_rules('sigla', 'sigla', array('required', 'max_length[10]', 'is_unique[Turma.sigla]','strtoupper'));
-              $this->form_validation->set_rules('qtdAlunos', 'quantidade de alunos', array('required', 'integer', 'greater_than[0]'));
+              $this->form_validation->set_rules('recipient-sigla', 'sigla', array('required', 'max_length[10]','strtoupper'));
+              $this->form_validation->set_rules('recipient-qtdAlunos', 'quantidade de alunos', array('required', 'integer', 'greater_than[0]'));
+              $this->form_validation->set_rules('recipient-disciplina', 'disciplina', array('greater_than[0]'), array('greater_than' => 'Selecione a disciplina'));
               // Definição dos delimitadores
               $this->form_validation->set_error_delimiters('<p class="text-danger">','</p>');
 
@@ -118,7 +120,6 @@
 
                 $dados['disciplina']   = convert($this->Disciplina_model->getAll(TRUE));
                 $dados['turmas'] = $this->Turma_model->getAll();
-
                 $this->load->view('includes/header', $dados);
                 $this->load->view('includes/sidebar');
                 $this->load->view('turmas/turmas');
@@ -127,23 +128,26 @@
 
               }else{
 
+                $id = $this->input->post('recipient-id');
+
+                // Pega os dados do formulário
                 $turma = array(
-                  'sigla'         => $this->input->post('sigla'),
-                  'qtdAlunos'     => $this->input->post('qtdAlunos'),
-                  'dp'            => ($this->input->post("dp") == NULL) ? 0 : 1,
-                  'disciplina'   =>$this->input->post('disciplina')
+                  'sigla'         => $this->input->post('recipient-sigla'),
+                  'qtdAlunos'     => $this->input->post('recipient-qtdAlunos'),
+                  'dp'            => ($this->input->post("recipient-dp") == NULL) ? 0 : 1,
+                  'disciplina'   =>$this->input->post('recipient-disciplina')
                 );
                 /**echo '<pre>'.
                 print_r($turma,1);
                 '</pre>';
                 exit();*/
 
-                if ($this->Turma_model->insert($turma)) {
+                if ($this->Turma_model->updateTurma($id, $turma)) {
                   $this->session->set_flashdata('success','Turma cadastrada com sucesso');
                 } else {
                   $this->session->set_flashdata('danger','Não foi possível cadastrar o turma, tente novamente ou entre em contato com o administrador do sistema.');
                 }
-                  redirect('Turma/cadastrar');
+                  redirect('Turma/atualizar');
 
               }
             /**}else{

@@ -13,7 +13,7 @@
         modal.find('.modal-title').text('Alterar Turma')
         modal.find('#recipient-sigla').val(recipientsigla)
         modal.find('#recipient-qtdAlunos').val(recipientqtdAlunos)
-        modal.find('#recipient-dp').prop('checked',recipientdp)       
+        modal.find('#recipient-dp').prop('checked',recipientdp)
         modal.find('select[name=recipient-disciplina] option[value='+recipientdisciplina+']').prop('selected',true)
         modal.find('#recipient-id').val(recipientId)
     })

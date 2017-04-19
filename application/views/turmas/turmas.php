@@ -138,19 +138,19 @@
 				</div>
 
 					 <!-- DropListDisciplina (Droplist) -->
-												<div class="form-group percent-40 inline">
-														<label for="disciplina-name" class="control-label">Curso:</label>
-													<?= form_dropdown('disciplina',$disciplina,null,array('class'=>'form-control')) ?>
-													<?= form_error('disciplina') ?>
-												</div>
 
-
+				<label>Disciplina</label>
+				<div id="u1" class="ax_default droplist" data-label="DropListDisciplina">
+					<?= form_dropdown('recipient-disciplina',$disciplina,set_value('recipient-disciplina'),array('class'=>'form-control')) ?>
+					<?= form_error('recipient-disciplina') ?>
+				</div>
 
 				<div class="form-group">
-					<label for="qtd-aluno" class="control-label">Quantidade de Alunos:</label>
-					<input type="text" maxlength="3" pattern="[0-9]+$"  class="form-control percent-10" name="recipient-qtdAlunos" id="recipient-qtdAlunos">
-					<?= form_error('recipient-qtdAlunos') ?>
+						<label for="recipient-qtdAlunos" class="control-label">Quantidade de Alunos</label>
+						<input type="text" maxlength="3" pattern="[0-9]+$"class="form-control" name="recipient-qtdAlunos" id="recipient-qtdAlunos">
+						<?= form_error('recipient-qtdAlunos') ?>
 				</div>
+
 
 				<div class="form-group">
 					<input type="checkbox" name="recipient-dp" value="true" class="form-group" id="recipient-dp"/>
