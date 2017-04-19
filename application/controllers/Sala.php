@@ -42,7 +42,12 @@
 			$this->session->set_flashdata('formDanger','<strong>Não foi possível cadastrar a sala, pois existe(m) erro(s) no formulário:</strong>');
 			
             $dados['salas'] = $this->Sala_model->getAll();
-     	      $this->load->view('salas',$dados);
+     	    
+			$this->load->view('includes/header',$dados);
+			$this->load->view('includes/sidebar');
+			$this->load->view('salas/salas');
+            $this->load->view('includes/footer');
+            $this->load->view('salas/js_salas');
 
            } else {
 
@@ -100,8 +105,8 @@
              $this->load->model(array('Sala_model'));
 
              // Definir as regras de validação para cada campo do formulário.
-             $this->form_validation->set_rules('recipient-nSala', 'Numero Sala', array('required', 'max_length[5]','strtoupper'));
-             $this->form_validation->set_rules('recipient-capMax', 'Capacidade Maxima', array('required', 'integer', 'greater_than[0]'));
+             $this->form_validation->set_rules('recipient-nSala', 'Número da sala', array('required', 'max_length[5]','strtoupper'));
+             $this->form_validation->set_rules('recipient-capMax', 'Capacidade máxima', array('required', 'integer', 'greater_than[0]'));
              $this->form_validation->set_rules('recipient-tipo', 'Tipo', array('required','min_length[5]','ucwords'));
             // Definição dos delimitadores
              $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
@@ -112,7 +117,11 @@
                $this->session->set_flashdata('formDanger','<strong>Não foi possível atualizar os dados da sala:</strong>');
 
                $dados['salas'] = $this->Sala_model->getAll();
-       	       $this->load->view('salas', $dados);
+			   $this->load->view('includes/header',$dados);
+			   $this->load->view('includes/sidebar');
+       	       $this->load->view('salas/salas');
+			   $this->load->view('includes/footer');
+			   $this->load->view('salas/js_salas');
 
              } else {
 
