@@ -14,6 +14,8 @@
       *  @author Jean Brock
     */
     function getAll() {
+      $this->db->select('Turma.*, Disciplina.sigla as disciplinaSigla');
+      $this->db->join('Disciplina','Disciplina.id = Turma.disciplina');
       $result = $this->db->get('Turma');
       return $result->result_array();
     }

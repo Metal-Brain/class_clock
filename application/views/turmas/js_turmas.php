@@ -3,7 +3,7 @@
         var button = $(event.relatedTarget) // Button that triggered the modal
         var recipient = button.data('whatever') // Extract info from data-* attributes
         var recipientsigla = button.data('whateversigla')
-        var recipientqtdAlunos = button.data('whateverqtdAlunos')
+        var recipientqtdAlunos = button.data('whateverqtd')
         var recipientdp = button.data('whateverdp')
         var recipientdisciplina = button.data('whateverdisciplina')
         var recipientId = button.data('whateverid')

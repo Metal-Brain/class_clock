@@ -40,7 +40,7 @@
 
         // Definir as regras de validação para cada campo do formulário.
         $this->form_validation->set_rules('sigla', 'sigla', array('required', 'max_length[10]', 'is_unique[Turma.sigla]','strtoupper'));
-        $this->form_validation->set_rules('qtdAlunos', 'quantidade de alunos', array('required', 'integer', 'greater_than[0]'));
+        $this->form_validation->set_rules('qtdAlunos', 'quantidade de alunos', array('required', 'integer', 'greater_than[0]','max_length[3]'));
         $this->form_validation->set_rules('disciplina', 'disciplina', array('greater_than[0]'), array('greater_than' => 'Selecione a disciplina'));
         // Definição dos delimitadores
         $this->form_validation->set_error_delimiters('<p class="text-danger">','</p>');
@@ -108,7 +108,7 @@
 
               // Definir as regras de validação para cada campo do formulário.
               $this->form_validation->set_rules('recipient-sigla', 'sigla', array('required', 'max_length[10]','strtoupper'));
-              $this->form_validation->set_rules('recipient-qtdAlunos', 'quantidade de alunos', array('required', 'integer', 'greater_than[0]'));
+              $this->form_validation->set_rules('recipient-qtdAlunos', 'quantidade de alunos', array('required', 'integer', 'greater_than[0]','max_length[3]'));
               $this->form_validation->set_rules('recipient-disciplina', 'disciplina', array('greater_than[0]'), array('greater_than' => 'Selecione a disciplina'));
               // Definição dos delimitadores
               $this->form_validation->set_error_delimiters('<p class="text-danger">','</p>');

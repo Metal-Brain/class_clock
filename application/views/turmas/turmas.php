@@ -53,13 +53,13 @@
 					<?php foreach ($turmas as $turma): ?>
 							<?= ($turma['status'] ? '<tr>' : '<tr class="danger">') ?>
 								<td><?= $turma['sigla']?></td>
-								<td><?= $turma['disciplina']?></td>
+								<td><?= $turma['disciplinaSigla']?></td>
 								<td><?= $turma['qtdAlunos']?></td>
-								<td><?= $turma['dp']?></td>
+								<td><?php if($turma['dp']): echo "SIM"; else: echo "NÃO"; endif;?></td>
 								<td><?php if($turma['status']): echo "Ativo"; else: echo "Inativo"; endif;?></td>
 								<td>
 									<?php if ($turma['status']): ?>
-										<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal"  data-whateverdisciplina="<?= $turma['disciplina']?>" data-whateverid="<?= $turma['id']?>"  data-whateversigla="<?= $turma['sigla']?>"  data-whateverqtdAlunos="<?= $turma['qtdAlunos']?>" data-whateverdp="<?= $turma['dp']?>"<<span class="glyphicon glyphicon-pencil"></span></button>
+										<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal"  data-whateverdisciplina="<?= $turma['disciplinaSigla']?>" data-whateverid="<?= $turma['id']?>"  data-whateversigla="<?= $turma['sigla']?>"  data-whateverqtd="<?= $turma['qtdAlunos']?>" data-whateverdp="<?= $turma['dp']?>"<<span class="glyphicon glyphicon-pencil"></span></button>
 										<button onClick="disable(<?= $turma['id']?>)" type="button" class="btn btn-danger delete" title="Desativar"><span class="glyphicon glyphicon-remove"></span></button>
 									<?php else : ?>
 										<button onClick="able(<?= $turma['id']?>)" type="button" class="btn btn-success delete" title="Ativar"><span class="glyphicon glyphicon-ok"></span></button>
@@ -81,7 +81,7 @@
 			<div class="row">
 					<div class="form-group col-md-4">
 							<?= form_label('Sigla', 'sigla') ?>
-							<?= form_input('sigla', set_value('sigla'), array('class' => 'form-control', 'placeholder' => 'ex: ADS5S')) ?>
+							<?= form_input('sigla', set_value('sigla'), array('class' => 'form-control', 'placeholder' => 'ex: ADS5S', 'maxlength'=>'10')) ?>
 		<?= form_error('sigla') ?>
 					</div>
 			</div>
@@ -95,7 +95,7 @@
 			<div class="row">
 					<div class="form-group col-md-4">
 							<?= form_label('Quantidade de alunos', 'qtdAlunos') ?>
-							<?= form_input(array('name' => 'qtdAlunos', 'value' => set_value('qtdAlunos'), 'type' => 'number', 'maxlength' => '3', 'pattern' => '[0-9]+$', 'class' => 'form-control', 'placeholder' => 'ex:25')) ?>
+							<?= form_input(array('name' => 'qtdAlunos', 'value' => set_value('qtdAlunos'), 'type' => 'text', 'pattern' => '[0-9]+$', 'class' => 'form-control', 'maxlength' => '3', 'placeholder' => 'ex:25')) ?>
 							<?= form_error('qtdAlunos') ?>
 					</div>
 			</div>
