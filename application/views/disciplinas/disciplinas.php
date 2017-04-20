@@ -79,21 +79,36 @@
             <h3>Cadastrar Disciplina</h3>
 			
             <form action="" method="post">
-                <div class="form-group percent-40">
-                    <label>Nome</label>
-                    <input type="text" class="form-control" name="nome" placeholder="Nome" value="<?= set_value('nome') ?>">
-					<?= form_error('nome') ?>
-                </div>
-                <div class="form-group">
-                    <label>Sigla</label>
-                    <input type="text" class="form-control percent-40" name="sigla" placeholder="ex: LOPA1" value="<?= set_value('sigla') ?>">
-					<?= form_error('sigla') ?>
-                </div>
-                <div class="form-group">
-                    <label>Quantidade de professores</label>
-                    <input type="text" maxlength="1" pattern="[0-9]+$" class="form-control percent-5" name="qtdProf" placeholder="ex: 1" value="<?= set_value('qtdProf') ?>">
-					<?= form_error('qtdProf') ?>
-                </div>
+				
+				<div class="row">
+					<div class="form-group col-md-6">
+						<label>Nome</label>
+						<input type="text" class="form-control" name="nome" placeholder="Nome" value="<?= set_value('nome') ?>">
+						<?= form_error('nome') ?>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="form-group col-md-2">
+						<label>Sigla</label>
+						<input type="text" class="form-control" name="sigla" placeholder="ex: LOPA1" value="<?= set_value('sigla') ?>">
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-md-5 margin-top-error">
+						<?= form_error('sigla') ?>
+					</div>
+				</div>
+                
+				<div class="row">
+					<div class="form-group col-md-2">
+						<label>Quantidade de professores</label>
+						<input type="text" maxlength="1" pattern="[0-9]+$" class="form-control percent-5" name="qtdProf" placeholder="ex: 1" value="<?= set_value('qtdProf') ?>">
+						<?= form_error('qtdProf') ?>
+					</div>
+				</div>
+                
                 <div class="inline">
                     <button type='submit' class='btn bt-lg btn-primary'>Cadastrar</button>
                 </div>
