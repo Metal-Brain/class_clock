@@ -49,7 +49,9 @@
 
           $this->load->view('includes/header',$dados);
           $this->load->view('includes/sidebar');
-          $this->load->view('disciplinas');
+          $this->load->view('disciplinas/disciplinas');
+		  $this->load->view('includes/footer');
+		  $this->load->view('disciplinas/js_disciplinas');
 
         } else {
 
@@ -140,7 +142,9 @@
 
           $this->load->view('includes/header',$dados);
           $this->load->view('includes/sidebar');
-          $this->load->view('disciplinas');
+		  $this->load->view('disciplinas/disciplinas');
+		  $this->load->view('includes/footer');
+		  $this->load->view('disciplinas/js_disciplinas');
         } else {
 
           $id = $this->input->post('recipient-id');
