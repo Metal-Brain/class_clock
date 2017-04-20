@@ -43,6 +43,7 @@
         $this->form_validation->set_rules('qtdSemestres','quantidade de semestres', array('required','integer','greater_than[0]','less_than[20]'));
         $this->form_validation->set_rules('periodo[]', 'periodo', array('required'));
         $this->form_validation->set_rules('grau','grau',array('greater_than[0]'));
+		$this->form_validation->set_rules('disciplinas[]', 'disciplinas', array('required'), array('required' => 'Não é possível cadastrar um curso sem selecionar as disciplinas.'));
 
         //delimitador
         $this->form_validation->set_error_delimiters('<p class="text-danger">','</p>');
@@ -59,7 +60,9 @@
 
           $this->load->view('includes/header',$dados);
           $this->load->view('includes/sidebar');
-          $this->load->view('cursos');
+          $this->load->view('cursos/cursos');
+		  $this->load->view('includes/footer');
+		  $this->load->view('cursos/js_cursos');
 
         }else{
 
@@ -115,6 +118,7 @@
         $this->form_validation->set_rules('cursoQtdSemestres','quantidade de semestres', array('required','integer','greater_than[0]','less_than[10]'));
         $this->form_validation->set_rules('cursoPeriodos[]','período',array('required'));
         $this->form_validation->set_rules('cursoGrau','grau',array('greater_than[0]'));
+		$this->form_validation->set_rules('cursoDisciplinas[]', 'disciplinas', array('required'), array('required' => 'Não é possível atualizar um curso sem selecionar as disciplinas.'));
 
         //delimitador
         $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
