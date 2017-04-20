@@ -54,6 +54,16 @@
       return $result->result_array();
     }
 
+    public function insertPreferencia($idProfessor, $idDisciplina, $status){
+			$this->db->where('idProfessor', $idProfessor);
+			$this->db->where('idDisciplina', $idDisciplina);
+
+			$result = $this->db->update('Competencia', array('interesse'=>$status));
+
+			return $result;
+		}
+
+
   }
 
 

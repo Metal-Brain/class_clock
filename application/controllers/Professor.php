@@ -23,7 +23,7 @@ class Professor extends CI_Controller {
      * @since 2017/04/03
      */
     public function cadastrar() {
-      if (verificaSessao() && verificaNivelPagina(array(1))){
+      if (verificaSessao() && verificaNivelPagina(array(2))){
         // Carrega a biblioteca para validação dos dados.
         $this->load->library(array('form_validation','My_PHPMailer'));
         $this->load->helper(array('form','dropdown','date','password'));
@@ -247,16 +247,28 @@ class Professor extends CI_Controller {
 		*@author Felipe Ribeiro
 		*/
 		public function preferencia(){
-			if (verificaSessao() && verificaNivelPagina(array(1))){
-				$this->load->model('Disciplina_model');
+			if (verificaSessao() && verificaNivelPagina(array(2))){
+				$this->load->model(array('Disciplina_model','Competencia_model'));
 				$this->load->helper('dropdown');
+				$this->form_validation->set_rules('disciplinas','disciplinas',array('requeire'));
 
-				$dados['disciplinas'] = convert($this->Disciplina_model->getAll());
-				$this->load->view('preferencias', $dados);
+				if($this->form_validation->run()==FALSE){
+					$dados['disciplinas'] = convert($this->Disciplina_model->getAll());
+					$this->load->view('preferencias', $dados);
+				} else {
+
+					$selected = $this->input->post('disciplinas[]');
+
+					foreach ($selected as $s)
+						$this->Competencia_model->insertPreferencia($this->session->id, $s, TRUE);
+				}
+
 			}else{
-				redirect('/');
+					redirect('/');
 			}
 		}
+
  }
+
 
 ?>
