@@ -36,7 +36,7 @@
 
 				<div id="content" class="col-md-10">
 					<!-- Cadastro das preferências do professor -->
-					<?= form_open('Preferencia/cadastrar') ?>
+					<?= form_open('Professor/preferencia') ?>
 						<div class="modal-content col-md-offset-3 col-md-5">
 							<h1>Preferências</h1>
 							<!-- Aqui entra o multi select -->
@@ -50,14 +50,14 @@
 						</div>
 					<?= form_close() ?>
 				</div><!--Fecha content-->
-					
-						
+
+
 				<div id="footer" class="col">
 					<p>Desenvolvido por Metal Code</p>
 				</div>
 			</div><!--Fecha row-->
 		</div><!--Fecha container-fluid-->
-		
+
 		<script type="text/javascript" src="<?= base_url('assets/js/jquery-3.1.1.min.js')?>"></script>
 		<script type="text/javascript" src="<?= base_url('assets/js/bootstrap.min.js')?>"></script>
 		<!-- multi-select -->
