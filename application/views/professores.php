@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang ="pt-br">
 	<head>
@@ -43,6 +44,9 @@
 
 				<div id="content" class="col-md-10">
 
+=======
+				<div id="content" class="col-md-10">
+>>>>>>> a38f44128ab50eb6fc7d2209959045c36d026561
 					<?php if (validation_errors()): ?>
 						<div class="alert alert-danger text-center">
 							<p><?= $this->session->flashdata('formDanger') ?></p>
@@ -66,7 +70,10 @@
 						</div>
 					<?php endif; ?>
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> a38f44128ab50eb6fc7d2209959045c36d026561
 					<h1>Professores</h1>
 					<!-- Lista de 'botoes' links do Bootstrap -->
 					<ul class="nav nav-pills">
@@ -87,6 +94,10 @@
 										<tr>
 											<th>Nome</th>
 											<th>Matrícula</th>
+<<<<<<< HEAD
+=======
+											<th>Email</th>
+>>>>>>> a38f44128ab50eb6fc7d2209959045c36d026561
 											<th>Data Nascimento</th>
 											<th>Nível acadêmico<th>
 											<th>Contrato<th>
@@ -99,6 +110,10 @@
 												<?= ($professor['status'] ? '<tr>' : '<tr class="danger">') ?>
 														<td><?= $professor['nome'] ?></td>
 														<td><?= $professor['matricula'] ?></td>
+<<<<<<< HEAD
+=======
+														<td><?= $professor['email'] ?></td>
+>>>>>>> a38f44128ab50eb6fc7d2209959045c36d026561
 														<td><?= sqlToBr($professor['nascimento']) ?></td>
 														<td><?= $professor['nivel'] ?></td>
 														<td></td>
@@ -106,7 +121,11 @@
 														<td></td>
 														<td><?= ($professor['status']) ? "Ativo" : "Inativo"?></td>
 														<td><?php if($professor['status']): ?>
+<<<<<<< HEAD
 															<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whatevernome="<?= $professor['nome']?>" data-whateverid="<?= $professor['id']?>" data-whatevercoordenador="<?= $professor['coordenador']?>" data-whatevercontrato="<?= $professor['idContrato']?>" data-whatevernivel="<?= $professor['idNivel']?>" data-whatevermatricula= "<?= $professor['matricula']?>" data-whatevernascimento= "<?= sqlToBr($professor['nascimento']) ?>"><span class="glyphicon glyphicon-pencil"></span></button>
+=======
+															<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whatevernome="<?= $professor['nome']?>" data-whateverid="<?= $professor['id']?>" data-whatevercoordenador="<?= $professor['coordenador']?>" data-whatevercontrato="<?= $professor['idContrato']?>" data-whatevernivel="<?= $professor['idNivel']?>" data-whatevermatricula= "<?= $professor['matricula']?>" data-whateveremail= "<?= $professor['email']?>" data-whatevernascimento= "<?= sqlToBr($professor['nascimento']) ?>"><span class="glyphicon glyphicon-pencil"></span></button>
+>>>>>>> a38f44128ab50eb6fc7d2209959045c36d026561
 															<button onClick="exclude(<?= $professor['id']?>);" type="button" class="btn btn-danger" title="Excluir"><span class="glyphicon glyphicon-remove"></span></button>
 													<?php else:?>
 														<button onClick="able(<?= $professor['id']?>)" type="button" class="btn btn-success" title="Ativar"><span class="glyphicon glyphicon-ok"></span></button>
@@ -130,9 +149,20 @@
 								</div>
 								<div class="form-group">
 									<label>Matrícula</label>
+<<<<<<< HEAD
 									<input type="text" class="form-control percent-20" name="matricula"  maxlength="7" placeholder="ex: cg0000000" value="<?= set_value('matricula')?>"/>
 									<?= form_error('matricula') ?>
 								</div>
+=======
+									<input type="text" class="form-control percent-20" name="matricula"  maxlength="8" placeholder="ex: cg0000000" value="<?= set_value('matricula')?>"/>
+									<?= form_error('matricula') ?>
+								</div>
+									<div class="form-group percent-40">
+									<label>Email</label>
+									<input type="email" class="form-control percent-40" name="email" placeholder="Email" value="<?= set_value('email')?>"/>
+									<?= form_error('email') ?>
+								</div>
+>>>>>>> a38f44128ab50eb6fc7d2209959045c36d026561
 								<div class="form-group disc">
 									<label>Disciplinas que pode lecionar</label>
 									<?= form_dropdown('disciplinas[]',$disciplinas,set_value('disciplinas[]'),array('id'=>'disciplinas','multiple'=>'multiple')) ?>
@@ -143,14 +173,22 @@
 									<input type="text" class="form-control percent-40" name="nascimento" value="<?= set_value('nascimento')?>"/>
 									<?= form_error('nascimento') ?>
 								</div>
+<<<<<<< HEAD
 								<div class="form-group percent-30 inline">
+=======
+								<div class="form-group percent-40">
+>>>>>>> a38f44128ab50eb6fc7d2209959045c36d026561
 										<label for="nivelAcademico" >Nivel Acadêmico</label>
 										<div id="u1" class="ax_default droplist" data-label="DropListNivel">
 											<?= form_dropdown('nivel',$nivel,set_value('nivel'),array('class'=>'form-control')) ?>
 											<?= form_error('nivel') ?>
 										</div>
 								</div>
+<<<<<<< HEAD
 								<div class="form-group percent-30 inline">
+=======
+								<div class="form-group percent-40">
+>>>>>>> a38f44128ab50eb6fc7d2209959045c36d026561
 									<label>Regime de contrato</label>
 									<div id="u2" class="ax_default droplist" data-label="DropListContrato">
 										<?= form_dropdown('contrato',$contrato,set_value('contrato'),array('class'=>'form-control')) ?>
@@ -193,9 +231,20 @@
 								</div>
 								<div class="form-group">
 									<label>Matrícula</label>
+<<<<<<< HEAD
 									<input type="text" class="form-control percent-20" name="recipient-matricula"  id="recipient-matricula" maxlength="7" placeholder="ex: cg0000000" value="<?= set_value('recipient-matricula')?>"/>
 									<?= form_error('recipient-matricula') ?>
 								</div>
+=======
+									<input type="text" class="form-control percent-20" name="recipient-matricula"  id="recipient-matricula" maxlength="8" placeholder="ex: cg0000000" value="<?= set_value('recipient-matricula')?>"/>
+									<?= form_error('recipient-matricula') ?>
+								</div>
+									<div class="form-group">
+									<label>Email</label>
+									<input type="email" class="form-control" name="recipient-email" placeholder="Email" id="recipient-email" value="<?= set_value('email')?>"/>
+									<?= form_error('recipient-email') ?>
+								</div>
+>>>>>>> a38f44128ab50eb6fc7d2209959045c36d026561
 								<div class="form-group percent-50">
 									<label>Disciplinas que pode lecionar: </label>
 									<!-- Pessoal do back-end, aqui o campo de texto deverá auto-completar o que o usuário começar a digitar -->
@@ -235,8 +284,11 @@
 				</div>
 			</div>
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> a38f44128ab50eb6fc7d2209959045c36d026561
 			<div class="row">
 				<div id="footer" class="col">
 					<p>Desenvolvido por Metal Code</p>
@@ -245,7 +297,10 @@
 
 		</div><!--Fecha container-fluid-->
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> a38f44128ab50eb6fc7d2209959045c36d026561
 		<script type="text/javascript" src="<?= base_url('assets/js/jquery-3.1.1.min.js')?>"></script>
 		<script type="text/javascript" src="<?= base_url('assets/js/bootstrap.min.js') ?>"></script>
 		<script type="text/javascript" src="<?= base_url('assets/DataTables/datatables.min.js') ?>"></script>
@@ -255,6 +310,7 @@
     <script type="text/javascript" src="<?= base_url('assets/multi-select/js/jquery.multi-select.js')?>"></script>
     <script>
     	$("#professorDisciplinas").multiSelect({
+<<<<<<< HEAD
 			selectableHeader: "<div class='multiselect'>Selecione as disciplinas</div>",
 			selectionHeader: "<div class='multiselect'>Disciplinas selecionadas</div>"
 		});
@@ -262,6 +318,15 @@
 			selectableHeader: "<div class='multiselect'>Selecione as disciplinas</div>",
 			selectionHeader: "<div class='multiselect'>Disciplinas selecionadas</div>"
 		});
+=======
+				selectableHeader: "<div class='multiselect'>Selecione as disciplinas</div>",
+				selectionHeader: "<div class='multiselect'>Disciplinas selecionadas</div>"
+			});
+    	$("#disciplinas").multiSelect({
+				selectableHeader: "<div class='multiselect'>Selecione as disciplinas</div>",
+				selectionHeader: "<div class='multiselect'>Disciplinas selecionadas</div>"
+			});
+>>>>>>> a38f44128ab50eb6fc7d2209959045c36d026561
     </script>
 		<script type="text/javascript">
 			$('#exampleModal').on('show.bs.modal', function (event) {
@@ -271,6 +336,10 @@
 				<!-- Foi criado todos os var caso seja necessario adicionar ou mudar os que já existem-->
 				var recipientnome = button.data('whatevernome')
 				var recipientmatricula = button.data('whatevermatricula')
+<<<<<<< HEAD
+=======
+				var recipientemail = button.data('whateveremail')
+>>>>>>> a38f44128ab50eb6fc7d2209959045c36d026561
 				var recipientnomeDisciplina = button.data('whatevernomeDisciplina')
 				var recipientnascimento = button.data('whatevernascimento')
 				var recipientnivelAcademico = button.data('whatevernivel')
@@ -285,6 +354,10 @@
 					});
 					$("#professorDisciplinas").multiSelect('select',disciplinas);
 				});
+<<<<<<< HEAD
+=======
+
+>>>>>>> a38f44128ab50eb6fc7d2209959045c36d026561
 				// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
 				// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
 				var modal = $(this)
@@ -292,6 +365,10 @@
 				<!-- Foi criado todos os modal caso seja necessario adicionar ou mudar os que já existem-->
 				modal.find('#recipient-nome').val(recipientnome)
 				modal.find('#recipient-matricula').val(recipientmatricula)
+<<<<<<< HEAD
+=======
+				modal.find('#recipient-email').val(recipientemail)
+>>>>>>> a38f44128ab50eb6fc7d2209959045c36d026561
 				modal.find('#recipient-nomeDisciplina').val(recipientnomeDisciplina)
 				modal.find('#recipient-nascimento').val(recipientnascimento)
 				modal.find('select[name=recipient-nivelAcademico] option[value='+recipientnivelAcademico+']').prop('selected',true)
@@ -349,9 +426,17 @@
 				});
 			}
 		</script>
+<<<<<<< HEAD
 		<script type="text/javascript">
 			$(document).ready(function () {
 				$("input[name=nascimento]").mask('00/00/0000', {placeholder: "__/__/____"});
+=======
+
+		<script type="text/javascript">
+			$(document).ready(function () {
+				$("input[name=nascimento]").mask('00/00/0000', {placeholder: "__/__/____"});
+				$("input[name='recipient-nascimento']").mask('00/00/0000', {placeholder: "__/__/____"});
+>>>>>>> a38f44128ab50eb6fc7d2209959045c36d026561
 			});
 		</script>
 

@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="<?= base_url('assets/DataTables/datatables.min.css')?>">
         <!-- Multi-Select -->
         <link rel="stylesheet" href="<?= base_url('assets/multi-select/css/multi-select.css')?>">
-        
+
         <style>
             a.active { background: #4CAF50; color:#FFF!important;}
         </style>

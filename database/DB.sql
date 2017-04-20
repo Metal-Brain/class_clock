@@ -69,40 +69,54 @@ CREATE TABLE IF NOT EXISTS Sala (
 );
 
 CREATE TABLE IF NOT EXISTS Contrato(
-	id					INT           NOT NULL 			AUTO_INCREMENT,
-  nome 				VARCHAR(45) 	NOT NULL,
-  PRIMARY KEY(id)
+	id					INT 			NOT NULL 			AUTO_INCREMENT,
+    nome 				VARCHAR(45) 	NOT NULL,
+    PRIMARY KEY(id)
 );
 
 INSERT INTO Contrato (nome) VALUES ('Exclusiva'),('Integral'),('Parcial');
 
-CREATE TABLE IF NOT EXISTS Nivel (
-	id					INT 			    NOT NULL 			AUTO_INCREMENT,
-  nome 				VARCHAR(45) 	NOT NULL,
-  PRIMARY KEY(id)
+CREATE TABLE IF NOT EXISTS Nivel(
+	id					INT 			NOT NULL 			AUTO_INCREMENT,
+    nome 				VARCHAR(45) 	NOT NULL,
+    PRIMARY KEY(id)
 );
 
 INSERT INTO Nivel (nome) VALUES ('Graduação'),('Pós-Graduação'),('Mestrado'),('Doutorado');
 
+CREATE TABLE IF NOT EXISTS Usuario (
+	id 					  INT 			    NOT NULL 			AUTO_INCREMENT,
+  nome 			    VARCHAR(32) 	NOT NULL,
+  matricula 		VARCHAR(8)		NOT NULL			UNIQUE,
+  email         varchar(255)  NOT NULL      UNIQUE,
+  senha 		    CHAR(64) 	    NOT NULL,
+  `status` 			BOOLEAN       NOT NULL  		DEFAULT TRUE,
+  PRIMARY KEY(id)
+);
+
+INSERT INTO Usuario VALUES (NULL, 'admin','cg123456','admin@admin.com','46070d4bf934fb0d4b06d9e2c46e346944e322444900a435d7d9a95e6d7435f5', TRUE);
+
+
 CREATE TABLE IF NOT EXISTS Professor(
-	id 					INT 			    NOT NULL 			AUTO_INCREMENT,
-  nome 				VARCHAR(255) 	NOT NULL,
-  matricula 	CHAR(7)    		NOT NULL			UNIQUE,
-  nascimento 	DATE 			    NOT NULL,
-  coordenador tinyint(1) 		NOT NULL			DEFAULT 0,
-  `status` 		tinyint(1) 		NOT NULL			DEFAULT 1,
-  idContrato 	INT 			    NOT NULL,
-  idNivel			INT 			    NOT NULL,
+	id 					    INT 			    NOT NULL 			AUTO_INCREMENT,
+  nascimento 			DATE 			    NOT NULL,
+  coordenador 		BOOLEAN       NOT NULL  		DEFAULT FALSE,
+  idContrato 			INT 			    NOT NULL,
+  idNivel				  INT 			    NOT NULL,
   PRIMARY KEY(id),
-  FOREIGN KEY(idContrato) REFERENCES Contrato(id),
-	FOREIGN KEY(idNivel) REFERENCES Nivel(id)
+  CONSTRAINT fk_professor_contrato
+    FOREIGN KEY(idContrato) REFERENCES Contrato(id),
+  CONSTRAINT fk_professor_nivel
+	  FOREIGN KEY(idNivel) REFERENCES Nivel(id),
+  CONSTRAINT fk_professor_usuario
+    FOREIGN KEY(id) REFERENCES Usuario(id)
 );
 
 CREATE TABLE IF NOT EXISTS Competencia(
-	idProfessor			INT 			    NOT NULL,
-  idDisciplina		INT 			    NOT NULL,
-  interesse 			tinyint(1) 		NOT NULL			DEFAULT 0,
-  PRIMARY KEY(idProfessor, idDisciplina),
-  FOREIGN KEY(idProfessor) REFERENCES Professor(id),
-  FOREIGN KEY(idDisciplina) REFERENCES Disciplina(id)
+	idProfessor			INT 			NOT NULL,
+    idDisciplina		INT 			NOT NULL,
+    interesse 			BOOLEAN       	NOT NULL  DEFAULT FALSE,
+    PRIMARY KEY(idProfessor, idDisciplina),
+    FOREIGN KEY(idProfessor) REFERENCES Professor(id),
+    FOREIGN KEY(idDisciplina) REFERENCES Disciplina(id)
 );
