@@ -77,7 +77,7 @@
           } else {
             $this->session->set_flashdata('danger','Não foi possível cadastrar o turma, tente novamente ou entre em contato com o administrador do sistema.');
           }
-            redirect('Turma/cadastrar');
+            redirect('Turma');
 
         }
       /**}else{

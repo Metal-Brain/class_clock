@@ -59,7 +59,7 @@
 								<td><?php if($turma['status']): echo "Ativo"; else: echo "Inativo"; endif;?></td>
 								<td>
 									<?php if ($turma['status']): ?>
-										<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal"  data-whateverdisciplina="<?= $turma['disciplinaSigla']?>" data-whateverid="<?= $turma['id']?>"  data-whateversigla="<?= $turma['sigla']?>"  data-whateverqtd="<?= $turma['qtdAlunos']?>" data-whateverdp="<?= $turma['dp']?>"<<span class="glyphicon glyphicon-pencil"></span></button>
+										<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal"  data-whateverdisciplina="<?= $turma['disciplinaSigla']?>" data-whateverid="<?= $turma['id']?>"  data-whateversigla="<?= $turma['sigla']?>"  data-whateverqtd="<?= $turma['qtdAlunos']?>" data-whateverdp="<?= $turma['dp']?>"><span class="glyphicon glyphicon-pencil"></span></button>
 										<button onClick="disable(<?= $turma['id']?>)" type="button" class="btn btn-danger delete" title="Desativar"><span class="glyphicon glyphicon-remove"></span></button>
 									<?php else : ?>
 										<button onClick="able(<?= $turma['id']?>)" type="button" class="btn btn-success delete" title="Ativar"><span class="glyphicon glyphicon-ok"></span></button>
@@ -85,13 +85,15 @@
 		<?= form_error('sigla') ?>
 					</div>
 			</div>
-
-			<label>Disciplina</label>
-			<div id="u1" class="ax_default droplist" data-label="DropListDisciplina">
-				<?= form_dropdown('disciplina',$disciplina,set_value('disciplina'),array('class'=>'form-control')) ?>
-				<?= form_error('disciplina') ?>
-			</div>
-
+			<div class="row">
+				<div class="form-group col-md-4">
+					<label>Disciplina</label>
+					<div id="u1" class="ax_default droplist" data-label="DropListDisciplina">
+						<?= form_dropdown('disciplina',$disciplina,set_value('disciplina'),array('class'=>'form-control')) ?>
+						<?= form_error('disciplina') ?>
+					</div>
+				</div>
+		  </div>
 			<div class="row">
 					<div class="form-group col-md-4">
 							<?= form_label('Quantidade de alunos', 'qtdAlunos') ?>
