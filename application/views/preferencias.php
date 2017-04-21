@@ -6,7 +6,7 @@
 		<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/bootstrap.min.css')?>">
 		<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/style.css')?>">
 		<!-- Multi-Select -->
-        <link rel="stylesheet" href="<?= base_url('assets/multi-select/css/multi-select.css')?>">
+    <link rel="stylesheet" href="<?= base_url('assets/multi-select/css/multi-select.css')?>">
 	</head>
 	<body>
 		<div class="container-fluid">
@@ -35,6 +35,13 @@
 				</div>
 
 				<div id="content" class="col-md-10">
+
+					<?php if($this->session->flashdata('success')) : ?>
+						<div class="alert alert-success">
+							<p class="text-center"><?= $this->session->flashdata('success') ?></p>
+						</div>
+					<?php endif; ?>
+
 					<!-- Cadastro das preferências do professor -->
 					<?= form_open('Professor/preferencia') ?>
 						<div class="modal-content col-md-offset-3 col-md-5">
@@ -43,6 +50,7 @@
 							<div class="form-group disc col-md-offset-1">
 							  <label>Disciplinas que deseja lecionar</label>
 							  <?= form_dropdown('disciplinas[]',$disciplinas,null,array('id'=>'disciplinas','multiple'=>'multiple')) ?>
+								<?= form_error('disciplinas[]') ?>
 							</div>
 							<div class="form-group col-md-offset-5">
 								<?= form_submit('submit','Cadastrar',array('class'=>'btn btn-primary')) ?>
@@ -59,9 +67,19 @@
 		<script type="text/javascript" src="<?= base_url('assets/js/jquery-3.1.1.min.js')?>"></script>
 		<script type="text/javascript" src="<?= base_url('assets/js/bootstrap.min.js')?>"></script>
 		<!-- multi-select -->
-        <script type="text/javascript" src="<?= base_url('assets/multi-select/js/jquery.multi-select.js')?>"></script>
-      	<script>
-		    $("#disciplinas").multiSelect({
+    <script type="text/javascript" src="<?= base_url('assets/multi-select/js/jquery.multi-select.js')?>"></script>
+    <script>
+			var url = '<?= base_url('index.php/Professor/getPreferencia/'.$this->session->id)?>';
+			$.getJSON(url,function (response) {
+				var disciplinas = [];
+				$.each(response, function (index, value) {
+					disciplinas.push(value.idDisciplina);
+				});
+				console.log(disciplinas);
+				$("#disciplinas").multiSelect('select',disciplinas);
+			});
+
+			$("#disciplinas").multiSelect({
 				selectableHeader: "<div class='multiselect'>Selecione as disciplinas</div>",
 				selectionHeader: "<div class='multiselect'>Disciplinas selecionadas</div>"
 			});

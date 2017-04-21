@@ -62,6 +62,25 @@
 			return $result;
 		}
 
+    public function clearPreferencia($idProfessor) {
+      $this->db->update('Competencia', array('interesse'=>FALSE));
+    }
+
+    /**
+     * Busca as disciplinas em que o professor quer lecionar.
+     * @author Caio de Freitas
+     * @since 2017/04/21
+     * @param INT $idProfessor - ID do professor
+     * @return Array - Retorna um vetor com as disciplinas.
+     */
+    public function getPreferencia ($idProfessor) {
+      $this->db->where('idProfessor', $idProfessor);
+      $this->db->where('interesse', TRUE);
+      $result = $this->db->get('Competencia');
+
+      return $result->result_array();
+    }
+
   }
 
 
