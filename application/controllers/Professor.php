@@ -23,7 +23,7 @@ class Professor extends CI_Controller {
      * @since 2017/04/03
      */
     public function cadastrar() {
-      if (verificaSessao() && verificaNivelPagina(array(2))){
+      if (verificaSessao() && verificaNivelPagina(array(1))){
         // Carrega a biblioteca para validação dos dados.
         $this->load->library(array('form_validation','My_PHPMailer'));
         $this->load->helper(array('form','dropdown','date','password'));
@@ -55,9 +55,8 @@ class Professor extends CI_Controller {
           $this->load->view('includes/header', $dados);
           $this->load->view('includes/sidebar');
           $this->load->view('professores/professores');
-		  $this->load->view('includes/footer');
-		  $this->load->view('professores/js_professores');
-
+					$this->load->view('includes/footer');
+					$this->load->view('professores/js_professores');
         } else {
           // Gera uma senha para o usuário
           $senha = gerate(10);
@@ -194,14 +193,14 @@ class Professor extends CI_Controller {
           $this->load->view('includes/header', $dados);
           $this->load->view('includes/sidebar');
           $this->load->view('professores/professores');
-		  $this->load->view('includes/footer');
-		  $this->load->view('professores/js_professores');
+					$this->load->view('includes/footer');
+					$this->load->view('professores/js_professores');
 
-            $dados['contrato'] = convert($this->Contrato_model->getAll(), TRUE);
-            $dados['nivel'] = convert($this->Nivel_model->getAll(), TRUE);
-            $dados['disciplinas'] = convert($this->Disciplina_model->getAll(TRUE));
-            $dados['professores'] = $this->Professor_model->getAll();
-            $this->load->view('professores/professores',$dados);
+          $dados['contrato'] = convert($this->Contrato_model->getAll(), TRUE);
+          $dados['nivel'] = convert($this->Nivel_model->getAll(), TRUE);
+          $dados['disciplinas'] = convert($this->Disciplina_model->getAll(TRUE));
+          $dados['professores'] = $this->Professor_model->getAll();
+          $this->load->view('professores/professores',$dados);
         } else {
             $id = $this->input->post('recipient-id');
           // Pega os dados do formulário
