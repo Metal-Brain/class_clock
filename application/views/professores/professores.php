@@ -77,42 +77,72 @@
         <!-- Aqui é o formulário de registro do novo item-->
         <div id="new" class="tab-pane fade">
             <h3>Cadastrar Professor</h3>
+			
             <?= form_open('Professor') ?>
-            <div class="form-group percent-40">
-                <label>Nome</label>
-                <input type="text" class="form-control" name="nome" placeholder="Nome" value="<?= set_value('nome') ?>"/>
-                <?= form_error('nome') ?>
-            </div>
+			
+			<div class="row">
+				<div class="form-group col-md-6">
+					<label>Nome</label>
+					<input type="text" class="form-control" name="nome" placeholder="Nome" value="<?= set_value('nome') ?>"/>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-4 margin-top-error">
+					<?= form_error('nome') ?>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="form-group col-md-2">
+					<label>Matrícula</label>
+					<input type="text" class="form-control" name="matricula"  maxlength="7" placeholder="ex: cg0000000" value="<?= set_value('matricula') ?>"/>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-3 margin-top-error">
+					<?= form_error('matricula') ?>
+				</div>
+			</div>
+			
+			<div class="row">
+                <div class="form-group col-md-5">
+					<label>Disciplinas que pode lecionar</label>
+					<?= form_dropdown('disciplinas[]', $disciplinas, set_value('disciplinas[]'), array('id' => 'disciplinas', 'multiple' => 'multiple')) ?>
+					<?= form_error('disciplinas[]') ?>
+				</div>
+			</div>
+			
+			<div class="row">
+                <div class="form-group col-md-2">
+                    <label>Data de Nascimento</label>
+					<input type="text" class="form-control" name="nascimento" value="<?= set_value('nascimento') ?>"/>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-3 margin-top-error">
+					<?= form_error('nascimento') ?>
+				</div>
+			</div>
+			
+			<!-- PAREI AQUI -->
             <div class="form-group">
-                <label>Matrícula</label>
-                <input type="text" class="form-control percent-20" name="matricula"  maxlength="7" placeholder="ex: cg0000000" value="<?= set_value('matricula') ?>"/>
-                <?= form_error('matricula') ?>
-            </div>
-            <div class="form-group disc">
-                <label>Disciplinas que pode lecionar</label>
-                <?= form_dropdown('disciplinas[]', $disciplinas, set_value('disciplinas[]'), array('id' => 'disciplinas', 'multiple' => 'multiple')) ?>
-                <?= form_error('disciplinas[]') ?>
-            </div>
-            <div class="form-group percent-40">
-                <label>Data de Nascimento</label>
-                <input type="text" class="form-control percent-40" name="nascimento" value="<?= set_value('nascimento') ?>"/>
-                <?= form_error('nascimento') ?>
-            </div>
-            <div class="form-group percent-40">
                 <label for="nivelAcademico" >Nivel Acadêmico</label>
                 <div id="u1" class="ax_default droplist" data-label="DropListNivel">
                     <?= form_dropdown('nivel', $nivel, set_value('nivel'), array('class' => 'form-control')) ?>
                     <?= form_error('nivel') ?>
                 </div>
             </div>
-            <div class="form-group percent-40">
+            <div class="form-group">
                 <label>Regime de contrato</label>
                 <div id="u2" class="ax_default droplist" data-label="DropListContrato">
                     <?= form_dropdown('contrato', $contrato, set_value('contrato'), array('class' => 'form-control')) ?>
                     <?= form_error('contrato') ?>
                 </div>
             </div>
-            <div class="form-group percent-50">
+            <div class="form-group">
                 <input id="coordenador" type="checkbox" name="coordenador" class="form-group" value="true"/>
                 <label for="coordenador">Coordenador</label>
             </div>
@@ -148,18 +178,18 @@
                 </div>
                 <div class="form-group">
                     <label>Matrícula</label>
-                    <input type="text" class="form-control percent-20" name="recipient-matricula"  id="recipient-matricula" maxlength="7" placeholder="ex: cg0000000" value="<?= set_value('recipient-matricula') ?>"/>
+                    <input type="text" class="form-control" name="recipient-matricula"  id="recipient-matricula" maxlength="7" placeholder="ex: cg0000000" value="<?= set_value('recipient-matricula') ?>"/>
                     <?= form_error('recipient-matricula') ?>
                 </div>
-                <div class="form-group percent-50">
+                <div class="form-group">
                     <label>Disciplinas que pode lecionar: </label>
                     <!-- Pessoal do back-end, aqui o campo de texto deverá auto-completar o que o usuário começar a digitar -->
                     <?= form_dropdown('professorDisciplinas[]', $disciplinas, set_value('professorDisciplinas[]'), array('id' => 'professorDisciplinas', 'multiple' => 'multiple')) ?>
                     <?= form_error('professorDisciplinas[]') ?>
                 </div>
-                <div class="form-group percent-50">
+                <div class="form-group">
                     <label>Data de Nascimento</label>
-                    <input type="text" class="form-control percent-40" name="recipient-nascimento" id="recipient-nascimento" value="<?= set_value('nascimento') ?>"/>
+                    <input type="text" class="form-control" name="recipient-nascimento" id="recipient-nascimento" value="<?= set_value('nascimento') ?>"/>
                     <?= form_error('recipient-nascimento') ?>
                 </div>
                 <div class="form-group">
@@ -169,14 +199,14 @@
                         <?= form_error('recipient-nivelAcademico') ?>
                     </div>
                 </div>
-                <div class="form-group percent-30 inline">
+                <div class="form-group">
                     <label>Regime de contrato</label>
                     <div id="u2" class="ax_default droplist" data-label="DropListContrato">
                         <?= form_dropdown('recipient-contrato', $contrato, set_value('recipient-contrato'), array('class' => 'form-control')) ?>
                         <?= form_error('recipient-contrato') ?>
                     </div>
                 </div>
-                <div class="form-group percent-50">
+                <div class="form-group">
                     <input type="checkbox" name="recipient-coordenador" value="true" class="form-group" id="recipient-coordenador"/>
                     <label for="recipient-coordenador">Coordenador</label>
                 </div>

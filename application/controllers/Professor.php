@@ -64,7 +64,9 @@ class Professor extends CI_Controller {
 
           $this->load->view('includes/header', $dados);
           $this->load->view('includes/sidebar');
-          $this->load->view('professores');
+          $this->load->view('professores/professores');
+		  $this->load->view('includes/footer');
+		  $this->load->view('professores/js_professores');
 
         } else {
 
@@ -134,7 +136,7 @@ class Professor extends CI_Controller {
     public function date_check ($date) {
 
       if ($date == null) {
-        $this->form_validation->set_message('date_check','Informe sua data de nascimento');
+        $this->form_validation->set_message('date_check','Informe a data de nascimento.');
         return FALSE;
       }
 
@@ -228,7 +230,9 @@ class Professor extends CI_Controller {
 
           $this->load->view('includes/header', $dados);
           $this->load->view('includes/sidebar');
-          $this->load->view('professores');
+          $this->load->view('professores/professores');
+		  $this->load->view('includes/footer');
+		  $this->load->view('professores/js_professores');
 
             $dados['contrato'] = convert($this->Contrato_model->getAll(), TRUE);
             $dados['nivel'] = convert($this->Nivel_model->getAll(), TRUE);

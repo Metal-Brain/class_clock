@@ -84,7 +84,6 @@
 					<div class="form-group col-md-6">
 						<label>Nome</label>
 						<input type="text" class="form-control" name="nome" placeholder="Nome" value="<?= set_value('nome') ?>">
-						
 					</div>
 				</div>
 				
@@ -115,7 +114,7 @@
                 
 				<div class="row">
 					<div class="form-group col-md-1">
-						<input type="text" maxlength="1" pattern="[0-9]+$" class="form-control percent-5" name="qtdProf" placeholder="ex: 1" value="<?= set_value('qtdProf') ?>">
+						<input type="text" maxlength="1" pattern="[0-9]+$" class="form-control" name="qtdProf" placeholder="ex: 1" value="<?= set_value('qtdProf') ?>">
 					</div>
 				</div>
 				
@@ -187,7 +186,7 @@
 				
 				<div class="row">
 					<div class="form-group col-md-2">
-						<input type="text" maxlength="1" pattern="[0-9]+$"  class="form-control percent-10" name="recipient-qtd-prof" id="recipient-qtd-prof">
+						<input type="text" maxlength="1" pattern="[0-9]+$"  class="form-control" name="recipient-qtd-prof" id="recipient-qtd-prof">
 					</div>
 				</div>
 				

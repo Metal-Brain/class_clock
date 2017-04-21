@@ -47,7 +47,9 @@
                $dados['salas'] = $this->Sala_model->getAll();
            	   $this->load->view('includes/header',$dados);
                $this->load->view('includes/sidebar');
-               $this->load->view('salas');
+               $this->load->view('salas/salas');
+			   $this->load->view('includes/footer');
+		       $this->load->view('salas/js_salas');
 
              } else {
 
@@ -129,7 +131,11 @@
                        $this->session->set_flashdata('formDanger','<strong>Não foi possível atualizar os dados da sala:</strong>');
 
                        $dados['salas'] = $this->Sala_model->getAll();
-               	       $this->load->view('salas', $dados);
+               	       $this->load->view('includes/header',$dados);
+					   $this->load->view('includes/sidebar');
+       			       $this->load->view('salas/salas');
+				       $this->load->view('includes/footer');
+				       $this->load->view('salas/js_salas');
 
                      } else {
 
