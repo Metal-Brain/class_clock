@@ -234,31 +234,56 @@ class Professor extends CI_Controller {
      * @since 2017/04/07
      * @param INT $id - ID do professor
      */
-    public function disciplinas($id) {
+    public function disciplinas($id, $json=TRUE) {
         $this->load->model(array('Competencia_model'));
         $disciplinas = $this->Competencia_model->getAllDisciplinas($id);
-        echo json_encode($disciplinas);
+        if ($json)
+					echo json_encode($disciplinas);
+				else
+					return $disciplinas;
     }
 
 		/**
-		*Busca todas as disciplinas vinculadas ao professor e enviar para view de preferencias
-		*@author Felipe Ribeiro
-		*/
+		 * busca todas as preferências de disciplinas selecionadas pelo professor
+		 * @author Caio de Freitas
+		 * @since 2017/04/21
+		 * @param INT $idProfessor - ID do professor
+		 */
+		public function getPreferencia($idProfessor) {
+			$this->load->model('Competencia_model');
+			$preferencias = $this->Competencia_model->getPreferencia($idProfessor);
+
+			echo json_encode($preferencias);
+		}
+
+		/**
+			*	Busca todas as disciplinas vinculadas ao professor e enviar para view de preferencias
+			*	@author Felipe Ribeiro
+			*/
 		public function preferencia(){
 			if (verificaSessao() && verificaNivelPagina(array(2))){
-				$this->load->model(array('Disciplina_model','Competencia_model'));
-				$this->load->helper('dropdown');
-				$this->form_validation->set_rules('disciplinas','disciplinas',array('requeire'));
 
-				if($this->form_validation->run()==FALSE){
-					$dados['disciplinas'] = convert($this->Disciplina_model->getAll());
+				$this->load->model(array('Competencia_model'));
+				$this->load->helper('dropdown');
+
+				// Regra de validação do formulário
+				$this->form_validation->set_rules('disciplinas[]','disciplinas',array('required'));
+				// delimitadores
+				$this->form_validation->set_error_delimiters('<p class="text-danger">','</p>');
+
+				if($this->form_validation->run() == FALSE){
+					$dados['disciplinas'] = convert($this->disciplinas($this->session->id, FALSE));
 					$this->load->view('preferencias', $dados);
 				} else {
 
-					$selected = $this->input->post('disciplinas[]');
+					$disciplinas = $this->input->post('disciplinas[]');
+					$this->Competencia_model->clearPreferencia($this->session->id);
 
-					foreach ($selected as $s)
-						$this->Competencia_model->insertPreferencia($this->session->id, $s, TRUE);
+					foreach ($disciplinas as $disciplina)
+						$this->Competencia_model->insertPreferencia($this->session->id, $disciplina, TRUE);
+
+					$this->session->set_flashdata('success','Disciplinas selecionadas com sucesso');
+					redirect('Professor/preferencia');
 				}
 
 			}else{
