@@ -251,35 +251,56 @@
 					</div>	
 				</div>
 				
+				<div class="row">
+					<div class="form-group col-md-12">
+						<label>Data de Nascimento</label>
+						<input type="text" class="form-control" name="recipient-nascimento" id="recipient-nascimento" value="<?= set_value('nascimento') ?>"/>
+					</div>
+				</div>
 				
-                <div class="form-group">
-                    <label>Data de Nascimento</label>
-                    <input type="text" class="form-control" name="recipient-nascimento" id="recipient-nascimento" value="<?= set_value('nascimento') ?>"/>
-                    <?= form_error('recipient-nascimento') ?>
-                </div>
-                <div class="form-group">
-                    <label for="nivelAcademico" >Nivel Acadêmico</label>
-                    <div id="u1" class="ax_default droplist" data-label="DropListNivel">
+				<div class="row">
+					<div class="col-md-6 margin-top-error">
+						<?= form_error('recipient-nascimento') ?>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="form-group col-md-12">
+						<label for="nivelAcademico" >Nivel Acadêmico</label>
                         <?= form_dropdown('recipient-nivelAcademico', $nivel, set_value('recipient-nivelAcademico'), array('class' => 'form-control')) ?>
-                        <?= form_error('recipient-nivelAcademico') ?>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label>Regime de contrato</label>
-                    <div id="u2" class="ax_default droplist" data-label="DropListContrato">
-                        <?= form_dropdown('recipient-contrato', $contrato, set_value('recipient-contrato'), array('class' => 'form-control')) ?>
-                        <?= form_error('recipient-contrato') ?>
+				
+				<div class="row">
+					<div class="col-md-6 margin-top-error">
+						<?= form_error('recipient-nivelAcademico') ?>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="form-group col-md-12">
+						<label>Regime de contrato</label>
+						<?= form_dropdown('recipient-contrato', $contrato, set_value('recipient-contrato'), array('class' => 'form-control')) ?>
                     </div>
                 </div>
-                <div class="form-group">
-                    <input type="checkbox" name="recipient-coordenador" value="true" class="form-group" id="recipient-coordenador"/>
-                    <label for="recipient-coordenador">Coordenador</label>
-                </div>
+				
+				<div class="row">
+					<div class="col-md-6 margin-top-error">
+						<?= form_error('recipient-contrato') ?>
+					</div>
+				</div>
+                
+				<div class="row">
+					<div class="form-group col-md-12">
+						<input type="checkbox" name="recipient-coordenador" value="true" class="form-group" id="recipient-coordenador"/>
+						<label for="recipient-coordenador">Coordenador</label>
+					</div>
+				</div>
+				
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Alterar</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                 </div>
-                </form>
             </div>
         </div>
     </div>
