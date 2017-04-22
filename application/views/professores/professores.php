@@ -96,13 +96,26 @@
 			<div class="row">
 				<div class="form-group col-md-2">
 					<label>Matrícula</label>
-					<input type="text" class="form-control" name="matricula"  maxlength="7" placeholder="ex: cg0000000" value="<?= set_value('matricula') ?>"/>
+					<input type="text" class="form-control" name="matricula"  maxlength="8" placeholder="ex: cg0000000" value="<?= set_value('matricula') ?>"/>
 				</div>
 			</div>
 			
 			<div class="row">
 				<div class="col-md-3 margin-top-error">
 					<?= form_error('matricula') ?>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="form-group col-md-4">
+					<label>E-mail</label>
+					<input type="email" class="form-control" name="e-mail" placeholder="exemplo@exemplo.com.br" value="<?= set_value('email') ?>"/>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-3 margin-top-error">
+					<?= form_error('email') ?>
 				</div>
 			</div>
 			
@@ -127,33 +140,45 @@
 				</div>
 			</div>
 			
-			<!-- PAREI AQUI -->
-            <div class="form-group">
-                <label for="nivelAcademico" >Nivel Acadêmico</label>
-                <div id="u1" class="ax_default droplist" data-label="DropListNivel">
-                    <?= form_dropdown('nivel', $nivel, set_value('nivel'), array('class' => 'form-control')) ?>
-                    <?= form_error('nivel') ?>
-                </div>
+			<div class="row">
+                <div class="form-group col-md-2">
+					<label for="nivelAcademico" >Nivel Acadêmico</label>
+					<!-- <div id="u1" class="ax_default droplist" data-label="DropListNivel"> -->
+						<?= form_dropdown('nivel', $nivel, set_value('nivel'), array('class' => 'form-control')) ?>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-3 margin-top-error">
+					<?= form_error('nivel') ?>
+				</div>
+			</div>
+			
+			<div class="row">
+                <div class="form-group col-md-2">
+					<label>Regime de contrato</label>
+						<?= form_dropdown('contrato', $contrato, set_value('contrato'), array('class' => 'form-control')) ?>
+				</div>
             </div>
-            <div class="form-group">
-                <label>Regime de contrato</label>
-                <div id="u2" class="ax_default droplist" data-label="DropListContrato">
-                    <?= form_dropdown('contrato', $contrato, set_value('contrato'), array('class' => 'form-control')) ?>
-                    <?= form_error('contrato') ?>
-                </div>
-            </div>
-            <div class="form-group">
-                <input id="coordenador" type="checkbox" name="coordenador" class="form-group" value="true"/>
-                <label for="coordenador">Coordenador</label>
-            </div>
+			
+			<div class="row">
+				<div class="col-md-2 margin-top-error">
+					<?= form_error('contrato') ?>
+				</div>
+			</div>
+			
+			<div class="row">
+                <div class="form-group col-md-2">
+					<input id="coordenador" type="checkbox" name="coordenador" class="form-group" value="true"/>
+					<label for="coordenador">Coordenador</label>
+				</div>
+			</div>
+			
             <div class="inline">
                 <button type='submit' class='btn bt-lg btn-primary'>Cadastrar</button>
             </div>
-            </form>
         </div>
-
     </div><!--fecha tab-content-->
-
 </div><!--Fecha content-->
 
 </div><!--Fecha row-->
@@ -161,32 +186,72 @@
 <!-- Aqui é o Modal de alteração dos professores-->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
     <div class="modal-dialog" role="document">
-        <div class="modal-content">
+        <div class="modal-content col-md-12">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="exampleModalLabel">Professor</h4>
             </div>
             <div class="modal-body">
+			
                 <?= form_open('Professor/atualizar') ?>
+				
                 <div class="form-group">
                     <input type="hidden" name="recipient-id" id="recipient-id">
                 </div>
-                <div class="form-group">
-                    <label>Nome</label>
-                    <input type="text" class="form-control" name="recipient-nome" placeholder="Nome" id="recipient-nome" value="<?= set_value('nome') ?>"/>
-                    <?= form_error('recipient-nome') ?>
-                </div>
-                <div class="form-group">
-                    <label>Matrícula</label>
-                    <input type="text" class="form-control" name="recipient-matricula"  id="recipient-matricula" maxlength="7" placeholder="ex: cg0000000" value="<?= set_value('recipient-matricula') ?>"/>
-                    <?= form_error('recipient-matricula') ?>
-                </div>
-                <div class="form-group">
-                    <label>Disciplinas que pode lecionar: </label>
-                    <!-- Pessoal do back-end, aqui o campo de texto deverá auto-completar o que o usuário começar a digitar -->
-                    <?= form_dropdown('professorDisciplinas[]', $disciplinas, set_value('professorDisciplinas[]'), array('id' => 'professorDisciplinas', 'multiple' => 'multiple')) ?>
-                    <?= form_error('professorDisciplinas[]') ?>
-                </div>
+				
+				<div class="row">
+					<div class="form-group col-md-12">
+						<label>Nome</label>
+						<input type="text" class="form-control" name="recipient-nome" placeholder="Nome" id="recipient-nome" value="<?= set_value('nome') ?>"/>                    
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-md-6 margin-top-error">
+						<?= form_error('recipient-nome') ?>
+					</div>	
+				</div>
+				
+				<div class="row">
+					<div class="form-group col-md-12">
+						<label>Matrícula</label>
+						<input type="text" class="form-control" name="recipient-matricula"  id="recipient-matricula" maxlength="8" placeholder="ex: cg0000000" value="<?= set_value('recipient-matricula') ?>"/>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-md-6 margin-top-error">
+						<?= form_error('recipient-matricula') ?>
+					</div>	
+				</div>
+				
+				<div class="row">
+					<div class="form-group col-md-4">
+						<label>E-mail</label>
+						<input type="email" class="form-control" name="e-mail" placeholder="exemplo@exemplo.com.br" value="<?= set_value('email') ?>"/>
+					</div>
+				</div>
+			
+				<div class="row">
+					<div class="col-md-3 margin-top-error">
+						<?= form_error('recipient-email') ?>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="form-group col-md-12">
+						<label>Disciplinas que pode lecionar: </label>
+						<?= form_dropdown('professorDisciplinas[]', $disciplinas, set_value('professorDisciplinas[]'), array('id' => 'professorDisciplinas', 'multiple' => 'multiple')) ?>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-md-6 margin-top-error">
+						<?= form_error('professorDisciplinas[]') ?>
+					</div>	
+				</div>
+				
+				
                 <div class="form-group">
                     <label>Data de Nascimento</label>
                     <input type="text" class="form-control" name="recipient-nascimento" id="recipient-nascimento" value="<?= set_value('nascimento') ?>"/>
