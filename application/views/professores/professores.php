@@ -83,7 +83,7 @@
 			<div class="row">
 				<div class="form-group col-md-6">
 					<label>Nome</label>
-					<input type="text" class="form-control" name="nome" placeholder="Nome" value="<?= set_value('nome') ?>"/>
+					<input type="text" class="form-control" name="nome" placeholder="Nome" value="<?= set_value('nome') ?>" required>
 				</div>
 			</div>
 			
@@ -96,12 +96,12 @@
 			<div class="row">
 				<div class="form-group col-md-2">
 					<label>Matrícula</label>
-					<input type="text" class="form-control" name="matricula"  maxlength="8" placeholder="ex: cg0000000" value="<?= set_value('matricula') ?>"/>
+					<input type="text" class="form-control" name="matricula"  maxlength="8" placeholder="ex: cg0000000" value="<?= set_value('matricula') ?>" required>
 				</div>
 			</div>
 			
 			<div class="row">
-				<div class="col-md-3 margin-top-error">
+				<div class="col-md-4 margin-top-error">
 					<?= form_error('matricula') ?>
 				</div>
 			</div>
@@ -109,7 +109,7 @@
 			<div class="row">
 				<div class="form-group col-md-4">
 					<label>E-mail</label>
-					<input type="email" class="form-control" name="e-mail" placeholder="exemplo@exemplo.com.br" value="<?= set_value('email') ?>"/>
+					<input type="email" class="form-control" name="e-mail" placeholder="exemplo@exemplo.com.br" value="<?= set_value('email') ?>" required>
 				</div>
 			</div>
 			
@@ -130,7 +130,7 @@
 			<div class="row">
                 <div class="form-group col-md-2">
                     <label>Data de Nascimento</label>
-					<input type="text" class="form-control" name="nascimento" value="<?= set_value('nascimento') ?>"/>
+					<input type="text" class="form-control" name="nascimento" value="<?= set_value('nascimento') ?>" required>
 				</div>
 			</div>
 			
@@ -169,7 +169,7 @@
 			
 			<div class="row">
                 <div class="form-group col-md-2">
-					<input id="coordenador" type="checkbox" name="coordenador" class="form-group" value="true"/>
+					<input id="coordenador" type="checkbox" name="coordenador" class="form-group" value="true">
 					<label for="coordenador">Coordenador</label>
 				</div>
 			</div>

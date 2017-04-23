@@ -83,7 +83,7 @@
 				<div class="row">
 					<div class="form-group col-md-6">
 						<label>Nome</label>
-						<input type="text" class="form-control" name="nome" placeholder="Nome" value="<?= set_value('nome') ?>">
+						<input type="text" class="form-control" name="nome" placeholder="Nome" value="<?= set_value('nome') ?>" required>
 					</div>
 				</div>
 				
@@ -96,7 +96,7 @@
 				<div class="row">
 					<div class="form-group col-md-2">
 						<label>Sigla</label>
-						<input type="text" class="form-control" name="sigla" placeholder="ex: LOPA1" value="<?= set_value('sigla') ?>">
+						<input type="text" class="form-control" name="sigla" placeholder="ex: LOPA1" value="<?= set_value('sigla') ?>" required>
 					</div>
 				</div>
 				
@@ -114,7 +114,7 @@
                 
 				<div class="row">
 					<div class="form-group col-md-1">
-						<input type="text" maxlength="1" pattern="[0-9]+$" class="form-control" name="qtdProf" placeholder="ex: 1" value="<?= set_value('qtdProf') ?>">
+						<input type="text" maxlength="1" pattern="[0-9]+$" class="form-control" name="qtdProf" placeholder="ex: 1" value="<?= set_value('qtdProf') ?>" required>
 					</div>
 				</div>
 				
@@ -155,7 +155,7 @@
 				<div class="row">
 					<div class="form-group col-md-12">
 						<label for="nome-name" class="control-label">Nome:</label>
-						<input type="text" class="form-control" name="recipient-nome" id="recipient-nome">
+						<input type="text" class="form-control" name="recipient-nome" id="recipient-nome" required>
 					</div>
 				</div>
 				
@@ -168,7 +168,7 @@
 				<div class="row">
 					<div class="form-group col-md-3">
 						<label for="sigla-name" class="control-label">Sigla:</label>
-						<input type="text" class="form-control" name="recipient-sigla" id="recipient-sigla">
+						<input type="text" class="form-control" name="recipient-sigla" id="recipient-sigla" required>
 					</div>
 				</div>
 				
@@ -186,7 +186,7 @@
 				
 				<div class="row">
 					<div class="form-group col-md-2">
-						<input type="text" maxlength="1" pattern="[0-9]+$"  class="form-control" name="recipient-qtd-prof" id="recipient-qtd-prof">
+						<input type="text" maxlength="1" pattern="[0-9]+$"  class="form-control" name="recipient-qtd-prof" id="recipient-qtd-prof" required>
 					</div>
 				</div>
 				
@@ -200,7 +200,8 @@
                     <button type="submit" class="btn btn-primary">Alterar</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                 </div>
-                </form>
+                
+				<?= form_close() ?>
             </div>
         </div>
     </div>

@@ -46,8 +46,8 @@ class Professor extends CI_Controller {
         $this->form_validation->set_rules('matricula', 'matrícula', array('required','exact_length[8]','is_unique[Usuario.matricula]','strtoupper'));
 		$this->form_validation->set_rules('email','e-mail',array('required','valid_email','is_unique[Usuario.email]'));
         $this->form_validation->set_rules('nascimento', 'data de nascimento', array('callback_date_check'));
-        $this->form_validation->set_rules('nivel', 'nivel', array('greater_than[0]'),array('greater_than'=>'Selecione o nivel acadêmico'));
-        $this->form_validation->set_rules('contrato','contrato',array('greater_than[0]'),array('greater_than'=>'Selecione um contrato'));
+        $this->form_validation->set_rules('nivel', 'nivel', array('greater_than[0]'),array('greater_than'=>'Selecione o nível acadêmico.'));
+        $this->form_validation->set_rules('contrato','contrato',array('greater_than[0]'),array('greater_than'=>'Selecione um contrato.'));
 
         // Definição dos delimitadores
         $this->form_validation->set_error_delimiters('<p class="text-danger">','</p>');
@@ -115,7 +115,7 @@ class Professor extends CI_Controller {
 
             $this->session->set_flashdata('success','Professor cadastrado com sucesso');
           } else {
-            $this->session->set_flashdata('danger','Não foi possivel cadastrar o professor, tente novamente ou entre em contato com o administrador do sistema');
+            $this->session->set_flashdata('danger','Não foi possível cadastrar o professor, tente novamente ou entre em contato com o administrador do sistema.');
           }
 
           redirect('Professor/cadastrar');
@@ -178,7 +178,7 @@ class Professor extends CI_Controller {
         $this->load->model('Professor_model');
 
         if ( $this->Professor_model->able($id) )
-          $this->session->set_flashdata('success','Professor ativado com sucesso!');
+          $this->session->set_flashdata('success','Professor ativado com sucesso');
         else
           $this->session->set_flashdata('danger','Não foi possível ativar o professor, tente novamente ou entre em contato com o administrador do sistema.');
 
@@ -213,8 +213,8 @@ class Professor extends CI_Controller {
         $this->form_validation->set_rules('recipient-matricula', 'matrícula', array('required','exact_length[8]','strtoupper'));
 		$this->form_validation->set_rules('recipient-email','e-mail',array('required','valid_email'));
         $this->form_validation->set_rules('recipient-nascimento', 'data de nascimento', array('callback_date_check'));
-        $this->form_validation->set_rules('recipient-nivelAcademico', 'nivel', array('greater_than[0]'),array('greater_than'=>'Selecione o nivel acadêmico'));
-        $this->form_validation->set_rules('recipient-contrato','contrato',array('greater_than[0]'),array('greater_than'=>'Selecione um contrato'));
+        $this->form_validation->set_rules('recipient-nivelAcademico', 'nivel', array('greater_than[0]'),array('greater_than'=>'Selecione o nível acadêmico.'));
+        $this->form_validation->set_rules('recipient-contrato','contrato',array('greater_than[0]'),array('greater_than'=>'Selecione um contrato.'));
         // Definição dos delimitadores
         $this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
 
@@ -265,7 +265,7 @@ class Professor extends CI_Controller {
 
             $this->session->set_flashdata('success','Dados atualizados com sucesso');
           } else {
-            $this->session->set_flashdata('danger','Não foi possivel atualizar os dados do professor, tente novamente ou entre em contato com o administrador do sistema. Caso tenha <strong>alterado a matrícula</strong> verifique se a mesma já está existe.');
+            $this->session->set_flashdata('danger','Não foi possível atualizar os dados do professor, tente novamente ou entre em contato com o administrador do sistema. Caso tenha alterado a <strong>matrícula</strong>, verifique se a mesma já existe.');
           }
 
           redirect('Professor/atualizar');

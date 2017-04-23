@@ -38,7 +38,7 @@
              $this->form_validation->set_rules('capMax', 'capacidade máxima', array('required', 'integer', 'greater_than[0]'));
              $this->form_validation->set_rules('tipo', 'tipo', array('required','min_length[5]','ucwords'));
              // Definição dos delimitadores
-             $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
+             $this->form_validation->set_error_delimiters('<p class="text-danger">','</p>');
 
              // Verifica se o formulario é valido
              if ($this->form_validation->run() == FALSE) {
@@ -97,7 +97,7 @@
                $this->load->model('Sala_model');
 
        			  if ( $this->Sala_model->able($id) )
-       				$this->session->set_flashdata('success','Sala ativada com sucesso!');
+       				$this->session->set_flashdata('success','Sala ativada com sucesso');
        			  else
        				$this->session->set_flashdata('danger','Não foi possível ativar a sala, tente novamente ou entre em contato com o administrador do sistema.');
 
@@ -119,11 +119,11 @@
                      $this->load->model(array('Sala_model'));
 
                      // Definir as regras de validação para cada campo do formulário.
-                     $this->form_validation->set_rules('recipient-nSala', 'Numero Sala', array('required', 'max_length[5]','strtoupper'));
-                     $this->form_validation->set_rules('recipient-capMax', 'Capacidade Maxima', array('required', 'integer', 'greater_than[0]'));
-                     $this->form_validation->set_rules('recipient-tipo', 'Tipo', array('required','min_length[5]','ucwords'));
+                     $this->form_validation->set_rules('recipient-nSala', 'número da sala', array('required', 'max_length[5]','strtoupper'));
+                     $this->form_validation->set_rules('recipient-capMax', 'capacidade máxima', array('required', 'integer', 'greater_than[0]'));
+                     $this->form_validation->set_rules('recipient-tipo', 'tipo', array('required','min_length[5]','ucwords'));
                     // Definição dos delimitadores
-                     $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
+                     $this->form_validation->set_error_delimiters('<p class="text-danger">','</p>');
 
                      // Verifica se o formulario é valido
                      if ($this->form_validation->run() == FALSE) {
@@ -150,7 +150,7 @@
                       if ( $this->Sala_model->update($id, $sala) )
                         $this->session->set_flashdata('success', 'Sala atualizada com sucesso');
                       else
-                        $this->session->set_flashdata('danger','Não foi possível atualizar os dados da sala, tente novamente ou entre em contato com o administrador do sistema. <br/> Caso tenha alterado o <b>número da sala</b>, verifique se ele já não foi utilizado!');
+                        $this->session->set_flashdata('danger','Não foi possível atualizar os dados da sala, tente novamente ou entre em contato com o administrador do sistema. <br/> Caso tenha alterado o <b>número da sala</b>, verifique se ele já não foi utilizado.');
                        redirect("Sala/cadastro");
                      }
              }else{
