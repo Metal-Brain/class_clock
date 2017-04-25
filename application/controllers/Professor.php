@@ -192,15 +192,10 @@ class Professor extends CI_Controller {
           $dados['professores']     = $this->Professor_model->getAll();
           $this->load->view('includes/header', $dados);
           $this->load->view('includes/sidebar');
-          $this->load->view('professores/professores');
+          $this->load->view('professores/professores',$dados);
 					$this->load->view('includes/footer');
 					$this->load->view('professores/js_professores');
 
-          $dados['contrato'] = convert($this->Contrato_model->getAll(), TRUE);
-          $dados['nivel'] = convert($this->Nivel_model->getAll(), TRUE);
-          $dados['disciplinas'] = convert($this->Disciplina_model->getAll(TRUE));
-          $dados['professores'] = $this->Professor_model->getAll();
-          $this->load->view('professores/professores',$dados);
         } else {
             $id = $this->input->post('recipient-id');
           // Pega os dados do formulário
