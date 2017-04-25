@@ -109,7 +109,7 @@
           $usuario['senha'] = hash('sha256',$senha);//aplica hash na nova senha
           if ($this->Login_model->updateSenha($usuario['id'], $usuario)){
 
-
+			$content = $this->load->view('email/recuperar',array('professor'=>$professor),TRUE);
             $mail = new PHPMailer();
             $mail->CharSet = 'UTF-8';
             $mail->isSMTP();
@@ -121,8 +121,8 @@
             $mail->Password = "#metalcode2017#";
             $mail->setFrom('metalcodeifsp@gmail.com', 'Metalcode');//Cria a origem do email
             $mail->addAddress($usuario['email'], $usuario['nome']);//add o email e nome
-            $mail->Subject = 'Senha de Recuperação';//Seta o titulo do email
-            $mail->msgHTML('Sua senha: <strong>'.$senha. '</strong>');//Seta a mensagem do email no caso passando a senha
+            $mail->Subject = 'Recuperação de senha';//Seta o titulo do email
+            $mail->msgHTML($content);//Seta a mensagem do email no caso passando a senha
             $mail->AltBody = 'This is a plain-text message body';
 
             if ($mail->send()){//Verifica se obteve sucesso no envio do email
