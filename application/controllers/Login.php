@@ -106,10 +106,12 @@
         } else {
           $email = ($usuario['email']);// Pega o email na array referente ao usuário
           $senha = gerate(10);//gera uma nova senha para o usuario
+          $usuario['senha'] = $senha;//aplica nova senha
+          $content = $this->load->view('email/recuperar',array('usuario'=>$usuario),TRUE);
           $usuario['senha'] = hash('sha256',$senha);//aplica hash na nova senha
           if ($this->Login_model->updateSenha($usuario['id'], $usuario)){
 
-			$content = $this->load->view('email/recuperar',array('professor'=>$professor),TRUE);
+
             $mail = new PHPMailer();
             $mail->CharSet = 'UTF-8';
             $mail->isSMTP();
