@@ -83,21 +83,6 @@
 				selectableHeader: "<div class='multiselect'>Selecione as disciplinas</div>",
 				selectionHeader: "<div class='multiselect'>Disciplinas selecionadas</div>"
 			});
-        </script>
-
-			<!-- nao manjei mas acho que vai precisar desse trexo alterado... -->
-
-        <script type="text/javascript">
-			var recipientid = button.data('whateverid')
-			var url = '<?= base_url('index.php/Professor/disciplinas/') ?>'+recipientid;
-			$.getJSON(url,function (response) {
-				var disciplinas = [];
-				$.each(response,function (index,value) {
-					disciplinas.push(value.id);
-				});
-
-				$("#professorDisciplinas").multiSelect('select',disciplinas);
-			});
-		</script>
+    </script>
 	</body>
 </html>
