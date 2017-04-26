@@ -275,7 +275,11 @@ class Professor extends CI_Controller {
 
 				if($this->form_validation->run() == FALSE){
 					$dados['disciplinas'] = convert($this->disciplinas($this->session->id, FALSE));
-					$this->load->view('preferencias', $dados);
+					$this->load->view('Includes/header', $dados);
+					$this->load->view('Includes/sidebarProf');
+					$this->load->view('Preferencias/preferencias');
+					$this->load->view('Includes/footer');
+					$this->load->view('Preferencias/js_preferencias');
 				} else {
 
 					$disciplinas = $this->input->post('disciplinas[]');
