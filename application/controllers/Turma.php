@@ -8,10 +8,10 @@
   class Turma extends CI_Controller {
 
     public function index () {
-      //if (verificaSessao() && verificaNivelPagina(array(1)))
+      if (verificaSessao() && verificaNivelPagina(array(1)))
         $this->cadastrar();
-    //  else
-      //  redirect('/');
+      else
+        redirect('/');
     }
 
 
@@ -28,7 +28,7 @@
       */
     public function cadastrar () {
 
-      //if (verificaSessao() && verificaNivelPagina(array(1))) {
+      if (verificaSessao() && verificaNivelPagina(array(1))) {
         // Carrega a biblioteca para validação dos dados.
         $this->load->library(array('form_validation','session'));
         $this->load->helper(array('form','url','dropdown'));
@@ -67,10 +67,6 @@
             'dp'            => ($this->input->post("dp") == NULL) ? 0 : 1,
             'disciplina'   =>$this->input->post('disciplina')
           );
-          /**echo '<pre>'.
-          print_r($turma,1);
-          '</pre>';
-          exit();*/
 
           if ($this->Turma_model->insert($turma)) {
             $this->session->set_flashdata('success','Turma cadastrada com sucesso');
@@ -80,9 +76,9 @@
             redirect('Turma');
 
         }
-      /**}else{
+      }else{
         redirect('/');
-      }**/
+      }
     }
 
     /**
@@ -94,9 +90,7 @@
     */
 
     public function atualizar () {
-
-
-            //if (verificaSessao() && verificaNivelPagina(array(1))) {
+            if (verificaSessao() && verificaNivelPagina(array(1))) {
               // Carrega a biblioteca para validação dos dados.
               $this->load->library(array('form_validation','session'));
               $this->load->helper(array('form','url','dropdown'));
@@ -137,10 +131,7 @@
                   'dp'            => ($this->input->post("recipient-dp") == NULL) ? 0 : 1,
                   'disciplina'   =>$this->input->post('recipient-disciplina')
                 );
-                /**echo '<pre>'.
-                print_r($turma,1);
-                '</pre>';
-                exit();*/
+
 
                 if ($this->Turma_model->updateTurma($id, $turma)) {
                   $this->session->set_flashdata('success','Turma cadastrada com sucesso');
@@ -150,10 +141,9 @@
                   redirect('Turma/atualizar');
 
               }
-            /**}else{
+            }else{
               redirect('/');
-            }**/
-
+            }
     }
 
     /**
@@ -164,26 +154,34 @@
       * @author Jean Brock
     */
     public function desativar ($id) {
+      if (verificaSessao() && verificaNivelPagina(array(1))) {
+        $this->load->model(array('Turma_model'));
 
-      $this->load->model(array('Turma_model'));
+        if ($this->Turma_model->deleteTurma($id))
+          $this->session->set_flashdata('success','Turma desativada com sucesso');
+        else
+          $this->session->set_flashdata('danger','Não foi possível desativar a turma, tente novamente mais tarde ou entre em contato com o administrador do sistema.');
 
-      if ($this->Turma_model->deleteTurma($id))
-        $this->session->set_flashdata('success','Turma desativada com sucesso');
-      else
-        $this->session->set_flashdata('danger','Não foi possível desativar a turma, tente novamente mais tarde ou entre em contato com o administrador do sistema.');
-
-      redirect('Turma');
+        redirect('Turma');
+      }else{
+        redirect('/');
+      }
     }
 
 	   public function ativar ($id) {
-      $this->load->model('Turma_model');
+       if (verificaSessao() && verificaNivelPagina(array(1))) {
+         $this->load->model('Turma_model');
 
-      if ( $this->Turma_model->able($id) )
-        $this->session->set_flashdata('success','Turma ativada com sucesso');
-      else
-        $this->session->set_flashdata('danger','Não foi possível ativar a turma, tente novamente ou entre em contato com o administrador do sistema.');
+         if ( $this->Turma_model->able($id) )
+           $this->session->set_flashdata('success','Turma ativada com sucesso');
+         else
+           $this->session->set_flashdata('danger','Não foi possível ativar a turma, tente novamente ou entre em contato com o administrador do sistema.');
 
-      redirect('Turma');
+         redirect('Turma');
+       }else{
+         redirect('/');
+       }
+
     }
    }
 
