@@ -188,7 +188,7 @@
 
 				<div class="row">
 					<!-- DropListPeriodo (Droplist) -->
-					<div class="form-group col-md-9" style="background-color: #FE1232">
+					<div class="form-group col-md-9">
 						<label>Período:</label>
 						<?= form_dropdown('cursoPeriodos[]', $periodo, null, array('id' => 'cursoPeriodos', 'multiple' => 'multiple')) ?>
 						<?= form_error('cursoPeriodos[]') ?>
