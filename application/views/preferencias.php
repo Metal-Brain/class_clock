@@ -27,7 +27,7 @@
 					<h2>Menu</h2>
 					<ul class="nav nav-pills nav-stacked">
 						<li><?= anchor('Disponibilidade','Disponibilidade') ?></a></li>
-						<li class="active"><?= anchor('Preferencia','Preferências') ?></a></li>
+						<li class="active"><?= anchor('Professor/preferencia','Preferências') ?></a></li>
 						<li><?= anchor('Grade','Grade') ?></a></li>
 						<hr>
 						<li><span class="glyphicon glyphicon-log-out"></span> Sair do Sistema</a></li>
