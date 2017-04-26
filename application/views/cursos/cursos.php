@@ -83,7 +83,7 @@
             <h3>Cadastrar Curso</h3>
 
             <?= form_open('Curso/cadastrar') ?>
-			
+
             <div class="row">
                 <div class="form-group col-md-6">
                     <?= form_label('Nome', 'nome') ?>
@@ -155,13 +155,13 @@
                 <h4 class="modal-title" id="exampleModalLabel">Cursos</h4>
             </div>
             <div class="modal-body">
-				
+
 				<?= form_open('Curso/atualizar') ?>
-				
+
 				<div class="form-group">
 					<input type="hidden" name="cursoId" value="" id="recipient-id">
 				</div>
-				
+
 				<div class="row">
 					<div class="form-group col-md-11">
 						<?= form_label('Nome:', 'recipient-nome', array('class' => 'control-label')) ?>
@@ -169,7 +169,7 @@
 						<?= form_error('nomeCurso') ?>
 					</div>
 				</div>
-				
+
 				<div class="row">
 					<div class="form-group col-md-8">
 						<?= form_label('Sigla:', 'recipient-sigla', array('class' => 'control-label')) ?>
@@ -177,7 +177,7 @@
 						<?= form_error('cursoSigla') ?>
 					</div>
 				</div>
-				
+
 				<div class="row">
 					<div class="form-group col-md-8">
 						<?= form_label('Quantidade de Semestres:', 'recipient-semestres', array('class' => 'control-label')) ?>
@@ -185,7 +185,7 @@
 						<?= form_error('cursoQtdSemestres') ?>
 					</div>
 				</div>
-				
+
 				<div class="row">
 					<!-- DropListPeriodo (Droplist) -->
 					<div class="form-group col-md-9" style="background-color: #FE1232">
@@ -194,9 +194,9 @@
 						<?= form_error('cursoPeriodos[]') ?>
 					</div>
 				</div>
-				
+
 				<br/>
-				
+
 				<div class="row">
 					<!-- DropListGrau (Droplist) -->
 					<div class="form-group col-md-7">
@@ -205,7 +205,7 @@
 						<?= form_error('cursoGrau') ?>
 					</div>
 				</div>
-				
+
 				<div class="row">
 					<div class="form-group col-md-9">
 						<label>Disciplinas:</label>
@@ -217,7 +217,7 @@
 				<?= form_submit('submit', 'Alterar', array('class' => 'btn btn-primary')) ?>
 				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
 				</div>
-			
+
 				<?= form_close() ?>
             </div>
         </div>

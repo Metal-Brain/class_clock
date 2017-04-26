@@ -49,30 +49,24 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php
-                        foreach ($salas as $sala) {
-                            ?>
-                            <?= ($sala['status'] ? '<tr>' : '<tr class="danger">') ?>
-                        <td><?= $sala['nSala']; ?></td>
-                        <td><?= $sala['capMax']; ?></td>
-                        <td><?= $sala['tipo']; ?></td>
-                        <td><?php if ($sala['status']): echo "Ativo";
-                        else: echo "Inativo";
-                        endif; ?></td>
-                        <td>
-    <?php if ($sala['status']): ?>
-
-                                <button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whatevernsala="<?= $sala['nSala']; ?>" data-whateverid="<?= $sala['id']; ?>" data-whatevercapmax="<?= $sala['capMax']; ?>"  data-whatevertipo="<?= $sala['tipo']; ?>"><span class="glyphicon glyphicon-pencil"></span></button>
-                                <button onClick="exclude(<?= $sala['id'] ?>);" type="button" class="btn btn-danger" title="Desativar"><span class="glyphicon glyphicon-remove"></span></button>
-
-                            <?php else : ?>
-                                <button onClick="able(<?= $sala['id'] ?>)" type="button" class="btn btn-success delete" title="Ativar"><span class="glyphicon glyphicon-ok"></span></button>
-                        <?php endif; ?>
-                        </td>
-                        </tr>
-                        <?php
-                    }
-                    ?>
+                        <?php foreach ($salas as $sala) { ?>
+							<?= ($sala['status'] ? '<tr>' : '<tr class="danger">') ?>
+							<td><?= $sala['nSala']; ?></td>
+							<td><?= $sala['capMax']; ?></td>
+							<td><?= $sala['tipo']; ?></td>
+							<td><?php if ($sala['status']): echo "Ativo";
+							else: echo "Inativo";
+							endif; ?></td>
+							<td>
+								<?php if ($sala['status']): ?>
+									<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whatevernsala="<?= $sala['nSala']; ?>" data-whateverid="<?= $sala['id']; ?>" data-whatevercapmax="<?= $sala['capMax']; ?>"  data-whatevertipo="<?= $sala['tipo']; ?>"><span class="glyphicon glyphicon-pencil"></span></button>
+									<button onClick="exclude(<?= $sala['id'] ?>);" type="button" class="btn btn-danger" title="Desativar"><span class="glyphicon glyphicon-remove"></span></button>
+								<?php else : ?>
+									<button onClick="able(<?= $sala['id'] ?>)" type="button" class="btn btn-success delete" title="Ativar"><span class="glyphicon glyphicon-ok"></span></button>
+								<?php endif; ?>
+							</td>
+							</tr>
+                        <?php } ?>
                     </tbody>
                 </table>
             </div>
@@ -81,25 +75,51 @@
         <!-- Aqui é o formulário de registro do novo item-->
         <div id="new" class="tab-pane fade">
             <h3>Cadastrar Sala</h3>
+
             <form action="" method="post">
-                <div class="form-group percent-40">
-                    <label>Sala</label>
-                    <input type="number" min="0" class="form-control" pattern="[0-9]+$" name="nSala" placeholder="ex: 110" required>
-<?= form_error('nSala') ?>
-                </div>
-                <div class="form-group percent-40">
-                    <label for="tipo">Tipo</label>
-                    <select  class="form-control" name="tipo" id="tipo" required>
-                        <option  selected>Laboratório</option>
-                        <option>Teórica</option>
-                    </select>
-                    <!-- Aqui tem tratamento de erro? -->
-                </div>
-                <div class="form-group">
-                    <label>Capacidade Máxima</label>
-                    <input type="number" min="0" max="999" class="form-control percent-10" name="capMax" placeholder="ex: 30" required>
-<?= form_error('capMax') ?>
-                </div>
+
+				<div class="row">
+					<div class="form-group col-md-2">
+						<label>Sala</label>
+						<input type="number" min="0" class="form-control" pattern="[0-9]+$" name="nSala" placeholder="ex: 110" required>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-4 margin-top-error">
+						<?= form_error('nSala') ?>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group col-md-2">
+						<label for="tipo">Tipo</label>
+						<select  class="form-control" name="tipo" id="tipo" required>
+							<option  selected>Laboratório</option>
+							<option>Teórica</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-4 margin-top-error">
+						<?= form_error('tipo') ?>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group col-md-2">
+						<label>Capacidade Máxima</label>
+						<input type="number" min="0" max="999" class="form-control" name="capMax" placeholder="ex: 30" required>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-4 margin-top-error">
+						<?= form_error('capMax') ?>
+					</div>
+				</div>
+
                 <div class="inline">
                     <button type='submit' class='btn bt-lg btn-primary'>Cadastrar</button>
                 </div>
@@ -115,38 +135,71 @@
 <!-- Aqui é o Modal de alteração das salas-->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
     <div class="modal-dialog" role="document">
-        <div class="modal-content">
+        <div class="modal-content col-md-12">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="exampleModalLabel">Salas</h4>
             </div>
             <div class="modal-body">
-<?= form_open('Sala/atualizar') ?>
+
+				<?= form_open('Sala/atualizar') ?>
+
                 <div class="form-group">
                     <input type="hidden" name="recipient-id" id="recipient-id">
                 </div>
-                <div class="form-group">
-                    <label for="nSala-name" class="control-label">Número da sala</label>
-                    <input type="number" min="0" class="form-control" name="recipient-nSala" id="recipient-nSala">
-<?= form_error('recipient-nSala') ?>
+
+				<div class="row">
+					<div class="form-group col-md-2">
+						<label for="nSala-name" class="control-label">Sala</label>
+						<input type="number" min="0" class="form-control" name="recipient-nSala" id="recipient-nSala" required>
+					</div>
                 </div>
-                <div class="form-group">
-                    <label for="capMax-name" class="control-label">Capacidade Máxima</label>
-                    <input type="number" max="999" maxlength="3" pattern="[0-9]+$"class="form-control" name="recipient-capMax" id="recipient-capMax">
-<?= form_error('recipient-capMax') ?>
+
+				<div class="row">
+					<div class="col-md-6 margin-top-error">
+						<?= form_error('recipient-nSala') ?>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group col-md-4">
+						<label for="tipo-name" class="control-label">Tipo</label>
+						<select  class="form-control" name="recipient-tipo" id="recipient-tipo" required>
+							<option>Laboratório</option>
+							<option>Teórica</option>
+						</select>
+					</div>
                 </div>
-                <div class="form-group">
-                    <label for="tipo-name" class="control-label">Tipo</label>
-                    <select  class="form-control" name="recipient-tipo" id="recipient-tipo">
-                        <option>Laboratório</option>
-                        <option>Teórica</option>
-                    </select>
-<?= form_error('recipient-tipo') ?>
+
+				<div class="row">
+					<div class="col-md-6 margin-top-error">
+						<?= form_error('recipient-tipo') ?>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-4">
+						<label for="capMax-name" class="control-label">Capacidade Máxima</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-md-2">
+						<input type="number" max="999" maxlength="3" pattern="[0-9]+$"class="form-control" name="recipient-capMax" id="recipient-capMax" required>
+					</div>
                 </div>
+
+				<div class="row">
+					<div class="col-md-7 margin-top-error">
+						<?= form_error('recipient-capMax') ?>
+					</div>
+				</div>
+
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Alterar</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                 </div>
+
+				<?= form_close() ?>
             </div>
         </div>
     </div>

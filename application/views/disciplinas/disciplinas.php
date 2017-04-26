@@ -77,7 +77,7 @@
         <!-- Aqui é o formulário de registro do novo item-->
         <div id="new" class="tab-pane fade">
             <h3>Cadastrar Disciplina</h3>
-			
+
             <form action="" method="post">
                 <div class="form-group percent-40">
                     <label>Nome</label>
@@ -109,36 +109,68 @@
 <!-- Aqui é o Modal de alteração das disciplinas-->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
     <div class="modal-dialog" role="document">
-        <div class="modal-content">
+        <div class="modal-content col-md-12">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="exampleModalLabel">Disciplinas</h4>
             </div>
             <div class="modal-body">
-<?= form_open('Disciplina/atualizar') ?>
+				<?= form_open('Disciplina/atualizar') ?>
+
                 <div class="form-group">
                     <input type="hidden" name="recipient-id" id="recipient-id">
                 </div>
-                <div class="form-group">
-                    <label for="sigla-name" class="control-label">Sigla:</label>
-                    <input type="text" class="form-control" name="recipient-sigla" id="recipient-sigla">
-<?= form_error('recipient-sigla') ?>
-                </div>
-                <div class="form-group">
-                    <label for="nome-name" class="control-label">Nome:</label>
-                    <input type="text" class="form-control" name="recipient-nome" id="recipient-nome">
-<?= form_error('recipient-nome') ?>
-                </div>
-                <div class="form-group">
-                    <label for="qtd-prof" class="control-label">Quantidade de professores:</label>
-                    <input type="text" maxlength="1" pattern="[0-9]+$"  class="form-control percent-10" name="recipient-qtd-prof" id="recipient-qtd-prof">
-<?= form_error('recipient-qtd-prof') ?>
-                </div>
+
+				<div class="row">
+					<div class="form-group col-md-12">
+						<label for="nome-name" class="control-label">Nome:</label>
+						<input type="text" class="form-control" name="recipient-nome" id="recipient-nome" required>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-6 margin-top-error">
+						<?= form_error('recipient-nome') ?>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group col-md-3">
+						<label for="sigla-name" class="control-label">Sigla:</label>
+						<input type="text" class="form-control" name="recipient-sigla" id="recipient-sigla" required>
+					</div>
+				</div>
+
+                <div class="row">
+					<div class="col-md-5 margin-top-error">
+						<?= form_error('recipient-sigla') ?>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-5">
+						<label for="qtd-prof" class="control-label">Quantidade de professores:</label>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group col-md-2">
+						<input type="text" maxlength="1" pattern="[0-9]+$"  class="form-control" name="recipient-qtd-prof" id="recipient-qtd-prof" required>
+					</div>
+				</div>
+
+                <div class="row">
+					<div class="col-md-8 margin-top-error">
+						<?= form_error('recipient-qtd-prof') ?>
+					</div>
+				</div>
+
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Alterar</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                 </div>
-                </form>
+
+				<?= form_close() ?>
             </div>
         </div>
     </div>

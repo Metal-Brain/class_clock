@@ -69,9 +69,9 @@ CREATE TABLE IF NOT EXISTS Sala (
 );
 
 CREATE TABLE IF NOT EXISTS Contrato(
-	id					INT 			NOT NULL 			AUTO_INCREMENT,
-    nome 				VARCHAR(45) 	NOT NULL,
-    PRIMARY KEY(id)
+	id					INT           NOT NULL 			AUTO_INCREMENT,
+  nome 				VARCHAR(45) 	NOT NULL,
+  PRIMARY KEY(id)
 );
 
 INSERT INTO Contrato (nome) VALUES ('Exclusiva'),('Integral'),('Parcial');
@@ -129,7 +129,7 @@ CREATE TABLE Turma(
     disciplina			INT				NOT NULL,
 	`status`      		BOOLEAN     	NOT NULL  DEFAULT TRUE,
 	PRIMARY KEY (id),
-     
+
     CONSTRAINT fk_turma_disciplina
     FOREIGN KEY (disciplina) REFERENCES Disciplina(id)
 );

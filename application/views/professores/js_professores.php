@@ -13,7 +13,7 @@
     $('#exampleModal').on('show.bs.modal',    function (event)   {
     $("#professorDisciplinas").multiSelect('desel ect_all ') ;
     va  r     butt on         =     $(eve  nt .relatedTarget) // Button that triggered the mod al
-    va   r  re c ipie nt       =       butt on.data('whatever') // Extract info from data-* attributes 
+    va   r  re c ipie nt       =       butt on.data('whatever') // Extract info from data-* attributes
     <!-- Foi criado todos os var caso seja necessario adicionar ou mudar os que já existem-->
     var recipientnome = button.data('whatevernome')
     var recipientmatricula = button.data('whatevermatricula')
@@ -101,7 +101,7 @@
 </script>
 
 <script type="text/java                script">
-    $(document).ready(function () {                
+    $(document).ready(function () {
     $("input[name=nascimento]").mask('00/00/0000', {placeholder: "__/__/____"});
     });
 </script>
