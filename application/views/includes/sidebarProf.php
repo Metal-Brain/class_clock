@@ -19,4 +19,3 @@
 			document.links[active].className = 'active';
 		</script>
 	</div>
-<span class="glyphicon glyphicon-log-out"></span>
