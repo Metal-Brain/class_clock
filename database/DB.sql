@@ -121,7 +121,7 @@ CREATE TABLE IF NOT EXISTS Competencia(
     FOREIGN KEY(idDisciplina) REFERENCES Disciplina(id)
 );
 
-CREATE TABLE Turma(
+CREATE TABLE IF NOT EXISTS Turma(
 	id 					INT 			NOT NULL AUTO_INCREMENT,
     sigla 				CHAR(10) 		NOT NULL UNIQUE,
     qtdAlunos 			INT 			NOT NULL,
@@ -132,4 +132,17 @@ CREATE TABLE Turma(
 
     CONSTRAINT fk_turma_disciplina
     FOREIGN KEY (disciplina) REFERENCES Disciplina(id)
+);
+
+CREATE TABLE IF NOT EXISTS Disponibilidade(
+	idPeriodo 			INT 			NOT NULL,
+    idProfessor 		INT 			NOT NULL,
+    dia 				VARCHAR(45) 	NOT NULL,
+    inicio 				TIME 			NOT NULL,
+    fim 				TIME 			NOT NULL,
+    `status`      		BOOLEAN     	NOT NULL  DEFAULT TRUE,
+    PRIMARY KEY(idPeriodo, idProfessor),
+    
+    FOREIGN KEY(idPeriodo) REFERENCES Periodo(id),
+    FOREIGN KEY(idProfessor) REFERENCES Professor(id)    
 );
