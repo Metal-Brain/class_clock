@@ -100,7 +100,7 @@
     }
 </script>
 
-<script type="text/java                script">
+<script type="text/javascript">
     $(document).ready(function () {
     $("input[name=nascimento]").mask('00/00/0000', {placeholder: "__/__/____"});
     });

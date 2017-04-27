@@ -197,7 +197,7 @@ class Professor extends CI_Controller {
           $dados['professores']     = $this->Professor_model->getAll();
           $this->load->view('includes/header', $dados);
           $this->load->view('includes/sidebar');
-          $this->load->view('professores/professores',$dados);
+          $this->load->view('professores/professores');
 					$this->load->view('includes/footer');
 					$this->load->view('professores/js_professores');
 
