@@ -177,7 +177,6 @@
         </div>
     </div><!--fecha tab-content-->
 </div><!--Fecha content-->
-</div><!--Fecha row-->
 
 <!-- Aqui é o Modal de alteração dos cursos-->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">

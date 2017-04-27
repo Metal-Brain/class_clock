@@ -130,8 +130,6 @@
 
 </div><!--Fecha content-->
 
-</div><!--Fecha row-->
-
 <!-- Aqui é o Modal de alteração das salas-->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
     <div class="modal-dialog" role="document">
@@ -164,7 +162,7 @@
 				<div class="row">
 					<div class="form-group col-md-4">
 						<label for="tipo-name" class="control-label">Tipo</label>
-						<select  class="form-control" name="recipient-tipo" id="recipient-tipo" required>
+						<select  class="form-control" name="recipient-tipo" id="recipient-tipo">
 							<option>Laboratório</option>
 							<option>Teórica</option>
 						</select>
