@@ -7,6 +7,8 @@
         var recipientdp = button.data('whateverdp')
         var recipientdisciplina = button.data('whateverdisciplina')
         var recipientId = button.data('whateverid')
+        var recipientIdDisciplina = button.data('whateveriddisciplina')
+        console.log(recipientIdDisciplina);
         // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
         // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
         var modal = $(this)
@@ -14,7 +16,7 @@
         modal.find('#recipient-sigla').val(recipientsigla)
         modal.find('#recipient-qtdAlunos').val(recipientqtdAlunos)
         modal.find('#recipient-dp').prop('checked',recipientdp)
-        modal.find('select[name=recipient-disciplina] option[value='+recipientdisciplina+']').prop('selected',true)
+        modal.find('select[name=recipient-disciplina] option[value='+recipientIdDisciplina+']').prop('selected',true)
         modal.find('#recipient-id').val(recipientId)
     })
 </script>

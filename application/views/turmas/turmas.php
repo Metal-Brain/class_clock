@@ -34,7 +34,7 @@
 
 	<!-- Dentro dessa div vai o conteúdo que os botões acima exibem ou omitem -->
 	<div class="tab-content">
-
+		
 		<!-- Aqui é a Listagem dos Itens -->
 		<div id="list" class="tab-pane fade in active">
 			<div style="margin-top: 25px;">
@@ -59,7 +59,7 @@
 								<td><?php if($turma['status']): echo "Ativo"; else: echo "Inativo"; endif;?></td>
 								<td>
 									<?php if ($turma['status']): ?>
-										<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal"  data-whateverdisciplina="<?= $turma['disciplinaSigla']?>" data-whateverid="<?= $turma['id']?>"  data-whateversigla="<?= $turma['sigla']?>"  data-whateverqtd="<?= $turma['qtdAlunos']?>" data-whateverdp="<?= $turma['dp']?>"><span class="glyphicon glyphicon-pencil"></span></button>
+										<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal"  data-whateverdisciplina="<?= $turma['disciplinaSigla']?>" data-whateverid="<?= $turma['id']?>"  data-whateversigla="<?= $turma['sigla']?>" data-whateveriddisciplina="<?= $turma['disciplina']?>"  data-whateverqtd="<?= $turma['qtdAlunos']?>" data-whateverdp="<?= $turma['dp']?>"><span class="glyphicon glyphicon-pencil"></span></button>
 										<button onClick="exclude(<?= $turma['id']?>)" type="button" class="btn btn-danger delete" title="Desativar"><span class="glyphicon glyphicon-remove"></span></button>
 									<?php else : ?>
 										<button onClick="able(<?= $turma['id']?>)" type="button" class="btn btn-success delete" title="Ativar"><span class="glyphicon glyphicon-ok"></span></button>
