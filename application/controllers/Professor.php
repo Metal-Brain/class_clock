@@ -244,6 +244,19 @@ class Professor extends CI_Controller {
 				else
 					return $disciplinas;
     }
+/**
+     * Busca as disciplinas vinculada ao professor.
+     * @author Caio de Freitas
+     * @since 2017/04/07
+     * @param INT $id - ID do professor
+     */
+    public function Disponibilidades() {
+        $this->load->view('includes/header');
+        $this->load->view('includes/sidebarProf');
+        $this->load->view('disponibilidade/disponibilidades');
+				$this->load->view('includes/footer');
+        $this->load->view('disponibilidade/js_disponibilidades');
+    }
 
 		/**
 		 * busca todas as preferências de disciplinas selecionadas pelo professor
