@@ -121,7 +121,7 @@
             $mail->SMTPAuth = true;
             $mail->Username = "metalcodeifsp@gmail.com";
             $mail->Password = "#metalcode2017#";
-            $mail->setFrom('metalcodeifsp@gmail.com', 'Metalcode');//Cria a origem do email
+            $mail->setFrom('metalcodeifsp@gmail.com', 'Suporte Metalcode');//Cria a origem do email
             $mail->addAddress($usuario['email'], $usuario['nome']);//add o email e nome
             $mail->Subject = 'Recuperação de senha';//Seta o titulo do email
             $mail->msgHTML($content);//Seta a mensagem do email no caso passando a senha
@@ -135,7 +135,7 @@
                 redirect('/');//Carrega a view login
             }
           }else{
-            $this->session->set_flashdata('danger','Erro ao gerar nova senha');//Apresenta mensagem de sucesso
+            $this->session->set_flashdata('danger','Erro ao gerar nova senha');//Apresenta mensagem de erro
             redirect('/');//Carrega a view login
           }
         }
