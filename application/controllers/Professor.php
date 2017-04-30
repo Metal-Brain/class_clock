@@ -244,19 +244,6 @@ class Professor extends CI_Controller {
 				else
 					return $disciplinas;
     }
-/**
-     * Busca as disciplinas vinculada ao professor.
-     * @author Caio de Freitas
-     * @since 2017/04/07
-     * @param INT $id - ID do professor
-     */
-    public function Disponibilidades() {
-        $this->load->view('includes/header');
-        $this->load->view('includes/sidebarProf');
-        $this->load->view('disponibilidade/disponibilidades');
-				$this->load->view('includes/footer');
-        $this->load->view('disponibilidade/js_disponibilidades');
-    }
 
 		/**
 		 * busca todas as preferências de disciplinas selecionadas pelo professor
@@ -288,11 +275,11 @@ class Professor extends CI_Controller {
 
 				if($this->form_validation->run() == FALSE){
 					$dados['disciplinas'] = convert($this->disciplinas($this->session->id, FALSE));
-					$this->load->view('Includes/header', $dados);
-					$this->load->view('Includes/sidebarProf');
-					$this->load->view('Preferencias/preferencias');
-					$this->load->view('Includes/footer');
-					$this->load->view('Preferencias/js_preferencias');
+					$this->load->view('includes/header', $dados);
+					$this->load->view('includes/sidebarProf');
+					$this->load->view('preferencias/preferencias');
+					$this->load->view('includes/footer');
+					$this->load->view('preferencias/js_preferencias');
 				} else {
 
 					$disciplinas = $this->input->post('disciplinas[]');
@@ -309,23 +296,6 @@ class Professor extends CI_Controller {
 					redirect('/');
 			}
 		}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 		/**
 		 * busca todas as disponibilidades selecionadas pelo professor
@@ -369,7 +339,7 @@ class Professor extends CI_Controller {
 					$this->session->set_flashdata('formDanger','<strong>Não foi possível cadastrar a disponibilidade, pois existe(m) erro(s) no formulário:</strong>');
 					$dados['periodo']         = convert($this->Periodo_model->getAll(), TRUE);
 					$dados['professores']     = convert($this->Professor_model->getAll(TRUE));
-					$dados['disponibilidade'] = $this->Disponibilidade_model->getAll();
+					$dados['disponibilidade'] = $this->Disponibilidade_model->getAllDisponibilidades($this->session->id);
 
 					$this->load->view('includes/header');
 	        $this->load->view('includes/sidebarProf');
@@ -391,12 +361,6 @@ class Professor extends CI_Controller {
 					redirect('/');
 			}
 		}
-
-
-
-
-
-
 
  }
 
