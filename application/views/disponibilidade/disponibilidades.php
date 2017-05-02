@@ -52,6 +52,14 @@
                                             </div>
 
                                         </div>
+										
+											<div class="row">
+												<div class='col-sm-8'>	
+													<div  style="margin-left:15px;">
+														<button type='submit' class='btn bt-lg btn-primary'>Cadastrar</button>
+													</div>
+												</div>
+											</div>	
                                     </div>
 				</div>
 			<?= form_close() ?>
