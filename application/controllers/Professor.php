@@ -347,10 +347,10 @@ class Professor extends CI_Controller {
 					$dados['disponibilidade'] = $this->Disponibilidade_model->getAllDisponibilidades($this->session->id);
 					$dados['dia'] = $this->getDia();
 
-					echo "<pre>";
+					/**echo "<pre>";
       			print_r($dados);
    				echo "</pre>";
-					exit();
+					exit();*/
 
 
 
