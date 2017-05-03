@@ -244,19 +244,6 @@ class Professor extends CI_Controller {
 				else
 					return $disciplinas;
     }
-/**
-     * Busca as disciplinas vinculada ao professor.
-     * @author Caio de Freitas
-     * @since 2017/04/07
-     * @param INT $id - ID do professor
-     */
-    public function Disponibilidades() {
-        $this->load->view('includes/header');
-        $this->load->view('includes/sidebarProf');
-        $this->load->view('disponibilidade/disponibilidades');
-				$this->load->view('includes/footer');
-        $this->load->view('disponibilidade/js_disponibilidades');
-    }
 
 		/**
 		 * busca todas as preferências de disciplinas selecionadas pelo professor
@@ -324,6 +311,11 @@ class Professor extends CI_Controller {
 			echo json_encode($disponibilidades);
 		}
 
+		public function getDia(){
+			$dia = array('Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta','Sábado');
+			return $dia;
+		}
+
 		/**
 			*	Busca todas as disponibilidades vinculadas ao professor e enviar para view de preferencias
 			* @author Jean Brock
@@ -341,8 +333,8 @@ class Professor extends CI_Controller {
 				));
 				// Definir as regras de validação para cada campo do formulário.
 
-				$this->form_validation->set_rules('periodo','periodo',array('greater_than[0]'),array('greater_than'=>'Selecione um periodo.'));
-				$this->form_validation->set_rules('dia', 'dia da semana', array('required','ucwords'));
+				$this->form_validation->set_rules('periodo', 'periodo', array('required'));
+				$this->form_validation->set_rules('dia', 'dia da semana', array('required'));
 				$this->form_validation->set_rules('inicio', 'hora inicio', array('required'));
 				$this->form_validation->set_rules('fim', 'hora fim', array('required'));
 				// Definição dos delimitadores
@@ -350,19 +342,31 @@ class Professor extends CI_Controller {
 				// Verifica se o formulario é valido
 				if ($this->form_validation->run() == FALSE) {
 					$this->session->set_flashdata('formDanger','<strong>Não foi possível cadastrar a disponibilidade, pois existe(m) erro(s) no formulário:</strong>');
-					$dados['periodo']         = convert($this->Periodo_model->getAll(), TRUE);
+					$dados['periodo']         = convert($this->Periodo_model->getTurno(), TRUE);
 					$dados['professores']     = convert($this->Professor_model->getAll(TRUE));
 					$dados['disponibilidade'] = $this->Disponibilidade_model->getAllDisponibilidades($this->session->id);
+					$dados['dia'] = $this->getDia();
 
-					$this->load->view('includes/header');
+					echo "<pre>";
+      			print_r($dados);
+   				echo "</pre>";
+					exit();
+
+
+
+					$this->load->view('includes/header',$dados);
 	        $this->load->view('includes/sidebarProf');
 	        $this->load->view('disponibilidade/disponibilidades');
 					$this->load->view('includes/footer');
 	        $this->load->view('disponibilidade/js_disponibilidades');
 				} else {
+					$periodo = $this->input->post('periodo');
+					$professor = ($this->session->id);
+					$dia = $this->input->post('dia');
+					$inicio = $this->input->post('inicio');
+					$fim = $this->input->post('fim');
 
-
-					if ($this->Disponibilidade_model->insert($disponibilidade)) {
+					if ($this->Disponibilidade_model->insertDisponibilidade ($periodo, $professor, $dia, $inicio, $fim)) {
 						$this->session->set_flashdata('success','Disponibilidade cadastrada com sucesso');
 					} else {
 						$this->session->set_flashdata('danger','Não foi possível cadastrar o disponibilidade, tente novamente ou entre em contato com o administrador do sistema.');

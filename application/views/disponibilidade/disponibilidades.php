@@ -7,7 +7,7 @@
 			<?php endif; ?>
 
 			<!-- Cadastro das preferências do professor -->
-			<?= form_open('Professor/preferencia') ?>
+			<?= form_open('Professor/disponibilidade') ?>
 				<div class="col-md-12">
 					<h1>Disponibilidade</h1>
                                     <div class="container">
@@ -15,7 +15,7 @@
                                             <div class='col-sm-8'>
                                                 <div class="table-responsive">
                                                     <input type="button" id="add_field" class="btn btn-default" value="Adicionar" style="margin-bottom: 12px;">
-                                                
+
                                                 <table id="listas" class="table">
                                                         <tr>
                                                                 <th>Periodo</th>
@@ -26,41 +26,29 @@
                                                         </tr>
                                                         <tr>
                                                                 <td>
-                                                                <select class="form-control selectpicker" name="periodo[]">
-                                                                    <option>Diurno</option>
-                                                                    <option>Matutino</option>
-                                                                    <option>Noturno</option>
-                                                                  </select>
+                                                                	<?= form_dropdown('periodo',$periodo,set_value('periodo'),array('class'=>'form-control')) ?>
                                                                 </td>
-                                                                
+
                                                                 <td>
-                                                                <select class="form-control selectpicker" name="dia[]">
-                                                                    <option>Segunda</option>
-                                                                    <option>Terça</option>
-                                                                    <option>Quarta</option>
-                                                                    <option>Quinta</option>
-                                                                    <option>Sexta</option>
-                                                                    <option>Sábado</option>
-                                                                  </select>
+                                                                	<?= form_dropdown('dia',$dia,set_value('dia'),array('class'=>'form-control')) ?>
                                                                 </td>
-                                                                
-                                                                <td><input type="time" class="form-control" step="1800" name="inicio[]" id="dta_nasc" maxlength="10"></td>
-                                                                <td><input type="time" class="form-control" step="1800" name="fim[]" id="dta_nasc" maxlength="10"></td>
+
+
+                                                                <td><?= form_input(array('name' => 'inicio', 'value' => set_value('inicio'), 'type' => 'time')) ?></td>
+
+                                                                <td><?= form_input(array('name' => 'fim', 'value' => set_value('fim'), 'type' => 'time')) ?></td>
                                                         </tr>
                                                 </table>
-
                                             </div>
-
                                         </div>
-										
 											<div class="row">
-												<div class='col-sm-8'>	
+												<div class='col-sm-8'>
 													<div  style="margin-left:15px;">
 														<button type='submit' class='btn bt-lg btn-primary'>Cadastrar</button>
 													</div>
 												</div>
-											</div>	
-                                    </div>
+											</div>
+										</div>
 				</div>
 			<?= form_close() ?>
 		</div><!--Fecha content-->

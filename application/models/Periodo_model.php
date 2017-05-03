@@ -18,6 +18,11 @@
       return $result->result_array();
     }
 
+    public function getTurno () {
+      $this->db->where('nome !=', 'Integral');
+      return $result = $this->db->get('Periodo')->result_array();
+    }
+
   }
 
 ?>
