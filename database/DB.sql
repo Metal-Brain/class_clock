@@ -69,9 +69,9 @@ CREATE TABLE IF NOT EXISTS Sala (
 );
 
 CREATE TABLE IF NOT EXISTS Contrato(
-	id					INT           NOT NULL 			AUTO_INCREMENT,
-  nome 				VARCHAR(45) 	NOT NULL,
-  PRIMARY KEY(id)
+	id					INT 			NOT NULL 			AUTO_INCREMENT,
+    nome 				VARCHAR(45) 	NOT NULL,
+    PRIMARY KEY(id)
 );
 
 INSERT INTO Contrato (nome) VALUES ('Exclusiva'),('Integral'),('Parcial');
@@ -147,4 +147,18 @@ CREATE TABLE IF NOT EXISTS Disponibilidade(
 
     FOREIGN KEY(idPeriodo) REFERENCES Periodo(id),
     FOREIGN KEY(idProfessor) REFERENCES Professor(id)
+);
+
+CREATE TABLE IF NOT EXISTS CoordenadorDe(
+	idCoordenador INT NOT NULL,
+    idProfessor INT NOT NULL,
+
+    PRIMARY KEY(idCoordenador, idProfessor),
+
+    CONSTRAINT fk_coordenadorde_coordenador
+    FOREIGN KEY (idCoordenador) REFERENCES Professor(id),
+
+    CONSTRAINT fk_coordenadorde_professor
+    FOREIGN KEY (idProfessor) REFERENCES Professor(id)
+
 );
