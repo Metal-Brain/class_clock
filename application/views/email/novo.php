@@ -8,15 +8,14 @@
 				margin: 0;
 				padding: 0;
 			}
-		  
-			h3{
-				color:rgb(112,112,112);
-				text-align:left;
-			}
 			
 			p span{
 				font-weight: bold;
 				font-size: 15px;
+			}
+		  
+			.logo{
+				height: 140px;
 			}
 		  
 			.page{
@@ -49,7 +48,7 @@
 	</head>
 	<body>
 		<div class="page">
-			<h3>Class Clock</h3>
+			<img src="http://i1043.photobucket.com/albums/b437/Yasmin_Sayad_Yoshizumi/class_clock_zps0cgfuxqm.jpg" class="logo">
 			
 			<p class="ola">Olá <?= $professor['nome'] ?>, </p>
 			<p>Sua conta Class Clock foi criada com sucesso!</p>

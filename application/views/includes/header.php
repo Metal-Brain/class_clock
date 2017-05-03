@@ -19,7 +19,7 @@
 			<div id="header">
 				<div class="row">
 					<div id="classclock" class="col-xs-12 col-sm-4 col-md-4">
-						<h1>Class Clock</h1>
+						<img src="<?= base_url('assets/img/class_clock.jpg')?>" class="logo">
 					</div>
 					<div id="ifsp" class="col-xs-12 col-sm-offset-5 col-sm-3 col-md-offset-5 col-md-3">
 						<img src="<?= base_url('assets/img/ifsp.jpg')?>" class="logo">

@@ -67,6 +67,10 @@
 	height: 100px;
 }
 
+.logoClassClock{
+	height: 200px;
+}
+
 /*tamanhos em porcentagem para qualquer bloco*/
 .disc{
     width: 300px;
