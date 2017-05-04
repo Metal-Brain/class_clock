@@ -24,7 +24,7 @@
                                                                 <th>Fim</th>
                                                                 <th></th>
                                                         </tr>
-                                                        <tr>
+                                                        <tr class="form-row">
                                                                 <td>
                                                                 	<?= form_dropdown('periodo',$periodo,set_value('periodo'),array('class'=>'form-control')) ?>
                                                                 </td>
@@ -34,9 +34,9 @@
                                                                 </td>
 
 
-                                                                <td><?= form_input(array('name' => 'inicio', 'value' => set_value('inicio'), 'type' => 'time')) ?></td>
+                                                                <td><?= form_dropdown('inicio[]',$horas,null,array('class'=>'form-control')) ?></td>
 
-                                                                <td><?= form_input(array('name' => 'fim', 'value' => set_value('fim'), 'type' => 'time')) ?></td>
+                                                                <td><?= form_input(array('name' => 'fim[]', 'value' => set_value('fim'),'class'=>'form-control','disabled'=>'disabled')) ?></td>
                                                         </tr>
                                                 </table>
                                             </div>
