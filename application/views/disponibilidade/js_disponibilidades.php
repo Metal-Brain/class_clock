@@ -1,29 +1,22 @@
 <script>
 		$(document).ready(function(){
-
-    $("select[name='inicio[]']").blur(function(){
-
+    $("select[name='inicio[]']").change(function(){
+				next = $(this);
         var hora = parseInt($(this).val());
         hora++;
-				console.log(hora);
-        $("input[name='fim[]'").val(hora+':00');
+				
     });
 });
 </script>
 <script type="text/javascript">
-
       $(document).ready(function() {
         var max_fields          = 10;   //max de 15 inscricoes de cada vez
         var x = 1;
         $('#add_field').click (function(e) {
       		e.preventDefault(); //prevenir novos clicks
-					var element = $(".form-row").first().clone();
-					$('.form-row').first().after(element);
+					var element = $(".form-row").first().clone(true);
+					$('.form-row').last().after(element);
         });
-
-        //this is not the best move, because will create overhead...
-        //but is for simplicity
-        //damn users
 });
 
 

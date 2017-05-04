@@ -35,8 +35,7 @@
 
 
                                                                 <td><?= form_dropdown('inicio[]',$horas,null,array('class'=>'form-control')) ?></td>
-
-                                                                <td><?= form_input(array('name' => 'fim[]', 'value' => set_value('fim'),'class'=>'form-control','disabled'=>'disabled')) ?></td>
+																																<td><?= form_input('fim[]','',array('class'=>'form-control horario','disabled'=>'disabled')) ?></td>
                                                         </tr>
                                                 </table>
                                             </div>
