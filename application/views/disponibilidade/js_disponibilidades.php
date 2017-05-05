@@ -4,7 +4,7 @@
 				next = $(this);
         var hora = parseInt($(this).val());
         hora++;
-				
+				next.parent().parent().find('.horario').val(hora+':00');
     });
 });
 </script>
