@@ -14,7 +14,6 @@
 						<div class="row">
 							<div class='col-sm-8'>
 								<div class="table-responsive">
-									<input type="button" id="add_field" class="btn btn-default" value="Adicionar" style="margin-bottom: 12px;">
 									<table id="listas" class="table">
 										<tr>
 											<th>Periodo</th>
@@ -23,10 +22,10 @@
 											<th>Fim</th>
 										</tr>
 										<tr class="form-row">
-											<td><?= form_dropdown('periodo',$periodo,set_value('periodo'),array('class'=>'form-control')) ?></td>
+											<td><?= form_dropdown('periodo',$periodo,set_value('periodo'),array('id'=>'periodo','class'=>'form-control')) ?></td>
 											<td><?= form_dropdown('dia',$dia,set_value('dia'),array('class'=>'form-control')) ?></td>
-											<td><?= form_dropdown('inicio[]',$horas,null,array('class'=>'form-control')) ?></td>
-											<td><?= form_input('fim[]','',array('class'=>'form-control horario','disabled'=>'disabled')) ?></td>
+											<td><?= form_dropdown('inicio',$horas,null,array('id'=>'inicio','class'=>'form-control','disabled'=>'disabled')) ?></td>
+											<td><?= form_input('fim','',array('id'=>'fim','class'=>'form-control','disabled'=>'disabled')) ?></td>
 										</tr>
 									</table>
 								</div>

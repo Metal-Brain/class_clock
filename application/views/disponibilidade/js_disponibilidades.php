@@ -1,40 +1,52 @@
 <script>
-		$(document).ready(function(){
-    $("select[name='inicio[]']").change(function(){
-				next = $(this);
-        var hora = parseInt($(this).val());
-        hora++;
-				next.parent().parent().find('.horario').val(hora+':00');
-    });
-});
+	$(document).ready(function(){
+
+		$("#inicio").change(function(){
+			var hora = parseInt($(this).val());
+			hora++;
+			$('input#fim').val(hora+':00');
+		});
+
+		$('select[name=periodo]').change(function () {
+			var periodo = parseInt($(this).val());
+			switch (periodo) {
+				case 1:
+					$('#inicio').prop('disabled',false);
+					$('#inicio option').prop('disabled',false);
+					var select = $('#inicio option');
+
+					for (var i = 1; i < select.length; i++) {
+						if (select[i].value > 12)
+							select[i].disabled = true;
+					}
+					break;
+				case 2:
+					$('#inicio').prop('disabled',false);
+					$('#inicio option').prop('disabled',false);
+					var select = $('#inicio option');
+
+					for (var i = 1; i < select.length; i++) {
+						if (select[i].value <= 12 || select[i].value > 18)
+							select[i].disabled = true;
+					}
+					break;
+				case 3:
+					$('#inicio').prop('disabled',false);
+					$('#inicio option').prop('disabled',false);
+					var select = $('#inicio option');
+
+					for (var i = 1; i < select.length; i++) {
+						if (select[i].value <= 18)
+							select[i].disabled = true;
+					}
+					break;
+				default:
+					$('#inicio').prop('disabled',true);
+					break;
+			}
+		});
+	});
 </script>
-<script type="text/javascript">
-      $(document).ready(function() {
-        var max_fields          = 10;   //max de 15 inscricoes de cada vez
-        var x = 1;
-        $('#add_field').click (function(e) {
-      		e.preventDefault(); //prevenir novos clicks
-					var element = $(".form-row").first().clone(true);
-					$('.form-row').last().after(element);
-        });
-});
 
-
-
-        </script>
-
-
-        <script>
-            function retirarItem(idTabela, i) {
-            var row = document.getElementById(i);
-            var table = row.parentNode;
-            while (table && table.tagName != 'TABLE')
-                table = table.parentNode;
-            if (!table)
-                return;
-            table.deleteRow(row.rowIndex);
-            totalOrc(idTabela);
-        }
-            </script>
 </body>
 </html>

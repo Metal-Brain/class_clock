@@ -346,6 +346,7 @@ class Professor extends CI_Controller {
 					$dados['professores']     = convert($this->Professor_model->getAll(TRUE));
 					$dados['disponibilidade'] = $this->Disponibilidade_model->getAllDisponibilidades($this->session->id);
 					$dados['horas'] = array(
+						'0'	=> 'Selecione',
 						'7'=>'07:00',
 						'8'=>'08:00',
 						'9'=>'09:00',
