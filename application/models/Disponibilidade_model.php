@@ -12,22 +12,12 @@
       * disponibilidade
       * @author Jean Brock
       * @since 2017/04/27
-      * @param INT $professor - ID do professor
-      * @param INT $periodo - ID do periodo
-      * @param TIME $dia - dia da semana
-      * @param TIME $inicio - hora de inicio
-      * @param TIME $fim - hora de fim
+      * @param ARRAY $disponibilidade - Vetor com todos os dados de disponibilidade
       * @return boolean - Retorna TRUE caso os dados sejam inseridos no banco
       * de dados com sucesso.
       */
-    public function insertDisponibilidade ($periodo, $professor, $dia, $inicio, $fim) {
-      return $this->db->insert('Disponibilidade',array(
-        'idPeriodo'       => $periodo,
-        'idProfessor'     => $professor,
-        'dia'             => $dia,
-        'inicio'          => $inicio,
-        'fim'             => $fim,
-      ));
+    public function insertDisponibilidade ($disponibilidade) {
+      return $this->db->insert('Disponibilidade',$disponibilidade);
     }
 
     /**
@@ -44,6 +34,17 @@
       $result = $this->db->delete('Disponibilidade');
 
       return $result;
+    }
+
+    public function getProfDisponibilidade ($idProfessor,$dia=NULL) {
+      $this->db->where('idProfessor',$idProfessor);
+      if ($dia)
+        $this->db->where('dia',$dia);
+      $this->db->where('status',TRUE);
+      $this->db->order_by('inicio');
+      $result = $this->db->get('Disponibilidade');
+
+      return $result->result_array();
     }
 
     /**

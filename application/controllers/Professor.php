@@ -312,7 +312,15 @@ class Professor extends CI_Controller {
 		}
 
 		public function getDia(){
-			$dia = array('Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta','Sábado');
+			$dia = array(
+				0					=> 'Selecione',
+				'segunda'	=> 'Segunda',
+				'terça'		=> 'Terça',
+				'quarta'	=> 'Quarta',
+				'quinta'	=> 'Quinta',
+				'sexta'		=> 'Sexta',
+				'sábado'	=> 'Sábado'
+			);
 			return $dia;
 		}
 
@@ -333,18 +341,25 @@ class Professor extends CI_Controller {
 				));
 				// Definir as regras de validação para cada campo do formulário.
 
-				$this->form_validation->set_rules('periodo', 'periodo', array('required'));
-				$this->form_validation->set_rules('dia', 'dia da semana', array('required'));
-				$this->form_validation->set_rules('inicio', 'hora inicio', array('required'));
-				$this->form_validation->set_rules('fim', 'hora fim', array('required'));
+				$this->form_validation->set_rules('periodo', 'periodo', array('greater_than[0]'),array('greater_than'=>'Selecione um {field}'));
+				$this->form_validation->set_rules('dia', 'dia da semana', array('in_list[segunda,terça,quarta,quinta,sexta,sábado]'));
+				$this->form_validation->set_rules('inicio', 'horario de inicio', array('greater_than[0]'),array('greater_than'=>'Selecione um {field}'));
 				// Definição dos delimitadores
-				$this->form_validation->set_error_delimiters('<p class="text-danger">','</p>');
+				$this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
 				// Verifica se o formulario é valido
 				if ($this->form_validation->run() == FALSE) {
 					$this->session->set_flashdata('formDanger','<strong>Não foi possível cadastrar a disponibilidade, pois existe(m) erro(s) no formulário:</strong>');
+
+					$disponibilidade['segunda'] = $this->Disponibilidade_model->getProfDisponibilidade($this->session->id,'segunda');
+					$disponibilidade['terça'] = $this->Disponibilidade_model->getProfDisponibilidade($this->session->id,'terça');
+					$disponibilidade['quarta'] = $this->Disponibilidade_model->getProfDisponibilidade($this->session->id,'quarta');
+					$disponibilidade['quinta'] = $this->Disponibilidade_model->getProfDisponibilidade($this->session->id,'quinta');
+					$disponibilidade['sexta'] = $this->Disponibilidade_model->getProfDisponibilidade($this->session->id,'sexta');
+					$disponibilidade['sábado'] = $this->Disponibilidade_model->getProfDisponibilidade($this->session->id,'sábado');
+
 					$dados['periodo']         = convert($this->Periodo_model->getTurno(), TRUE);
 					$dados['professores']     = convert($this->Professor_model->getAll(TRUE));
-					$dados['disponibilidade'] = $this->Disponibilidade_model->getAllDisponibilidades($this->session->id);
+					$dados['disponibilidade'] = $disponibilidade;
 					$dados['horas'] = array(
 						'0'	=> 'Selecione',
 						'7'=>'07:00',
@@ -375,13 +390,16 @@ class Professor extends CI_Controller {
 					$this->load->view('includes/footer');
 	        $this->load->view('disponibilidade/js_disponibilidades');
 				} else {
-					$periodo = $this->input->post('periodo');
-					$professor = ($this->session->id);
-					$dia = $this->input->post('dia');
-					$inicio = $this->input->post('inicio');
-					$fim = $this->input->post('fim');
 
-					if ($this->Disponibilidade_model->insertDisponibilidade ($periodo, $professor, $dia, $inicio, $fim)) {
+					$disponibilidade = array(
+						'idPeriodo' 	=> $this->input->post('periodo'),
+						'idProfessor' => $this->session->id,
+						'dia' 				=> $this->input->post('dia'),
+						'inicio' 			=> $this->input->post('inicio').':00',
+						'fim' 				=> $this->input->post('fim')
+					);
+
+					if ($this->Disponibilidade_model->insertDisponibilidade ($disponibilidade)) {
 						$this->session->set_flashdata('success','Disponibilidade cadastrada com sucesso');
 					} else {
 						$this->session->set_flashdata('danger','Não foi possível cadastrar o disponibilidade, tente novamente ou entre em contato com o administrador do sistema.');
