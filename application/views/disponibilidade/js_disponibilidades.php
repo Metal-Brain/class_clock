@@ -45,6 +45,21 @@
 					break;
 			}
 		});
+
+		$('select[name=dia]').change(function () {
+			var day = $(this).val();
+			var url = '<?= base_url('index.php/Professor/verificaDisponibilidade/') ?>'+day;
+
+			$.getJSON(url,function (data,status) {
+				console.log(data);
+			}).fail(function () {
+				var msg = '<div class="alert alert-danger">'+
+				'<p class="text-center">Não foi possivel verificar a disponibilidade do dia selecionado. Atualize a página e tente novamente.</p>'+
+				'</div>';
+				$('#main-content').prepend(msg);
+			});
+		});
+
 	});
 </script>
 

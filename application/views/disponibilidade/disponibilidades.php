@@ -15,7 +15,7 @@
 				<div class="col-md-12">
 					<div class="container">
 						<div class="row">
-							<div class='col-sm-8'>
+							<div id="main-content" class='col-sm-8'>
 								<h1>Disponibilidade</h1>
 								<div class="table-responsive">
 									<table id="listas" class="table">
@@ -48,7 +48,7 @@
 							<div class="row">
 								<div class='col-sm-8'>
 									<div  style="margin-left:15px;">
-										<button type='submit' class='btn bt-lg btn-primary'>Cadastrar</button>
+										<button name="cadastrar" type='submit' class='btn bt-lg btn-primary'>Cadastrar</button>
 									</div>
 								</div>
 							</div>

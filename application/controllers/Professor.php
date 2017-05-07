@@ -412,6 +412,25 @@ class Professor extends CI_Controller {
 			}
 		}
 
+		public function verificaDisponibilidade($dia) {
+			$dia = urldecode($dia);
+			$idProfessor = $this->session->id;
+			$response = array();
+
+			array_push($response,$dia);
+
+			$this->load->model('Disponibilidade_model');
+
+			$disponibilidade = $this->Disponibilidade_model->getProfDisponibilidade($idProfessor, $dia);
+
+			foreach ($disponibilidade as $d) {
+				$horaInicio = $d['inicio'];
+				array_push($response,$horaInicio);
+			}
+
+			echo json_encode($response);
+		}
+
  }
 
 ?>
