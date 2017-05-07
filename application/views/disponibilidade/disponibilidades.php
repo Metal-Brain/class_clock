@@ -20,9 +20,9 @@
 								<div class="table-responsive">
 									<table id="listas" class="table">
 										<tr>
-											<th>Periodo</th>
+											<th>Período</th>
 											<th>Dia</th>
-											<th>Inicio</th>
+											<th>Início</th>
 											<th>Fim</th>
 										</tr>
 										<tr class="form-row">
@@ -59,7 +59,7 @@
 									<table class="table table-bordered">
 										<tr>
 											<th class="text-center">Dia</th>
-											<th class="text-center" colspan="6">Horario</th>
+											<th class="text-center" colspan="6">Horário</th>
 										</tr>
 										<?php foreach ($disponibilidade as $dia) : ?>
 											<tr>
