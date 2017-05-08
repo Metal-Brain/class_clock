@@ -141,7 +141,6 @@ CREATE TABLE IF NOT EXISTS Disponibilidade(
     inicio 				TIME 			NOT NULL,
     fim 				TIME 			NOT NULL,
     `status`      		BOOLEAN     	NOT NULL  DEFAULT TRUE,
-    PRIMARY KEY(idPeriodo,idProfessor,dia,inicio,fim),
 
     FOREIGN KEY(idPeriodo) REFERENCES Periodo(id),
     FOREIGN KEY(idProfessor) REFERENCES Professor(id)

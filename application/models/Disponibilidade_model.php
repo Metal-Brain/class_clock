@@ -61,33 +61,6 @@
 
       return $result->result_array();
     }
-
-    public function verificaHorasPeriodo(){
-      $query  = $this->db
-              ->select('idPeriodo, count(idPeriodo) AS qtdAulasPeriodo')
-              ->join('Periodo as p','p.id = Disponibilidade.idPeriodo')
-              ->group_by('idPeriodo')
-              ->order_by('qtdAulasPeriodo', 'desc')
-              ->get('Disponibilidade');
-      $result = $query->result_array();
-      $matutino = $result[0];
-      print_r($matutino);
-    }
-
-    public function verificaHorasDia($dia){
-      $this->db->select('count(idPeriodo) AS qtdAulasDia');
-      $this->db->join('Periodo as p','p.id = Disponibilidade.idPeriodo');
-      $this->db->where('dia',$dia);
-      $query = $this->db->get('Disponibilidade');
-      $result = $query->row_array();
-
-      if ($result['qtdAulasDia'] > 6) {
-        return FALSE;
-      }else{
-        return TRUE;
-      }
-
-    }
   }
 
 ?>
