@@ -296,6 +296,14 @@ class Professor extends CI_Controller {
 					redirect('/');
 			}
 		}
+                public function professor_consulta(){
+			
+                    $this->load->view('Includes/header');
+                    $this->load->view('Includes/sidebar');
+                    $this->load->view('professor_consulta/professores');
+                    $this->load->view('Includes/footer');
+                    $this->load->view('professor_consulta/js_professores');
+		}
 
  }
 
