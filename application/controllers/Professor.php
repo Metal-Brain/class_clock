@@ -416,17 +416,30 @@ class Professor extends CI_Controller {
 			$dia = urldecode($dia);
 			$idProfessor = $this->session->id;
 			$response = array();
-
-			array_push($response,$dia);
+			$horario = array();
 
 			$this->load->model('Disponibilidade_model');
 
 			$disponibilidade = $this->Disponibilidade_model->getProfDisponibilidade($idProfessor, $dia);
 
+			$temp = 0;
+			$consecutivas = 1;
+			$separada = 0;
 			foreach ($disponibilidade as $d) {
-				$horaInicio = $d['inicio'];
-				array_push($response,$horaInicio);
+				$horaInicio = date_create($d['inicio']);
+				$horaInicio = date_format($horaInicio,'H');
+
+				if (($temp + 1) == $horaInicio) {
+					$consecutivas++;
+				} else {
+					$separada++;
+					$consecutivas = 1;
+				}
+
+				$temp = $horaInicio;
+
 			}
+			$response['result'] = ($separada >= 6 || $consecutivas >= 4) ? FALSE : TRUE;
 
 			echo json_encode($response);
 		}
