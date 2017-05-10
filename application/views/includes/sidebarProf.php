@@ -17,7 +17,6 @@
 
 				if (a[6] === b[6]) {
 					active = i;
-					console.log('entrou');
 					break;
 				}
 			}

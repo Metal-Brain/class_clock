@@ -378,7 +378,6 @@ class Professor extends CI_Controller {
 						'20'=>'20:00',
 						'21'=>'21:00',
 						'22'=>'22:00',
-						'23'=>'23:00',
 					);
 					$dados['dia'] = $this->getDia();
 
@@ -412,11 +411,19 @@ class Professor extends CI_Controller {
 			}
 		}
 
+		/**
+		 * Recebe o dia da semana e verifica se o professor logado tem disponibilidade
+		 * de horario para o dia selecionado.
+		 * Ao final a função gera um JSON com um boolean TRUE caso professor tenha
+		 * disponibilidade para o dia.
+		 * @author Caio de Freitas
+		 * @since 2017/05/08
+		 * @param STRING $dia - Dia de semana em texto
+		 */
 		public function verificaDisponibilidade($dia) {
 			$dia = urldecode($dia);
 			$idProfessor = $this->session->id;
 			$response = array();
-			$horario = array();
 
 			$this->load->model('Disponibilidade_model');
 
@@ -424,22 +431,18 @@ class Professor extends CI_Controller {
 
 			$temp = 0;
 			$consecutivas = 1;
-			$separada = 0;
 			foreach ($disponibilidade as $d) {
 				$horaInicio = date_create($d['inicio']);
 				$horaInicio = date_format($horaInicio,'H');
 
 				if (($temp + 1) == $horaInicio) {
 					$consecutivas++;
-				} else {
-					$separada++;
-					$consecutivas = 1;
 				}
 
 				$temp = $horaInicio;
 
 			}
-			$response['result'] = ($separada >= 6 || $consecutivas >= 4) ? FALSE : TRUE;
+			$response['result'] = ($consecutivas >= 4) ? FALSE : TRUE;
 
 			echo json_encode($response);
 		}

@@ -64,9 +64,9 @@
 										<?php foreach ($disponibilidade as $dia) : ?>
 											<tr>
 											<?php if ($dia) :?>
-												<td><?= ucfirst($dia[0]['dia']) ?></td>
+												<td style="vertical-align: middle;"><?= ucfirst($dia[0]['dia']) ?></td>
 												<?php foreach ($dia as $horario) : ?>
-													<td><?= $horario['inicio'] ?></td>
+													<td><?= $horario['inicio'] ?><br><?= $horario['fim'] ?></td>
 												<?php endforeach; ?>
 											<?php endif; ?>
 											</tr>
