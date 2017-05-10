@@ -51,7 +51,6 @@
                     </thead>
                     <tbody>
                         <?php foreach ($cursos as $curso) : ?>
-                            <tr>
                                 <?= ($curso['status'] ? '<tr>' : '<tr class="danger">') ?>
                                 <td><?= $curso['sigla'] ?></td>
                                 <td><?= $curso['nome'] ?></td>
@@ -83,14 +82,14 @@
             <h3>Cadastrar Curso</h3>
 
             <?= form_open('Curso/cadastrar') ?>
-			
+
             <div class="row">
                 <div class="form-group col-md-6">
                     <?= form_label('Nome', 'nome') ?>
                     <?= form_input('nome', set_value('nome'), array('class' => 'form-control', 'placeholder' => 'ex: Análise e Desenvolvimento de Sistemas', 'required' => 'required')) ?>
                 </div>
             </div>
-			
+
 			<div class="row">
 				<div class="col-md-3 margin-top-error">
 					<?= form_error('nome') ?>
@@ -115,13 +114,13 @@
 					<label>Quantidade de semestres</label>
 				</div>
 			</div>
-			
+
             <div class="row">
                 <div class="form-group col-md-2">
                     <?= form_input(array('name' => 'qtdSemestres', 'value' => set_value('qtdSemestres'), 'type' => 'number', 'maxlength' => '2', 'pattern' => '[0-9]+$', 'class' => 'form-control', 'placeholder' => 'ex: 6', 'required' => 'required')) ?>
                 </div>
             </div>
-			
+
 			<div class="row">
                 <div class="col-md-6 margin-top-error">
 					<?= form_error('qtdSemestres') ?>
@@ -134,7 +133,7 @@
                     <?= form_dropdown('periodo[]', $periodo, null, array('id' => 'periodos', 'multiple' => 'multiple')) ?>
                 </div>
             </div>
-			
+
 			<div class="row">
 				<div class="col-md-3 margin-top-error">
 					<?= form_error('periodo[]') ?>
@@ -148,7 +147,7 @@
 					<?= form_dropdown('grau', $graus, set_value('grau'), array('class' => 'form-control')) ?>
                 </div>
             </div>
-			
+
 			<div class="row">
 				<div class="col-md-3 margin-top-error">
 					<?= form_error('grau') ?>
@@ -161,17 +160,17 @@
                     <?= form_dropdown('disciplinas[]', $disciplinas, set_value('disciplinas[]'), array('id' => 'disciplinas', 'multiple' => 'multiple')) ?>
                 </div>
             </div>
-			
+
 			<div class="row">
 				<div class="col-md-6 margin-top-error">
 					<?= form_error('disciplinas[]') ?>
 				</div>
 			</div>
-			
+
 			<div class="form-group">
 				<?= form_submit('submit', 'Cadastrar', array('class' => 'btn btn-primary')) ?>
 			</div>
-            
+
 
             <?= form_close() ?>
         </div>
@@ -187,57 +186,57 @@
                 <h4 class="modal-title" id="exampleModalLabel">Cursos</h4>
             </div>
             <div class="modal-body">
-				
+
 				<?= form_open('Curso/atualizar') ?>
-				
+
 				<div class="form-group">
 					<input type="hidden" name="cursoId" value="" id="recipient-id">
 				</div>
-				
+
 				<div class="row">
 					<div class="form-group col-md-12">
 						<?= form_label('Nome:', 'recipient-nome', array('class' => 'control-label')) ?>
 						<?= form_input('nomeCurso', set_value('nomeCurso'), array('class' => 'form-control', 'id' => 'recipient-nome', 'required' => 'required')) ?>
 					</div>
 				</div>
-				
+
 				<div class="row">
 					<div class="col-md-6 margin-top-error">
 						<?= form_error('nomeCurso') ?>
 					</div>
 				</div>
-				
+
 				<div class="row">
 					<div class="form-group col-md-3">
 						<?= form_label('Sigla:', 'recipient-sigla', array('class' => 'control-label')) ?>
 						<?= form_input('cursoSigla', set_value('cursoSigla'), array('class' => 'form-control', 'id' => 'recipient-sigla', 'maxlength' => '5', 'required' => 'required')) ?>
 					</div>
 				</div>
-				
+
 				<div class="row">
 					<div class="col-md-6 margin-top-error">
 						<?= form_error('cursoSigla') ?>
 					</div>
 				</div>
-				
+
 				<div class="row">
 					<div class="col-md-5">
 						<?= form_label('Quantidade de Semestres:', 'recipient-semestres', array('class' => 'control-label')) ?>
 					</div>
-				</div> 
-				
+				</div>
+
 				<div class="row">
 					<div class="form-group col-md-2">
 						<?= form_input('cursoQtdSemestres', set_value('cursoQtdSemestres'), array('pattern' => '[0-9]+$', 'maxlength' => '2', 'id' => 'recipient-semestres', 'class' => 'form-control', 'required' => 'required')) ?>
 					</div>
 				</div>
-				
+
 				<div class="row">
 					<div class="col-md-11 margin-top-error">
 						<?= form_error('cursoQtdSemestres') ?>
 					</div>
 				</div>
-				
+
 				<div class="row">
 					<!-- DropListPeriodo (Droplist) -->
 					<div class="form-group col-md-9">
@@ -245,13 +244,13 @@
 						<?= form_dropdown('cursoPeriodos[]', $periodo, null, array('id' => 'cursoPeriodos', 'multiple' => 'multiple')) ?>
 					</div>
 				</div>
-				
+
 				<div class="row">
 					<div class="col-md-10 margin-top-error">
 						<?= form_error('cursoPeriodos[]') ?>
 					</div>
 				</div>
-				
+
 				<div class="row">
 					<!-- DropListGrau (Droplist) -->
 					<div class="form-group col-md-7">
@@ -259,20 +258,20 @@
 						<?= form_dropdown('cursoGrau', $graus, null, array('class' => 'form-control')) ?>
 					</div>
 				</div>
-				
+
 				<div class="row">
 					<div class="col-md-10 margin-top-error">
 						<?= form_error('cursoGrau') ?>
 					</div>
 				</div>
-				
+
 				<div class="row">
 					<div class="form-group col-md-9">
 						<label>Disciplinas:</label>
 						<?= form_dropdown('cursoDisciplinas[]', $disciplinas, null, array('id' => 'cursoDisciplinas', 'multiple' => 'multiple')) ?>
 					</div>
 				</div>
-				
+
 				<div class="row">
 					<div class="col-md-10 margin-top-error">
 						<?= form_error('cursoDisciplinas[]') ?>
@@ -283,7 +282,7 @@
 					<?= form_submit('submit', 'Alterar', array('class' => 'btn btn-primary')) ?>
 					<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
 				</div>
-			
+
 				<?= form_close() ?>
             </div>
         </div>
