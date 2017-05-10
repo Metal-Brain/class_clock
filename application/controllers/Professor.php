@@ -297,13 +297,35 @@ class Professor extends CI_Controller {
 			}
 		}
                 public function professor_consulta(){
-			
-                    $this->load->view('Includes/header');
+						if (verificaSessao() && verificaNivelPagina(array(1))){
+			   $this->load->library(array('form_validation','My_PHPMailer'));
+			   $this->load->helper(array('form','dropdown','date','password'));
+			   $this->load->model(array(
+				  'Professor_model',
+				  'Disciplina_model',
+				  'Competencia_model',
+				  'Nivel_model',
+				  'Contrato_model',
+				  'Usuario_model'
+				));
+				  $dados['contrato']        = convert($this->Contrato_model->getAll(), TRUE);
+				  $dados['nivel']           = convert($this->Nivel_model->getAll(), TRUE);
+				  $dados['disciplinas']     = convert($this->Disciplina_model->getAll(TRUE));
+				  $dados['professores']     = $this->Professor_model->getAll();
+					
+                    $this->load->view('Includes/header', $dados);
                     $this->load->view('Includes/sidebar');
                     $this->load->view('professor_consulta/professores');
                     $this->load->view('Includes/footer');
                     $this->load->view('professor_consulta/js_professores');
-		}
+					
+				
+				}
+				else{
+					redirect('/');
+					}
+		
+				}
 
 		/**
 		 * busca todas as disponibilidades selecionadas pelo professor
