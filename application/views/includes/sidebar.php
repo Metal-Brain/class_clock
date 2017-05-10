@@ -17,8 +17,14 @@
 			for (var i = 0; i < document.links.length; i++) {
 				var a  = document.links[i].href.split('/');
 				var b = document.URL.split('/');
-
-				if (a[5] === b[5]) {
+					
+				if (a.length==7) {
+					
+					if (a[6] === b[6]) {
+						active = i;
+					}
+			
+				} else if (a[5] === b[5]) {
 					active = i;
 				}
 			}
