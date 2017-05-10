@@ -99,6 +99,7 @@ INSERT INTO Usuario VALUES (NULL, 'admin','cg123456','admin@admin.com','46070d4b
 
 CREATE TABLE IF NOT EXISTS Professor(
 	id 					    INT 			    NOT NULL 			AUTO_INCREMENT,
+	idCurso					    INT				    NULL,
   nascimento 			DATE 			    NOT NULL,
   coordenador 		BOOLEAN       NOT NULL  		DEFAULT FALSE,
   idContrato 			INT 			    NOT NULL,
