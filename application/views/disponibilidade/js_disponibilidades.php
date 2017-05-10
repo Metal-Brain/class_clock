@@ -65,7 +65,7 @@
 				}
 			}).fail(function () {
 				var msg = '<div class="alert alert-danger">'+
-				'<p class="text-center">Não foi possivel verificar a disponibilidade do dia selecionado. Atualize a página e tente novamente.</p>'+
+				'<p class="text-center">Não foi possível verificar a disponibilidade do dia selecionado. Atualize a página e tente novamente.</p>'+
 				'</div>';
 				$('#main-content').prepend(msg);
 			});

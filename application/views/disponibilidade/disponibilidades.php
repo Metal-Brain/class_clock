@@ -1,12 +1,14 @@
 		<div id="content" class="col-md-10">
 
 			<?php if($this->session->flashdata('success')) : ?>
-				<div class="alert alert-success">
-					<p class="text-center"><?= $this->session->flashdata('success') ?></p>
+				<div class="text-center alert alert-success">
+					<span class="glyphicon glyphicon glyphicon-ok" aria-hidden="true"></span>
+					<?= $this->session->flashdata('success') ?>
 				</div>
 			<?php elseif ($this->session->flashdata('danger')) : ?>
-				<div class="alert alert-danger">
-					<p class="text-center"><?= $this->session->flashdata('danger') ?></p>
+				<div class="text-center alert alert-danger">
+					<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+					<?= $this->session->flashdata('danger') ?>
 				</div>
 			<?php endif; ?>
 
@@ -20,19 +22,19 @@
 								<div class="table-responsive">
 									<table id="listas" class="table">
 										<tr>
-											<th>Período</th>
 											<th>Dia</th>
+											<th>Período</th>
 											<th>Início</th>
 											<th>Fim</th>
 										</tr>
 										<tr class="form-row">
 											<td>
-												<?= form_dropdown('periodo',$periodo,null,array('id'=>'periodo','class'=>'form-control')) ?>
-												<?= form_error('periodo') ?>
-											</td>
-											<td>
 												<?= form_dropdown('dia',$dia,null,array('class'=>'form-control')) ?>
 												<?= form_error('dia') ?>
+											</td>
+											<td>
+												<?= form_dropdown('periodo',$periodo,null,array('id'=>'periodo','class'=>'form-control')) ?>
+												<?= form_error('periodo') ?>
 											</td>
 											<td>
 												<?= form_dropdown('inicio',$horas,null,array('id'=>'inicio','class'=>'form-control','disabled'=>'disabled')) ?>
@@ -66,7 +68,7 @@
 											<?php if ($dia) :?>
 												<td style="vertical-align: middle;"><?= ucfirst($dia[0]['dia']) ?></td>
 												<?php foreach ($dia as $horario) : ?>
-													<td><?= $horario['inicio'] ?><br><?= $horario['fim'] ?></td>
+													<td><?= $horario['inicio'] ?> - <?= $horario['fim'] ?> <a href="#" style="color: red;"><span class="glyphicon glyphicon-remove"></span></a></td>
 												<?php endforeach; ?>
 											<?php endif; ?>
 											</tr>
