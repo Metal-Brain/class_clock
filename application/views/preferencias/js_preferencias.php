@@ -5,7 +5,7 @@
 				$.each(response, function (index, value) {
 					disciplinas.push(value.idDisciplina);
 				});
-				console.log(disciplinas);
+				
 				$("#disciplinas").multiSelect('select',disciplinas);
 			});
 

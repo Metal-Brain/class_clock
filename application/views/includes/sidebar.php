@@ -2,29 +2,41 @@
 	<div id="sidebar" class="col-xs-12 col-sm-2 col-md-2" role="navigation">
 		<h2>Menu</h2>
 		<ul class="nav nav-pills nav-stacked">
-		  <li><?= anchor('Curso','Cursos') ?></li>
-		  <li><?= anchor('Disciplina','Disciplinas') ?></li>
-		  <li><?= anchor('Professor', 'Professores') ?></li>
-           <li><?= anchor('Sala','Salas') ?></li>
-		  <li><?= anchor('Turma','Turmas') ?></li>
+			<?php if ($this->session->nivel == 1) : ?>
+				<li><?= anchor('Curso','Cursos') ?></li>
+				<li><?= anchor('Disciplina','Disciplinas') ?></li>
+				<li><?= anchor('Sala','Salas') ?></li>
+				<li><?= anchor('Turma','Turmas') ?></li>
+			<?php elseif ($this->session->nivel == 2) : ?>
+				<li><?= anchor('Professor/disponibilidade','Disponibilidade') ?></li>
+				<li><?= anchor('Professor/preferencia','Preferências') ?></li>
+			<?php endif; ?>
+		  <li><?= anchor('Grade','Grade') ?></li>
+			<li><?= anchor('Professor/index', 'Professores') ?></li>
 		  <hr>
 		  <li><?= anchor('Login/logout', '<span class="glyphicon glyphicon-log-out"></span> Sair do Sistema') ?></li>
 		</ul>
 
-		 <script>
+		<script>
 			var active = 0;
+			var nivelUsuario = <?= $this->session->nivel?>;
 			for (var i = 0; i < document.links.length; i++) {
 				var a  = document.links[i].href.split('/');
 				var b = document.URL.split('/');
-					
-				if (a.length==7) {
-					
-					if (a[6] === b[6]) {
-						active = i;
-					}
-			
-				} else if (a[5] === b[5]) {
-					active = i;
+
+				switch (nivelUsuario) {
+					case 1:
+						if (a[5] === b[5]) {
+							active = i;
+							break;
+						}
+						break;
+					case 2:
+						if (a[6] === b[6]) {
+							active = i;
+							break;
+						}
+						break;
 				}
 			}
 			document.links[active].className = 'active';
