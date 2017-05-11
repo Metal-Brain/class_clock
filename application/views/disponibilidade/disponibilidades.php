@@ -56,12 +56,12 @@
 							</div>
 
 							<div class="row" style="margin-top:100px;">
-								<div class="col-sm-8">
+								<div class="col-sm-10">
 									<h3 class="text-center">Tabela de disponibilidade</h3>
 									<table class="table table-bordered">
 										<tr>
 											<th class="text-center">Dia</th>
-											<th class="text-center" colspan="6">Horário</th>
+											<th class="text-center" colspan="16">Horário</th>
 										</tr>
 										<?php foreach ($disponibilidade as $dia) : ?>
 											<tr>
