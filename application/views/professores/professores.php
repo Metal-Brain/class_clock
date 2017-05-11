@@ -21,15 +21,18 @@
 			<?= $this->session->flashdata('danger') ?>
 		</div>
 	<?php endif; ?>
-
+	
 	<h1>Professores</h1>
 	<!-- Lista de 'botoes' links do Bootstrap -->
+	<?php if ($this->session->nivel == 1) :?>
 	<ul class="nav nav-pills">
 		<!-- 'botao' link para a listagem -->
 		<li class="active"><a data-toggle="pill" href="#list">Listar todos</a></li>
 		<!-- 'botao' link para novo registro -->
 		<li><a data-toggle="pill" href="#new">Cadastrar</a></li>
 	</ul>
+	<?php endif;?>
+	
 	<div class="tab-content">
 		<!-- Aqui é a Listagem dos Itens -->
 		<div id="list" class="tab-pane fade in active">
@@ -57,13 +60,21 @@
 									<td><?= $professor['nivel'] ?></td>
 									<td><?= $professor['contrato'] ?></td>
 									<td><?= ($professor['status']) ? "Ativo" : "Inativo"?></td>
+									
 									<td><?php if($professor['status']): ?>
+										<?php if ($this->session->nivel == 1) :?>
 										<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whatevernome="<?= $professor['nome']?>" data-whateverid="<?= $professor['id']?>" data-whatevercoordenador="<?= $professor['coordenador']?>" data-whatevercontrato="<?= $professor['idContrato']?>" data-whatevernivel="<?= $professor['idNivel']?>" data-whatevermatricula= "<?= $professor['matricula']?>" data-whateveremail="<?= $professor['email']?>" data-whatevernascimento= "<?= sqlToBr($professor['nascimento']) ?>"><span class="glyphicon glyphicon-pencil"></span></button>
 										<button onClick="exclude(<?= $professor['id']?>);" type="button" class="btn btn-danger" title="Excluir"><span class="glyphicon glyphicon-remove"></span></button>
+										<?php endif;?>
+										<?php if ($this->session->nivel == 2) :?>
+										<button type="button" class="btn btn-primary" title="Editar" data-toggle="modal" data-target="#exampleModal2" data-whatevernome="<?= $professor['nome']?>" data-whateverid="<?= $professor['id']?>" data-whatevercoordenador="<?= $professor['coordenador']?>" data-whatevercontrato="<?= $professor['idContrato']?>" data-whatevernivel="<?= $professor['idNivel']?>" data-whatevermatricula= "<?= $professor['matricula']?>" data-whateveremail="<?= $professor['email']?>" data-whatevernascimento= "<?= sqlToBr($professor['nascimento']) ?>"><span class="glyphicon glyphicon-eye-open"></span></button>
+										<?php endif;?>
+										
 								<?php else:?>
 									<button onClick="able(<?= $professor['id']?>)" type="button" class="btn btn-success" title="Ativar"><span class="glyphicon glyphicon-ok"></span></button>
 								<?php endif;?>
 								</td>
+								
 							</tr>
 						<?php endforeach; ?>
 					</tbody>
@@ -302,6 +313,84 @@
 					</div>
 				
 				<?= form_close() ?>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Aqui é o Modal de visualização dos professores-->
+<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="exampleModalLabel">Professor</h4>
+			</div>
+			<div class="modal-body">
+				<?= form_open('Professor/atualizar') ?>
+					<div class="form-group">
+						<input type="hidden" name="recipient-id" id="recipient-id">
+					</div>
+							
+					<div class="row">	
+						<div class="form-group col-md-12">
+							<label>Nome</label>
+							<?= set_value('nome')?>
+						</div>
+					</div>	
+						
+					<div class="row">	
+						<div class="form-group col-md-4">
+							<label>Matrícula</label>
+							<?= set_value('matricula')?>
+						</div>
+					</div>
+					
+					<div class="row">	
+						<div class="form-group col-md-7">
+							<label>E-mail</label>
+							<?= set_value('email')?>
+						</div>
+					</div>	
+						
+					<div class="row">	
+						<div class="form-group col-md-7">
+							<table id="Table" class="table table-striped">
+							<thead>
+								<tr>
+									<label>Disciplinas que pode lecionar</label>
+								</tr>
+							</thead>
+							<tbody>
+								<!-- Inserir o código php bonito que faz esse trem funcionar -->
+								<tr>
+									<td>Lógica de Programação</td>
+								</tr>
+								<tr>
+									<td>Estrutura de dados</td>
+								</tr>
+								<tr>
+									<td>Redes de computadores</td>
+								</tr>
+							</tbody>
+						</table>
+						</div>
+					</div>	
+						
+					<div class="row">	
+						<div class="form-group col-md-4">
+							<label>Data de Nascimento</label>
+							<?= set_value('nascimento')?>
+						</div>
+					</div>	
+					
+					
+					<div class="row">	
+						<div class="form-group col-md-4">
+							<label for="nivelAcademico" >Nivel Acadêmico</label>
+							<?= set_value('recipient-nivelAcademico') ?>
+						</div>
+					</div>
 			</div>
 		</div>
 	</div>

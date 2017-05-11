@@ -4,6 +4,7 @@
 		<ul class="nav nav-pills nav-stacked">
 		  <li><?= anchor('Disponibilidade','Disponibilidade') ?></li>
 		  <li><?= anchor('Professor/Preferencia','Preferências') ?></li>
+		  <li><?= anchor('Professor', 'Professores') ?></li>
 		  <li><?= anchor('Grade','Grade') ?></li>
 		  <hr>
 		  <li><?= anchor('Login/logout', '<span class="glyphicon glyphicon-log-out"></span> Sair do Sistema') ?></li>
