@@ -27,7 +27,7 @@ class Professor extends CI_Controller {
      * @since 2017/04/03
      */
     public function cadastrar() {
-      if (verificaSessao() && verificaNivelPagina(array(1))){
+      if (verificaSessao() && verificaNivelPagina(array(1,2))){
         // Carrega a biblioteca para validação dos dados.
         $this->load->library(array('form_validation','My_PHPMailer'));
         $this->load->helper(array('form','dropdown','date','password'));
