@@ -61,6 +61,18 @@
 
       return $result->result_array();
     }
+
+    public function able($id){
+      $this->db->where('id', $id);
+      $result = $this->db->update('Disponibilidade',array('status'=>TRUE));
+      return $result;
+    }
+
+    public function disable($id){
+      $this->db->where('id', $id);
+      $result = $this->db->update('Disponibilidade',array('status'=>FALSE));
+      return $result;
+    }
   }
 
 ?>

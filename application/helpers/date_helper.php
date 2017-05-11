@@ -24,4 +24,8 @@
     return $d[2].'/'.$d[1].'/'.$d[0];
   }
 
+  function removerSegundos($time){
+    $time = date_create($time);
+    return date_format($time, "H:i");
+  }
 ?>

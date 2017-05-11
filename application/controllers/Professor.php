@@ -447,6 +447,13 @@ class Professor extends CI_Controller {
 			echo json_encode($response);
 		}
 
+		public function removeHorario($id){
+			$this->load->model('Disponibilidade_model');
+			$this->Disponibilidade_model->disable($id);
+			redirect('Professor/disponibilidade');
+		}
+
+
  }
 
 ?>

@@ -68,7 +68,7 @@
 											<?php if ($dia) :?>
 												<td style="vertical-align: middle;"><?= ucfirst($dia[0]['dia']) ?></td>
 												<?php foreach ($dia as $horario) : ?>
-													<td><?= $horario['inicio'] ?> - <?= $horario['fim'] ?> <a href="#" style="color: red;"><span class="glyphicon glyphicon-remove"></span></a></td>
+													<td><?= removerSegundos($horario['inicio'])?> - <?= removerSegundos($horario['fim']) ?>  <?= anchor ('Professor/removeHorario/'.$horario['id'], '<span class="glyphicon glyphicon-remove text-danger" ></span>') ?></td>
 												<?php endforeach; ?>
 											<?php endif; ?>
 											</tr>

@@ -135,12 +135,15 @@ CREATE TABLE IF NOT EXISTS Turma(
 );
 
 CREATE TABLE IF NOT EXISTS Disponibilidade(
+	id					INT				NOT NULL  AUTO_INCREMENT,
 	idPeriodo 			INT 			NOT NULL,
     idProfessor 		INT 			NOT NULL,
     dia 				VARCHAR(45) 	NOT NULL,
     inicio 				TIME 			NOT NULL,
     fim 				TIME 			NOT NULL,
     `status`      		BOOLEAN     	NOT NULL  DEFAULT TRUE,
+
+    PRIMARY KEY(id),
 
     FOREIGN KEY(idPeriodo) REFERENCES Periodo(id),
     FOREIGN KEY(idProfessor) REFERENCES Professor(id)
