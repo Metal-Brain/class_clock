@@ -73,6 +73,20 @@
       $result = $this->db->update('Disponibilidade',array('status'=>FALSE));
       return $result;
     }
+
+    public function verificaHora($dia, $inicio){
+      $this->db->select('Disponibilidade.*');
+      $this->db->where('dia',$dia);
+      $this->db->where('inicio',$inicio);
+      $this->db->where('status',TRUE);
+      $result = $this->db->get('Disponibilidade');
+      if ($result->num_rows() > 0) {
+        return FALSE;
+      }else {
+        return TRUE;
+      }
+
+    }
   }
 
 ?>

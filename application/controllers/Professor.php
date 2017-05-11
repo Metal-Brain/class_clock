@@ -397,13 +397,18 @@ class Professor extends CI_Controller {
 						'inicio' 			=> $this->input->post('inicio').':00',
 						'fim' 				=> $this->input->post('fim')
 					);
-
-					if ($this->Disponibilidade_model->insertDisponibilidade ($disponibilidade)) {
-						$this->session->set_flashdata('success','Disponibilidade cadastrada com sucesso');
-					} else {
-						$this->session->set_flashdata('danger','Não foi possível cadastrar a disponibilidade, tente novamente ou entre em contato com o administrador do sistema.');
+					if ($this->Disponibilidade_model->verificaHora($disponibilidade['dia'], $disponibilidade['inicio'])) {
+						if ($this->Disponibilidade_model->insertDisponibilidade ($disponibilidade)) {
+							$this->session->set_flashdata('success','Disponibilidade cadastrada com sucesso');
+						} else {
+							$this->session->set_flashdata('danger','Não foi possível cadastrar a disponibilidade, tente novamente ou entre em contato com o administrador do sistema.');
+						}
+						redirect('Professor/disponibilidade');
+					}else {
+						$this->session->set_flashdata('danger','Não foi possível cadastrar a disponibilidade esse horario já existe.');
+						redirect('Professor/disponibilidade');
 					}
-					redirect('Professor/disponibilidade');
+
 				}
 
 			}else{
