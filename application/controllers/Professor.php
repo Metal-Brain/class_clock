@@ -10,10 +10,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Professor extends CI_Controller {
 
 	public function index () {
-      if (verificaSessao() && verificaNivelPagina(array(1)))
-        $this->cadastrar();
-      else
-        redirect('/');
+		$this->cadastrar();
 	}
     // =========================================================================
     // ==========================CRUD de professores============================
@@ -296,28 +293,6 @@ class Professor extends CI_Controller {
 					redirect('/');
 			}
 		}
-                public function professor_consulta(){
-						if (verificaSessao() && verificaNivelPagina(array(1))){
-			   $this->load->library(array('form_validation','My_PHPMailer'));
-			   $this->load->helper(array('form','dropdown','date','password'));
-			   $this->load->model(array(
-				  'Professor_model',
-				  'Disciplina_model',
-				  'Competencia_model',
-				  'Nivel_model',
-				  'Contrato_model',
-				  'Usuario_model'
-				));
-				  $dados['contrato']        = convert($this->Contrato_model->getAll(), TRUE);
-				  $dados['nivel']           = convert($this->Nivel_model->getAll(), TRUE);
-				  $dados['disciplinas']     = convert($this->Disciplina_model->getAll(TRUE));
-				  $dados['professores']     = $this->Professor_model->getAllCoordenador($this->session->id);
-
-                    $this->load->view('Includes/header', $dados);
-                    $this->load->view('Includes/sidebar');
-                    $this->load->view('professor_consulta/professores');
-                    $this->load->view('Includes/footer');
-                    $this->load->view('professor_consulta/js_professores');
 
 
 				}
