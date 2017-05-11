@@ -384,10 +384,10 @@ class Professor extends CI_Controller {
 
 
 					$this->load->view('includes/header',$dados);
-	        $this->load->view('includes/sidebarProf');
-	        $this->load->view('disponibilidade/disponibilidades');
+					$this->load->view('includes/sidebarProf');
+					$this->load->view('disponibilidade/disponibilidades');
 					$this->load->view('includes/footer');
-	        $this->load->view('disponibilidade/js_disponibilidades');
+					$this->load->view('disponibilidade/js_disponibilidades');
 				} else {
 
 					$disponibilidade = array(
@@ -401,7 +401,7 @@ class Professor extends CI_Controller {
 					if ($this->Disponibilidade_model->insertDisponibilidade ($disponibilidade)) {
 						$this->session->set_flashdata('success','Disponibilidade cadastrada com sucesso');
 					} else {
-						$this->session->set_flashdata('danger','Não foi possível cadastrar o disponibilidade, tente novamente ou entre em contato com o administrador do sistema.');
+						$this->session->set_flashdata('danger','Não foi possível cadastrar a disponibilidade, tente novamente ou entre em contato com o administrador do sistema.');
 					}
 					redirect('Professor/disponibilidade');
 				}

@@ -9,6 +9,8 @@
 
 		$('select[name=periodo]').change(function () {
 			var periodo = parseInt($(this).val());
+			$('#inicio').val(0);
+			$('#fim').val(null);
 			switch (periodo) {
 				case 1:
 					$('#inicio').prop('disabled',false);
