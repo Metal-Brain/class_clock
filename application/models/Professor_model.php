@@ -107,6 +107,18 @@
       return $result;
     }
 
+    public function getAllCoordenador($idCoordenador){
+      $this->db->select('Usuario.*, Professor.*, Contrato.nome AS contrato, Nivel.nome AS nivel');
+      $this->db->join('Usuario','Usuario.id = Professor.id');
+      $this->db->join('Contrato','Contrato.id = Professor.idContrato');
+      $this->db->join('Nivel','Nivel.id = Professor.idNivel');
+      $this->db->join('CoordenadorDe as c', "c.idCoordenador = $idCoordenador");
+      $this->db->where('c.idProfessor = Professor.id');
+      $result = $this->db->get('Professor');
+
+      return $result->result_array(); // converte o objeto em um array
+    }
+
   }
 
 
