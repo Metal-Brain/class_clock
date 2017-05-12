@@ -110,10 +110,10 @@
 		
 		<script>
 			$(document).ready(function() {
+				$('#coordena1').hide();
 				$('#coordenador').click(function (){
 					$('#coordena1').toggle();
 				});
-				
 				$('#recipient-coordenador').click(function (){
 					$('#coordena2').toggle();
 				});

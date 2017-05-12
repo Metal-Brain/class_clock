@@ -102,8 +102,3 @@
 .margin-top-error{
 	margin: -15px 0 0 0;
 }
-
-/*Esconde o elemento*/
-.hide{
-	display: none;
-}
