@@ -185,6 +185,19 @@
 					</div>
 				</div>
 				
+				<div id="coordena1" class="row hide">
+					<div class="form-group col-md-5">
+						<label>Coordenador do curso</label>
+						<?= form_dropdown('coordena','',set_value('coordena'),array('class'=>'form-control')) ?>
+					</div>
+				</div>
+				
+				<div class="row hide">
+					<div class="col-md-6 margin-top-error">
+						<?= form_error('coordena') ?>
+					</div>
+				</div>
+				
 				<div class="inline">
 					<button type='submit' class='btn bt-lg btn-primary'>Cadastrar</button>
 				</div>
@@ -306,6 +319,19 @@
 							<label for="recipient-coordenador">Coordenador</label>
 						</div>
 					</div>
+					
+					<div id="coordena2" class="row hide">
+						<div class="form-group col-md-9">
+							<label>Coordenador do curso</label>
+							<?= form_dropdown('coordena','',set_value('coordena'),array('class'=>'form-control')) ?>
+						</div>
+					</div>
+				
+				<div class="row hide">
+					<div class="col-md-6 margin-top-error">
+						<?= form_error('coordena') ?>
+					</div>
+				</div>
 					
 					<div class="modal-footer">
 						<button type="submit" class="btn btn-primary">Alterar</button>

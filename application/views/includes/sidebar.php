@@ -5,16 +5,20 @@
 			<?php if ($this->session->nivel == 1) : ?>
 				<li><?= anchor('Curso','Cursos') ?></li>
 				<li><?= anchor('Disciplina','Disciplinas') ?></li>
+				<li><?= anchor('Professor/index', 'Professores') ?></li>
 				<li><?= anchor('Sala','Salas') ?></li>
 				<li><?= anchor('Turma','Turmas') ?></li>
 			<?php elseif ($this->session->nivel == 2) : ?>
 				<li><?= anchor('Professor/disponibilidade','Disponibilidade') ?></li>
 				<li><?= anchor('Professor/preferencia','Preferências') ?></li>
+				<li><?= anchor('Grade','Visualizar Cadastro') ?></li>
 			<?php endif; ?>
-		  <li><?= anchor('Grade','Grade') ?></li>
-			<li><?= anchor('Professor/index', 'Professores') ?></li>
-		  <hr>
-		  <li><?= anchor('Login/logout', '<span class="glyphicon glyphicon-log-out"></span> Sair do Sistema') ?></li>
+			<li><?= anchor('Grade','Grade') ?></li>
+			<hr>
+			<?php if ($this->session->nivel == 2) : ?>
+				<li><?= anchor('Professor/configuracao','<span class="glyphicon glyphicon-cog"></span> Configurações') ?></li>	
+			<?php endif; ?>
+			<li><?= anchor('Login/logout', '<span class="glyphicon glyphicon-log-out"></span> Sair do Sistema') ?></li>
 		</ul>
 
 		<script>

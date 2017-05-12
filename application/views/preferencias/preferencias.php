@@ -16,7 +16,6 @@
 					<div class="form-group col-md-5">
 						<label>Disciplinas que deseja lecionar</label>
 						<?= form_dropdown('disciplinas[]',$disciplinas,null,array('id'=>'disciplinas','multiple'=>'multiple')) ?>
-						
 					</div>
 				</div>
 				
