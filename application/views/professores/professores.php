@@ -344,7 +344,7 @@
 	</div>
 </div>
 
-<!-- Aqui é o Modal de visualização dos professores-->
+<!-- Aqui é o Modal2 de visualização dos professores-->
 <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -361,62 +361,121 @@
 					<div class="row">	
 						<div class="form-group col-md-12">
 							<label>Nome</label>
-							<?= set_value('nome')?>
+							<input type="text" class="form-control" name="recipient-nome" placeholder="Nome" id="recipient-nome" value="<?= set_value('nome')?>" required/>
 						</div>
 					</div>	
+								
+					<div class="row">
+						<div class="col-md-7 margin-top-error">
+							<?= form_error('recipient-nome') ?>
+						</div>	
+					</div>
 						
 					<div class="row">	
 						<div class="form-group col-md-4">
 							<label>Matrícula</label>
-							<?= set_value('matricula')?>
+							<input type="text" class="form-control" name="recipient-matricula"  id="recipient-matricula" maxlength="8" placeholder="ex: cg0000000" value="<?= set_value('recipient-matricula')?>" required/>
 						</div>
 					</div>
+				
+					<div class="row">
+						<div class="col-md-6 margin-top-error">
+							<?= form_error('recipient-matricula') ?>
+						</div>	
+					</div>	
 					
 					<div class="row">	
 						<div class="form-group col-md-7">
 							<label>E-mail</label>
-							<?= set_value('email')?>
+							<input type="email" class="form-control" name="recipient-email" placeholder="Email" id="recipient-email" value="<?= set_value('email')?>" required/>
 						</div>
 					</div>	
+							
+					<div class="row">
+						<div class="col-md-6 margin-top-error">
+							<?= form_error('recipient-email') ?>
+						</div>	
+					</div>
 						
 					<div class="row">	
 						<div class="form-group col-md-7">
-							<table id="Table" class="table table-striped">
-							<thead>
-								<tr>
-									<label>Disciplinas que pode lecionar</label>
-								</tr>
-							</thead>
-							<tbody>
-								<!-- Inserir o código php bonito que faz esse trem funcionar -->
-								<tr>
-									<td>Lógica de Programação</td>
-								</tr>
-								<tr>
-									<td>Estrutura de dados</td>
-								</tr>
-								<tr>
-									<td>Redes de computadores</td>
-								</tr>
-							</tbody>
-						</table>
+							<label>Disciplinas que pode lecionar: </label>
+							<?= form_dropdown('professorDisciplinas[]',$disciplinas,set_value('professorDisciplinas[]'),array('id'=>'professorDisciplinas','multiple'=>'multiple')) ?>
 						</div>
 					</div>	
+					
+					<div class="row">
+						<div class="col-md-6 margin-top-error">
+							<?= form_error('professorDisciplinas[]') ?>
+						</div>	
+					</div>
 						
 					<div class="row">	
 						<div class="form-group col-md-4">
 							<label>Data de Nascimento</label>
-							<?= set_value('nascimento')?>
+							<input type="text" class="form-control" name="recipient-nascimento" id="recipient-nascimento" value="<?= set_value('nascimento')?>" required/>
 						</div>
 					</div>	
 					
-					
+					<div class="row">
+						<div class="col-md-6 margin-top-error">
+							<?= form_error('recipient-nascimento') ?>
+						</div>
+					</div>
+								
 					<div class="row">	
 						<div class="form-group col-md-4">
 							<label for="nivelAcademico" >Nivel Acadêmico</label>
-							<?= set_value('recipient-nivelAcademico') ?>
+							<?= form_dropdown('recipient-nivelAcademico',$nivel,set_value('recipient-nivelAcademico'),array('class'=>'form-control')) ?>
 						</div>
 					</div>
+					
+					<div class="row">
+						<div class="col-md-6 margin-top-error">
+							<?= form_error('recipient-nivelAcademico') ?>
+						</div>	
+					</div>
+					
+					<div class="row">	
+						<div class="form-group col-md-4">
+							<label>Regime de contrato</label>
+							<?= form_dropdown('recipient-contrato',$contrato,set_value('recipient-contrato'),array('class'=>'form-control')) ?>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-md-6 margin-top-error">
+							<?= form_error('recipient-contrato') ?>
+						</div>	
+					</div>
+					
+					
+					<div class="row">	
+						<div class="form-group">
+							<input type="checkbox" name="recipient-coordenador" value="true" class="form-group" style="margin-left:20px;" id="recipient-coordenador"/>
+							<label for="recipient-coordenador">Coordenador</label>
+						</div>
+					</div>
+					
+					<div id="coordena2" class="row">
+						<div class="form-group col-md-9">
+							<label>Coordenador do curso</label>
+							<?= form_dropdown('coordena','',set_value('coordena'),array('class'=>'form-control')) ?>
+						</div>
+					</div>
+				
+				<div class="row">
+					<div class="col-md-6 margin-top-error">
+						<?= form_error('coordena') ?>
+					</div>
+				</div>
+					
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-primary">Alterar</button>
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+					</div>
+				
+				<?= form_close() ?>
 			</div>
 		</div>
 	</div>
