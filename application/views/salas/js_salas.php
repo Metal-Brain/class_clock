@@ -32,7 +32,7 @@
         modal.find('#recipient-capMax').val(recipientcapmax)
         modal.find('#recipient-tipo').val(recipienttipo)
         modal.find('#recipient-id').val(recipientId)
-    })
+    });
 </script>
 
 <script type="text/javascript">
