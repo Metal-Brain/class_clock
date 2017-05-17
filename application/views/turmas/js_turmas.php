@@ -18,7 +18,29 @@
         modal.find('#recipient-dp').prop('checked',recipientdp)
         modal.find('select[name=recipient-disciplina] option[value='+recipientIdDisciplina+']').prop('selected',true)
         modal.find('#recipient-id').val(recipientId)
-    })
+    });
+	
+	
+	 $('#exampleModal2').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var recipient = button.data('whatever') // Extract info from data-* attributes
+        var recipientsigla = button.data('whateversigla')
+        var recipientqtdAlunos = button.data('whateverqtd')
+        var recipientdp = button.data('whateverdp')
+        var recipientdisciplina = button.data('whateverdisciplina')
+        var recipientId = button.data('whateverid')
+        var recipientIdDisciplina = button.data('whateveriddisciplina')
+        console.log(recipientIdDisciplina);
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        var modal = $(this)
+        modal.find('.modal-title').text('Alterar Turma')
+        modal.find('#recipient-sigla').val(recipientsigla)
+        modal.find('#recipient-qtdAlunos').val(recipientqtdAlunos)
+        modal.find('#recipient-dp').prop('checked',recipientdp)
+        modal.find('select[name=recipient-disciplina] option[value='+recipientIdDisciplina+']').prop('selected',true)
+        modal.find('#recipient-id').val(recipientId)
+    });
 </script>
 
 <script type="text/javascript">
