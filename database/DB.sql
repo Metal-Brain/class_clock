@@ -161,5 +161,5 @@ CREATE TABLE IF NOT EXISTS CoordenadorDe(
 
     CONSTRAINT fk_coordenadorde_professor
     FOREIGN KEY (idProfessor) REFERENCES Professor(id)
-    
+
 );
