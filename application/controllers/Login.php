@@ -33,7 +33,10 @@
           $this->session->set_userdata($usuario);
 
           if ($this->Usuario_model->isProfessor($usuario)) {
+            $isCoordenador = $this->Usuario_model->isCoordenador($usuario);
+
             $this->session->set_userdata('nivel', 2);
+            $this->session->set_userdata('isCoordenador', $isCoordenador);
             redirect('Professor/preferencia');
           }
 

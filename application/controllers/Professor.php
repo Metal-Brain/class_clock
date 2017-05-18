@@ -275,7 +275,7 @@ class Professor extends CI_Controller {
 				if($this->form_validation->run() == FALSE){
 					$dados['disciplinas'] = convert($this->disciplinas($this->session->id, FALSE));
 					$this->load->view('includes/header', $dados);
-					$this->load->view('includes/sidebarProf');
+					$this->load->view('includes/sidebar');
 					$this->load->view('preferencias/preferencias');
 					$this->load->view('includes/footer');
 					$this->load->view('preferencias/js_preferencias');
@@ -296,21 +296,12 @@ class Professor extends CI_Controller {
 			}
 		}
 
-
-				}
-				else{
-					redirect('/');
-					}
-
-				}
-
 		/**
 		 * busca todas as disponibilidades selecionadas pelo professor
 		 * @author Jean Brock
 		 * @since 2017/04/27
 		 * @param INT $idProfessor - ID do professor
 		 */
-
 		public function getDisponibilidade($idProfessor) {
 			$this->load->model('Disponibilidade_model');
 			$disponibilidades = $this->Disponibilidade_model->getAllDisponibilidades($idProfessor);
@@ -391,7 +382,7 @@ class Professor extends CI_Controller {
 
 
 					$this->load->view('includes/header',$dados);
-					$this->load->view('includes/sidebarProf');
+					$this->load->view('includes/sidebar');
 					$this->load->view('disponibilidade/disponibilidades');
 					$this->load->view('includes/footer');
 					$this->load->view('disponibilidade/js_disponibilidades');

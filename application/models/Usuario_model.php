@@ -36,6 +36,20 @@
     }
 
     /**
+     * Verifica se o usuário é um coordenador.
+     * @author Caio de Freitas
+     * @since 2017/05/18
+     * @param ARRAY $usuario - Vetor com os dados do usuario
+     * @return Retorna um boolean TRUE caso o usuario sejá um coordenador
+     */
+    public function isCoordenador ($usuario) {
+      $this->db->where('id', $usuario['id']);
+      $result = $this->db->get('Professor')->row();
+
+      return $result->coordenador;
+    }
+
+    /**
      * Insere um novo usuário na base de dados.
      * @author Caio de Freitas
      * @since 2017/04/16

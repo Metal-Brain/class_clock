@@ -1,7 +1,7 @@
 <div class="row">
 	<div id="sidebar" class="col-xs-12 col-sm-2 col-md-2" role="navigation">
 		<h2>Menu</h2>
-		<ul class="nav nav-pills nav-stacked">
+		<ul class="metismenu nav nav-pills nav-stacked" id="menu">
 			<?php if ($this->session->nivel == 1) : ?>
 				<li><?= anchor('Curso','Cursos') ?></li>
 				<li><?= anchor('Disciplina','Disciplinas') ?></li>
@@ -11,12 +11,19 @@
 			<?php elseif ($this->session->nivel == 2) : ?>
 				<li><?= anchor('Professor/disponibilidade','Disponibilidade') ?></li>
 				<li><?= anchor('Professor/preferencia','Preferências') ?></li>
-				<li><?= anchor('Grade','Visualizar Cadastro') ?></li>
+				<?php if ($this->session->isCoordenador) : ?>
+					<li><?= anchor('Grade','Visualizar Cadastro') ?></li>
+				<?php endif; ?>
 			<?php endif; ?>
 			<li><?= anchor('Grade','Grade') ?></li>
 			<hr>
 			<?php if ($this->session->nivel == 2) : ?>
-				<li><?= anchor('Professor/configuracao','<span class="glyphicon glyphicon-cog"></span> Configurações') ?></li>	
+				<li>
+					<?= anchor(current_url().'#','<span class="glyphicon glyphicon-cog"></span> Configurações') ?>
+					<ul aria-expanded="false" class="nav nav-pills nav-stacked">
+						<li><?= anchor('Professor/alterarSenha',' Alterar Senha') ?></li>
+					</ul>
+				</li>
 			<?php endif; ?>
 			<li><?= anchor('Login/logout', '<span class="glyphicon glyphicon-log-out"></span> Sair do Sistema') ?></li>
 		</ul>
