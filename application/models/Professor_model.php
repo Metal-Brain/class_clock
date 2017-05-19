@@ -50,6 +50,7 @@
         'id'          => $idUsuario,
         'nascimento'  => $professor['nascimento'],
         'coordenador' => $professor['coordenador'],
+        'idCurso'     => $professor['idCurso'],
         'idContrato'  => $professor['idContrato'],
         'idNivel'     => $professor['idNivel']
       );

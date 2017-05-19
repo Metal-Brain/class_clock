@@ -29,6 +29,7 @@ class Professor extends CI_Controller {
         $this->load->library(array('form_validation','My_PHPMailer'));
         $this->load->helper(array('form','dropdown','date','password'));
         $this->load->model(array(
+					'Curso_model',
           'Professor_model',
           'Disciplina_model',
           'Competencia_model',
@@ -39,11 +40,10 @@ class Professor extends CI_Controller {
         // Definir as regras de validação para cada campo do formulário.
         $this->form_validation->set_rules('nome', 'nome do professor', array('required','min_length[5]','max_length[255]','ucwords'));
         $this->form_validation->set_rules('matricula', 'matrícula', array('required','exact_length[8]','is_unique[Usuario.matricula]','strtoupper'));
-		$this->form_validation->set_rules('email','e-mail',array('required','valid_email','is_unique[Usuario.email]'));
+				$this->form_validation->set_rules('email','e-mail',array('required','valid_email','is_unique[Usuario.email]'));
         $this->form_validation->set_rules('nascimento', 'data de nascimento', array('callback_date_check'));
         $this->form_validation->set_rules('nivel', 'nivel', array('greater_than[0]'),array('greater_than'=>'Selecione o nível acadêmico.'));
         $this->form_validation->set_rules('contrato','contrato',array('greater_than[0]'),array('greater_than'=>'Selecione um contrato.'));
-		//$this->form_validation->set_rules('coordena','curso',array('greater_than[0]'),array('greater_than'=>'Selecione o curso que o professor coordena.'));
 
         // Definição dos delimitadores
         $this->form_validation->set_error_delimiters('<p class="text-danger">','</p>');
@@ -53,13 +53,13 @@ class Professor extends CI_Controller {
           $dados['contrato']        = convert($this->Contrato_model->getAll(), TRUE);
           $dados['nivel']           = convert($this->Nivel_model->getAll(), TRUE);
           $dados['disciplinas']     = convert($this->Disciplina_model->getAll(TRUE));
-		  //$dados['coordena']		= convert($this->Curso_model->getAll(), TRUE);
+		  		$dados['cursos']					= convert($this->Curso_model->getAll(), TRUE);
           $dados['professores']     = $this->Professor_model->getAll();
           $this->load->view('includes/header', $dados);
           $this->load->view('includes/sidebar');
           $this->load->view('professores/professores');
-		  $this->load->view('includes/footer');
-		  $this->load->view('professores/js_professores');
+		  		$this->load->view('includes/footer');
+		  		$this->load->view('professores/js_professores');
         } else {
           // Gera uma senha para o usuário
           $senha = gerate(10);
@@ -72,10 +72,12 @@ class Professor extends CI_Controller {
             'senhaLimpa'      => $senha,
             'senha'           => hash('sha256',$senha),
             'coordenador'     => ($this->input->post("coordenador") == null) ? 0 : 1,
+						'idCurso'					=> $this->input->post('coordena'),
             'idContrato'      => $this->input->post("contrato"),
             'idNivel'         => $this->input->post("nivel"),
             'disciplinas'     => $this->input->post('disciplinas[]')
           );
+
           $content = $this->load->view('email/novo',array('professor'=>$professor),TRUE);
           $mail = new PHPMailer();
           $mail->CharSet = 'UTF-8';
@@ -91,6 +93,7 @@ class Professor extends CI_Controller {
           $mail->Subject = 'Novo usuário';
           $mail->msgHTML($content);
           $mail->send();
+
           if ($this->Usuario_model->insert($professor)) {
             $idUsuario = $this->db->insert_id(); // Pega o ID do Professor cadastrado
             $this->Professor_model->insert($idUsuario, $professor);
@@ -171,6 +174,7 @@ class Professor extends CI_Controller {
         $this->load->library(array('form_validation'));
         $this->load->helper(array('form', 'dropdown', 'date'));
         $this->load->model(array(
+					'Curso_model',
           'Usuario_model',
           'Professor_model',
           'Disciplina_model',
@@ -193,6 +197,7 @@ class Professor extends CI_Controller {
           $dados['contrato']        = convert($this->Contrato_model->getAll(), TRUE);
           $dados['nivel']           = convert($this->Nivel_model->getAll(), TRUE);
           $dados['disciplinas']     = convert($this->Disciplina_model->getAll(TRUE));
+					$dados['cursos']					= convert($this->Curso_model->getAll(), TRUE);
           $dados['professores']     = $this->Professor_model->getAll();
           $this->load->view('includes/header', $dados);
           $this->load->view('includes/sidebar');

@@ -6,7 +6,8 @@
 			$("#disciplinas").multiSelect({
 				selectableHeader: "<div class='multiselect'>Selecione as disciplinas</div>",
 				selectionHeader: "<div class='multiselect'>Disciplinas selecionadas</div>"
-			});</script>
+			});
+		</script>
 
 
 		<script type="text/javascript">
@@ -23,6 +24,7 @@
 			  var recipientnivelAcademico = button.data('whatevernivel')
 			  var recipientregimeContrato = button.data('whatevercontrato')
 			  var recipientcoordenador = button.data('whatevercoordenador')
+				var recipientIdCurso = button.data('whatevercurso')
 			  var recipientid = button.data('whateverid')
 			  var url = '<?= base_url('index.php/Professor/disciplinas/') ?>'+recipientid;
 			  $.getJSON(url,function (response) {
@@ -31,7 +33,7 @@
 				  disciplinas.push(value.id);
 				});
 			  $("#professorDisciplinas").multiSelect('select',disciplinas);
-			});
+				});
 
 			// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
 			// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
@@ -47,9 +49,19 @@
 			modal.find('select[name=recipient-contrato] option[value='+recipientregimeContrato+']').prop('selected',true)
 			modal.find('#recipient-id').val(recipientid)
 			modal.find('#recipient-coordenador').prop('checked',recipientcoordenador)
+
+			var isCoordenador = $('#recipient-coordenador').prop('checked');
+			if (isCoordenador) {
+				$('#coordena2').show();
+				modal.find('select[name=coordena] option[value='+recipientIdCurso+']').prop('selected',true)
+			} else {
+				$('#coordena2').hide();
+			}
+
+
 			});
-			
-			
+
+
 				$('#exampleModal2').on('show.bs.modal', function (event){
 			  $("#professorDisciplinas").multiSelect('deselect_all')
 			  var  button          =     $(event.relatedTarget) // Button that triggered the mod al
@@ -147,7 +159,7 @@
 				$("input[name=nascimento]").mask('00/00/0000', {placeholder: "__/__/____"});
 			});
 		</script>
-		
+
 		<script>
 			$(document).ready(function() {
 				$('#coordena1').hide();
@@ -155,12 +167,12 @@
 					$('#coordena1').toggle();
 				});
 				$('#recipient-coordenador').click(function (){
-					$('#coordena2').toggle();
+					$('#coordena2').toggle('slow');
 				});
-					
+
 			});
-		
+
 		</script>
-		
+
 	</body>
 </html>
