@@ -22,6 +22,22 @@
     }
 
     /**
+     * Altera a senha do usuário
+     * @author Caio de Freitas
+     * @since 2017/05/22
+     * @param INT $id
+     * @param STRING $senhaAtual - Senha atual do usuário
+     * @param STRING $novaSenha - Nova senha
+     * @return Retorna um boolean TRUE caso a senha seja alterada
+     */
+    public function alterarSenha ($id, $senhaAtual, $novaSenha) {
+      $this->db->where('id',$id);
+      $this->db->where('senha',$senhaAtual);
+
+      return $this->db->update('Usuario',array('senha'=>$novaSenha));
+    }
+
+    /**
      *  Verifica se o usuário é professor.
      *  @author Caio de Freitas
      *  @since 2017/04/12

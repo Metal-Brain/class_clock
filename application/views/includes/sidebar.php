@@ -19,9 +19,9 @@
 			<hr>
 			<?php if ($this->session->nivel == 2) : ?>
 				<li>
-					<?= anchor(current_url().'#','<span class="glyphicon glyphicon-cog"></span> Configurações') ?>
-					<ul aria-expanded="false" class="nav nav-pills nav-stacked">
-						<li><?= anchor('Professor/alterarSenha',' Alterar Senha') ?></li>
+					<?= anchor(current_url().'#','<span class="glyphicon glyphicon-cog"></span> Configurações',array('aria-expanded'=>'true')) ?>
+					<ul aria-expanded="true" class="nav nav-pills nav-stacked collapse in">
+						<li><?= anchor('Usuario/alterarSenha',' Alterar Senha') ?></li>
 					</ul>
 				</li>
 			<?php endif; ?>
