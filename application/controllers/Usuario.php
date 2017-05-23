@@ -40,8 +40,8 @@ class Usuario extends CI_Controller {
   private function alterarSenha () {
     // Regras de validação
     $this->form_validation->set_rules('senhaAtual','senha atual',array('trim','required'));
-    $this->form_validation->set_rules('novaSenha','senha',array('trim','required'));
-    $this->form_validation->set_rules('confirmaSenha','senha',array('trim','required'));
+    $this->form_validation->set_rules('novaSenha','Nova senha',array('trim','required'));
+    $this->form_validation->set_rules('confirmaSenha','Confirmar senha',array('trim','required','matches[novaSenha]'));
     // Delimitadores
     $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
 
@@ -52,7 +52,7 @@ class Usuario extends CI_Controller {
       if ($this->Usuario_model->alterarSenha($this->session->id,$senhaAtual,$novaSenha))
         $this->session->set_flashdata('success','Senha alterada com sucesso');
       else
-        $this->session->set_flashdata('danger','Não foi possivel alterar a senha');
+        $this->session->set_flashdata('danger','Não foi possível alterar a senha');
 
       redirect('Usuario/editar');
     }
@@ -80,7 +80,7 @@ class Usuario extends CI_Controller {
         $this->session->set_flashdata('success','Email alterado com sucesso');
         $this->session->email = $novoEmail;
       } else {
-        $this->session->set_flashdata('danger','Não foi possivel alterar o email');
+        $this->session->set_flashdata('danger','Não foi possível alterar o email');
       }
 
       redirect('Usuario/editar');

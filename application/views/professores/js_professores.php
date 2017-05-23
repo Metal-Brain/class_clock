@@ -169,7 +169,6 @@
 				$('#recipient-coordenador').click(function (){
 					$('#coordena2').toggle('slow');
 				});
-
 			});
 
 		</script>

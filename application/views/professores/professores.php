@@ -366,21 +366,9 @@
 					</div>
 
 					<div class="row">
-						<div class="col-md-7 margin-top-error">
-							<?= form_error('recipient-nome') ?>
-						</div>
-					</div>
-
-					<div class="row">
 						<div class="form-group col-md-4">
 							<label>Matrícula</label>
 							<input type="text" class="form-control" name="recipient-matricula"  id="recipient-matricula" maxlength="8" placeholder="ex: cg0000000" value="<?= set_value('recipient-matricula')?>" required readonly/>
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="col-md-6 margin-top-error">
-							<?= form_error('recipient-matricula') ?>
 						</div>
 					</div>
 
@@ -390,36 +378,17 @@
 							<input type="email" class="form-control" name="recipient-email" placeholder="Email" id="recipient-email" value="<?= set_value('email')?>" required readonly/>
 						</div>
 					</div>
-
-					<div class="row">
-						<div class="col-md-6 margin-top-error">
-							<?= form_error('recipient-email') ?>
-						</div>
-					</div>
-
 					<div class="row">
 						<div class="form-group col-md-7">
 							<label>Disciplinas que pode lecionar: </label>
 							<?= form_dropdown('professorDisciplinas[]',$disciplinas,set_value('professorDisciplinas[]'),array('id'=>'professorDisciplinas','multiple'=>'multiple')) ?>
 						</div>
 					</div>
-
-					<div class="row">
-						<div class="col-md-6 margin-top-error">
-							<?= form_error('professorDisciplinas[]') ?>
-						</div>
-					</div>
-
+					
 					<div class="row">
 						<div class="form-group col-md-4">
 							<label>Data de Nascimento</label>
 							<input type="text" class="form-control" name="recipient-nascimento" id="recipient-nascimento" value="<?= set_value('nascimento')?>" required readonly/>
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="col-md-6 margin-top-error">
-							<?= form_error('recipient-nascimento') ?>
 						</div>
 					</div>
 
@@ -431,24 +400,11 @@
 					</div>
 
 					<div class="row">
-						<div class="col-md-6 margin-top-error">
-							<?= form_error('recipient-nivelAcademico') ?>
-						</div>
-					</div>
-
-					<div class="row">
 						<div class="form-group col-md-4">
 							<label>Regime de contrato</label>
 							<?= form_dropdown('recipient-contrato',$contrato,set_value('recipient-contrato'),array('class'=>'form-control', 'disabled' =>'disabled')) ?>
 						</div>
 					</div>
-
-					<div class="row">
-						<div class="col-md-6 margin-top-error">
-							<?= form_error('recipient-contrato') ?>
-						</div>
-					</div>
-
 
 					<div class="row">
 						<div class="form-group">
@@ -460,16 +416,10 @@
 					<div id="coordena2" class="row">
 						<div class="form-group col-md-9">
 							<label>Coordenador do curso</label>
-							<?= form_dropdown('coordena','',set_value('coordena'),array('class'=>'form-control', 'disabled' =>'disabled')) ?>
+							<?= form_dropdown('coordena',$cursos,set_value('coordena'),array('class'=>'form-control', 'disabled' =>'disabled')) ?>
 						</div>
 					</div>
-
-				<div class="row">
-					<div class="col-md-6 margin-top-error">
-						<?= form_error('coordena') ?>
-					</div>
-				</div>
-
+					
 					<div class="modal-footer">
 						<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
 					</div>
