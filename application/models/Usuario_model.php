@@ -38,6 +38,22 @@
     }
 
     /**
+     * Altera o email do usuário
+     * @author Caio de Freitas
+     * @since 2017/05/23
+     * @param INT $id - ID do usuário
+     * @param STRING $emailAtual - Email atual do usuário
+     * @param STRING $novoEmail - Novo email do usuário
+     * @return Retorna um boolean TRUE caso o email seja alterado
+     */
+    public function alterarEmail ($id,$emailAtual,$novoEmail) {
+      $this->db->where('id',$id);
+      $this->db->where('email',$emailAtual);
+
+      return $this->db->update('Usuario',array('email'=>$novoEmail));
+    }
+
+    /**
      *  Verifica se o usuário é professor.
      *  @author Caio de Freitas
      *  @since 2017/04/12

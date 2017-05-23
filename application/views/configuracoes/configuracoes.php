@@ -19,7 +19,7 @@
 			<div class="row">
 				<!-- Primeira coluna -->
 				<div class="col-md-6">
-					<?= form_open('Usuario/alterarEmail',array('class'=>'form-horizontal')) ?>
+					<?= form_open('Usuario/editar/email',array('class'=>'form-horizontal')) ?>
 					<div class="row">
 						<div class="col-md-12">
 							<h3>Alterar e-mail</h3>
@@ -29,21 +29,23 @@
 					<div class="row">
 						<div class="col-md-9 form-group">
 							<label>E-mail cadastrado</label>
-							<?= form_input('',$this->session->email,array('class'=>'form-control','readonly'=>'readonly')) ?>
+							<?= form_input('emailAtual',$this->session->email,array('class'=>'form-control','readonly'=>'readonly')) ?>
 						</div>
 					</div>
 
 					<div class="row">
 						<div class="col-md-9 form-group">
 							<label>Novo e-mail</label>
-							<?= form_input('', set_value(''), array('class' => 'form-control')) ?>
+							<?= form_input('novoEmail', set_value('novoEmail'), array('class'=>'form-control')) ?>
+							<?= form_error('novoEmail') ?>
 						</div>
 					</div>
 
 					<div class="row">
 						<div class="col-md-9 form-group">
 							<label>Confirme o novo e-mail</label>
-							<?= form_input('', set_value(''), array('class' => 'form-control')) ?>
+							<?= form_input('confirmaEmail', set_value('confirmaEmail'), array('class'=>'form-control')) ?>
+							<?= form_error('confirmaEmail') ?>
 						</div>
 					</div>
 

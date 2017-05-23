@@ -12,7 +12,7 @@
       $this->load->model('Usuario_model');
 
       $this->form_validation->set_rules('matricula','matrícula',array('required','exact_length[8]'));
-      $this->form_validation->set_rules('password','Senha',array('required'));
+      $this->form_validation->set_rules('password','Senha',array('required','trim'));
 
       if ($this->form_validation->run() == false) {
 
