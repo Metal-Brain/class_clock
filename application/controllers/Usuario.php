@@ -13,7 +13,7 @@ class Usuario extends CI_Controller {
    */
   public function alterarSenha () {
 
-    $this->load->model(array('Usuario_model'));
+    $this->load->model(array('Usuario_model','Professor_model'));
 
     // Regras de validação
     $this->form_validation->set_rules('senhaAtual','senha atual',array('trim','required','min_length[6]'));
@@ -23,10 +23,12 @@ class Usuario extends CI_Controller {
     $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
 
     if ($this->form_validation->run() == false) {
+
       $this->load->view('includes/header');
       $this->load->view('includes/sidebar');
-      $this->load->view('professores/alterarSenha');
+      $this->load->view('configuracoes/configuracoes');
       $this->load->view('includes/footer');
+      $this->load->view('configuracoes/js_configuracoes');
     } else {
 
       $id = $this->session->id;

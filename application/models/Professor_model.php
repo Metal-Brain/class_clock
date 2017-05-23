@@ -31,7 +31,11 @@
       * @return Retorna um array que representa a tupla.
       */
     public function getById ($idProfessor) {
-      $this->db->where('id', $idProfessor);
+      $this->db->select('Usuario.*, Professor.*, Contrato.nome AS contrato, Nivel.nome AS nivel');
+      $this->db->join('Usuario','Usuario.id = Professor.id');
+      $this->db->join('Contrato','Contrato.id = Professor.idContrato');
+      $this->db->join('Nivel','Nivel.id = Professor.idNivel');
+      $this->db->where('Usuario.id', $idProfessor);
       $result = $this->db->get('Professor');
 
       return $result->result_array();
