@@ -22,95 +22,91 @@
 			</div>
 		</div>
 
-		<div class="row">
-			<!-- Primeira coluna -->
-			<div class="col-md-6">
-				<?= form_open('Usuario/editar/email',array('class'=>'form-horizontal')) ?>
-				<div class="row">
-					<div class="col-md-12">
-						<h3>Alterar e-mail</h3>
-					</div>
+		<!-- Primeira coluna -->
+		<div class="col-md-6">
+			<?= form_open('Usuario/editar/email',array('class'=>'form-horizontal')) ?>
+			<div class="row">
+				<div class="col-md-12 form-group">
+					<h3>Alterar e-mail</h3>
 				</div>
-
-				<div class="row">
-					<div class="col-md-9 form-group">
-						<label>E-mail cadastrado</label>
-						<?= form_input('emailAtual',$this->session->email,array('class'=>'form-control','readonly'=>'readonly')) ?>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-md-9 form-group">
-						<label>Novo e-mail</label>
-						<?= form_input('novoEmail', set_value('novoEmail'), array('class'=>'form-control')) ?>
-						<?= form_error('novoEmail') ?>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-md-9 form-group">
-						<label>Confirme o novo e-mail</label>
-						<?= form_input('confirmaEmail', set_value('confirmaEmail'), array('class'=>'form-control')) ?>
-						<?= form_error('confirmaEmail') ?>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class='col-md-12'>
-						<button type='submit' class='btn bt-lg btn-primary'>Alterar</button>
-					</div>
-				</div>
-
-				<?= form_close() ?>
 			</div>
 
-			<!-- Segunda coluna -->
-			<div class="col-md-6">
-				<?= form_open('Usuario/editar/senha',array('class'=>'form-horizontal')) ?>
-				<div class="row">
-					<div class="col-md-12">
-						<h3>Alterar senha de acesso</h3>
-					</div>
+			<div class="row">
+				<div class="col-md-9 form-group">
+					<label>E-mail cadastrado</label>
+					<?= form_input('emailAtual',$this->session->email,array('class'=>'form-control','readonly'=>'readonly')) ?>
 				</div>
-
-				<div class="row">
-					<div class="col-md-9 form-group">
-						<?= form_label('Senha atual:','senhaAtual') ?>
-						<?= form_password('senhaAtual','',array('class'=>'form-control')) ?>
-						<?= form_error('senhaAtual') ?>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-md-9 form-group">
-						<?= form_label('Nova senha:','novaSenha') ?>
-						<?= form_password('novaSenha','',array('class'=>'form-control')) ?>
-						<?= form_error('novaSenha') ?>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-md-9 form-group">
-						<?= form_label('Confirme a nova senha:','confirmaSenha') ?>
-						<?= form_password('confirmaSenha','',array('class'=>'form-control')) ?>
-						<?= form_error('confirmaSenha') ?>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class='col-md-12'>
-						<button type='submit' class='btn bt-lg btn-primary'>Alterar</button>
-					</div>
-				</div>
-
-				<?= form_close() ?>
 			</div>
 
+			<div class="row">
+				<div class="col-md-9 form-group">
+					<label>Novo e-mail</label>
+					<?= form_input('novoEmail', set_value('novoEmail'), array('class'=>'form-control')) ?>
+					<?= form_error('novoEmail') ?>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-9 form-group">
+					<label>Confirme o novo e-mail</label>
+					<?= form_input('confirmaEmail', set_value('confirmaEmail'), array('class'=>'form-control')) ?>
+					<?= form_error('confirmaEmail') ?>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class='col-md-12'>
+					<button type='submit' class='btn bt-lg btn-primary form-group'>Alterar</button>
+				</div>
+			</div>
+
+			<?= form_close() ?>
 		</div>
-		<hr>
 
+		<!-- Segunda coluna -->
+		<div class="col-md-6">
+			<?= form_open('Usuario/editar/senha',array('class'=>'form-horizontal')) ?>
+			<div class="row">
+				<div class="col-md-12 form-group">
+					<h3>Alterar senha de acesso</h3>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-9 form-group">
+					<?= form_label('Senha atual:','senhaAtual') ?>
+					<?= form_password('senhaAtual','',array('class'=>'form-control')) ?>
+					<?= form_error('senhaAtual') ?>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-9 form-group">
+					<?= form_label('Nova senha:','novaSenha') ?>
+					<?= form_password('novaSenha','',array('class'=>'form-control')) ?>
+					<?= form_error('novaSenha') ?>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-9 form-group">
+					<?= form_label('Confirme a nova senha:','confirmaSenha') ?>
+					<?= form_password('confirmaSenha','',array('class'=>'form-control')) ?>
+					<?= form_error('confirmaSenha') ?>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class='col-md-12'>
+					<button type='submit' class='btn bt-lg btn-primary form-group'>Alterar</button>
+				</div>
+			</div>
+
+			<?= form_close() ?>
+		</div>
+		
 		<!-- Formulário para disciplinas -->
-		<div class="row">
+		<div class="row margin-top">
 			<div class="col-md-12">
 				<div class="row">
 					<div class="col-md-12 form-group">
