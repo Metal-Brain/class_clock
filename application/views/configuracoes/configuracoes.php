@@ -58,7 +58,7 @@
 
 				<!-- Segunda coluna -->
 				<div class="col-md-6">
-					<?= form_open('Usuario/alterarSenha',array('class'=>'form-horizontal')) ?>
+					<?= form_open('Usuario/editar/senha',array('class'=>'form-horizontal')) ?>
 					<div class="row">
 						<div class="col-md-12">
 							<h3>Alterar senha de acesso</h3>

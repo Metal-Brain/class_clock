@@ -18,12 +18,7 @@
 			<li><?= anchor('Grade','Grade') ?></li>
 			<hr>
 			<?php if ($this->session->nivel == 2) : ?>
-				<li>
-					<?= anchor(current_url().'#','<span class="glyphicon glyphicon-cog"></span> Configurações',array('aria-expanded'=>'true')) ?>
-					<ul aria-expanded="true" class="nav nav-pills nav-stacked collapse in">
-						<li><?= anchor('Usuario/alterarSenha',' Alterar Senha') ?></li>
-					</ul>
-				</li>
+				<li><?= anchor('Usuario/editar','<span class="glyphicon glyphicon-cog"></span> Configurações',array('aria-expanded'=>'true')) ?></li>
 			<?php endif; ?>
 			<li><?= anchor('Login/logout', '<span class="glyphicon glyphicon-log-out"></span> Sair do Sistema') ?></li>
 		</ul>
