@@ -7,6 +7,8 @@
 				selectableHeader: "<div class='multiselect'>Selecione as disciplinas</div>",
 				selectionHeader: "<div class='multiselect'>Disciplinas selecionadas</div>"
 			});
+
+			$('#professorDisciplinasView').multiSelect();
 		</script>
 
 
@@ -76,6 +78,7 @@
 			  var recipientregimeContrato = button.data('whatevercontrato')
 			  var recipientcoordenador = button.data('whatevercoordenador')
 			  var recipientid = button.data('whateverid')
+				var recipientIdCurso = button.data('whatevercurso')
 			  var url = '<?= base_url('index.php/Professor/disciplinas/') ?>'+recipientid;
 			  $.getJSON(url,function (response) {
 				var disciplinas = [];
@@ -98,7 +101,28 @@
 			modal.find('select[name=recipient-nivelAcademico] option[value='+recipientnivelAcademico+']').prop('selected',true)
 			modal.find('select[name=recipient-contrato] option[value='+recipientregimeContrato+']').prop('selected',true)
 			modal.find('#recipient-id').val(recipientid)
-			modal.find('#recipient-coordenador').prop('checked',recipientcoordenador)
+			modal.find('#recipient-coordenador-view').prop('checked',recipientcoordenador)
+
+			var url = '<?= base_url('index.php/Professor/disciplinas/') ?>'+recipientid;
+
+			$.getJSON(url,function (response) {
+				var disciplinas = [];
+				$.each(response, function (index, value) {
+					disciplinas.push(value.id);
+				});
+
+				$("#professorDisciplinasView").multiSelect('select',disciplinas);
+				$("#professorDisciplinasView").prop('disabled','disabled');
+			});
+
+			var isCoordenador = $('#recipient-coordenador-view').prop('checked');
+			if (isCoordenador) {
+				$('#coordena-view').show();
+				modal.find('select[name=coordena] option[value='+recipientIdCurso+']').prop('selected',true)
+			} else {
+				$('#coordena-view').hide();
+			}
+
 			});
 		</script>
 

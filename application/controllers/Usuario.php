@@ -91,6 +91,7 @@ class Usuario extends CI_Controller {
    * @param Senha informado pelo usuário.
    */
   public function checkUserPassword ($password) {
+    $password = hash('SHA256',$password);
     if ($this->Usuario_model->checkPassword($this->session->id,$password)) {
       return TRUE;
     } else {

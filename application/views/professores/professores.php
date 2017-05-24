@@ -381,10 +381,10 @@
 					<div class="row">
 						<div class="form-group col-md-7">
 							<label>Disciplinas que pode lecionar: </label>
-							<?= form_dropdown('professorDisciplinas[]',$disciplinas,set_value('professorDisciplinas[]'),array('id'=>'professorDisciplinas','multiple'=>'multiple')) ?>
+							<?= form_dropdown('professorDisciplinas[]',$disciplinas,set_value('professorDisciplinas[]'),array('id'=>'professorDisciplinasView','multiple'=>'multiple')) ?>
 						</div>
 					</div>
-					
+
 					<div class="row">
 						<div class="form-group col-md-4">
 							<label>Data de Nascimento</label>
@@ -408,18 +408,18 @@
 
 					<div class="row">
 						<div class="form-group">
-							<input type="checkbox" name="recipient-coordenador" value="true" class="form-group" style="margin-left:20px;" id="recipient-coordenador" disabled/>
+							<input type="checkbox" name="recipient-coordenador" value="true" class="form-group disabled" style="margin-left:20px;" id="recipient-coordenador-view" disabled/>
 							<label for="recipient-coordenador">Coordenador</label>
 						</div>
 					</div>
 
-					<div id="coordena2" class="row">
+					<div id="coordena-view" class="row">
 						<div class="form-group col-md-9">
 							<label>Coordenador do curso</label>
-							<?= form_dropdown('coordena',$cursos,set_value('coordena'),array('class'=>'form-control', 'disabled' =>'disabled')) ?>
+							<?= form_dropdown('coordena',$cursos,set_value('coordena'),array('class'=>'form-control','disabled'=>'disabled')) ?>
 						</div>
 					</div>
-					
+
 					<div class="modal-footer">
 						<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
 					</div>
