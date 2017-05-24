@@ -38,6 +38,22 @@
     }
 
     /**
+     * Verifica a senha do usuário
+     * @author Caio de Freitas
+     * @since 2017/05/24
+     * @param INT $id - ID do usuário
+     * @param STRING $password - Senha do usuário
+     * @return Retorna um boolean true caso a senha esteja correta
+     */
+    public function checkPassword ($id, $password) {
+      $this->db->where('id',$id);
+      $this->db->where('senha',$password);
+      $result = $this->db->get('Usuario')->num_rows();
+
+      return ($result == 1) ? TRUE : FALSE;
+    }
+
+    /**
      * Altera o email do usuário
      * @author Caio de Freitas
      * @since 2017/05/23

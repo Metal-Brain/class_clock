@@ -39,7 +39,7 @@ class Usuario extends CI_Controller {
    */
   private function alterarSenha () {
     // Regras de validação
-    $this->form_validation->set_rules('senhaAtual','senha atual',array('trim','required'));
+    $this->form_validation->set_rules('senhaAtual','senha atual',array('trim','required','callback_checkUserPassword'));
     $this->form_validation->set_rules('novaSenha','Nova senha',array('trim','required'));
     $this->form_validation->set_rules('confirmaSenha','Confirmar senha',array('trim','required','matches[novaSenha]'));
     // Delimitadores
@@ -55,6 +55,22 @@ class Usuario extends CI_Controller {
         $this->session->set_flashdata('danger','Não foi possível alterar a senha');
 
       redirect('Usuario/editar');
+    }
+  }
+
+  /**
+   * Função para validar a senha informada pelo usuário no formulário de alteração
+   * de senha.
+   * @author Caio de Freitas
+   * @since 2017/05/24
+   * @param Senha informado pelo usuário.
+   */
+  public function checkUserPassword ($password) {
+    if ($this->Usuario_model->checkPassword($this->session->id,$password)) {
+      return TRUE;
+    } else {
+      $this->form_validation->set_message('checkUserPassword','A {field} está incorreta');
+      return FALSE;
     }
   }
 
