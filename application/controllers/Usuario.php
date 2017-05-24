@@ -13,7 +13,7 @@ class Usuario extends CI_Controller {
    */
   public function editar ($action=NULL) {
 
-    $this->load->model(array('Usuario_model'));
+    $this->load->model(array('Competencia_model','Disciplina_model','Usuario_model'));
 
     switch ($action) {
       case 'senha':
@@ -22,14 +22,39 @@ class Usuario extends CI_Controller {
       case 'email':
         $this->alterarEmail();
         break;
+      case 'disciplinas':
+        $this->alterarDisciplinas();
+        break;
     }
 
-    $this->load->view('includes/header');
+    $dados['disciplinas'] = convert($this->Disciplina_model->getAll());
+
+    $this->load->view('includes/header',$dados);
     $this->load->view('includes/sidebar');
     $this->load->view('configuracoes/configuracoes');
     $this->load->view('includes/footer');
     $this->load->view('configuracoes/js_configuracoes');
 
+  }
+
+  public function alterarDisciplinas () {
+    // Regras de validação
+    $this->form_validation->set_rules('disciplinas[]','disciplinas',array('required'));
+    // Delimitadores
+    $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
+
+    if ($this->form_validation->run()) {
+      $disciplinas = $this->input->post('disciplinas[]');
+
+      $id = $this->session->id;
+      $this->Competencia_model->delete($id);
+      foreach ($disciplinas as $idDisciplina)
+        $this->Competencia_model->insert($id,$idDisciplina);
+
+      $this->session->set_flashdata('success','Disciplinas alterado com sucesso');
+
+      redirect("Usuario/editar");
+    }
   }
 
   /**

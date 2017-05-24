@@ -104,10 +104,11 @@
 
 			<?= form_close() ?>
 		</div>
-		
+
 		<!-- Formulário para disciplinas -->
 		<div class="row margin-top">
 			<div class="col-md-12">
+				<?= form_open('Usuario/editar/disciplinas',array('class'=>'form-horizontal')) ?>
 				<div class="row">
 					<div class="col-md-12 form-group">
 						<h3>Alterar disciplinas que pode lecionar</h3>
@@ -116,7 +117,8 @@
 
 				<div class="row">
 					<div class="col-md-12 form-group">
-						<?= form_dropdown('disciplinas[]','',set_value('disciplinas[]'),array('id'=>'disciplinas','multiple'=>'multiple')) ?>
+						<?= form_dropdown('disciplinas[]',$disciplinas,set_value('disciplinas[]'),array('id'=>'disciplinas','multiple'=>'multiple')) ?>
+						<?= form_error('disciplinas[]') ?>
 					</div>
 				</div>
 
@@ -125,6 +127,8 @@
 						<button type='submit' class='btn bt-lg btn-primary'>Alterar</button>
 					</div>
 				</div>
+
+				<?= form_close() ?>
 			</div>
 		</div>
 	</div><!--Fecha content-->
