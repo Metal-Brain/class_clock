@@ -15,7 +15,7 @@
         modal.find('#recipient-qtd-prof').val(recipientQtdProf)
         modal.find('#recipient-id').val(recipientId)
     });
-	
+
 	    $('#exampleModal2').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget) // Button that triggered the modal
         var recipient = button.data('whatever') // Extract info from data-* attributes
@@ -87,7 +87,7 @@
     }
 </script>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 	$(document).ready(function(){
 		$('#cadastrarDisciplina').validate({
 			rules: {
@@ -102,6 +102,6 @@
 			}
 		});
 	});
-</script>
+</script> -->
 </body>
 </html>
