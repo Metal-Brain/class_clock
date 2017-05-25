@@ -31,4 +31,4 @@
  			</div>
  		<?= form_close() ?>
  	</div><!--Fecha content-->
- </div><!--Fecha container-fluid--> 
+ </div><!--Fecha container-fluid-->

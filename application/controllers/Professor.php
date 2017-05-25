@@ -479,10 +479,10 @@ class Professor extends CI_Controller {
 				// Regra de validação do formulário
 				$this->form_validation->set_rules('professores[]','professores',array('required'));
 				// delimitadores
-				$this->form_validation->set_error_delimiters('<p class="text-danger">','</p>');
+				$this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
 
 				if($this->form_validation->run() == FALSE){
-					$dados['professores'] = $this->Professor_model->getAll();//convert($this->professor($this->session->id, FALSE));
+					$dados['professores'] = convert($this->Professor_model->getAll());
 					$this->load->view('includes/header', $dados);
 					$this->load->view('includes/sidebar');
 					$this->load->view('coordenadorde/coordenadordes');
@@ -490,11 +490,11 @@ class Professor extends CI_Controller {
 					$this->load->view('coordenadorde/js_coordenadordes');
 				} else {
 
-					$disciplinas = $this->input->post('professores[]');
+					$professores = $this->input->post('professores[]');
 					$this->CoordenadorDe_model->clearProfessor($this->session->id);
 
-					foreach ($disciplinas as $disciplina)
-						$this->CoordenadorDe_model->insertCoordenadorDe($this->session->id, $professor, TRUE);
+					foreach ($professores as $professor)
+						$this->CoordenadorDe_model->insertCoordenadorDe($professor, $this->session->id);
 
 					$this->session->set_flashdata('success','Professor selecionado com sucesso');
 					redirect('Professor/coordenadorde');
@@ -505,15 +505,16 @@ class Professor extends CI_Controller {
 			}
 		}
 
-		// public function professor($id, $json=TRUE) {
-    //     $this->load->model(array('CoordenadorDe_model','Professor_model'));
-    //     $professores = $this->CoordenadorDe_model->getAllProfessor($id);
-    //     if ($json)
-		// 			echo json_encode($professores);
-		// 		else
-		// 			return $professores;
-    // }
-
+		public function getCoordenadorDe ($idCoordenador,$json=TRUE) {
+			if (verificaSessao()) {
+				$this->load->model('CoordenadorDe_model');
+				$professores = $this->CoordenadorDe_model->getAllProfessor($idCoordenador);
+				if ($json)
+					echo json_encode($professores);
+				else
+					return $professores;
+			}
+		}
 
  }
 

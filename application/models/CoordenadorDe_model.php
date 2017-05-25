@@ -53,17 +53,15 @@
       return $result->result_array();
     }
 
-    public function insertCoordenadorDe($idCoordenador, $idCoordenador){
-      $this->db->where('idCoordenador', $idCoordenador);
-			$this->db->where('idProfessor', $idProfessor);
-
-			$result = $this->db->update('Coordenador');
+    public function insertCoordenadorDe($idProfessor, $idCoordenador){
+      $result = $this->db->insert('CoordenadorDe',array('idProfessor'=>$idProfessor,'idCoordenador'=>$idCoordenador));
 
 			return $result;
 		}
 
-    public function clearProfessor($idProfessor) {
-      $this->db->delete('CoordenadorDe');
+    public function clearProfessor($id) {
+      $this->db->where('idCoordenador',$id);
+      return $this->db->delete('CoordenadorDe');
     }
 
     /**
