@@ -5,7 +5,7 @@
     * @author Jean Brock
     * @since 2017/04/04
     */
-  class CoodernadorDe_model extends CI_Model {
+  class CoordenadorDe_model extends CI_Model {
 
     /**
       * Insere no banco de dados os dado do relacionamento entre professor e

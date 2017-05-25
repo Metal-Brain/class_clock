@@ -13,6 +13,7 @@
 				<li><?= anchor('Professor/preferencia','Preferências') ?></li>
 				<?php if ($this->session->isCoordenador) : ?>
 					<li><?= anchor('Professor/cadastrar','Visualizar Professores') ?></li>
+							<li><?= anchor('Professor/coordenadorde','CoordenadorDe') ?></li>
 				<?php endif; ?>
 			<?php endif; ?>
 			<li><?= anchor('Grade','Grade') ?></li>

@@ -3,9 +3,9 @@
 			$.getJSON(url,function (response) {
 				var professores = [];
 				$.each(response, function (index, value) {
-					professores.push(value.idProfessor);
+					professores.push(value.idCoordenador);
 				});
-				
+
 				$("#professores").multiSelect('select',professores);
 			});
 

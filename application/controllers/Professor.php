@@ -319,7 +319,7 @@ class Professor extends CI_Controller {
 		public function coordenadorde(){
 			if (verificaSessao() && verificaNivelPagina(array(2))){
 
-				$this->load->model(array('Professor_model', 'CoordenadoDe_model'));
+				$this->load->model(array('Professor_model','CoordenadorDe_model'));
 				$this->load->helper('dropdown');
 
 				// Regra de validação do formulário
@@ -328,19 +328,19 @@ class Professor extends CI_Controller {
 				$this->form_validation->set_error_delimiters('<p class="text-danger">','</p>');
 
 				if($this->form_validation->run() == FALSE){
-					$dados['professores'] = convert($this->professores($this->session->id, FALSE));
+					$dados['professores'] = $this->Professor_model->getAll();//convert($this->professor($this->session->id, FALSE));
 					$this->load->view('includes/header', $dados);
 					$this->load->view('includes/sidebar');
-					$this->load->view('coordenadorde/coordenadorde');
+					$this->load->view('coordenadorde/coordenadordes');
 					$this->load->view('includes/footer');
-					$this->load->view('coordenadorde/js_coordenadorde');
+					$this->load->view('coordenadorde/js_coordenadordes');
 				} else {
 
 					$disciplinas = $this->input->post('professores[]');
-					$this->CoordenadoDe_model->clearProfessor($this->session->id);
+					$this->CoordenadorDe_model->clearProfessor($this->session->id);
 
 					foreach ($disciplinas as $disciplina)
-						$this->CoordenadoDe_model->insertCoordenadorDe($this->session->id, $professor, TRUE);
+						$this->CoordenadorDe_model->insertCoordenadorDe($this->session->id, $professor, TRUE);
 
 					$this->session->set_flashdata('success','Professor selecionado com sucesso');
 					redirect('Professor/coordenadorde');
@@ -350,6 +350,15 @@ class Professor extends CI_Controller {
 					redirect('/');
 			}
 		}
+
+		// public function professor($id, $json=TRUE) {
+    //     $this->load->model(array('CoordenadorDe_model','Professor_model'));
+    //     $professores = $this->CoordenadorDe_model->getAllProfessor($id);
+    //     if ($json)
+		// 			echo json_encode($professores);
+		// 		else
+		// 			return $professores;
+    // }
 
 
 
