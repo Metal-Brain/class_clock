@@ -62,6 +62,10 @@
 	margin-top: 10%;
 }
 
+ ul#disciplinaTable-view{
+	margin: 0 0 0 -20px;
+}
+
 /* Redefine o tamanho do logo */
 .logo{
 	height: 100px;

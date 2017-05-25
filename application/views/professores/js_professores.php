@@ -26,7 +26,7 @@
 			  var recipientnivelAcademico = button.data('whatevernivel')
 			  var recipientregimeContrato = button.data('whatevercontrato')
 			  var recipientcoordenador = button.data('whatevercoordenador')
-				var recipientIdCurso = button.data('whatevercurso')
+			  var recipientIdCurso = button.data('whatevercurso')
 			  var recipientid = button.data('whateverid')
 			  var url = '<?= base_url('index.php/Professor/disciplinas/') ?>'+recipientid;
 			  $.getJSON(url,function (response) {
@@ -64,7 +64,7 @@
 			});
 
 
-				$('#exampleModal2').on('show.bs.modal', function (event){
+			  $('#exampleModal2').on('show.bs.modal', function (event){
 			  $("#professorDisciplinas").multiSelect('deselect_all')
 			  var  button          =     $(event.relatedTarget) // Button that triggered the mod al
 			  var  recipient       =    button.data('whatever') // Extract info from data-* attributes
@@ -78,7 +78,7 @@
 			  var recipientregimeContrato = button.data('whatevercontrato')
 			  var recipientcoordenador = button.data('whatevercoordenador')
 			  var recipientid = button.data('whateverid')
-				var recipientIdCurso = button.data('whatevercurso')
+			  var recipientIdCurso = button.data('whatevercurso')
 			  var url = '<?= base_url('index.php/Professor/disciplinas/') ?>'+recipientid;
 			  $.getJSON(url,function (response) {
 				var disciplinas = [];
@@ -91,7 +91,7 @@
 			// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
 			// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
 			var modal = $(this)
-			modal.find('.modal-title').text('Alterar Professores')
+			modal.find('.modal-title').text('Visuzalizar Professor')
 			// Foi criado todos os modal caso seja necessario adicionar ou mudar os que já existem
 			modal.find('#recipient-nome').val(recipientnome)
 			modal.find('#recipient-matricula').val(recipientmatricula)
@@ -103,16 +103,15 @@
 			modal.find('#recipient-id').val(recipientid)
 			modal.find('#recipient-coordenador-view').prop('checked',recipientcoordenador)
 
+			console.log(recipientid);
 			var url = '<?= base_url('index.php/Professor/disciplinas/') ?>'+recipientid;
 
 			$.getJSON(url,function (response) {
 				var disciplinas = [];
 				$.each(response, function (index, value) {
-					disciplinas.push(value.id);
+					var row = '<li>'+value.nome+'</li>';
+					$('#disciplinaTable-view').prepend(row);
 				});
-
-				$("#professorDisciplinasView").multiSelect('select',disciplinas);
-				$("#professorDisciplinasView").prop('disabled','disabled');
 			});
 
 			var isCoordenador = $('#recipient-coordenador-view').prop('checked');

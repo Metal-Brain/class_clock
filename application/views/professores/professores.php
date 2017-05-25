@@ -67,7 +67,7 @@
 										<button onClick="exclude(<?= $professor['id']?>);" type="button" class="btn btn-danger" title="Excluir"><span class="glyphicon glyphicon-remove"></span></button>
 										<?php endif;?>
 										<?php if ($this->session->nivel == 2) :?>
-										<button type="button" class="btn btn-primary" title="Editar" data-toggle="modal" data-target="#exampleModal2" data-whatevernome="<?= $professor['nome']?>" data-whateverid="<?= $professor['id']?>" data-whatevercoordenador="<?= $professor['coordenador']?>" data-whatevercurso="<?= $professor['idCurso']?>" data-whatevercontrato="<?= $professor['idContrato']?>" data-whatevernivel="<?= $professor['idNivel']?>" data-whatevermatricula= "<?= $professor['matricula']?>" data-whateveremail="<?= $professor['email']?>" data-whatevernascimento= "<?= sqlToBr($professor['nascimento']) ?>"><span class="glyphicon glyphicon-eye-open"></span></button>
+										<button type="button" class="btn btn-primary" title="Visualizar" data-toggle="modal" data-target="#exampleModal2" data-whatevernome="<?= $professor['nome']?>" data-whateverid="<?= $professor['id']?>" data-whatevercoordenador="<?= $professor['coordenador']?>" data-whatevercurso="<?= $professor['idCurso']?>" data-whatevercontrato="<?= $professor['idContrato']?>" data-whatevernivel="<?= $professor['idNivel']?>" data-whatevermatricula= "<?= $professor['matricula']?>" data-whateveremail="<?= $professor['email']?>" data-whatevernascimento= "<?= sqlToBr($professor['nascimento']) ?>"><span class="glyphicon glyphicon-eye-open"></span></button>
 										<?php endif;?>
 
 								<?php else:?>
@@ -381,7 +381,7 @@
 					<div class="row">
 						<div class="form-group col-md-7">
 							<label>Disciplinas que pode lecionar: </label>
-							<?= form_dropdown('professorDisciplinas[]',$disciplinas,set_value('professorDisciplinas[]'),array('id'=>'professorDisciplinasView','multiple'=>'multiple')) ?>
+							<ul id="disciplinaTable-view"></ul>
 						</div>
 					</div>
 
