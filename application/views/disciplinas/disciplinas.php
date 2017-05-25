@@ -87,7 +87,7 @@
         <div id="new" class="tab-pane fade">
             <h3>Cadastrar Disciplina</h3>
 
-            <form action="" method="post">
+            <form action="" method="post" id="cadastrarDisciplina">
 
 				<div class="row">
 					<div class="form-group col-md-6">

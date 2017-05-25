@@ -6,6 +6,7 @@
 </div><!--Fecha container-fluid-->
 
 <script type="text/javascript" src="<?= base_url('assets/js/jquery-3.1.1.min.js') ?>"></script>
+<script type="text/javascript" src="<?= base_url('assets/js/jquery.validate.min.js') ?>"></script>
 <script type="text/javascript" src="<?= base_url('assets/js/bootstrap.min.js') ?>"></script>
 <script type="text/javascript" src="<?= base_url('assets/js/bootbox.min.js') ?>"></script>
 <script type="text/javascript" src="<?= base_url('assets/DataTables/datatables.min.js') ?>"></script>

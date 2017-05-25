@@ -86,5 +86,22 @@
         });
     }
 </script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#cadastrarDisciplina').validate({
+			rules: {
+				nome: { required: true, minlength: 5 },
+				sigla: { required: true, email: true },
+				qtdProf: { required: true, number: true }
+			},
+			messages: {
+				nome: { required: 'Preencha o campo nome', minlength: 'O campo nome deve ter no mínimo 5 letras' },
+				sigla: { required: 'Informe o seu email', email: 'Ops, informe um email válido' },
+				qtdProf: { required: 'Preencha o campo quantidade de professores', number: 'Digite apenas números'}
+			}
+		});
+	});
+</script>
 </body>
 </html>
