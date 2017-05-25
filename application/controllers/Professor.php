@@ -8,7 +8,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *  @author Yasmin Sayad
  */
 class Professor extends CI_Controller {
-
 	public function index () {
 		$this->cadastrar();
 	}
@@ -54,7 +53,11 @@ class Professor extends CI_Controller {
           $dados['nivel']           = convert($this->Nivel_model->getAll(), TRUE);
           $dados['disciplinas']     = convert($this->Disciplina_model->getAll(TRUE));
 		  $dados['cursos']			= convert($this->Curso_model->getAll(), TRUE);
-          $dados['professores']     = $this->Professor_model->getAll();
+			if ($this->session->nivel == 2) {
+				$dados['professores']     = $this->Professor_model->getAllCoordenador($this->session->id);
+			}else{
+				$dados['professores']     = $this->Professor_model->getAll();
+			}
           $this->load->view('includes/header', $dados);
           $this->load->view('includes/sidebar');
           $this->load->view('professores/professores');
@@ -198,7 +201,13 @@ class Professor extends CI_Controller {
           $dados['nivel']           = convert($this->Nivel_model->getAll(), TRUE);
           $dados['disciplinas']     = convert($this->Disciplina_model->getAll(TRUE));
 					$dados['cursos']					= convert($this->Curso_model->getAll(), TRUE);
-          $dados['professores']     = $this->Professor_model->getAll();
+
+
+					if ($this->session->nivel == 2) {
+						$dados['professores']     = $this->Professor_model->getAllCoordenador($this->session->id);
+					}else{
+						$dados['professores']     = $this->Professor_model->getAll();
+					}
           $this->load->view('includes/header', $dados);
           $this->load->view('includes/sidebar');
           $this->load->view('professores/professores');
