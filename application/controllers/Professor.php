@@ -310,6 +310,70 @@ class Professor extends CI_Controller {
 			}
 		}
 
+
+
+
+
+
+
+		public function coordenadorde(){
+			if (verificaSessao() && verificaNivelPagina(array(2))){
+
+				$this->load->model(array('Professor_model', 'CoordenadoDe_model'));
+				$this->load->helper('dropdown');
+
+				// Regra de validação do formulário
+				$this->form_validation->set_rules('professores[]','professores',array('required'));
+				// delimitadores
+				$this->form_validation->set_error_delimiters('<p class="text-danger">','</p>');
+
+				if($this->form_validation->run() == FALSE){
+					$dados['professores'] = convert($this->professores($this->session->id, FALSE));
+					$this->load->view('includes/header', $dados);
+					$this->load->view('includes/sidebar');
+					$this->load->view('coordenadorde/coordenadorde');
+					$this->load->view('includes/footer');
+					$this->load->view('coordenadorde/js_coordenadorde');
+				} else {
+
+					$disciplinas = $this->input->post('professores[]');
+					$this->CoordenadoDe_model->clearProfessor($this->session->id);
+
+					foreach ($disciplinas as $disciplina)
+						$this->CoordenadoDe_model->insertCoordenadorDe($this->session->id, $professor, TRUE);
+
+					$this->session->set_flashdata('success','Professor selecionado com sucesso');
+					redirect('Professor/coordenadorde');
+				}
+
+			}else{
+					redirect('/');
+			}
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 		/**
 		 * busca todas as disponibilidades selecionadas pelo professor
 		 * @author Jean Brock
