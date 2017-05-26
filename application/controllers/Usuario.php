@@ -27,7 +27,7 @@ class Usuario extends CI_Controller {
         break;
     }
 
-    $dados['disciplinas'] = convert($this->Disciplina_model->getAll());
+    $dados['disciplinas'] = convert($this->Disciplina_model->getAll(TRUE));
 
     $this->load->view('includes/header',$dados);
     $this->load->view('includes/sidebar');
@@ -47,9 +47,14 @@ class Usuario extends CI_Controller {
       $disciplinas = $this->input->post('disciplinas[]');
 
       $id = $this->session->id;
+
       $this->Competencia_model->delete($id);
-      foreach ($disciplinas as $idDisciplina)
-        $this->Competencia_model->insert($id,$idDisciplina);
+      foreach ($disciplinas as $idDisciplina){
+        if ($this->Competencia_model->verificaCompetencia($id,$idDisciplina))
+          $this->Competencia_model->setCompetencia($id,$idDisciplina);
+        else
+          $this->Competencia_model->insert($id,$idDisciplina);
+      }
 
       $this->session->set_flashdata('success','Disciplinas alterado com sucesso');
 

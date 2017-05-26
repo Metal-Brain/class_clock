@@ -25,6 +25,29 @@
     }
 
     /**
+     * @return Retorna um boolena TRUE caso a disciplina esteja vinculada ao
+     * professor.
+     */
+    public function verificaCompetencia ($idProfessor,$idDisciplina) {
+      $this->db->where('idProfessor',$idProfessor);
+      $this->db->where('idDisciplina',$idDisciplina);
+      $result = $this->db->get('Competencia')->num_rows();
+
+      return ($result == 1) ? TRUE : FALSE;
+    }
+
+    /**
+     *
+     */
+    public function setCompetencia ($idProfessor,$idDisciplina) {
+      $this->db->where('idProfessor',$idProfessor);
+      $this->db->where('idDisciplina',$idDisciplina);
+      $result = $this->db->update('Competencia',array('active'=>TRUE));
+
+      return $result;
+    }
+
+    /**
       * Deleta um relação entre professor e disciplina
       * @author Jean Brock
       * @since 2017/04/04
@@ -33,7 +56,7 @@
       */
     public function delete ($professor) {
       $this->db->where('idProfessor', $professor);
-      $result = $this->db->delete('Competencia');
+      $result = $this->db->update('Competencia',array('active'=>FALSE));
 
       return $result;
     }
@@ -47,6 +70,7 @@
     public function getAllDisciplinas($professor) {
       $this->db->select('Disciplina.*');
       $this->db->where('idProfessor',$professor);
+      $this->db->where('Competencia.active',TRUE);
       $this->db->join('Disciplina','Disciplina.id = Competencia.idDisciplina');
       $result = $this->db->get('Competencia');
 

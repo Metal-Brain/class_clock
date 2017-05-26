@@ -116,7 +116,8 @@ CREATE TABLE IF NOT EXISTS Professor(
 CREATE TABLE IF NOT EXISTS Competencia(
 	idProfessor			INT 			NOT NULL,
     idDisciplina		INT 			NOT NULL,
-    interesse 			BOOLEAN       	NOT NULL  DEFAULT FALSE,
+    interesse 			BOOLEAN       	NOT NULL  	DEFAULT FALSE,
+	active				BOOLEAN			NOT NULL	DEFAULT TRUE,
     PRIMARY KEY(idProfessor, idDisciplina),
     FOREIGN KEY(idProfessor) REFERENCES Professor(id),
     FOREIGN KEY(idDisciplina) REFERENCES Disciplina(id)
