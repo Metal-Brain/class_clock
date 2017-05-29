@@ -97,7 +97,7 @@
 				</div>
 				
 				<div class="row">
-					<div class="col-md-4 margin-top-error">
+					<div class="col-md-6 margin-top-error">
 						<?= form_error('nome') ?>
 					</div>
 				</div>
@@ -155,7 +155,7 @@
             </div>
             <div class="modal-body">
 
-				<?= form_open('Disciplina/atualizar') ?>
+				<?= form_open('Disciplina/atualizar', 'id="alterarDisciplina"') ?>
 
                 <div class="form-group">
                     <input type="hidden" name="recipient-id" id="recipient-id">
@@ -169,7 +169,7 @@
 				</div>
 
 				<div class="row">
-					<div class="col-md-6 margin-top-error">
+					<div class="col-md-8 margin-top-error">
 						<?= form_error('recipient-nome') ?>
 					</div>
 				</div>
@@ -195,7 +195,7 @@
 
 				<div class="row">
 					<div class="form-group col-md-2">
-						<input type="text" maxlength="1" pattern="[0-9]+$"  class="form-control" name="recipient-qtd-prof" id="recipient-qtd-prof" required>
+						<input type="text" maxlength="1" pattern="[0-9]+$" class="form-control" name="recipient-qtd-prof" id="recipient-qtd-prof" required>
 					</div>
 				</div>
 
