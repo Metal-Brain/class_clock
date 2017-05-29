@@ -37,6 +37,7 @@
             });
             $("#cursoDisciplinas").multiSelect('select', disciplinas);
         });
+		
         // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
         // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
         var modal = $(this)
@@ -64,13 +65,15 @@
         var recipientPeriodo = button.data('whateverperiodo').toString()
         var recipientid = button.data('whateverid')
         var url = '<?= base_url('index.php/Curso/disciplinas/') ?>' + recipientid;
-        $.getJSON(url, function (response) {
-            var disciplinas = [];
-            $.each(response, function (index, value) {
-                disciplinas.push(value.id);
-            });
-            $("#cursoDisciplinas").multiSelect('select', disciplinas);
-        });
+        
+		
+			$.getJSON(url,function (response) {
+				var disciplinas = [];
+				$.each(response, function (index, value) {
+					var row = '<li>'+value.nome+'</li>';
+					$('#cursoDisciplinas2').prepend(row);
+					});
+			});
         // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
         // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
         var modal = $(this)
