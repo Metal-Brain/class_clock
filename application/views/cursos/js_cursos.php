@@ -83,9 +83,8 @@
         modal.find('#recipient-nome').val(recipientnome)
         modal.find('#recipient-semestres').val(recipientsemestre)
         modal.find('select[name=cursoGrau] option[value=' + recipientgrau + ']').prop('selected', true)
-        if (recipientPeriodo.indexOf(',') != -1)
-            recipientPeriodo = recipientPeriodo.split(',')
-        $("#cursoPeriodos").multiSelect('select', recipientPeriodo)
+       	var row = '<li>'+recipientPeriodo+'</li>';
+					$('#periodo-view').prepend(row);
 
     });
 	

@@ -71,7 +71,7 @@
 											<button onClick="exclude(<?= $curso['id'] ?>);" type="button" class="btn btn-danger" title="Desativar"><span class="glyphicon glyphicon-remove"></span></button>
 										 <?php endif; ?>
 										 <?php if ($this->session->nivel == 2) :?>
-											<button type="button" class="btn btn-primary" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whateverid="<?= $curso['id'] ?>" data-whateversigla="<?= $curso['sigla'] ?>" data-whatevernome="<?= $curso['nome'] ?>" data-whateversemestres="<?= $curso['qtdSemestres'] ?>" data-whatevergrau="<?= $curso['grau'] ?>" data-whateverperiodo="<?= $curso['idPeriodo'] ?>"><span class="glyphicon glyphicon-eye-open"></span></button>
+											<button type="button" class="btn btn-primary" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whateverid="<?= $curso['id'] ?>" data-whateversigla="<?= $curso['sigla'] ?>" data-whatevernome="<?= $curso['nome'] ?>" data-whateversemestres="<?= $curso['qtdSemestres'] ?>" data-whatevergrau="<?= $curso['grau'] ?>" data-whateverperiodo="<?= $curso['Periodo'] ?>"><span class="glyphicon glyphicon-eye-open"></span></button>
 										 <?php endif; ?>
 								  <?php else: ?>
                                         <button onClick="able(<?= $curso['id'] ?>)" type="button" class="btn btn-success delete" title="Ativar"><span class="glyphicon glyphicon-ok"></span></button>
@@ -361,15 +361,11 @@
 					<!-- DropListPeriodo (Droplist) -->
 					<div class="form-group col-md-9">
 						<label>Período:</label>
-						<?= form_dropdown('cursoPeriodos[]', $periodo, null, array('id' => 'cursoPeriodos', 'multiple' => 'multiple')) ?>
+							<ul id="periodo-view"></ul>
 					</div>
 				</div>
 				
-				<div class="row">
-					<div class="col-md-10 margin-top-error">
-						<?= form_error('cursoPeriodos[]') ?>
-					</div>
-				</div>
+				
 				
 				<div class="row">
 					<!-- DropListGrau (Droplist) -->
