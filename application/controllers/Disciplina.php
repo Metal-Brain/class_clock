@@ -37,6 +37,7 @@
         $this->form_validation->set_rules('nome', 'nome da disciplina', array('required','min_length[5]','ucwords'));
         $this->form_validation->set_rules('sigla', 'sigla', array('required', 'max_length[5]', 'is_unique[Disciplina.sigla]','strtoupper'));
         $this->form_validation->set_rules('qtdProf', 'quantidade de professores', array('required', 'integer', 'greater_than[0]', 'less_than[10]'));
+        $this->form_validation->set_rules('semestre', 'semestre', array('required', 'integer', 'greater_than[0]', 'less_than[10]'));
         // Definição dos delimitadores
         $this->form_validation->set_error_delimiters('<p class="text-danger">','</p>');
 
@@ -59,7 +60,8 @@
           $disciplina = array(
             'nome'      => $this->input->post("nome"),
             'sigla'     => $this->input->post('sigla'),
-            'qtdProf'   => $this->input->post("qtdProf")
+            'qtdProf'   => $this->input->post("qtdProf"),
+            'semestre'  => $this->input->post("semestre")
           );
 
           if ($this->Disciplina_model->insert($disciplina)){
@@ -130,6 +132,7 @@
         $this->form_validation->set_rules('recipient-nome', 'nome', array('required','min_length[5]','ucwords'));
         $this->form_validation->set_rules('recipient-sigla', 'sigla', array('required', 'max_length[5]','strtoupper'));
         $this->form_validation->set_rules('recipient-qtd-prof', 'quantidade de professores', array('required', 'integer', 'greater_than[0]'));
+        $this->form_validation->set_rules('recipient-semestre', 'semestre', array('required', 'integer', 'greater_than[0]'));
         // Definição dos delimitadores
         $this->form_validation->set_error_delimiters('<p class="text-danger">','</p>');
 
@@ -137,8 +140,6 @@
         if ($this->form_validation->run() == FALSE) {
 
           $this->session->set_flashdata('formDanger','<strong>Não foi possível atualizar os dados da disciplina:</strong>');
-
-          $dados['disciplinas'] = $this->Disciplina_model->getAll();
 
           $dados['disciplinas'] = $this->Disciplina_model->getAll();
 
@@ -155,7 +156,8 @@
           $disciplina = array(
             'nome'        => $this->input->post("recipient-nome"),
             'sigla'       => $this->input->post('recipient-sigla'),
-            'qtdProf'     => $this->input->post("recipient-qtd-prof")
+            'qtdProf'     => $this->input->post("recipient-qtd-prof"),
+            'semestre'    => $this->input->post("recipient-semestre")
           );
 
           if ( $this->Disciplina_model->update($id, $disciplina) )
