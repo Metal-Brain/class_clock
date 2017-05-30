@@ -88,7 +88,7 @@
         <div id="new" class="tab-pane fade">
             <h3>Cadastrar Curso</h3>
 
-            <?= form_open('Curso/cadastrar') ?>
+            <?= form_open('Curso/cadastrar', 'id="cadastrarCurso"') ?>
 
             <div class="row">
                 <div class="form-group col-md-6">

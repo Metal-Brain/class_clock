@@ -143,6 +143,22 @@
     }
 </script>
 
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#cadastrarCurso').validate({
+			rules: {
+				nome: { required: true, minlength: 5 },
+				sigla: { required: true, maxlength: 5 },
+				qtdSemestres: { required: true, number: true }
+			},
+			messages: {
+				nome: { required: 'Campo obrigatório', minlength: 'O campo nome deve ter no mínimo 5 caracteres' },
+				sigla: { required: 'Campo obrigatório', maxlength: 'O campo sigla deve ter no máximo 5 caracteres' },
+				qtdSemestres: { required: 'Campo obrigatório', number: 'Digite apenas números'}
+			}
+		});
+	});
+</script>
 
 </body>
 </html>
