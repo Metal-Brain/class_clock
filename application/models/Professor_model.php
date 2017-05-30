@@ -124,6 +124,21 @@
       return $result->result_array(); // converte o objeto em um array
     }
 
+    /**
+     * Verifica se o curso possui um coordenador
+     * @author Caio de Freitas
+     * @since 2017/05/30
+     * @param INT $idCurso - ID do curso
+     * @return Retorna um boolean FALSE caso o curso já tenha um coordenador
+     */
+    public function verificaCoordenadorCurso ($idCurso) {
+      $this->db->where('coordenador',TRUE);
+      $this->db->where('idCurso',$idCurso);
+      $result = $this->db->get('Professor')->num_rows();
+
+      $result = ($result == 1) ? TRUE : FALSE;
+      return !$result;
+    }
   }
 
 

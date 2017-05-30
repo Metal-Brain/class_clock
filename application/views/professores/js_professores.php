@@ -55,6 +55,7 @@
 			var isCoordenador = $('#recipient-coordenador').prop('checked');
 			if (isCoordenador) {
 				$('#coordena2').show();
+				console.log(recipientIdCurso);
 				modal.find('select[name=coordena] option[value='+recipientIdCurso+']').prop('selected',true)
 			} else {
 				$('#coordena2').hide();

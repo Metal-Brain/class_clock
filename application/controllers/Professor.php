@@ -39,10 +39,13 @@ class Professor extends CI_Controller {
         // Definir as regras de validação para cada campo do formulário.
         $this->form_validation->set_rules('nome', 'nome do professor', array('required','min_length[5]','max_length[255]','ucwords'));
         $this->form_validation->set_rules('matricula', 'matrícula', array('required','exact_length[8]','is_unique[Usuario.matricula]','strtoupper'));
-		$this->form_validation->set_rules('email','e-mail',array('required','valid_email','is_unique[Usuario.email]'));
+				$this->form_validation->set_rules('email','e-mail',array('required','valid_email','is_unique[Usuario.email]'));
         $this->form_validation->set_rules('nascimento', 'data de nascimento', array('callback_date_check'));
         $this->form_validation->set_rules('nivel', 'nivel', array('greater_than[0]'),array('greater_than'=>'Selecione o nível acadêmico.'));
         $this->form_validation->set_rules('contrato','contrato',array('greater_than[0]'),array('greater_than'=>'Selecione um contrato.'));
+				$this->form_validation->set_rules('coordena','curso',array(array('coordenadorCurso',array($this->Professor_model,'verificaCoordenadorCurso'))));
+
+				$this->form_validation->set_message('coordenadorCurso','Curso selecionado já possui um coordenador');
 
         // Definição dos delimitadores
         $this->form_validation->set_error_delimiters('<p class="text-danger">','</p>');
@@ -52,17 +55,17 @@ class Professor extends CI_Controller {
           $dados['contrato']        = convert($this->Contrato_model->getAll(), TRUE);
           $dados['nivel']           = convert($this->Nivel_model->getAll(), TRUE);
           $dados['disciplinas']     = convert($this->Disciplina_model->getAll(TRUE));
-		  $dados['cursos']			= convert($this->Curso_model->getAll(), TRUE);
-			if ($this->session->nivel == 2) {
-				$dados['professores']     = $this->Professor_model->getAllCoordenador($this->session->id);
-			}else{
-				$dados['professores']     = $this->Professor_model->getAll();
-			}
-          $this->load->view('includes/header', $dados);
-          $this->load->view('includes/sidebar');
-          $this->load->view('professores/professores');
-		  $this->load->view('includes/footer');
-		  $this->load->view('professores/js_professores');
+		  		$dados['cursos']			= convert($this->Curso_model->getAll(), TRUE);
+					if ($this->session->nivel == 2) {
+						$dados['professores']     = $this->Professor_model->getAllCoordenador($this->session->id);
+					}else{
+						$dados['professores']     = $this->Professor_model->getAll();
+					}
+        	$this->load->view('includes/header', $dados);
+        	$this->load->view('includes/sidebar');
+        	$this->load->view('professores/professores');
+		  		$this->load->view('includes/footer');
+		  		$this->load->view('professores/js_professores');
         } else {
           // Gera uma senha para o usuário
           $senha = gerate(10);
@@ -192,6 +195,9 @@ class Professor extends CI_Controller {
         $this->form_validation->set_rules('recipient-nascimento', 'data de nascimento', array('callback_date_check'));
         $this->form_validation->set_rules('recipient-nivelAcademico', 'nivel', array('greater_than[0]'),array('greater_than'=>'Selecione o nível acadêmico.'));
         $this->form_validation->set_rules('recipient-contrato','contrato',array('greater_than[0]'),array('greater_than'=>'Selecione um contrato.'));
+				$this->form_validation->set_rules('coordena','curso',array(array('coordenadorCurso',array($this->Professor_model,'verificaCoordenadorCurso'))));
+
+				$this->form_validation->set_message('coordenadorCurso','Curso selecionado já possui um coordenador');
         // Definição dos delimitadores
         $this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
         // Verifica se o formulario é valido
