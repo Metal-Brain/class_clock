@@ -44,27 +44,27 @@
                 <table id="disciplinaTable" class="table table-striped">
                     <thead>
                         <tr>
-                            <th>Sigla</th>
-                            <th>Nome</th>
-                            <th>Qtd. Professores</th>
-                            <th>Semestre</th>
-                            <th>Status</th>
-                            <th>Ação</th>
+                            <th><center>Sigla</th>
+                            <th><center>Nome</th>
+                            <th><center>Qtd. Professores</th>
+                            <th><center>Semestre</th>
+                            <th><center>Status</th>
+                            <th><center>Ação</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($disciplinas as $disciplina): ?>
                             <?= ($disciplina['status'] ? '<tr>' : '<tr class="danger">') ?>
-							<td><?= $disciplina['sigla'] ?></td>
-							<td><?= $disciplina['nome'] ?></td>
-							<td><?= $disciplina['qtdProf'] ?></td>
-              <td><?= $disciplina['semestre'] ?></td>
-							<td><?php
+							<td><center><?= $disciplina['sigla'] ?></td>
+							<td><center><?= $disciplina['nome'] ?></td>
+							<td><center><?= $disciplina['qtdProf'] ?></td>
+              <td><center><?= $disciplina['semestre'] ?></td>
+							<td><center><?php
 								if ($disciplina['status']): echo "Ativo";
 								else: echo "Inativo";
 								endif;
                             ?></td>
-							<td>
+							<td><center>
 								<?php if ($disciplina['status']): ?>
 									<?php if ($this->session->nivel == 1) :?>
 										<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whateversemestre="<?= $disciplina['semestre'] ?>" data-whateversigla="<?= $disciplina['sigla'] ?>" data-whatevernome="<?= $disciplina['nome'] ?>" data-whateverid="<?= $disciplina['id'] ?>" data-whateverqtdprof="<?= $disciplina['qtdProf'] ?>"><span class="glyphicon glyphicon-pencil"></span></button>

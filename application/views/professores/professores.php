@@ -40,28 +40,28 @@
 				<table id="professorTable" class="table table-striped">
 					<thead>
 						<tr>
-							<th>Nome</th>
-							<th>Matrícula</th>
-							<th>Email</th>
-							<th>Data Nascimento</th>
-							<th>Nível acadêmico</th>
-							<th>Contrato</th>
-							<th>Status</th>
-							<th>Ações</th>
+							<th><center>Nome</th>
+							<th><center>Matrícula</th>
+							<th><center>Email</th>
+							<th><center>Data Nascimento</th>
+							<th><center>Nível acadêmico</th>
+							<th><center>Contrato</th>
+							<th><center>Status</th>
+							<th><center>Ações</th>
 						</tr>
 					</thead>
 					<tbody>
 						<?php foreach ($professores as $professor) : ?>
 							<?= ($professor['status'] ? '<tr>' : '<tr class="danger">') ?>
-									<td><?= $professor['nome'] ?></td>
-									<td><?= $professor['matricula'] ?></td>
-									<td><?= $professor['email'] ?></td>
-									<td><?= sqlToBr($professor['nascimento']) ?></td>
-									<td><?= $professor['nivel'] ?></td>
-									<td><?= $professor['contrato'] ?></td>
-									<td><?= ($professor['status']) ? "Ativo" : "Inativo"?></td>
+									<td><center><?= $professor['nome'] ?></td>
+									<td><center><?= $professor['matricula'] ?></td>
+									<td><center><?= $professor['email'] ?></td>
+									<td><center><?= sqlToBr($professor['nascimento']) ?></td>
+									<td><center><?= $professor['nivel'] ?></td>
+									<td><center><?= $professor['contrato'] ?></td>
+									<td><center><?= ($professor['status']) ? "Ativo" : "Inativo"?></td>
 
-									<td><?php if($professor['status']): ?>
+									<td><center><?php if($professor['status']): ?>
 										<?php if ($this->session->nivel == 1) :?>
 										<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whatevernome="<?= $professor['nome']?>" data-whateverid="<?= $professor['id']?>" data-whatevercoordenador="<?= $professor['coordenador']?>" data-whatevercurso="<?= $professor['idCurso']?>" data-whatevercontrato="<?= $professor['idContrato']?>" data-whatevernivel="<?= $professor['idNivel']?>" data-whatevermatricula= "<?= $professor['matricula']?>" data-whateveremail="<?= $professor['email']?>" data-whatevernascimento= "<?= sqlToBr($professor['nascimento']) ?>"><span class="glyphicon glyphicon-pencil"></span></button>
 										<button onClick="exclude(<?= $professor['id']?>);" type="button" class="btn btn-danger" title="Excluir"><span class="glyphicon glyphicon-remove"></span></button>

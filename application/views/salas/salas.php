@@ -42,23 +42,23 @@
                 <table id="salaTable" class="table table-striped">
                     <thead>
                         <tr>
-                            <th>Número da Sala</th>
-                            <th>Capacidade Máxima</th>
-                            <th>Tipo</th>
-                            <th>Status</th>
-                            <th>Ação</th>
+                            <th><center>Número da Sala</th>
+                            <th><center>Capacidade Máxima</th>
+                            <th><center>Tipo</th>
+                            <th><center>Status</th>
+                            <th><center>Ação</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($salas as $sala) { ?>
 							<?= ($sala['status'] ? '<tr>' : '<tr class="danger">') ?>
-							<td><?= $sala['nSala']; ?></td>
-							<td><?= $sala['capMax']; ?></td>
-							<td><?= $sala['tipo']; ?></td>
-							<td><?php if ($sala['status']): echo "Ativo";
+							<td><center><?= $sala['nSala']; ?></td>
+							<td><center><?= $sala['capMax']; ?></td>
+							<td><center><?= $sala['tipo']; ?></td>
+							<td><center><?php if ($sala['status']): echo "Ativo";
 							else: echo "Inativo";
 							endif; ?></td>
-							<td>
+							<td><center>
 								<?php if ($sala['status']): ?>
 									<?php if ($this->session->nivel == 1) :?>
 									<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whatevernsala="<?= $sala['nSala']; ?>" data-whateverid="<?= $sala['id']; ?>" data-whatevercapmax="<?= $sala['capMax']; ?>"  data-whatevertipo="<?= $sala['tipo']; ?>"><span class="glyphicon glyphicon-pencil"></span></button>
@@ -67,8 +67,8 @@
 									<?php if ($this->session->nivel == 2) :?>
 									<button type="button" class="btn btn-primary" title="Editar" data-toggle="modal" data-target="#exampleModal2" data-whatevernsala="<?= $sala['nSala']; ?>" data-whateverid="<?= $sala['id']; ?>" data-whatevercapmax="<?= $sala['capMax']; ?>"  data-whatevertipo="<?= $sala['tipo']; ?>"><span class="glyphicon glyphicon-eye-open"></span></button>
 									<?php endif;?>
-									
-									
+
+
 								<?php else : ?>
 									<button onClick="able(<?= $sala['id'] ?>)" type="button" class="btn btn-success delete" title="Ativar"><span class="glyphicon glyphicon-ok"></span></button>
 								<?php endif; ?>

@@ -42,30 +42,30 @@
                 <table id="curso-table" class="table table-striped">
                     <thead>
                         <tr>
-                            <th>Sigla</th>
-                            <th>Nome</th>
-                            <th>Qtd. Semestres</th>
-                            <th>Período</th>
-                            <th>Grau</th>
-                            <th>Status</th>
-                            <th>Ação</th>
+                            <th><center>Sigla</th>
+                            <th><center>Nome</th>
+                            <th><center>Qtd. Semestres</th>
+                            <th><center>Período</th>
+                            <th><center>Grau</th>
+                            <th><center>Status</th>
+                            <th><center>Ação</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($cursos as $curso) : ?>
                                 <?= ($curso['status'] ? '<tr>' : '<tr class="danger">') ?>
-                                <td><?= $curso['sigla'] ?></td>
-                                <td><?= $curso['nome'] ?></td>
-                                <td><?= $curso['qtdSemestres'] ?></td>
-                                <td><?= $curso['periodo'] ?></td>
-                                <td><?= $curso['grauNome'] ?></td>
-                                <td><?php
-                                    if ($curso['status']): echo "Ativo";
-                                    else: echo "Inativo";
-                                    endif;
-                                    ?></td>
-                                <td>
-                                    <?php if ($curso['status']): ?>
+                                <td><center><?= $curso['sigla'] ?></td>
+                                <td><center><?= $curso['nome'] ?></td>
+                                <td><center><?= $curso['qtdSemestres'] ?></td>
+                                <td><center><?= $curso['periodo'] ?></td>
+                                <td><center><?= $curso['grauNome'] ?></td>
+                                  <td><center><?php
+                    								if ($curso['status']): echo "Ativo";
+                    								else: echo "Inativo";
+                    								endif;
+                                                ?></td>
+                    							<td><center>
+                    								<?php if ($curso['status']): ?>
 										<?php if ($this->session->nivel == 1) :?>
 											<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whateverid="<?= $curso['id'] ?>" data-whateversigla="<?= $curso['sigla'] ?>" data-whatevernome="<?= $curso['nome'] ?>" data-whateversemestres="<?= $curso['qtdSemestres'] ?>" data-whatevergrau="<?= $curso['grau'] ?>" data-whateverperiodo="<?= $curso['idPeriodo'] ?>"><span class="glyphicon glyphicon-pencil"></span></button>
 											<button onClick="exclude(<?= $curso['id'] ?>);" type="button" class="btn btn-danger" title="Desativar"><span class="glyphicon glyphicon-remove"></span></button>
