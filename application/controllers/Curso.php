@@ -129,7 +129,7 @@
               $this->CursoTemDisciplina_model->insert($idCurso,$disciplina);
             $this->session->set_flashdata('success','Curso atualizado com sucesso');
           } else {
-            $this->session->set_flashdata('danger','Não foi possível atualizar os dados do curso, tente novamente ou entre em contato com o administrador do sistema. <br/> Caso tenha alterado a <b>sigla</b>, verifique se ela já não foi utilizada.');
+            $this->session->set_flashdata('danger','Não foi possível atualizar os dados do curso, tente novamente ou entre em contato com o administrador do sistema. <br/> Caso tenha alterado a <b>sigla</b> e/ou <b>nome</b>, verifique se ela já não foi utilizada.');
           }
           redirect('Curso');
         }
