@@ -25,7 +25,7 @@
     <h1>Disciplinas</h1>
 
     <!-- Lista de 'botoes' links do Bootstrap -->
-	
+
 	<?php if ($this->session->nivel == 1) :?>
     <ul class="nav nav-pills">
         <!-- 'botao' link para a listagem -->
@@ -47,6 +47,7 @@
                             <th>Sigla</th>
                             <th>Nome</th>
                             <th>Qtd. Professores</th>
+                            <th>Semestre</th>
                             <th>Status</th>
                             <th>Ação</th>
                         </tr>
@@ -57,6 +58,7 @@
 							<td><?= $disciplina['sigla'] ?></td>
 							<td><?= $disciplina['nome'] ?></td>
 							<td><?= $disciplina['qtdProf'] ?></td>
+              <td><?= $disciplina['semestre'] ?></td>
 							<td><?php
 								if ($disciplina['status']): echo "Ativo";
 								else: echo "Inativo";
@@ -64,6 +66,7 @@
                             ?></td>
 							<td>
 								<?php if ($disciplina['status']): ?>
+<<<<<<< HEAD
 									<?php if ($this->session->nivel == 1) :?>
 										<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whateversigla="<?= $disciplina['sigla'] ?>" data-whatevernome="<?= $disciplina['nome'] ?>" data-whateverid="<?= $disciplina['id'] ?>" data-whateverqtdprof="<?= $disciplina['qtdProf'] ?>"><span class="glyphicon glyphicon-pencil"></span></button>
 										<button onClick="disable(<?= $disciplina['id'] ?>)" type="button" class="btn btn-danger delete" title="Desativar"><span class="glyphicon glyphicon-remove"></span></button>
@@ -71,7 +74,7 @@
 										<?php if ($this->session->nivel == 2) :?>
 										<button type="button" class="btn btn-primary" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whateversigla="<?= $disciplina['sigla'] ?>" data-whatevernome="<?= $disciplina['nome'] ?>" data-whateverid="<?= $disciplina['id'] ?>" data-whateverqtdprof="<?= $disciplina['qtdProf'] ?>"><span class="glyphicon glyphicon-eye-open"></span></button>
 										<?php endif;?>
-								
+
 								<?php else : ?>
 									<button onClick="able(<?= $disciplina['id'] ?>)" type="button" class="btn btn-success delete" title="Ativar"><span class="glyphicon glyphicon-ok"></span></button>
 								<?php endif; ?>
@@ -95,7 +98,7 @@
 						<input type="text" class="form-control" name="nome" placeholder="Nome" value="<?= set_value('nome') ?>" required>
 					</div>
 				</div>
-				
+
 				<div class="row">
 					<div class="col-md-6 margin-top-error">
 						<?= form_error('nome') ?>
@@ -114,24 +117,44 @@
 						<?= form_error('sigla') ?>
 					</div>
 				</div>
-				
+
 				<div class="row">
 					<div class="col-md-3">
 						<label>Quantidade de professores</label>
 					</div>
 				</div>
-				
+
 				<div class="row">
 					<div class="form-group col-md-2">
 						<input type="text" maxlength="1" pattern="[0-9]+$" class="form-control percent-5" name="qtdProf" placeholder="ex: 1" value="<?= set_value('qtdProf') ?>" required>
 					</div>
 				</div>
-				
+
 				<div class="row">
 					<div class="col-md-4 margin-top-error">
 						<?= form_error('qtdProf') ?>
 					</div>
 				</div>
+
+
+        <div class="row">
+          <div class="col-md-3">
+            <label>Semestre</label>
+          </div>
+        </div>
+
+        <div class="row">
+					<div class="form-group col-md-2">
+						<input type="text" maxlength="1" pattern="[0-9]+$" class="form-control percent-5" name="semestre" placeholder="ex: 6" value="<?= set_value('semestre') ?>" required>
+					</div>
+				</div>
+        <div class="row">
+					<div class="col-md-4 margin-top-error">
+						<?= form_error('semestre') ?>
+					</div>
+				</div>
+
+
 
                 <div class="inline">
                     <button type='submit' class='btn bt-lg btn-primary'>Cadastrar</button>
@@ -202,6 +225,25 @@
                 <div class="row">
 					<div class="col-md-11 margin-top-error">
 						<?= form_error('recipient-qtd-prof') ?>
+					</div>
+				</div>
+
+
+        <div class="row">
+					<div class="col-md-5">
+						<label for="semestre" class="control-label">Semestre:</label>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group col-md-2">
+						<input type="text" maxlength="1" pattern="[0-9]+$"  class="form-control" name="recipient-semestre" id="recipient-semestre" required>
+					</div>
+				</div>
+
+                <div class="row">
+					<div class="col-md-11 margin-top-error">
+						<?= form_error('recipient-semestre') ?>
 					</div>
 				</div>
 
@@ -277,7 +319,7 @@
 					</div>
 				</div>
 
-                <div class="modal-footer">                    
+                <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                 </div>
 

@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS Disciplina(
  nome               VARCHAR(45)   NOT NULL,
  sigla              VARCHAR(5)    NOT NULL  UNIQUE,
  qtdProf            INT           NOT NULL,
+ semestre			INT			  NOT NULL,
  status             BOOLEAN       NOT NULL  DEFAULT TRUE,
  PRIMARY KEY (id)
 );
