@@ -66,13 +66,12 @@
                             ?></td>
 							<td>
 								<?php if ($disciplina['status']): ?>
-<<<<<<< HEAD
 									<?php if ($this->session->nivel == 1) :?>
-										<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whateversigla="<?= $disciplina['sigla'] ?>" data-whatevernome="<?= $disciplina['nome'] ?>" data-whateverid="<?= $disciplina['id'] ?>" data-whateverqtdprof="<?= $disciplina['qtdProf'] ?>"><span class="glyphicon glyphicon-pencil"></span></button>
+										<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whateversemestre="<?= $disciplina['semestre'] ?>" data-whateversigla="<?= $disciplina['sigla'] ?>" data-whatevernome="<?= $disciplina['nome'] ?>" data-whateverid="<?= $disciplina['id'] ?>" data-whateverqtdprof="<?= $disciplina['qtdProf'] ?>"><span class="glyphicon glyphicon-pencil"></span></button>
 										<button onClick="disable(<?= $disciplina['id'] ?>)" type="button" class="btn btn-danger delete" title="Desativar"><span class="glyphicon glyphicon-remove"></span></button>
 									<?php endif;?>
 										<?php if ($this->session->nivel == 2) :?>
-										<button type="button" class="btn btn-primary" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whateversigla="<?= $disciplina['sigla'] ?>" data-whatevernome="<?= $disciplina['nome'] ?>" data-whateverid="<?= $disciplina['id'] ?>" data-whateverqtdprof="<?= $disciplina['qtdProf'] ?>"><span class="glyphicon glyphicon-eye-open"></span></button>
+										<button type="button" class="btn btn-primary" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whateversemestre="<?= $disciplina['semestre'] ?>" data-whateversigla="<?= $disciplina['sigla'] ?>" data-whatevernome="<?= $disciplina['nome'] ?>" data-whateverid="<?= $disciplina['id'] ?>" data-whateverqtdprof="<?= $disciplina['qtdProf'] ?>"><span class="glyphicon glyphicon-eye-open"></span></button>
 										<?php endif;?>
 
 								<?php else : ?>
@@ -145,7 +144,7 @@
 
         <div class="row">
 					<div class="form-group col-md-2">
-						<input type="text" maxlength="1" pattern="[0-9]+$" class="form-control percent-5" name="semestre" placeholder="ex: 6" value="<?= set_value('semestre') ?>" required>
+						<input type="text" maxlength="2" pattern="[0-9]+$" class="form-control percent-5" name="semestre" placeholder="ex: 6" value="<?= set_value('semestre') ?>" required>
 					</div>
 				</div>
         <div class="row">
@@ -237,7 +236,7 @@
 
 				<div class="row">
 					<div class="form-group col-md-2">
-						<input type="text" maxlength="1" pattern="[0-9]+$"  class="form-control" name="recipient-semestre" id="recipient-semestre" required>
+						<input type="text" maxlength="2" pattern="[0-9]+$"  class="form-control" name="recipient-semestre" id="recipient-semestre" required>
 					</div>
 				</div>
 

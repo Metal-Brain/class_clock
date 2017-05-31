@@ -34,10 +34,10 @@
         $this->load->model(array('Disciplina_model'));
 
         // Definir as regras de validação para cada campo do formulário.
-        $this->form_validation->set_rules('nome', 'nome da disciplina', array('required','min_length[5]','ucwords'));
+        $this->form_validation->set_rules('nome', 'nome da disciplina', array('required','min_length[5]', 'is_unique[Disciplina.nome]','ucwords'));
         $this->form_validation->set_rules('sigla', 'sigla', array('required', 'max_length[5]', 'is_unique[Disciplina.sigla]','strtoupper'));
         $this->form_validation->set_rules('qtdProf', 'quantidade de professores', array('required', 'integer', 'greater_than[0]', 'less_than[10]'));
-        $this->form_validation->set_rules('semestre', 'semestre', array('required', 'integer', 'greater_than[0]', 'less_than[10]'));
+        $this->form_validation->set_rules('semestre', 'semestre', array('required', 'integer', 'greater_than[0]', 'less_than[20]'));
         // Definição dos delimitadores
         $this->form_validation->set_error_delimiters('<p class="text-danger">','</p>');
 
@@ -132,7 +132,7 @@
         $this->form_validation->set_rules('recipient-nome', 'nome', array('required','min_length[5]','ucwords'));
         $this->form_validation->set_rules('recipient-sigla', 'sigla', array('required', 'max_length[5]','strtoupper'));
         $this->form_validation->set_rules('recipient-qtd-prof', 'quantidade de professores', array('required', 'integer', 'greater_than[0]'));
-        $this->form_validation->set_rules('recipient-semestre', 'semestre', array('required', 'integer', 'greater_than[0]'));
+        $this->form_validation->set_rules('recipient-semestre', 'semestre', array('required', 'integer', 'greater_than[0]','less_than[20]'));
         // Definição dos delimitadores
         $this->form_validation->set_error_delimiters('<p class="text-danger">','</p>');
 

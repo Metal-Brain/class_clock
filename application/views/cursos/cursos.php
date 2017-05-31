@@ -124,7 +124,7 @@
 
             <div class="row">
                 <div class="form-group col-md-2">
-                    <?= form_input(array('name' => 'qtdSemestres', 'value' => set_value('qtdSemestres'), 'type' => 'number', 'maxlength' => '2', 'pattern' => '[0-9]+$', 'class' => 'form-control', 'placeholder' => 'ex: 6', 'required' => 'required')) ?>
+                    <?= form_input(array('name' => 'qtdSemestres', 'value' => set_value('qtdSemestres'), 'type' => 'text', 'maxlength' => '2', 'pattern' => '[0-9]+$', 'class' => 'form-control', 'placeholder' => 'ex: 6', 'required' => 'required')) ?>
                 </div>
             </div>
 
@@ -306,57 +306,57 @@
                 <h4 class="modal-title" id="exampleModalLabel">Cursos</h4>
             </div>
             <div class="modal-body">
-				
+
 				<?= form_open('Curso/atualizar') ?>
-				
+
 				<div class="form-group">
 					<input type="hidden" name="cursoId" value="" id="recipient-id">
 				</div>
-				
+
 				<div class="row">
 					<div class="form-group col-md-12">
 						<?= form_label('Nome:', 'recipient-nome', array('class' => 'control-label')) ?>
 						<?= form_input('nomeCurso', set_value('nomeCurso'), array('class' => 'form-control', 'id' => 'recipient-nome', 'required' => 'required' , 'readonly' => 'readonly')) ?>
 					</div>
 				</div>
-				
+
 				<div class="row">
 					<div class="col-md-6 margin-top-error">
 						<?= form_error('nomeCurso') ?>
 					</div>
 				</div>
-				
+
 				<div class="row">
 					<div class="form-group col-md-3">
 						<?= form_label('Sigla:', 'recipient-sigla', array('class' => 'control-label')) ?>
 						<?= form_input('cursoSigla', set_value('cursoSigla'), array('class' => 'form-control', 'id' => 'recipient-sigla', 'maxlength' => '5', 'required' => 'required' , 'readonly' => 'readonly')) ?>
 					</div>
 				</div>
-				
+
 				<div class="row">
 					<div class="col-md-6 margin-top-error">
 						<?= form_error('cursoSigla') ?>
 					</div>
 				</div>
-				
+
 				<div class="row">
 					<div class="col-md-5">
 						<?= form_label('Quantidade de Semestres:', 'recipient-semestres', array('class' => 'control-label')) ?>
 					</div>
-				</div> 
-				
+				</div>
+
 				<div class="row">
 					<div class="form-group col-md-2">
 						<?= form_input('cursoQtdSemestres', set_value('cursoQtdSemestres'), array('pattern' => '[0-9]+$', 'maxlength' => '2', 'id' => 'recipient-semestres', 'class' => 'form-control', 'required' => 'required' , 'readonly' => 'readonly')) ?>
 					</div>
 				</div>
-				
+
 				<div class="row">
 					<div class="col-md-11 margin-top-error">
 						<?= form_error('cursoQtdSemestres') ?>
 					</div>
 				</div>
-				
+
 				<div class="row">
 					<!-- DropListPeriodo (Droplist) -->
 					<div class="form-group col-md-9">
@@ -364,9 +364,9 @@
 							<ul id="periodo-view"></ul>
 					</div>
 				</div>
-				
-				
-				
+
+
+
 				<div class="row">
 					<!-- DropListGrau (Droplist) -->
 					<div class="form-group col-md-7">
@@ -374,28 +374,27 @@
 						<?= form_dropdown('cursoGrau', $graus, null, array('class' => 'form-control' , 'disabled' => 'disabled')) ?>
 					</div>
 				</div>
-				
+
 				<div class="row">
 					<div class="col-md-10 margin-top-error">
 						<?= form_error('cursoGrau') ?>
 					</div>
 				</div>
-				
+
 				<div class="row">
 					<div class="form-group col-md-9">
-						<label>Disciplinas:</label>					
+						<label>Disciplinas:</label>
 							<ul id="cursoDisciplinas2"></ul>
 					</div>
 				</div>
-			
+
 
 				<div class="modal-footer">
 					<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
 				</div>
-			
+
 				<?= form_close() ?>
             </div>
         </div>
     </div>
 </div>
-

@@ -5,7 +5,7 @@ USE CLASSCLOCK;
 
 CREATE TABLE IF NOT EXISTS Disciplina(
  id                 INT           NOT NULL  AUTO_INCREMENT,
- nome               VARCHAR(45)   NOT NULL,
+ nome               VARCHAR(45)   NOT NULL  UNIQUE,
  sigla              VARCHAR(5)    NOT NULL  UNIQUE,
  qtdProf            INT           NOT NULL,
  semestre			INT			  NOT NULL,
@@ -31,7 +31,7 @@ INSERT INTO Periodo (nome) VALUES ('Matutino'),('Vespertino'),('Noturno'),('Inte
 
 CREATE TABLE IF NOT EXISTS Curso (
   id            INT         NOT NULL AUTO_INCREMENT,
-  nome          VARCHAR(45) NOT NULL,
+  nome          VARCHAR(45) NOT NULL  UNIQUE,
   sigla         VARCHAR(5)  NOT NULL  UNIQUE,
   qtdSemestres  INT         NOT NULL,
   grau          INT         NOT NULL,
