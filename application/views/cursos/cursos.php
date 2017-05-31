@@ -361,7 +361,7 @@
 					<!-- DropListPeriodo (Droplist) -->
 					<div class="form-group col-md-9">
 						<label>Período:</label>
-							<ul id="periodo-view"></ul>
+							<ul id="periodo-view" style="list-style-type: none"></ul>
 					</div>
 				</div>
 
