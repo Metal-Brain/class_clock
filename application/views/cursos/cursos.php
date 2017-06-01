@@ -150,7 +150,6 @@
             <div class="row">
                 <div class="form-group col-md-4">
                     <label>Grau</label>
-                    <!-- <div id="u1" class="ax_default droplist" data-label="DropListGrau"> -->
 					<?= form_dropdown('grau', $graus, set_value('grau'), array('class' => 'form-control')) ?>
                 </div>
             </div>

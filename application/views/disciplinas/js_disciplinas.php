@@ -24,7 +24,7 @@
 		var recipientsigla = button.data('whateversigla')
 		var recipientnome = button.data('whatevernome')
 		var recipientQtdProf = button.data('whateverqtdprof')
-    var recipentSemestre = button.data('whateversemestre')
+		var recipentSemestre = button.data('whateversemestre')
 		var recipientId = button.data('whateverid')
 		// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
 		// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
@@ -33,7 +33,7 @@
 		modal.find('#recipient-sigla').val(recipientsigla)
 		modal.find('#recipient-nome').val(recipientnome)
 		modal.find('#recipient-qtd-prof').val(recipientQtdProf)
-    modal.find('#recipient-semestre').val(recipentSemestre)
+		modal.find('#recipient-semestre').val(recipentSemestre)
 		modal.find('#recipient-id').val(recipientId)
 	});
 </script>
@@ -97,34 +97,38 @@
 			rules: {
 				nome: { required: true, minlength: 5 },
 				sigla: { required: true, maxlength: 5 },
-				qtdProf: { required: true, number: true }
+				qtdProf: { required: true, number: true, min: 1 },
+				semestre: { required: true, number: true, min: 1, max: 19 }
+				
 			},
 			messages: {
 				nome: { required: 'Campo obrigatório', minlength: 'O campo nome deve ter no mínimo 5 caracteres' },
 				sigla: { required: 'Campo obrigatório', maxlength: 'O campo sigla deve ter no máximo 5 caracteres' },
-				qtdProf: { required: 'Campo obrigatório', number: 'Digite apenas números'}
+				qtdProf: { required: 'Campo obrigatório', number: 'Digite apenas números', min: 'Digite um valor maior ou igual a 1' },
+				semestre: { required: 'Campo obrigatório', number: 'Digite apenas números', min: 'Digite um valor maior ou igual a 1', max: 'Digite um valor menor ou igual a 19'}
 			}
 		});
 	});
 </script>
 
-<!-- NÃO ESTÁ FUNCIONANDO! -->
-<!-- <script type="text/javascript">
+<script type="text/javascript">
 	$(document).ready(function(){
 		$('#alterarDisciplina').validate({
 			rules: {
-				recipient-nome: { required: true, minlength: 5 },
-				recipient-sigla: { required: true, maxlength: 5 },
-				recipient-qtd-prof: { required: true, number: true }
+				'recipient-nome': { required: true, minlength: 5 },
+				'recipient-sigla': { required: true, maxlength: 5 },
+				'recipient-qtd-prof': { required: true, number: true, min: 1 },
+				'recipient-semestre': { required: true, number: true, min: 1, max: 19 }
 			},
 			messages: {
-				recipient-nome: { required: 'Campo obrigatório', minlength: 'O campo nome deve ter no mínimo 5 caracteres' },
-				recipient-sigla: { required: 'Campo obrigatório', maxlength: 'O campo sigla deve ter no máximo 5 caracteres' },
-				recipient-qtd-prof: { required: 'Campo obrigatório', number: 'Digite apenas números'}
+				'recipient-nome': { required: 'Campo obrigatório', minlength: 'O campo nome deve ter no mínimo 5 caracteres' },
+				'recipient-sigla': { required: 'Campo obrigatório', maxlength: 'O campo sigla deve ter no máximo 5 caracteres' },
+				'recipient-qtd-prof': { required: 'Campo obrigatório', number: 'Digite apenas números', min: 'Digite um valor maior ou igual a 1' },
+				'recipient-semestre': { required: 'Campo obrigatório', number: 'Digite apenas números', min: 'Digite um valor maior ou igual a 1', max: 'Digite um valor menor ou igual a 19'}
 			}
 		});
 	});
-</script> -->
+</script>
 
 </body>
 </html>
