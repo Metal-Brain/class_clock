@@ -99,7 +99,7 @@
 				</div>
 
 				<div class="row">
-					<div class="col-md-6 margin-top-error">
+					<div class="col-md-10 margin-top-error">
 						<?= form_error('nome') ?>
 					</div>
 				</div>
@@ -112,7 +112,7 @@
 				</div>
 
 				<div class="row">
-					<div class="col-md-3 margin-top-error">
+					<div class="col-md-10 margin-top-error">
 						<?= form_error('sigla') ?>
 					</div>
 				</div>
@@ -130,25 +130,25 @@
 				</div>
 
 				<div class="row">
-					<div class="col-md-4 margin-top-error">
+					<div class="col-md-10 margin-top-error">
 						<?= form_error('qtdProf') ?>
 					</div>
 				</div>
 
+				<div class="row">
+					<div class="col-md-3">
+						<label>Semestre</label>
+					</div>
+				</div>
 
-        <div class="row">
-          <div class="col-md-3">
-            <label>Semestre</label>
-          </div>
-        </div>
-
-        <div class="row">
+				<div class="row">
 					<div class="form-group col-md-2">
 						<input type="text" maxlength="2" pattern="[0-9]+$" class="form-control percent-5" name="semestre" placeholder="ex: 6" value="<?= set_value('semestre') ?>" required>
 					</div>
 				</div>
-        <div class="row">
-					<div class="col-md-4 margin-top-error">
+				
+				<div class="row">
+					<div class="col-md-10 margin-top-error">
 						<?= form_error('semestre') ?>
 					</div>
 				</div>
