@@ -85,7 +85,7 @@
 		<!-- Aqui é o formulário de registro do novo item-->
 		<div id="new" class="tab-pane fade">
 			<h3>Cadastrar Professor</h3>
-			<?= form_open('Professor') ?>
+			<?= form_open('Professor', 'id="cadastrarProfessor"') ?>
 				<div class="row">
 					<div class="form-group col-md-6">
 						<label>Nome</label>
