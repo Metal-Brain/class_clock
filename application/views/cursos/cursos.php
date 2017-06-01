@@ -193,7 +193,7 @@
             </div>
             <div class="modal-body">
 
-				<?= form_open('Curso/atualizar') ?>
+				<?= form_open('Curso/atualizar', 'id="alterarCurso"') ?>
 
 				<div class="form-group">
 					<input type="hidden" name="cursoId" value="" id="recipient-id">
@@ -261,7 +261,7 @@
 					<!-- DropListGrau (Droplist) -->
 					<div class="form-group col-md-7">
 						<label for="curso-name" class="control-label">Grau:</label>
-						<?= form_dropdown('cursoGrau', $graus, null, array('class' => 'form-control')) ?>
+						<?= form_dropdown('cursoGrau', $graus, null, array('id' => 'cursoGrau', 'class' => 'form-control')) ?>
 					</div>
 				</div>
 

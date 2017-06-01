@@ -1,11 +1,11 @@
 <script>
     $("#cursoPeriodos").multiSelect({
-        selectableHeader: "<div class='multiselect'>Selecione o(s) per韔do(s)</div>",
-        selectionHeader: "<div class='multiselect'>Per韔do(s) selecionado(s)</div>"
+        selectableHeader: "<div class='multiselect'>Selecione o(s) per铆odo(s)</div>",
+        selectionHeader: "<div class='multiselect'>Per铆odo(s) selecionado(s)</div>"
     });
     $("#periodos").multiSelect({
-        selectableHeader: "<div class='multiselect'>Selecione o(s) per韔do(s)</div>",
-        selectionHeader: "<div class='multiselect'>Per韔do(s) selecionado(s)</div>"
+        selectableHeader: "<div class='multiselect'>Selecione o(s) per铆odo(s)</div>",
+        selectionHeader: "<div class='multiselect'>Per铆odo(s) selecionado(s)</div>"
     });
     $("#cursoDisciplinas").multiSelect({
         selectableHeader: "<div class='multiselect'>Selecione as disciplinas</div>",
@@ -109,7 +109,7 @@
                     className: 'btn-success'
                 },
                 cancel: {
-                    label: 'N鉶',
+                    label: 'N茫o',
                     className: 'btn-danger'
                 }
             },
@@ -128,7 +128,7 @@
                     className: 'btn-success'
                 },
                 cancel: {
-                    label: 'N鉶',
+                    label: 'N茫o',
                     className: 'btn-danger'
                 }
             },
@@ -146,12 +146,41 @@
 			rules: {
 				nome: { required: true, minlength: 5 },
 				sigla: { required: true, maxlength: 5 },
-				qtdSemestres: { required: true, number: true }
+				qtdSemestres: { required: true, number: true, min: 1, max: 19 },
+				'periodo[]': { required: true },
+				grau: {required: true, min: 1},
+				'disciplinas[]': { required: true }
 			},
 			messages: {
-				nome: { required: 'Campo obrigat髍io', minlength: 'O campo nome deve ter no m韓imo 5 caracteres' },
-				sigla: { required: 'Campo obrigat髍io', maxlength: 'O campo sigla deve ter no m醲imo 5 caracteres' },
-				qtdSemestres: { required: 'Campo obrigat髍io', number: 'Digite apenas n鷐eros'}
+				nome: { required: 'Campo obrigat贸rio', minlength: 'O campo nome deve ter no m铆nimo 5 caracteres' },
+				sigla: { required: 'Campo obrigat贸rio', maxlength: 'O campo sigla deve ter no m谩ximo 5 caracteres' },
+				qtdSemestres: { required: 'Campo obrigat贸rio', number: 'Digite apenas n煤meros', min: 'Digite um valor maior ou igual a 1', max: 'Digite um valor menor ou igual a 19'},
+				'periodo[]': { required: 'Campo obrigat贸rio' },
+				grau: {required: 'Campo obrigat贸rio', min: 'Campo obrigat贸rio' },
+				'disciplinas[]': { required: 'Campo obrigat贸rio' }
+			}
+		});
+	});
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#alterarCurso').validate({
+			rules: {
+				nomeCurso: { required: true, minlength: 5 },
+				cursoSigla: { required: true, maxlength: 5 },
+				cursoQtdSemestres: { required: true, number: true, min: 1, max: 19 },
+				'cursoPeriodos[]': { required: true },
+				cursoGrau: {required: true, min: 1},
+				'cursoDisciplinas[]': { required: true }
+			},
+			messages: {
+				nomeCurso: { required: 'Campo obrigat贸rio', minlength: 'O campo nome deve ter no m铆nimo 5 caracteres' },
+				cursoSigla: { required: 'Campo obrigat贸rio', maxlength: 'O campo sigla deve ter no m谩ximo 5 caracteres' },
+				cursoQtdSemestres: { required: 'Campo obrigat贸rio', number: 'Digite apenas n煤meros', min: 'Digite um valor maior ou igual a 1', max: 'Digite um valor menor ou igual a 19'},
+				'cursoPeriodos[]': { required: 'Campo obrigat贸rio' },
+				cursoGrau: {required: 'Campo obrigat贸rio', min: 'Campo obrigat贸rio' },
+				'cursoDisciplinas[]': { required: 'Campo obrigat贸rio' }
 			}
 		});
 	});
