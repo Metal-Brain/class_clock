@@ -39,11 +39,11 @@ class Professor extends CI_Controller {
         // Definir as regras de validação para cada campo do formulário.
         $this->form_validation->set_rules('nome', 'nome do professor', array('required','min_length[5]','max_length[255]','ucwords'));
         $this->form_validation->set_rules('matricula', 'matrícula', array('required','exact_length[8]','is_unique[Usuario.matricula]','strtoupper'));
-				$this->form_validation->set_rules('email','e-mail',array('required','valid_email','is_unique[Usuario.email]'));
+		$this->form_validation->set_rules('email','e-mail',array('required','valid_email','is_unique[Usuario.email]'));
         $this->form_validation->set_rules('nascimento', 'data de nascimento', array('callback_date_check'));
         $this->form_validation->set_rules('nivel', 'nivel', array('greater_than[0]'),array('greater_than'=>'Selecione o nível acadêmico.'));
         $this->form_validation->set_rules('contrato','contrato',array('greater_than[0]'),array('greater_than'=>'Selecione um contrato.'));
-				$this->form_validation->set_rules('coordena','curso',array(array('coordenadorCurso',array($this->Professor_model,'verificaCoordenadorCurso'))));
+		$this->form_validation->set_rules('coordena','curso',array(array('coordenadorCurso',array($this->Professor_model,'verificaCoordenadorCurso'))));
 
 				$this->form_validation->set_message('coordenadorCurso','Curso selecionado já possui um coordenador');
 

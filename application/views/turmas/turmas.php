@@ -83,7 +83,7 @@
 		<!-- Aqui é o formulário de registro do novo item-->
 		<div id="new" class="tab-pane fade">
 			<h3>Cadastrar Turma</h3>
-			<?= form_open('Turma/cadastrar') ?>
+			<?= form_open('Turma/cadastrar', 'id="cadastrarTurma"') ?>
 
 				<div class="row">
 					<div class="form-group col-md-2">
@@ -157,7 +157,7 @@
 			</div>
 			<div class="modal-body">
 
-				<?= form_open('Turma/atualizar') ?>
+				<?= form_open('Turma/atualizar', 'id="atualizarTurma"') ?>
 
 					<div class="form-group">
 						<input type="hidden" name="recipient-id" id="recipient-id">

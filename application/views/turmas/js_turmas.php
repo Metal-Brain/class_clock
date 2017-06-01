@@ -94,5 +94,40 @@
         });
     }
 </script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#cadastrarTurma').validate({
+			rules: {
+				sigla: { required: true, maxlength: 10 },
+				disciplina: { required: true, min: 1 },
+				qtdAlunos: { required: true, number: true, maxlength: 3, min: 1, max: 999 }
+			},
+			messages: {
+				sigla: { required: 'Campo obrigatório', maxlength: 'O campo sigla deve ter no máximo 10 caracteres' },
+				disciplina: { required: 'Campo obrigatório'},
+				qtdAlunos: { required: 'Campo obrigatório', number: 'Digite apenas números', maxlength: 'Digite um valor menor ou igual a 999', min: 'Digite um valor maior ou igual a 1', max: 'Digite um valor menor ou igual a 999' }
+			}
+		});
+	});
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#atualizarTurma').validate({
+			rules: {
+				'recipient-sigla': { required: true, maxlength: 10 },
+				'recipient-disciplina': { required: true, min: 1 },
+				'recipient-qtdAlunos': { required: true, number: true, maxlength: 3, min: 1, max: 999 }
+			},
+			messages: {
+				'recipient-sigla': { required: 'Campo obrigatório', maxlength: 'O campo sigla deve ter no máximo 10 caracteres' },
+				'recipient-disciplina': { required: 'Campo obrigatório'},
+				'recipient-qtdAlunos': { required: 'Campo obrigatório', number: 'Digite apenas números', maxlength: 'Digite um valor menor ou igual a 999', min: 'Digite um valor maior ou igual a 1', max: 'Digite um valor menor ou igual a 999' }
+			}
+		});
+	});
+</script>
+
 </body>
 </html>

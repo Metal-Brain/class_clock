@@ -118,7 +118,7 @@
 				<div class="row">
 					<div class="form-group col-md-2">
 						<label>Capacidade Máxima</label>
-						<input type="number" min="0" max="999" class="form-control" name="capMax" placeholder="ex: 30" required>
+						<input type="text" pattern="[0-9]+$" maxlength="3" class="form-control" name="capMax" placeholder="ex: 30" required>
 					</div>
 				</div>
 
@@ -148,16 +148,16 @@
             </div>
             <div class="modal-body">
 
-				<?= form_open('Sala/atualizar') ?>
+				<?= form_open('Sala/atualizar', 'id="atualizarSala"') ?>
 
                 <div class="form-group">
                     <input type="hidden" name="recipient-id" id="recipient-id">
                 </div>
 
 				<div class="row">
-					<div class="form-group col-md-2">
+					<div class="form-group col-md-4">
 						<label for="nSala-name" class="control-label">Sala</label>
-						<input type="number" min="0" class="form-control" name="recipient-nSala" id="recipient-nSala" required>
+						<input type="text" maxlength="5" class="form-control" name="recipient-nSala" id="recipient-nSala" required>
 					</div>
                 </div>
 
@@ -190,7 +190,7 @@
 				</div>
 				<div class="row">
 					<div class="form-group col-md-2">
-						<input type="number" max="999" maxlength="3" pattern="[0-9]+$"class="form-control" name="recipient-capMax" id="recipient-capMax" required>
+						<input type="text" maxlength="3" pattern="[0-9]+$" class="form-control" name="recipient-capMax" id="recipient-capMax" required>
 					</div>
                 </div>
 
@@ -274,7 +274,7 @@
 				</div>
 
                 <div class="modal-footer">
-                           <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                 </div>
 
 				<?= form_close() ?>
