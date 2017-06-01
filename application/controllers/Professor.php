@@ -433,6 +433,8 @@ class Professor extends CI_Controller {
 					redirect('/');
 			}
 		}
+                
+               
 
 		/**
 		 * Recebe o dia da semana e verifica se o professor logado tem disponibilidade
@@ -521,6 +523,26 @@ class Professor extends CI_Controller {
 					return $professores;
 			}
 		}
+                
+                public function Grade(){
+			if (verificaSessao() && verificaNivelPagina(array(2))){
+
+				if($this->form_validation->run() == FALSE){
+                                        $this->load->view('includes/header',$dados);
+					$this->load->view('includes/sidebar');
+					$this->load->view('grade/grades');
+					$this->load->view('includes/footer');
+					$this->load->view('grade/js_grades');
+				} else {
+
+					
+				}
+
+			}else{
+					redirect('/');
+			}
+		}
+                
 
  }
 
