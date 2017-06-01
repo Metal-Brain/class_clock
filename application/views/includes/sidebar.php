@@ -16,7 +16,9 @@
 							<li><?= anchor('Professor/coordenadorde','CoordenadorDe') ?></li>
 				<?php endif; ?>
 			<?php endif; ?>
-			<li><?= anchor('Grade','Grade') ?></li>
+                        <?php if ($this->session->nivel == 2) : ?>
+			<li><?= anchor('Professor/Grade','Grade') ?></li>
+                        <?php endif; ?>
 			<hr>
 			<?php if ($this->session->nivel == 2) : ?>
 				<li><?= anchor('Usuario/editar','<span class="glyphicon glyphicon-cog"></span> Configurações',array('aria-expanded'=>'true')) ?></li>
