@@ -84,12 +84,12 @@
         <div id="new" class="tab-pane fade">
             <h3>Cadastrar Sala</h3>
 
-            <form action="" method="post">
+            <form action="" method="post" id="cadastrarSala">
 
 				<div class="row">
 					<div class="form-group col-md-2">
 						<label>Sala</label>
-						<input type="number" min="0" class="form-control" pattern="[0-9]+$" name="nSala" placeholder="ex: 110" required>
+						<input type="text" maxlength="5" class="form-control" pattern="[0-9]+$" name="nSala" placeholder="ex: 110" required>
 					</div>
 				</div>
 

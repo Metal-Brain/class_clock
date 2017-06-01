@@ -86,5 +86,22 @@
         });
     }
 </script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#cadastrarSala').validate({
+			rules: {
+				nSala: { required: true, maxlength: 5 },
+				tipo: { required: true},
+				capMax: { required: true, number: true, min: 1 }
+			},
+			messages: {
+				nSala: { required: 'Campo obrigatório', maxlength: 'O campo sala deve ter no máximo 5 caracteres' },
+				tipo: { required: 'Campo obrigatório'},
+				capMax: { required: 'Campo obrigatório', number: 'Digite apenas números', min: 'Digite um valor maior ou igual a 1' }
+			}
+		});
+	});
+</script>
 </body>
 </html>

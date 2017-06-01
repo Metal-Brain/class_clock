@@ -179,7 +179,7 @@
 				cursoSigla: { required: 'Campo obrigatório', maxlength: 'O campo sigla deve ter no máximo 5 caracteres' },
 				cursoQtdSemestres: { required: 'Campo obrigatório', number: 'Digite apenas números', min: 'Digite um valor maior ou igual a 1', max: 'Digite um valor menor ou igual a 19'},
 				'cursoPeriodos[]': { required: 'Campo obrigatório' },
-				cursoGrau: {required: 'Campo obrigatório', min: 'Campo obrigatório' },
+				cursoGrau: { required: 'Campo obrigatório', min: 'Campo obrigatório' },
 				'cursoDisciplinas[]': { required: 'Campo obrigatório' }
 			}
 		});
