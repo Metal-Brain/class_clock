@@ -17,58 +17,54 @@
 				<div class="col-md-12">
 					<div class="container">
 						<div class="row">
-							
-						
-
 							<div class="row">
 								<div class="col-sm-10">
 									<h3 class="text-center">Grade</h3>
-                                                                        <table class="table table-bordered"> 
-                                                                          <tr>
-                                                                              <th class="text-center" style="background-color: #4CAF50; color: #fff;" colspan="6">1° Semestre</th>
-                                                                          </tr>  
+
+									<pre>
+										<?php print_r($this->session->userdata()) ?>
+									</pre>
+
+									<?php if (isset($grade)) : ?>
 									<table class="table table-bordered">
-                                                                            
-                                                                            
-                                                                            <tr>
-                                                                                <td rowspan="6" class="dsemana" style="padding-top: 5%;"><b>2° <br />Segunda</b></td>
+										<tr>
+											<th class="text-center" style="background-color: #4CAF50; color: #fff;" colspan="6">1° Semestre</th>
+										</tr>
+										<table class="table table-bordered">
+											<tr>
+											<td rowspan="6" class="dsemana" style="padding-top: 5%;"><b>2° <br />Segunda</b></td>
 											<th class="dsemana"></th>
-                                                                                        <th class="dsemana">Disciplina</th>
+											<th class="dsemana">Disciplina</th>
 											<th class="dsemana">Turma</th>
-                                                                                        <th class="dsemana">Profesor</th>
+											<th class="dsemana">Profesor</th>
 											<th class="dsemana">Sala</th>
 										</tr>
-											<tr>
-                                                                                                <td class="text-center">1</td>
+												<tr>
+												<td class="text-center">1</td>
 												<td class="text-center">MD1 A1</td>
-                                                                                                <td class="text-center">ADS</td>
+												<td class="text-center">ADS</td>
 												<td class="text-center">MARILENE</td>
-                                                                                                <td class="text-center">A209</td>
-						
+												<td class="text-center">A209</td>
 											</tr>
-                                                                                        <tr>
-                                                                                                <td class="text-center">1</td>
+												<tr>
+												<td class="text-center">1</td>
 												<td class="text-center">MD1 A1</td>
-                                                                                                <td class="text-center">ADS</td>
+												<td class="text-center">ADS</td>
 												<td class="text-center">MARILENE</td>
-                                                                                                <td class="text-center">A209</td>
-						
+												<td class="text-center">A209</td>
 											</tr>
-                                                                                        <tr>
-                                                                                                <td class="text-center">1</td>
-												<td class="text-center">MD1 A1</td>
-                                                                                                <td class="text-center">ADS</td>
-												<td class="text-center">MARILENE</td>
-                                                                                                <td class="text-center">A209</td>
-						
-											</tr>
-                                                                                        
+												<tr>
+													<td class="text-center">1</td>
+													<td class="text-center">MD1 A1</td>
+                        	<td class="text-center">ADS</td>
+													<td class="text-center">MARILENE</td>
+                        	<td class="text-center">A209</td>
+												</tr>
+											</table>
 									</table>
-                                                                          
-                                                                          
-                                                                        
-                                                                        </table>
-                                                                        
+									<?php elseif ($this->session->isCoordenador) : ?>
+										<?= anchor('Professor/gerarGrade/'.$this->session->id,'Gerar Grade',array('class'=>'btn btn-success btn-block','style'=>'color: white;')) ?>
+									<?php endif; ?>
 								</div>
 							</div>
 						</div>

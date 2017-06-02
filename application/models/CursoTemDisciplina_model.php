@@ -58,6 +58,10 @@
       return $result->num_rows();
     }
 
+    public function getDisciplinasByCurso ($idCurso, $semestre=NULL) {
+
+    }
+
   }
 
 ?>
