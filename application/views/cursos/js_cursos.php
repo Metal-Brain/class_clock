@@ -144,16 +144,16 @@
 	$(document).ready(function(){
 		$('#cadastrarCurso').validate({
 			rules: {
-				nome: { required: true, minlength: 5 },
-				sigla: { required: true, maxlength: 5 },
+				nome: { required: true, minlength: 5, remote: '<?= base_url("index.php/Curso/verificaNome/") ?>' },
+				sigla: { required: true, maxlength: 5, remote:  '<?= base_url("index.php/Curso/verificaSigla/") ?>' },
 				qtdSemestres: { required: true, number: true, min: 1, max: 19 },
 				'periodo[]': { required: true },
 				grau: {required: true, min: 1},
 				'disciplinas[]': { required: true }
 			},
 			messages: {
-				nome: { required: 'Campo obrigatório', minlength: 'O campo nome deve ter no mínimo 5 caracteres' },
-				sigla: { required: 'Campo obrigatório', maxlength: 'O campo sigla deve ter no máximo 5 caracteres' },
+				nome: { required: 'Campo obrigatório', minlength: 'O campo nome deve ter no mínimo 5 caracteres', remote: 'Este nome já está em uso' },
+				sigla: { required: 'Campo obrigatório', maxlength: 'O campo sigla deve ter no máximo 5 caracteres', remote: 'Esta sigla já está em uso' },
 				qtdSemestres: { required: 'Campo obrigatório', number: 'Digite apenas números', min: 'Digite um valor maior ou igual a 1', max: 'Digite um valor menor ou igual a 19'},
 				'periodo[]': { required: 'Campo obrigatório' },
 				grau: {required: 'Campo obrigatório', min: 'Campo obrigatório' },
@@ -165,10 +165,25 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
+		jQuery.validator.addMethod("checkChangeName", function(value) {
+			$('#nomeCurso').change(function() {
+				if(value != ('#nomeCurso').val()) <!-- ARRUMAR ISSO AQUI -->
+					'<?= base_url("index.php/Curso/verificaNomeAtualizar/") ?>';
+			});
+		},
+		$.validator.format("Este nome já está em uso"));
+		
+		jQuery.validator.addMethod("checkChangeInitials", function() {
+			$('#cursoSigla').change(function() {
+				'<?= base_url("index.php/Curso/verificaSiglaAtualizar/") ?>';
+			});
+		},
+		$.validator.format("Esta sigla já está em uso"));
+		
 		$('#alterarCurso').validate({
 			rules: {
-				nomeCurso: { required: true, minlength: 5 },
-				cursoSigla: { required: true, maxlength: 5 },
+				nomeCurso: { required: true, minlength: 5, checkChangeName: true },
+				cursoSigla: { required: true, maxlength: 5, checkChangeInitials: true },
 				cursoQtdSemestres: { required: true, number: true, min: 1, max: 19 },
 				'cursoPeriodos[]': { required: true },
 				cursoGrau: {required: true, min: 1},
