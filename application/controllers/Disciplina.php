@@ -172,6 +172,31 @@
         redirect('/');
       }
     }
+
+    public function verificaNome(){
+      $validate_data = array('nome' => $this->input->get('nome'));
+      $this->form_validation->set_data($validate_data);
+      $this->form_validation->set_rules('nome', 'nome da disciplina', 'is_unique[Disciplina.nome]');
+
+      if($this->form_validation->run() == FALSE){
+        echo "false";
+      }else{
+        echo "true";
+      }
+    }
+
+    public function verificaSigla(){
+      $validate_data = array('sigla' => $this->input->get('sigla'));
+      $this->form_validation->set_data($validate_data);
+      $this->form_validation->set_rules('sigla', 'sigla da disciplina', 'is_unique[Disciplina.sigla]');
+
+      if($this->form_validation->run() == FALSE){
+        echo "false";
+      }else{
+        echo "true";
+      }
+    }
+
   }
 
 ?>

@@ -95,15 +95,15 @@
 	$(document).ready(function(){
 		$('#cadastrarDisciplina').validate({
 			rules: {
-				nome: { required: true, minlength: 5 },
-				sigla: { required: true, maxlength: 5 },
+				nome: { required: true, minlength: 5, remote: '<?= base_url("index.php/Disciplina/verificaNome/") ?>' },
+				sigla: { required: true, maxlength: 5, remote: '<?= base_url("index.php/Disciplina/verificaSigla/") ?>' },
 				qtdProf: { required: true, number: true, min: 1 },
 				semestre: { required: true, number: true, min: 1, max: 19 }
-				
+
 			},
 			messages: {
-				nome: { required: 'Campo obrigatório', minlength: 'O campo nome deve ter no mínimo 5 caracteres' },
-				sigla: { required: 'Campo obrigatório', maxlength: 'O campo sigla deve ter no máximo 5 caracteres' },
+				nome: { required: 'Campo obrigatório', minlength: 'O campo nome deve ter no mínimo 5 caracteres', remote: 'Este nome já está em uso' },
+				sigla: { required: 'Campo obrigatório', maxlength: 'O campo sigla deve ter no máximo 5 caracteres', remote: 'Esta sigla já está em uso' },
 				qtdProf: { required: 'Campo obrigatório', number: 'Digite apenas números', min: 'Digite um valor maior ou igual a 1' },
 				semestre: { required: 'Campo obrigatório', number: 'Digite apenas números', min: 'Digite um valor maior ou igual a 1', max: 'Digite um valor menor ou igual a 19'}
 			}
