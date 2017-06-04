@@ -242,16 +242,47 @@
 					},
 					messages: {
 						nome: { required: 'Campo obrigatório', minlength: 'O campo nome deve ter no mínimo 5 caracteres', maxlength: 'O campo nome deve ter no máximo 255 caracteres' },
-						matricula: { required: 'Campo obrigatório'},
+						matricula: { required: 'Campo obrigatório' , minlength:'insira exatamente 8 caracteres'},
 						email: { required: 'Campo obrigatório', email: 'Insira um e-mail válido' },
 						nascimento: { required: 'Campo obrigatório'},
 						nivel: { required: 'Campo obrigatório', min: 'Campo obrigatório'},
 						contrato: { required: 'Campo obrigatório', min: 'Campo obrigatório'}
 					}
 				});
+				
+				
+				$('#modalProfessor').validate({
+					rules: {
+						'recipient-nome': { required: true, minlength: 5, maxlength: 255 },
+						'recipient-matricula': { required: true, minlength: 8},
+						'recipient-email': { required: true, email: true },
+						'recipient-nascimento': { required: true, date: true},
+						'recipient-nivelAcademico': { required: true, min: 1 },
+						'recipient-contrato': { required: true, min: 1},
+						'recipient-coordenador': { required: function (element) { <!-- PAREI AQUI -->
+							if($('#recipient-coordenador').is(':checked')){
+								var e = document.getElementById("coordena");
+								return e.options[e.selectedIndex].value=="" ;                           
+							} else {
+								return false;
+							}
+						}}
+					},
+					messages: {
+						'recipient-nome': { required: 'Campo obrigatório', minlength: 'O campo nome deve ter no mínimo 5 caracteres', maxlength: 'O campo nome deve ter no máximo 255 caracteres' },
+						'recipient-matricula': { required: 'Campo obrigatório' , minlength:'insira exatamente 8 caracteres'},
+						'recipient-email': { required: 'Campo obrigatório', email: 'Insira um e-mail válido' },
+						'recipient-nascimento': { required: 'Campo obrigatório'},
+						'recipient-nivelAcademico': { required: 'Campo obrigatório', min: 'Campo obrigatório'},
+						'recipient-contrato': { required: 'Campo obrigatório', min: 'Campo obrigatório'},
+						'recipient-coordenador': { required: 'Campo obrigatório', min: 'Campo obrigatório'}
+					}
+				});
+				
 			});
 			
 		</script>
-
+		
+		
 	</body>
 </html>

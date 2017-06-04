@@ -216,7 +216,7 @@
 				<h4 class="modal-title" id="exampleModalLabel">Professor</h4>
 			</div>
 			<div class="modal-body">
-				<?= form_open('Professor/atualizar') ?>
+				<?= form_open('Professor/atualizar', 'id=modalProfessor') ?>
 					<div class="form-group">
 						<input type="hidden" name="recipient-id" id="recipient-id">
 					</div>
@@ -235,9 +235,9 @@
 					</div>
 
 					<div class="row">
-						<div class="form-group col-md-4">
+						<div class="form-group col-md-8">
 							<label>Matrícula</label>
-							<input type="text" class="form-control" name="recipient-matricula"  id="recipient-matricula" maxlength="8" placeholder="ex: cg0000000" value="<?= set_value('recipient-matricula')?>" required/>
+							<input type="text" class="form-control" name="recipient-matricula"  id="recipient-matricula" maxlength="8" placeholder="ex: cg0000000" value="<?= set_value('recipient-matricula')?>" required style=" width:140px;"/>
 						</div>
 					</div>
 
