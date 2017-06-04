@@ -226,7 +226,7 @@
 				$('#cadastrarProfessor').validate({
 					rules: {
 						nome: { required: true, minlength: 5, maxlength: 255 },
-						matricula: { required: true, exactlength: 8 },
+						matricula: { required: true, minlength: 8},
 						email: { required: true, email: true },
 						nascimento: { required: true, date: true},
 						nivel: { required: true, min: 1 },
@@ -239,6 +239,7 @@
 								return false;
 							}
 						}}
+					},
 					messages: {
 						nome: { required: 'Campo obrigatório', minlength: 'O campo nome deve ter no mínimo 5 caracteres', maxlength: 'O campo nome deve ter no máximo 255 caracteres' },
 						matricula: { required: 'Campo obrigatório'},
@@ -249,6 +250,7 @@
 					}
 				});
 			});
+			
 		</script>
 
 	</body>
