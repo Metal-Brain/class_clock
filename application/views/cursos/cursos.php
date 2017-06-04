@@ -213,9 +213,9 @@
 				</div>
 
 				<div class="row">
-					<div class="form-group col-md-3">
+					<div class="form-group col-md-8">
 						<?= form_label('Sigla:', 'recipient-sigla', array('class' => 'control-label')) ?>
-						<?= form_input('cursoSigla', set_value('cursoSigla'), array('class' => 'form-control', 'id' => 'recipient-sigla', 'maxlength' => '5', 'required' => 'required')) ?>
+						<?= form_input('cursoSigla', set_value('cursoSigla'), array('class' => 'form-control', 'id' => 'recipient-sigla', 'maxlength' => '5', 'required' => 'required' , 'style' => 'width: 90px')) ?>
 					</div>
 				</div>
 
@@ -232,8 +232,8 @@
 				</div>
 
 				<div class="row">
-					<div class="form-group col-md-2">
-						<?= form_input('cursoQtdSemestres', set_value('cursoQtdSemestres'), array('pattern' => '[0-9]+$', 'maxlength' => '2', 'id' => 'recipient-semestres', 'class' => 'form-control', 'required' => 'required')) ?>
+					<div class="form-group col-md-8">
+						<?= form_input('cursoQtdSemestres', set_value('cursoQtdSemestres'), array('pattern' => '[0-9]+$', 'maxlength' => '2', 'id' => 'recipient-semestres', 'class' => 'form-control', 'required' => 'required' ,'style' => 'width: 50px')) ?>
 					</div>
 				</div>
 

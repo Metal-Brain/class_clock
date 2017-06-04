@@ -197,9 +197,9 @@
 				</div>
 
 				<div class="row">
-					<div class="form-group col-md-3">
+					<div class="form-group col-md-8">
 						<label for="sigla-name" class="control-label">Sigla:</label>
-						<input type="text" maxlength="5" class="form-control" name="recipient-sigla" id="recipient-sigla" required>
+						<input type="text" maxlength="5" class="form-control" name="recipient-sigla" id="recipient-sigla" required style="width:90px;">
 					</div>
 				</div>
 
@@ -216,8 +216,8 @@
 				</div>
 
 				<div class="row">
-					<div class="form-group col-md-2">
-						<input type="text" maxlength="1" pattern="[0-9]+$" class="form-control" name="recipient-qtd-prof" id="recipient-qtd-prof" required>
+					<div class="form-group col-md-8">
+						<input type="text" maxlength="1" pattern="[0-9]+$" class="form-control" name="recipient-qtd-prof" id="recipient-qtd-prof" required style=" width:50px;">
 					</div>
 				</div>
 
@@ -235,8 +235,8 @@
 				</div>
 
 				<div class="row">
-					<div class="form-group col-md-2">
-						<input type="text" maxlength="2" pattern="[0-9]+$"  class="form-control" name="recipient-semestre" id="recipient-semestre" required>
+					<div class="form-group col-md-8">
+						<input type="text" maxlength="2" pattern="[0-9]+$"  class="form-control" name="recipient-semestre" id="recipient-semestre" required style=" width:50px;">
 					</div>
 				</div>
 
