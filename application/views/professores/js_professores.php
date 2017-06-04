@@ -242,7 +242,7 @@
 					},
 					messages: {
 						nome: { required: 'Campo obrigatório', minlength: 'O campo nome deve ter no mínimo 5 caracteres', maxlength: 'O campo nome deve ter no máximo 255 caracteres' },
-						matricula: { required: 'Campo obrigatório' , minlength:'insira exatamente 8 caracteres'},
+						matricula: { required: 'Campo obrigatório' , minlength:'Insira exatamente 8 caracteres'},
 						email: { required: 'Campo obrigatório', email: 'Insira um e-mail válido' },
 						nascimento: { required: 'Campo obrigatório'},
 						nivel: { required: 'Campo obrigatório', min: 'Campo obrigatório'},
@@ -270,7 +270,7 @@
 					},
 					messages: {
 						'recipient-nome': { required: 'Campo obrigatório', minlength: 'O campo nome deve ter no mínimo 5 caracteres', maxlength: 'O campo nome deve ter no máximo 255 caracteres' },
-						'recipient-matricula': { required: 'Campo obrigatório' , minlength:'insira exatamente 8 caracteres'},
+						'recipient-matricula': { required: 'Campo obrigatório' , minlength:'Insira exatamente 8 caracteres'},
 						'recipient-email': { required: 'Campo obrigatório', email: 'Insira um e-mail válido' },
 						'recipient-nascimento': { required: 'Campo obrigatório'},
 						'recipient-nivelAcademico': { required: 'Campo obrigatório', min: 'Campo obrigatório'},
