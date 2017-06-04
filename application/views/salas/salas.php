@@ -155,9 +155,9 @@
                 </div>
 
 				<div class="row">
-					<div class="form-group col-md-4">
+					<div class="form-group col-md-8">
 						<label for="nSala-name" class="control-label">Sala</label>
-						<input type="text" maxlength="5" class="form-control" name="recipient-nSala" id="recipient-nSala" required>
+						<input type="text" maxlength="5" class="form-control" name="recipient-nSala" id="recipient-nSala" required style="width:90px;">
 					</div>
                 </div>
 
@@ -184,13 +184,13 @@
 				</div>
 
 				<div class="row">
-					<div class="col-md-4">
+					<div class="col-md-8">
 						<label for="capMax-name" class="control-label">Capacidade Máxima</label>
 					</div>
 				</div>
 				<div class="row">
 					<div class="form-group col-md-2">
-						<input type="text" maxlength="3" pattern="[0-9]+$" class="form-control" name="recipient-capMax" id="recipient-capMax" required>
+						<input type="text" maxlength="3" pattern="[0-9]+$" class="form-control" name="recipient-capMax" id="recipient-capMax" required style=" width:50px;">
 					</div>
                 </div>
 
