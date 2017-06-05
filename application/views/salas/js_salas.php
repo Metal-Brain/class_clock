@@ -91,12 +91,12 @@
 	$(document).ready(function(){
 		$('#cadastrarSala').validate({
 			rules: {
-				nSala: { required: true, maxlength: 5 },
+				nSala: { required: true, maxlength: 5, remote: '<?= base_url("index.php/Sala/verificaSala/") ?>' },
 				tipo: { required: true},
 				capMax: { required: true, number: true, maxlength: 5, min: 1, max: 999 }
 			},
 			messages: {
-				nSala: { required: 'Campo obrigatório', maxlength: 'O campo sala deve ter no máximo 5 caracteres' },
+				nSala: { required: 'Campo obrigatório', maxlength: 'O campo sala deve ter no máximo 5 caracteres', remote: 'Este nome já está em uso' },
 				tipo: { required: 'Campo obrigatório'},
 				capMax: { required: 'Campo obrigatório', number: 'Digite apenas números', maxlength: 'Digite um valor menor ou igual a 999', min: 'Digite um valor maior ou igual a 1', max: 'Digite um valor menor ou igual a 999' }
 			}

@@ -28,7 +28,7 @@ class Professor extends CI_Controller {
         $this->load->library(array('form_validation','My_PHPMailer'));
         $this->load->helper(array('form','dropdown','date','password'));
         $this->load->model(array(
-					'Curso_model',
+		  'Curso_model',
           'Professor_model',
           'Disciplina_model',
           'Competencia_model',
@@ -39,13 +39,13 @@ class Professor extends CI_Controller {
         // Definir as regras de validação para cada campo do formulário.
         $this->form_validation->set_rules('nome', 'nome do professor', array('required','min_length[5]','max_length[255]','ucwords'));
         $this->form_validation->set_rules('matricula', 'matrícula', array('required','exact_length[8]','is_unique[Usuario.matricula]','strtoupper'));
-				$this->form_validation->set_rules('email','e-mail',array('required','valid_email','is_unique[Usuario.email]'));
+		$this->form_validation->set_rules('email','e-mail',array('required','valid_email','is_unique[Usuario.email]'));
         $this->form_validation->set_rules('nascimento', 'data de nascimento', array('callback_date_check'));
         $this->form_validation->set_rules('nivel', 'nivel', array('greater_than[0]'),array('greater_than'=>'Selecione o nível acadêmico.'));
         $this->form_validation->set_rules('contrato','contrato',array('greater_than[0]'),array('greater_than'=>'Selecione um contrato.'));
-				$this->form_validation->set_rules('coordena','curso',array(array('coordenadorCurso',array($this->Professor_model,'verificaCoordenadorCurso'))));
-
-				$this->form_validation->set_message('coordenadorCurso','Curso selecionado já possui um coordenador');
+		$this->form_validation->set_rules('coordena','curso',array(array('coordenadorCurso',array($this->Professor_model,'verificaCoordenadorCurso'))));
+		
+		$this->form_validation->set_message('coordenadorCurso','Curso selecionado já possui um coordenador');
 
         // Definição dos delimitadores
         $this->form_validation->set_error_delimiters('<p class="text-danger">','</p>');
@@ -191,14 +191,15 @@ class Professor extends CI_Controller {
         // Definir as regras de validação para cada campo do formulário.
         $this->form_validation->set_rules('recipient-nome', 'nome do professor', array('required','min_length[5]','max_length[255]','ucwords'));
         $this->form_validation->set_rules('recipient-matricula', 'matrícula', array('required','exact_length[8]','strtoupper'));
-				$this->form_validation->set_rules('recipient-email','e-mail',array('required','valid_email'));
+		$this->form_validation->set_rules('recipient-email','e-mail',array('required','valid_email'));
         $this->form_validation->set_rules('recipient-nascimento', 'data de nascimento', array('callback_date_check'));
         $this->form_validation->set_rules('recipient-nivelAcademico', 'nivel', array('greater_than[0]'),array('greater_than'=>'Selecione o nível acadêmico.'));
         $this->form_validation->set_rules('recipient-contrato','contrato',array('greater_than[0]'),array('greater_than'=>'Selecione um contrato.'));
-				$this->form_validation->set_rules('coordena','curso',array(array('coordenadorCurso',array($this->Professor_model,'verificaCoordenadorCurso'))));
+		$this->form_validation->set_rules('recipient-coordena','curso',array(array('coordenadorCurso',array($this->Professor_model,'verificaCoordenadorCurso'))));
 
-				$this->form_validation->set_message('coordenadorCurso','Curso selecionado já possui um coordenador');
-        // Definição dos delimitadores
+		$this->form_validation->set_message('coordenadorCurso','Curso selecionado já possui um coordenador');
+        
+		// Definição dos delimitadores
         $this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
         // Verifica se o formulario é valido
         if ($this->form_validation->run() == FALSE) {
@@ -572,6 +573,30 @@ class Professor extends CI_Controller {
 					echo '</pre>';
 				}
 			}
+		}
+		
+		public function verificaMatricula(){
+		  $validate_data = array('matricula' => $this->input->get('matricula'));
+		  $this->form_validation->set_data($validate_data);
+		  $this->form_validation->set_rules('matricula', 'matrícula', 'is_unique[Usuario.matricula]');
+
+		  if($this->form_validation->run() == FALSE){
+			echo "false";
+		  }else{
+			echo "true";
+		  }
+		}
+		
+		public function verificaEmail(){
+		  $validate_data = array('email' => $this->input->get('email'));
+		  $this->form_validation->set_data($validate_data);
+		  $this->form_validation->set_rules('email', 'email', 'is_unique[Usuario.email]');
+
+		  if($this->form_validation->run() == FALSE){
+			echo "false";
+		  }else{
+			echo "true";
+		  }
 		}
 
 

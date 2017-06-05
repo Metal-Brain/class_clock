@@ -191,35 +191,11 @@
         echo "true";
       }
     }
-	
-	public function verificaNomeAtualizar(){
-      $validate_data = array('nomeCurso' => $this->input->get('nomeCurso'));
-      $this->form_validation->set_data($validate_data);
-      $this->form_validation->set_rules("nomeCurso", 'nome do curso', 'is_unique[Curso.nome]');
-
-      if($this->form_validation->run() == FALSE){
-        echo "false";
-      }else{
-        echo "true";
-      }
-    }
 
     public function verificaSigla(){
       $validate_data = array('sigla' => $this->input->get('sigla'));
       $this->form_validation->set_data($validate_data);
       $this->form_validation->set_rules('sigla', 'sigla', 'is_unique[Curso.sigla]');
-
-      if($this->form_validation->run() == FALSE){
-        echo "false";
-      }else{
-        echo "true";
-      }
-    }
-	
-	public function verificaSiglaAtualizar(){
-      $validate_data = array('cursoSigla' => $this->input->get('cursoSigla'));
-      $this->form_validation->set_data($validate_data);
-      $this->form_validation->set_rules('cursoSigla', 'sigla do curso', 'is_unique[Curso.sigla]');
 
       if($this->form_validation->run() == FALSE){
         echo "false";

@@ -58,7 +58,7 @@
 							<td><center><?= $disciplina['sigla'] ?></td>
 							<td><center><?= $disciplina['nome'] ?></td>
 							<td><center><?= $disciplina['qtdProf'] ?></td>
-              <td><center><?= $disciplina['semestre'] ?></td>
+							<td><center><?= $disciplina['semestre'] ?></td>
 							<td><center><?php
 								if ($disciplina['status']): echo "Ativo";
 								else: echo "Inativo";
@@ -124,8 +124,8 @@
 				</div>
 
 				<div class="row">
-					<div class="form-group col-md-2">
-						<input type="text" maxlength="1" pattern="[0-9]+$" class="form-control percent-5" name="qtdProf" placeholder="ex: 1" value="<?= set_value('qtdProf') ?>" required>
+					<div class="form-group col-md-4">
+						<input type="text" maxlength="1" pattern="[0-9]+$" class="form-control percent-5" name="qtdProf" placeholder="ex: 1" value="<?= set_value('qtdProf') ?>" required style="width: 100px">
 					</div>
 				</div>
 
@@ -142,8 +142,8 @@
 				</div>
 
 				<div class="row">
-					<div class="form-group col-md-2">
-						<input type="text" maxlength="2" pattern="[0-9]+$" class="form-control percent-5" name="semestre" placeholder="ex: 6" value="<?= set_value('semestre') ?>" required>
+					<div class="form-group col-md-4">
+						<input type="text" maxlength="2" pattern="[0-9]+$" class="form-control percent-5" name="semestre" placeholder="ex: 6" value="<?= set_value('semestre') ?>" required style="width: 100px">
 					</div>
 				</div>
 				
@@ -152,8 +152,6 @@
 						<?= form_error('semestre') ?>
 					</div>
 				</div>
-
-
 
                 <div class="inline">
                     <button type='submit' class='btn bt-lg btn-primary'>Cadastrar</button>
@@ -227,8 +225,7 @@
 					</div>
 				</div>
 
-
-        <div class="row">
+				<div class="row">
 					<div class="col-md-5">
 						<label for="semestre" class="control-label">Semestre:</label>
 					</div>

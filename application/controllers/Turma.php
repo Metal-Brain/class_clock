@@ -183,6 +183,19 @@
        }
 
     }
+	
+	public function verificaTurma(){
+      $validate_data = array('sigla' => $this->input->get('sigla'));
+      $this->form_validation->set_data($validate_data);
+      $this->form_validation->set_rules('sigla', 'sigla da disciplina', 'is_unique[Turma.sigla]');
+
+      if($this->form_validation->run() == FALSE){
+        echo "false";
+      }else{
+        echo "true";
+      }
+    }
+	
    }
 
 ?>

@@ -113,24 +113,10 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		jQuery.validator.addMethod("checkChangeName", function() {
-			$('#recipient-nome').change(function() {
-				'<?= base_url("index.php/Disciplina/verificaNomeAtualizar/") ?>';
-			});
-		},
-		$.validator.format("Este nome já está em uso"));
-		
-		jQuery.validator.addMethod("checkChangeInitials", function() {
-			$('#recipient-sigla').change(function() {
-				'<?= base_url("index.php/Disciplina/verificaSiglaAtualizar/") ?>';
-			});
-		},
-		$.validator.format("Esta sigla já está em uso"));
-				
 		$('#alterarDisciplina').validate({
 			rules: {
-				'recipient-nome': { required: true, minlength: 5, checkChangeName: true },
-				'recipient-sigla': { required: true, maxlength: 5, checkChangeInitials: true },
+				'recipient-nome': { required: true, minlength: 5 },
+				'recipient-sigla': { required: true, maxlength: 5 },
 				'recipient-qtd-prof': { required: true, number: true, min: 1 },
 				'recipient-semestre': { required: true, number: true, min: 1, max: 19 }
 			},

@@ -165,25 +165,10 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		jQuery.validator.addMethod("checkChangeName", function(value) {
-			$('#nomeCurso').change(function() {
-				if(value != ('#nomeCurso').val()) <!-- ARRUMAR ISSO AQUI -->
-					'<?= base_url("index.php/Curso/verificaNomeAtualizar/") ?>';
-			});
-		},
-		$.validator.format("Este nome já está em uso"));
-		
-		jQuery.validator.addMethod("checkChangeInitials", function() {
-			$('#cursoSigla').change(function() {
-				'<?= base_url("index.php/Curso/verificaSiglaAtualizar/") ?>';
-			});
-		},
-		$.validator.format("Esta sigla já está em uso"));
-		
 		$('#alterarCurso').validate({
 			rules: {
-				nomeCurso: { required: true, minlength: 5, checkChangeName: true },
-				cursoSigla: { required: true, maxlength: 5, checkChangeInitials: true },
+				nomeCurso: { required: true, minlength: 5 },
+				cursoSigla: { required: true, maxlength: 5 },
 				cursoQtdSemestres: { required: true, number: true, min: 1, max: 19 },
 				'cursoPeriodos[]': { required: true },
 				cursoGrau: {required: true, min: 1},

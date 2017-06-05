@@ -87,9 +87,9 @@
             <form action="" method="post" id="cadastrarSala">
 
 				<div class="row">
-					<div class="form-group col-md-2">
+					<div class="form-group col-md-4">
 						<label>Sala</label>
-						<input type="text" maxlength="5" class="form-control" pattern="[0-9]+$" name="nSala" placeholder="ex: 110" required>
+						<input type="text" maxlength="5" class="form-control" pattern="[0-9]+$" name="nSala" placeholder="ex: 110" required style="width: 100px;">
 					</div>
 				</div>
 
@@ -116,9 +116,9 @@
 				</div>
 
 				<div class="row">
-					<div class="form-group col-md-2">
+					<div class="form-group col-md-4">
 						<label>Capacidade Máxima</label>
-						<input type="text" pattern="[0-9]+$" maxlength="3" class="form-control" name="capMax" placeholder="ex: 30" required>
+						<input type="text" pattern="[0-9]+$" maxlength="3" class="form-control" name="capMax" placeholder="ex: 30" required style="width: 100px">
 					</div>
 				</div>
 
@@ -188,9 +188,10 @@
 						<label for="capMax-name" class="control-label">Capacidade Máxima</label>
 					</div>
 				</div>
+				
 				<div class="row">
-					<div class="form-group col-md-2">
-						<input type="text" maxlength="3" pattern="[0-9]+$" class="form-control" name="recipient-capMax" id="recipient-capMax" required style=" width:50px;">
+					<div class="form-group col-md-8">
+						<input type="text" maxlength="3" pattern="[0-9]+$" class="form-control" name="recipient-capMax" id="recipient-capMax" required style=" width:90px;">
 					</div>
                 </div>
 

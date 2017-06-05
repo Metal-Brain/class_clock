@@ -158,5 +158,17 @@
              }
 
            }
-         }
-       ?>
+		   
+			public function verificaSala(){
+			  $validate_data = array('nSala' => $this->input->get('nSala'));
+			  $this->form_validation->set_data($validate_data);
+			  $this->form_validation->set_rules('nSala', 'número da sala', 'is_unique[Sala.nSala]');
+
+			  if($this->form_validation->run() == FALSE){
+				echo "false";
+			  }else{
+				echo "true";
+			  }
+			}
+    }
+?>

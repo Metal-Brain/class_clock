@@ -221,29 +221,33 @@
 						check = false;  
 					return this.optional(element) || check;  
 				},  
-				"Insira uma data válida");  
+				"Insira uma data válida");
+				
+				jQuery.validator.addMethod("verificaCheckbox", function() {
+					if($('#coordenador').is(':checked')) {
+						if($('#coordena').val() == 0){
+							return true;
+						}else{
+							return false;
+						}	
+					}
+				},
+				$.validator.format("Campo obrigatório"));
 				
 				$('#cadastrarProfessor').validate({
 					rules: {
 						nome: { required: true, minlength: 5, maxlength: 255 },
-						matricula: { required: true, minlength: 8},
-						email: { required: true, email: true },
+						matricula: { required: true, minlength: 8, remote: '<?= base_url("index.php/Professor/verificaMatricula/") ?>' },
+						email: { required: true, email: true, remote: '<?= base_url("index.php/Professor/verificaEmail/") ?>' },
 						nascimento: { required: true, date: true},
 						nivel: { required: true, min: 1 },
 						contrato: { required: true, min: 1},
-						coordena: { required: function (element) { <!-- PAREI AQUI -->
-							if($('#coordenador').is(':checked')){
-								var e = document.getElementById("coordena");
-								return e.options[e.selectedIndex].value=="" ;                           
-							} else {
-								return false;
-							}
-						}}
+						coordena: { verificaCheckbox: true }
 					},
 					messages: {
 						nome: { required: 'Campo obrigatório', minlength: 'O campo nome deve ter no mínimo 5 caracteres', maxlength: 'O campo nome deve ter no máximo 255 caracteres' },
-						matricula: { required: 'Campo obrigatório' , minlength:'Insira exatamente 8 caracteres'},
-						email: { required: 'Campo obrigatório', email: 'Insira um e-mail válido' },
+						matricula: { required: 'Campo obrigatório' , minlength:'Insira exatamente 8 caracteres', remote: 'Esta matrícula já está em uso'},
+						email: { required: 'Campo obrigatório', email: 'Insira um e-mail válido', remote: 'Este e-mail já está em uso' },
 						nascimento: { required: 'Campo obrigatório'},
 						nivel: { required: 'Campo obrigatório', min: 'Campo obrigatório'},
 						contrato: { required: 'Campo obrigatório', min: 'Campo obrigatório'}
@@ -259,30 +263,21 @@
 						'recipient-nascimento': { required: true, date: true},
 						'recipient-nivelAcademico': { required: true, min: 1 },
 						'recipient-contrato': { required: true, min: 1},
-						'recipient-coordenador': { required: function (element) { <!-- PAREI AQUI -->
-							if($('#recipient-coordenador').is(':checked')){
-								var e = document.getElementById("coordena");
-								return e.options[e.selectedIndex].value=="" ;                           
-							} else {
-								return false;
-							}
-						}}
+						'recipient-coordena': { verificaCheckbox: true }
 					},
 					messages: {
 						'recipient-nome': { required: 'Campo obrigatório', minlength: 'O campo nome deve ter no mínimo 5 caracteres', maxlength: 'O campo nome deve ter no máximo 255 caracteres' },
-						'recipient-matricula': { required: 'Campo obrigatório' , minlength:'Insira exatamente 8 caracteres'},
+						'recipient-matricula': { required: 'Campo obrigatório' , minlength:'Insira exatamente 8 caracteres' },
 						'recipient-email': { required: 'Campo obrigatório', email: 'Insira um e-mail válido' },
-						'recipient-nascimento': { required: 'Campo obrigatório'},
-						'recipient-nivelAcademico': { required: 'Campo obrigatório', min: 'Campo obrigatório'},
-						'recipient-contrato': { required: 'Campo obrigatório', min: 'Campo obrigatório'},
-						'recipient-coordenador': { required: 'Campo obrigatório', min: 'Campo obrigatório'}
+						'recipient-nascimento': { required: 'Campo obrigatório' },
+						'recipient-nivelAcademico': { required: 'Campo obrigatório', min: 'Campo obrigatório' },
+						'recipient-contrato': { required: 'Campo obrigatório', min: 'Campo obrigatório' }
 					}
 				});
 				
 			});
 			
 		</script>
-		
 		
 	</body>
 </html>

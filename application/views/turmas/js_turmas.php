@@ -99,12 +99,12 @@
 	$(document).ready(function(){
 		$('#cadastrarTurma').validate({
 			rules: {
-				sigla: { required: true, maxlength: 10 },
+				sigla: { required: true, maxlength: 10, remote: '<?= base_url("index.php/Turma/verificaTurma/") ?>' },
 				disciplina: { required: true, min: 1 },
 				qtdAlunos: { required: true, number: true, maxlength: 3, min: 1, max: 999 }
 			},
 			messages: {
-				sigla: { required: 'Campo obrigatório', maxlength: 'O campo sigla deve ter no máximo 10 caracteres' },
+				sigla: { required: 'Campo obrigatório', maxlength: 'O campo sigla deve ter no máximo 10 caracteres', remote: 'Esta sigla já está em uso' },
 				disciplina: { required: 'Campo obrigatório'},
 				qtdAlunos: { required: 'Campo obrigatório', number: 'Digite apenas números', maxlength: 'Digite um valor menor ou igual a 999', min: 'Digite um valor maior ou igual a 1', max: 'Digite um valor menor ou igual a 999' }
 			}

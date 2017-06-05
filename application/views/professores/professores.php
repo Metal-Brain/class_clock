@@ -100,9 +100,9 @@
 				</div>
 
 				<div class="row">
-					<div class="form-group col-md-2">
+					<div class="form-group col-md-3">
 						<label>Matrícula</label>
-						<input type="text" class="form-control" name="matricula"  maxlength="8" placeholder="ex: cg000000" value="<?= set_value('matricula')?>" required/>
+						<input type="text" class="form-control" name="matricula"  maxlength="8" placeholder="ex: cg000000" value="<?= set_value('matricula')?>" required style="width: 150px"/>
 					</div>
 				</div>
 
@@ -323,13 +323,13 @@
 					<div id="coordena2" class="row">
 						<div class="form-group col-md-9">
 							<label>Coordenador do curso</label>
-							<?= form_dropdown('coordena',$cursos,set_value('coordena'),array('class'=>'form-control')) ?>
+							<?= form_dropdown('recipient-coordena',$cursos,set_value('recipient-coordena'),array('class'=>'form-control')) ?>
 						</div>
 					</div>
 
 					<div class="row">
 						<div class="col-md-6 margin-top-error">
-							<?= form_error('coordena') ?>
+							<?= form_error('recipient-coordena') ?>
 						</div>
 					</div>
 

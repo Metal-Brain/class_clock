@@ -86,9 +86,9 @@
 			<?= form_open('Turma/cadastrar', 'id="cadastrarTurma"') ?>
 
 				<div class="row">
-					<div class="form-group col-md-2">
+					<div class="form-group col-md-3">
 						<?= form_label('Sigla', 'sigla') ?>
-						<?= form_input('sigla', set_value('sigla'), array('class' => 'form-control', 'placeholder' => 'ex: ADS5S', 'maxlength'=>'10', 'required' => 'required')) ?>
+						<?= form_input('sigla', set_value('sigla'), array('class' => 'form-control', 'placeholder' => 'ex: ADS5S', 'maxlength'=>'10', 'required' => 'required', 'style' => 'width: 150px')) ?>
 					</div>
 				</div>
 
@@ -120,8 +120,8 @@
 				</div>
 
 				<div class="row">
-					<div class="form-group col-md-1">
-						<?= form_input(array('name' => 'qtdAlunos', 'value' => set_value('qtdAlunos'), 'type' => 'text', 'pattern' => '[0-9]+$', 'class' => 'form-control', 'maxlength' => '3', 'placeholder' => 'ex:25', 'required' => 'required')) ?>
+					<div class="form-group col-md-3">
+						<?= form_input(array('name' => 'qtdAlunos', 'value' => set_value('qtdAlunos'), 'type' => 'text', 'pattern' => '[0-9]+$', 'class' => 'form-control', 'maxlength' => '3', 'placeholder' => 'ex:25', 'required' => 'required', 'style' => 'width: 80px')) ?>
 					</div>
 				</div>
 
@@ -166,7 +166,7 @@
 					<div class="row">
 						<div class="form-group col-md-8">
 							<label>Sigla</label>
-							<input type="text" class="form-control" name="recipient-sigla" id="recipient-sigla" maxlength="10" required style=" width:90px;">
+							<input type="text" class="form-control" name="recipient-sigla" id="recipient-sigla" maxlength="10" required style=" width:140px;">
 						</div>
 					</div>
 

@@ -184,35 +184,11 @@
         echo "true";
       }
     }
-	
-	public function verificaNomeAtualizar(){
-      $validate_data = array('recipient-nome' => $this->input->get('recipient-nome'));
-      $this->form_validation->set_data($validate_data);
-      $this->form_validation->set_rules("recipient-nome", 'nome', 'is_unique[Disciplina.nome]');
-
-      if($this->form_validation->run() == FALSE){
-        echo "false";
-      }else{
-        echo "true";
-      }
-    }
 
     public function verificaSigla(){
       $validate_data = array('sigla' => $this->input->get('sigla'));
       $this->form_validation->set_data($validate_data);
       $this->form_validation->set_rules('sigla', 'sigla da disciplina', 'is_unique[Disciplina.sigla]');
-
-      if($this->form_validation->run() == FALSE){
-        echo "false";
-      }else{
-        echo "true";
-      }
-    }
-	
-	public function verificaSiglaAtualizar(){
-      $validate_data = array('recipient-sigla' => $this->input->get('recipient-sigla'));
-      $this->form_validation->set_data($validate_data);
-      $this->form_validation->set_rules('recipient-sigla', 'sigla', 'is_unique[Disciplina.sigla]');
 
       if($this->form_validation->run() == FALSE){
         echo "false";
