@@ -93,6 +93,7 @@
       */
     public function disable ($id) {
       $this->db->where('id', $id);
+      $this->db->where('coordenador',FALSE);
       $result = $this->db->update('Usuario',array('status'=>FALSE));
 
       return $result;
