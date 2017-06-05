@@ -48,6 +48,7 @@
                             <th><center>Nome</th>
                             <th><center>Qtd. Professores</th>
                             <th><center>Semestre</th>
+                            <th><center>Qtd. Aulas Semanais</th>
                             <th><center>Status</th>
                             <th><center>Ação</th>
                         </tr>
@@ -59,6 +60,7 @@
 							<td><center><?= $disciplina['nome'] ?></td>
 							<td><center><?= $disciplina['qtdProf'] ?></td>
 							<td><center><?= $disciplina['semestre'] ?></td>
+              <td><center><?= $disciplina['qtdAulas'] ?></td>
 							<td><center><?php
 								if ($disciplina['status']): echo "Ativo";
 								else: echo "Inativo";
@@ -67,11 +69,11 @@
 							<td><center>
 								<?php if ($disciplina['status']): ?>
 									<?php if ($this->session->nivel == 1) :?>
-										<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whateversemestre="<?= $disciplina['semestre'] ?>" data-whateversigla="<?= $disciplina['sigla'] ?>" data-whatevernome="<?= $disciplina['nome'] ?>" data-whateverid="<?= $disciplina['id'] ?>" data-whateverqtdprof="<?= $disciplina['qtdProf'] ?>"><span class="glyphicon glyphicon-pencil"></span></button>
+										<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whateversemestre="<?= $disciplina['semestre'] ?>" data-whateversigla="<?= $disciplina['sigla'] ?>" data-whateverqtdAula="<?= $disciplina['qtdAulas'] ?>" data-whatevernome="<?= $disciplina['nome'] ?>" data-whateverid="<?= $disciplina['id'] ?>" data-whateverqtdprof="<?= $disciplina['qtdProf'] ?>"><span class="glyphicon glyphicon-pencil"></span></button>
 										<button onClick="disable(<?= $disciplina['id'] ?>)" type="button" class="btn btn-danger delete" title="Desativar"><span class="glyphicon glyphicon-remove"></span></button>
 									<?php endif;?>
 										<?php if ($this->session->nivel == 2) :?>
-										<button type="button" class="btn btn-primary" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whateversemestre="<?= $disciplina['semestre'] ?>" data-whateversigla="<?= $disciplina['sigla'] ?>" data-whatevernome="<?= $disciplina['nome'] ?>" data-whateverid="<?= $disciplina['id'] ?>" data-whateverqtdprof="<?= $disciplina['qtdProf'] ?>"><span class="glyphicon glyphicon-eye-open"></span></button>
+										<button type="button" class="btn btn-primary" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whateversemestre="<?= $disciplina['semestre'] ?>" data-whateversigla="<?= $disciplina['sigla'] ?>" data-whateverqtdAula="<?= $disciplina['qtdAulas'] ?>" data-whatevernome="<?= $disciplina['nome'] ?>" data-whateverid="<?= $disciplina['id'] ?>" data-whateverqtdprof="<?= $disciplina['qtdProf'] ?>"><span class="glyphicon glyphicon-eye-open"></span></button>
 										<?php endif;?>
 
 								<?php else : ?>
@@ -146,12 +148,31 @@
 						<input type="text" maxlength="2" pattern="[0-9]+$" class="form-control percent-5" name="semestre" placeholder="ex: 6" value="<?= set_value('semestre') ?>" required style="width: 100px">
 					</div>
 				</div>
-				
+
 				<div class="row">
 					<div class="col-md-10 margin-top-error">
 						<?= form_error('semestre') ?>
 					</div>
 				</div>
+
+        <div class="row">
+					<div class="col-md-3">
+						<label>Qtd.Aulas por Semana</label>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group col-md-4">
+						<input type="text" maxlength="1" pattern="[0-9]+$" class="form-control percent-5" name="qtdAulas" placeholder="ex: 4" value="<?= set_value('qtdAulas') ?>" required style="width: 100px">
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-10 margin-top-error">
+						<?= form_error('qtdAulas') ?>
+					</div>
+				</div>
+
 
                 <div class="inline">
                     <button type='submit' class='btn bt-lg btn-primary'>Cadastrar</button>
@@ -243,6 +264,26 @@
 					</div>
 				</div>
 
+
+        <div class="row">
+					<div class="col-md-5">
+						<label for="qtdAulas" class="control-label">Qtd.Aulas por Semana:</label>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group col-md-8">
+						<input type="text" maxlength="1" pattern="[0-9]+$" class="form-control" name="recipient-qtdAula" id="recipient-qtdAula" required style=" width:50px;">
+					</div>
+				</div>
+
+                <div class="row">
+					<div class="col-md-11 margin-top-error">
+						<?= form_error('recipient-qtdAula') ?>
+					</div>
+				</div>
+
+
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Alterar</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
@@ -318,6 +359,24 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                 </div>
+
+                <div class="row">
+        					<div class="col-md-5">
+        						<label for="qtdAulas" class="control-label">Qtd.Aulas por Semana:</label>
+        					</div>
+        				</div>
+
+        				<div class="row">
+        					<div class="form-group col-md-8">
+        						<input type="text" maxlength="1" pattern="[0-9]+$" class="form-control" name="recipient-qtdAula" id="recipient-qtdAula" required style=" width:50px;">
+        					</div>
+        				</div>
+
+                        <div class="row">
+        					<div class="col-md-11 margin-top-error">
+        						<?= form_error('recipient-qtdAula') ?>
+        					</div>
+        				</div>
 
 				<?= form_close() ?>
             </div>
