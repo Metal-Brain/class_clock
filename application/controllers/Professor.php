@@ -44,7 +44,7 @@ class Professor extends CI_Controller {
         $this->form_validation->set_rules('nivel', 'nivel', array('greater_than[0]'),array('greater_than'=>'Selecione o nível acadêmico.'));
         $this->form_validation->set_rules('contrato','contrato',array('greater_than[0]'),array('greater_than'=>'Selecione um contrato.'));
 		$this->form_validation->set_rules('coordena','curso',array(array('coordenadorCurso',array($this->Professor_model,'verificaCoordenadorCurso'))));
-		
+
 		$this->form_validation->set_message('coordenadorCurso','Curso selecionado já possui um coordenador');
 
         // Definição dos delimitadores
@@ -198,7 +198,7 @@ class Professor extends CI_Controller {
 		$this->form_validation->set_rules('recipient-coordena','curso',array(array('coordenadorCurso',array($this->Professor_model,'verificaCoordenadorCurso'))));
 
 		$this->form_validation->set_message('coordenadorCurso','Curso selecionado já possui um coordenador');
-        
+
 		// Definição dos delimitadores
         $this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
         // Verifica se o formulario é valido
@@ -557,7 +557,7 @@ class Professor extends CI_Controller {
 			if (verificaSessao()) {
 
 				$this->load->helper(array('date'));
-				$this->load->model(array('Disciplina_model','Curso_model'));
+				$this->load->model(array('CursoTemDisciplina_model','Curso_model'));
 
 				$idCurso = $this->Curso_model->getCursoCoordenador($idCoordenador);
 				$curso = $this->Curso_model->getCursoById($idCurso)[0];
@@ -566,7 +566,7 @@ class Professor extends CI_Controller {
 
 
 				for ($i=$semestreInicial; $i <= $curso['qtdSemestres']; $i += 2) {
-					$disciplinas = $this->Disciplina_model->getDisciplinasByCurso($idCurso,$i);
+					$disciplinas = $this->CursoTemDisciplina_model->getDisciplinasByCurso($idCurso,$i);
 
 					echo '<pre>';
 					print_r($disciplinas);
@@ -574,7 +574,7 @@ class Professor extends CI_Controller {
 				}
 			}
 		}
-		
+
 		public function verificaMatricula(){
 		  $validate_data = array('matricula' => $this->input->get('matricula'));
 		  $this->form_validation->set_data($validate_data);
@@ -586,7 +586,7 @@ class Professor extends CI_Controller {
 			echo "true";
 		  }
 		}
-		
+
 		public function verificaEmail(){
 		  $validate_data = array('email' => $this->input->get('email'));
 		  $this->form_validation->set_data($validate_data);

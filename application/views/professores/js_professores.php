@@ -104,9 +104,9 @@
 			modal.find('#recipient-id').val(recipientid)
 			modal.find('#recipient-coordenador-view').prop('checked',recipientcoordenador)
 
-			console.log(recipientid);
 			var url = '<?= base_url('index.php/Professor/disciplinas/') ?>'+recipientid;
 
+			$('#disciplinaTable-view li').remove();
 			$.getJSON(url,function (response) {
 				var disciplinas = [];
 				$.each(response, function (index, value) {
@@ -196,44 +196,44 @@
 			});
 
 		</script>
-		
+
 		<script type="text/javascript">
 			$(document).ready(function(){
 				jQuery.validator.addMethod("exactlength", function(value, element, param) {
 					return this.optional(element) || value.length == param;
 				},
 				$.validator.format("Insira exatamente {0} caracteres"));
-				
-				$.validator.addMethod("date", function(value, element) {  
-					var check = false;  
-				    var re = /^\d{1,2}\/\d{1,2}\/\d{4}$/;  
-					if( re.test(value)){  
-						var adata = value.split('/');  
-						var gg = parseInt(adata[0],10);  
-						var mm = parseInt(adata[1],10);  
-						var aaaa = parseInt(adata[2],10);  
-						var xdata = new Date(aaaa,mm-1,gg);  
-						if ( ( xdata.getFullYear() == aaaa ) && ( xdata.getMonth () == mm - 1 ) && ( xdata.getDate() == gg ) && ( xdata.getFullYear() > 1917 ))  
-							check = true;  
-						else  
-							check = false;  
-					} else  
-						check = false;  
-					return this.optional(element) || check;  
-				},  
+
+				$.validator.addMethod("date", function(value, element) {
+					var check = false;
+				    var re = /^\d{1,2}\/\d{1,2}\/\d{4}$/;
+					if( re.test(value)){
+						var adata = value.split('/');
+						var gg = parseInt(adata[0],10);
+						var mm = parseInt(adata[1],10);
+						var aaaa = parseInt(adata[2],10);
+						var xdata = new Date(aaaa,mm-1,gg);
+						if ( ( xdata.getFullYear() == aaaa ) && ( xdata.getMonth () == mm - 1 ) && ( xdata.getDate() == gg ) && ( xdata.getFullYear() > 1917 ))
+							check = true;
+						else
+							check = false;
+					} else
+						check = false;
+					return this.optional(element) || check;
+				},
 				"Insira uma data válida");
-				
+
 				jQuery.validator.addMethod("verificaCheckbox", function() {
 					if($('#coordenador').is(':checked')) {
 						if($('#coordena').val() == 0){
 							return true;
 						}else{
 							return false;
-						}	
+						}
 					}
 				},
 				$.validator.format("Campo obrigatório"));
-				
+
 				$('#cadastrarProfessor').validate({
 					rules: {
 						nome: { required: true, minlength: 5, maxlength: 255 },
@@ -253,8 +253,8 @@
 						contrato: { required: 'Campo obrigatório', min: 'Campo obrigatório'}
 					}
 				});
-				
-				
+
+
 				$('#modalProfessor').validate({
 					rules: {
 						'recipient-nome': { required: true, minlength: 5, maxlength: 255 },
@@ -274,10 +274,10 @@
 						'recipient-contrato': { required: 'Campo obrigatório', min: 'Campo obrigatório' }
 					}
 				});
-				
+
 			});
-			
+
 		</script>
-		
+
 	</body>
 </html>

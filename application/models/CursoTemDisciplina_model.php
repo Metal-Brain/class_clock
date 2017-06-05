@@ -58,8 +58,21 @@
       return $result->num_rows();
     }
 
-    public function getDisciplinasByCurso ($idCurso, $semestre=NULL) {
+    /**
+     *
+     * @author Caio de Freitas
+     * @since 2017/06/05
+     * @param INT $idCurso - ID do curso
+     * @param INT $semestre -
+     * @return Retorna um vetor com os dados das disciplinas.
+     */
+    public function getDisciplinasByCurso ($idCurso, $semestre) {
+      $this->db->join('Disciplina','cd.idDisciplina = disciplina.id');
+      $this->db->where('idCurso',$idCurso);
+      $this->db->where('semestre',$semestre);
+      $result = $this->db->get('Curso_tem_Disciplina AS cd');
 
+      return $result->result_array();
     }
 
   }
