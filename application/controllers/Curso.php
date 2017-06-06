@@ -29,7 +29,8 @@
           'CursoTemDisciplina_model',
           'Grau_model',
           'Periodo_model',
-          'disciplina_model'
+          'disciplina_model',
+          'Professor_model'
         ));
         //Define regras de validação do formulario!!!
         $this->form_validation->set_rules('nome', 'nome',array('required', 'min_length[5]','is_unique[Curso.nome]','trim','ucwords'));
@@ -37,7 +38,7 @@
         $this->form_validation->set_rules('qtdSemestres','quantidade de semestres', array('required','integer','greater_than[0]','less_than[20]'));
         $this->form_validation->set_rules('periodo[]', 'período', array('required'));
         $this->form_validation->set_rules('grau','grau', array('greater_than[0]'), array('greater_than' => 'Selecione o grau.'));
-		$this->form_validation->set_rules('disciplinas[]', 'disciplinas', array('required'), array('required' => 'Não é possível cadastrar um curso sem selecionar as disciplinas.'));
+        $this->form_validation->set_rules('disciplinas[]', 'disciplinas', array('required'), array('required' => 'Não é possível cadastrar um curso sem selecionar as disciplinas.'));
         //delimitador
         $this->form_validation->set_error_delimiters('<p class="text-danger">','</p>');
         //condição para o formulario
@@ -47,11 +48,12 @@
           $dados['periodo']       = convert($this->Periodo_model->getAll());
           $dados['disciplinas']   = convert($this->disciplina_model->getAll(TRUE));
           $dados['cursos']        = $this->Curso_model->getAll();
+          $dados['professores']   = convert($this->Professor_model->getAll(),True);
           $this->load->view('includes/header',$dados);
           $this->load->view('includes/sidebar');
           $this->load->view('cursos/cursos');
-		  $this->load->view('includes/footer');
-		  $this->load->view('cursos/js_cursos');
+          $this->load->view('includes/footer');
+          $this->load->view('cursos/js_cursos');
         }else{
           $curso = array(
             'nome'          => $this->input->post('nome'),
@@ -59,6 +61,9 @@
             'qtdSemestres'  => $this->input->post('qtdSemestres'),
             'grau'          => $this->input->post('grau'),
           );
+
+          $idProfessor = $this->input->post('coordenadorCurso');
+
           $disciplinas = $this->input->post('disciplinas[]');
           $periodo = $this->input->post('periodo[]');
           if ($this->Curso_model->insert($curso)) {
@@ -67,6 +72,10 @@
               $this->CursoTemPeriodo_model->insert($idCurso,$idPeriodo);
             foreach ($disciplinas as $idDisciplina)
               $this->CursoTemDisciplina_model->insert($idCurso,$idDisciplina);
+
+            // relaciona o professor coordenador ao curso
+            $this->db->Professor_model->setCoordenador($idProfessor,$idCurso);
+
             $this->session->set_flashdata('success','Curso cadastrado com sucesso');
           } else {
             $this->session->set_flashdata('danger','Não foi possível cadastrar o curso, tente novamente ou entre em contato com o administrador do sistema.');
@@ -179,7 +188,7 @@
       $disciplinas = $this->CursoTemDisciplina_model->getAllDisciplinas($id);
       echo json_encode($disciplinas);
     }
-	
+
 	public function verificaNome(){
       $validate_data = array('nome' => $this->input->get('nome'));
       $this->form_validation->set_data($validate_data);

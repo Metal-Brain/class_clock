@@ -173,6 +173,13 @@
 				</div>
 			</div>
 
+      <div class="row">
+        <div class="form-group col-md-5">
+          <?= form_label('Professor Coordenador') ?>
+          <?= form_dropdown('coordenadorCurso',$professores,set_value('coordenadorCurso'),array('class'=>'form-control')); ?>
+        </div>
+      </div>
+
 			<div class="form-group">
 				<?= form_submit('submit', 'Cadastrar', array('class' => 'btn btn-primary')) ?>
 			</div>

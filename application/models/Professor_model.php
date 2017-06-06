@@ -141,6 +141,11 @@
       return !$result;
     }
 
+    
+    public function setCoordenador($idProfessor,$idCurso,$status=TRUE) {
+      $this->db->where('id',$idProfessor);
+      return $this->db->update('Professor',array('idCurso'=>$idCurso,'coordenador'=>$status));
+    }
 
   }
 
