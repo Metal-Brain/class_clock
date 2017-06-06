@@ -127,7 +127,7 @@
 
 				<div class="row">
 					<div class="form-group col-md-4">
-						<input type="text" maxlength="1" pattern="[0-9]+$" class="form-control percent-5" name="qtdProf" placeholder="ex: 1" value="<?= set_value('qtdProf') ?>" required style="width: 100px">
+						<input type="text" maxlength="1" pattern="[0-9]+$" class="form-control" name="qtdProf" placeholder="ex: 1" value="<?= set_value('qtdProf') ?>" required style="width: 100px">
 					</div>
 				</div>
 
@@ -145,7 +145,7 @@
 
 				<div class="row">
 					<div class="form-group col-md-4">
-						<input type="text" maxlength="2" pattern="[0-9]+$" class="form-control percent-5" name="semestre" placeholder="ex: 6" value="<?= set_value('semestre') ?>" required style="width: 100px">
+						<input type="text" maxlength="2" pattern="[0-9]+$" class="form-control" name="semestre" placeholder="ex: 6" value="<?= set_value('semestre') ?>" required style="width: 100px">
 					</div>
 				</div>
 
@@ -155,15 +155,15 @@
 					</div>
 				</div>
 
-        <div class="row">
+				<div class="row">
 					<div class="col-md-3">
-						<label>Qtd.Aulas por Semana</label>
+						<label>Qtd. Aulas por Semana</label>
 					</div>
 				</div>
 
 				<div class="row">
 					<div class="form-group col-md-4">
-						<input type="text" maxlength="1" pattern="[0-9]+$" class="form-control percent-5" name="qtdAulas" placeholder="ex: 4" value="<?= set_value('qtdAulas') ?>" required style="width: 100px">
+						<input type="text" maxlength="1" pattern="[0-9]+$" class="form-control" name="qtdAulas" placeholder="ex: 4" value="<?= set_value('qtdAulas') ?>" required style="width: 100px">
 					</div>
 				</div>
 

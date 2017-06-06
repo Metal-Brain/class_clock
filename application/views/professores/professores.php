@@ -188,7 +188,7 @@
 				<div id="coordena1" class="row">
 					<div class="form-group col-md-5">
 						<label>Coordenador do curso</label>
-						<?= form_dropdown('coordena',$cursos,set_value('coordena'),array('class'=>'form-control')) ?>
+						<?= form_dropdown('coordena',$cursos,set_value('coordena'),array('class'=>'form-control', 'id' => 'coordena')) ?>
 					</div>
 				</div>
 
@@ -323,7 +323,7 @@
 					<div id="coordena2" class="row">
 						<div class="form-group col-md-9">
 							<label>Coordenador do curso</label>
-							<?= form_dropdown('recipient-coordena',$cursos,set_value('recipient-coordena'),array('class'=>'form-control')) ?>
+							<?= form_dropdown('recipient-coordena',$cursos,set_value('recipient-coordena'),array('class'=>'form-control', 'id' => 'recipient-coordena')) ?>
 						</div>
 					</div>
 

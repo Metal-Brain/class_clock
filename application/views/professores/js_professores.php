@@ -225,7 +225,18 @@
 
 				jQuery.validator.addMethod("verificaCheckbox", function() {
 					if($('#coordenador').is(':checked')) {
-						if($('#coordena').val() == 0){
+						if($('#coordena').val() != 0){
+							return true;
+						}else{
+							return false;
+						}
+					}
+				},
+				$.validator.format("Campo obrigatório"));
+				
+				jQuery.validator.addMethod("verificaCheckboxModal", function() {
+					if($('#recipient-coordenador').is(':checked')) {
+						if($('#recipient-coordena').val() != 0){
 							return true;
 						}else{
 							return false;
@@ -263,7 +274,7 @@
 						'recipient-nascimento': { required: true, date: true},
 						'recipient-nivelAcademico': { required: true, min: 1 },
 						'recipient-contrato': { required: true, min: 1},
-						'recipient-coordena': { verificaCheckbox: true }
+						'recipient-coordena': { verificaCheckboxModal: true }
 					},
 					messages: {
 						'recipient-nome': { required: 'Campo obrigatório', minlength: 'O campo nome deve ter no mínimo 5 caracteres', maxlength: 'O campo nome deve ter no máximo 255 caracteres' },
@@ -278,6 +289,5 @@
 			});
 
 		</script>
-
 	</body>
 </html>

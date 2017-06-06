@@ -105,7 +105,7 @@
 				sigla: { required: true, maxlength: 5, remote: '<?= base_url("index.php/Disciplina/verificaSigla/") ?>' },
 				qtdProf: { required: true, number: true, min: 1 },
 				semestre: { required: true, number: true, min: 1, max: 19 },
-        qtdAulas: { required: true, number: true, min: 1 }
+				qtdAulas: { required: true, number: true, min: 1 }
 
 			},
 			messages: {
@@ -113,7 +113,7 @@
 				sigla: { required: 'Campo obrigatório', maxlength: 'O campo sigla deve ter no máximo 5 caracteres', remote: 'Esta sigla já está em uso' },
 				qtdProf: { required: 'Campo obrigatório', number: 'Digite apenas números', min: 'Digite um valor maior ou igual a 1' },
 				semestre: { required: 'Campo obrigatório', number: 'Digite apenas números', min: 'Digite um valor maior ou igual a 1', max: 'Digite um valor menor ou igual a 19'},
-        qtdAulas: { required: 'Campo obrigatório', number: 'Digite apenas números', min: 'Digite um valor maior ou igual a 1' }
+				qtdAulas: { required: 'Campo obrigatório', number: 'Digite apenas números', min: 'Digite um valor maior ou igual a 1' }
 			}
 		});
 	});
@@ -127,14 +127,14 @@
 				'recipient-sigla': { required: true, maxlength: 5 },
 				'recipient-qtd-prof': { required: true, number: true, min: 1 },
 				'recipient-semestre': { required: true, number: true, min: 1, max: 19 },
-        'recipient-qtdAula': { required: true, number: true, min: 1 }
+				'recipient-qtdAula': { required: true, number: true, min: 1 }
 			},
 			messages: {
 				'recipient-nome': { required: 'Campo obrigatório', minlength: 'O campo nome deve ter no mínimo 5 caracteres' },
 				'recipient-sigla': { required: 'Campo obrigatório', maxlength: 'O campo sigla deve ter no máximo 5 caracteres' },
 				'recipient-qtd-prof': { required: 'Campo obrigatório', number: 'Digite apenas números', min: 'Digite um valor maior ou igual a 1' },
 				'recipient-semestre': { required: 'Campo obrigatório', number: 'Digite apenas números', min: 'Digite um valor maior ou igual a 1', max: 'Digite um valor menor ou igual a 19'},
-        'recipient-qtdAula': { required: 'Campo obrigatório', number: 'Digite apenas números', min: 'Digite um valor maior ou igual a 1' }
+				'recipient-qtdAula': { required: 'Campo obrigatório', number: 'Digite apenas números', min: 'Digite um valor maior ou igual a 1' }
 			}
 		});
 	});
