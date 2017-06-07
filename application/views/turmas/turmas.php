@@ -250,22 +250,10 @@
 					</div>
 
 					<div class="row">
-						<div class="col-md-12 margin-top-error">
-							<?= form_error('recipient-sigla') ?>
-						</div>
-					</div>
-
-					<div class="row">
 						<div class="form-group col-md-10">
 							<!-- DropListDisciplina (Droplist) -->
 							<label>Disciplina</label>
 							<?= form_dropdown('recipient-disciplina',$disciplina,set_value('recipient-disciplina'),array('class'=>'form-control')) ?>
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="col-md-12 margin-top-error">
-							<?= form_error('recipient-disciplina') ?>
 						</div>
 					</div>
 
@@ -278,12 +266,6 @@
 					<div class="row">
 						<div class="form-group col-md-2">
 							<input type="text" maxlength="3" pattern="[0-9]+$"class="form-control" name="recipient-qtdAlunos" id="recipient-qtdAlunos" required readonly/>
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="col-md-12 margin-top-error">
-							<?= form_error('recipient-qtdAlunos') ?>
 						</div>
 					</div>
 

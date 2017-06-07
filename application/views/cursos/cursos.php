@@ -47,6 +47,7 @@
                             <th><center>Qtd. Semestres</th>
                             <th><center>Período</th>
                             <th><center>Grau</th>
+							<th><center>Coordenador</th>
                             <th><center>Status</th>
                             <th><center>Ação</th>
                         </tr>
@@ -59,6 +60,7 @@
                                 <td><center><?= $curso['qtdSemestres'] ?></td>
                                 <td><center><?= $curso['periodo'] ?></td>
                                 <td><center><?= $curso['grauNome'] ?></td>
+								<!-- <td><center><?= $curso['coordenador'] ?></td> -->
                                   <td><center><?php
                     								if ($curso['status']): echo "Ativo";
                     								else: echo "Inativo";
@@ -289,13 +291,13 @@
 					</div>
 				</div>
 
-        <div class="row">
-          <div class="form-group col-md-9">
-            <?= form_label('Coordenador') ?>
-            <?= form_dropdown('cursoCoordenador',$professores,null,array('id'=>'cursoCoordenador','class'=>'form-control')) ?>
-            <?= form_error('cursoCoordenador') ?>
-          </div>
-        </div>
+				<div class="row">
+				  <div class="form-group col-md-9">
+					<?= form_label('Professor Coordenador') ?>
+					<?= form_dropdown('cursoCoordenador',$professores,null,array('id'=>'cursoCoordenador','class'=>'form-control')) ?>
+					<?= form_error('cursoCoordenador') ?>
+				  </div>
+				</div>
 
 				<div class="modal-footer">
 					<?= form_submit('submit', 'Alterar', array('class' => 'btn btn-primary')) ?>
@@ -333,21 +335,9 @@
 				</div>
 
 				<div class="row">
-					<div class="col-md-6 margin-top-error">
-						<?= form_error('nomeCurso') ?>
-					</div>
-				</div>
-
-				<div class="row">
 					<div class="form-group col-md-3">
 						<?= form_label('Sigla:', 'recipient-sigla', array('class' => 'control-label')) ?>
 						<?= form_input('cursoSigla', set_value('cursoSigla'), array('class' => 'form-control', 'id' => 'recipient-sigla', 'maxlength' => '5', 'required' => 'required' , 'readonly' => 'readonly')) ?>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-md-6 margin-top-error">
-						<?= form_error('cursoSigla') ?>
 					</div>
 				</div>
 
@@ -360,12 +350,6 @@
 				<div class="row">
 					<div class="form-group col-md-2">
 						<?= form_input('cursoQtdSemestres', set_value('cursoQtdSemestres'), array('pattern' => '[0-9]+$', 'maxlength' => '2', 'id' => 'recipient-semestres', 'class' => 'form-control', 'required' => 'required' , 'readonly' => 'readonly')) ?>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-md-11 margin-top-error">
-						<?= form_error('cursoQtdSemestres') ?>
 					</div>
 				</div>
 
@@ -388,19 +372,20 @@
 				</div>
 
 				<div class="row">
-					<div class="col-md-10 margin-top-error">
-						<?= form_error('cursoGrau') ?>
-					</div>
-				</div>
-
-				<div class="row">
 					<div class="form-group col-md-9">
 						<label>Disciplinas:</label>
 							<ul id="cursoDisciplinas2"></ul>
 					</div>
 				</div>
 
+				<div class="row">
+					<div class="form-group col-md-9">
+						<?= form_label('Professor Coordenador') ?>
+						<?= form_dropdown('cursoCoordenador',$professores,null,array('id'=>'cursoCoordenador','class'=>'form-control', 'disabled' => 'disabled')) ?>
+					</div>
+				</div>
 
+				
 				<div class="modal-footer">
 					<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
 				</div>

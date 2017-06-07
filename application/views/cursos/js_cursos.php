@@ -163,7 +163,8 @@
 				qtdSemestres: { required: true, number: true, min: 1, max: 19 },
 				'periodo[]': { required: true },
 				grau: {required: true, min: 1},
-				'disciplinas[]': { required: true }
+				'disciplinas[]': { required: true },
+				coordenadorCurso: { required: true, min: 1 }
 			},
 			messages: {
 				nome: { required: 'Campo obrigatório', minlength: 'O campo nome deve ter no mínimo 5 caracteres', remote: 'Este nome já está em uso' },
@@ -171,7 +172,8 @@
 				qtdSemestres: { required: 'Campo obrigatório', number: 'Digite apenas números', min: 'Digite um valor maior ou igual a 1', max: 'Digite um valor menor ou igual a 19'},
 				'periodo[]': { required: 'Campo obrigatório' },
 				grau: {required: 'Campo obrigatório', min: 'Campo obrigatório' },
-				'disciplinas[]': { required: 'Campo obrigatório' }
+				'disciplinas[]': { required: 'Campo obrigatório' },
+				coordenadorCurso: { required: 'Campo obrigatório', min: 'Campo obrigatório' }
 			}
 		});
 	});
@@ -186,7 +188,8 @@
 				cursoQtdSemestres: { required: true, number: true, min: 1, max: 19 },
 				'cursoPeriodos[]': { required: true },
 				cursoGrau: {required: true, min: 1},
-				'cursoDisciplinas[]': { required: true }
+				'cursoDisciplinas[]': { required: true },
+				cursoCoordenador: { required: true, min: 1 }
 			},
 			messages: {
 				nomeCurso: { required: 'Campo obrigatório', minlength: 'O campo nome deve ter no mínimo 5 caracteres' },
@@ -194,7 +197,8 @@
 				cursoQtdSemestres: { required: 'Campo obrigatório', number: 'Digite apenas números', min: 'Digite um valor maior ou igual a 1', max: 'Digite um valor menor ou igual a 19'},
 				'cursoPeriodos[]': { required: 'Campo obrigatório' },
 				cursoGrau: { required: 'Campo obrigatório', min: 'Campo obrigatório' },
-				'cursoDisciplinas[]': { required: 'Campo obrigatório' }
+				'cursoDisciplinas[]': { required: 'Campo obrigatório' },
+				cursoCoordenador: { required: 'Campo obrigatório', min: 'Campo obrigatório' }
 			}
 		});
 	});

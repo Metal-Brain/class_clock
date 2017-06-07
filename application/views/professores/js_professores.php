@@ -52,16 +52,6 @@
 			modal.find('#recipient-id').val(recipientid)
 			modal.find('#recipient-coordenador').prop('checked',recipientcoordenador)
 
-			var isCoordenador = $('#recipient-coordenador').prop('checked');
-			if (isCoordenador) {
-				$('#coordena2').show();
-				console.log(recipientIdCurso);
-				modal.find('select[name=coordena] option[value='+recipientIdCurso+']').prop('selected',true)
-			} else {
-				$('#coordena2').hide();
-			}
-
-
 			});
 
 
@@ -114,14 +104,6 @@
 					$('#disciplinaTable-view').prepend(row);
 				});
 			});
-
-			var isCoordenador = $('#recipient-coordenador-view').prop('checked');
-			if (isCoordenador) {
-				$('#coordena-view').show();
-				modal.find('select[name=coordena] option[value='+recipientIdCurso+']').prop('selected',true)
-			} else {
-				$('#coordena-view').hide();
-			}
 
 			});
 		</script>
@@ -184,19 +166,6 @@
 			});
 		</script>
 
-		<script>
-			$(document).ready(function() {
-				$('#coordena1').hide();
-				$('#coordenador').click(function (){
-					$('#coordena1').toggle();
-				});
-				$('#recipient-coordenador').click(function (){
-					$('#coordena2').toggle('slow');
-				});
-			});
-
-		</script>
-
 		<script type="text/javascript">
 			$(document).ready(function(){
 				jQuery.validator.addMethod("exactlength", function(value, element, param) {
@@ -223,28 +192,6 @@
 				},
 				"Insira uma data válida");
 
-				jQuery.validator.addMethod("verificaCheckbox", function() {
-					if($('#coordenador').is(':checked')) {
-						if($('#coordena').val() != 0){
-							return true;
-						}else{
-							return false;
-						}
-					}
-				},
-				$.validator.format("Campo obrigatório"));
-				
-				jQuery.validator.addMethod("verificaCheckboxModal", function() {
-					if($('#recipient-coordenador').is(':checked')) {
-						if($('#recipient-coordena').val() != 0){
-							return true;
-						}else{
-							return false;
-						}
-					}
-				},
-				$.validator.format("Campo obrigatório"));
-
 				$('#cadastrarProfessor').validate({
 					rules: {
 						nome: { required: true, minlength: 5, maxlength: 255 },
@@ -252,8 +199,7 @@
 						email: { required: true, email: true, remote: '<?= base_url("index.php/Professor/verificaEmail/") ?>' },
 						nascimento: { required: true, date: true},
 						nivel: { required: true, min: 1 },
-						contrato: { required: true, min: 1},
-						coordena: { verificaCheckbox: true }
+						contrato: { required: true, min: 1}
 					},
 					messages: {
 						nome: { required: 'Campo obrigatório', minlength: 'O campo nome deve ter no mínimo 5 caracteres', maxlength: 'O campo nome deve ter no máximo 255 caracteres' },
@@ -273,8 +219,7 @@
 						'recipient-email': { required: true, email: true },
 						'recipient-nascimento': { required: true, date: true},
 						'recipient-nivelAcademico': { required: true, min: 1 },
-						'recipient-contrato': { required: true, min: 1},
-						'recipient-coordena': { verificaCheckboxModal: true }
+						'recipient-contrato': { required: true, min: 1}
 					},
 					messages: {
 						'recipient-nome': { required: 'Campo obrigatório', minlength: 'O campo nome deve ter no mínimo 5 caracteres', maxlength: 'O campo nome deve ter no máximo 255 caracteres' },

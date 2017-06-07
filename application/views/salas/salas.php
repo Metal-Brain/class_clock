@@ -236,12 +236,6 @@
                 </div>
 
 				<div class="row">
-					<div class="col-md-6 margin-top-error">
-						<?= form_error('recipient-nSala') ?>
-					</div>
-				</div>
-
-				<div class="row">
 					<div class="form-group col-md-4">
 						<label for="tipo-name" class="control-label">Tipo</label>
 						<select  class="form-control" name="recipient-tipo" id="recipient-tipo" disabled>
@@ -250,12 +244,6 @@
 						</select>
 					</div>
                 </div>
-
-				<div class="row">
-					<div class="col-md-6 margin-top-error">
-						<?= form_error('recipient-tipo') ?>
-					</div>
-				</div>
 
 				<div class="row">
 					<div class="col-md-4">
@@ -267,12 +255,6 @@
 						<input type="number" max="999" maxlength="3" pattern="[0-9]+$"class="form-control" name="recipient-capMax" id="recipient-capMax" required readonly/>
 					</div>
                 </div>
-
-				<div class="row">
-					<div class="col-md-7 margin-top-error">
-						<?= form_error('recipient-capMax') ?>
-					</div>
-				</div>
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>

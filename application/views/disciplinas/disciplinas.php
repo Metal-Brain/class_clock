@@ -265,7 +265,7 @@
 				</div>
 
 
-        <div class="row">
+				<div class="row">
 					<div class="col-md-5">
 						<label for="qtdAulas" class="control-label">Qtd.Aulas por Semana:</label>
 					</div>
@@ -320,21 +320,9 @@
 				</div>
 
 				<div class="row">
-					<div class="col-md-6 margin-top-error">
-						<?= form_error('recipient-nome') ?>
-					</div>
-				</div>
-
-				<div class="row">
 					<div class="form-group col-md-3">
 						<label for="sigla-name" class="control-label">Sigla:</label>
 						<input type="text" maxlength="5" class="form-control" name="recipient-sigla" id="recipient-sigla" required readonly/>
-					</div>
-				</div>
-
-                <div class="row">
-					<div class="col-md-8 margin-top-error">
-						<?= form_error('recipient-sigla') ?>
 					</div>
 				</div>
 
@@ -350,33 +338,21 @@
 					</div>
 				</div>
 
-                <div class="row">
-					<div class="col-md-11 margin-top-error">
-						<?= form_error('recipient-qtd-prof') ?>
-					</div>
-				</div>
-
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                 </div>
 
                 <div class="row">
-        					<div class="col-md-5">
-        						<label for="qtdAulas" class="control-label">Qtd.Aulas por Semana:</label>
-        					</div>
-        				</div>
+					<div class="col-md-5">
+						<label for="qtdAulas" class="control-label">Qtd.Aulas por Semana:</label>
+					</div>
+				</div>
 
-        				<div class="row">
-        					<div class="form-group col-md-8">
-        						<input type="text" maxlength="1" pattern="[0-9]+$" class="form-control" name="recipient-qtdAula" id="recipient-qtdAula" required style=" width:50px;">
-        					</div>
-        				</div>
-
-                        <div class="row">
-        					<div class="col-md-11 margin-top-error">
-        						<?= form_error('recipient-qtdAula') ?>
-        					</div>
-        				</div>
+				<div class="row">
+					<div class="form-group col-md-8">
+						<input type="text" maxlength="1" pattern="[0-9]+$" class="form-control" name="recipient-qtdAula" id="recipient-qtdAula" required style=" width:50px;">
+					</div>
+				</div>
 
 				<?= form_close() ?>
             </div>
