@@ -141,9 +141,27 @@
       return !$result;
     }
 
-    
+    /**
+     *
+     * @author Caio de Freitas
+     */
+    public function getCoordenadorByCurso($idCurso) {
+      $this->db->where('idCurso',$idCurso);
+      $result = $this->db->get("Professor");
+
+      return $result->result();
+    }
+
+    /**
+     * @author Caio de Freitas
+     */
     public function setCoordenador($idProfessor,$idCurso,$status=TRUE) {
-      $this->db->where('id',$idProfessor);
+      if ($idProfessor == null) {
+        $this->db->where('idCurso',$idCurso);
+        $idCurso = 0;
+      } else
+        $this->db->where('id',$idProfessor);
+
       return $this->db->update('Professor',array('idCurso'=>$idCurso,'coordenador'=>$status));
     }
 

@@ -97,11 +97,11 @@
                 </div>
             </div>
 
-			<div class="row">
-				<div class="col-md-3 margin-top-error">
-					<?= form_error('nome') ?>
-				</div>
-			</div>
+            <div class="row">
+              <div class="col-md-3 margin-top-error">
+                <?= form_error('nome') ?>
+              </div>
+            </div>
 
             <div class="row">
                 <div class="form-group col-md-2">
@@ -111,16 +111,16 @@
             </div>
 
             <div class="row">
-                <div class="col-md-3 margin-top-error">
-					<?= form_error('sigla') ?>
-				</div>
-			</div>
+              <div class="col-md-3 margin-top-error">
+                <?= form_error('sigla') ?>
+              </div>
+            </div>
 
-			<div class="row">
-				<div class="col-md-3">
-					<label>Quantidade de semestres</label>
-				</div>
-			</div>
+            <div class="row">
+              <div class="col-md-3">
+                <label>Quantidade de semestres</label>
+              </div>
+            </div>
 
             <div class="row">
                 <div class="form-group col-md-2">
@@ -128,11 +128,11 @@
                 </div>
             </div>
 
-			<div class="row">
-                <div class="col-md-6 margin-top-error">
-					<?= form_error('qtdSemestres') ?>
-				</div>
-			</div>
+            <div class="row">
+              <div class="col-md-6 margin-top-error">
+                <?= form_error('qtdSemestres') ?>
+              </div>
+            </div>
 
             <div class="row">
                 <div class="form-group col-md-5">
@@ -141,24 +141,24 @@
                 </div>
             </div>
 
-			<div class="row">
-				<div class="col-md-3 margin-top-error">
-					<?= form_error('periodo[]') ?>
-				</div>
-			</div>
-
             <div class="row">
-                <div class="form-group col-md-4">
-                    <label>Grau</label>
-					<?= form_dropdown('grau', $graus, set_value('grau'), array('class' => 'form-control')) ?>
-                </div>
+              <div class="col-md-3 margin-top-error">
+                <?= form_error('periodo[]') ?>
+              </div>
             </div>
 
-			<div class="row">
-				<div class="col-md-3 margin-top-error">
-					<?= form_error('grau') ?>
-				</div>
-			</div>
+            <div class="row">
+              <div class="form-group col-md-4">
+                <label>Grau</label>
+                <?= form_dropdown('grau', $graus, set_value('grau'), array('class' => 'form-control')) ?>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-3 margin-top-error">
+                <?= form_error('grau') ?>
+              </div>
+            </div>
 
             <div class="row">
                 <div class="form-group col-md-5">
@@ -167,24 +167,22 @@
                 </div>
             </div>
 
-			<div class="row">
-				<div class="col-md-6 margin-top-error">
-					<?= form_error('disciplinas[]') ?>
-				</div>
-			</div>
+            <div class="row">
+              <div class="col-md-6 margin-top-error">
+                <?= form_error('disciplinas[]') ?>
+              </div>
+            </div>
 
-      <div class="row">
-        <div class="form-group col-md-5">
-          <?= form_label('Professor Coordenador') ?>
-          <?= form_dropdown('coordenadorCurso',$professores,set_value('coordenadorCurso'),array('class'=>'form-control')); ?>
-        </div>
-      </div>
+            <div class="row">
+              <div class="form-group col-md-5">
+                <?= form_label('Professor Coordenador') ?>
+                <?= form_dropdown('coordenadorCurso',$professores,set_value('coordenadorCurso'),array('class'=>'form-control')); ?>
+              </div>
+            </div>
 
-			<div class="form-group">
-				<?= form_submit('submit', 'Cadastrar', array('class' => 'btn btn-primary')) ?>
-			</div>
-
-
+            <div class="form-group">
+              <?= form_submit('submit', 'Cadastrar', array('class' => 'btn btn-primary')) ?>
+            </div>
             <?= form_close() ?>
         </div>
     </div><!--fecha tab-content-->
@@ -290,6 +288,14 @@
 						<?= form_error('cursoDisciplinas[]') ?>
 					</div>
 				</div>
+
+        <div class="row">
+          <div class="form-group col-md-9">
+            <?= form_label('Coordenador') ?>
+            <?= form_dropdown('cursoCoordenador',$professores,null,array('id'=>'cursoCoordenador','class'=>'form-control')) ?>
+            <?= form_error('cursoCoordenador') ?>
+          </div>
+        </div>
 
 				<div class="modal-footer">
 					<?= form_submit('submit', 'Alterar', array('class' => 'btn btn-primary')) ?>

@@ -599,6 +599,17 @@ class Professor extends CI_Controller {
 		  }
 		}
 
+		/**
+		 * Gera um JSON com os dados do professor coordenador do curso informado.
+		 * @author Caio de Freitas
+		 * @since 2017/06/07
+		 * @param INT $idCurso - ID do curso
+		 */
+		public function getCoordenador($idCurso) {
+			$this->load->model('Professor_model');
+			$professor = $this->Professor_model->getCoordenadorByCurso($idCurso);
+			echo json_encode($professor);
+		}
 
  }
 

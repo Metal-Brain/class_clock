@@ -18,6 +18,16 @@
 </script>
 
 <script type="text/javascript">
+  var getCoordenadorByCurso = function(idCurso) {
+
+    var professor;
+    var url = '<?= base_url('index.php/Professor/getCoordenador/')?>/'+idCurso;
+
+    return $.getJSON(url);
+  }
+</script>
+
+<script type="text/javascript">
     $('#exampleModal').on('show.bs.modal', function (event) {
         $("#cursoDisciplinas").multiSelect('deselect_all');
         $("#cursoPeriodos").multiSelect('deselect_all');
@@ -37,7 +47,7 @@
             });
             $("#cursoDisciplinas").multiSelect('select', disciplinas);
         });
-		
+
         // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
         // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
         var modal = $(this)
@@ -47,11 +57,15 @@
         modal.find('#recipient-nome').val(recipientnome)
         modal.find('#recipient-semestres').val(recipientsemestre)
         modal.find('select[name=cursoGrau] option[value=' + recipientgrau + ']').prop('selected', true)
+        getCoordenadorByCurso(recipientid).done(function (response) {
+          var professor = response[0];
+          modal.find('select[name=cursoCoordenador] option[value='+professor.id+']').prop('selected',true);
+        });
         if (recipientPeriodo.indexOf(',') != -1)
             recipientPeriodo = recipientPeriodo.split(',')
         $("#cursoPeriodos").multiSelect('select', recipientPeriodo)
     });
-	
+
 	$('#exampleModal2').on('show.bs.modal', function (event) {
         $("#cursoDisciplinas").multiSelect('deselect_all');
         $("#cursoPeriodos").multiSelect('deselect_all');
@@ -64,8 +78,8 @@
         var recipientPeriodo = button.data('whateverperiodo').toString()
         var recipientid = button.data('whateverid')
         var url = '<?= base_url('index.php/Curso/disciplinas/') ?>' + recipientid;
-        
-		
+
+
 			$.getJSON(url,function (response) {
 				var disciplinas = [];
 				$.each(response, function (index, value) {
@@ -85,7 +99,7 @@
        	var row = '<li>'+recipientPeriodo+'</li>';
 					$('#periodo-view').prepend(row);
     });
-	
+
 </script>
 
 <script type="text/javascript">
