@@ -29,6 +29,12 @@
       return $result;
     }
 
+    public function getPeriodoByCurso($curso) {
+      $this->db->where('idCurso',$curso);
+      $result = $this->db->get('Curso_tem_Periodo');
+
+      return $result->row()->idPeriodo;
+    }
   }
 
 
