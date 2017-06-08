@@ -146,6 +146,7 @@
 		</div>
 	</div><!--fecha tab-content-->
 </div><!--Fecha content-->
+</div>
 
 <!-- Aqui é o Modal de alteração das Turmas-->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">

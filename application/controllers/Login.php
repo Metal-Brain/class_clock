@@ -124,7 +124,7 @@
             $mail->SMTPAuth = true;
             $mail->Username = "metalcodeifsp@gmail.com";
             $mail->Password = "#metalcode2017#";
-            $mail->setFrom('metalcodeifsp@gmail.com', 'Suporte Metalcode');//Cria a origem do email
+            $mail->setFrom('metalcodeifsp@gmail.com', 'Suporte Metal Code');//Cria a origem do email
             $mail->addAddress($usuario['email'], $usuario['nome']);//add o email e nome
             $mail->Subject = 'Recuperação de senha';//Seta o titulo do email
             $mail->msgHTML($content);//Seta a mensagem do email no caso passando a senha

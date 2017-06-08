@@ -133,10 +133,9 @@
                 </div>
             </form>
         </div>
-
     </div><!--Fecha tab-content-->
-
 </div><!--Fecha content-->
+</div>
 
 <!-- Aqui é o Modal de alteração das salas-->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">

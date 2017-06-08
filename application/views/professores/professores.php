@@ -184,8 +184,8 @@
 			<?= form_close() ?>
 		</div>
 	</div><!--fecha tab-content-->
-
 </div> <!--Fecha content-->
+</div>
 
 <!-- Aqui é o Modal de alteração dos professores-->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
