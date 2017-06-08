@@ -416,7 +416,7 @@ class Professor extends CI_Controller {
 						'inicio' 			=> $this->input->post('inicio').':00',
 						'fim' 				=> $this->input->post('fim')
 					);
-					if ($this->Disponibilidade_model->verificaHora($disponibilidade['dia'], $disponibilidade['inicio'])) {
+					if ($this->Disponibilidade_model->verificaHora($disponibilidade['dia'], $disponibilidade['inicio'], $disponibilidade['idProfessor'])) {
 						if ($this->Disponibilidade_model->insertDisponibilidade ($disponibilidade)) {
 							$this->session->set_flashdata('success','Disponibilidade cadastrada com sucesso');
 						} else {
@@ -586,6 +586,60 @@ class Professor extends CI_Controller {
 			echo "true";
 		  }
 		}
+		//
+		// public function grade($disciplinas, $periodo){
+		// 	$diasSemana = array(
+		// 		'1' => 'segunda',
+		// 		'2' => 'terca',
+		// 		'3' => 'quarta',
+		// 		'4' => 'quinta',
+		// 		'5' => 'sexta'
+		// 	);
+		//
+		// 	$horas = getHorasPeriodo($periodo);
+		//
+		// 	switch ($periodo) {
+		// 		case 1:
+		// 			$disponibilidades = $this->Disponibilidade_model($periodo);
+		// 			$grade = array();
+		// 			for ($i=1; $i < 6 ; $i++) {//Dias Semanas
+		// 				for ($j=0; $j < 5 ; $j++) { //Horas Aulas Dia
+		// 					foreach ($disciplinas as $disciplina) {//Disciplinas
+		// 						if ($disciplina['qtdAulas'] <= 4 && $disciplina['qtdAulas'] > 0) {
+		// 							foreach ($disponibilidades as $disponibilidade) {//Disponibilidade por Professor
+		// 								if ($disponibilidade['dia'] == $diasSemana[$i] && $disponibilidade['inicio'] == $horas[$j]) {
+		// 									$grade =
+		// 								}
+		// 								}else{
+		// 									$disciplina['qtdAulas']-=4;
+		// 									$grade =
+		// 							}
+		// 						}
+		// 					}
+		// 				}
+		// 			}
+		//
+		// 			if (condition) {
+		// 				# code...
+		// 			}
+		//
+		// 			break;
+		//
+		// 		case 2:
+		// 			# code...
+		// 			break;
+		//
+		// 		case 3:
+		// 			# code...
+		// 			break;
+		//
+		//
+		// 		default:
+		// 			# code...
+		// 			break;
+		// 	}
+		// }
+
 
 		public function verificaEmail(){
 		  $validate_data = array('email' => $this->input->get('email'));

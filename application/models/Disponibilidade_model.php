@@ -74,8 +74,9 @@
       return $result;
     }
 
-    public function verificaHora($dia, $inicio){
+    public function verificaHora($dia, $inicio, $idProfessor){
       $this->db->select('Disponibilidade.*');
+      $this->db->where('idProfessor',$idProfessor);
       $this->db->where('dia',$dia);
       $this->db->where('inicio',$inicio);
       $this->db->where('status',TRUE);
@@ -86,6 +87,11 @@
         return TRUE;
       }
 
+    }
+
+    public function getPorPeriodo($idPeriodo){
+      $this->db-where('idPeriodo',$idPeriodo);
+      return $result = $this->db->get('Disponibilidade')->result_array();
     }
   }
 
