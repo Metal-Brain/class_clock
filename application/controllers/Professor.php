@@ -557,19 +557,21 @@ class Professor extends CI_Controller {
 			if (verificaSessao()) {
 
 				$this->load->helper(array('date'));
-				$this->load->model(array('CursoTemDisciplina_model','Curso_model'));
+				$this->load->model(array('CursoTemPeriodo_model','CursoTemDisciplina_model','Curso_model'));
 
 				$idCurso = $this->Curso_model->getCursoCoordenador($idCoordenador);
 				$curso = $this->Curso_model->getCursoById($idCurso)[0];
 
 				$semestreInicial = primeiroSemestre();
-
+				$curso['periodo'] = $this->CursoTemPeriodo_model->getPeriodoByCurso($curso['id']);
 
 				for ($i=$semestreInicial; $i <= $curso['qtdSemestres']; $i += 2) {
 					$disciplinas = $this->CursoTemDisciplina_model->getDisciplinasByCurso($idCurso,$i);
 
+
+
 					echo '<pre>';
-					print_r($disciplinas);
+					print_r($curso);
 					echo '</pre>';
 				}
 			}

@@ -1,6 +1,7 @@
-
-<div id="footer" class="col">
-    <p>Desenvolvido por Metal Code</p>
+<div class="row">
+	<div id="footer" class="col">
+		<p>Desenvolvido por Metal Code</p>
+	</div>
 </div>
 
 </div><!--Fecha container-fluid-->

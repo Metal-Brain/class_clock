@@ -178,34 +178,14 @@
 					</div>
 				</div>
 
-				<div class="row">
-					<div class="form-group col-md-2">
-						<input id="coordenador" type="checkbox" name="coordenador" class="form-group" value="true"/>
-						<label for="coordenador">Coordenador</label>
-					</div>
-				</div>
-
-				<div id="coordena1" class="row">
-					<div class="form-group col-md-5">
-						<label>Coordenador do curso</label>
-						<?= form_dropdown('coordena',$cursos,set_value('coordena'),array('class'=>'form-control', 'id' => 'coordena')) ?>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-md-6 margin-top-error">
-						<?= form_error('coordena') ?>
-					</div>
-				</div>
-
 				<div class="inline">
 					<button type='submit' class='btn bt-lg btn-primary'>Cadastrar</button>
 				</div>
 			<?= form_close() ?>
 		</div>
 	</div><!--fecha tab-content-->
-
 </div> <!--Fecha content-->
+</div>
 
 <!-- Aqui é o Modal de alteração dos professores-->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
@@ -312,27 +292,6 @@
 						</div>
 					</div>
 
-
-					<div class="row">
-						<div class="form-group">
-							<input type="checkbox" name="recipient-coordenador" value="true" class="form-group" style="margin-left:20px;" id="recipient-coordenador"/>
-							<label for="recipient-coordenador">Coordenador</label>
-						</div>
-					</div>
-
-					<div id="coordena2" class="row">
-						<div class="form-group col-md-9">
-							<label>Coordenador do curso</label>
-							<?= form_dropdown('recipient-coordena',$cursos,set_value('recipient-coordena'),array('class'=>'form-control', 'id' => 'recipient-coordena')) ?>
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="col-md-6 margin-top-error">
-							<?= form_error('recipient-coordena') ?>
-						</div>
-					</div>
-
 					<div class="modal-footer">
 						<button type="submit" class="btn btn-primary">Alterar</button>
 						<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
@@ -403,20 +362,6 @@
 						<div class="form-group col-md-4">
 							<label>Regime de contrato</label>
 							<?= form_dropdown('recipient-contrato',$contrato,set_value('recipient-contrato'),array('class'=>'form-control', 'disabled' =>'disabled')) ?>
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="form-group">
-							<input type="checkbox" name="recipient-coordenador" value="true" class="form-group disabled" style="margin-left:20px;" id="recipient-coordenador-view" disabled/>
-							<label for="recipient-coordenador">Coordenador</label>
-						</div>
-					</div>
-
-					<div id="coordena-view" class="row">
-						<div class="form-group col-md-9">
-							<label>Coordenador do curso</label>
-							<?= form_dropdown('coordena',$cursos,set_value('coordena'),array('class'=>'form-control','disabled'=>'disabled')) ?>
 						</div>
 					</div>
 
