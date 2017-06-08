@@ -49,7 +49,7 @@
       $this->db->where('Disciplina.id', $idDisciplina);
       $this->db->where('disp.inicio', $horaInicio);
       $result = $this->db->get('Disciplina');
-      echo $this->db->last_query();
+      //echo $this->db->last_query();
       return $result->result_array();
     }
 

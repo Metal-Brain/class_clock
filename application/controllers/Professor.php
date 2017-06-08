@@ -567,7 +567,12 @@ class Professor extends CI_Controller {
 				$this->load->model(array('CursoTemPeriodo_model','CursoTemDisciplina_model','Curso_model'));
 
 				$idCurso = $this->Curso_model->getCursoCoordenador($idCoordenador);
-				$curso = $this->Curso_model->getCursoById($idCurso)[0];
+				$curso = $this->Curso_model->getCursoById($idCurso);
+
+				echo '<pre>';
+				print_r($idCurso);
+				echo '</pre>';
+				exit();
 
 				$semestreInicial = primeiroSemestre();
 				$curso['periodo'] = $this->CursoTemPeriodo_model->getPeriodoByCurso($curso['id']);
@@ -598,17 +603,6 @@ class Professor extends CI_Controller {
 
 		public function grade2($idDisciplinas, $periodo){
 
-			$grade = array(
-				1 => array('19'=>'','20'=>'','21'=>''),
-				2 => array('19')
-			);
-
-			echo '<pre>';
-			print_r($grade);
-			echo '</pre>';
-
-			exit();
-
 			$this->load->helper(array('date_helper'));
 			$this->load->model(array(
 				'Professor_model',
@@ -620,23 +614,43 @@ class Professor extends CI_Controller {
 
 			$horas = getHorasPeriodo($periodo);
 
+			// $disponibilidades = $this->Professor_model->getDisponibilidadeHorario(1, '21:00');
+			// echo '<pre>';
+			// print_r($disponibilidades);
+			// echo '</pre>';
+			//
+			// exit();
+
+			$idDisciplina = 1;
+			$grade = array();
 			switch ($periodo) {
-				case 1:
-					$grade = array();
+				case 3:
 					for ($i=1; $i < 6 ; $i++) {//Dias Semanas
-						for ($j=0; $j < 5 ; $j++) { //Horas Aulas Dia
-							if ($disponibilidades = $this->getDisponibilidadeHorario($idDisciplina, $horas[$j])) {
-								$grade = array(
+						for ($j=0; $j < sizeof($horas) ; $j++) { //Horas Aulas Dia
+							if ($this->Professor_model->getDisponibilidadeHorario($idDisciplina, $horas[$j])) {
+								$disponibilidades = $this->Professor_model->getDisponibilidadeHorario($idDisciplina, $horas[$j]);
+								$disponibilidadeHora = array(
 									$i => array(
-										'professor' => $disponibilidades['nome'],
-										'disciplina' => $disponibilidades['nome'],
+										'dia' => $disponibilidades[0]['dia'],
+										'horario' => $disponibilidades[0]['inicio'],
+										'disciplina' => $disponibilidades[0]['sigla'],
+										'professor'=> $disponibilidades[0]['nome']
 									)
 								);
 							}
-
-
+							$grade[$j] = $disponibilidadeHora;
+						}
+						if (sizeof($grade) == sizeof($horas)) {
+							echo sizeof($grade);
+							echo '<pre>';
+							print_r($grade);
+							echo '</pre>';
+							return $grade;
+						}else{
+							return FALSE;
 						}
 					}
+
 
 					break;
 
@@ -644,7 +658,7 @@ class Professor extends CI_Controller {
 					# code...
 					break;
 
-				case 3:
+				case 1:
 					# code...
 					break;
 
@@ -653,6 +667,7 @@ class Professor extends CI_Controller {
 					# code...
 					break;
 			}
+			return $grade;
 		}
 
 
