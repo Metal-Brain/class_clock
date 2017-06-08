@@ -36,6 +36,13 @@ class Professor extends CI_Controller {
           'Contrato_model',
           'Usuario_model'
         ));
+
+				// $disponibilidades = $this->Professor_model->getDisponibilidadeHorario(1,'07:00');
+				//
+				// echo '<pre>';
+				// print_r($disponibilidades);
+				// echo '</pre>';
+
         // Definir as regras de validação para cada campo do formulário.
         $this->form_validation->set_rules('nome', 'nome do professor', array('required','min_length[5]','max_length[255]','ucwords'));
         $this->form_validation->set_rules('matricula', 'matrícula', array('required','exact_length[8]','is_unique[Usuario.matricula]','strtoupper'));
@@ -588,60 +595,86 @@ class Professor extends CI_Controller {
 			echo "true";
 		  }
 		}
-		//
-		// public function grade($disciplinas, $periodo){
-		// 	$diasSemana = array(
-		// 		'1' => 'segunda',
-		// 		'2' => 'terca',
-		// 		'3' => 'quarta',
-		// 		'4' => 'quinta',
-		// 		'5' => 'sexta'
-		// 	);
-		//
-		// 	$horas = getHorasPeriodo($periodo);
-		//
-		// 	switch ($periodo) {
-		// 		case 1:
-		// 			$disponibilidades = $this->Disponibilidade_model($periodo);
-		// 			$grade = array();
-		// 			for ($i=1; $i < 6 ; $i++) {//Dias Semanas
-		// 				for ($j=0; $j < 5 ; $j++) { //Horas Aulas Dia
-		// 					foreach ($disciplinas as $disciplina) {//Disciplinas
-		// 						if ($disciplina['qtdAulas'] <= 4 && $disciplina['qtdAulas'] > 0) {
-		// 							foreach ($disponibilidades as $disponibilidade) {//Disponibilidade por Professor
-		// 								if ($disponibilidade['dia'] == $diasSemana[$i] && $disponibilidade['inicio'] == $horas[$j]) {
-		// 									$grade =
-		// 								}
-		// 								}else{
-		// 									$disciplina['qtdAulas']-=4;
-		// 									$grade =
-		// 							}
-		// 						}
-		// 					}
-		// 				}
-		// 			}
-		//
-		// 			if (condition) {
-		// 				# code...
-		// 			}
-		//
-		// 			break;
-		//
-		// 		case 2:
-		// 			# code...
-		// 			break;
-		//
-		// 		case 3:
-		// 			# code...
-		// 			break;
-		//
-		//
-		// 		default:
-		// 			# code...
-		// 			break;
-		// 	}
-		// }
 
+		public function grade2($idDisciplinas, $periodo){
+
+			$grade = array(
+				1 => array('19'=>'','20'=>'','21'=>''),
+				2 => array('19')
+			);
+
+			echo '<pre>';
+			print_r($grade);
+			echo '</pre>';
+
+			exit();
+
+			$this->load->helper(array('date_helper'));
+			$this->load->model(array(
+				'Professor_model',
+				'Disciplina_model',
+				'Competencia_model',
+				'Usuario_model',
+				'Disponibilidade_model'
+			));
+
+			$horas = getHorasPeriodo($periodo);
+
+			switch ($periodo) {
+				case 1:
+					$grade = array();
+					for ($i=1; $i < 6 ; $i++) {//Dias Semanas
+						for ($j=0; $j < 5 ; $j++) { //Horas Aulas Dia
+							if ($disponibilidades = $this->getDisponibilidadeHorario($idDisciplina, $horas[$j])) {
+								$grade = array(
+									$i => array(
+										'professor' => $disponibilidades['nome'],
+										'disciplina' => $disponibilidades['nome'],
+									)
+								);
+							}
+
+
+						}
+					}
+
+					break;
+
+				case 2:
+					# code...
+					break;
+
+				case 3:
+					# code...
+					break;
+
+
+				default:
+					# code...
+					break;
+			}
+		}
+
+
+			// 			$disponibilidades = $this->Disponibilidade_model($periodo);
+			// 			$grade = array();
+			// 			for ($i=1; $i < 6 ; $i++) {//Dias Semanas
+			// 				for ($j=0; $j < 5 ; $j++) { //Horas Aulas Dia
+			// 					foreach ($disciplinas as $disciplina) {//Disciplinas
+			// 						if ($disciplina['qtdAulas'] <= 4 && $disciplina['qtdAulas'] > 0) {
+			// 							foreach ($disponibilidades as $disponibilidade) {//Disponibilidade por Professor
+			// 								if ($disponibilidade['dia'] == $diasSemana[$i] && $disponibilidade['inicio'] == $horas[$j]) {
+			// 									$grade =
+			// 								}
+			// 								}else{
+			// 									$disciplina['qtdAulas']-=4;
+			// 									$grade =
+			// 							}
+			// 						}
+			// 					}
+			// 				}
+			// 			}
+			//
 
 		public function verificaEmail(){
 		  $validate_data = array('email' => $this->input->get('email'));

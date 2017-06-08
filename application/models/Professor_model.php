@@ -41,6 +41,18 @@
       return $result->result_array();
     }
 
+    public function getDisponibilidadeHorario ($idDisciplina, $horaInicio) {
+      $this->db->join('Competencia as comp','comp.idDisciplina = Disciplina.id');
+      $this->db->join('Professor as prof','prof.id = comp.idProfessor');
+      $this->db->join('Usuario as user','user.id = prof.id');
+      $this->db->join('Disponibilidade as disp','disp.idProfessor = prof.id');
+      $this->db->where('Disciplina.id', $idDisciplina);
+      $this->db->where('disp.inicio', $horaInicio);
+      $result = $this->db->get('Disciplina');
+      echo $this->db->last_query();
+      return $result->result_array();
+    }
+
     /**
       * Insere um novo professor na base de dados.
       * @author Yasmin Sayad
