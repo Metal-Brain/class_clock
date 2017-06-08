@@ -98,7 +98,7 @@
       if (verificaSessao() && verificaNivelPagina(array(1))) {
         $this->load->library('form_validation');
         $this->load->helper('dropdown');
-        $this->load->model(array('CursoTemDisciplina_model','CursoTemPeriodo_model','Curso_model','Grau_model','Periodo_model','disciplina_model','Professor_model'));
+        $this->load->model(array('CoordenadorDe_model','CursoTemDisciplina_model','CursoTemPeriodo_model','Curso_model','Grau_model','Periodo_model','disciplina_model','Professor_model'));
         //Define regras de validação do formulario!!!
         $this->form_validation->set_rules('nomeCurso', 'nome do curso',array('required', 'min_length[5]','ucwords'));
         $this->form_validation->set_rules('cursoSigla', 'sigla do curso', array('required', 'max_length[5]', 'strtoupper'));
@@ -149,6 +149,14 @@
             $this->Professor_model->setCoordenador($coordenador,$idCurso,TRUE);
 
             // TODO: Terminar a alteração de coordenador do curso. Falta apenas alterar a relação de coordenadorDe
+            // Pega o ID de todos os professores do curso
+            $professores = $this->CursoTemDisciplina_model->getAllProfessorByCurso($idCurso);
+            $temp = array();
+            foreach($professores as $professor)
+              array_push($temp,$professor['id']);
+            $professores = $temp;
+            // Altera a relação de coordenador para todos os professores do curso
+            $this->CoordenadorDe_model->setCoordenadorDe($coordenador,$professores);
 
             $this->session->set_flashdata('success','Curso atualizado com sucesso');
           } else {

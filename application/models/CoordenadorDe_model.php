@@ -78,6 +78,22 @@
       return $result->result_array();
     }
 
+    /**
+     * Altera o relacionamento entre coodenador e coordenado.
+     * @author Caio de Freitas Adriano
+     * @since 2017/06/08
+     * @param INT $idCoordenador - Identificador do professores coordenador.
+     * @param ARRAY $professores - Vetor com todos os professores
+     * @return retorna um boolean true caso as modificações sejam realizadas.
+     */
+    public function setCoordenadorDe($idCoordenador,$professores) {
+      $this->db->where_in('idProfessor',$professores);
+      $this->db->set('idCoordenador',$idCoordenador);
+      $result = $this->db->update('CoordenadorDe');
+
+      return $result;
+    }
+
   }
 
 ?>
