@@ -56,6 +56,7 @@
     public function getAllDisponibilidades($professor) {
       $this->db->select('Disponibilidade.*');
       $this->db->where('idProfessor',$professor);
+      $this->db->where('status',TRUE);
       $this->db->join('Professor','Professor.id = Disponibilidade.idProfessor');
       $result = $this->db->get('Disponibilidade');
 
@@ -91,6 +92,7 @@
 
     public function getPorPeriodo($idPeriodo){
       $this->db-where('idPeriodo',$idPeriodo);
+      $this->db->where('status',TRUE);
       return $result = $this->db->get('Disponibilidade')->result_array();
     }
   }

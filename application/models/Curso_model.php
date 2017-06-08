@@ -105,7 +105,7 @@
     public function getCursoCoordenador ($idCoordenador) {
       $this->db->where('id',$idCoordenador);
       $result = $this->db->get('Professor');
-
+      //echo $this->db->last_query();
       return $result->row()->idCurso;
     }
 

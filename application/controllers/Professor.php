@@ -569,23 +569,19 @@ class Professor extends CI_Controller {
 				$idCurso = $this->Curso_model->getCursoCoordenador($idCoordenador);
 				$curso = $this->Curso_model->getCursoById($idCurso);
 
-				echo '<pre>';
-				print_r($idCurso);
-				echo '</pre>';
-				exit();
-
 				$semestreInicial = primeiroSemestre();
-				$curso['periodo'] = $this->CursoTemPeriodo_model->getPeriodoByCurso($curso['id']);
+				$curso['periodo'] = $this->CursoTemPeriodo_model->getPeriodoByCurso($curso[0]['id']);
 
-				for ($i=$semestreInicial; $i <= $curso['qtdSemestres']; $i += 2) {
-					$disciplinas = $this->CursoTemDisciplina_model->getDisciplinasByCurso($idCurso,$i);
-
-
-
-					echo '<pre>';
-					print_r($curso);
-					echo '</pre>';
+				for ($i=$semestreInicial; $i <= $curso[0]['qtdSemestres']; $i += 2) {
+					if ($this->CursoTemDisciplina_model->getDisciplinasByCurso($idCurso,$i)) {
+						$disciplinas = $this->CursoTemDisciplina_model->getDisciplinasByCurso($idCurso,$i);
+					}
 				}
+					for ($i=0; $i < sizeof($disciplinas) ; $i++) {
+						if ($disciplinas[$i]['id'] != null) {
+							$grade = $this->verificaDia($disciplinas[$i]['id'], $curso['periodo']);
+						}
+					}
 			}
 		}
 
@@ -601,7 +597,7 @@ class Professor extends CI_Controller {
 		  }
 		}
 
-		public function grade2($idDisciplinas, $periodo){
+		public function verificaDia($idDisciplina, $periodo){
 
 			$this->load->helper(array('date_helper'));
 			$this->load->model(array(
@@ -614,37 +610,28 @@ class Professor extends CI_Controller {
 
 			$horas = getHorasPeriodo($periodo);
 
-			// $disponibilidades = $this->Professor_model->getDisponibilidadeHorario(1, '21:00');
-			// echo '<pre>';
-			// print_r($disponibilidades);
-			// echo '</pre>';
-			//
-			// exit();
 
-			$idDisciplina = 1;
 			$grade = array();
 			switch ($periodo) {
 				case 3:
-					for ($i=1; $i < 6 ; $i++) {//Dias Semanas
+					for ($i=0; $i < 5 ; $i++) {//Dias Semanas
 						for ($j=0; $j < sizeof($horas) ; $j++) { //Horas Aulas Dia
 							if ($this->Professor_model->getDisponibilidadeHorario($idDisciplina, $horas[$j])) {
 								$disponibilidades = $this->Professor_model->getDisponibilidadeHorario($idDisciplina, $horas[$j]);
 								$disponibilidadeHora = array(
 									$i => array(
-										'dia' => $disponibilidades[0]['dia'],
-										'horario' => $disponibilidades[0]['inicio'],
-										'disciplina' => $disponibilidades[0]['sigla'],
-										'professor'=> $disponibilidades[0]['nome']
+										'dia' => $disponibilidades[$i]['dia'],
+										'horario' => $disponibilidades[$i]['inicio'],
+										'disciplina' => $disponibilidades[$i]['sigla'],
+										'professor'=> $disponibilidades[$i]['nome']
 									)
 								);
+								if ($disponibilidadeHora != null) {
+									$grade[$j] = $disponibilidadeHora;
+								}
 							}
-							$grade[$j] = $disponibilidadeHora;
 						}
 						if (sizeof($grade) == sizeof($horas)) {
-							echo sizeof($grade);
-							echo '<pre>';
-							print_r($grade);
-							echo '</pre>';
 							return $grade;
 						}else{
 							return FALSE;

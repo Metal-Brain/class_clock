@@ -47,7 +47,11 @@
       $this->db->join('Usuario as user','user.id = prof.id');
       $this->db->join('Disponibilidade as disp','disp.idProfessor = prof.id');
       $this->db->where('Disciplina.id', $idDisciplina);
+      $this->db->where('Disciplina.status', TRUE);
       $this->db->where('disp.inicio', $horaInicio);
+      $this->db->where('disp.status',TRUE);
+      $this->db->where('user.status',TRUE);
+
       $result = $this->db->get('Disciplina');
       //echo $this->db->last_query();
       return $result->result_array();
