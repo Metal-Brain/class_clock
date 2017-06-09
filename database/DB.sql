@@ -5,7 +5,7 @@ USE CLASSCLOCK;
 
 CREATE TABLE IF NOT EXISTS Disciplina(
  id                 INT           NOT NULL  AUTO_INCREMENT,
- nome               VARCHAR(45)   NOT NULL  UNIQUE,
+ nome               VARCHAR(45)   NOT NULL,
  sigla              VARCHAR(5)    NOT NULL  UNIQUE,
  qtdProf            INT           NOT NULL,
  semestre			INT			  NOT NULL,
