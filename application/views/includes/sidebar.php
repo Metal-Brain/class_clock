@@ -2,7 +2,7 @@
 	<div id="sidebar" class="col-xs-12 col-sm-2 col-md-2" role="navigation">
 		<h2>Menu</h2>
 		<ul class="metismenu nav nav-pills nav-stacked" id="menu">
-			<?php if ($this->session->nivel == 1) : ?>
+			<?php if ($this->session->nivel == 1 || $this->session->nivel == 3) : ?>
 				<li><?= anchor('Curso','Cursos') ?></li>
 				<li><?= anchor('Disciplina','Disciplinas') ?></li>
 				<li><?= anchor('Professor/index', 'Professores') ?></li>
@@ -16,7 +16,7 @@
 							<li><?= anchor('Professor/coordenadorde','CoordenadorDe') ?></li>
 				<?php endif; ?>
 			<?php endif; ?>
-                        <?php if ($this->session->nivel == 2) : ?>
+            <?php if ($this->session->nivel == 2) : ?>
 			<li><?= anchor('Professor/Grade','Grade') ?></li>
                         <?php endif; ?>
 			<hr>
@@ -46,6 +46,12 @@
 							break;
 						}
 						break;
+					case 3:
+					if (a[5] === b[5]) {
+						active = i;
+						break;
+					}
+					break;
 				}
 			}
 			document.links[active].className = 'active';

@@ -47,7 +47,6 @@
                             <th><center>Qtd. Semestres</th>
                             <th><center>Período</th>
                             <th><center>Grau</th>
-							<th><center>Coordenador</th>
                             <th><center>Status</th>
                             <th><center>Ação</th>
                         </tr>
@@ -60,7 +59,6 @@
                                 <td><center><?= $curso['qtdSemestres'] ?></td>
                                 <td><center><?= $curso['periodo'] ?></td>
                                 <td><center><?= $curso['grauNome'] ?></td>
-								<!-- <td><center><?= $curso['coordenador'] ?></td> -->
                                   <td><center><?php
                     								if ($curso['status']): echo "Ativo";
                     								else: echo "Inativo";
@@ -72,8 +70,8 @@
 											<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whateverid="<?= $curso['id'] ?>" data-whateversigla="<?= $curso['sigla'] ?>" data-whatevernome="<?= $curso['nome'] ?>" data-whateversemestres="<?= $curso['qtdSemestres'] ?>" data-whatevergrau="<?= $curso['grau'] ?>" data-whateverperiodo="<?= $curso['idPeriodo'] ?>"><span class="glyphicon glyphicon-pencil"></span></button>
 											<button onClick="exclude(<?= $curso['id'] ?>);" type="button" class="btn btn-danger" title="Desativar"><span class="glyphicon glyphicon-remove"></span></button>
 										 <?php endif; ?>
-										 <?php if ($this->session->nivel == 2) :?>
-											<button type="button" class="btn btn-primary" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whateverid="<?= $curso['id'] ?>" data-whateversigla="<?= $curso['sigla'] ?>" data-whatevernome="<?= $curso['nome'] ?>" data-whateversemestres="<?= $curso['qtdSemestres'] ?>" data-whatevergrau="<?= $curso['grau'] ?>" data-whateverperiodo="<?= $curso['Periodo'] ?>"><span class="glyphicon glyphicon-eye-open"></span></button>
+										 <?php if ($this->session->nivel == 2 || $this->session->nivel == 3) :?>
+											<button type="button" class="btn btn-primary" title="Visualizar" data-toggle="modal" data-target="#exampleModal2" data-whateverid="<?= $curso['id'] ?>" data-whateversigla="<?= $curso['sigla'] ?>" data-whatevernome="<?= $curso['nome'] ?>" data-whateversemestres="<?= $curso['qtdSemestres'] ?>" data-whatevergrau="<?= $curso['grau'] ?>" data-whateverperiodo="<?= $curso['idPeriodo'] ?>"><span class="glyphicon glyphicon-eye-open"></span></button>
 										 <?php endif; ?>
 								  <?php else: ?>
                                         <button onClick="able(<?= $curso['id'] ?>)" type="button" class="btn btn-success delete" title="Ativar"><span class="glyphicon glyphicon-ok"></span></button>

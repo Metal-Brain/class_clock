@@ -31,14 +31,16 @@
           $this->session->set_flashdata('danger','Matrícula ou senha incorretos');
         } else {
           $this->session->set_userdata($usuario);
-
           if ($this->Usuario_model->isProfessor($usuario)) {
             $isCoordenador = $this->Usuario_model->isCoordenador($usuario);
 
             $this->session->set_userdata('nivel', 2);
             $this->session->set_userdata('isCoordenador', $isCoordenador);
             redirect('Professor/preferencia');
-          }
+          } else if ($this->Usuario_model->isDae($usuario)){			  
+			  $this->session->set_userdata('nivel', 3);
+			  redirect('Curso');
+		  }
 
           $this->session->set_userdata('nivel', 1);
           redirect('Curso');

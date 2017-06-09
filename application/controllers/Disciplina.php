@@ -8,7 +8,7 @@
   class Disciplina extends CI_Controller {
 
     public function index () {
-      if (verificaSessao() && verificaNivelPagina(array(1)))
+      if (verificaSessao() && verificaNivelPagina(array(1,3)))
         $this->cadastro();
       else
         redirect('/');
@@ -28,7 +28,7 @@
       */
     public function cadastro () {
       // Carrega a biblioteca para validação dos dados.
-      if (verificaSessao() && verificaNivelPagina(array(1))) {
+      if (verificaSessao() && verificaNivelPagina(array(1,3))) {
         $this->load->library(array('form_validation','session'));
         $this->load->helper(array('form','url'));
         $this->load->model(array('Disciplina_model'));

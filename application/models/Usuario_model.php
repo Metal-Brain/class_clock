@@ -96,6 +96,20 @@
 
       return $result->coordenador;
     }
+	
+	/**
+     * Verifica se o usuário é DAE.
+     * @author Yasmin Sayad
+     * @since 2017/06/07
+     * @param ARRAY $usuario - Vetor com os dados do usuario
+     * @return Retorna um boolean TRUE caso o usuario seja DAE
+     */
+    public function isDae ($usuario) {
+      $this->db->where('id', $usuario['id']);
+      $result = $this->db->get('Usuario')->row();
+	  
+      return ($result->dae == 1) ? true : false;
+    }
 
     /**
      * Insere um novo usuário na base de dados.
