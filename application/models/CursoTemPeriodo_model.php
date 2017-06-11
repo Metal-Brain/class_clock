@@ -35,6 +35,15 @@
 
       return $result->row()->idPeriodo;
     }
+	
+	public function getAllPeriodos($curso) {
+      $this->db->select('Periodo.*');
+      $this->db->where('idCurso',$curso);
+      $this->db->join('Periodo','Periodo.id = Curso_tem_Periodo.idPeriodo');
+      $result = $this->db->get('Curso_tem_Periodo');
+
+      return $result->result_array();
+    }
   }
 
 

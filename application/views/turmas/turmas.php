@@ -66,7 +66,7 @@
 									<button onClick="exclude(<?= $turma['id']?>)" type="button" class="btn btn-danger delete" title="Desativar"><span class="glyphicon glyphicon-remove"></span></button>
 									<?php endif;?>
 									<?php if ($this->session->nivel == 3) :?>
-									<button type="button" class="btn btn-primary" title="Visualizar" data-toggle="modal" data-target="#exampleModal"  data-whateverdisciplina="<?= $turma['disciplinaSigla']?>" data-whateverid="<?= $turma['id']?>"  data-whateversigla="<?= $turma['sigla']?>" data-whateveriddisciplina="<?= $turma['disciplina']?>"  data-whateverqtd="<?= $turma['qtdAlunos']?>" data-whateverdp="<?= $turma['dp']?>"><span class="glyphicon glyphicon-eye-open"></span></button>
+									<button type="button" class="btn btn-primary" title="Visualizar" data-toggle="modal" data-target="#exampleModal2"  data-whateverdisciplina="<?= $turma['disciplinaSigla']?>" data-whateverid="<?= $turma['id']?>"  data-whateversigla="<?= $turma['sigla']?>" data-whateveriddisciplina="<?= $turma['disciplina']?>"  data-whateverqtd="<?= $turma['qtdAlunos']?>" data-whateverdp="<?= $turma['dp']?>"><span class="glyphicon glyphicon-eye-open"></span></button>
 									<?php endif;?>
 
 								<?php else : ?>
@@ -254,7 +254,7 @@
 						<div class="form-group col-md-10">
 							<!-- DropListDisciplina (Droplist) -->
 							<label>Disciplina</label>
-							<?= form_dropdown('recipient-disciplina',$disciplina,set_value('recipient-disciplina'),array('class'=>'form-control')) ?>
+							<?= form_dropdown('recipient-disciplina',$disciplina,set_value('recipient-disciplina'),array('class'=>'form-control', 'disabled' =>'disabled')) ?>
 						</div>
 					</div>
 

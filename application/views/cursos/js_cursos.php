@@ -29,15 +29,13 @@
 
 <script type="text/javascript">
     $('#exampleModal').on('show.bs.modal', function (event) {
-        $("#cursoDisciplinas").multiSelect('deselect_all');
-        $("#cursoPeriodos").multiSelect('deselect_all');
         var button = $(event.relatedTarget) // Button that triggered the modal
         var recipient = button.data('whatever') // Extract info from data-* attributes
         var recipientsigla = button.data('whateversigla')
         var recipientnome = button.data('whatevernome')
         var recipientsemestre = button.data('whateversemestres')
         var recipientgrau = button.data('whatevergrau')
-        var recipientPeriodo = button.data('whateverperiodo').toString()
+        var recipientPeriodo = button.data('whateverperiodo')
         var recipientid = button.data('whateverid')
         var url = '<?= base_url('index.php/Curso/disciplinas/') ?>' + recipientid;
         $.getJSON(url, function (response) {
@@ -67,38 +65,46 @@
     });
 
 	$('#exampleModal2').on('show.bs.modal', function (event) {
-        $("#cursoDisciplinas").multiSelect('deselect_all');
-        $("#cursoPeriodos").multiSelect('deselect_all');
         var button = $(event.relatedTarget) // Button that triggered the modal
         var recipient = button.data('whatever') // Extract info from data-* attributes
         var recipientsigla = button.data('whateversigla')
         var recipientnome = button.data('whatevernome')
         var recipientsemestre = button.data('whateversemestres')
         var recipientgrau = button.data('whatevergrau')
-        var recipientPeriodo = button.data('whateverperiodo').toString()
+        /* var recipientPeriodo = button.data('whateverperiodo') */
         var recipientid = button.data('whateverid')
         var url = '<?= base_url('index.php/Curso/disciplinas/') ?>' + recipientid;
+		var urlPeriodo = '<?= base_url('index.php/Curso/periodos/') ?>' + recipientid;
+		
+		console.log(url);
 
 		$('#cursoDisciplinas2 li').remove();
 		$.getJSON(url,function (response) {
-			var disciplinas = [];
 			$.each(response, function (index, value) {
 				var row = '<li>'+value.nome+'</li>';
 				$('#cursoDisciplinas2').prepend(row);
 			});
 		});
 		
+		$('#periodo-view li').remove();
+		$.getJSON(urlPeriodo,function (response) {
+			$.each(response, function (index, value) {
+				var row = '<li>'+value.nome+'</li>';
+				$('#periodo-view').append(row);
+			});
+		});
+		
         // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
         // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
         var modal = $(this)
-        modal.find('.modal-title').text('Alterar Curso')
+        modal.find('.modal-title').text('Visualizar Curso')
         modal.find('#recipient-id').val(recipientid)
         modal.find('#recipient-sigla').val(recipientsigla)
         modal.find('#recipient-nome').val(recipientnome)
         modal.find('#recipient-semestres').val(recipientsemestre)
         modal.find('select[name=cursoGrau] option[value=' + recipientgrau + ']').prop('selected', true)
        	
-		$('#periodo-view li').remove();
+		/* $('#periodo-view li').remove();
 		$.getJSON(url,function (response) {
 			$.each(response, function (index, value) {
 				var row = '<li>'+recipientPeriodo+'</li>';
@@ -106,7 +112,7 @@
 			});
 		});
 		
-		console.log();
+		console.log(); */
     });
 
 </script>

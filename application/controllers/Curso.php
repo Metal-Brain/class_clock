@@ -202,6 +202,12 @@
       $disciplinas = $this->CursoTemDisciplina_model->getAllDisciplinas($id);
       echo json_encode($disciplinas);
     }
+	
+	public function periodos ($id) {
+      $this->load->model('CursoTemPeriodo_model');
+      $periodos = $this->CursoTemPeriodo_model->getAllPeriodos($id);
+      echo json_encode($periodos);
+    }
 
 	public function verificaNome(){
       $validate_data = array('nome' => $this->input->get('nome'));

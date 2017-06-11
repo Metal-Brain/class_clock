@@ -6,7 +6,7 @@
         var recipientnome = button.data('whatevernome')
         var recipientQtdProf = button.data('whateverqtdprof')
         var recipentSemestre = button.data('whateversemestre')
-        var recipientqtdAula = button.data('whateverqtdAula')
+        var recipientqtdAula = button.data('whateverqtdaula')
         var recipientId = button.data('whateverid')
         // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
         // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
@@ -18,7 +18,6 @@
         modal.find('#recipient-semestre').val(recipentSemestre)
         modal.find('#recipient-qtdAula').val(recipientqtdAula)
         modal.find('#recipient-id').val(recipientId)
-        console.log(recipientqtdAula);
     });
 
 
@@ -29,7 +28,7 @@
 		var recipientnome = button.data('whatevernome')
 		var recipientQtdProf = button.data('whateverqtdprof')
 		var recipentSemestre = button.data('whateversemestre')
-    var recipientqtdAula = button.data('whateverqtdAula')
+		var recipientqtdAula = button.data('whateverqtdaula')
 		var recipientId = button.data('whateverid')
 		// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
 		// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
@@ -39,7 +38,7 @@
 		modal.find('#recipient-nome').val(recipientnome)
 		modal.find('#recipient-qtd-prof').val(recipientQtdProf)
 		modal.find('#recipient-semestre').val(recipentSemestre)
-    modal.find('#recipient-qtdAula').val(recipientqtdAula)
+		modal.find('#recipient-qtdAula').val(recipientqtdAula)
 		modal.find('#recipient-id').val(recipientId)
 	});
 </script>

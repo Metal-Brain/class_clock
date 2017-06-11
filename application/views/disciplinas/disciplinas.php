@@ -60,7 +60,7 @@
 							<td><center><?= $disciplina['nome'] ?></td>
 							<td><center><?= $disciplina['qtdProf'] ?></td>
 							<td><center><?= $disciplina['semestre'] ?></td>
-              <td><center><?= $disciplina['qtdAulas'] ?></td>
+							<td><center><?= $disciplina['qtdAulas'] ?></td>
 							<td><center><?php
 								if ($disciplina['status']): echo "Ativo";
 								else: echo "Inativo";
@@ -69,7 +69,7 @@
 							<td><center>
 								<?php if ($disciplina['status']): ?>
 									<?php if ($this->session->nivel == 1) :?>
-										<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whateversemestre="<?= $disciplina['semestre'] ?>" data-whateversigla="<?= $disciplina['sigla'] ?>" data-whateverqtdAula="<?= $disciplina['qtdAulas'] ?>" data-whatevernome="<?= $disciplina['nome'] ?>" data-whateverid="<?= $disciplina['id'] ?>" data-whateverqtdprof="<?= $disciplina['qtdProf'] ?>"><span class="glyphicon glyphicon-pencil"></span></button>
+										<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whateversemestre="<?= $disciplina['semestre'] ?>" data-whateversigla="<?= $disciplina['sigla'] ?>" data-whateverqtdaula="<?= $disciplina['qtdAulas'] ?>" data-whatevernome="<?= $disciplina['nome'] ?>" data-whateverid="<?= $disciplina['id'] ?>" data-whateverqtdprof="<?= $disciplina['qtdProf'] ?>"><span class="glyphicon glyphicon-pencil"></span></button>
 										<button onClick="disable(<?= $disciplina['id'] ?>)" type="button" class="btn btn-danger delete" title="Desativar"><span class="glyphicon glyphicon-remove"></span></button>
 									<?php endif;?>
 										<?php if ($this->session->nivel == 2 || $this->session->nivel == 3) :?>
@@ -337,12 +337,8 @@
 						<input type="text" maxlength="1" pattern="[0-9]+$"  class="form-control" name="recipient-qtd-prof" id="recipient-qtd-prof" required readonly/>
 					</div>
 				</div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                </div>
-
-                <div class="row">
+				
+				<div class="row">
 					<div class="col-md-5">
 						<label for="qtdAulas" class="control-label">Qtd.Aulas por Semana:</label>
 					</div>
@@ -350,9 +346,13 @@
 
 				<div class="row">
 					<div class="form-group col-md-8">
-						<input type="text" maxlength="1" pattern="[0-9]+$" class="form-control" name="recipient-qtdAula" id="recipient-qtdAula" required style=" width:50px;">
+						<input type="text" maxlength="1" pattern="[0-9]+$" class="form-control" name="recipient-qtdAula" id="recipient-qtdAula" required style=" width:50px;" readonly/>
 					</div>
 				</div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
 
 				<?= form_close() ?>
             </div>

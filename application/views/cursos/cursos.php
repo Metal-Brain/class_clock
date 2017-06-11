@@ -71,7 +71,7 @@
 											<button onClick="exclude(<?= $curso['id'] ?>);" type="button" class="btn btn-danger" title="Desativar"><span class="glyphicon glyphicon-remove"></span></button>
 										 <?php endif; ?>
 										 <?php if ($this->session->nivel == 2 || $this->session->nivel == 3) :?>
-											<button type="button" class="btn btn-primary" title="Visualizar" data-toggle="modal" data-target="#exampleModal2" data-whateverid="<?= $curso['id'] ?>" data-whateversigla="<?= $curso['sigla'] ?>" data-whatevernome="<?= $curso['nome'] ?>" data-whateversemestres="<?= $curso['qtdSemestres'] ?>" data-whatevergrau="<?= $curso['grau'] ?>" data-whateverperiodo="<?= $curso['idPeriodo'] ?>"><span class="glyphicon glyphicon-eye-open"></span></button>
+											<button type="button" class="btn btn-primary" title="Visualizar" data-toggle="modal" data-target="#exampleModal2" data-whateverid="<?= $curso['id'] ?>" data-whateversigla="<?= $curso['sigla'] ?>" data-whatevernome="<?= $curso['nome'] ?>" data-whateversemestres="<?= $curso['qtdSemestres'] ?>" data-whatevergrau="<?= $curso['grau'] ?>" data-whateverperiodo="<?= $curso['periodo'] ?>"><span class="glyphicon glyphicon-eye-open"></span></button>
 										 <?php endif; ?>
 								  <?php else: ?>
                                         <button onClick="able(<?= $curso['id'] ?>)" type="button" class="btn btn-success delete" title="Ativar"><span class="glyphicon glyphicon-ok"></span></button>
@@ -355,8 +355,8 @@
 				<div class="row">
 					<!-- DropListPeriodo (Droplist) -->
 					<div class="form-group col-md-9">
-						<label>Período:</label>
-							<ul id="periodo-view" style="list-style-type: none"></ul>
+						<label>Período(s):</label>
+							<ul id="periodo-view" style="margin: 0 0 0 -20px;"></ul>
 					</div>
 				</div>
 
@@ -373,7 +373,7 @@
 				<div class="row">
 					<div class="form-group col-md-9">
 						<label>Disciplinas:</label>
-							<ul id="cursoDisciplinas2"></ul>
+							<ul id="cursoDisciplinas2" style="margin: 0 0 0 -20px;"></ul>
 					</div>
 				</div>
 
