@@ -8,7 +8,7 @@
   class Turma extends CI_Controller {
 
     public function index () {
-      if (verificaSessao() && verificaNivelPagina(array(1)))
+      if (verificaSessao() && verificaNivelPagina(array(1,3)))
         $this->cadastrar();
       else
         redirect('/');
@@ -28,7 +28,7 @@
       */
     public function cadastrar () {
 
-      if (verificaSessao() && verificaNivelPagina(array(1))) {
+      if (verificaSessao() && verificaNivelPagina(array(1,3))) {
         // Carrega a biblioteca para validação dos dados.
         $this->load->library(array('form_validation','session'));
         $this->load->helper(array('form','url','dropdown'));

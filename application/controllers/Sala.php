@@ -8,7 +8,7 @@
 
    Class Sala extends CI_Controller{
      public function index(){
-       if (verificaSessao() && verificaNivelPagina(array(1)))
+       if (verificaSessao() && verificaNivelPagina(array(1,3)))
          $this->cadastro();
        else
          redirect('/');
@@ -27,7 +27,7 @@
            * @since 2017/03/23
            */
          public function cadastro () {
-           if (verificaSessao() && verificaNivelPagina(array(1))){
+           if (verificaSessao() && verificaNivelPagina(array(1,3))){
              // Carrega a biblioteca para validação dos dados.
       		   $this->load->library(array('form_validation','session'));
       		   $this->load->helper(array('form','url'));
