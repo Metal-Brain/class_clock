@@ -71,13 +71,10 @@
         var recipientnome = button.data('whatevernome')
         var recipientsemestre = button.data('whateversemestres')
         var recipientgrau = button.data('whatevergrau')
-        /* var recipientPeriodo = button.data('whateverperiodo') */
         var recipientid = button.data('whateverid')
         var url = '<?= base_url('index.php/Curso/disciplinas/') ?>' + recipientid;
 		var urlPeriodo = '<?= base_url('index.php/Curso/periodos/') ?>' + recipientid;
 		
-		console.log(url);
-
 		$('#cursoDisciplinas2 li').remove();
 		$.getJSON(url,function (response) {
 			$.each(response, function (index, value) {
@@ -103,6 +100,10 @@
         modal.find('#recipient-nome').val(recipientnome)
         modal.find('#recipient-semestres').val(recipientsemestre)
         modal.find('select[name=cursoGrau] option[value=' + recipientgrau + ']').prop('selected', true)
+		getCoordenadorByCurso(recipientid).done(function (response) {
+          var professor = response[0];
+          modal.find('select[name=cursoCoordenador] option[value='+professor.id+']').prop('selected',true);
+        });
        	
 		/* $('#periodo-view li').remove();
 		$.getJSON(url,function (response) {
