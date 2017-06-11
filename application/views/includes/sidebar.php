@@ -13,7 +13,10 @@
 				<li><?= anchor('Professor/preferencia','Preferências') ?></li>
 				<?php if ($this->session->isCoordenador) : ?>
 					<li><?= anchor('Professor/cadastrar','Visualizar Professores') ?></li>
-							<li><?= anchor('Professor/coordenadorde','CoordenadorDe') ?></li>
+					<li><?= anchor('Professor/coordenadorde','Professores Coordenados') ?></li>
+				<?php endif; ?>
+				<?php if (!($this->session->isCoordenador)) : ?>
+					<li><?= anchor('Professor/verCadastro','Visualizar Cadastro') ?></li>
 				<?php endif; ?>
 			<?php endif; ?>
             <?php if ($this->session->nivel == 2) : ?>

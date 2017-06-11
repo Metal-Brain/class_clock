@@ -214,14 +214,13 @@ class Professor extends CI_Controller {
           $dados['contrato']        = convert($this->Contrato_model->getAll(), TRUE);
           $dados['nivel']           = convert($this->Nivel_model->getAll(), TRUE);
           $dados['disciplinas']     = convert($this->Disciplina_model->getAll(TRUE));
-					$dados['cursos']					= convert($this->Curso_model->getAll(), TRUE);
+		  $dados['cursos']					= convert($this->Curso_model->getAll(), TRUE);
 
-
-					if ($this->session->nivel == 2) {
-						$dados['professores']     = $this->Professor_model->getAllCoordenador($this->session->id);
-					}else{
-						$dados['professores']     = $this->Professor_model->getAll();
-					}
+			if ($this->session->nivel == 2) {
+				$dados['professores']     = $this->Professor_model->getAllCoordenador($this->session->id);
+			}else{
+				$dados['professores']     = $this->Professor_model->getAll();
+			}
           $this->load->view('includes/header', $dados);
           $this->load->view('includes/sidebar');
           $this->load->view('professores/professores');
@@ -706,6 +705,33 @@ class Professor extends CI_Controller {
 			$this->load->model('Professor_model');
 			$professor = $this->Professor_model->getCoordenadorByCurso($idCurso);
 			echo json_encode($professor);
+		}
+		
+		
+		public function verCadastro(){
+			if (verificaSessao() && verificaNivelPagina(array(2))){
+
+				$this->load->model(array(
+					'Curso_model',
+					'Professor_model',
+					'Disciplina_model',
+					'Competencia_model',
+					'Nivel_model',
+					'Contrato_model',
+					'Usuario_model'));
+
+				if($this->form_validation->run() == FALSE){
+					$dados['professores'] = convert($this->Professor_model->getAll());
+					$this->load->view('includes/header', $dados);
+					$this->load->view('includes/sidebar');
+					$this->load->view('cadastroProf/cadastroProf');
+					$this->load->view('includes/footer');
+					$this->load->view('cadastroProf/js_cadastroProf');
+				}
+
+			}else{
+					redirect('/');
+			}
 		}
 
  }

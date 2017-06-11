@@ -9,7 +9,7 @@
  		<!-- Cordenador de -->
  		<?= form_open('Professor/coordenadorde') ?>
  			<div class="col-md-12">
- 				<h1>Coordenador de</h1>
+ 				<h1>Professores Coordenados</h1>
 
  				<div class="row">
  					<!-- Aqui entra o multi select -->

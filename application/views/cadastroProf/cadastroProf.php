@@ -1,6 +1,6 @@
 	<div id="content" class="col-md-10">
 		
-		<!-- Form de vizualização do cadastro do professor -->
+		<!-- Form de vizualizaÃ§Ã£o do cadastro do professor -->
 		<?= form_open('Professor/cadastro') ?>
 			<div class="row">
 				<div class="col-md-12">
@@ -18,14 +18,14 @@
 											
 				<div class="row">
 					<div class="form-group col-md-2">
-						<label>Matrícula</label>
+						<label>MatrÃ­cula</label>
 						<?= form_input('','',array('class'=>'form-control')) ?>
 					</div>
 				</div>
 				
 				<div class="row">
 					<div class="form-group col-md-4">
-						<label>Email</label>
+						<label>E-mail</label>
 						<?= form_input('','',array('class'=>'form-control')) ?>
 					</div>
 				</div>
@@ -39,9 +39,9 @@
 								</tr>
 							</thead>
 							<tbody>
-								<!-- Inserir o código php bonito que faz esse trem funcionar -->
+								<!-- Inserir o cÃ³digo php bonito que faz esse trem funcionar -->
 								<tr>
-									<td>Lógica de Programação</td>
+									<td>LÃ³gica de ProgramaÃ§Ã£o</td>
 								</tr>
 								<tr>
 									<td>Estrutura de dados</td>
@@ -63,7 +63,7 @@
 				
 				<div class="row">
 					<div class="form-group col-md-2">
-						<label>Nivel Acadêmico</label>
+						<label>NÃ­vel AcadÃªmico</label>
 						<?= form_input('','',array('class'=>'form-control')) ?>
 					</div>
 				</div>
@@ -72,13 +72,6 @@
 					<div class="form-group col-md-2">
 						<label>Regime de contrato</label>
 						<?= form_input('','',array('class'=>'form-control')) ?>
-					</div>
-				</div>
-					
-				<div class="row">
-					<div class="form-group col-md-2">
-						<input id="coordenador" type="checkbox" name="coordenador" class="form-group" value="true"/>
-						<label for="coordenador">Coordenador</label>
 					</div>
 				</div>
 			</fieldset>
