@@ -19,7 +19,7 @@
       * com sucesso;
       */
     public function insert ($curso,$periodo) {
-      return $this->db->insert('Curso_tem_periodo',array('idCurso'=>$curso,'idPeriodo'=>$periodo));
+      return $this->db->insert('Curso_tem_Periodo',array('idCurso'=>$curso,'idPeriodo'=>$periodo));
     }
 
     public function delete ($curso) {

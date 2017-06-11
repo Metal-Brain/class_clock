@@ -18,7 +18,7 @@
       * de dados com sucesso.
       */
     public function insert ($curso, $disciplina) {
-      return $this->db->insert('Curso_tem_Disciplina',array(
+      return $this->db->insert('Curso_tem_disciplina',array(
         'idCurso'       => $curso,
         'idDisciplina'  => $disciplina
       ));
@@ -67,10 +67,10 @@
      * @return Retorna um vetor com os dados das disciplinas.
      */
     public function getDisciplinasByCurso ($idCurso, $semestre) {
-      $this->db->join('Disciplina','cd.idDisciplina = disciplina.id');
+      $this->db->join('Disciplina','cd.idDisciplina = Disciplina.id');
       $this->db->where('idCurso',$idCurso);
       $this->db->where('semestre',$semestre);
-      $result = $this->db->get('Curso_tem_Disciplina AS cd');
+      $result = $this->db->get('Curso_tem_disciplina AS cd');
       //echo $this->db->last_query();
       return $result->result_array();
     }

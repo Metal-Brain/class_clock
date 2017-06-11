@@ -12,6 +12,71 @@
     return $d[2].'-'.$d[1].'-'.$d[0];
   }
 
+  function fimPeriodo ($periodo){
+    $fim;
+
+    switch ($periodo) {
+      case 1:
+        $fim = 12;
+        break;
+
+      case 2:
+        $fim = 18;
+        break;
+
+      case 3:
+        $fim = 22;
+        break;
+    }
+
+    return $fim;
+  }
+
+  /**
+   *
+   * @since 2017/06/11
+   */
+  function inicioPeriodo ($periodo){
+    $inicio;
+
+    switch ($periodo) {
+      case 1:
+        $inicio = 7;
+        break;
+
+      case 2:
+        $inicio = 14;
+        break;
+
+      case 3:
+        $inicio = 19;
+        break;
+    }
+
+    return $inicio;
+  }
+
+  /**
+   * converte um numero da semana em dia da semana em texto.
+   * @author Caio de Freitas
+   * @since 201/06/11
+   * @param INT $number - Dia da semana em número
+   * @return Retorna o dia da semana em texto
+   */
+  function numberToDay($number) {
+    $day = array (
+      'segunda',
+      'terça',
+      'quarta',
+      'quinta',
+      'sexta',
+      'sabado',
+      'domingo'
+    );
+
+    return $day[$number];
+  }
+
   /**
    * Converte uma data em formato SQL para BR
    * @author Caio de Freitas
@@ -71,7 +136,7 @@
             '11:00',
             '12:00'
             );
-            break; 
+            break;
 
     }
     return $horas;

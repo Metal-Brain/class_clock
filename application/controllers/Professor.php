@@ -570,18 +570,24 @@ class Professor extends CI_Controller {
 				$curso = $this->Curso_model->getCursoById($idCurso);
 
 				$semestreInicial = primeiroSemestre();
+				$disciplinaIndex = 0;
 				$curso['periodo'] = $this->CursoTemPeriodo_model->getPeriodoByCurso($curso[0]['id']);
 
 				for ($i=$semestreInicial; $i <= $curso[0]['qtdSemestres']; $i += 2) {
-					if ($this->CursoTemDisciplina_model->getDisciplinasByCurso($idCurso,$i)) {
-						$disciplinas = $this->CursoTemDisciplina_model->getDisciplinasByCurso($idCurso,$i);
-					}
-				}
-					for ($i=0; $i < sizeof($disciplinas) ; $i++) {
-						if ($disciplinas[$i]['id'] != null) {
-							$grade = $this->verificaDia($disciplinas[$i]['id'], $curso['periodo']);
+					$disciplinas = $this->CursoTemDisciplina_model->getDisciplinasByCurso($idCurso,$i);
+
+					echo '<pre>';
+					print_r($disciplinas);
+					echo '</pre>';
+
+					for ($dia = 0; $dia < 5; $dia++) { // dias
+						for ($hora = inicioPeriodo($curso['periodo']); $hora <= fimPeriodo($curso['periodo']); $hora ++) { // horario
+
+							// TODO: continuar construção da grade - verificar disponibilidade do professor.
+
 						}
 					}
+				}
 			}
 		}
 
