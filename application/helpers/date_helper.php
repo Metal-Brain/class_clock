@@ -57,6 +57,56 @@
   }
 
   /**
+   *
+   * @since 2017/06/12
+   */
+  function numeroParaHora($numero) {
+    $hora = array(
+      7   => '07:00',
+      8   => '08:00',
+      9   => '09:00',
+      10  => '10:00',
+      11  => '11:00',
+      12  => '12:00',
+      13  => '13:00',
+      14  => '14:00',
+      15  => '15:00',
+      16  => '16:00',
+      17  => '17:00',
+      18  => '18:00',
+      19  => '19:00',
+      20  => '20:00',
+      21  => '21:00',
+      22  => '22:00',
+      23  => '23:00'
+    );
+
+    return $hora[$numero];
+  }
+
+  /**
+   *
+   * @author Caio de Freitas
+   * @since 2017/06/12
+   */
+  function maxAula ($periodo) {
+    $max = 0;
+    switch ($periodo) {
+      case 1:
+        $max = 3;
+        break;
+      case 2:
+        $max = 2;
+        break;
+      case 3:
+        $max = 4;
+        break;
+    }
+
+    return $max;
+  }
+
+  /**
    * converte um numero da semana em dia da semana em texto.
    * @author Caio de Freitas
    * @since 201/06/11

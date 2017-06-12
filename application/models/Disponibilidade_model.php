@@ -63,6 +63,18 @@
       return $result->result_array();
     }
 
+    public function getDisponibilidade($idDisciplina,$dia,$hora) {
+      $this->db->select('Competencia.idDisciplina, Disponibilidade.*');
+      $this->db->join('Professor','Professor.id = Disponibilidade.idProfessor');
+      $this->db->join('Competencia','Competencia.idProfessor = Professor.id');
+      $this->db->where('Disponibilidade.dia',$dia);
+      $this->db->where('Disponibilidade.inicio',$hora);
+      $this->db->where('Competencia.idDisciplina',$idDisciplina);
+      $result = $this->db->get('Disponibilidade');
+
+      return $result->result();
+    }
+
     public function able($id){
       $this->db->where('id', $id);
       $result = $this->db->update('Disponibilidade',array('status'=>TRUE));

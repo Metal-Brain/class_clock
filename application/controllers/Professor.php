@@ -563,27 +563,34 @@ class Professor extends CI_Controller {
 			if (verificaSessao()) {
 
 				$this->load->helper(array('date'));
-				$this->load->model(array('CursoTemPeriodo_model','CursoTemDisciplina_model','Curso_model'));
+				$this->load->model(array('Disponibilidade_model','CursoTemPeriodo_model','CursoTemDisciplina_model','Curso_model'));
 
 				$idCurso = $this->Curso_model->getCursoCoordenador($idCoordenador);
 				$curso = $this->Curso_model->getCursoById($idCurso);
 
 				$semestreInicial = primeiroSemestre();
-				$disciplinaIndex = 0;
 				$curso['periodo'] = $this->CursoTemPeriodo_model->getPeriodoByCurso($curso[0]['id']);
 
 				for ($i=$semestreInicial; $i <= $curso[0]['qtdSemestres']; $i += 2) {
 					$disciplinas = $this->CursoTemDisciplina_model->getDisciplinasByCurso($idCurso,$i);
-
-					echo '<pre>';
-					print_r($disciplinas);
-					echo '</pre>';
-
-					for ($dia = 0; $dia < 5; $dia++) { // dias
-						for ($hora = inicioPeriodo($curso['periodo']); $hora <= fimPeriodo($curso['periodo']); $hora ++) { // horario
-
-							// TODO: continuar construção da grade - verificar disponibilidade do professor.
-
+					for ($dia = 0; $dia < 5; $dia ++) {
+						$disciplinaIndex = 0;
+						$hora = inicioPeriodo($curso['periodo']);
+						$aulasAtribuidas = 0;
+						// TODO: continuar construção da grade - verificar disponibilidade do professor.
+						while ( ($disciplinas[$disciplinaIndex]['qtdAulas'] > 0 && $aulasAtribuidas < maxAula($curso['periodo']) && $disciplinaIndex < count($disciplinas)-1)) {
+							$disponibilidade = $this->Disponibilidade_model->getDisponibilidade($disciplinas[$disciplinaIndex]['idDisciplina'], numberToDay($dia), numeroParaHora($hora));
+							if ($disponibilidade) {
+								echo '<pre>';
+								print_r($disciplinas);
+								echo '</pre>';
+								$disciplinas[$disciplinaIndex]['qtdAulas'] -= 1;
+								$hora++;
+								$aulasAtribuidas++;
+								// TODO: Fazer atribuição da aula.
+							} else {
+								$disciplinaIndex++;
+							}
 						}
 					}
 				}
@@ -706,7 +713,7 @@ class Professor extends CI_Controller {
 			$professor = $this->Professor_model->getCoordenadorByCurso($idCurso);
 			echo json_encode($professor);
 		}
-		
+
 		public function verCadastro(){
 			if (verificaSessao() && verificaNivelPagina(array(2))){
 		        $this->load->helper(array('form','dropdown','date','password'));
@@ -725,7 +732,7 @@ class Professor extends CI_Controller {
 				    $dados['disciplinas']     = convert($this->Disciplina_model->getAll(TRUE));
 				    $dados['cursos']	    	= convert($this->Curso_model->getAll(), TRUE);
 
-					
+
 					$dados['professores'] = ($this->Professor_model->getById($this->session->id));
 					$this->load->view('includes/header', $dados);
 					$this->load->view('includes/sidebar');
@@ -742,4 +749,3 @@ class Professor extends CI_Controller {
  }
 
 ?>
-
