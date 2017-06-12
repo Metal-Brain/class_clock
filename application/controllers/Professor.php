@@ -707,10 +707,9 @@ class Professor extends CI_Controller {
 			echo json_encode($professor);
 		}
 		
-		
 		public function verCadastro(){
 			if (verificaSessao() && verificaNivelPagina(array(2))){
-
+		        $this->load->helper(array('form','dropdown','date','password'));
 				$this->load->model(array(
 					'Curso_model',
 					'Professor_model',
@@ -721,7 +720,13 @@ class Professor extends CI_Controller {
 					'Usuario_model'));
 
 				if($this->form_validation->run() == FALSE){
-					$dados['professores'] = convert($this->Professor_model->getAll());
+					$dados['contrato']        = convert($this->Contrato_model->getAll(), TRUE);
+					$dados['nivel']           = convert($this->Nivel_model->getAll(), TRUE);
+				    $dados['disciplinas']     = convert($this->Disciplina_model->getAll(TRUE));
+				    $dados['cursos']	    	= convert($this->Curso_model->getAll(), TRUE);
+
+					
+					$dados['professores'] = ($this->Professor_model->getById($this->session->id));
 					$this->load->view('includes/header', $dados);
 					$this->load->view('includes/sidebar');
 					$this->load->view('cadastroProf/cadastroProf');
@@ -737,3 +742,4 @@ class Professor extends CI_Controller {
  }
 
 ?>
+

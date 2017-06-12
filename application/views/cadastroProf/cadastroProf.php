@@ -11,22 +11,29 @@
 			<fieldset disabled>
 				<div class="row">
 					<div class="form-group col-md-6">
+				
+						<?php foreach ($professores as $professor) : ?>
+								<input type="hidden" value="<?= $professor['id']?>" id="identificador">
+						<?php endforeach; ?>
+							
 						<label>Nome</label>
-						<?= form_input('','',array('class'=>'form-control')) ?>
+						
+						<input type="text" class="form-control" value="<?= $professor['nome'] ?>"/>
+				
 					</div>
 				</div>
 											
 				<div class="row">
 					<div class="form-group col-md-2">
 						<label>Matrícula</label>
-						<?= form_input('','',array('class'=>'form-control')) ?>
+							<input type="text" class="form-control" value="<?= $professor['matricula'] ?>"/>
 					</div>
 				</div>
 				
 				<div class="row">
 					<div class="form-group col-md-4">
 						<label>E-mail</label>
-						<?= form_input('','',array('class'=>'form-control')) ?>
+							<input type="text" class="form-control" value="<?= $professor['email'] ?>"/>
 					</div>
 				</div>
 				
@@ -39,16 +46,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<!-- Inserir o código php bonito que faz esse trem funcionar -->
-								<tr>
-									<td>Lógica de Programação</td>
-								</tr>
-								<tr>
-									<td>Estrutura de dados</td>
-								</tr>
-								<tr>
-									<td>Redes de computadores</td>
-								</tr>
+								
 							</tbody>
 						</table>
 					</div>
@@ -57,21 +55,21 @@
 				<div class="row">
 					<div class="form-group col-md-2">
 						<label>Data de Nascimento</label>
-						<?= form_input('','',array('class'=>'form-control')) ?>
+							<input type="date" class="form-control" value="<?= ($professor['nascimento']) ?>"/>
 					</div>
 				</div>
 				
 				<div class="row">
 					<div class="form-group col-md-2">
 						<label>Nível Acadêmico</label>
-						<?= form_input('','',array('class'=>'form-control')) ?>
+							<input type="text" class="form-control" value="<?= $professor['nivel'] ?>"/>
 					</div>
 				</div>
 				
 				<div class="row">
 					<div class="form-group col-md-2">
 						<label>Regime de contrato</label>
-						<?= form_input('','',array('class'=>'form-control')) ?>
+							<input type="text" class="form-control" value="<?= $professor['contrato'] ?>"/>
 					</div>
 				</div>
 			</fieldset>
