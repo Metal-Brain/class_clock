@@ -75,6 +75,17 @@
       * @return altera o boolean  para TRUE ou False dos Dados caso Seja deletado.
     */
     function deleteCurso($idCurso) {
+      $this->load->model(array(
+        'CoordenadorDe_model',
+        'Professor_model'
+      ));
+
+
+      $idProfessor = $this->Professor_model->getCoordenadorCurso($idCurso);      
+
+      $this->CoordenadorDe_model->delete($idProfessor[0]['id']);
+
+
       $this->db->where('id', $idCurso);
       $result = $this->db->update('Curso', array('status' =>FALSE));
 

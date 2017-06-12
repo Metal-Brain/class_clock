@@ -168,17 +168,37 @@
       return $result->result();
     }
 
+    public function getCoordenadorCurso($idCurso) {
+      $this->db->where('idCurso',$idCurso);
+      $result = $this->db->get("Professor");
+
+      return $result->result_array();
+    }
+
     /**
      * @author Caio de Freitas
      */
     public function setCoordenador($idProfessor,$idCurso,$status=TRUE) {
+      $this->load->model(array(
+        'CoordenadorDe_model'
+      ));
+
+      if ($idProfessor == null) {
+        $this->db->where('idCurso',$idCurso);
+        $idCurso = 0;
+        $this->CoordenadorDe_model->delete($idProfessor['id']);
+      } else
+        $this->db->where('id',$idProfessor);
+
+      return $this->db->update('Professor',array('idCurso'=>$idCurso,'coordenador'=>$status));
+    }
+
+    public function removeCoordenadorCurso($idProfessor,$idCurso,$status=TRUE){
       if ($idProfessor == null) {
         $this->db->where('idCurso',$idCurso);
         $idCurso = 0;
       } else
         $this->db->where('id',$idProfessor);
-
-      return $this->db->update('Professor',array('idCurso'=>$idCurso,'coordenador'=>$status));
     }
 
   }

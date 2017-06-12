@@ -32,9 +32,9 @@
       * @return Retorna um boolean True caso a relação foi desfeita
       */
     public function delete ($professor) {
-      $this->db->where('idProfessor', $professor);
+      $this->db->where('idCoordenador', $professor);
       $result = $this->db->delete('CoordenadorDe');
-
+      
       return $result;
     }
 
