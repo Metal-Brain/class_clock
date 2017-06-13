@@ -21,10 +21,6 @@
 								<div class="col-sm-10">
 									<h3 class="text-center">Grade</h3>
 
-									<pre>
-										<?php print_r($this->session->userdata()) ?>
-									</pre>
-
 									<?php if (isset($grade)) : ?>
 									<table class="table table-bordered">
 										<tr>

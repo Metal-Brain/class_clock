@@ -531,23 +531,16 @@ class Professor extends CI_Controller {
 			}
 		}
 
-		public function grade(){
+		public function grade($grade=NULL){
 			if (verificaSessao() && verificaNivelPagina(array(2))){
-				if($this->form_validation->run() == FALSE){
 
+				$dados = array('grade'	=> $grade);
 
-					$dados = array();
-
-					$this->load->view('includes/header',$dados);
-					$this->load->view('includes/sidebar');
-					$this->load->view('grade/grades');
-					$this->load->view('includes/footer');
-					$this->load->view('grade/js_grades');
-				} else {
-
-
-				}
-
+				$this->load->view('includes/header',$dados);
+				$this->load->view('includes/sidebar');
+				$this->load->view('grade/grades');
+				$this->load->view('includes/footer');
+				$this->load->view('grade/js_grades');
 			}else{
 					redirect('/');
 			}
@@ -577,23 +570,23 @@ class Professor extends CI_Controller {
 						$disciplinaIndex = 0;
 						$hora = inicioPeriodo($curso['periodo']);
 						$aulasAtribuidas = 0;
-						// TODO: continuar construção da grade - verificar disponibilidade do professor.
+
 						while ( ($disciplinas[$disciplinaIndex]['qtdAulas'] > 0 && $aulasAtribuidas < maxAula($curso['periodo']) && $disciplinaIndex < count($disciplinas)-1)) {
 							$disponibilidade = $this->Disponibilidade_model->getDisponibilidade($disciplinas[$disciplinaIndex]['idDisciplina'], numberToDay($dia), numeroParaHora($hora));
 							if ($disponibilidade) {
-								echo '<pre>';
-								print_r($disciplinas);
-								echo '</pre>';
 								$disciplinas[$disciplinaIndex]['qtdAulas'] -= 1;
+								$grade[$dia][$hora] = $disponibilidade[0];
 								$hora++;
 								$aulasAtribuidas++;
-								// TODO: Fazer atribuição da aula.
 							} else {
 								$disciplinaIndex++;
 							}
 						}
 					}
 				}
+
+				$this->grade($grade);
+
 			}
 		}
 
