@@ -29,13 +29,15 @@
 
 <script type="text/javascript">
     $('#exampleModal').on('show.bs.modal', function (event) {
+		$("#cursoDisciplinas").multiSelect('deselect_all');
+        $("#cursoPeriodos").multiSelect('deselect_all');
         var button = $(event.relatedTarget) // Button that triggered the modal
         var recipient = button.data('whatever') // Extract info from data-* attributes
         var recipientsigla = button.data('whateversigla')
         var recipientnome = button.data('whatevernome')
         var recipientsemestre = button.data('whateversemestres')
         var recipientgrau = button.data('whatevergrau')
-        var recipientPeriodo = button.data('whateverperiodo')
+        var recipientPeriodo = button.data('whateverperiodo').toString()
         var recipientid = button.data('whateverid')
         var url = '<?= base_url('index.php/Curso/disciplinas/') ?>' + recipientid;
         $.getJSON(url, function (response) {
