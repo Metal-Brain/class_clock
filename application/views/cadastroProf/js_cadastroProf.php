@@ -8,9 +8,8 @@ var url = '<?= base_url('index.php/Professor/disciplinas/') ?>'+recipientid;
 			$.getJSON(url,function (response) {
 				var disciplinas = [];
 				$.each(response, function (index, value) {
-					var row = '<tr><td>'+value.nome+'</td></tr>';
-					console.log(row);
-					$('#lecionarTable').prepend(row);
+					var row = '<li>'+value.nome+ ' ('+value.sigla+')</li>';
+					$('#lecionarList').prepend(row);
 				});
 			});
 

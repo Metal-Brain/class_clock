@@ -39,16 +39,8 @@
 				
 				<div class="row">
 					<div class="form-group col-md-6">
-						<table id="lecionarTable" class="table table-striped">
-							<thead>
-								<tr>
-									<th>Disciplinas que pode lecionar</th>
-								</tr>
-							</thead>
-							<tbody>
-								
-							</tbody>
-						</table>
+						<label>Disciplinas que pode lecionar</label>
+						<ul id="lecionarList" style="margin: 0 0 0 -20px;"></ul>
 					</div>
 				</div>
 				

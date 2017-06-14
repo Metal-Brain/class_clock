@@ -82,7 +82,7 @@
 		$('#cursoDisciplinas2 li').remove();
 		$.getJSON(url,function (response) {
 			$.each(response, function (index, value) {
-				var row = '<li>'+value.nome+'</li>';
+				var row = '<li>'+value.nome+ ' ('+value.sigla+')</li>';
 				$('#cursoDisciplinas2').prepend(row);
 			});
 		});
