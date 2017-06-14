@@ -44,6 +44,8 @@
             var disciplinas = [];
             $.each(response, function (index, value) {
                 disciplinas.push(value.id);
+
+
             });
             $("#cursoDisciplinas").multiSelect('select', disciplinas);
         });
@@ -76,7 +78,7 @@
         var recipientid = button.data('whateverid')
         var url = '<?= base_url('index.php/Curso/disciplinas/') ?>' + recipientid;
 		var urlPeriodo = '<?= base_url('index.php/Curso/periodos/') ?>' + recipientid;
-		
+
 		$('#cursoDisciplinas2 li').remove();
 		$.getJSON(url,function (response) {
 			$.each(response, function (index, value) {
@@ -84,7 +86,7 @@
 				$('#cursoDisciplinas2').prepend(row);
 			});
 		});
-		
+
 		$('#periodo-view li').remove();
 		$.getJSON(urlPeriodo,function (response) {
 			$.each(response, function (index, value) {
@@ -92,7 +94,7 @@
 				$('#periodo-view').append(row);
 			});
 		});
-		
+
         // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
         // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
         var modal = $(this)
@@ -106,7 +108,7 @@
           var professor = response[0];
           modal.find('select[name=cursoCoordenador] option[value='+professor.id+']').prop('selected',true);
         });
-       	
+
 		/* $('#periodo-view li').remove();
 		$.getJSON(url,function (response) {
 			$.each(response, function (index, value) {
@@ -114,7 +116,7 @@
 				$('#periodo-view').prepend(row);
 			});
 		});
-		
+
 		console.log(); */
     });
 

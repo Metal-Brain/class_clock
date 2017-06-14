@@ -57,7 +57,7 @@
                         <?php foreach ($disciplinas as $disciplina): ?>
                             <?= ($disciplina['status'] ? '<tr>' : '<tr class="danger">') ?>
 							<td><center><?= $disciplina['sigla'] ?></td>
-							<td><center><?= $disciplina['nome'] ?></td>
+							<td><center><?= ($disciplina['nome']) . (' ('.$disciplina['sigla'].')') ?></td>
 							<td><center><?= $disciplina['qtdProf'] ?></td>
 							<td><center><?= $disciplina['semestre'] ?></td>
 							<td><center><?= $disciplina['qtdAulas'] ?></td>
@@ -337,7 +337,7 @@
 						<input type="text" maxlength="1" pattern="[0-9]+$"  class="form-control" name="recipient-qtd-prof" id="recipient-qtd-prof" required readonly/>
 					</div>
 				</div>
-				
+
 				<div class="row">
 					<div class="col-md-5">
 						<label for="qtdAulas" class="control-label">Qtd.Aulas por Semana:</label>
