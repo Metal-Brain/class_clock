@@ -98,7 +98,7 @@
       if (verificaSessao() && verificaNivelPagina(array(1))) {
         $this->load->library('form_validation');
         $this->load->helper('dropdown');
-        $this->load->model(array('CursoTemDisciplina_model','CursoTemPeriodo_model','Curso_model','Grau_model','Periodo_model','disciplina_model','Professor_model'));
+        $this->load->model(array('CursoTemDisciplina_model','CursoTemPeriodo_model','Curso_model','Grau_model','Periodo_model','disciplina_model','Professor_model','CoordenadorDe_model'));
         //Define regras de validação do formulario!!!
         $this->form_validation->set_rules('nomeCurso', 'nome do curso',array('required', 'min_length[5]','ucwords'));
         $this->form_validation->set_rules('cursoSigla', 'sigla do curso', array('required', 'max_length[5]', 'strtoupper'));
@@ -135,6 +135,12 @@
           $disciplinas = $this->input->post('cursoDisciplinas[]');
           $coordenador = $this->input->post('cursoCoordenador');
 
+          // echo '<pre>';
+ 				 //      print_r($coordenador);
+ 				 //  echo '</pre>';
+          // exit();
+
+
           if($this->Curso_model->updateCurso($idCurso, $curso)) {
             $this->CursoTemPeriodo_model->delete($idCurso);
             foreach ($periodo as $idPeriodo)
@@ -143,8 +149,14 @@
             foreach ($disciplinas as $disciplina)
               $this->CursoTemDisciplina_model->insert($idCurso,$disciplina);
 
+            // Retira os coordenados desse coordenador
+            $professor = $this->Professor_model->getCoordenadorCurso($idCurso);
+            if ($professor[0]['id'] != $coordenador)
+              $this->CoordenadorDe_model->delete($professor[0]['id']);
+
             // Retira o coordenador atural
             $this->Professor_model->setCoordenador(null,$idCurso,FALSE);
+
             // Seta o novo coordenador
             $this->Professor_model->setCoordenador($coordenador,$idCurso,TRUE);
 
@@ -202,7 +214,7 @@
       $disciplinas = $this->CursoTemDisciplina_model->getAllDisciplinas($id);
       echo json_encode($disciplinas);
     }
-	
+
 	public function periodos ($id) {
       $this->load->model('CursoTemPeriodo_model');
       $periodos = $this->CursoTemPeriodo_model->getAllPeriodos($id);

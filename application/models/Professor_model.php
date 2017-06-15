@@ -179,14 +179,10 @@
      * @author Caio de Freitas
      */
     public function setCoordenador($idProfessor,$idCurso,$status=TRUE) {
-      $this->load->model(array(
-        'CoordenadorDe_model'
-      ));
 
       if ($idProfessor == null) {
         $this->db->where('idCurso',$idCurso);
         $idCurso = 0;
-        $this->CoordenadorDe_model->delete($idProfessor['id']);
       } else
         $this->db->where('id',$idProfessor);
 

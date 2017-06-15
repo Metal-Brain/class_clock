@@ -81,8 +81,8 @@
       ));
 
 
-      $idProfessor = $this->Professor_model->getCoordenadorCurso($idCurso);      
-
+      $idProfessor = $this->Professor_model->getCoordenadorCurso($idCurso);
+      $this->Professor_model->setCoordenador(null,$idCurso,FALSE);
       $this->CoordenadorDe_model->delete($idProfessor[0]['id']);
 
 

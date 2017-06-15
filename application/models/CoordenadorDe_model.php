@@ -34,7 +34,7 @@
     public function delete ($professor) {
       $this->db->where('idCoordenador', $professor);
       $result = $this->db->delete('CoordenadorDe');
-      
+
       return $result;
     }
 
