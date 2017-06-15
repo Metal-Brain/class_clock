@@ -14,9 +14,10 @@
       * @return Retorna um array com todas as disciplinas
       */
     public function getAll ($status=NULL) {
+      $this->db->select('id, concat(nome," (",sigla,")") as nome, sigla, qtdProf, semestre, qtdAulas,status');
       if ($status)
         $this->db->where('status',$status);
-      $result = $this->db->get('disciplinaSigla');
+      $result = $this->db->get('disciplina');
 
       return $result->result_array(); // converte o objeto em um array
     }

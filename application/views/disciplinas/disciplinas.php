@@ -44,7 +44,6 @@
                 <table id="disciplinaTable" class="table table-striped">
                     <thead>
                         <tr>
-                            <th><center>Sigla</th>
                             <th><center>Nome</th>
                             <th><center>Qtd. Professores</th>
                             <th><center>Semestre</th>
@@ -56,8 +55,7 @@
                     <tbody>
                         <?php foreach ($disciplinas as $disciplina): ?>
                             <?= ($disciplina['status'] ? '<tr>' : '<tr class="danger">') ?>
-							<td><center><?= $disciplina['sigla'] ?></td>
-							<td><center><?= ($disciplina['nome']) . (' ('.$disciplina['sigla'].')') ?></td>
+							<td><center><?= ($disciplina['nome'])  ?></td>
 							<td><center><?= $disciplina['qtdProf'] ?></td>
 							<td><center><?= $disciplina['semestre'] ?></td>
 							<td><center><?= $disciplina['qtdAulas'] ?></td>

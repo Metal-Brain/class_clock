@@ -100,7 +100,7 @@
 			$.getJSON(url,function (response) {
 				var disciplinas = [];
 				$.each(response, function (index, value) {
-					var row = '<li>'+value.nome+ ' ('+value.sigla+')</li>';
+					var row = '<li>'+value.nome+'</li>';
 					$('#disciplinaTable-view').prepend(row);
 				});
 			});
