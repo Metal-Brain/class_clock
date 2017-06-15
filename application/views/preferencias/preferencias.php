@@ -1,6 +1,3 @@
-	<pre>
-		<?php print_r($disciplinas) ?>
-	</pre>
 
 	<div id="content" class="col-md-10">
 

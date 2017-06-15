@@ -16,7 +16,7 @@
     public function getAll ($status=NULL) {
       if ($status)
         $this->db->where('status',$status);
-      $result = $this->db->get('Disciplina');
+      $result = $this->db->get('disciplinaSigla');
 
       return $result->result_array(); // converte o objeto em um array
     }
