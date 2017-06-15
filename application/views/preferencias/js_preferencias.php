@@ -2,10 +2,11 @@
 			var url = '<?= base_url('index.php/Professor/getPreferencia/'.$this->session->id)?>';
 			$.getJSON(url,function (response) {
 				var disciplinas = [];
+
 				$.each(response, function (index, value) {
 					disciplinas.push(value.idDisciplina);
 				});
-				
+
 				$("#disciplinas").multiSelect('select',disciplinas);
 			});
 

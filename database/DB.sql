@@ -168,3 +168,7 @@ CREATE TABLE IF NOT EXISTS CoordenadorDe(
     FOREIGN KEY (idProfessor) REFERENCES Professor(id)
 
 );
+
+create view disciplinaSigla as SELECT id, concat(nome, ' (', sigla,')') as nome FROM `Competencia` JOIN `Disciplina` ON `Disciplina`.`id` = `Competencia`.`idDisciplina` WHERE `idProfessor` = '3' AND `Competencia`.`active` = 1;
+
+
