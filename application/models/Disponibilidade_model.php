@@ -64,15 +64,24 @@
     }
 
     public function getDisponibilidade($idDisciplina,$dia,$hora) {
-      $this->db->select('Competencia.idDisciplina, Disponibilidade.*');
+      $this->db->select('Competencia.idDisciplina, Usuario.nome, Disponibilidade.*, Disciplina.nome AS nomeDisciplina');
       $this->db->join('Professor','Professor.id = Disponibilidade.idProfessor');
+      $this->db->join('Usuario','Usuario.id = Professor.id');
       $this->db->join('Competencia','Competencia.idProfessor = Professor.id');
+      $this->db->join('Disciplina','Disciplina.id = Competencia.idDisciplina');
       $this->db->where('Disponibilidade.dia',$dia);
       $this->db->where('Disponibilidade.inicio',$hora);
       $this->db->where('Competencia.idDisciplina',$idDisciplina);
+      $this->db->where('Disponibilidade.status',TRUE);
+      $this->db->where('Disponibilidade.hasDisponibilidade',TRUE);
       $result = $this->db->get('Disponibilidade');
 
-      return $result->result();
+      return $result->result_array();
+    }
+
+    public function setHasDisponibilidade ($idDisponibilidade, $hasDisponibilidade) {
+      $this->db->where('id',$idDisponibilidade);
+      return $this->db->update('Disponibilidade',array('hasDisponibilidade'=>$hasDisponibilidade));
     }
 
     public function able($id){

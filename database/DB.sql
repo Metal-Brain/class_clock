@@ -148,6 +148,7 @@ CREATE TABLE IF NOT EXISTS Disponibilidade(
     inicio 				TIME 			NOT NULL,
     fim 				TIME 			NOT NULL,
     `status`      		BOOLEAN     	NOT NULL  DEFAULT TRUE,
+    hasDisponibilidade	BOOLEAN			NOT NULL  DEFAULT TRUE,
 
     PRIMARY KEY(id),
 

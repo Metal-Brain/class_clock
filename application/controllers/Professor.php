@@ -560,6 +560,7 @@ class Professor extends CI_Controller {
 
 				$idCurso = $this->Curso_model->getCursoCoordenador($idCoordenador);
 				$curso = $this->Curso_model->getCursoById($idCurso);
+				$grade = array();
 
 				$semestreInicial = primeiroSemestre();
 				$curso['periodo'] = $this->CursoTemPeriodo_model->getPeriodoByCurso($curso[0]['id']);
@@ -574,8 +575,10 @@ class Professor extends CI_Controller {
 						while ( ($disciplinas[$disciplinaIndex]['qtdAulas'] > 0 && $aulasAtribuidas < maxAula($curso['periodo']) && $disciplinaIndex < count($disciplinas)-1)) {
 							$disponibilidade = $this->Disponibilidade_model->getDisponibilidade($disciplinas[$disciplinaIndex]['idDisciplina'], numberToDay($dia), numeroParaHora($hora));
 							if ($disponibilidade) {
+								$disponibilidade = $disponibilidade[0];
 								$disciplinas[$disciplinaIndex]['qtdAulas'] -= 1;
-								$grade[$dia][$hora] = $disponibilidade[0];
+								$grade[$i][$dia][$hora] = $disponibilidade;
+								$this->Disponibilidade_model->setHasDisponibilidade($disponibilidade['id'],FALSE);
 								$hora++;
 								$aulasAtribuidas++;
 							} else {
