@@ -170,6 +170,7 @@ CREATE TABLE IF NOT EXISTS CoordenadorDe(
 
 );
 
-create view disciplinaSigla AS SELECT id, concat(nome, ' (', sigla,')') as nome, sigla, qtdProf, semestre, qtdAulas, status FROM `Competencia` JOIN `Disciplina` ON `Disciplina`.`id` = `Competencia`.`idDisciplina` WHERE `idProfessor` = '3' AND `Competencia`.`active` = 1;
+CREATE VIEW disciplinaSigla AS SELECT Competencia.idProfessor, id, concat(nome, ' (', sigla,')') as nome, sigla, qtdProf, semestre, qtdAulas, status FROM `Competencia` 
+	JOIN `Disciplina` ON `Disciplina`.`id` = `Competencia`.`idDisciplina`;
 
 
