@@ -116,6 +116,10 @@
       $this->db->where('status',TRUE);
       return $result = $this->db->get('Disponibilidade')->result_array();
     }
+
+    public function reset() {
+      return $this->db->update('Disponibilidade',array('hasDisponibilidade'=>TRUE));
+    }
   }
 
 ?>

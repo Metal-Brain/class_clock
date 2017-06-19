@@ -558,6 +558,8 @@ class Professor extends CI_Controller {
 				$this->load->helper(array('date'));
 				$this->load->model(array('Disponibilidade_model','CursoTemPeriodo_model','CursoTemDisciplina_model','Curso_model'));
 
+				$this->Disponibilidade_model->reset();
+
 				$idCurso = $this->Curso_model->getCursoCoordenador($idCoordenador);
 				$curso = $this->Curso_model->getCursoById($idCurso);
 				$grade = array();
