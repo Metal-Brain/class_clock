@@ -67,7 +67,8 @@
 							<td><center>
 								<?php if ($disciplina['status']): ?>
 									<?php if ($this->session->nivel == 1) :?>
-										<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whateversemestre="<?= $disciplina['semestre'] ?>" data-whateversigla="<?= $disciplina['sigla'] ?>" data-whateverqtdaula="<?= $disciplina['qtdAulas'] ?>" data-whatevernome="<?= $disciplina['nome'] ?>" data-whateverid="<?= $disciplina['id'] ?>" data-whateverqtdprof="<?= $disciplina['qtdProf'] ?>"><span class="glyphicon glyphicon-pencil"></span></button>
+                    <?php $index = strpos($disciplina['nome'],"("); $destruir = substr($disciplina['nome'],0,$index) ?>
+                    <button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whateversemestre="<?= $disciplina['semestre'] ?>" data-whateversigla="<?= $disciplina['sigla'] ?>" data-whateverqtdaula="<?= $disciplina['qtdAulas'] ?>" data-whatevernome="<?= $destruir ?>" data-whateverid="<?= $disciplina['id'] ?>" data-whateverqtdprof="<?= $disciplina['qtdProf'] ?>"><span class="glyphicon glyphicon-pencil"></span></button>
 										<button onClick="disable(<?= $disciplina['id'] ?>)" type="button" class="btn btn-danger delete" title="Desativar"><span class="glyphicon glyphicon-remove"></span></button>
 									<?php endif;?>
 										<?php if ($this->session->nivel == 2 || $this->session->nivel == 3) :?>
