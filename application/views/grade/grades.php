@@ -1,6 +1,3 @@
-	<pre>
-		<?php print_r($grade) ?>
-	</pre>
 
 		<div id="content" class="col-md-10">
 
@@ -16,8 +13,7 @@
 				</div>
 			<?php endif; ?>
 
-			<!-- Cadastro das preferências do professor -->
-			<?= form_open('Professor/disponibilidade') ?>
+		
 				<div class="col-md-12">
 					<div class="container">
 						<div class="row">
@@ -26,42 +22,74 @@
 									<h3 class="text-center">Grade</h3>
 
 									<?php if (isset($grade)) : ?>
-									<table class="table table-bordered">
-										<tr>
-											<th class="text-center" style="background-color: #4CAF50; color: #fff;" colspan="6">1° Semestre</th>
-										</tr>
-										<table class="table table-bordered">
-											<tr>
-											<td rowspan="6" class="dsemana" style="padding-top: 5%;"><b>2° <br />Segunda</b></td>
-											<th class="dsemana"></th>
-											<th class="dsemana">Disciplina</th>
-											<th class="dsemana">Turma</th>
-											<th class="dsemana">Profesor</th>
-											<th class="dsemana">Sala</th>
-										</tr>
-												<tr>
-												<td class="text-center">1</td>
-												<td class="text-center">MD1 A1</td>
-												<td class="text-center">ADS</td>
-												<td class="text-center">MARILENE</td>
-												<td class="text-center">A209</td>
-											</tr>
-												<tr>
-												<td class="text-center">1</td>
-												<td class="text-center">MD1 A1</td>
-												<td class="text-center">ADS</td>
-												<td class="text-center">MARILENE</td>
-												<td class="text-center">A209</td>
-											</tr>
-												<tr>
-													<td class="text-center">1</td>
-													<td class="text-center">MD1 A1</td>
-                        	<td class="text-center">ADS</td>
-													<td class="text-center">MARILENE</td>
-                        	<td class="text-center">A209</td>
-												</tr>
-											</table>
-									</table>
+			<?php
+				$grade = json_decode(json_encode($grade), True);
+					
+				foreach ($grade as $key => $semestre){	
+					echo '
+						<table class="table table-bordered">
+							<tr>
+								<th class="text-center" style="background-color: #4CAF50; color: #fff;" colspan="6">'.$key.'º Semestre</th>
+							</tr> 
+						';      
+					foreach($semestre as $semana){
+										$nomeDia;
+						
+						foreach($semana as $dia){
+							
+						$nomeDia = $dia['dia'];	
+						}
+						
+						echo'		
+							<table class="table table-bordered">
+								<tr> <td rowspan="6" class="thsemana" style="padding-top: 5%;"><b> <br />'.$nomeDia.'</b></td>
+									<th class="thaula"></th>
+										<th class="thdisciplina">Disciplina</th>
+										<th class="thprofessor">Professor</th>
+								
+								</tr>'
+						;
+						$control= 1;
+						foreach($semana as $dia){
+							if($control==3){
+								echo'		
+								   <tr>
+										<td class="text-center" colspan="4">Intervalo</td>
+										
+									</tr>
+															
+								';		
+				
+					
+							}	
+					
+			
+								echo'
+									<tr>
+										<td class="text-center">'.$control.'º</td>
+											<td class="text-center">'.$dia['nomeDisciplina'].'</td>
+											<td class="text-center">'.$dia['nome'].'</td>
+									
+									</tr>
+																
+								';									
+			
+							$control++;									
+						}									
+					
+				echo '
+
+				</table>';
+		  
+					}
+				echo'	
+				</table>
+				';										
+				}
+								
+								
+			?>
+
 									<?php elseif ($this->session->isCoordenador) : ?>
 										<?= anchor('Professor/gerarGrade/'.$this->session->id,'Gerar Grade',array('class'=>'btn btn-success btn-block','style'=>'color: white;')) ?>
 									<?php endif; ?>
@@ -70,5 +98,6 @@
 						</div>
 					</div>
 				</div><!--Fecha content-->
-			<?= form_close() ?>
+		
 		</div><!--Fecha container-fluid-->
+	</div>	
