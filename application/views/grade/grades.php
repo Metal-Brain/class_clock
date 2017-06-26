@@ -42,7 +42,7 @@
 						
 						echo'		
 							<table class="table table-bordered">
-								<tr> <td rowspan="6" class="thsemana" style="padding-top: 5%;"><b> <br />'.$nomeDia.'</b></td>
+								<tr> <td rowspan="6" class="thsemana" style="padding-top: 5%;"><b> <br /><span>'.$nomeDia.'</span></b></td>
 									<th class="thaula"></th>
 										<th class="thdisciplina">Disciplina</th>
 										<th class="thprofessor">Professor</th>
@@ -54,7 +54,7 @@
 							if($control==3){
 								echo'		
 								   <tr>
-										<td class="text-center" colspan="4">Intervalo</td>
+										<td class="tdintervalo" colspan="4"><span>Intervalo</span></td>
 										
 									</tr>
 															
