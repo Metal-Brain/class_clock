@@ -3,11 +3,7 @@
     <type>org.netbeans.modules.php.project</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/php-project/1">
-<<<<<<< HEAD
             <name>CLASSCLOCK</name>
-=======
-            <name>framework</name>
->>>>>>> a7a5d4c581e076ddfbadad8cf958204e18c60b46
         </data>
     </configuration>
 </project>
