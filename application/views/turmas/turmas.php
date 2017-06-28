@@ -65,8 +65,8 @@
 									<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal"  data-whateverdisciplina="<?= $turma['disciplinaSigla']?>" data-whateverid="<?= $turma['id']?>"  data-whateversigla="<?= $turma['sigla']?>" data-whateveriddisciplina="<?= $turma['disciplina']?>"  data-whateverqtd="<?= $turma['qtdAlunos']?>" data-whateverdp="<?= $turma['dp']?>"><span class="glyphicon glyphicon-pencil"></span></button>
 									<button onClick="exclude(<?= $turma['id']?>)" type="button" class="btn btn-danger delete" title="Desativar"><span class="glyphicon glyphicon-remove"></span></button>
 									<?php endif;?>
-									<?php if ($this->session->nivel == 2) :?>
-									<button type="button" class="btn btn-primary" title="Editar" data-toggle="modal" data-target="#exampleModal"  data-whateverdisciplina="<?= $turma['disciplinaSigla']?>" data-whateverid="<?= $turma['id']?>"  data-whateversigla="<?= $turma['sigla']?>" data-whateveriddisciplina="<?= $turma['disciplina']?>"  data-whateverqtd="<?= $turma['qtdAlunos']?>" data-whateverdp="<?= $turma['dp']?>"><span class="glyphicon glyphicon-eye-open"></span></button>
+									<?php if ($this->session->nivel == 3) :?>
+									<button type="button" class="btn btn-primary" title="Visualizar" data-toggle="modal" data-target="#exampleModal2"  data-whateverdisciplina="<?= $turma['disciplinaSigla']?>" data-whateverid="<?= $turma['id']?>"  data-whateversigla="<?= $turma['sigla']?>" data-whateveriddisciplina="<?= $turma['disciplina']?>"  data-whateverqtd="<?= $turma['qtdAlunos']?>" data-whateverdp="<?= $turma['dp']?>"><span class="glyphicon glyphicon-eye-open"></span></button>
 									<?php endif;?>
 
 								<?php else : ?>
@@ -83,12 +83,12 @@
 		<!-- Aqui é o formulário de registro do novo item-->
 		<div id="new" class="tab-pane fade">
 			<h3>Cadastrar Turma</h3>
-			<?= form_open('Turma/cadastrar') ?>
+			<?= form_open('Turma/cadastrar', 'id="cadastrarTurma"') ?>
 
 				<div class="row">
-					<div class="form-group col-md-2">
+					<div class="form-group col-md-3">
 						<?= form_label('Sigla', 'sigla') ?>
-						<?= form_input('sigla', set_value('sigla'), array('class' => 'form-control', 'placeholder' => 'ex: ADS5S', 'maxlength'=>'10', 'required' => 'required')) ?>
+						<?= form_input('sigla', set_value('sigla'), array('class' => 'form-control', 'placeholder' => 'ex: ADS5S', 'maxlength'=>'10', 'required' => 'required', 'style' => 'width: 150px')) ?>
 					</div>
 				</div>
 
@@ -120,8 +120,8 @@
 				</div>
 
 				<div class="row">
-					<div class="form-group col-md-1">
-						<?= form_input(array('name' => 'qtdAlunos', 'value' => set_value('qtdAlunos'), 'type' => 'text', 'pattern' => '[0-9]+$', 'class' => 'form-control', 'maxlength' => '3', 'placeholder' => 'ex:25', 'required' => 'required')) ?>
+					<div class="form-group col-md-3">
+						<?= form_input(array('name' => 'qtdAlunos', 'value' => set_value('qtdAlunos'), 'type' => 'text', 'pattern' => '[0-9]+$', 'class' => 'form-control', 'maxlength' => '3', 'placeholder' => 'ex:25', 'required' => 'required', 'style' => 'width: 80px')) ?>
 					</div>
 				</div>
 
@@ -146,6 +146,7 @@
 		</div>
 	</div><!--fecha tab-content-->
 </div><!--Fecha content-->
+</div>
 
 <!-- Aqui é o Modal de alteração das Turmas-->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
@@ -157,16 +158,16 @@
 			</div>
 			<div class="modal-body">
 
-				<?= form_open('Turma/atualizar') ?>
+				<?= form_open('Turma/atualizar', 'id="atualizarTurma"') ?>
 
 					<div class="form-group">
 						<input type="hidden" name="recipient-id" id="recipient-id">
 					</div>
 
 					<div class="row">
-						<div class="form-group col-md-4">
+						<div class="form-group col-md-8">
 							<label>Sigla</label>
-							<input type="text" class="form-control" name="recipient-sigla" id="recipient-sigla" maxlength="10" required>
+							<input type="text" class="form-control" name="recipient-sigla" id="recipient-sigla" maxlength="10" required style=" width:140px;">
 						</div>
 					</div>
 
@@ -197,8 +198,8 @@
 					</div>
 
 					<div class="row">
-						<div class="form-group col-md-2">
-							<input type="text" maxlength="3" pattern="[0-9]+$"class="form-control" name="recipient-qtdAlunos" id="recipient-qtdAlunos" required>
+						<div class="form-group col-md-8">
+							<input type="text" maxlength="3" pattern="[0-9]+$"class="form-control" name="recipient-qtdAlunos" id="recipient-qtdAlunos" required style=" width:50px;">
 						</div>
 					</div>
 
@@ -250,22 +251,10 @@
 					</div>
 
 					<div class="row">
-						<div class="col-md-12 margin-top-error">
-							<?= form_error('recipient-sigla') ?>
-						</div>
-					</div>
-
-					<div class="row">
 						<div class="form-group col-md-10">
 							<!-- DropListDisciplina (Droplist) -->
 							<label>Disciplina</label>
-							<?= form_dropdown('recipient-disciplina',$disciplina,set_value('recipient-disciplina'),array('class'=>'form-control')) ?>
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="col-md-12 margin-top-error">
-							<?= form_error('recipient-disciplina') ?>
+							<?= form_dropdown('recipient-disciplina',$disciplina,set_value('recipient-disciplina'),array('class'=>'form-control', 'disabled' =>'disabled')) ?>
 						</div>
 					</div>
 
@@ -278,12 +267,6 @@
 					<div class="row">
 						<div class="form-group col-md-2">
 							<input type="text" maxlength="3" pattern="[0-9]+$"class="form-control" name="recipient-qtdAlunos" id="recipient-qtdAlunos" required readonly/>
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="col-md-12 margin-top-error">
-							<?= form_error('recipient-qtdAlunos') ?>
 						</div>
 					</div>
 

@@ -56,10 +56,32 @@
     public function getAllDisponibilidades($professor) {
       $this->db->select('Disponibilidade.*');
       $this->db->where('idProfessor',$professor);
+      $this->db->where('status',TRUE);
       $this->db->join('Professor','Professor.id = Disponibilidade.idProfessor');
       $result = $this->db->get('Disponibilidade');
 
       return $result->result_array();
+    }
+
+    public function getDisponibilidade($idDisciplina,$dia,$hora) {
+      $this->db->select('Competencia.idDisciplina, Usuario.nome, Disponibilidade.*, Disciplina.nome AS nomeDisciplina');
+      $this->db->join('Professor','Professor.id = Disponibilidade.idProfessor');
+      $this->db->join('Usuario','Usuario.id = Professor.id');
+      $this->db->join('Competencia','Competencia.idProfessor = Professor.id');
+      $this->db->join('Disciplina','Disciplina.id = Competencia.idDisciplina');
+      $this->db->where('Disponibilidade.dia',$dia);
+      $this->db->where('Disponibilidade.inicio',$hora);
+      $this->db->where('Competencia.idDisciplina',$idDisciplina);
+      $this->db->where('Disponibilidade.status',TRUE);
+      $this->db->where('Disponibilidade.hasDisponibilidade',TRUE);
+      $result = $this->db->get('Disponibilidade');
+
+      return $result->result_array();
+    }
+
+    public function setHasDisponibilidade ($idDisponibilidade, $hasDisponibilidade) {
+      $this->db->where('id',$idDisponibilidade);
+      return $this->db->update('Disponibilidade',array('hasDisponibilidade'=>$hasDisponibilidade));
     }
 
     public function able($id){
@@ -74,8 +96,9 @@
       return $result;
     }
 
-    public function verificaHora($dia, $inicio){
+    public function verificaHora($dia, $inicio, $idProfessor){
       $this->db->select('Disponibilidade.*');
+      $this->db->where('idProfessor',$idProfessor);
       $this->db->where('dia',$dia);
       $this->db->where('inicio',$inicio);
       $this->db->where('status',TRUE);
@@ -86,6 +109,16 @@
         return TRUE;
       }
 
+    }
+
+    public function getPorPeriodo($idPeriodo){
+      $this->db-where('idPeriodo',$idPeriodo);
+      $this->db->where('status',TRUE);
+      return $result = $this->db->get('Disponibilidade')->result_array();
+    }
+
+    public function reset() {
+      return $this->db->update('Disponibilidade',array('hasDisponibilidade'=>TRUE));
     }
   }
 

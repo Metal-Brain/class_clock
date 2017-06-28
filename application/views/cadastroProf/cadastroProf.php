@@ -1,6 +1,6 @@
 	<div id="content" class="col-md-10">
 		
-		<!-- Form de vizualização do cadastro do professor -->
+		<!-- Form de vizualizaÃ§Ã£o do cadastro do professor -->
 		<?= form_open('Professor/cadastro') ?>
 			<div class="row">
 				<div class="col-md-12">
@@ -11,74 +11,57 @@
 			<fieldset disabled>
 				<div class="row">
 					<div class="form-group col-md-6">
+				
+						<?php foreach ($professores as $professor) : ?>
+								<input type="hidden" value="<?= $professor['id']?>" id="identificador">
+						<?php endforeach; ?>
+							
 						<label>Nome</label>
-						<?= form_input('','',array('class'=>'form-control')) ?>
+						
+						<input type="text" class="form-control" value="<?= $professor['nome'] ?>"/>
+				
 					</div>
 				</div>
 											
 				<div class="row">
 					<div class="form-group col-md-2">
-						<label>Matrícula</label>
-						<?= form_input('','',array('class'=>'form-control')) ?>
+						<label>MatrÃ­cula</label>
+							<input type="text" class="form-control" value="<?= $professor['matricula'] ?>"/>
 					</div>
 				</div>
 				
 				<div class="row">
 					<div class="form-group col-md-4">
-						<label>Email</label>
-						<?= form_input('','',array('class'=>'form-control')) ?>
+						<label>E-mail</label>
+							<input type="text" class="form-control" value="<?= $professor['email'] ?>"/>
 					</div>
 				</div>
 				
 				<div class="row">
 					<div class="form-group col-md-6">
-						<table id="lecionarTable" class="table table-striped">
-							<thead>
-								<tr>
-									<th>Disciplinas que pode lecionar</th>
-								</tr>
-							</thead>
-							<tbody>
-								<!-- Inserir o código php bonito que faz esse trem funcionar -->
-								<tr>
-									<td>Lógica de Programação</td>
-								</tr>
-								<tr>
-									<td>Estrutura de dados</td>
-								</tr>
-								<tr>
-									<td>Redes de computadores</td>
-								</tr>
-							</tbody>
-						</table>
+						<label>Disciplinas que pode lecionar</label>
+						<ul id="lecionarList" style="margin: 0 0 0 -20px;"></ul>
 					</div>
 				</div>
 				
 				<div class="row">
 					<div class="form-group col-md-2">
 						<label>Data de Nascimento</label>
-						<?= form_input('','',array('class'=>'form-control')) ?>
+							<input type="date" class="form-control" value="<?= ($professor['nascimento']) ?>"/>
 					</div>
 				</div>
 				
 				<div class="row">
 					<div class="form-group col-md-2">
-						<label>Nivel Acadêmico</label>
-						<?= form_input('','',array('class'=>'form-control')) ?>
+						<label>NÃ­vel AcadÃªmico</label>
+							<input type="text" class="form-control" value="<?= $professor['nivel'] ?>"/>
 					</div>
 				</div>
 				
 				<div class="row">
 					<div class="form-group col-md-2">
 						<label>Regime de contrato</label>
-						<?= form_input('','',array('class'=>'form-control')) ?>
-					</div>
-				</div>
-					
-				<div class="row">
-					<div class="form-group col-md-2">
-						<input id="coordenador" type="checkbox" name="coordenador" class="form-group" value="true"/>
-						<label for="coordenador">Coordenador</label>
+							<input type="text" class="form-control" value="<?= $professor['contrato'] ?>"/>
 					</div>
 				</div>
 			</fieldset>

@@ -64,8 +64,8 @@
 									<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whatevernsala="<?= $sala['nSala']; ?>" data-whateverid="<?= $sala['id']; ?>" data-whatevercapmax="<?= $sala['capMax']; ?>"  data-whatevertipo="<?= $sala['tipo']; ?>"><span class="glyphicon glyphicon-pencil"></span></button>
 									<button onClick="exclude(<?= $sala['id'] ?>);" type="button" class="btn btn-danger" title="Desativar"><span class="glyphicon glyphicon-remove"></span></button>
 									<?php endif;?>
-									<?php if ($this->session->nivel == 2) :?>
-									<button type="button" class="btn btn-primary" title="Editar" data-toggle="modal" data-target="#exampleModal2" data-whatevernsala="<?= $sala['nSala']; ?>" data-whateverid="<?= $sala['id']; ?>" data-whatevercapmax="<?= $sala['capMax']; ?>"  data-whatevertipo="<?= $sala['tipo']; ?>"><span class="glyphicon glyphicon-eye-open"></span></button>
+									<?php if ($this->session->nivel == 3) :?>
+									<button type="button" class="btn btn-primary" title="Visualizar" data-toggle="modal" data-target="#exampleModal2" data-whatevernsala="<?= $sala['nSala']; ?>" data-whateverid="<?= $sala['id']; ?>" data-whatevercapmax="<?= $sala['capMax']; ?>"  data-whatevertipo="<?= $sala['tipo']; ?>"><span class="glyphicon glyphicon-eye-open"></span></button>
 									<?php endif;?>
 
 
@@ -84,12 +84,12 @@
         <div id="new" class="tab-pane fade">
             <h3>Cadastrar Sala</h3>
 
-            <form action="" method="post">
+            <form action="" method="post" id="cadastrarSala">
 
 				<div class="row">
-					<div class="form-group col-md-2">
+					<div class="form-group col-md-4">
 						<label>Sala</label>
-						<input type="number" min="0" class="form-control" pattern="[0-9]+$" name="nSala" placeholder="ex: 110" required>
+						<input type="text" maxlength="5" class="form-control" pattern="[0-9]+$" name="nSala" placeholder="ex: 110" required style="width: 100px;">
 					</div>
 				</div>
 
@@ -116,9 +116,9 @@
 				</div>
 
 				<div class="row">
-					<div class="form-group col-md-2">
+					<div class="form-group col-md-4">
 						<label>Capacidade Máxima</label>
-						<input type="number" min="0" max="999" class="form-control" name="capMax" placeholder="ex: 30" required>
+						<input type="text" pattern="[0-9]+$" maxlength="3" class="form-control" name="capMax" placeholder="ex: 30" required style="width: 100px">
 					</div>
 				</div>
 
@@ -133,10 +133,9 @@
                 </div>
             </form>
         </div>
-
     </div><!--Fecha tab-content-->
-
 </div><!--Fecha content-->
+</div>
 
 <!-- Aqui é o Modal de alteração das salas-->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
@@ -148,16 +147,16 @@
             </div>
             <div class="modal-body">
 
-				<?= form_open('Sala/atualizar') ?>
+				<?= form_open('Sala/atualizar', 'id="atualizarSala"') ?>
 
                 <div class="form-group">
                     <input type="hidden" name="recipient-id" id="recipient-id">
                 </div>
 
 				<div class="row">
-					<div class="form-group col-md-2">
+					<div class="form-group col-md-8">
 						<label for="nSala-name" class="control-label">Sala</label>
-						<input type="number" min="0" class="form-control" name="recipient-nSala" id="recipient-nSala" required>
+						<input type="text" maxlength="5" class="form-control" name="recipient-nSala" id="recipient-nSala" required style="width:90px;">
 					</div>
                 </div>
 
@@ -184,13 +183,14 @@
 				</div>
 
 				<div class="row">
-					<div class="col-md-4">
+					<div class="col-md-8">
 						<label for="capMax-name" class="control-label">Capacidade Máxima</label>
 					</div>
 				</div>
+				
 				<div class="row">
-					<div class="form-group col-md-2">
-						<input type="number" max="999" maxlength="3" pattern="[0-9]+$"class="form-control" name="recipient-capMax" id="recipient-capMax" required>
+					<div class="form-group col-md-8">
+						<input type="text" maxlength="3" pattern="[0-9]+$" class="form-control" name="recipient-capMax" id="recipient-capMax" required style=" width:90px;">
 					</div>
                 </div>
 
@@ -235,12 +235,6 @@
                 </div>
 
 				<div class="row">
-					<div class="col-md-6 margin-top-error">
-						<?= form_error('recipient-nSala') ?>
-					</div>
-				</div>
-
-				<div class="row">
 					<div class="form-group col-md-4">
 						<label for="tipo-name" class="control-label">Tipo</label>
 						<select  class="form-control" name="recipient-tipo" id="recipient-tipo" disabled>
@@ -249,12 +243,6 @@
 						</select>
 					</div>
                 </div>
-
-				<div class="row">
-					<div class="col-md-6 margin-top-error">
-						<?= form_error('recipient-tipo') ?>
-					</div>
-				</div>
 
 				<div class="row">
 					<div class="col-md-4">
@@ -267,14 +255,8 @@
 					</div>
                 </div>
 
-				<div class="row">
-					<div class="col-md-7 margin-top-error">
-						<?= form_error('recipient-capMax') ?>
-					</div>
-				</div>
-
                 <div class="modal-footer">
-                           <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                 </div>
 
 				<?= form_close() ?>

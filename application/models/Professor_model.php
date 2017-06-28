@@ -41,6 +41,22 @@
       return $result->result_array();
     }
 
+    public function getDisponibilidadeHorario ($idDisciplina, $horaInicio) {
+      $this->db->join('Competencia as comp','comp.idDisciplina = Disciplina.id');
+      $this->db->join('Professor as prof','prof.id = comp.idProfessor');
+      $this->db->join('Usuario as user','user.id = prof.id');
+      $this->db->join('Disponibilidade as disp','disp.idProfessor = prof.id');
+      $this->db->where('Disciplina.id', $idDisciplina);
+      $this->db->where('Disciplina.status', TRUE);
+      $this->db->where('disp.inicio', $horaInicio);
+      $this->db->where('disp.status',TRUE);
+      $this->db->where('user.status',TRUE);
+
+      $result = $this->db->get('Disciplina');
+      //echo $this->db->last_query();
+      return $result->result_array();
+    }
+
     /**
       * Insere um novo professor na base de dados.
       * @author Yasmin Sayad
@@ -93,6 +109,7 @@
       */
     public function disable ($id) {
       $this->db->where('id', $id);
+      $this->db->where('coordenador',FALSE);
       $result = $this->db->update('Usuario',array('status'=>FALSE));
 
       return $result;
@@ -139,6 +156,47 @@
       $result = ($result == 1) ? TRUE : FALSE;
       return !$result;
     }
+
+    /**
+     *
+     * @author Caio de Freitas
+     */
+    public function getCoordenadorByCurso($idCurso) {
+      $this->db->where('idCurso',$idCurso);
+      $result = $this->db->get("Professor");
+
+      return $result->result();
+    }
+
+    public function getCoordenadorCurso($idCurso) {
+      $this->db->where('idCurso',$idCurso);
+      $result = $this->db->get("Professor");
+
+      return $result->result_array();
+    }
+
+    /**
+     * @author Caio de Freitas
+     */
+    public function setCoordenador($idProfessor,$idCurso,$status=TRUE) {
+
+      if ($idProfessor == null) {
+        $this->db->where('idCurso',$idCurso);
+        $idCurso = 0;
+      } else
+        $this->db->where('id',$idProfessor);
+
+      return $this->db->update('Professor',array('idCurso'=>$idCurso,'coordenador'=>$status));
+    }
+
+    public function removeCoordenadorCurso($idProfessor,$idCurso,$status=TRUE){
+      if ($idProfessor == null) {
+        $this->db->where('idCurso',$idCurso);
+        $idCurso = 0;
+      } else
+        $this->db->where('id',$idProfessor);
+    }
+
   }
 
 

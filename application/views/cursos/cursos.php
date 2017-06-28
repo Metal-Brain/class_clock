@@ -59,22 +59,22 @@
                                 <td><center><?= $curso['qtdSemestres'] ?></td>
                                 <td><center><?= $curso['periodo'] ?></td>
                                 <td><center><?= $curso['grauNome'] ?></td>
-                                  <td><center><?php
-                    								if ($curso['status']): echo "Ativo";
-                    								else: echo "Inativo";
-                    								endif;
-                                                ?></td>
-                    							<td><center>
-                    								<?php if ($curso['status']): ?>
+                                <td><center><?php
+									if ($curso['status']): echo "Ativo";
+									else: echo "Inativo";
+									endif;
+								?></td>
+                    			<td><center>
+                    				<?php if ($curso['status']): ?>
 										<?php if ($this->session->nivel == 1) :?>
 											<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whateverid="<?= $curso['id'] ?>" data-whateversigla="<?= $curso['sigla'] ?>" data-whatevernome="<?= $curso['nome'] ?>" data-whateversemestres="<?= $curso['qtdSemestres'] ?>" data-whatevergrau="<?= $curso['grau'] ?>" data-whateverperiodo="<?= $curso['idPeriodo'] ?>"><span class="glyphicon glyphicon-pencil"></span></button>
 											<button onClick="exclude(<?= $curso['id'] ?>);" type="button" class="btn btn-danger" title="Desativar"><span class="glyphicon glyphicon-remove"></span></button>
-										 <?php endif; ?>
-										 <?php if ($this->session->nivel == 2) :?>
-											<button type="button" class="btn btn-primary" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whateverid="<?= $curso['id'] ?>" data-whateversigla="<?= $curso['sigla'] ?>" data-whatevernome="<?= $curso['nome'] ?>" data-whateversemestres="<?= $curso['qtdSemestres'] ?>" data-whatevergrau="<?= $curso['grau'] ?>" data-whateverperiodo="<?= $curso['Periodo'] ?>"><span class="glyphicon glyphicon-eye-open"></span></button>
-										 <?php endif; ?>
-								  <?php else: ?>
-                                        <button onClick="able(<?= $curso['id'] ?>)" type="button" class="btn btn-success delete" title="Ativar"><span class="glyphicon glyphicon-ok"></span></button>
+										<?php endif; ?>
+										<?php if ($this->session->nivel == 2 || $this->session->nivel == 3) :?>
+											<button type="button" class="btn btn-primary" title="Visualizar" data-toggle="modal" data-target="#exampleModal2" data-whateverid="<?= $curso['id'] ?>" data-whateversigla="<?= $curso['sigla'] ?>" data-whatevernome="<?= $curso['nome'] ?>" data-whateversemestres="<?= $curso['qtdSemestres'] ?>" data-whatevergrau="<?= $curso['grau'] ?>" data-whateverperiodo="<?= $curso['periodo'] ?>"><span class="glyphicon glyphicon-eye-open"></span></button>
+										<?php endif; ?>
+									<?php else: ?>
+										<button onClick="able(<?= $curso['id'] ?>)" type="button" class="btn btn-success delete" title="Ativar"><span class="glyphicon glyphicon-ok"></span></button>
                                     <?php endif; ?>
                                 </td>
                             </tr>
@@ -97,11 +97,11 @@
                 </div>
             </div>
 
-			<div class="row">
-				<div class="col-md-3 margin-top-error">
-					<?= form_error('nome') ?>
-				</div>
-			</div>
+            <div class="row">
+              <div class="col-md-3 margin-top-error">
+                <?= form_error('nome') ?>
+              </div>
+            </div>
 
             <div class="row">
                 <div class="form-group col-md-2">
@@ -111,16 +111,16 @@
             </div>
 
             <div class="row">
-                <div class="col-md-3 margin-top-error">
-					<?= form_error('sigla') ?>
-				</div>
-			</div>
+              <div class="col-md-3 margin-top-error">
+                <?= form_error('sigla') ?>
+              </div>
+            </div>
 
-			<div class="row">
-				<div class="col-md-3">
-					<label>Quantidade de semestres</label>
-				</div>
-			</div>
+            <div class="row">
+              <div class="col-md-3">
+                <label>Quantidade de semestres</label>
+              </div>
+            </div>
 
             <div class="row">
                 <div class="form-group col-md-2">
@@ -128,11 +128,11 @@
                 </div>
             </div>
 
-			<div class="row">
-                <div class="col-md-6 margin-top-error">
-					<?= form_error('qtdSemestres') ?>
-				</div>
-			</div>
+            <div class="row">
+              <div class="col-md-6 margin-top-error">
+                <?= form_error('qtdSemestres') ?>
+              </div>
+            </div>
 
             <div class="row">
                 <div class="form-group col-md-5">
@@ -141,25 +141,24 @@
                 </div>
             </div>
 
-			<div class="row">
-				<div class="col-md-3 margin-top-error">
-					<?= form_error('periodo[]') ?>
-				</div>
-			</div>
-
             <div class="row">
-                <div class="form-group col-md-4">
-                    <label>Grau</label>
-                    <!-- <div id="u1" class="ax_default droplist" data-label="DropListGrau"> -->
-					<?= form_dropdown('grau', $graus, set_value('grau'), array('class' => 'form-control')) ?>
-                </div>
+              <div class="col-md-3 margin-top-error">
+                <?= form_error('periodo[]') ?>
+              </div>
             </div>
 
-			<div class="row">
-				<div class="col-md-3 margin-top-error">
-					<?= form_error('grau') ?>
-				</div>
-			</div>
+            <div class="row">
+              <div class="form-group col-md-4">
+                <label>Grau</label>
+                <?= form_dropdown('grau', $graus, set_value('grau'), array('class' => 'form-control')) ?>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-3 margin-top-error">
+                <?= form_error('grau') ?>
+              </div>
+            </div>
 
             <div class="row">
                 <div class="form-group col-md-5">
@@ -168,21 +167,27 @@
                 </div>
             </div>
 
-			<div class="row">
-				<div class="col-md-6 margin-top-error">
-					<?= form_error('disciplinas[]') ?>
-				</div>
-			</div>
+            <div class="row">
+              <div class="col-md-6 margin-top-error">
+                <?= form_error('disciplinas[]') ?>
+              </div>
+            </div>
 
-			<div class="form-group">
-				<?= form_submit('submit', 'Cadastrar', array('class' => 'btn btn-primary')) ?>
-			</div>
+            <div class="row">
+              <div class="form-group col-md-5">
+                <?= form_label('Professor Coordenador') ?>
+                <?= form_dropdown('coordenadorCurso',$professores,set_value('coordenadorCurso'),array('class'=>'form-control')); ?>
+              </div>
+            </div>
 
-
+            <div class="form-group">
+              <?= form_submit('submit', 'Cadastrar', array('class' => 'btn btn-primary')) ?>
+            </div>
             <?= form_close() ?>
         </div>
     </div><!--fecha tab-content-->
 </div><!--Fecha content-->
+</div>
 
 <!-- Aqui é o Modal de alteração dos cursos-->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
@@ -194,7 +199,7 @@
             </div>
             <div class="modal-body">
 
-				<?= form_open('Curso/atualizar') ?>
+				<?= form_open('Curso/atualizar', 'id="alterarCurso"') ?>
 
 				<div class="form-group">
 					<input type="hidden" name="cursoId" value="" id="recipient-id">
@@ -214,9 +219,9 @@
 				</div>
 
 				<div class="row">
-					<div class="form-group col-md-3">
+					<div class="form-group col-md-8">
 						<?= form_label('Sigla:', 'recipient-sigla', array('class' => 'control-label')) ?>
-						<?= form_input('cursoSigla', set_value('cursoSigla'), array('class' => 'form-control', 'id' => 'recipient-sigla', 'maxlength' => '5', 'required' => 'required')) ?>
+						<?= form_input('cursoSigla', set_value('cursoSigla'), array('class' => 'form-control', 'id' => 'recipient-sigla', 'maxlength' => '5', 'required' => 'required' , 'style' => 'width: 90px')) ?>
 					</div>
 				</div>
 
@@ -233,8 +238,8 @@
 				</div>
 
 				<div class="row">
-					<div class="form-group col-md-2">
-						<?= form_input('cursoQtdSemestres', set_value('cursoQtdSemestres'), array('pattern' => '[0-9]+$', 'maxlength' => '2', 'id' => 'recipient-semestres', 'class' => 'form-control', 'required' => 'required')) ?>
+					<div class="form-group col-md-8">
+						<?= form_input('cursoQtdSemestres', set_value('cursoQtdSemestres'), array('pattern' => '[0-9]+$', 'maxlength' => '2', 'id' => 'recipient-semestres', 'class' => 'form-control', 'required' => 'required' ,'style' => 'width: 50px')) ?>
 					</div>
 				</div>
 
@@ -262,7 +267,7 @@
 					<!-- DropListGrau (Droplist) -->
 					<div class="form-group col-md-7">
 						<label for="curso-name" class="control-label">Grau:</label>
-						<?= form_dropdown('cursoGrau', $graus, null, array('class' => 'form-control')) ?>
+						<?= form_dropdown('cursoGrau', $graus, null, array('id' => 'cursoGrau', 'class' => 'form-control')) ?>
 					</div>
 				</div>
 
@@ -283,6 +288,14 @@
 					<div class="col-md-10 margin-top-error">
 						<?= form_error('cursoDisciplinas[]') ?>
 					</div>
+				</div>
+
+				<div class="row">
+				  <div class="form-group col-md-9">
+					<?= form_label('Professor Coordenador') ?>
+					<?= form_dropdown('cursoCoordenador',$professores,null,array('id'=>'cursoCoordenador','class'=>'form-control')) ?>
+					<?= form_error('cursoCoordenador') ?>
+				  </div>
 				</div>
 
 				<div class="modal-footer">
@@ -321,21 +334,9 @@
 				</div>
 
 				<div class="row">
-					<div class="col-md-6 margin-top-error">
-						<?= form_error('nomeCurso') ?>
-					</div>
-				</div>
-
-				<div class="row">
 					<div class="form-group col-md-3">
 						<?= form_label('Sigla:', 'recipient-sigla', array('class' => 'control-label')) ?>
 						<?= form_input('cursoSigla', set_value('cursoSigla'), array('class' => 'form-control', 'id' => 'recipient-sigla', 'maxlength' => '5', 'required' => 'required' , 'readonly' => 'readonly')) ?>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-md-6 margin-top-error">
-						<?= form_error('cursoSigla') ?>
 					</div>
 				</div>
 
@@ -352,16 +353,10 @@
 				</div>
 
 				<div class="row">
-					<div class="col-md-11 margin-top-error">
-						<?= form_error('cursoQtdSemestres') ?>
-					</div>
-				</div>
-
-				<div class="row">
 					<!-- DropListPeriodo (Droplist) -->
 					<div class="form-group col-md-9">
-						<label>Período:</label>
-							<ul id="periodo-view" style="list-style-type: none"></ul>
+						<label>Período(s):</label>
+							<ul id="periodo-view" style="margin: 0 0 0 -20px;"></ul>
 					</div>
 				</div>
 
@@ -376,15 +371,16 @@
 				</div>
 
 				<div class="row">
-					<div class="col-md-10 margin-top-error">
-						<?= form_error('cursoGrau') ?>
+					<div class="form-group col-md-9">
+						<label>Disciplinas:</label>
+							<ul id="cursoDisciplinas2" style="margin: 0 0 0 -20px;"></ul>
 					</div>
 				</div>
 
 				<div class="row">
 					<div class="form-group col-md-9">
-						<label>Disciplinas:</label>
-							<ul id="cursoDisciplinas2"></ul>
+						<?= form_label('Professor Coordenador') ?>
+						<?= form_dropdown('cursoCoordenador',$professores,null,array('id'=>'cursoCoordenador','class'=>'form-control', 'disabled' => 'disabled')) ?>
 					</div>
 				</div>
 

@@ -24,7 +24,7 @@
 
 		<!-- Primeira coluna -->
 		<div class="col-md-6">
-			<?= form_open('Usuario/editar/email',array('class'=>'form-horizontal')) ?>
+			<?= form_open('Usuario/editar/email',array('class'=>'form-horizontal', 'id' => 'alterarEmail')) ?>
 			<div class="row">
 				<div class="col-md-12 form-group">
 					<h3>Alterar e-mail</h3>
@@ -41,7 +41,7 @@
 			<div class="row">
 				<div class="col-md-9 form-group">
 					<label>Novo e-mail</label>
-					<?= form_input('novoEmail', set_value('novoEmail'), array('class'=>'form-control')) ?>
+					<?= form_input('novoEmail', set_value('novoEmail'), array('class'=>'form-control', 'id' => 'novoEmail')) ?>
 					<?= form_error('novoEmail') ?>
 				</div>
 			</div>
@@ -49,7 +49,7 @@
 			<div class="row">
 				<div class="col-md-9 form-group">
 					<label>Confirme o novo e-mail</label>
-					<?= form_input('confirmaEmail', set_value('confirmaEmail'), array('class'=>'form-control')) ?>
+					<?= form_input('confirmaEmail', set_value('confirmaEmail'), array('class'=>'form-control', 'id' => 'confirmaEmail')) ?>
 					<?= form_error('confirmaEmail') ?>
 				</div>
 			</div>
@@ -65,7 +65,7 @@
 
 		<!-- Segunda coluna -->
 		<div class="col-md-6">
-			<?= form_open('Usuario/editar/senha',array('class'=>'form-horizontal')) ?>
+			<?= form_open('Usuario/editar/senha',array('class'=>'form-horizontal', 'id' => 'alterarSenha')) ?>
 			<div class="row">
 				<div class="col-md-12 form-group">
 					<h3>Alterar senha de acesso</h3>
@@ -75,7 +75,7 @@
 			<div class="row">
 				<div class="col-md-9 form-group">
 					<?= form_label('Senha atual:','senhaAtual') ?>
-					<?= form_password('senhaAtual','',array('class'=>'form-control')) ?>
+					<?= form_password('senhaAtual','',array('class'=>'form-control', 'id' => 'senhaAtual')) ?>
 					<?= form_error('senhaAtual') ?>
 				</div>
 			</div>
@@ -83,7 +83,7 @@
 			<div class="row">
 				<div class="col-md-9 form-group">
 					<?= form_label('Nova senha:','novaSenha') ?>
-					<?= form_password('novaSenha','',array('class'=>'form-control')) ?>
+					<?= form_password('novaSenha','',array('class'=>'form-control', 'id' => 'novaSenha')) ?>
 					<?= form_error('novaSenha') ?>
 				</div>
 			</div>
@@ -91,7 +91,7 @@
 			<div class="row">
 				<div class="col-md-9 form-group">
 					<?= form_label('Confirme a nova senha:','confirmaSenha') ?>
-					<?= form_password('confirmaSenha','',array('class'=>'form-control')) ?>
+					<?= form_password('confirmaSenha','',array('class'=>'form-control', 'id' => 'confirmaSenha')) ?>
 					<?= form_error('confirmaSenha') ?>
 				</div>
 			</div>

@@ -33,7 +33,7 @@
       * @return array de Cursos
     */
     function getCursoById($idCurso) {
-      $this->db->where('idCurso', $idCurso);
+      $this->db->where('id', $idCurso);
       $result = $this->db->get('Curso');
 
       return $result->result_array();
@@ -75,13 +75,24 @@
       * @return altera o boolean  para TRUE ou False dos Dados caso Seja deletado.
     */
     function deleteCurso($idCurso) {
+      $this->load->model(array(
+        'CoordenadorDe_model',
+        'Professor_model'
+      ));
+
+
+      $idProfessor = $this->Professor_model->getCoordenadorCurso($idCurso);
+      $this->Professor_model->setCoordenador(null,$idCurso,FALSE);
+      $this->CoordenadorDe_model->delete($idProfessor[0]['id']);
+
+
       $this->db->where('id', $idCurso);
       $result = $this->db->update('Curso', array('status' =>FALSE));
 
       return $result;
     }
-	
-	/**
+
+	   /**
       * Altera o status da disciplina para TRUE.
       * @author Caio de Freitas
       * @since 2017/03/31
@@ -93,6 +104,20 @@
       $result = $this->db->update('Curso',array('status'=>TRUE));
 
       return $result;
+    }
+
+    /**
+     * Busca o ID do curso relacionado ao professor coordenador.
+     * @author Caio de Freitas
+     * @since 2017/02/06
+     * @param INT $idCoordenador - ID do Professor coordenador
+     * @return Retorna um INT com o ID do curso relacionado ao professor coordenador
+     */
+    public function getCursoCoordenador ($idCoordenador) {
+      $this->db->where('id',$idCoordenador);
+      $result = $this->db->get('Professor');
+      //echo $this->db->last_query();
+      return $result->row()->idCurso;
     }
 
   }

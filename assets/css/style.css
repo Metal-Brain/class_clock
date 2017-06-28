@@ -106,3 +106,49 @@
 .margin-top-error{
 	margin: -15px 0 0 0;
 }
+
+/*Alteração da tabela Grade*/
+.dsemana {
+	
+     text-align: center; 
+     color: #68B92E;  
+     background-color: #F2F9E8;
+    
+}
+.thsemana {
+    width: 15%;
+    text-align: center; 
+    color: #68B92E;  
+    background-color: #F2F9E8;
+    
+}
+
+.thaula{
+	width: 5%;
+	 text-align: center; 
+     color: #68B92E;  
+     background-color: #F2F9E8;
+}
+
+.thdisciplina{
+	width:55%;
+	 text-align: center; 
+     color: #68B92E;  
+     background-color: #F2F9E8;
+}
+
+.thprofessor{
+	width:25%;
+	 text-align: center; 
+     color: #68B92E;  
+     background-color: #F2F9E8;
+}
+.tdintervalo{
+	 
+	 text-align: center; 
+     background-color: #F8F8F8;
+}
+.tdintervalo span{
+	
+	 margin-right:15%;
+}

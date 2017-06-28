@@ -44,10 +44,10 @@
                 <table id="disciplinaTable" class="table table-striped">
                     <thead>
                         <tr>
-                            <th><center>Sigla</th>
                             <th><center>Nome</th>
                             <th><center>Qtd. Professores</th>
                             <th><center>Semestre</th>
+                            <th><center>Qtd. Aulas Semanais</th>
                             <th><center>Status</th>
                             <th><center>Ação</th>
                         </tr>
@@ -55,10 +55,10 @@
                     <tbody>
                         <?php foreach ($disciplinas as $disciplina): ?>
                             <?= ($disciplina['status'] ? '<tr>' : '<tr class="danger">') ?>
-							<td><center><?= $disciplina['sigla'] ?></td>
-							<td><center><?= $disciplina['nome'] ?></td>
+							<td><center><?= ($disciplina['nome'])  ?></td>
 							<td><center><?= $disciplina['qtdProf'] ?></td>
-              <td><center><?= $disciplina['semestre'] ?></td>
+							<td><center><?= $disciplina['semestre'] ?></td>
+							<td><center><?= $disciplina['qtdAulas'] ?></td>
 							<td><center><?php
 								if ($disciplina['status']): echo "Ativo";
 								else: echo "Inativo";
@@ -67,11 +67,12 @@
 							<td><center>
 								<?php if ($disciplina['status']): ?>
 									<?php if ($this->session->nivel == 1) :?>
-										<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whateversemestre="<?= $disciplina['semestre'] ?>" data-whateversigla="<?= $disciplina['sigla'] ?>" data-whatevernome="<?= $disciplina['nome'] ?>" data-whateverid="<?= $disciplina['id'] ?>" data-whateverqtdprof="<?= $disciplina['qtdProf'] ?>"><span class="glyphicon glyphicon-pencil"></span></button>
+                    <?php $index = strpos($disciplina['nome'],"("); $destruir = substr($disciplina['nome'],0,$index) ?>
+                    <button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whateversemestre="<?= $disciplina['semestre'] ?>" data-whateversigla="<?= $disciplina['sigla'] ?>" data-whateverqtdaula="<?= $disciplina['qtdAulas'] ?>" data-whatevernome="<?= $destruir ?>" data-whateverid="<?= $disciplina['id'] ?>" data-whateverqtdprof="<?= $disciplina['qtdProf'] ?>"><span class="glyphicon glyphicon-pencil"></span></button>
 										<button onClick="disable(<?= $disciplina['id'] ?>)" type="button" class="btn btn-danger delete" title="Desativar"><span class="glyphicon glyphicon-remove"></span></button>
 									<?php endif;?>
-										<?php if ($this->session->nivel == 2) :?>
-										<button type="button" class="btn btn-primary" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whateversemestre="<?= $disciplina['semestre'] ?>" data-whateversigla="<?= $disciplina['sigla'] ?>" data-whatevernome="<?= $disciplina['nome'] ?>" data-whateverid="<?= $disciplina['id'] ?>" data-whateverqtdprof="<?= $disciplina['qtdProf'] ?>"><span class="glyphicon glyphicon-eye-open"></span></button>
+										<?php if ($this->session->nivel == 2 || $this->session->nivel == 3) :?>
+										<button type="button" class="btn btn-primary" title="Visualizar" data-toggle="modal" data-target="#exampleModal2" data-whateversemestre="<?= $disciplina['semestre'] ?>" data-whateversigla="<?= $disciplina['sigla'] ?>" data-whateverqtdAula="<?= $disciplina['qtdAulas'] ?>" data-whatevernome="<?= $disciplina['nome'] ?>" data-whateverid="<?= $disciplina['id'] ?>" data-whateverqtdprof="<?= $disciplina['qtdProf'] ?>"><span class="glyphicon glyphicon-eye-open"></span></button>
 										<?php endif;?>
 
 								<?php else : ?>
@@ -99,7 +100,7 @@
 				</div>
 
 				<div class="row">
-					<div class="col-md-6 margin-top-error">
+					<div class="col-md-10 margin-top-error">
 						<?= form_error('nome') ?>
 					</div>
 				</div>
@@ -112,7 +113,7 @@
 				</div>
 
 				<div class="row">
-					<div class="col-md-3 margin-top-error">
+					<div class="col-md-10 margin-top-error">
 						<?= form_error('sigla') ?>
 					</div>
 				</div>
@@ -124,35 +125,52 @@
 				</div>
 
 				<div class="row">
-					<div class="form-group col-md-2">
-						<input type="text" maxlength="1" pattern="[0-9]+$" class="form-control percent-5" name="qtdProf" placeholder="ex: 1" value="<?= set_value('qtdProf') ?>" required>
+					<div class="form-group col-md-4">
+						<input type="text" maxlength="1" pattern="[0-9]+$" class="form-control" name="qtdProf" placeholder="ex: 1" value="<?= set_value('qtdProf') ?>" required style="width: 100px">
 					</div>
 				</div>
 
 				<div class="row">
-					<div class="col-md-4 margin-top-error">
+					<div class="col-md-10 margin-top-error">
 						<?= form_error('qtdProf') ?>
 					</div>
 				</div>
 
-
-        <div class="row">
-          <div class="col-md-3">
-            <label>Semestre</label>
-          </div>
-        </div>
-
-        <div class="row">
-					<div class="form-group col-md-2">
-						<input type="text" maxlength="2" pattern="[0-9]+$" class="form-control percent-5" name="semestre" placeholder="ex: 6" value="<?= set_value('semestre') ?>" required>
+				<div class="row">
+					<div class="col-md-3">
+						<label>Semestre</label>
 					</div>
 				</div>
-        <div class="row">
-					<div class="col-md-4 margin-top-error">
+
+				<div class="row">
+					<div class="form-group col-md-4">
+						<input type="text" maxlength="2" pattern="[0-9]+$" class="form-control" name="semestre" placeholder="ex: 6" value="<?= set_value('semestre') ?>" required style="width: 100px">
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-10 margin-top-error">
 						<?= form_error('semestre') ?>
 					</div>
 				</div>
 
+				<div class="row">
+					<div class="col-md-3">
+						<label>Qtd. Aulas por Semana</label>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group col-md-4">
+						<input type="text" maxlength="1" pattern="[0-9]+$" class="form-control" name="qtdAulas" placeholder="ex: 4" value="<?= set_value('qtdAulas') ?>" required style="width: 100px">
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-10 margin-top-error">
+						<?= form_error('qtdAulas') ?>
+					</div>
+				</div>
 
 
                 <div class="inline">
@@ -197,9 +215,9 @@
 				</div>
 
 				<div class="row">
-					<div class="form-group col-md-3">
+					<div class="form-group col-md-8">
 						<label for="sigla-name" class="control-label">Sigla:</label>
-						<input type="text" maxlength="5" class="form-control" name="recipient-sigla" id="recipient-sigla" required>
+						<input type="text" maxlength="5" class="form-control" name="recipient-sigla" id="recipient-sigla" required style="width:90px;">
 					</div>
 				</div>
 
@@ -216,8 +234,8 @@
 				</div>
 
 				<div class="row">
-					<div class="form-group col-md-2">
-						<input type="text" maxlength="1" pattern="[0-9]+$" class="form-control" name="recipient-qtd-prof" id="recipient-qtd-prof" required>
+					<div class="form-group col-md-8">
+						<input type="text" maxlength="1" pattern="[0-9]+$" class="form-control" name="recipient-qtd-prof" id="recipient-qtd-prof" required style=" width:50px;">
 					</div>
 				</div>
 
@@ -227,16 +245,15 @@
 					</div>
 				</div>
 
-
-        <div class="row">
+				<div class="row">
 					<div class="col-md-5">
 						<label for="semestre" class="control-label">Semestre:</label>
 					</div>
 				</div>
 
 				<div class="row">
-					<div class="form-group col-md-2">
-						<input type="text" maxlength="2" pattern="[0-9]+$"  class="form-control" name="recipient-semestre" id="recipient-semestre" required>
+					<div class="form-group col-md-8">
+						<input type="text" maxlength="2" pattern="[0-9]+$"  class="form-control" name="recipient-semestre" id="recipient-semestre" required style=" width:50px;">
 					</div>
 				</div>
 
@@ -245,6 +262,26 @@
 						<?= form_error('recipient-semestre') ?>
 					</div>
 				</div>
+
+
+				<div class="row">
+					<div class="col-md-5">
+						<label for="qtdAulas" class="control-label">Qtd.Aulas por Semana:</label>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group col-md-8">
+						<input type="text" maxlength="1" pattern="[0-9]+$" class="form-control" name="recipient-qtdAula" id="recipient-qtdAula" required style=" width:50px;">
+					</div>
+				</div>
+
+                <div class="row">
+					<div class="col-md-11 margin-top-error">
+						<?= form_error('recipient-qtdAula') ?>
+					</div>
+				</div>
+
 
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Alterar</button>
@@ -282,21 +319,9 @@
 				</div>
 
 				<div class="row">
-					<div class="col-md-6 margin-top-error">
-						<?= form_error('recipient-nome') ?>
-					</div>
-				</div>
-
-				<div class="row">
 					<div class="form-group col-md-3">
 						<label for="sigla-name" class="control-label">Sigla:</label>
 						<input type="text" maxlength="5" class="form-control" name="recipient-sigla" id="recipient-sigla" required readonly/>
-					</div>
-				</div>
-
-                <div class="row">
-					<div class="col-md-8 margin-top-error">
-						<?= form_error('recipient-sigla') ?>
 					</div>
 				</div>
 
@@ -312,9 +337,15 @@
 					</div>
 				</div>
 
-                <div class="row">
-					<div class="col-md-11 margin-top-error">
-						<?= form_error('recipient-qtd-prof') ?>
+				<div class="row">
+					<div class="col-md-5">
+						<label for="qtdAulas" class="control-label">Qtd.Aulas por Semana:</label>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group col-md-8">
+						<input type="text" maxlength="1" pattern="[0-9]+$" class="form-control" name="recipient-qtdAula" id="recipient-qtdAula" required style=" width:50px;" readonly/>
 					</div>
 				</div>
 

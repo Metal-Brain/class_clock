@@ -70,8 +70,8 @@ class Usuario extends CI_Controller {
   private function alterarSenha () {
     // Regras de validação
     $this->form_validation->set_rules('senhaAtual','senha atual',array('trim','required','callback_checkUserPassword'));
-    $this->form_validation->set_rules('novaSenha','Nova senha',array('trim','required'));
-    $this->form_validation->set_rules('confirmaSenha','Confirmar senha',array('trim','required','matches[novaSenha]'));
+    $this->form_validation->set_rules('novaSenha','nova senha',array('trim','required'));
+    $this->form_validation->set_rules('confirmaSenha','confirmar senha',array('trim','required','matches[novaSenha]'));
     // Delimitadores
     $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
 
@@ -113,7 +113,7 @@ class Usuario extends CI_Controller {
   private function alterarEmail () {
 
     // Regras de validação
-    $this->form_validation->set_rules('novoEmail','email',array('trim','required','valid_email','is_unique[Usuario.email]'),array('is_unique'=>'O email informado já está cadastrado no sistema'));
+    $this->form_validation->set_rules('novoEmail','email',array('trim','required','valid_email','is_unique[Usuario.email]'),array('is_unique'=>'O e-mail informado já está cadastrado no sistema'));
     $this->form_validation->set_rules('confirmaEmail','email',array('trim','required','valid_email','matches[novoEmail]'));
     // Delimitadores
     $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
@@ -133,6 +133,18 @@ class Usuario extends CI_Controller {
       redirect('Usuario/editar');
     }
   }
+  
+	public function verificaEmail(){
+      $validate_data = array('novoEmail' => $this->input->get('novoEmail'));
+      $this->form_validation->set_data($validate_data);
+      $this->form_validation->set_rules('novoEmail', 'email', 'is_unique[Usuario.email]');
+
+      if($this->form_validation->run() == FALSE){
+        echo "false";
+      }else{
+        echo "true";
+      }
+    }
 
 }
 

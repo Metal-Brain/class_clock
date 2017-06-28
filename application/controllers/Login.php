@@ -31,14 +31,16 @@
           $this->session->set_flashdata('danger','Matrícula ou senha incorretos');
         } else {
           $this->session->set_userdata($usuario);
-
           if ($this->Usuario_model->isProfessor($usuario)) {
             $isCoordenador = $this->Usuario_model->isCoordenador($usuario);
 
             $this->session->set_userdata('nivel', 2);
             $this->session->set_userdata('isCoordenador', $isCoordenador);
             redirect('Professor/preferencia');
-          }
+          } else if ($this->Usuario_model->isDae($usuario)){			  
+			  $this->session->set_userdata('nivel', 3);
+			  redirect('Curso');
+		  }
 
           $this->session->set_userdata('nivel', 1);
           redirect('Curso');
@@ -124,7 +126,7 @@
             $mail->SMTPAuth = true;
             $mail->Username = "metalcodeifsp@gmail.com";
             $mail->Password = "#metalcode2017#";
-            $mail->setFrom('metalcodeifsp@gmail.com', 'Suporte Metalcode');//Cria a origem do email
+            $mail->setFrom('metalcodeifsp@gmail.com', 'Suporte Metal Code');//Cria a origem do email
             $mail->addAddress($usuario['email'], $usuario['nome']);//add o email e nome
             $mail->Subject = 'Recuperação de senha';//Seta o titulo do email
             $mail->msgHTML($content);//Seta a mensagem do email no caso passando a senha

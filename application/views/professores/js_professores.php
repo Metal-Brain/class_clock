@@ -52,16 +52,6 @@
 			modal.find('#recipient-id').val(recipientid)
 			modal.find('#recipient-coordenador').prop('checked',recipientcoordenador)
 
-			var isCoordenador = $('#recipient-coordenador').prop('checked');
-			if (isCoordenador) {
-				$('#coordena2').show();
-				console.log(recipientIdCurso);
-				modal.find('select[name=coordena] option[value='+recipientIdCurso+']').prop('selected',true)
-			} else {
-				$('#coordena2').hide();
-			}
-
-
 			});
 
 
@@ -104,9 +94,9 @@
 			modal.find('#recipient-id').val(recipientid)
 			modal.find('#recipient-coordenador-view').prop('checked',recipientcoordenador)
 
-			console.log(recipientid);
 			var url = '<?= base_url('index.php/Professor/disciplinas/') ?>'+recipientid;
 
+			$('#disciplinaTable-view li').remove();
 			$.getJSON(url,function (response) {
 				var disciplinas = [];
 				$.each(response, function (index, value) {
@@ -114,14 +104,6 @@
 					$('#disciplinaTable-view').prepend(row);
 				});
 			});
-
-			var isCoordenador = $('#recipient-coordenador-view').prop('checked');
-			if (isCoordenador) {
-				$('#coordena-view').show();
-				modal.find('select[name=coordena] option[value='+recipientIdCurso+']').prop('selected',true)
-			} else {
-				$('#coordena-view').hide();
-			}
 
 			});
 		</script>
@@ -184,18 +166,73 @@
 			});
 		</script>
 
-		<script>
-			$(document).ready(function() {
-				$('#coordena1').hide();
-				$('#coordenador').click(function (){
-					$('#coordena1').toggle();
+		<script type="text/javascript">
+			$(document).ready(function(){
+				jQuery.validator.addMethod("exactlength", function(value, element, param) {
+					return this.optional(element) || value.length == param;
+				},
+				$.validator.format("Insira exatamente {0} caracteres"));
+
+				$.validator.addMethod("date", function(value, element) {
+					var check = false;
+				    var re = /^\d{1,2}\/\d{1,2}\/\d{4}$/;
+					if( re.test(value)){
+						var adata = value.split('/');
+						var gg = parseInt(adata[0],10);
+						var mm = parseInt(adata[1],10);
+						var aaaa = parseInt(adata[2],10);
+						var xdata = new Date(aaaa,mm-1,gg);
+						if ( ( xdata.getFullYear() == aaaa ) && ( xdata.getMonth () == mm - 1 ) && ( xdata.getDate() == gg ) && ( xdata.getFullYear() > 1917 ))
+							check = true;
+						else
+							check = false;
+					} else
+						check = false;
+					return this.optional(element) || check;
+				},
+				"Insira uma data válida");
+
+				$('#cadastrarProfessor').validate({
+					rules: {
+						nome: { required: true, minlength: 5, maxlength: 255 },
+						matricula: { required: true, minlength: 8, remote: '<?= base_url("index.php/Professor/verificaMatricula/") ?>' },
+						email: { required: true, email: true, remote: '<?= base_url("index.php/Professor/verificaEmail/") ?>' },
+						nascimento: { required: true, date: true},
+						nivel: { required: true, min: 1 },
+						contrato: { required: true, min: 1}
+					},
+					messages: {
+						nome: { required: 'Campo obrigatório', minlength: 'O campo nome deve ter no mínimo 5 caracteres', maxlength: 'O campo nome deve ter no máximo 255 caracteres' },
+						matricula: { required: 'Campo obrigatório' , minlength:'Insira exatamente 8 caracteres', remote: 'Esta matrícula já está em uso'},
+						email: { required: 'Campo obrigatório', email: 'Insira um e-mail válido', remote: 'Este e-mail já está em uso' },
+						nascimento: { required: 'Campo obrigatório'},
+						nivel: { required: 'Campo obrigatório', min: 'Campo obrigatório'},
+						contrato: { required: 'Campo obrigatório', min: 'Campo obrigatório'}
+					}
 				});
-				$('#recipient-coordenador').click(function (){
-					$('#coordena2').toggle('slow');
+
+
+				$('#modalProfessor').validate({
+					rules: {
+						'recipient-nome': { required: true, minlength: 5, maxlength: 255 },
+						'recipient-matricula': { required: true, minlength: 8},
+						'recipient-email': { required: true, email: true },
+						'recipient-nascimento': { required: true, date: true},
+						'recipient-nivelAcademico': { required: true, min: 1 },
+						'recipient-contrato': { required: true, min: 1}
+					},
+					messages: {
+						'recipient-nome': { required: 'Campo obrigatório', minlength: 'O campo nome deve ter no mínimo 5 caracteres', maxlength: 'O campo nome deve ter no máximo 255 caracteres' },
+						'recipient-matricula': { required: 'Campo obrigatório' , minlength:'Insira exatamente 8 caracteres' },
+						'recipient-email': { required: 'Campo obrigatório', email: 'Insira um e-mail válido' },
+						'recipient-nascimento': { required: 'Campo obrigatório' },
+						'recipient-nivelAcademico': { required: 'Campo obrigatório', min: 'Campo obrigatório' },
+						'recipient-contrato': { required: 'Campo obrigatório', min: 'Campo obrigatório' }
+					}
 				});
+
 			});
 
 		</script>
-
 	</body>
 </html>

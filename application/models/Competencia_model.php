@@ -68,11 +68,8 @@
       * @return Retorna um array com todas as disciplinas
       */
     public function getAllDisciplinas($professor) {
-      $this->db->select('Disciplina.*');
       $this->db->where('idProfessor',$professor);
-      $this->db->where('Competencia.active',TRUE);
-      $this->db->join('Disciplina','Disciplina.id = Competencia.idDisciplina');
-      $result = $this->db->get('Competencia');
+      $result = $this->db->get('disciplinaSigla');
 
       return $result->result_array();
     }

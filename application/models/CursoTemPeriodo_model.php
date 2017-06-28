@@ -19,7 +19,7 @@
       * com sucesso;
       */
     public function insert ($curso,$periodo) {
-      return $this->db->insert('Curso_tem_periodo',array('idCurso'=>$curso,'idPeriodo'=>$periodo));
+      return $this->db->insert('Curso_tem_Periodo',array('idCurso'=>$curso,'idPeriodo'=>$periodo));
     }
 
     public function delete ($curso) {
@@ -29,6 +29,21 @@
       return $result;
     }
 
+    public function getPeriodoByCurso($curso) {
+      $this->db->where('idCurso',$curso);
+      $result = $this->db->get('Curso_tem_Periodo');
+
+      return $result->row()->idPeriodo;
+    }
+	
+	public function getAllPeriodos($curso) {
+      $this->db->select('Periodo.*');
+      $this->db->where('idCurso',$curso);
+      $this->db->join('Periodo','Periodo.id = Curso_tem_Periodo.idPeriodo');
+      $result = $this->db->get('Curso_tem_Periodo');
+
+      return $result->result_array();
+    }
   }
 
 

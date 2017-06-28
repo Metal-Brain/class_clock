@@ -18,7 +18,7 @@
       * de dados com sucesso.
       */
     public function insert ($curso, $disciplina) {
-      return $this->db->insert('Curso_tem_Disciplina',array(
+      return $this->db->insert('Curso_tem_disciplina',array(
         'idCurso'       => $curso,
         'idDisciplina'  => $disciplina
       ));
@@ -56,6 +56,41 @@
       $result = $this->db->get('Curso_tem_Disciplina');
 
       return $result->num_rows();
+    }
+
+    /**
+     *
+     * @author Caio de Freitas
+     * @since 2017/06/05
+     * @param INT $idCurso - ID do curso
+     * @param INT $semestre -
+     * @return Retorna um vetor com os dados das disciplinas.
+     */
+    public function getDisciplinasByCurso ($idCurso, $semestre) {
+      $this->db->join('Disciplina','cd.idDisciplina = Disciplina.id');
+      $this->db->where('idCurso',$idCurso);
+      $this->db->where('semestre',$semestre);
+      $result = $this->db->get('Curso_tem_disciplina AS cd');
+      return $result->result_array();
+    }
+
+    /**
+     * Pega o id de todos os professores de um determinado curso.
+     * @author Caio de Freitas
+     * @since 2017/06/08
+     * @param INT $idCurso - Identificador do curso.
+     * @return Retorna um vetor com todos os IDs
+     */
+    public function getAllProfessorByCurso($idCurso) {
+      $this->db->select('p.id');
+      $this->db->join('Disciplina AS d','d.id = cd.idDisciplina');
+      $this->db->join('Competencia AS c','c.idDisciplina = d.id');
+      $this->db->join('Professor AS p','p.id = c.idProfessor');
+      $this->db->where('cd.idCurso',$idCurso);
+      $this->db->group_by('id');
+      $result = $this->db->get('Curso_tem_Disciplina AS cd');
+
+      return $result->result_array();
     }
 
   }

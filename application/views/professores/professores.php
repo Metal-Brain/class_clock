@@ -66,7 +66,7 @@
 										<button type="button" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whatevernome="<?= $professor['nome']?>" data-whateverid="<?= $professor['id']?>" data-whatevercoordenador="<?= $professor['coordenador']?>" data-whatevercurso="<?= $professor['idCurso']?>" data-whatevercontrato="<?= $professor['idContrato']?>" data-whatevernivel="<?= $professor['idNivel']?>" data-whatevermatricula= "<?= $professor['matricula']?>" data-whateveremail="<?= $professor['email']?>" data-whatevernascimento= "<?= sqlToBr($professor['nascimento']) ?>"><span class="glyphicon glyphicon-pencil"></span></button>
 										<button onClick="exclude(<?= $professor['id']?>);" type="button" class="btn btn-danger" title="Excluir"><span class="glyphicon glyphicon-remove"></span></button>
 										<?php endif;?>
-										<?php if ($this->session->nivel == 2) :?>
+										<?php if ($this->session->nivel == 2 || $this->session->nivel == 3) :?>
 										<button type="button" class="btn btn-primary" title="Visualizar" data-toggle="modal" data-target="#exampleModal2" data-whatevernome="<?= $professor['nome']?>" data-whateverid="<?= $professor['id']?>" data-whatevercoordenador="<?= $professor['coordenador']?>" data-whatevercurso="<?= $professor['idCurso']?>" data-whatevercontrato="<?= $professor['idContrato']?>" data-whatevernivel="<?= $professor['idNivel']?>" data-whatevermatricula= "<?= $professor['matricula']?>" data-whateveremail="<?= $professor['email']?>" data-whatevernascimento= "<?= sqlToBr($professor['nascimento']) ?>"><span class="glyphicon glyphicon-eye-open"></span></button>
 										<?php endif;?>
 
@@ -85,7 +85,7 @@
 		<!-- Aqui é o formulário de registro do novo item-->
 		<div id="new" class="tab-pane fade">
 			<h3>Cadastrar Professor</h3>
-			<?= form_open('Professor') ?>
+			<?= form_open('Professor', 'id="cadastrarProfessor"') ?>
 				<div class="row">
 					<div class="form-group col-md-6">
 						<label>Nome</label>
@@ -100,9 +100,9 @@
 				</div>
 
 				<div class="row">
-					<div class="form-group col-md-2">
+					<div class="form-group col-md-3">
 						<label>Matrícula</label>
-						<input type="text" class="form-control" name="matricula"  maxlength="8" placeholder="ex: cg000000" value="<?= set_value('matricula')?>" required/>
+						<input type="text" class="form-control" name="matricula"  maxlength="8" placeholder="ex: cg000000" value="<?= set_value('matricula')?>" required style="width: 150px"/>
 					</div>
 				</div>
 
@@ -178,34 +178,14 @@
 					</div>
 				</div>
 
-				<div class="row">
-					<div class="form-group col-md-2">
-						<input id="coordenador" type="checkbox" name="coordenador" class="form-group" value="true"/>
-						<label for="coordenador">Coordenador</label>
-					</div>
-				</div>
-
-				<div id="coordena1" class="row">
-					<div class="form-group col-md-5">
-						<label>Coordenador do curso</label>
-						<?= form_dropdown('coordena',$cursos,set_value('coordena'),array('class'=>'form-control')) ?>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-md-6 margin-top-error">
-						<?= form_error('coordena') ?>
-					</div>
-				</div>
-
 				<div class="inline">
 					<button type='submit' class='btn bt-lg btn-primary'>Cadastrar</button>
 				</div>
 			<?= form_close() ?>
 		</div>
 	</div><!--fecha tab-content-->
-
 </div> <!--Fecha content-->
+</div>
 
 <!-- Aqui é o Modal de alteração dos professores-->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
@@ -216,7 +196,7 @@
 				<h4 class="modal-title" id="exampleModalLabel">Professor</h4>
 			</div>
 			<div class="modal-body">
-				<?= form_open('Professor/atualizar') ?>
+				<?= form_open('Professor/atualizar', 'id=modalProfessor') ?>
 					<div class="form-group">
 						<input type="hidden" name="recipient-id" id="recipient-id">
 					</div>
@@ -235,9 +215,9 @@
 					</div>
 
 					<div class="row">
-						<div class="form-group col-md-4">
+						<div class="form-group col-md-8">
 							<label>Matrícula</label>
-							<input type="text" class="form-control" name="recipient-matricula"  id="recipient-matricula" maxlength="8" placeholder="ex: cg0000000" value="<?= set_value('recipient-matricula')?>" required/>
+							<input type="text" class="form-control" name="recipient-matricula"  id="recipient-matricula" maxlength="8" placeholder="ex: cg0000000" value="<?= set_value('recipient-matricula')?>" required style=" width:140px;"/>
 						</div>
 					</div>
 
@@ -312,27 +292,6 @@
 						</div>
 					</div>
 
-
-					<div class="row">
-						<div class="form-group">
-							<input type="checkbox" name="recipient-coordenador" value="true" class="form-group" style="margin-left:20px;" id="recipient-coordenador"/>
-							<label for="recipient-coordenador">Coordenador</label>
-						</div>
-					</div>
-
-					<div id="coordena2" class="row">
-						<div class="form-group col-md-9">
-							<label>Coordenador do curso</label>
-							<?= form_dropdown('coordena',$cursos,set_value('coordena'),array('class'=>'form-control')) ?>
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="col-md-6 margin-top-error">
-							<?= form_error('coordena') ?>
-						</div>
-					</div>
-
 					<div class="modal-footer">
 						<button type="submit" class="btn btn-primary">Alterar</button>
 						<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
@@ -403,20 +362,6 @@
 						<div class="form-group col-md-4">
 							<label>Regime de contrato</label>
 							<?= form_dropdown('recipient-contrato',$contrato,set_value('recipient-contrato'),array('class'=>'form-control', 'disabled' =>'disabled')) ?>
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="form-group">
-							<input type="checkbox" name="recipient-coordenador" value="true" class="form-group disabled" style="margin-left:20px;" id="recipient-coordenador-view" disabled/>
-							<label for="recipient-coordenador">Coordenador</label>
-						</div>
-					</div>
-
-					<div id="coordena-view" class="row">
-						<div class="form-group col-md-9">
-							<label>Coordenador do curso</label>
-							<?= form_dropdown('coordena',$cursos,set_value('coordena'),array('class'=>'form-control','disabled'=>'disabled')) ?>
 						</div>
 					</div>
 

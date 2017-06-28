@@ -5,10 +5,11 @@ USE CLASSCLOCK;
 
 CREATE TABLE IF NOT EXISTS Disciplina(
  id                 INT           NOT NULL  AUTO_INCREMENT,
- nome               VARCHAR(45)   NOT NULL  UNIQUE,
+ nome               VARCHAR(45)   NOT NULL,
  sigla              VARCHAR(5)    NOT NULL  UNIQUE,
  qtdProf            INT           NOT NULL,
  semestre			INT			  NOT NULL,
+ qtdAulas			INT			  NOT NULL,
  status             BOOLEAN       NOT NULL  DEFAULT TRUE,
  PRIMARY KEY (id)
 );
@@ -92,10 +93,12 @@ CREATE TABLE IF NOT EXISTS Usuario (
   email         varchar(255)  NOT NULL      UNIQUE,
   senha 		    CHAR(64) 	    NOT NULL,
   `status` 			BOOLEAN       NOT NULL  		DEFAULT TRUE,
+  dae				BOOLEAN       NOT NULL  		DEFAULT FALSE,
   PRIMARY KEY(id)
 );
 
-INSERT INTO Usuario VALUES (NULL, 'admin','cg123456','admin@admin.com','46070d4bf934fb0d4b06d9e2c46e346944e322444900a435d7d9a95e6d7435f5', TRUE);
+INSERT INTO Usuario VALUES (NULL, 'admin','cg123456','admin@admin.com','46070d4bf934fb0d4b06d9e2c46e346944e322444900a435d7d9a95e6d7435f5', TRUE, FALSE);
+INSERT INTO Usuario VALUES (NULL, 'dae','cg654321','dae@dae.com','46070d4bf934fb0d4b06d9e2c46e346944e322444900a435d7d9a95e6d7435f5', TRUE, TRUE);
 
 
 CREATE TABLE IF NOT EXISTS Professor(
@@ -145,6 +148,7 @@ CREATE TABLE IF NOT EXISTS Disponibilidade(
     inicio 				TIME 			NOT NULL,
     fim 				TIME 			NOT NULL,
     `status`      		BOOLEAN     	NOT NULL  DEFAULT TRUE,
+    hasDisponibilidade	BOOLEAN			NOT NULL  DEFAULT TRUE,
 
     PRIMARY KEY(id),
 
@@ -165,3 +169,8 @@ CREATE TABLE IF NOT EXISTS CoordenadorDe(
     FOREIGN KEY (idProfessor) REFERENCES Professor(id)
 
 );
+
+CREATE VIEW disciplinaSigla AS SELECT Competencia.idProfessor, id, concat(nome, ' (', sigla,')') as nome, sigla, qtdProf, semestre, qtdAulas, status FROM `Competencia` 
+	JOIN `Disciplina` ON `Disciplina`.`id` = `Competencia`.`idDisciplina`;
+
+

@@ -8,7 +8,7 @@
   class Disciplina extends CI_Controller {
 
     public function index () {
-      if (verificaSessao() && verificaNivelPagina(array(1)))
+      if (verificaSessao() && verificaNivelPagina(array(1,3)))
         $this->cadastro();
       else
         redirect('/');
@@ -28,7 +28,7 @@
       */
     public function cadastro () {
       // Carrega a biblioteca para validação dos dados.
-      if (verificaSessao() && verificaNivelPagina(array(1))) {
+      if (verificaSessao() && verificaNivelPagina(array(1,3))) {
         $this->load->library(array('form_validation','session'));
         $this->load->helper(array('form','url'));
         $this->load->model(array('Disciplina_model'));
@@ -38,6 +38,7 @@
         $this->form_validation->set_rules('sigla', 'sigla', array('required', 'max_length[5]', 'is_unique[Disciplina.sigla]','strtoupper'));
         $this->form_validation->set_rules('qtdProf', 'quantidade de professores', array('required', 'integer', 'greater_than[0]', 'less_than[10]'));
         $this->form_validation->set_rules('semestre', 'semestre', array('required', 'integer', 'greater_than[0]', 'less_than[20]'));
+        $this->form_validation->set_rules('qtdAulas', 'quantidade de aulas', array('required', 'integer', 'greater_than[0]', 'less_than[10]'));
         // Definição dos delimitadores
         $this->form_validation->set_error_delimiters('<p class="text-danger">','</p>');
 
@@ -47,6 +48,7 @@
           $this->session->set_flashdata('formDanger','<strong>Não foi possível cadastrar a disciplina, pois existe(m) erro(s) no formulário:</strong>');
 
           $dados['disciplinas'] = $this->Disciplina_model->getAll();
+
 
           $this->load->view('includes/header',$dados);
           $this->load->view('includes/sidebar');
@@ -61,7 +63,8 @@
             'nome'      => $this->input->post("nome"),
             'sigla'     => $this->input->post('sigla'),
             'qtdProf'   => $this->input->post("qtdProf"),
-            'semestre'  => $this->input->post("semestre")
+            'semestre'  => $this->input->post("semestre"),
+            'qtdAulas'   => $this->input->post("qtdAulas")
           );
 
           if ($this->Disciplina_model->insert($disciplina)){
@@ -133,6 +136,7 @@
         $this->form_validation->set_rules('recipient-sigla', 'sigla', array('required', 'max_length[5]','strtoupper'));
         $this->form_validation->set_rules('recipient-qtd-prof', 'quantidade de professores', array('required', 'integer', 'greater_than[0]'));
         $this->form_validation->set_rules('recipient-semestre', 'semestre', array('required', 'integer', 'greater_than[0]','less_than[20]'));
+        $this->form_validation->set_rules('recipient-qtdAula', 'quantidade de aulas', array('required', 'integer', 'greater_than[0]', 'less_than[10]'));
         // Definição dos delimitadores
         $this->form_validation->set_error_delimiters('<p class="text-danger">','</p>');
 
@@ -142,6 +146,7 @@
           $this->session->set_flashdata('formDanger','<strong>Não foi possível atualizar os dados da disciplina:</strong>');
 
           $dados['disciplinas'] = $this->Disciplina_model->getAll();
+
 
           $this->load->view('includes/header',$dados);
           $this->load->view('includes/sidebar');
@@ -157,13 +162,16 @@
             'nome'        => $this->input->post("recipient-nome"),
             'sigla'       => $this->input->post('recipient-sigla'),
             'qtdProf'     => $this->input->post("recipient-qtd-prof"),
-            'semestre'    => $this->input->post("recipient-semestre")
+            'semestre'    => $this->input->post("recipient-semestre"),
+            'qtdAulas'     => $this->input->post("recipient-qtdAula")
           );
+
 
           if ( $this->Disciplina_model->update($id, $disciplina) )
             $this->session->set_flashdata('success', 'Disciplina atualizada com sucesso');
           else
             $this->session->set_flashdata('danger','Não foi possível atualizar os dados da disciplina, tente novamente ou entre em contato com o administrador do sistema.<br/> Caso tenha alterado a <b>sigla</b> e/ou <b>nome</b>, verifique se ela já não foi utilizada.');
+
 
           redirect('Disciplina');
 
@@ -172,6 +180,31 @@
         redirect('/');
       }
     }
+
+    public function verificaNome(){
+      $validate_data = array('nome' => $this->input->get('nome'));
+      $this->form_validation->set_data($validate_data);
+      $this->form_validation->set_rules('nome', 'nome da disciplina', 'is_unique[Disciplina.nome]');
+
+      if($this->form_validation->run() == FALSE){
+        echo "false";
+      }else{
+        echo "true";
+      }
+    }
+
+    public function verificaSigla(){
+      $validate_data = array('sigla' => $this->input->get('sigla'));
+      $this->form_validation->set_data($validate_data);
+      $this->form_validation->set_rules('sigla', 'sigla da disciplina', 'is_unique[Disciplina.sigla]');
+
+      if($this->form_validation->run() == FALSE){
+        echo "false";
+      }else{
+        echo "true";
+      }
+    }
+
   }
 
 ?>

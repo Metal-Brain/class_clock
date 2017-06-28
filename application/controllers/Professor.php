@@ -23,12 +23,12 @@ class Professor extends CI_Controller {
      * @since 2017/04/03
      */
     public function cadastrar() {
-      if (verificaSessao() && verificaNivelPagina(array(1,2))){
+      if (verificaSessao() && verificaNivelPagina(array(1,2,3))){
         // Carrega a biblioteca para validação dos dados.
         $this->load->library(array('form_validation','My_PHPMailer'));
         $this->load->helper(array('form','dropdown','date','password'));
         $this->load->model(array(
-					'Curso_model',
+		  'Curso_model',
           'Professor_model',
           'Disciplina_model',
           'Competencia_model',
@@ -36,6 +36,13 @@ class Professor extends CI_Controller {
           'Contrato_model',
           'Usuario_model'
         ));
+
+				// $disponibilidades = $this->Professor_model->getDisponibilidadeHorario(1,'07:00');
+				//
+				// echo '<pre>';
+				// print_r($disponibilidades);
+				// echo '</pre>';
+
         // Definir as regras de validação para cada campo do formulário.
         $this->form_validation->set_rules('nome', 'nome do professor', array('required','min_length[5]','max_length[255]','ucwords'));
         $this->form_validation->set_rules('matricula', 'matrícula', array('required','exact_length[8]','is_unique[Usuario.matricula]','strtoupper'));
@@ -191,14 +198,15 @@ class Professor extends CI_Controller {
         // Definir as regras de validação para cada campo do formulário.
         $this->form_validation->set_rules('recipient-nome', 'nome do professor', array('required','min_length[5]','max_length[255]','ucwords'));
         $this->form_validation->set_rules('recipient-matricula', 'matrícula', array('required','exact_length[8]','strtoupper'));
-				$this->form_validation->set_rules('recipient-email','e-mail',array('required','valid_email'));
+		$this->form_validation->set_rules('recipient-email','e-mail',array('required','valid_email'));
         $this->form_validation->set_rules('recipient-nascimento', 'data de nascimento', array('callback_date_check'));
         $this->form_validation->set_rules('recipient-nivelAcademico', 'nivel', array('greater_than[0]'),array('greater_than'=>'Selecione o nível acadêmico.'));
         $this->form_validation->set_rules('recipient-contrato','contrato',array('greater_than[0]'),array('greater_than'=>'Selecione um contrato.'));
-				$this->form_validation->set_rules('coordena','curso',array(array('coordenadorCurso',array($this->Professor_model,'verificaCoordenadorCurso'))));
+		$this->form_validation->set_rules('recipient-coordena','curso',array(array('coordenadorCurso',array($this->Professor_model,'verificaCoordenadorCurso'))));
 
-				$this->form_validation->set_message('coordenadorCurso','Curso selecionado já possui um coordenador');
-        // Definição dos delimitadores
+		$this->form_validation->set_message('coordenadorCurso','Curso selecionado já possui um coordenador');
+
+		// Definição dos delimitadores
         $this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
         // Verifica se o formulario é valido
         if ($this->form_validation->run() == FALSE) {
@@ -206,14 +214,13 @@ class Professor extends CI_Controller {
           $dados['contrato']        = convert($this->Contrato_model->getAll(), TRUE);
           $dados['nivel']           = convert($this->Nivel_model->getAll(), TRUE);
           $dados['disciplinas']     = convert($this->Disciplina_model->getAll(TRUE));
-					$dados['cursos']					= convert($this->Curso_model->getAll(), TRUE);
+		  $dados['cursos']					= convert($this->Curso_model->getAll(), TRUE);
 
-
-					if ($this->session->nivel == 2) {
-						$dados['professores']     = $this->Professor_model->getAllCoordenador($this->session->id);
-					}else{
-						$dados['professores']     = $this->Professor_model->getAll();
-					}
+			if ($this->session->nivel == 2) {
+				$dados['professores']     = $this->Professor_model->getAllCoordenador($this->session->id);
+			}else{
+				$dados['professores']     = $this->Professor_model->getAll();
+			}
           $this->load->view('includes/header', $dados);
           $this->load->view('includes/sidebar');
           $this->load->view('professores/professores');
@@ -415,7 +422,7 @@ class Professor extends CI_Controller {
 						'inicio' 			=> $this->input->post('inicio').':00',
 						'fim' 				=> $this->input->post('fim')
 					);
-					if ($this->Disponibilidade_model->verificaHora($disponibilidade['dia'], $disponibilidade['inicio'])) {
+					if ($this->Disponibilidade_model->verificaHora($disponibilidade['dia'], $disponibilidade['inicio'], $disponibilidade['idProfessor'])) {
 						if ($this->Disponibilidade_model->insertDisponibilidade ($disponibilidade)) {
 							$this->session->set_flashdata('success','Disponibilidade cadastrada com sucesso');
 						} else {
@@ -433,6 +440,8 @@ class Professor extends CI_Controller {
 					redirect('/');
 			}
 		}
+
+
 
 		/**
 		 * Recebe o dia da semana e verifica se o professor logado tem disponibilidade
@@ -519,6 +528,218 @@ class Professor extends CI_Controller {
 					echo json_encode($professores);
 				else
 					return $professores;
+			}
+		}
+
+		public function grade($grade=NULL){
+			if (verificaSessao() && verificaNivelPagina(array(2))){
+
+				$dados = array('grade'	=> $grade);
+
+				$this->load->view('includes/header',$dados);
+				$this->load->view('includes/sidebar');
+				$this->load->view('grade/grades');
+				$this->load->view('includes/footer');
+				$this->load->view('grade/js_grades');
+			}else{
+					redirect('/');
+			}
+		}
+
+		/**
+		 * Essa função vai gerar a grade de horario para um curso
+		 * @author Caio de Freitas
+		 * @since 2017/02/06
+		 * @param INT $idCoordenador - ID do Professor coordenador
+		 */
+		public function gerarGrade ($idCoordenador) {
+			if (verificaSessao()) {
+
+				$this->load->helper(array('date'));
+				$this->load->model(array('Disponibilidade_model','CursoTemPeriodo_model','CursoTemDisciplina_model','Curso_model'));
+
+				$this->Disponibilidade_model->reset();
+
+				$idCurso = $this->Curso_model->getCursoCoordenador($idCoordenador);
+				$curso = $this->Curso_model->getCursoById($idCurso);
+				$grade = array();
+
+				$semestreInicial = primeiroSemestre();
+				$curso['periodo'] = $this->CursoTemPeriodo_model->getPeriodoByCurso($curso[0]['id']);
+
+				for ($i=$semestreInicial; $i <= $curso[0]['qtdSemestres']; $i += 1) {
+					$disciplinas = $this->CursoTemDisciplina_model->getDisciplinasByCurso($idCurso,$i);
+					for ($dia = 0; $dia < 5; $dia ++) {
+						$disciplinaIndex = 0;
+						$hora = inicioPeriodo($curso['periodo']);
+						$aulasAtribuidas = 0;
+						while ( ($disciplinas[$disciplinaIndex]['qtdAulas'] > 0 && $aulasAtribuidas < maxAula($curso['periodo']) && $disciplinaIndex < count($disciplinas)-1)) {
+							$disponibilidade = $this->Disponibilidade_model->getDisponibilidade($disciplinas[$disciplinaIndex]['idDisciplina'], numberToDay($dia), numeroParaHora($hora));
+							if ($disponibilidade) {
+								$disponibilidade = $disponibilidade[0];
+								$disciplinas[$disciplinaIndex]['qtdAulas'] -= 1;
+								$grade[$i][$dia][$hora] = $disponibilidade;
+								$this->Disponibilidade_model->setHasDisponibilidade($disponibilidade['id'],FALSE);
+								$hora++;
+								$aulasAtribuidas++;
+							} else {
+								$disciplinaIndex++;
+							}
+						}
+					}
+				}
+
+				$this->grade($grade);
+
+			}
+		}
+
+		public function verificaMatricula(){
+		  $validate_data = array('matricula' => $this->input->get('matricula'));
+		  $this->form_validation->set_data($validate_data);
+		  $this->form_validation->set_rules('matricula', 'matrícula', 'is_unique[Usuario.matricula]');
+
+		  if($this->form_validation->run() == FALSE){
+			echo "false";
+		  }else{
+			echo "true";
+		  }
+		}
+
+		public function verificaDia($idDisciplina, $periodo){
+
+			$this->load->helper(array('date_helper'));
+			$this->load->model(array(
+				'Professor_model',
+				'Disciplina_model',
+				'Competencia_model',
+				'Usuario_model',
+				'Disponibilidade_model'
+			));
+
+			$horas = getHorasPeriodo($periodo);
+
+
+			$grade = array();
+			switch ($periodo) {
+				case 3:
+					for ($i=0; $i < 5 ; $i++) {//Dias Semanas
+						for ($j=0; $j < sizeof($horas) ; $j++) { //Horas Aulas Dia
+							if ($this->Professor_model->getDisponibilidadeHorario($idDisciplina, $horas[$j])) {
+								$disponibilidades = $this->Professor_model->getDisponibilidadeHorario($idDisciplina, $horas[$j]);
+								$disponibilidadeHora = array(
+									$i => array(
+										'dia' => $disponibilidades[$i]['dia'],
+										'horario' => $disponibilidades[$i]['inicio'],
+										'disciplina' => $disponibilidades[$i]['sigla'],
+										'professor'=> $disponibilidades[$i]['nome']
+									)
+								);
+								if ($disponibilidadeHora != null) {
+									$grade[$j] = $disponibilidadeHora;
+								}
+							}
+						}
+						if (sizeof($grade) == sizeof($horas)) {
+							return $grade;
+						}else{
+							return FALSE;
+						}
+					}
+
+
+					break;
+
+				case 2:
+					# code...
+					break;
+
+				case 1:
+					# code...
+					break;
+
+
+				default:
+					# code...
+					break;
+			}
+			return $grade;
+		}
+
+
+			// 			$disponibilidades = $this->Disponibilidade_model($periodo);
+			// 			$grade = array();
+			// 			for ($i=1; $i < 6 ; $i++) {//Dias Semanas
+			// 				for ($j=0; $j < 5 ; $j++) { //Horas Aulas Dia
+			// 					foreach ($disciplinas as $disciplina) {//Disciplinas
+			// 						if ($disciplina['qtdAulas'] <= 4 && $disciplina['qtdAulas'] > 0) {
+			// 							foreach ($disponibilidades as $disponibilidade) {//Disponibilidade por Professor
+			// 								if ($disponibilidade['dia'] == $diasSemana[$i] && $disponibilidade['inicio'] == $horas[$j]) {
+			// 									$grade =
+			// 								}
+			// 								}else{
+			// 									$disciplina['qtdAulas']-=4;
+			// 									$grade =
+			// 							}
+			// 						}
+			// 					}
+			// 				}
+			// 			}
+			//
+
+		public function verificaEmail(){
+		  $validate_data = array('email' => $this->input->get('email'));
+		  $this->form_validation->set_data($validate_data);
+		  $this->form_validation->set_rules('email', 'email', 'is_unique[Usuario.email]');
+
+		  if($this->form_validation->run() == FALSE){
+			echo "false";
+		  }else{
+			echo "true";
+		  }
+		}
+
+		/**
+		 * Gera um JSON com os dados do professor coordenador do curso informado.
+		 * @author Caio de Freitas
+		 * @since 2017/06/07
+		 * @param INT $idCurso - ID do curso
+		 */
+		public function getCoordenador($idCurso) {
+			$this->load->model('Professor_model');
+			$professor = $this->Professor_model->getCoordenadorByCurso($idCurso);
+			echo json_encode($professor);
+		}
+
+		public function verCadastro(){
+			if (verificaSessao() && verificaNivelPagina(array(2))){
+		        $this->load->helper(array('form','dropdown','date','password'));
+				$this->load->model(array(
+					'Curso_model',
+					'Professor_model',
+					'Disciplina_model',
+					'Competencia_model',
+					'Nivel_model',
+					'Contrato_model',
+					'Usuario_model'));
+
+				if($this->form_validation->run() == FALSE){
+					$dados['contrato']        = convert($this->Contrato_model->getAll(), TRUE);
+					$dados['nivel']           = convert($this->Nivel_model->getAll(), TRUE);
+				    $dados['disciplinas']     = convert($this->Disciplina_model->getAll(TRUE));
+				    $dados['cursos']	    	= convert($this->Curso_model->getAll(), TRUE);
+
+
+					$dados['professores'] = ($this->Professor_model->getById($this->session->id));
+					$this->load->view('includes/header', $dados);
+					$this->load->view('includes/sidebar');
+					$this->load->view('cadastroProf/cadastroProf');
+					$this->load->view('includes/footer');
+					$this->load->view('cadastroProf/js_cadastroProf');
+				}
+
+			}else{
+					redirect('/');
 			}
 		}
 
