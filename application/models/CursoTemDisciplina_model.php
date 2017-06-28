@@ -71,6 +71,10 @@
       $this->db->where('idCurso',$idCurso);
       $this->db->where('semestre',$semestre);
       $result = $this->db->get('Curso_tem_disciplina AS cd');
+<<<<<<< HEAD
+=======
+      //echo $this->db->last_query();
+>>>>>>> a7a5d4c581e076ddfbadad8cf958204e18c60b46
       return $result->result_array();
     }
 
