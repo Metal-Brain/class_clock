@@ -14,13 +14,11 @@
                 <?php if ($this->session->isCoordenador) : ?>
                     <li><?= anchor('Professor/cadastrar', 'Visualizar Professores') ?></li>
                     <li><?= anchor('Professor/coordenadorde', 'Professores Coordenados') ?></li>
+					<li><?= anchor('Professor/Grade', 'Grade') ?></li>
                 <?php endif; ?>
                 <?php if (!($this->session->isCoordenador)) : ?>
                     <li><?= anchor('Professor/verCadastro', 'Visualizar Cadastro') ?></li>
                 <?php endif; ?>
-            <?php endif; ?>
-            <?php if ($this->session->nivel == 2) : ?>
-                <li><?= anchor('Professor/Grade', 'Grade') ?></li>
             <?php endif; ?>
             <hr>
             <?php if ($this->session->nivel == 2) : ?>
