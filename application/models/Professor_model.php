@@ -108,11 +108,17 @@
       * @return Retorna um boolean TRUE caso o professor seja desativado com sucesso
       */
     public function disable ($id) {
-      $this->db->where('id', $id);
-      $this->db->where('coordenador',FALSE);
-      $result = $this->db->update('Usuario',array('status'=>FALSE));
+      $this->db->select('Professor.*');
+      $this->db->where("id = $id AND Professor.coordenador = FALSE");
+      $prof = $this->db->get('Professor')->num_rows();
+      if($prof>0){
+        $this->db->select('Usuario.*');
+        $this->db->where('id', $id);
+        $result = $this->db->update('Usuario',array('status'=>FALSE));
+        return true;
+      }
 
-      return $result;
+      return false;
     }
 
     /**
