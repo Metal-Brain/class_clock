@@ -591,12 +591,15 @@ class Professor extends CI_Controller {
 								$this->Disponibilidade_model->setHasDisponibilidade($disponibilidade['id'],FALSE);
 								$hora++;
 								$aulasAtribuidas++;
+							} elseif ($disciplinas[$disciplinaIndex]['qtdAulas'] == 0) {
+								unset($disciplinas[$disciplinaIndex]);
+								$disciplinas = construirVetor($disciplinas);
 							} else {
-									if ($disciplinaIndex == (count($disciplinas) - 1 ) ){
-										$disciplinaIndex = 0;
-									}else {
-										$disciplinaIndex++;
-									}
+								if ($disciplinaIndex == (count($disciplinas) - 1) ) {
+									$disciplinaIndex = 0;
+								} else {
+									$disciplinaIndex++;
+								}
 							}
 						}
 					}
