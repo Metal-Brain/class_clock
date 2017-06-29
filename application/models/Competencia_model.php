@@ -69,6 +69,7 @@
       */
     public function getAllDisciplinas($professor) {
       $this->db->where('idProfessor',$professor);
+      $this->db->where('active',TRUE);
       $result = $this->db->get('disciplinaSigla');
 
       return $result->result_array();
