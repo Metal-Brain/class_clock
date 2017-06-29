@@ -1,4 +1,6 @@
-
+<!--<pre>
+		<?php print_r($grade) ?>
+</pre> -->	
 		<div id="content" class="col-md-10">
 
 			<?php if($this->session->flashdata('success')) : ?>
@@ -26,19 +28,41 @@
 				$grade = json_decode(json_encode($grade), True);
 					
 				foreach ($grade as $key => $semestre){	
+					$periodo;
+					$nomePeriodo;
+					
+					foreach($semestre as $semana){
+						
+						foreach($semana as $dia){
+							$periodo = $dia['idPeriodo'];
+						
+						}
+					}
+					
+					if($periodo==1){
+						$nomePeriodo ="Matutino"; 
+						
+					}else if($periodo==2) {
+						$nomePeriodo ="Vespertino"; 
+					}else if($periodo==3){
+						$nomePeriodo ="Noturno"; 
+						
+					}
+				   
+				
 					echo '
 						<table class="table table-bordered">
 							<tr>
-								<th class="text-center" style="background-color: #4CAF50; color: #fff;" colspan="6">'.$key.'º Semestre</th>
+								<th class="text-center" style="background-color: #4CAF50; color: #fff;" colspan="6">'.$key.'º Semestre - '.$nomePeriodo.'</th>
 							</tr> 
 						';      
-					foreach($semestre as $semana){
-										$nomeDia;
 						
+					foreach($semestre as $semana){
+						$nomeDia;
 						foreach($semana as $dia){
-							
-						$nomeDia = $dia['dia'];	
-						}
+							$nomeDia = $dia['dia'];	
+						}				
+										
 						
 						echo'		
 							<table class="table table-bordered">
@@ -51,7 +75,9 @@
 						;
 						$control= 1;
 						foreach($semana as $dia){
-							if($control==3){
+				
+						
+							if(($dia['idPeriodo']==3)&&($control==3)){
 								echo'		
 								   <tr>
 										<td class="tdintervalo" colspan="4"><span>Intervalo</span></td>
@@ -61,7 +87,37 @@
 								';		
 				
 					
-							}	
+							}else if(($dia['idPeriodo']==1)&&($control==4)){
+								echo'		
+								   <tr>
+										<td class="tdintervalo" colspan="4"><span>Intervalo</span></td>
+										
+									</tr>
+															
+								';		
+								
+							}
+							else if(($dia['idPeriodo']==2)&&($control==4)  && !(($nomeDia == "quarta")) ){
+								echo'		
+								   <tr>
+										<td class="tdintervalo" colspan="4"><span>Intervalo</span></td>
+										
+									</tr>
+															
+								';		
+								
+							}
+							else if(($dia['idPeriodo']==2)&&($control==3)  && (($nomeDia == "quarta")) ){
+								echo'		
+								   <tr>
+										<td class="tdintervalo" colspan="4"><span>Intervalo</span></td>
+										
+									</tr>
+															
+								';		
+								
+							}
+							
 					
 			
 								echo'
