@@ -84,7 +84,7 @@ class Professor extends CI_Controller {
             'email'           => $this->input->post('email'),
             'senhaLimpa'      => $senha,
             'senha'           => hash('sha256',$senha),
-            'coordenador'     => ($this->input->post("coordenador") == null) ? 0 : 1,
+            //'coordenador'     => ($this->input->post("coordenador") == null) ? 0 : 1,
 						'idCurso'					=> $this->input->post('coordena'),
             'idContrato'      => $this->input->post("contrato"),
             'idNivel'         => $this->input->post("nivel"),
@@ -235,7 +235,7 @@ class Professor extends CI_Controller {
             'matricula'       => $this->input->post('recipient-matricula'),
             'nascimento'      => brToSql($this->input->post("recipient-nascimento")),
             'email'           => $this->input->post('recipient-email'),
-            'coordenador'     => ($this->input->post("recipient-coordenador") == null) ? 0 : 1,
+						//'coordenador'     => ($this->input->post("coordenador") == null) ? 0 : 1,          
             'idContrato'      => $this->input->post("recipient-contrato"),
             'idNivel'         => $this->input->post("recipient-nivelAcademico"),
             'disciplinas'     => $this->input->post('professorDisciplinas[]')

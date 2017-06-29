@@ -89,7 +89,7 @@
 
       $dados = array(
         'nascimento'  => $professor['nascimento'],
-        'coordenador' => $professor['coordenador'],
+        //'coordenador' => $professor['coordenador'],
         'idContrato'  => $professor['idContrato'],
         'idNivel'     => $professor['idNivel']
       );
