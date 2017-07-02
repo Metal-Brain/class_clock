@@ -555,7 +555,7 @@ class Professor extends CI_Controller {
 		public function gerarGrade ($idCoordenador) {
 			if (verificaSessao()) {
 
-				$this->load->helper(array('date'));
+				$this->load->helper(array('date','array'));
 				$this->load->model(array('Disponibilidade_model','CursoTemPeriodo_model','CursoTemDisciplina_model','Curso_model'));
 
 				$this->Disponibilidade_model->reset();
@@ -573,17 +573,12 @@ class Professor extends CI_Controller {
 						$disciplinaIndex = 0;
 						$hora = inicioPeriodo($curso['periodo']);
 						$aulasAtribuidas = 0;
-						echo $dia.'-'.$disciplinaIndex.'-'.$aulasAtribuidas;
-						while ( ($disciplinaIndex < count($disciplinas) && $disciplinas[$disciplinaIndex]['qtdAulas'] > 0 && $aulasAtribuidas < maxAula($curso['periodo']))) {
-							echo '<pre>';
-							echo $disciplinas[$disciplinaIndex]['nome'] .'-'.numberToDay($dia).'-'.numeroParaHora($hora);
-							echo '</pre>';
+						$loopCount = 0;
+
+						while ( ($disciplinaIndex < count($disciplinas) && $loopCount < maxAula($curso['periodo']) && $disciplinas[$disciplinaIndex]['qtdAulas'] > 0 && $aulasAtribuidas < maxAula($curso['periodo']))) {
 							$disponibilidade = $this->Disponibilidade_model->getDisponibilidade($disciplinas[$disciplinaIndex]['idDisciplina'], numberToDay($dia), numeroParaHora($hora));
 
-							// echo '<pre>';
-							// print_r($disponibilidade);
-							// echo $this->db->last_query();
-							// echo '</pre>';
+							// Verifica se existe a disponibilidade
 							if ($disponibilidade) {
 								$disponibilidade = $disponibilidade[0];
 								$disciplinas[$disciplinaIndex]['qtdAulas'] -= 1;
@@ -591,16 +586,22 @@ class Professor extends CI_Controller {
 								$this->Disponibilidade_model->setHasDisponibilidade($disponibilidade['id'],FALSE);
 								$hora++;
 								$aulasAtribuidas++;
-							} elseif ($disciplinas[$disciplinaIndex]['qtdAulas'] == 0) {
-								unset($disciplinas[$disciplinaIndex]);
-								$disciplinas = construirVetor($disciplinas);
 							} else {
 								if ($disciplinaIndex == (count($disciplinas) - 1) ) {
 									$disciplinaIndex = 0;
+									if ($hora < 22){$hora++;}
+									$loopCount++;
 								} else {
 									$disciplinaIndex++;
 								}
 							}
+
+							// Verifica se foram atribuidas todas as aulas da disciplina
+							if ($disciplinas[$disciplinaIndex]['qtdAulas'] == 0) {
+								unset($disciplinas[$disciplinaIndex]);
+								$disciplinas = construirVetor($disciplinas);
+							}
+
 						}
 					}
 				}
