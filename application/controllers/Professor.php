@@ -84,7 +84,7 @@ class Professor extends CI_Controller {
             'email'           => $this->input->post('email'),
             'senhaLimpa'      => $senha,
             'senha'           => hash('sha256',$senha),
-            //'coordenador'     => ($this->input->post("coordenador") == null) ? 0 : 1,
+            'coordenador'     => ($this->input->post("coordenador") == null) ? 0 : 1,
 						'idCurso'					=> $this->input->post('coordena'),
             'idContrato'      => $this->input->post("contrato"),
             'idNivel'         => $this->input->post("nivel"),
@@ -235,7 +235,7 @@ class Professor extends CI_Controller {
             'matricula'       => $this->input->post('recipient-matricula'),
             'nascimento'      => brToSql($this->input->post("recipient-nascimento")),
             'email'           => $this->input->post('recipient-email'),
-						//'coordenador'     => ($this->input->post("coordenador") == null) ? 0 : 1,          
+            'coordenador'     => ($this->input->post("recipient-coordenador") == null) ? 0 : 1,
             'idContrato'      => $this->input->post("recipient-contrato"),
             'idNivel'         => $this->input->post("recipient-nivelAcademico"),
             'disciplinas'     => $this->input->post('professorDisciplinas[]')
@@ -555,7 +555,7 @@ class Professor extends CI_Controller {
 		public function gerarGrade ($idCoordenador) {
 			if (verificaSessao()) {
 
-				$this->load->helper(array('date'));
+				$this->load->helper(array('date','array'));
 				$this->load->model(array('Disponibilidade_model','CursoTemPeriodo_model','CursoTemDisciplina_model','Curso_model'));
 
 				$this->Disponibilidade_model->reset();
@@ -567,14 +567,18 @@ class Professor extends CI_Controller {
 				$semestreInicial = primeiroSemestre();
 				$curso['periodo'] = $this->CursoTemPeriodo_model->getPeriodoByCurso($curso[0]['id']);
 
-				for ($i=$semestreInicial; $i <= $curso[0]['qtdSemestres']; $i += 1) {
+				for ($i=$semestreInicial; $i <= $curso[0]['qtdSemestres']; $i += 2) {
 					$disciplinas = $this->CursoTemDisciplina_model->getDisciplinasByCurso($idCurso,$i);
 					for ($dia = 0; $dia < 5; $dia ++) {
 						$disciplinaIndex = 0;
 						$hora = inicioPeriodo($curso['periodo']);
 						$aulasAtribuidas = 0;
-						while ( ($disciplinas[$disciplinaIndex]['qtdAulas'] > 0 && $aulasAtribuidas < maxAula($curso['periodo']) && $disciplinaIndex < count($disciplinas)-1)) {
+						$loopCount = 0;
+
+						while ( ($disciplinaIndex < count($disciplinas) && $loopCount < maxAula($curso['periodo']) && $disciplinas[$disciplinaIndex]['qtdAulas'] > 0 && $aulasAtribuidas < maxAula($curso['periodo']))) {
 							$disponibilidade = $this->Disponibilidade_model->getDisponibilidade($disciplinas[$disciplinaIndex]['idDisciplina'], numberToDay($dia), numeroParaHora($hora));
+
+							// Verifica se existe a disponibilidade
 							if ($disponibilidade) {
 								$disponibilidade = $disponibilidade[0];
 								$disciplinas[$disciplinaIndex]['qtdAulas'] -= 1;
@@ -583,8 +587,21 @@ class Professor extends CI_Controller {
 								$hora++;
 								$aulasAtribuidas++;
 							} else {
-								$disciplinaIndex++;
+								if ($disciplinaIndex == (count($disciplinas) - 1) ) {
+									$disciplinaIndex = 0;
+									if ($hora < 22){$hora++;}
+									$loopCount++;
+								} else {
+									$disciplinaIndex++;
+								}
 							}
+
+							// Verifica se foram atribuidas todas as aulas da disciplina
+							if ($disciplinas[$disciplinaIndex]['qtdAulas'] == 0) {
+								unset($disciplinas[$disciplinaIndex]);
+								$disciplinas = construirVetor($disciplinas);
+							}
+
 						}
 					}
 				}
