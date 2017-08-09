@@ -1,4 +1,4 @@
-﻿DROP DATABASE IF EXISTS CLASSCLOCK;
+DROP DATABASE IF EXISTS CLASSCLOCK;
 CREATE DATABASE IF NOT EXISTS CLASSCLOCK;
 
 USE CLASSCLOCK;
@@ -170,7 +170,5 @@ CREATE TABLE IF NOT EXISTS CoordenadorDe(
 
 );
 
-CREATE VIEW disciplinaSigla AS SELECT Competencia.idProfessor, id, concat(nome, ' (', sigla,')') as nome, sigla, qtdProf, semestre, qtdAulas, status, Competencia.active FROM `Competencia` 
+CREATE VIEW disciplinaSigla AS SELECT Competencia.idProfessor, id, concat(nome, ' (', sigla,')') as nome, sigla, qtdProf, semestre, qtdAulas, status, Competencia.active FROM `Competencia`
 	JOIN `Disciplina` ON `Disciplina`.`id` = `Competencia`.`idDisciplina`;
-
-
