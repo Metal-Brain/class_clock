@@ -1,154 +1,133 @@
-#header{
-	float: left;
-	width: 100%;
-	padding: 15px 30px 5px 10px;
+html {
+    position: relative;
+    min-height: 100%;
 }
 
-#sidebar{
-	background-color: #F2F9E8;
-	padding: 10px;
-	height: 100%;
-	float: left;
+footer {
+    display: none;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: auto;
+    width: 100%;
+    background-color: #EAEAEA;
+    padding-top: 10px;
 }
 
-#sidebar h2{
-	text-align: center;
+body {
+    font-family: 'Roboto Mono', monospace;
 }
 
-#sidebar a{
-	color: #68B92E;
+.container-fluid {
+    min-width: 500px;
+    padding: 0 15px;
 }
 
-#sidebar>.nav-pills>li>a:hover{
-	color: #FFF;
-	background-color: #68B92E;
+.usuario {
+    padding: 5px 10px !important;
+    font-weight: bold;
 }
 
-#sidebar>.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover{
-	color: #FFF;
-	background-color: #4CAF50;
+.usuario:hover,
+.usuario:active,
+.usuario:visited,
+.usuario {
+    color: #33691e !important;
 }
 
-#content{
-	background-color: #FFF;
-	padding: 10px;
-	float: left;
+.usuario:hover {
+    background-color: #33691e !important;
+    color: #ffffff !important;
 }
 
-#content h1{
-	text-align: center;
+header {
+    background-color: #43a047;
+    color: #f5f5f5;
+    padding: 10px;
+    font-size: 15px;
 }
 
-#content a{
-	color: #68B92E;
+header .img-responsive {
+    width: 250px;
 }
 
-/* Isso muda a cor dos 'botoes' do bootstrap nav-pills em #content */
-#content>.nav-pills>li>a:hover{
-	color: #FFF;
-	background-color: #68B92E;
+header a {
+    color: white;
+    font-size: 14px;
 }
 
-/* Isso muda a cor dos 'botoes' 'ativos' do bootstrap nav-pills em #content */
-#content>.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover{
-	color: #FFF;
-	background-color: #4CAF50;
+header a:hover {
+    color: white;
+    text-decoration: none;
 }
 
-#footer{
-	color: #E6E6E6;
-	text-align: center;
-	overflow: hidden;
-	margin-top: 10%;
+.ifsp-logo {
+    margin-top: 15px;
+    margin-right: 15px;
+    max-width: 210px;
 }
 
- ul#disciplinaTable-view{
-	margin: 0 0 0 -20px;
+.navbar-brand {
+    max-width: 90px;
+    height: 90px;
 }
 
-/* Redefine o tamanho do logo */
-.logo{
-	height: 100px;
+.users {
+    background-color: #b2daa6;
 }
 
-.logoClassClock{
-	height: 200px;
+.sidebar {
+    background-color: #EAEAEA;
+    padding: 4px 4px;
+    border-radius: 0 5px 5px 0;
+    margin: 3px 0;
 }
 
-/*tamanhos em porcentagem para qualquer bloco*/
-.disc{
-    width: 300px;
-}
-.disc button{
-    margin-left: 15px;
-    margin-bottom: 15px;
-    float: right;
+.sidebar li {
+    color: #424242;
 }
 
-/*faz com que os blocos se alinhem*/
-.inline{
-	display: inline-block;
+.sidebar li:hover {
+    cursor: default;
 }
 
-.block{
-	display: block;
+.sidebar a {
+    color: #424242;
+    white-space: nowrap;
 }
 
-.padding-15-lr{
-	padding:0 15px;
+.nav-pills li a:hover {
+    background-color: #b2daa6;
+    color: #424242;
 }
 
-/*Alteração da cor da fonte do cabeçalho usado no multi-select*/
-.multiselect{
-	color: #4CAF50;
+#content {
+    margin-bottom: 10px;
 }
 
-.margin-top-error{
-	margin: -15px 0 0 0;
+.top-bar {
+    margin-top: 20px;
 }
 
-/*Alteração da tabela Grade*/
-.dsemana {
-	
-     text-align: center; 
-     color: #68B92E;  
-     background-color: #F2F9E8;
-    
-}
-.thsemana {
-    width: 15%;
-    text-align: center; 
-    color: #68B92E;  
-    background-color: #F2F9E8;
-    
+/* Bootstrap Override */
+
+.nav-pills>li.active>a,
+.nav-pills>li.active>a:focus,
+.nav-pills>li.active>a:hover {
+    background-color: #43a047;
 }
 
-.thaula{
-	width: 5%;
-	 text-align: center; 
-     color: #68B92E;  
-     background-color: #F2F9E8;
+.nav-tabs {
+    overflow-x: auto;
+    overflow-y: hidden;
+    display: -webkit-box;
+    display: -moz-box;
 }
 
-.thdisciplina{
-	width:55%;
-	 text-align: center; 
-     color: #68B92E;  
-     background-color: #F2F9E8;
+.nav-tabs>li {
+    float: none;
 }
 
-.thprofessor{
-	width:25%;
-	 text-align: center; 
-     color: #68B92E;  
-     background-color: #F2F9E8;
-}
-.tdintervalo{
-	 
-	 text-align: center; 
-     background-color: #F8F8F8;
-}
-.tdintervalo span{
-	
-	 margin-right:15%;
+.nav-tabs>li>a {
+    padding: 10px 10px;
 }
