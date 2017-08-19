@@ -18,9 +18,7 @@ class Turno extends CI_Controller {
     if ($this->form_validation->run()) {
       $this->salvar();
     } else {
-      $this->load->view('includes/header');
-      $this->load->view('turnos/turnos');
-      $this->load->view('includes/footer');
+      $this->load->template('turnos/turnos');
     }
 
   }
