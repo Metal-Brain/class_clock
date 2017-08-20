@@ -1,4 +1,4 @@
-<div class="col-lg-2 sidebar collapsed-canvas hidden-print" id='sidebar'>
+<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 sidebar collapsed-canvas hidden-print" id='sidebar'>
                <ul class="nav nav-pills nav-stacked">
                    <li class="active">
                        <a href="">
