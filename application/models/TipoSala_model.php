@@ -11,17 +11,6 @@
         protected $table = 'tipo_sala';
         public $timestamps = 'false';
 
-        /**
-         * Função responsável para retornar todos os tipos de sala do banco
-         * @author Lucas Leonel
-         * @since 2017/08/19
-        */
-
-        public function getAll() {
-            $result = TipoSala_model::all();
-            return $result;
-        }
-
     }
 
 ?>

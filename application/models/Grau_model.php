@@ -10,17 +10,6 @@
     protected $table = 'grau';
     public $timestamps = false;
 
-    /**
-     * Função responsável para retornar todos as modalidades do Banco
-     * @author Lucas Leonel
-     * @since 2017/08/19
-    */
-
-    public function getAll() {
-      $result = Grau_model::all();
-      return $result;
-    }
-
   }
 
 

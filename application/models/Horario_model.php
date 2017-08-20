@@ -12,24 +12,13 @@
         public $timestamps = 'false';
 
         /**
-        * Função responsável para retornar todos os horários do Banco
-        * @author Lucas Leonel
-        * @since 2017/08/19
-        */
-
-        public function getAll() {
-            $result = Horario_model::all();
-            return $result;
-        }
-
-        /**
          * Função responsável para retornar o turno em qual este horário está
          * @author Lucas Leonel
          * @since 2017/08/19
         */
         
-        public function getTurno(){
-            return $this->belongsTo('Turno_model.php');
+        public function turno(){
+            return $this->belongsTo(Turno_model::class);
         }
 
     }
