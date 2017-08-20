@@ -9,8 +9,7 @@
     class Horario_model extends Model{
 
         protected $table = 'horario';
-        public $timestamps = 'false';
-
+        
         /**
          * Função responsável para retornar o turno em qual este horário está
          * @author Lucas Leonel

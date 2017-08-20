@@ -8,7 +8,6 @@
   class Grau_model extends Model {
 
     protected $table = 'grau';
-    public $timestamps = false;
 
   }
 

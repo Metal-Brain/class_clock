@@ -9,7 +9,6 @@
     class TipoSala_model extends Model{
 
         protected $table = 'tipo_sala';
-        public $timestamps = 'false';
 
     }
 
