@@ -1,8 +1,15 @@
-
-
-	<!-- TODO: Falta colocar os nome, values e outros paramatros nos inputs -->
-
-
+<!-- TODO: Falta colocar os= nome, values e outros paramatros nos inputs -->
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="css/bootstrap.css">
+		<!-- <link rel="stylesheet" href="css/style.css"> --> 
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.js"></script>
+		<script type="text/javascript" src="js/script.js"></script>
+	</head>
+<body>	
 	<div class="container col-xs-12 col-sm-12 col-md-10 col-lg-10">
 		 
 							<ul class="nav nav-pills">
@@ -20,7 +27,7 @@
 						<div id="list" class="tab-pane fade in active">
 							<div style="margin-top: 25px;">
 								<table id="TurnoTable" class="table table-striped">
-									<thead>
+								 	<thead>
 										<tr>
 											<th><center>Nome</th>
 											<th><center>Qtd Aulas</th>
@@ -66,17 +73,18 @@
 												<label>Nome:</label>
 												<input class="form-control" placeholder="Nome" required maxlength="20">
 												<?= form_error('nome_turno') ?>
+												<button id="btnAdd" class="btn btn-primary btn-success add-field" style="background: green; ">+ Adicionar Aula</button>
 										</div>
 										
-											<div class="col-xs-2 col-sm-2 col-md-2 form-group">
+											<div id="copi" class="col-xs-2 col-sm-2 col-md-2 form-group">
 												<label >Horario de entrada:</label>
 												<input class="form-control" type="time">
 											</div>
-											<div class="col-xs-2 col-sm-2 col-md-2 form-group">
+											<div id="copi2" class="col-xs-2 col-sm-2 col-md-2 form-group">
 												<label >Horario de saida:</label>
 												<input class="form-control" type="time">
 											</div>
-							</div>
+																		
 										<div class="col-xs-12 col-sm-12 col-md-12 form-group">
 											<button type="submit" class="btn btn-primary btn-lg active" >Cadastrar</button>
 										</div>
@@ -84,6 +92,7 @@
 								</form>
 						</div>
 					
+					</div>
 					</div>
 					<!-- o tabpane Editar que vai ser chamado quando clicar em editar (está substituindo o modal), precisa testar se com o JS do modal vai ser possivel popular essa view, caso não
 					seja pensar em outra alternativa para evitar recarregar toda a pagina novamente ao direcionar para uma editar.php-->
@@ -122,4 +131,5 @@
 					
 				</div>
 		</div>
-		   
+</body>
+</html>		   
