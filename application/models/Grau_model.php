@@ -2,20 +2,23 @@
 
   /**
    *  Essa classe é um modelo que representa a relação Grau no banco de dados
-   *  @author Caio de Freitas
+   *  @author Caio de Freitas e Lucas Leonel
    *  @since 2017/03/24
    */
-  class Grau_model extends CI_Model {
+  class Grau_model extends Model {
+
+    protected $table = 'grau';
+    public $timestamps = false;
 
     /**
-      * Busca todos os graus cadastrados na base de dados.
-      * @author Caio de Freitas
-      * @since 2017/03/24
-      * @return Array - Retorna um array com todos o graus
-      */
-    public function getAll () {
-      $result = $this->db->get('Grau');
-      return $result->result_array();
+     * Função responsável para retornar todos as modalidades do Banco
+     * @author Lucas Leonel
+     * @since 2017/08/19
+    */
+
+    public function getAll() {
+      $result = Grau_model::all();
+      return $result;
     }
 
   }
