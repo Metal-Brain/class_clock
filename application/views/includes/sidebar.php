@@ -1,45 +1,40 @@
-<div class="row">
-    <div id="sidebar" class="col-xs-12 col-sm-2 col-md-2" role="navigation">
-        <h2>Menu</h2>
-        <ul class="metismenu nav nav-pills nav-stacked" id="menu">
-            <?php if ($this->session->nivel == 1 || $this->session->nivel == 3) : ?>
-                <li><?= anchor('Curso', 'Cursos') ?></li>
-                <li><?= anchor('Disciplina', 'Disciplinas') ?></li>
-                <li><?= anchor('Professor/index', 'Professores') ?></li>
-                <li><?= anchor('Sala', 'Salas') ?></li>
-                <li><?= anchor('Turma', 'Turmas') ?></li>
-            <?php elseif ($this->session->nivel == 2) : ?>
-                <li><?= anchor('Professor/disponibilidade', 'Disponibilidade') ?></li>
-                <li><?= anchor('Professor/preferencia', 'Preferências') ?></li>
-                <?php if ($this->session->isCoordenador) : ?>
-                    <li><?= anchor('Professor/cadastrar', 'Visualizar Professores') ?></li>
-                    <li><?= anchor('Professor/coordenadorde', 'Professores Coordenados') ?></li>
-					<li><?= anchor('Professor/Grade', 'Grade') ?></li>
-                <?php endif; ?>
-                <?php if (!($this->session->isCoordenador)) : ?>
-                    <li><?= anchor('Professor/verCadastro', 'Visualizar Cadastro') ?></li>
-                <?php endif; ?>
-            <?php endif; ?>
-            <hr>
-            <?php if ($this->session->nivel == 2) : ?>
-                <li><?= anchor('Usuario/editar', '<span class="glyphicon glyphicon-cog"></span> Configurações', array('aria-expanded' => 'true')) ?></li>
-            <?php endif; ?>
-            <li><?= anchor('Login/logout', '<span class="glyphicon glyphicon-log-out"></span> Sair do Sistema') ?></li>
-        </ul>
+<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 sidebar collapsed-canvas hidden-print" id='sidebar'>
+               <ul class="nav nav-pills nav-stacked">
+                   <li class="active">
+                       <a href="">
+                           <span class="glyphicon glyphicon-home"></span> <span class='sidebar-label'>Home</span>
+                       </a>
+                   </li>
+                   <li class="">
+                       <a href="">
+                           <span class="glyphicon glyphicon-time"></span> <span class='sidebar-label'>Turnos</span>
+                       </a>
+                   </li>
 
-        <script>
-            if(document.URL.split('/')[5]=='gerarGrade'){
-                document.links[4].className = 'active';
-            }
-            for (var i = 0; i < document.links.length; i++) {
-                switch (document.links[i].href) {
-                    case document.URL:
-                        console.log(document.links[i].href);
-                        document.links[i].className = 'active';
-                        break;
-                }
-                
-            }
-        </script>
-
-    </div>
+                   <li class="">
+                       <a href="">
+                           <span class="glyphicon glyphicon-education"></span> <span class='sidebar-label'>Cursos</span>
+                       </a>
+                   </li>
+                   <li class="">
+                       <a href="">
+                           <span class="glyphicon glyphicon-calendar"></span> <span class='sidebar-label'>Semestres</span>
+                       </a>
+                   </li>
+                   <li class="">
+                       <a href="">
+                           <span class="glyphicon glyphicon-user"></span> <span class='sidebar-label'>Funcionários</span>
+                       </a>
+                   </li>
+                   <li class="">
+                       <a href="">
+                           <span class="glyphicon glyphicon-briefcase"></span> <span class='sidebar-label'>Instituição</span>
+                       </a>
+                   </li>
+                   <li class="">
+                       <a href="">
+                           <span class="glyphicon glyphicon-duplicate"></span> <span class='sidebar-label'>FPA</span>
+                       </a>
+                   </li>
+               </ul>
+           </div>
