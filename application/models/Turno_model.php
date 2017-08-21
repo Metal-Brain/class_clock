@@ -10,7 +10,6 @@
     class Turno_model extends Model{
 
         protected $table = 'turno';
-        public $timestamps = false;
 
         /**
          * Função responsável para retornar todos os horarios linkados com o turno

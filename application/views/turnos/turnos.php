@@ -4,22 +4,22 @@
 	<head>
 		<meta charset="UTF-8">
 		<link rel="stylesheet" href="css/bootstrap.css">
-		<!-- <link rel="stylesheet" href="css/style.css"> -->
+		<!-- <link rel="stylesheet" href="css/style.css"> --> 
 		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 		<script type="text/javascript" src="js/bootstrap.js"></script>
 		<script type="text/javascript" src="js/script.js"></script>
 	</head>
-<body>
+<body>	
 	<div class="container col-xs-12 col-sm-12 col-md-10 col-lg-10">
-
+		 
 							<ul class="nav nav-pills">
 								<!-- 'botao' link para a listagem -->
 								<li class="active"><a data-toggle="pill" href="#list">Listar todas</a></li>
 								<!-- 'botao' link para novo registro -->
 								<li><a data-toggle="pill" href="#new">Cadastrar</a></li>
-
+							
 							</ul>
-
+					
 					<!-- Dentro dessa div vai o conteúdo que os botões acima exibem ou omitem -->
 				<div class="tab-content">
 
@@ -49,7 +49,7 @@
 												else: echo "Inativo";
 												endif; ?></td>
 											<td><center>
-
+											
 												<?php if ($turno['status']): ?>
 													<!-- Esse button editar vai chamar o outro tab-pane editar, não está direcionado pois os dados que ele tenta passar estão com problema, se deixar apeanas o data-toggle= pill e o href editar vai chamar o tabpane -->
 													<button type="button"  data-toggle="pill" href="#editar" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whatevernomeTurno="<?= $turno['nomeTurno']; ?>" data-whateverid="<?= $turno['id']; ?>" data-whateverqtdAula="<?= $turno['qtdAula']; ?>"  data-whateverinicio="<?= $turno['inicio']; ?>" data-whateverfim="<?= $turno['fim']; ?>"><span class="glyphicon glyphicon-pencil"></span></button>
@@ -67,33 +67,31 @@
 					<div id="new" class="tab-pane fade">
 						<div class="row">
 							<div class="col-xs-12 col-sm-12 col-md-12">
-								<form action="<?= site_url('turno/cadastrar')?>" method="post" novalidate>
+								<form method="post">
 										<div class="col-xs-12 col-sm-12 col-md-12 form-group">
 											<div class="col-xs-12 col-sm-12 col-md-12" style="height: 40px;"></div>
 												<label>Nome:</label>
-												<input name="nome_turno" class="form-control" placeholder="Nome" required maxlength="20">
+												<input class="form-control" placeholder="Nome" required maxlength="20">
 												<?= form_error('nome_turno') ?>
-												<button id="btnAdd" type="button" class="btn btn-primary btn-success add-field" style="background: green; ">+ Adicionar Aula</button>
+												<button id="btnAdd" class="btn btn-primary btn-success add-field" style="background: green; ">+ Adicionar Aula</button>
 										</div>
-
+										
 											<div id="copi" class="col-xs-2 col-sm-2 col-md-2 form-group">
 												<label >Horario de entrada:</label>
-												<input name="horario[]" class="form-control" type="time">
+												<input class="form-control" type="time">
 											</div>
 											<div id="copi2" class="col-xs-2 col-sm-2 col-md-2 form-group">
 												<label >Horario de saida:</label>
-												<input name="horario[]" class="form-control" type="time">
+												<input class="form-control" type="time">
 											</div>
-
-											<?= form_error('horario[]') ?>
-
+																		
 										<div class="col-xs-12 col-sm-12 col-md-12 form-group">
 											<button type="submit" class="btn btn-primary btn-lg active" >Cadastrar</button>
 										</div>
 
 								</form>
 						</div>
-
+					
 					</div>
 					</div>
 					<!-- o tabpane Editar que vai ser chamado quando clicar em editar (está substituindo o modal), precisa testar se com o JS do modal vai ser possivel popular essa view, caso não
@@ -112,7 +110,7 @@
 												<label>Quantidade de aulas:</label>
 												<input class="form-control"  placeholder="Informe a quantidade" required maxlength="3">
 											</div>
-
+										
 											<div class="col-xs-2 col-sm-2 col-md-2 form-group">
 												<label >Horario de entrada:</label>
 												<input class="form-control" type="time">
@@ -128,10 +126,10 @@
 
 								</form>
 						</div>
-
+					
 					</div>
-
+					
 				</div>
 		</div>
 </body>
-</html>
+</html>		   
