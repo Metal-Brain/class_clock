@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS `horario`.`grau` (
   `codigo` INT NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `codigo_UNIQUE` (`codigo` ASC))
-ENGINE = InnoDB
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------

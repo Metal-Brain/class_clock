@@ -63,6 +63,7 @@
 													<input name="nome_turno" class="form-control" placeholder="Nome" required maxlength="20">
 													<!-- <?= form_error('nome_turno') ?> -->
 													<button id="btnAdd" type="button" class="btn btn-primary btn-success add-field" style="background: green; ">+ Adicionar Aula</button>
+													<button id="btnRemove" type="button" class="btn btn-primary btn-success add-field" style="background: red; ">- Remover Aula</button>
 											</div>
 										</div>
 										<div class="row aux" id="linha">
@@ -75,10 +76,11 @@
 												<div class="col-xs-12 col-sm-12 col-md-2 form-group">
 													<input name="horario[]" class="form-control hora" type="text" placeholder="Fim" minlength="5" maxlength="5">
 													<?= form_error('horario[]') ?>
+													<span class="novo"></span>
 												</div>
 										</div>
 										<div class="col-xs-12 col-sm-12 col-md-12 form-group">
-											<button type="submit" class="btn btn-primary btn-lg active" >Cadastrar</button>
+											<button type="submit" class="btn btn-primary btn-lg active cadastrar" >Cadastrar</button>
 										</div>
 
 								</form>
