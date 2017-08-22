@@ -10,8 +10,15 @@
 </html>
 <form class="" action="" method="post">
   <div class="row">
+    Nome<br>
     <div class="form-group col-md-4">
       <input type="text" maxlength="5" class="form-control" name="nome_grau" placeholder="ex: 4" value="<?= set_value('nome_grau') ?>" required style="width: 100px">
+    </div>
+  </div>
+  <div class="row">
+    Código<br>
+    <div class="form-group col-md-4">
+      <input type="text" maxlength="5" class="form-control" name="codigo" placeholder="ex: 4" value="<?= set_value('codigo') ?>" required style="width: 100px">
     </div>
   </div>
 

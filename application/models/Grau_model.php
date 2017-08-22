@@ -8,7 +8,7 @@
   class Grau_model extends Model {
 
     protected $table = 'grau';
-    protected $fillable = array('nome_grau');
+    protected $fillable = array('codigo','nome_grau');
 
     /**
      * Função responsável para retornar todos as modalidades do Banco
