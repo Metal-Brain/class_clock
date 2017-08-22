@@ -1,15 +1,4 @@
 <!-- TODO: Falta colocar os= nome, values e outros paramatros nos inputs -->
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<link rel="stylesheet" href="css/bootstrap.css">
-		<!-- <link rel="stylesheet" href="css/style.css"> -->
-		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
-		<script type="text/javascript" src="js/bootstrap.js"></script>
-		<script type="text/javascript" src="js/script.js"></script>
-	</head>
-<body>
 	<div class="container col-xs-12 col-sm-12 col-md-10 col-lg-10">
 
 							<ul class="nav nav-pills">
@@ -68,25 +57,26 @@
 						<div class="row">
 							<div class="col-xs-12 col-sm-12 col-md-12">
 								<form action="<?= site_url('turno/cadastrar')?>" method="post" novalidate>
-										<div class="col-xs-12 col-sm-12 col-md-12 form-group">
-											<div class="col-xs-12 col-sm-12 col-md-12" style="height: 40px;"></div>
-												<label>Nome:</label>
-												<input name="nome_turno" class="form-control" placeholder="Nome" required maxlength="20">
-												<?= form_error('nome_turno') ?>
-												<button id="btnAdd" type="button" class="btn btn-primary btn-success add-field" style="background: green; ">+ Adicionar Aula</button>
+										<div class="row">
+											<div class="col-xs-12 col-sm-12 col-md-12 form-group">
+													<label>Nome:</label>
+													<input name="nome_turno" class="form-control" placeholder="Nome" required maxlength="20">
+													<!-- <?= form_error('nome_turno') ?> -->
+													<button id="btnAdd" type="button" class="btn btn-primary btn-success add-field" style="background: green; ">+ Adicionar Aula</button>
+											</div>
 										</div>
-
-											<div id="copi" class="col-xs-2 col-sm-2 col-md-2 form-group">
-												<label >Horario de entrada:</label>
-												<input name="horario[]" class="form-control" type="time">
-											</div>
-											<div id="copi2" class="col-xs-2 col-sm-2 col-md-2 form-group">
-												<label >Horario de saida:</label>
-												<input name="horario[]" class="form-control" type="time">
-											</div>
-
-											<?= form_error('horario[]') ?>
-
+										<div class="row aux" id="linha">
+												<div class="col-xs-12 col-sm-12 col-md-1">
+													<label style="padding: 8px 0 0 0;">Aula 1</label>
+												</div>
+												<div class="col-xs-12 col-sm-12 col-md-2 form-group">
+													<input name="horario[]" class="form-control hora" type="text" placeholder="Início" minlength="5" maxlength="5">
+												</div>
+												<div class="col-xs-12 col-sm-12 col-md-2 form-group">
+													<input name="horario[]" class="form-control hora" type="text" placeholder="Fim" minlength="5" maxlength="5">
+													<?= form_error('horario[]') ?>
+												</div>
+										</div>
 										<div class="col-xs-12 col-sm-12 col-md-12 form-group">
 											<button type="submit" class="btn btn-primary btn-lg active" >Cadastrar</button>
 										</div>
@@ -133,5 +123,3 @@
 
 				</div>
 		</div>
-</body>
-</html>
