@@ -24,7 +24,7 @@
 
   <div class="row">
     <div class="col-md-10 margin-top-error">
-      <?= form_error('qtdAulas') ?>
+      <?= form_error('codigo') ?>
     </div>
   </div>
 
