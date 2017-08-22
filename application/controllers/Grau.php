@@ -7,6 +7,8 @@
  */
 class Grau extends CI_Controller {
   function index () {
+    $graus = Grau_model ::all();
+    $this->load->view('grau/grau');
   }
   function cadastrar() {
     // Criando regra de validação do formulário
@@ -15,15 +17,24 @@ class Grau extends CI_Controller {
     // Setando os delimitadores da mensagem de erro.
     $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
     if ( $this->form_validation->run()) {
-        $value =  array('codigo' => $this->input->post('codigo'), 'nome_grau' => $this->input->post('nome_grau'));        
+        $value =  array('codigo' => $this->input->post('codigo'), 'nome_grau' => $this->input->post('nome_grau'));
         $grau = new Grau_model($value);
         $grau->save();
     } else {
       $this->load->view('grau/grau');
     }
   }
-  function editar(){
-
+  function editar($id){
+    $grau = Grau_model ::find($id);
+    $grau['nome_grau']="xxx";
+    $grau->save();
   }
+  function deletar($id){
+    $grau = Grau_model ::find($id);
+    $grau->delete();
+  }
+
+
+
 }
 ?>
