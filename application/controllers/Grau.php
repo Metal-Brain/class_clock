@@ -14,9 +14,9 @@ class Grau extends CI_Controller {
     // Setando os delimitadores da mensagem de erro.
     $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
     if ( $this->form_validation->run()) {
-      $grau = array(
-        'nome_grau'      => $this->input->post('nome_grau')
-      );
+        $nome =  array('nome_grau' => $this->input->post('nome_grau'));
+        $grau = new Grau_model($nome);        
+        $grau->save();
     } else {
       $this->load->view('grau/grau');
     }
