@@ -109,6 +109,10 @@ header a:hover {
     margin-top: 20px;
 }
 
+.error {
+	color: #FF0000;
+}
+
 /* Bootstrap Override */
 
 .nav-pills>li.active>a,
