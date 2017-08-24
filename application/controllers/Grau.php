@@ -8,7 +8,7 @@
 class Grau extends CI_Controller {
   function index () {
     $graus = Grau_model ::all();
-    $this->load->view('grau/grau');
+    $this->load->template('graus/graus',compact('graus'));
   }
   function cadastrar() {
     // Criando regra de validação do formulário
@@ -21,20 +21,28 @@ class Grau extends CI_Controller {
         $grau = new Grau_model($value);
         $grau->save();
     } else {
-      $this->load->view('grau/grau');
+      $graus = Grau_model ::all();
+      $this->load->template('graus/graus',compact('graus'));
     }
   }
   function editar($id){
-    $grau = Grau_model ::find($id);
-    $grau['nome_grau']="xxx";
-    $grau->save();
+    $this->form_validation->set_rules('nome_grau','nome',array('required','max_length[20]','trim','strtolower'));
+    $this->form_validation->set_rules('codigo','codigo', array('required','integer','greater_than[0]','less_than[20]'));
+    // Setando os delimitadores da mensagem de erro.
+    $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
+    if ( $this->form_validation->run()) {
+      $grau = Grau_model ::find($id);
+      $grau['nome_grau']    = $this->input->post('nome_grau');
+      $grau['codigo']       = $this->input->post('codigo');
+      $grau->save();
+    }else {
+      $graus = Grau_model ::all();
+      $this->load->template('graus/graus',compact('graus'));
+    }
   }
   function deletar($id){
     $grau = Grau_model ::find($id);
     $grau->delete();
   }
-
-
-
 }
 ?>
