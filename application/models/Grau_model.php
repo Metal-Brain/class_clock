@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
    *  @since 2017/03/24
    */
   class Grau_model extends Model {
+		public $timestamps = false;
     protected $table = 'grau';
     protected $fillable = array('codigo','nome_grau');
 
