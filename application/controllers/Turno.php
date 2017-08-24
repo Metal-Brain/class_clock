@@ -34,18 +34,31 @@ class Turno extends CI_Controller {
    */
   private function salvar () {
 
-    $turno['nome_turno']  = $this->input->post('nome_turno');
-    $turno['horario']     = $this->input->post('horario');
+    try {
+      DB::transaction(function () {
+        $turno = new Turno_model();
+        $turno->nome_turno = $this->input->post('nome_turno');
+        $turno->save();
 
-    $turno = new Turno_model();
+        $horarios = $this->input->post('horario');
 
-    $turno->nome_turno = $this->input->post('nome_turno');
-    $turno->save();
+        for ($i = 0; $i < sizeof($horarios); $i += 2) {
+          $horario = new Horario_model;
 
-    // TODO: Fazer a persistencia de horarios
+          $horario->inicio = $horarios[$i];
+          // $horario->fim = $horarios[$i+1];
+          $horario->turno_id = $turno->id;
+          $horario->save();
+        }
+      });
 
+      $this->session->set_flashdata('success','Turno cadastrado com sucesso');
 
+    } catch (Exception $e) {
+      $this->session->set_flashdata('danger','Problemas ao cadastrar o turno, tente novamente!');
+    }
 
+    redirect("Turno");
 
   }
 
