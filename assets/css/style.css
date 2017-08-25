@@ -4,7 +4,6 @@ html {
 }
 
 footer {
-    display: none;
     position: absolute;
     left: 0;
     bottom: 0;
@@ -70,6 +69,10 @@ header a:hover {
 .navbar-brand {
     max-width: 90px;
     height: 90px;
+}
+
+.navpills{
+    margin: 10px;
 }
 
 .users {

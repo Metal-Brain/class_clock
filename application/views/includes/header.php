@@ -32,8 +32,16 @@
             </header>
         </div>
         <div class="row">
+            
             <div class="text-right users">
+            
                 <ul class="nav">
+                <button class="btn btn-defaul sidebar-toggler hidden-lg collapsed pull-left" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="glyphicon glyphicon-icon-bar"></span>  
+            <span class="glyphicon glyphicon-icon-bar"></span>
+            <span class="glyphicon glyphicon-icon-bar"></span>
+                </button>
+           
                     <li class="dropdown pull-right">
                         <a href="#" data-toggle="dropdown" class="dropdown-toggle usuario">
                             Usuário <b class="caret"></b>
