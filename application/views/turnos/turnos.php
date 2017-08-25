@@ -29,7 +29,7 @@
 					<tbody>
 						<?php foreach ($turnos as $turno) { ?>
 							<?= ($turno['status'] ? '<tr>' : '<tr class="danger">') ?>
-								<td><center><?= $turno['nomeTurno']; ?></td>
+								<td><center><?= $turno['nome_turno']; ?></td>
 								<td><center><?= $turno['qtdAula']; ?></td>
 								<td><center><?= $turno['inicio']; ?></td>
 								<td><center><?= $turno['fim']; ?></td>
@@ -73,11 +73,11 @@
 								<label style="padding: 8px 0 0 0;">Aula 1</label>
 							</div>
 							<div class="col-xs-12 col-sm-12 col-md-2 form-group">
-								<input id="inicio" name="horario[]" class="form-control hora" type="text" placeholder="Início" minlength="5" maxlength="5">
+								<input id="inicio" name="horario[]" class="form-control hora inicio" type="text" placeholder="Início" minlength="5" maxlength="5">
 								<?= form_error('horario') ?>
 							</div>
 							<div class="col-xs-12 col-sm-12 col-md-2 form-group">
-								<input id="fim" name="horario[]" class="form-control hora" type="text" placeholder="Fim" minlength="5" maxlength="5">
+								<input id="fim" name="horario[]" class="form-control hora fim" type="text" placeholder="Fim" minlength="5" maxlength="5">
 							</div>
 							<?= form_error('horario[]') ?>
 						</div>
