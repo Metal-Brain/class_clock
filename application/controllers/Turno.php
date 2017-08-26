@@ -46,7 +46,7 @@ class Turno extends CI_Controller {
           $horario = new Horario_model;
 
           $horario->inicio = $horarios[$i];
-          // $horario->fim = $horarios[$i+1];
+          $horario->fim = $horarios[$i+1];
           $horario->turno_id = $turno->id;
           $horario->save();
         }

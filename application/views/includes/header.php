@@ -32,16 +32,16 @@
             </header>
         </div>
         <div class="row">
-            
+
             <div class="text-right users">
-            
+
                 <ul class="nav">
                 <button class="btn btn-defaul sidebar-toggler hidden-lg collapsed pull-left" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="glyphicon glyphicon-icon-bar"></span>  
+                <span class="glyphicon glyphicon-icon-bar"></span>
             <span class="glyphicon glyphicon-icon-bar"></span>
             <span class="glyphicon glyphicon-icon-bar"></span>
                 </button>
-           
+
                     <li class="dropdown pull-right">
                         <a href="#" data-toggle="dropdown" class="dropdown-toggle usuario">
                             Usuário <b class="caret"></b>
@@ -54,4 +54,18 @@
                     </li>
                 </ul>
             </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-offset-3 col-lg-6">
+            <?php if ($this->session->flashdata('success')) : ?>
+              <div class="alert alert-success">
+                <p class="text-center"><?= $this->session->flashdata('success') ?></p>
+              </div>
+            <?php elseif ($this->session->flashdata('danger')) : ?>
+              <div class="alert alert-danger">
+                <p class="text-center"><?= $this->session->flashdata('danger') ?></p>
+              </div>
+            <?php endif; ?>
+          </div>
         </div>
