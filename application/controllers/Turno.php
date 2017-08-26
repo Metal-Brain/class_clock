@@ -5,6 +5,11 @@
  */
 class Turno extends CI_Controller {
 
+  /**
+   * Exibe todos os turnos cadastrados no banco de dados.
+   * @author Caio de Freitas
+   * @since 2017/08/26
+   */
   function index () {
 
     $turnos = Turno_model::all();
@@ -62,22 +67,60 @@ class Turno extends CI_Controller {
 
   }
 
-  function editar () {
-    $this->load->template('turnos/turnosEditar');
+  /**
+   * Formulário para alterar os dados do turno
+   * @author Caio de Freitas
+   * @since 2017/08/26
+   */
+  function editar ($id) {
+
+    $this->form_validation->set_rules('nome_turno','nome',array('required','max_length[25]','trim','strtolower'));
+    $this->form_validation->set_rules('horario[]','horario',array('callback_timeValidate'));
+    $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
+
+    if ($this->form_validation->run()) {
+      $this->atualizar($id);
+    } else {
+      $turno = Turno_model::findOrFail($id);
+      $this->load->template('turnos/turnosEditar',compact('turno'));
+    }
+
+
   }
 
-  private function atualizar () {
+  /**
+   * Edita os dados do turno no banco de dados.
+   * @author Caio de Freitas
+   * @since 2017/08/26
+   */
+  private function atualizar ($id) {
+    try {
+      DB::transaction(function ($id) use ($id) {
+        $turno = Turno_model::findOrFail($id);
+        $turno->nome_turno = $this->input->post('nome_turno');
+        $horarios = $this->input->post('horario');
 
-    $turno['nome']    = $this->input->post('nome_turno');
-    $turno['horario'] = $this->input->post('horario');
+        $index = 0;
+        foreach ($turno->horarios as $horario) {
+          $horario->inicio = $horarios[$index];
+          $horario->fim =   $horarios[++$index];
+          $horario->save();
 
-    // TODO: Fazer a atualização dos dados no banco
+          $index++;
+        }
+        $turno->save();
+      });
+      $this->session->set_flashdata('success','Turno atualizado com sucesso');
+    } catch (Exception $e) {
+      $this->session->set_flashdata('danger','Problemas ao atualizar os dados do turno, tente novamente!');
+    }
+
+    redirect('Turno');
   }
 
   function deletar ($id) {
     // TODO: alterar o status do turno no banco de dados
   }
-
 
   /**
    * Função que valida o vetor de horarios
