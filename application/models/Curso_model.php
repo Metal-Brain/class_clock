@@ -11,6 +11,8 @@
 
     public $timestamps = false;
     private $table = 'curso';
+    protected $fillable = array('codigo', 'grau_id', 'codigo_curso', 'nome_curso', 'sigla_curso', 'qtd_semestre', 'fechamento');
+
 
     /**
     * Função responsável para retornar o grau do curso

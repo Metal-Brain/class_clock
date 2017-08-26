@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS `horario`.`grau` (
   `codigo` INT NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `codigo_UNIQUE` (`codigo` ASC))
-ENGINE = InnoDB;
+ENGINE = InnoDB
 
 
 -- -----------------------------------------------------
@@ -22,8 +22,9 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `horario`.`curso` (
   `id` SMALLINT(6) NOT NULL AUTO_INCREMENT,
   `grau_id` TINYINT NOT NULL,
+  `codigo_curso` INT NOT NULL,
   `nome_curso` VARCHAR(75) NOT NULL,
-  `sigla_curso` CHAR(5) NOT NULL,
+  `sigla_curso` CHAR(3) NOT NULL,
   `qtd_semestre` TINYINT(2) NOT NULL,
   `fechamento` CHAR(1) NOT NULL,
   PRIMARY KEY (`id`),
