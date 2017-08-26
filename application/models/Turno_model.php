@@ -19,7 +19,7 @@
         */
 
         public function horarios(){
-            return $this->hasMany(Horario_model::class, 'horario');
+            return $this->hasMany(Horario_model::class, 'turno_id');
         }
     }
 
