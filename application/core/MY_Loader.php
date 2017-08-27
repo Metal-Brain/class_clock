@@ -11,7 +11,9 @@ class My_Loader extends CI_Loader
     $this->view('includes/sidebar');
     $this->view($path,$data);
     $this->view('includes/footer');
-	$this->view($js); //O erro está aqui ou no controller!
+
+    // caso seja passado um arquivo js ele será carregado
+    if ($js) $this->view($js);
   }
 }
 
