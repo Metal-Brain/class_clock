@@ -1,4 +1,20 @@
-<div class="container col-xs-12 col-sm-12 col-md-10 col-lg-10">
+<div class="container col-md-12 col-lg-10">
+	<!-- Alertas de sucesso / erro -->
+	<div class="row">
+		<div class="col-lg-offset-3 col-lg-6">
+			<?php if ($this->session->flashdata('success')) : ?>
+				<div class="alert alert-success">
+					<p class="text-center"><?= $this->session->flashdata('success') ?></p>
+				</div>
+			<?php elseif ($this->session->flashdata('danger')) : ?>
+				<div class="alert alert-danger">
+					<p class="text-center"><?= $this->session->flashdata('danger') ?></p>
+				</div>
+			<?php endif; ?>
+		</div>
+	</div>
+	
+	<!-- Início do conteúdo da view-->
 	<div class="top-bar" style="padding: 0 0 15px 0">
 		<div class="row">
 			<div class="col-md-5">
@@ -8,7 +24,7 @@
 				</div>
 			</div>
 			<div class="col-md-2">
-				<a class="btn btn-success" href=""><span class="classglyphicon glyphicon-plus"></span> Cadastrar</a>
+				<a class="btn btn-success" href="<?= base_url('index.php/Turno/cadastrar')?>"><span class="glyphicon glyphicon-plus"></span> Cadastrar</a>
 			</div>
 		</div>
 	</div>

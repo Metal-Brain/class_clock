@@ -14,7 +14,7 @@ class Turno extends CI_Controller {
 
     $turnos = Turno_model::all();
 
-    $this->load->template('turnos/turnos',compact('turnos'));
+    $this->load->template('turnos/turnos',compact('turnos'),'turnos/js_turnos');
   }
 
   function cadastrar () {
@@ -27,7 +27,7 @@ class Turno extends CI_Controller {
       $this->salvar();
     } else {
       $turnos = Turno_model::all();
-      $this->load->template('turnos/turnos',compact('turnos'));
+      $this->load->template('turnos/turnosCadastrar',compact('turnos'));
     }
 
   }
