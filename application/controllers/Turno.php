@@ -120,6 +120,20 @@ class Turno extends CI_Controller {
 
   function deletar ($id) {
     // TODO: alterar o status do turno no banco de dados
+
+    try {
+      DB::transaction(function ($id) use ($id) {
+        $turno = Turno_model::findOrFail($id);
+        $turno->delete();
+      });
+
+      $this->session->set_flashdata('success','Turno deletado com sucesso');
+    }catch (Exception $e) {
+      $this->session->set_flashdata('danger','Erro ao deletar um turno, tente novamente');
+    }
+
+    redirect("Turno");
+
   }
 
   /**
