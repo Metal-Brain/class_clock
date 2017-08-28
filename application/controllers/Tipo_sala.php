@@ -6,7 +6,7 @@
 class Tipo_sala extends CI_Controller {
 
   function index () {
-
+    $this->cadastrar();
   }
 
   function cadastrar () {
@@ -27,11 +27,19 @@ class Tipo_sala extends CI_Controller {
 
   function salvar () {
 
-    $tipo_sala = array(
-      'nome_tipo_sala'      => $this->input->post('nome_tipo_sala'),
-      'descricao_tipo_sala' => $this->input->post('descricao_tipo_sala')
-    );
-    // TODO: fazer a persistencia dos dados
+  try {
+    DB::transaction(function () {
+      $tipo_sala = array(
+          'nome_tipo_sala'      => $this->input->post('nome_tipo_sala'),
+          'descricao_tipo_sala' => $this->input->post('descricao_tipo_sala')
+      );
+
+      TipoSala_model::firstOrCreate($tipo_sala);
+    });
+  }catch(Exception $e){
+    $this->session->set_flashdata('danger','Problemas ao cadastrar o tipo de sala, tente novamente!');
+  }
+
   }
 }
 
