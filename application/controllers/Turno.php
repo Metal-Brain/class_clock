@@ -27,7 +27,7 @@ class Turno extends CI_Controller {
       $this->salvar();
     } else {
       $turnos = Turno_model::all();
-      $this->load->template('turnos/turnosCadastrar',compact('turnos'));
+      $this->load->template('turnos/turnosCadastrar',compact('turnos'),'turnos/js_turnos');
     }
 
   }
@@ -142,7 +142,7 @@ class Turno extends CI_Controller {
       $horario = explode(':', $horario);
 
       if (!is_numeric($horario[0]) || !is_numeric($horario[1])) {
-        $this->form_validation->set_message('timeValidate','Os valores informado não são numericos');
+        $this->form_validation->set_message('timeValidate','Os valores informados não são numéricos');
         $result = FALSE;
         break;
       } else if ( $horario[0] > 24 || $horario[1] > 59) {
