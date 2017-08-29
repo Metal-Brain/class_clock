@@ -1,16 +1,18 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php
   /**
     * Essa classe contem todos as função de Curso
     * @author Caio de Freitas
     * @since 2017/03/20
     */
-  class Curso extends CI_Controller {
-    public function index () {
-      if (verificaSessao() && verificaNivelPagina(array(1,3)))
-        $this->cadastrar();
-      else
-        redirect('/');
-    }
+class Curso extends CI_Controller {
+
+  function index () {
+      
+    $cursos = Curso_model::all();
+
+    $this->load->template('cursos/cursos',compact('cursos'));
+  }
+    
     /**
       * Essa função irá cadastrar o Curso desejado
       * Se os dados estiverem corretos, será enviado para modelo
