@@ -1,11 +1,6 @@
-
-
-	<!-- TODO: Falta colocar os nome, values e outros paramatros nos inputs -->
-
-
 	<div class="container">
 				<div class="row">
-					<div class="col-xs-12 col-sm-12 col-md-12">
+					<div class="col-xs-12 col-sm-12 col-md-10">
 						<form method="post">
 								<div class="col-xs-12 col-sm-12 col-md-12 form-group">
 									<div class="col-xs-12 col-sm-12 col-md-12" style="height: 40px;"></div>
@@ -29,7 +24,7 @@
 									<?php endforeach; ?>
 
 								</div>
-								<div class="col-xs-12 col-sm-12 col-md-12 form-group">
+								<div class="col-md-10 form-group">
 									<button type="submit" class="btn btn-primary btn-lg active" >Cadastrar</button>
 								</div>
 
