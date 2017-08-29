@@ -19,7 +19,16 @@
         */
 
         public function horarios(){
-            return $this->hasMany(Horario_model::class, 'turno_id')->orderBy('horarios.inicio', 'asc');
+            return $this->hasMany(Horario_model::class, 'turno_id');
+        }
+
+        /**
+         * Retorna a quantidade de horarios de um Turno
+         * @author Uriel Cairê Balan Calvi
+         * @since 2017-08-28
+         */
+        public function qtd_horarios(){
+          return $this->horarios()->count();
         }
     }
 

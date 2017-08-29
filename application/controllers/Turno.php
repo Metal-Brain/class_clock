@@ -73,7 +73,7 @@ class Turno extends CI_Controller {
    * @since 2017/08/26
    */
   function editar ($id) {
-
+    
     $this->form_validation->set_rules('nome_turno','nome',array('required','max_length[25]','trim','strtolower'));
     $this->form_validation->set_rules('horario[]','horario',array('callback_timeValidate'));
     $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
