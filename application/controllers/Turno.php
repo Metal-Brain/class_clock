@@ -11,6 +11,7 @@ class Turno extends CI_Controller {
 
     $this->load->template('turnos/turnos',compact('turnos'));
   }
+    
 
   function cadastrar () {
 

@@ -1,5 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
+  use Illuminate\Database\Eloquent\Model;
 
   /**
   * Modelo responsável pelo curso
@@ -10,7 +11,7 @@
   class Curso_model extends Model {
 
     public $timestamps = false;
-    private $table = 'curso';
+    protected $table = 'curso';
     protected $fillable = array('codigo', 'grau_id', 'codigo_curso', 'nome_curso', 'sigla_curso', 'qtd_semestre', 'fechamento');
 
 
