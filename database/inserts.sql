@@ -1,0 +1,1 @@
+INSERT INTO curso(id, grau, nome_curso, sigla_curso, qtd_semestre, fechamento)
