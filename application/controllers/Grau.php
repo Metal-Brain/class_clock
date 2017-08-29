@@ -7,36 +7,93 @@
  */
 class Grau extends CI_Controller {
   function index () {
-   // $graus = Grau_model ::all();
-    //$this->load->view('grau/grau');
-    $this->load->template('grau/grau',compact('grau'),'grau/js_grau');  
+    $this->load->model(array(
+      'Grau_model'
+    ));
+    // $graus = Grau_model::where('valid',TRUE)->get();
+    $graus = Grau_model::all();
+    $this->load->template('graus/graus',compact('graus'),'graus/js_graus');
   }
   function cadastrar() {
+    $this->load->model(array(
+      'Grau_model'
+    ));
     // Criando regra de validação do formulário
     $this->form_validation->set_rules('nome_grau','nome',array('required','max_length[20]','trim','strtolower'));
-    $this->form_validation->set_rules('codigo','codigo', array('required','integer','greater_than[0]','less_than[20]'));
+    $this->form_validation->set_rules('codigo','codigo', array('required','integer','greater_than[0]','max_length[5]'));
     // Setando os delimitadores da mensagem de erro.
     $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
     if ( $this->form_validation->run()) {
-        $value =  array('codigo' => $this->input->post('codigo'), 'nome_grau' => $this->input->post('nome_grau'));
-        $grau = new Grau_model($value);
-        $grau->save();
+        $this->salvar();
     } else {
-     // $this->load->template('grau/grau');
-        $this->load->template('grau/GrauCadastrar',compact('grau'),'grau/js_grau');
+        // $graus = Grau_model::where('valid',TRUE)->get();
+        $graus = Grau_model ::all();
+        $this->load->template('graus/GrausCadastrar',compact('graus'),'graus/js_graus');
     }
   }
+
+  private function salvar () {
+    try {
+      DB::transaction(function () {
+        $grau = new Grau_model();
+        $grau->codigo = $this->input->post('codigo');
+        $grau->nome_grau = $this->input->post('nome_grau');
+        $grau->save();
+      });
+
+      $this->session->set_flashdata('success','Grau cadastrado com sucesso');
+
+    } catch (Exception $e) {
+      $this->session->set_flashdata('danger','Problemas ao cadastrar o grau, tente novamente!');
+    }
+    redirect("Grau");
+  }
+
   function editar($id){
-    $grau = Grau_model ::find($id);
-    $grau['nome_grau']="xxx";
-    $grau->save();
+    $this->load->model(array(
+      'Grau_model'
+    ));
+    // Criando regra de validação do formulário
+    $this->form_validation->set_rules('nome_grau','nome',array('required','max_length[20]','trim','strtolower'));
+    $this->form_validation->set_rules('codigo','codigo', array('required','integer','greater_than[0]','max_length[5]'));
+    // Setando os delimitadores da mensagem de erro.
+    $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
+    if ( $this->form_validation->run()) {
+        $this->atualizar();
+    } else {
+        $grau = Grau_model::findOrFail($id);
+        $this->load->template('graus/GrausEditar',compact('grau'));
+    }
   }
-  function deletar($id){
-    $grau = Grau_model ::find($id);
-    $grau->delete();
+
+  private function atualizar ($idGrau) {
+    try {
+      DB::transaction(function ($id) use ($idGrau) {
+        $grau = Grau_model::findOrFail($id);
+        $grau->codigo = $this->input->post('codigo');
+        $grau->nome_grau = $this->input->post('nome_grau');
+        $grau->save();
+      });
+      $this->session->set_flashdata('success','Grau atualizado com sucesso');
+    } catch (Exception $e) {
+      $this->session->set_flashdata('danger','Problemas ao atualizar os dados do grau, tente novamente!');
+    }
+    redirect('Grau');
   }
 
+  function deletar ($idGrau) {
+    try {
+      DB::transaction(function ($id) use ($idGrau) {
+        $grau = Grau_model::findOrFail($id);
+        $grau->valid = FALSE;
+        $grau->save();
+      });
 
-
+      $this->session->set_flashdata('success','Grau deletado com sucesso');
+    }catch (Exception $e) {
+      $this->session->set_flashdata('danger','Erro ao deletar um grau, tente novamente');
+    }
+    redirect("Grau");
+  }
 }
 ?>
