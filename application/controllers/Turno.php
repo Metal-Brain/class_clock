@@ -12,7 +12,7 @@ class Turno extends CI_Controller {
    */
   function index () {
 
-    $turnos = Turno_model::all();
+    $turnos = Turno_model::where('valid',TRUE)->get();
 
     $this->load->template('turnos/turnos',compact('turnos'),'turnos/js_turnos');
   }
@@ -73,7 +73,7 @@ class Turno extends CI_Controller {
    * @since 2017/08/26
    */
   function editar ($id) {
-    
+
     $this->form_validation->set_rules('nome_turno','nome',array('required','max_length[25]','trim','strtolower'));
     $this->form_validation->set_rules('horario[]','horario',array('callback_timeValidate'));
     $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
@@ -124,7 +124,8 @@ class Turno extends CI_Controller {
     try {
       DB::transaction(function ($id) use ($id) {
         $turno = Turno_model::findOrFail($id);
-        $turno->delete();
+        $turno->valid = FALSE;
+        $turno->save();
       });
 
       $this->session->set_flashdata('success','Turno deletado com sucesso');
