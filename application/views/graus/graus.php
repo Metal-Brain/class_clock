@@ -50,10 +50,9 @@
         <td><center>
           <?php if ($grau['valid']): ?>
             <!-- Esse button editar vai chamar o outro tab-pane editar, não está direcionado pois os dados que ele tenta passar estão com problema, se deixar apeanas o data-toggle= pill e o href editar vai chamar o tabpane -->
-            <button type="button"  data-toggle="pill" href="#editar" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whatevernomeCurso="<?= $grau['nome_grau']; ?>" data-whateverid="<?= $grau['id']; ?>"> <span class="glyphicon glyphicon-pencil"></span></button>
-            <button onClick="exclude(<?= $grau['id'] ?>);" type="button" class="btn btn-danger" title="Desativar"><span class="glyphicon glyphicon-remove"></span></button>
-          <?php else : ?>
-            <button onClick="table(<?= $grau['id'] ?>)" type="button" class="btn btn-success delete" title="Ativar"><span class="glyphicon glyphicon-ok"></span></button>
+			   <a class="btn btn-warning glyphicon glyphicon-pencil" title="Editar" href="<?= site_url('Grau/editar/'.$grau->id)?>"></a>
+			   <a class="btn btn-danger glyphicon glyphicon-remove" title="Remover" href="<?= site_url('Grau/deletar/'.$grau->id)?>"></a>  <?php else : ?>
+				<button onClick="table(<?= $grau['id'] ?>)" type="button" class="btn btn-success delete" title="Ativar"><span class="glyphicon glyphicon-ok"></span></button>
           <?php endif; ?>
         </td>
         </tr>
