@@ -19,7 +19,7 @@ class Grau extends CI_Controller {
       'Grau_model'
     ));
     // Criando regra de validação do formulário
-    $this->form_validation->set_rules('nome_grau','nome',array('required','max_length[20]','trim','strtolower'));
+    $this->form_validation->set_rules('nome_grau','nome',array('required','max_length[50]','trim','strtolower'));
     $this->form_validation->set_rules('codigo','codigo', array('required','integer','greater_than[0]','max_length[5]'));
     // Setando os delimitadores da mensagem de erro.
     $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
@@ -54,7 +54,7 @@ class Grau extends CI_Controller {
       'Grau_model'
     ));
     // Criando regra de validação do formulário
-    $this->form_validation->set_rules('nome_grau','nome',array('required','max_length[20]','trim','strtolower'));
+    $this->form_validation->set_rules('nome_grau','nome',array('required','max_length[50]','trim','strtolower'));
     $this->form_validation->set_rules('codigo','codigo', array('required','integer','greater_than[0]','max_length[5]'));
     // Setando os delimitadores da mensagem de erro.
     $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');

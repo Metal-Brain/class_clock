@@ -2,20 +2,24 @@
 <script>
     $("#formGrau").validate({
   rules: {
-    nome: {
+    nome_grau: {
       required: true,
-      maxlength: 255
+      maxlength: 50
+	  
     },
     codigo: {
-      required: true,  
+      required: true, 
+	  maxlength: 5
     }
   },
     messages: {
-      nome: {
-      required: 'Campo nome é obrigatório'
+      nome_grau: {
+      required: 'Campo nome é obrigatório',
+	  maxlength: 'Tamanho maximo do campo é 50'
     },
    codigo:{
-      required:'Campo codigo é obrigatório'    
+      required:'Campo codigo é obrigatório',
+	  maxlength: 'Tamanho maximo do campo é 5'	  
     }
      
   }
