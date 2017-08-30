@@ -11,11 +11,21 @@ CREATE TABLE IF NOT EXISTS `horario`.`grau` (
   `id` TINYINT NOT NULL AUTO_INCREMENT,
   `nome_grau` VARCHAR(50) NOT NULL,
   `codigo` INT NOT NULL,
-  `valid`       BOOLEAN NOT NULL DEFAULT TRUE,
+  `deletado_em` DATETIME,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `codigo_UNIQUE` (`codigo` ASC))
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `horario`.`tipo_sala`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `horario`.`tipo_sala` (
+  `id` TINYINT NOT NULL AUTO_INCREMENT,
+  `nome_tipo_sala` VARCHAR(30) NOT NULL,
+  `descricao_tipo_sala` VARCHAR(254) NOT NULL,
+  `deletado_em` DATETIME,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table `horario`.`curso`
@@ -23,10 +33,12 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `horario`.`curso` (
   `id` SMALLINT(6) NOT NULL AUTO_INCREMENT,
   `grau_id` TINYINT NOT NULL,
+  `codigo_curso` CHAR(5) NOT NULL,
   `nome_curso` VARCHAR(75) NOT NULL,
-  `sigla_curso` CHAR(5) NOT NULL,
+  `sigla_curso` CHAR(3) NOT NULL,
   `qtd_semestre` TINYINT(2) NOT NULL,
   `fechamento` CHAR(1) NOT NULL,
+  `deletado_em` DATETIME,
   PRIMARY KEY (`id`),
   INDEX `fk_curso_grau1_idx` (`grau_id` ASC),
   CONSTRAINT `fk_curso_grau1`
@@ -44,18 +56,22 @@ DEFAULT CHARACTER SET = latin1;
 CREATE TABLE IF NOT EXISTS `horario`.`disciplina` (
   `id` SMALLINT(6) NOT NULL AUTO_INCREMENT,
   `curso_id` SMALLINT(6) NOT NULL,
+  `tipo_sala_id` TINYINT NOT NULL,
   `nome_disciplina` VARCHAR(50) NOT NULL,
   `sigla_disciplina` CHAR(5) NOT NULL,
-  `modulo` TINYINT(2) NOT NULL,
   `qtd_professor` TINYINT(1) NOT NULL,
-  `carga_semanal` TINYINT(2) NOT NULL,
+  `qtd_aulas` TINYINT(2) NOT NULL,
+  `deletado_em` DATETIME,
   PRIMARY KEY (`id`),
   INDEX `fk_disciplina_curso1_idx` (`curso_id` ASC),
   CONSTRAINT `fk_disciplina_curso1`
     FOREIGN KEY (`curso_id`)
     REFERENCES `horario`.`curso` (`id`)
     ON DELETE CASCADE
-    ON UPDATE CASCADE)
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_disciplina_tipo_sala`
+    FOREIGN KEY (`tipo_sala_id`)
+    REFERENCES `horario`.`tipo_sala` (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
@@ -66,6 +82,7 @@ DEFAULT CHARACTER SET = latin1;
 CREATE TABLE IF NOT EXISTS `horario`.`turno` (
   `id` TINYINT NOT NULL AUTO_INCREMENT,
   `nome_turno` VARCHAR(25) NOT NULL,
+  `deletado_em` DATETIME,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
@@ -79,6 +96,7 @@ CREATE TABLE IF NOT EXISTS `horario`.`horario` (
   `turno_id` TINYINT NOT NULL,
   `inicio` TIME NOT NULL,
   `fim` TIME NOT NULL,
+  `deletado_em` DATETIME,
   PRIMARY KEY (`id`),
   INDEX `fk_horario_turno_idx` (`turno_id` ASC),
   CONSTRAINT `fk_horario_turno`
@@ -88,14 +106,3 @@ CREATE TABLE IF NOT EXISTS `horario`.`horario` (
     ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
-
-
--- -----------------------------------------------------
--- Table `horario`.`tipo_sala`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `horario`.`tipo_sala` (
-  `id` TINYINT NOT NULL AUTO_INCREMENT,
-  `nome_tipo_sala` VARCHAR(30) NOT NULL,
-  `descricao_tipo_sala` VARCHAR(254) NOT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
