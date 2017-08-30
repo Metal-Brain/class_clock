@@ -82,7 +82,7 @@ DEFAULT CHARACTER SET = latin1;
 CREATE TABLE IF NOT EXISTS `horario`.`turno` (
   `id` TINYINT NOT NULL AUTO_INCREMENT,
   `nome_turno` VARCHAR(25) NOT NULL,
-  `deletado_em` TIMESTAMP,
+  `deletado_em` DATETIME,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;

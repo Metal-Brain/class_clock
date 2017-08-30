@@ -12,7 +12,7 @@ class Turno extends CI_Controller {
    */
   function index () {
 
-    $turnos = Turno_model::where('valid',TRUE)->get();
+    $turnos = Turno_model::all();
 
     $this->load->template('turnos/turnos',compact('turnos'),'turnos/js_turnos');
   }
@@ -124,8 +124,7 @@ class Turno extends CI_Controller {
     try {
       DB::transaction(function ($id) use ($id) {
         $turno = Turno_model::findOrFail($id);
-        $turno->valid = FALSE;
-        $turno->save();
+        $turno->delete();
       });
 
       $this->session->set_flashdata('success','Turno deletado com sucesso');

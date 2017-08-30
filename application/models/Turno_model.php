@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-    use Model;
+    // use \Model;
 
     /**
      * Esta classe é um modelo do banco de dados que representa os turnos que a instituição possui
