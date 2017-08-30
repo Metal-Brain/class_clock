@@ -6,11 +6,12 @@
 class Tipo_sala extends CI_Controller {
 
   function index () {
-    $this->cadastrar();
+      $tipo_salas = TipoSala_model::all();
+      $this->load->template('tipo_salas/tipo_sala', compact('tipo_salas'), 'tipo_salas/js_tipo_sala');
   }
 
   function cadastrar () {
-    $this->load->view('tipo_salas/tipo_salas');
+    $this->load->template('tipo_salas/tipo_salaCadastrar');
   }
 
   function salvar () {
@@ -34,10 +35,10 @@ class Tipo_sala extends CI_Controller {
 
   }
 
-  function editar(){
-    $tipo_sala = TipoSala_model::all();
+  function editar($id){
+    $tipo_salas = TipoSala_model::findOrFail($id);
 
-    $this->load->view('tipo_salas/tipo_salas', compact($tipo_sala));
+    $this->load->template('tipo_salas/tipo_salaEditar', compact('tipo_salas'), 'tipo_salas/js_tipo_sala');
   }
 
   public function atualizar($id){
