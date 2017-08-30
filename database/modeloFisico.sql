@@ -71,6 +71,16 @@ CREATE  TABLE IF NOT EXISTS `horario`.`docente` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `horario`.`tipo_sala`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `horario`.`tipo_sala` (
+  `id` TINYINT NOT NULL AUTO_INCREMENT,
+  `nome_tipo_sala` VARCHAR(30) NOT NULL,
+  `descricao_tipo_sala` VARCHAR(254) NOT NULL,
+  `deletado_em` DATETIME,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table `horario`.`curso`
