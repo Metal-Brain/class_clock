@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-    use Illuminate\Database\Eloquent\Model;
+    use Model;
 
     /**
      * Esta classe é um modelo do banco de dados que representa os turnos que a instituição possui
@@ -10,7 +10,10 @@
     class Turno_model extends Model{
 
         protected $table = 'turno';
-        public $timestamps = false;
+        //public $timestamps = false;
+        protected $fillable = ['nome_turno'];
+        protected $dates = ['deletado_em'];
+
 
         /**
          * Função responsável para retornar todos os horarios linkados com o turno
