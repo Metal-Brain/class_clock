@@ -16,6 +16,16 @@ CREATE TABLE IF NOT EXISTS `horario`.`grau` (
   UNIQUE INDEX `codigo_UNIQUE` (`codigo` ASC))
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `horario`.`tipo_sala`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `horario`.`tipo_sala` (
+  `id` TINYINT NOT NULL AUTO_INCREMENT,
+  `nome_tipo_sala` VARCHAR(30) NOT NULL,
+  `descricao_tipo_sala` VARCHAR(254) NOT NULL,
+  `deletado_em` TIMESTAMP,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table `horario`.`curso`
@@ -98,13 +108,3 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 
--- -----------------------------------------------------
--- Table `horario`.`tipo_sala`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `horario`.`tipo_sala` (
-  `id` TINYINT NOT NULL AUTO_INCREMENT,
-  `nome_tipo_sala` VARCHAR(30) NOT NULL,
-  `descricao_tipo_sala` VARCHAR(254) NOT NULL,
-  `deletado_em` TIMESTAMP,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
