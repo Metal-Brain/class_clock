@@ -20,7 +20,7 @@ body {
 
 .container-fluid {
     min-width: 500px;
-    padding: 0 15px;
+    padding: 0 15px 0 0;
 }
 
 .usuario {
@@ -84,7 +84,7 @@ header a:hover {
     background-color: #EAEAEA;
     padding: 4px 4px;
     border-radius: 0 5px 5px 0;
-    margin: 3px 0;
+    margin: 5px 0 0 0;
 }
 
 .sidebar li {

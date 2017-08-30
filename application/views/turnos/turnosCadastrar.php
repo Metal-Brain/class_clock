@@ -1,5 +1,4 @@
 <div class="container col-xs-12 col-sm-12 col-md-10 col-lg-10" style="padding-top: 5px">
-	
 	<form id="formTurnos" action="<?= site_url('turno/cadastrar')?>" method="post">
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-5 form-group">
@@ -33,6 +32,5 @@
 				<button type="submit" class="btn btn-success active salvar" style="float: right; margin-right: 10px;"><span class="glyphicon glyphicon-floppy-disk"></span> Salvar</button>
 			</div>
 		</div>
-		
 	</form>
 </div>
