@@ -13,36 +13,36 @@
 		public function cadastrar() {			
 			//Define regras de validação do formulario!!!
 			$this->form_validation->set_rules('nome_curso', 
-											  'nome do curso',
-											  array('required',
-													'min_length[5]',
-													'is_unique[Curso.nome_curso]',
-													'trim',
-													'ucwords')
-											  );
-			$this->form_validation->set_rules('grau_id)', 
-											  'grau do curso',
-											  array('required',
-													'integer')
-											  );
+							  'nome do curso',
+							   array('required',
+							     	 'min_length[5]',
+								 'is_unique[Curso.nome_curso]',
+								 'trim',
+								 'ucwords')
+							  );
+			$this->form_validation->set_rules('grau_id', 
+							  'grau do curso',
+							   array('required',
+							    	 'integer')
+							  );
 			$this->form_validation->set_rules('sigla_curso',
-											  'sigla do curso', 
-											  array('required', 
-													'max_length[5]',
-													'is_unique[Curso.sigla_curso]', 
-													'strtoupper')
-											  );
+							  'sigla do curso', 
+							   array('required', 
+							         'max_length[5]',
+								 'is_unique[Curso.sigla_curso]', 
+								 'strtoupper')
+							  );
 			$this->form_validation->set_rules('qtd_semestre',
-											  'quantidade de semestres', 
-											  array('required',
-													'integer',
-													'greater_than[0]',
-													'less_than[20]')
-											  );
+							  'quantidade de semestres', 
+							   array('required',
+								 'integer',
+								 'greater_than[0]',
+								 'less_than[20]')
+							  );
 			$this->form_validation->set_rules('fechamento',
-											  'fechamento das notas',
-											  array('required')
-											  );
+							  'fechamento das notas',
+						   	   array('required')
+						 	  );
 			
 			$this->form_validation->set_error_delimiters('<p class="text-danger">','</p>');
 			//condição para o formulario
@@ -78,36 +78,36 @@
 		public function editar(){
 			//Define regras de validação do formulario!!!
 			$this->form_validation->set_rules('nome_curso', 
-											  'nome do curso',
-											  array('required',
-													'min_length[5]',
-													'is_unique[Curso.nome]',
-													'trim',
-													'ucwords')
-											  );
+							  'nome do curso',
+							   array('required',
+							  	 'min_length[5]',
+								 'is_unique[Curso.nome]',
+								 'trim',
+								 'ucwords')
+							  );
 			$this->form_validation->set_rules('grau_id)', 
-											  'grau do curso',
-											  array('required',
-													'integer')
-											  );
+							  'grau do curso',
+							   array('required',
+							   	 'integer')
+							  );
 			$this->form_validation->set_rules('sigla_curso',
-											  'sigla do curso', 
-											  array('required', 
-													'max_length[3]',
-													'is_unique[Curso.sigla]', 
-													'strtoupper')
-											  );
+							  'sigla do curso', 
+							   array('required', 
+							   	 'max_length[3]',
+								 'is_unique[Curso.sigla]', 
+								 'strtoupper')
+							  );
 			$this->form_validation->set_rules('qtd_semestre',
-											  'quantidade de semestres', 
-											  array('required',
-													'integer',
-													'greater_than[0]',
-													'less_than[20]')
-											  );
+							  'quantidade de semestres', 
+							   array('required',
+							  	 'integer',
+								 'greater_than[0]',
+								 'less_than[20]')
+							  );
 			$this->form_validation->set_rules('fechamento',
-											  'fechamento das notas',
-											  array('required')
-											  );
+							  'fechamento das notas',
+							   array('required')
+							  );
 			
 			$this->form_validation->set_error_delimiters('<p class="text-danger">','</p>');
 			//condição para o formulario
