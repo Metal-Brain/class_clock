@@ -1,15 +1,9 @@
-
-
-      <div class="col-xs=10 col-sm-10 col-md-10">
+ <div class="col-xs=10 col-sm-10 col-md-10">
         <form id="formGrau" action="<?= site_url('grau/cadastrar')?>" method="post">
           <div class="form-group" >
 
               <label>Nome:</label>
-
-
-
-
-                <input type="text"
+				<input type="text"
 
                 class="form-control"
                 id="nome_grau"
@@ -41,4 +35,4 @@
 			</div>
 		</div>
         </form>
-      </div>
+ </div>
