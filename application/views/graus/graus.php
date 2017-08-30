@@ -1,4 +1,4 @@
-<div class="container col-md-12 col-lg-10">
+<div class="container col-md-10 col-lg-10">
   <!-- Alertas de sucesso / erro -->
   <div class="row">
     <div class="col-lg-offset-3 col-lg-6">
@@ -43,14 +43,14 @@
     <!-- Aqui é onde popula a tabela com os dados que vem do backend, onde cada view vai configurar de acordo.-->
     <tbody>
       <?php foreach ($graus as $grau) { ?>
-        <?= ($graus['valid'] ? '<tr>' : '<tr class="danger">') ?>
+    <!-- <?= ($graus['valid'] ? '<tr>' : '<tr class="danger">') ?>  -->
           <td><center><?= $grau['nome_grau']; ?></td>
           <td><center><?= $grau['codigo']; ?></td>
 
         <td><center>
           <?php if ($grau['valid']): ?>
             <!-- Esse button editar vai chamar o outro tab-pane editar, não está direcionado pois os dados que ele tenta passar estão com problema, se deixar apeanas o data-toggle= pill e o href editar vai chamar o tabpane -->
-            <button type="button"  data-toggle="pill" href="#editar" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whatevernomeCurso="<?= $grau['nome_grau']; ?>" data-whateverid="<?= $grau['id']; ?>" <span class="glyphicon glyphicon-pencil"></span></button>
+            <button type="button"  data-toggle="pill" href="#editar" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whatevernomeCurso="<?= $grau['nome_grau']; ?>" data-whateverid="<?= $grau['id']; ?>"> <span class="glyphicon glyphicon-pencil"></span></button>
             <button onClick="exclude(<?= $grau['id'] ?>);" type="button" class="btn btn-danger" title="Desativar"><span class="glyphicon glyphicon-remove"></span></button>
           <?php else : ?>
             <button onClick="table(<?= $grau['id'] ?>)" type="button" class="btn btn-success delete" title="Ativar"><span class="glyphicon glyphicon-ok"></span></button>

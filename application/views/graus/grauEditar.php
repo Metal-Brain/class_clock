@@ -1,7 +1,7 @@
  <div class="container" style="margin-top: 150px;">
     <div class="row">
       <div class="col-xs=12 col-sm-12 col-md-12">
-        <form id="formGrau" method="Post" >
+        <form id="formGrau"  method="Post" >
           <div class="col-xs-10 col-sm-6 col-md-6"  style="margin-right:500px;">
             <div class="form-group">
               <label>Nome:</label>
@@ -32,10 +32,12 @@
             </div>
 
           </div>
-          <div class="col-xs-12 col-sm-12 col-md-12">
-                          <button type="submit" class="btn btn-primary btn-lg active" style="margin-top: 30px;">Confirmar</button>
-                          <button type="button" class="btn btn-danger btn-lg active" style="margin-top: 30px;">Deletar</button>
-                      </div>
+      	<div class="row">
+			<div class="col-md-12 form-group">
+				<a class="btn btn-danger active" href="<?= base_url('index.php/Grau')?>" style="float: right;"><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
+				<button type="submit" class="btn btn-success active salvar" style="float: right; margin-right: 10px;"><span class="glyphicon glyphicon-floppy-disk"></span> Salvar</button>
+			</div>
+		</div>
         </form>
       </div>
 
