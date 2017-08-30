@@ -41,7 +41,7 @@
 		<tbody>
 			<?php foreach ($turnos as $turno) { ?>
 				<tr>
-					<td class="text-center"><?= $turno['nome_turno']; ?></td>
+					<td class="text-center"><?= ucwords($turno['nome_turno']); ?></td>
 					<td class="text-center">
 						<?= $turno->qtd_horarios(); ?>
 					</td>

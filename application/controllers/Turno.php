@@ -12,15 +12,15 @@ class Turno extends CI_Controller {
    */
   function index () {
 
-    $turnos = Turno_model::where('valid',TRUE)->get();
+    $turnos = Turno_model::all();
 
     $this->load->template('turnos/turnos',compact('turnos'),'turnos/js_turnos');
   }
 
   function cadastrar () {
 
-    $this->form_validation->set_rules('nome_turno','nome',array('required','max_length[25]','trim','strtoupper'));
-    $this->form_validation->set_rules('horario[]','horario',array('callback_timeValidate'));
+    $this->form_validation->set_rules('nome_turno','nome',array('required','max_length[25]','trim','strtolower'));
+    $this->form_validation->set_rules('horario[]','horario',array('callback_horarioRequired','callback_timeValidate','callback_horarioAula'));
     $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
 
     if ($this->form_validation->run()) {
@@ -119,13 +119,10 @@ class Turno extends CI_Controller {
   }
 
   function deletar ($id) {
-    // TODO: alterar o status do turno no banco de dados
-
     try {
       DB::transaction(function ($id) use ($id) {
         $turno = Turno_model::findOrFail($id);
-        $turno->valid = FALSE;
-        $turno->save();
+        $turno->delete();
       });
 
       $this->session->set_flashdata('success','Turno deletado com sucesso');
@@ -135,6 +132,54 @@ class Turno extends CI_Controller {
 
     redirect("Turno");
 
+  }
+
+  /**
+   * Função para validar a obrigatoriedade dos horarios.
+   * Verifica se todos os valores de horario são diferentes de NULL.
+   * @author Caio de Freitas
+   * @since 2017/08/30
+   */
+  public function horarioRequired() {
+    $resultado = TRUE;
+    $horarios = $this->input->post('horario');
+
+    foreach ($horarios as $horario) {
+      if (empty($horario)) {
+        $this->form_validation->set_message('horarioRequired','Informe todos os horários');
+        $resultado = FALSE;
+        break;
+      }
+    }
+
+    return $resultado;
+  }
+
+  /**
+   * Função para validar os horarios das aulas.
+   * A aula possui um horario de inicio e um horário de fim, o horarário "fim"
+   * não pode ser menor do que o horário de inicio;
+   * @author Caio de Freitas
+   * @since 2017/08/30
+   * @return Retorna um BOOLEAN TRUE caso os horários da aula estejam corretos.
+   */
+  public function horarioAula () {
+    $resultado = true;
+    $horario = $this->input->post("horario");
+
+    for ($i = 0; $i < sizeof($horario); $i += 2){
+      $horarioInicio  = strtotime($horario[$i]);
+      $horarioFim     = strtotime($horario[$i+1]);
+
+      // Verifica se o horario fim é menor do que o horário de inicio
+      if ($horarioFim <= $horarioInicio) {
+        $this->form_validation->set_message('horarioAula','O horário fim não pode ser maior ou igual ao horário de inicio');
+        $resultado = false;
+        break;
+      }
+    }
+
+    return $resultado;
   }
 
   /**
@@ -148,19 +193,13 @@ class Turno extends CI_Controller {
     $horarios = $this->input->post('horario');
 
     foreach ($horarios as $horario) {
-      if (empty($horario)) {
-        $this->form_validation->set_message('timeValidate','Informe um horário');
-        $result = FALSE;
-        break;
-      }
-
       $horario = explode(':', $horario);
 
       if (!is_numeric($horario[0]) || !is_numeric($horario[1])) {
         $this->form_validation->set_message('timeValidate','Os valores informados não são numéricos');
         $result = FALSE;
         break;
-      } else if ( $horario[0] > 24 || $horario[1] > 59) {
+      } else if ( $horario[0] >= 24 || $horario[1] > 59) {
         $this->form_validation->set_message('timeValidate','Hora inválida');
         $result = FALSE;
         break;
