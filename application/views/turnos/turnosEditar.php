@@ -1,12 +1,12 @@
 <div class="container col-xs-12 col-sm-12 col-md-10 col-lg-10" style="padding-top: 5px">
-	<form method="post">
+	<form method="post" action="<?= site_url('turno/atualizar/'.$id)?>">
 		<div class="row">
 			<div class="col-md-5 form-group">
 				<label>Nome:</label>
 				<input name="nome_turno" class="form-control" placeholder="Nome" required maxlength="20" value="<?= $turno->nome_turno?>">
 			</div>
 		</div>
-		
+
 		<?php foreach ($turno->horarios as $horario) : ?>
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-2 form-group">
@@ -19,7 +19,7 @@
 				</div>
 			</div>
 		<?php endforeach; ?>
-		
+
 		<div class="row">
 			<div class="col-md-12 form-group">
 				<a class="btn btn-danger active" href="<?= base_url('index.php/Turno')?>" style="float: right;"><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
@@ -28,8 +28,3 @@
 		</div>
 	</form>
 </div>
-
-		
-		
-		
-		

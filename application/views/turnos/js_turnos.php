@@ -1,7 +1,12 @@
 		<script type="text/javascript">
 			$(document).ready(function(){
 				mask();
-				$('#formTurnos').validate();
+
+				$('#formTurnos').validate({
+					errorClass: 'text-danger',
+					errorElement: 'span',
+				});
+
 				var horarioIndex = 2;
 				var aula = 2;
 				//função para adicionar horário

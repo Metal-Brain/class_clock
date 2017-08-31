@@ -34,6 +34,7 @@
 				<th class="text-center">Nome</th>
 				<th class="text-center">Qtd. Aulas</th>
 				<th class="text-center">Horário das Aulas</th>
+				<th class="text-center">Status</th>
 				<th class="text-center">Ações</th>
 			</tr>
 		</thead>
@@ -47,14 +48,19 @@
 					</td>
 					<td class="text-center">
 						<?php foreach ($turno->horarios as $horario) :?>
-							<?= $horario->inicio; ?>
-							<?= $horario->fim; ?>
+							<?= removerSegundos($horario->inicio); ?>
+							<?= removerSegundos($horario->fim); ?>
 							<br>
 						<?php endforeach; ?>
 					</td>
+					<td class="text-center"><?= ( empty($turno->deletado_em) ) ? 'Ativado' : 'Desativado'?></td>
 					<td class="text-center">
 						<a class="btn btn-warning glyphicon glyphicon-pencil" title="Editar" href="<?= site_url('Turno/editar/'.$turno->id)?>"></a>
-						<a class="btn btn-danger glyphicon glyphicon-remove" title="Remover" href="<?= site_url('Turno/deletar/'.$turno->id)?>"></a>
+						<?php if ( empty($turno->deletado_em) ) : ?>
+							<a class="btn btn-danger glyphicon glyphicon-remove" title="Remover" href="<?= site_url('Turno/deletar/'.$turno->id)?>"></a>
+						<?php else : ?>
+							<a class="btn btn-success glyphicon glyphicon-check" title="Ativar" href="<?= site_url('Turno/ativar/'.$turno->id)?>"></a>
+						<?php endif; ?>
 					</td>
 				</tr>
 			<?php } ?>
