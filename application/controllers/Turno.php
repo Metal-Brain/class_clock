@@ -70,7 +70,7 @@ class Turno extends CI_Controller {
    */
   function editar ($id) {
       $turno = Turno_model::withTrashed()->findOrFail($id);
-      $this->load->template('turnos/turnosEditar',compact('turno','id'));
+      $this->load->template('turnos/turnosEditar',compact('turno','id'),'turnos/js_turnos');
   }
 
   /**
