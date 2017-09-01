@@ -3,7 +3,7 @@
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-5 form-group">
 				<label>Nome:</label>
-				<input id="nome_turno" name="nome_turno" class="form-control" type="text" placeholder="Nome" maxlength="20" required value="<?= set_value('nome_turno')?>">
+				<input id="nome_turno" name="nome_turno" class="form-control" type="text" placeholder="Nome" value="<?= set_value('nome_turno')?>">
 				<?= form_error('nome_turno') ?>
 			</div>
 		</div>
@@ -18,11 +18,11 @@
 				<label style="padding: 8px 0 0 0;">Aula 1</label>
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-2 form-group">
-				<input id="inicio" name="horario[0]" class="form-control hora" type="text" placeholder="Início" minlength="5" maxlength="5" required>
+				<input id="inicio" name="horario[0]" class="form-control hora" type="text" placeholder="Início">
 				<?= form_error('horario[]') ?>
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-2 form-group">
-				<input id="fim" name="horario[1]" class="form-control hora" type="text" placeholder="Fim" minlength="5" maxlength="5" required>
+				<input id="fim" name="horario[1]" class="form-control hora" type="text" placeholder="Fim">
 				<?= form_error('horario[]') ?>
 			</div>
 		</div>

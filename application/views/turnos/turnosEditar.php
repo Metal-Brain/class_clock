@@ -1,21 +1,21 @@
 <div class="container col-xs-12 col-sm-12 col-md-10 col-lg-10" style="padding-top: 5px">
-	<form method="post" action="<?= site_url('turno/atualizar/'.$id)?>">
+	<form id="formTurnos" method="post" action="<?= site_url('turno/atualizar/'.$id)?>">
 		<div class="row">
 			<div class="col-md-5 form-group">
 				<label>Nome:</label>
-				<input name="nome_turno" class="form-control" placeholder="Nome" required maxlength="20" value="<?= $turno->nome_turno?>">
+				<input name="nome_turno" class="form-control" placeholder="Nome" value="<?= $turno->nome_turno?>">
 			</div>
 		</div>
-
+		<?php $index = 0; ?>
 		<?php foreach ($turno->horarios as $horario) : ?>
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-2 form-group">
 					<label >Horário de entrada:</label>
-					<input name="horario[]" class="form-control" type="time" value="<?= $horario->inicio ?>">
+					<input name="horario[<?= $index++; ?>]" class="form-control hora" type="time" value="<?= substr($horario->inicio, 0, -3); ?>">
 				</div>
 				<div class="col-xs-12 col-sm-12 col-md-2 form-group">
 					<label >Horário de saída:</label>
-					<input name="horario[]" class="form-control" type="time" value="<?= $horario->fim ?>">
+					<input name="horario[<?= $index++; ?>]" class="form-control hora" type="time" value="<?= substr($horario->fim, 0, -3); ?>">
 				</div>
 			</div>
 		<?php endforeach; ?>
