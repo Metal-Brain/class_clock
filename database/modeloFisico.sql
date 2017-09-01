@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS `horario`.`grau` (
   `id` TINYINT NOT NULL AUTO_INCREMENT,
   `nome_grau` VARCHAR(50) NOT NULL,
   `codigo` INT NOT NULL,
-  `deletado_em` DATETIME,
+  `deletado_em` TIMESTAMP NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `codigo_UNIQUE` (`codigo` ASC))
 ENGINE = InnoDB;
@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS `horario`.`tipo_sala` (
   `id` TINYINT NOT NULL AUTO_INCREMENT,
   `nome_tipo_sala` VARCHAR(30) NOT NULL,
   `descricao_tipo_sala` VARCHAR(254) NOT NULL,
-  `deletado_em` DATETIME,
+  `deletado_em` TIMESTAMP NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `horario`.`curso` (
   `sigla_curso` CHAR(3) NOT NULL,
   `qtd_semestre` TINYINT(2) NOT NULL,
   `fechamento` CHAR(1) NOT NULL,
-  `deletado_em` DATETIME,
+  `deletado_em` TIMESTAMP NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_curso_grau1_idx` (`grau_id` ASC),
   CONSTRAINT `fk_curso_grau1`
@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `horario`.`disciplina` (
   `sigla_disciplina` CHAR(5) NOT NULL,
   `qtd_professor` TINYINT(1) NOT NULL,
   `qtd_aulas` TINYINT(2) NOT NULL,
-  `deletado_em` DATETIME,
+  `deletado_em` TIMESTAMP NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_disciplina_curso1_idx` (`curso_id` ASC),
   CONSTRAINT `fk_disciplina_curso1`
@@ -82,11 +82,11 @@ DEFAULT CHARACTER SET = latin1;
 CREATE TABLE IF NOT EXISTS `horario`.`turno` (
   `id` TINYINT NOT NULL AUTO_INCREMENT,
   `nome_turno` VARCHAR(25) NOT NULL,
-  `deletado_em` DATETIME,
-  PRIMARY KEY (`id`))
+  `deletado_em` TIMESTAMP NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `nome_turno_UNIQUE` (`nome_turno` ASC))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
-
 
 -- -----------------------------------------------------
 -- Table `horario`.`horario`
@@ -96,7 +96,7 @@ CREATE TABLE IF NOT EXISTS `horario`.`horario` (
   `turno_id` TINYINT NOT NULL,
   `inicio` TIME NOT NULL,
   `fim` TIME NOT NULL,
-  `deletado_em` DATETIME,
+  `deletado_em` TIMESTAMP NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_horario_turno_idx` (`turno_id` ASC),
   CONSTRAINT `fk_horario_turno`
