@@ -83,10 +83,10 @@ CREATE TABLE IF NOT EXISTS `horario`.`turno` (
   `id` TINYINT NOT NULL AUTO_INCREMENT,
   `nome_turno` VARCHAR(25) NOT NULL,
   `deletado_em` TIMESTAMP NULL,
-  PRIMARY KEY (`id`))
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `nome_turno_UNIQUE` (`nome_turno` ASC))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
-
 
 -- -----------------------------------------------------
 -- Table `horario`.`horario`
