@@ -27,7 +27,7 @@ class Turno extends CI_Controller {
    */
   public function salvar () {
 
-    $this->form_validation->set_rules('nome_turno','nome',array('required','max_length[25]','trim','strtolower'));
+    $this->form_validation->set_rules('nome_turno','nome',array('required','max_length[25]','is_unique[turno.nome_turno]','trim','strtolower'));
     $this->form_validation->set_rules('horario[]','horario',array('callback_horarioRequired','callback_timeValidate','callback_horarioAula'));
     $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
 
@@ -79,14 +79,18 @@ class Turno extends CI_Controller {
    * @since 2017/08/26
    */
   public function atualizar ($id) {
+    $turno = Turno_model::withTrashed()->findOrFail($id);
 
-    $this->form_validation->set_rules('nome_turno','nome',array('required','max_length[25]','trim','strtolower'));
+    if($turno->nome_turno != $this->input->post('nome_turno')){
+      $this->form_validation->set_rules('nome_turno','nome',array('required','max_length[25]','is_unique[turno.nome_turno]','trim','strtolower'));
+    }else {
+      $this->form_validation->set_rules('nome_turno','nome',array('required','max_length[25]','trim','strtolower'));
+    }
     $this->form_validation->set_rules('horario[]','horario',array('callback_timeValidate'));
     $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
 
     if ($this->form_validation->run()) {
       try {
-        $turno = Turno_model::withTrashed()->findOrFail($id);
         $turno->nome_turno = $this->input->post('nome_turno');
         $horarios = $this->input->post('horario');
 
@@ -106,7 +110,8 @@ class Turno extends CI_Controller {
       }
       redirect('Turno');
     } else {
-      
+      // ele não vai editar caso o nome já esteja registrado, mas não sei como exibir os erros :(
+      $this->editar($id);
     }
 
   }
