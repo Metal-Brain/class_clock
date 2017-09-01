@@ -86,29 +86,27 @@ class Turno extends CI_Controller {
 
     if ($this->form_validation->run()) {
       try {
-        DB::transaction(function ($id) use ($id) {
-          $turno = Turno_model::withTrashed()->findOrFail($id);
-          $turno->nome_turno = $this->input->post('nome_turno');
-          $horarios = $this->input->post('horario');
+        $turno = Turno_model::withTrashed()->findOrFail($id);
+        $turno->nome_turno = $this->input->post('nome_turno');
+        $horarios = $this->input->post('horario');
 
-          $index = 0;
-          foreach ($turno->horarios as $horario) {
-            $horario->inicio = $horarios[$index];
-            $horario->fim =   $horarios[++$index];
-            $horario->save();
+        $index = 0;
+        foreach ($turno->horarios as $horario) {
+          $horario->inicio = $horarios[$index];
+          $horario->fim =   $horarios[++$index];
+          $horario->save();
 
-            $index++;
-          }
-          $turno->save();
-        });
+          $index++;
+        }
+
+        $turno->save();
         $this->session->set_flashdata('success','Turno atualizado com sucesso');
       } catch (Exception $e) {
         $this->session->set_flashdata('danger','Problemas ao atualizar os dados do turno, tente novamente!');
       }
-
       redirect('Turno');
     } else {
-
+      
     }
 
   }
