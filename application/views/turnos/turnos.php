@@ -41,7 +41,7 @@
 		<!-- Aqui é onde popula a tabela com os dados que vem do backend, onde cada view vai configurar de acordo.-->
 		<tbody>
 			<?php foreach ($turnos as $turno) { ?>
-				<tr>
+				<tr <?php if($turno->deletado_em): echo 'class="danger"'; endif; ?>>
 					<td class="text-center"><?= ucwords($turno['nome_turno']); ?></td>
 					<td class="text-center">
 						<?= $turno->qtd_horarios(); ?>
