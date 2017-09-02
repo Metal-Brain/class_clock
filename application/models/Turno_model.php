@@ -1,28 +1,23 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-    // use \Model;
-
     /**
-     * Esta classe é um modelo do banco de dados que representa os turnos que a instituição possui
+     * Turnos que a instituição possui
      * @author Lucas Leonel
      * @since 2017/08/19
     */
-    class Turno_model extends Model{
+    class Turno_model extends Model {
 
         protected $table = 'turno';
-        //public $timestamps = false;
         protected $fillable = ['nome_turno'];
-        protected $dates = ['deletado_em'];
-
 
         /**
-         * Função responsável para retornar todos os horarios linkados com o turno
+         * Retorna todos os horarios linkados com o turno ordenados pela hora de início
          * @author Lucas Leonel
          * @since 2017/08/19
         */
 
-        public function horarios(){
-            return $this->hasMany(Horario_model::class, 'turno_id');
+        public function horarios() {
+            return $this->hasMany(Horario_model::class, 'turno_id')->orderBy('horario.inicio', 'asc');
         }
 
         /**
@@ -34,5 +29,3 @@
           return $this->horarios()->count();
         }
     }
-
-?>
