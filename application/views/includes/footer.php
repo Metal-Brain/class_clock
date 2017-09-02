@@ -11,3 +11,4 @@
 <script src="<?= base_url('assets/js/jquery.mask.js')?>"></script>
 <script src="<?= base_url('assets/js/jquery.validate.min.js')?>"></script>
 <script type="text/javascript" src="<?= base_url('assets/js/jquery.validate.traducao.js')?>" charset="utf-8"></script>
+<script src="<?= base_url('assets/DataTables/datatables.js')?>"></script>
