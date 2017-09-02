@@ -25,6 +25,11 @@
 							   array('required',
 							    	 'integer')
 							  );
+			$this->form_validation->set_rules('codigo_curso)',
+							  'codigo do curso', 
+							   array('required',
+								 'integer',)
+							  );
 			$this->form_validation->set_rules('sigla_curso',
 							  'sigla do curso', 
 							   array('required', 
@@ -60,6 +65,7 @@
 					$curso = new Curso_model();
 					$curso->nome_curso = $this->input->post('nome_curso');
 					$curso->grau_id = $this->input->post('grau_id');
+					$curso->codigo_curso = $this->input->post('codigo_curso');
 					$curso->sigla_curso = $this->input->post('sigla_curso');
 					$curso->qtd_semestre = $this->input->post('qtd_semestre');
 					$curso->fechamento = $this->input->post('fechamento');
@@ -89,6 +95,11 @@
 							  'grau do curso',
 							   array('required',
 							   	 'integer')
+							  );
+			$this->form_validation->set_rules('codigo_curso)',
+							  'codigo do curso', 
+							   array('required',
+							 	 'integer',)
 							  );
 			$this->form_validation->set_rules('sigla_curso',
 							  'sigla do curso', 
@@ -125,6 +136,7 @@
 					$curso = Curso_model::findOrFail($id);
 					$curso->nome_curso = $this->input->post('nome_curso');
 					$curso->grau_id = $this->input->post('grau_id');
+					$curso->codigo_curso = $this->input->post('codigo_curso');
 					$curso->sigla_curso = $this->input->post('sigla_curso');
 					$curso->qtd_semestre = $this->input->post('qtd_semestre');
 					$curso->fechamento = $this->input->post('fechamento');
