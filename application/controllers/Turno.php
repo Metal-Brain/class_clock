@@ -29,6 +29,8 @@ class Turno extends CI_Controller {
 
     $this->form_validation->set_rules('nome_turno','nome',array('required','max_length[25]','is_unique[turno.nome_turno]','trim','strtolower'));
     $this->form_validation->set_rules('horario[]','horario',array('callback_horarioRequired','callback_timeValidate','callback_horarioAula'));
+
+    $this->form_validation->set_message('is_unique','O nome do turno informado já está cadastrado');
     $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
 
     if ($this->form_validation->run()) {
@@ -87,6 +89,8 @@ class Turno extends CI_Controller {
       $this->form_validation->set_rules('nome_turno','nome',array('required','max_length[25]','trim','strtolower'));
     }
     $this->form_validation->set_rules('horario[]','horario',array('callback_timeValidate'));
+
+    $this->form_validation->set_message('is_unique','O nome do turno informado já está cadastrado');
     $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
 
     if ($this->form_validation->run()) {

@@ -41,6 +41,8 @@
 			});
 
 			$("#formTurnos").validate({
+				errorClass: 'text-danger',
+				errorElement: 'span',
 				rules: {
 					nome_turno: {
 						required: true,

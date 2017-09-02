@@ -4,6 +4,7 @@
 			<div class="col-md-5 form-group">
 				<label>Nome:</label>
 				<input name="nome_turno" class="form-control" placeholder="Nome" value="<?= $turno->nome_turno?>">
+				<?= form_error('nome_turno') ?>
 			</div>
 		</div>
 		<?php $index = 0; ?>
