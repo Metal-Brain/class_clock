@@ -38,7 +38,7 @@ class Tipo_sala extends CI_Controller {
   function editar($id){
     $tipo_salas = TipoSala_model::findOrFail($id);
 
-    $this->load->template('tipo_salas/tipo_salaEditar', compact('tipo_salas'), 'tipo_salas/js_tipo_sala');
+    $this->load->template('tipo_salas/tipo_salaEditar', compact('tipo_salas', 'id'), 'tipo_salas/js_tipo_sala');
   }
 
   public function atualizar($id){
