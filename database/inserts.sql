@@ -31,3 +31,15 @@ INSERT INTO disciplina(curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina
     VALUES(4, 2, "Hardware", "HDW", 2, 2);
 INSERT INTO disciplina(curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas)
     VALUES(5, 1, "Medicina", "MED", 2, 2);
+
+INSERT INTO turno(nome_turno) VALUES("Matutino");
+INSERT INTO turno(nome_turno) VALUES("Vespertino");
+INSERT INTO turno(nome_turno) VALUES("Noturno");
+INSERT INTO turno(nome_turno) VALUES("Integral");
+INSERT INTO turno(nome_turno) VALUES("Diário");
+
+INSERT INTO horario(turno_id, inicio, fim) VALUES(1, 9:10:00, 10:00);
+INSERT INTO horario(turno_id, inicio, fim) VALUES(2, 13:10:00, 14:00);
+INSERT INTO horario(turno_id, inicio, fim) VALUES(3, 20:10:00, 21:00);
+INSERT INTO horario(turno_id, inicio, fim) VALUES(4, 9:10:00, 10:00);
+INSERT INTO horario(turno_id, inicio, fim) VALUES(5, 10:10:00, 20:00);
