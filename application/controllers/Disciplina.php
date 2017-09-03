@@ -39,11 +39,10 @@
 
                     $this->session->set_flashdata('success','Disciplina cadastrada com sucesso');
                     redirect("disciplina");
-                } catch (Exception $e) {
-                    $this->session->set_flashdata('danger','Problemas ao cadastrar a Disciplina, tente novamente!');
-                }
+                } catch (Exception $ignored){}
             }
 
+            $this->session->set_flashdata('danger','Problemas ao cadastrar a Disciplina, tente novamente!');
             redirect("disciplina/cadastrar");
         }
 
@@ -64,21 +63,22 @@
         * @since 2018/08/28
         */
         function atualizar ($id) {
-            try {
-                $disciplinas = Disciplina_model::findOrFail($id);
-                $disciplinas->nome_disciplina  = $this->input->post('nome_disciplina') ;
-                $disciplinas->sigla_disciplina = $this->input->post('sigla_disciplina');
-                $disciplinas->modulo           = $this->input->post('modulo')          ;
-                $disciplinas->qtd_professor    = $this->input->post('qtd_professor')   ;
-                $disciplinas->qtd_aulas        = $this->input->post('qtd_aulas')   ;
-                $disciplinas->save();
+            if($this->validar()){
+                try {
+                    $disciplinas = Disciplina_model::findOrFail($id);
+                    $disciplinas->nome_disciplina  = $this->input->post('nome_disciplina') ;
+                    $disciplinas->sigla_disciplina = $this->input->post('sigla_disciplina');
+                    $disciplinas->modulo           = $this->input->post('modulo')          ;
+                    $disciplinas->qtd_professor    = $this->input->post('qtd_professor')   ;
+                    $disciplinas->qtd_aulas        = $this->input->post('qtd_aulas')   ;
+                    $disciplinas->save();
 
-                $this->session->set_flashdata('success','Disciplina atualizada com sucesso');
-                redirect("disciplina");
-            } catch (Exception $e) {
-                $this->session->set_flashdata('danger','Problemas ao atualizar os dados da Disciplina, tente novamente!');
+                    $this->session->set_flashdata('success','Disciplina atualizada com sucesso');
+                    redirect("disciplina");
+                } catch (Exception $ignored){}
             }
 
+            $this->session->set_flashdata('danger','Problemas ao atualizar os dados da Disciplina, tente novamente!');
             redirect('disciplina/editar');
         }
 
