@@ -51,7 +51,7 @@ class Grau extends CI_Controller {
     */
     function editar($id) {
         $grau = Grau_model::findOrFail($id);
-        $this->load->template('graus/GrausEditar',compact('grau'));
+        $this->load->template('graus/GrausEditar',compact('grau');
     }
 
     /**
@@ -61,7 +61,7 @@ class Grau extends CI_Controller {
     private function atualizar ($idGrau) {
         if($this->validar()){
             try {
-                $grau = Grau_model::findOrFail($id);
+                $grau = Grau_model::withTrashed()->findOrFail($id);
                 $grau->codigo = $this->input->post('codigo');
                 $grau->nome_grau = $this->input->post('nome_grau');
                 $grau->save();
