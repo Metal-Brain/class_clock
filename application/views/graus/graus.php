@@ -44,14 +44,16 @@
     <tbody>
       <?php foreach ($graus as $grau) { ?>
     <!-- <?= ($graus['valid'] ? '<tr>' : '<tr class="danger">') ?>  -->
-          <td><center><?= $grau['nome_grau']; ?></td>
+		  <td><center><?= $grau['nome_grau']; ?></td>
           <td><center><?= $grau['codigo']; ?></td>
-
+	
         <td><center>
-          <?php if ($grau['valid']): ?>
-            <!-- Esse button editar vai chamar o outro tab-pane editar, não está direcionado pois os dados que ele tenta passar estão com problema, se deixar apeanas o data-toggle= pill e o href editar vai chamar o tabpane -->
-			   <a class="btn btn-warning glyphicon glyphicon-pencil" title="Editar" href="<?= site_url('Grau/editar/'.$grau->id)?>"></a>
-			   <a class="btn btn-danger glyphicon glyphicon-remove" title="Remover" href="<?= site_url('Grau/deletar/'.$grau->id)?>"></a>  <?php else : ?>
+		
+
+          <?php if ( empty($grau->deletado_em) ) : ?>
+             <a class="btn btn-warning glyphicon glyphicon-pencil" title="Editar" href="<?= site_url('Grau/editar/'.$grau->id)?>"></a>
+			   <a class="btn btn-danger glyphicon glyphicon-remove" title="Remover" href="<?= site_url('Grau/deletar/'.$grau->id)?>"></a>
+		  <?php else : ?>
 				<button onClick="table(<?= $grau['id'] ?>)" type="button" class="btn btn-success delete" title="Ativar"><span class="glyphicon glyphicon-ok"></span></button>
           <?php endif; ?>
         </td>

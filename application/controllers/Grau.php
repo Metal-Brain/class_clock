@@ -50,7 +50,7 @@ class Grau extends CI_Controller {
   }
 
   function editar($id){
-    $this->load->model(array(
+   	   $this->load->model(array(
       'Grau_model'
     ));
     // Criando regra de validação do formulário
@@ -62,14 +62,17 @@ class Grau extends CI_Controller {
         $this->atualizar();
     } else {
         $grau = Grau_model::findOrFail($id);
-        $this->load->template('graus/GrausEditar',compact('grau'));
+        $this->load->template('graus/GrausEditar',compact('grau','id'),'graus/js_graus');
     }
   }
 
-  private function atualizar ($idGrau) {
+  public function atualizar ($idGrau) {
+	   $this->load->model(array(
+      'Grau_model'
+    ));
     try {
       DB::transaction(function ($id) use ($idGrau) {
-        $grau = Grau_model::findOrFail($id);
+	    $grau = Grau_model::withTrashed()->findOrFail($id);
         $grau->codigo = $this->input->post('codigo');
         $grau->nome_grau = $this->input->post('nome_grau');
         $grau->save();
