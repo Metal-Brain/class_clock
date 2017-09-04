@@ -20,6 +20,7 @@
 				</div>
 			</div>
 		<?php endforeach; ?>
+		<?= form_error('horario[]') ?>
 
 		<div class="row">
 			<div class="col-md-12 form-group">

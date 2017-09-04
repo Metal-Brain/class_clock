@@ -88,7 +88,7 @@ class Turno extends CI_Controller {
     }else {
       $this->form_validation->set_rules('nome_turno','nome',array('required','max_length[25]','trim','strtolower'));
     }
-    $this->form_validation->set_rules('horario[]','horario',array('callback_timeValidate'));
+    $this->form_validation->set_rules('horario[]','horario',array('callback_horarioRequired','callback_timeValidate','callback_horarioAula'));
 
     $this->form_validation->set_message('is_unique','O nome do turno informado já está cadastrado');
     $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
@@ -98,13 +98,14 @@ class Turno extends CI_Controller {
         $turno->nome_turno = $this->input->post('nome_turno');
         $horarios = $this->input->post('horario');
 
-        $index = 0;
-        foreach ($turno->horarios as $horario) {
-          $horario->inicio = $horarios[$index];
-          $horario->fim =   $horarios[++$index];
-          $horario->save();
+        $turno->horarios()->forceDelete();
+        for ($i = 0; $i < sizeof($horarios); $i += 2) {
+          $horario = new Horario_model;
 
-          $index++;
+          $horario->inicio = $horarios[$i];
+          $horario->fim = $horarios[$i+1];
+          $horario->turno_id = $turno->id;
+          $horario->save();
         }
 
         $turno->save();
@@ -114,7 +115,6 @@ class Turno extends CI_Controller {
       }
       redirect('Turno');
     } else {
-      // ele não vai editar caso o nome já esteja registrado, mas não sei como exibir os erros :(
       $this->editar($id);
     }
 
