@@ -1,5 +1,5 @@
  <div class="col-xs=10 col-sm-10 col-md-10">
-        <form id="formGrau" action="<?= site_url('grau/cadastrar')?>" method="post">
+        <form id="formGrau" action="<?= site_url('grau/salvar')?>" method="post">
           <div class="form-group" >
 
               <label>Nome:</label>
