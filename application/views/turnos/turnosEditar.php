@@ -4,12 +4,12 @@
 			<div class="col-md-5 form-group">
 				<label>Nome:</label>
 				<input name="nome_turno" class="form-control" placeholder="Nome" value="<?= $turno->nome_turno?>">
-				<button id="btnAdd" type="button" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Adicionar Aula</button>
 				<?= form_error('nome_turno') ?>
 			</div>
 		</div>
 
 		<div id="horarios">
+			<button id="btnAdd" type="button" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Adicionar Aula</button>
 
 		</div>
 

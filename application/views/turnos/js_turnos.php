@@ -36,15 +36,43 @@
 				row.remove();
 				// index vetor
 				novos = $("input.hora");
-				for (var i = 0; i < novos.length; i++) {
-					novos[i].name = 'horario['+i+']';
+				for (var index = 0; index < novos.length; index++) {
+					novos[index].name = 'horario['+index+']';
 				}
 
 				// index aula
 				var listAula = $("p.aula");
-				for (var i = 0; i < listAula.length; i ++) {
-					listAula[i].innerHTML = '<strong> Aula ' + (i + 1)+'</strong>';
+				for (var aula = 0; aula < listAula.length; aula ++) {
+					listAula[aula].innerHTML = '<strong> Aula ' + (aula + 1)+'</strong>';
 				}
+			});
+
+			// função para adicionar um novo campo de horario
+			$('#btnAdd',$('#horarios')).click(function () {
+				var content = `
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-1 form-group">
+						<p class="aula"><strong>Aula `+ aula +`</strong></p>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-2 form-group">
+						<label >Horário de entrada:</label>
+						<input name="horario[`+index+`]" class="form-control hora" type="text" value="">
+					</div>`;
+
+					index++;
+
+					content += `
+					<div class="col-xs-12 col-sm-12 col-md-2 form-group">
+						<label >Horário de saída:</label>
+						<input name="horario[`+index+`]" class="form-control hora" type="text" value="">
+					</div>
+					<div col-md-2 style="padding: 25px 0 0 0;">
+						<button id="btnRemove" type="button" class="btn btn-danger add-field"><span class="glyphicon glyphicon-remove"></span></button>
+					</div>
+				</div>`;
+				index++;
+				aula++;
+				$("#horarios").append(content);
 			});
 
 		});
