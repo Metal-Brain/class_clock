@@ -100,7 +100,7 @@ class Grau extends CI_Controller {
     * @return boolean Retorna se os dados passaram ou não na validação
     */
     private function validar() {
-        $this->form_validation->set_rules('nome_grau','nome',array('required','max_length[50]','trim','alpha','is_unique[grau.nome_grau]'));
+        $this->form_validation->set_rules('nome_grau','nome',array('required','max_length[50]','trim','regex_match[/^\D+$/]','alpha_numeric_spaces','is_unique[grau.nome_grau]'));
         $this->form_validation->set_rules('codigo','codigo', array('required','integer','greater_than[0]','max_length[5]'));
         $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
 
