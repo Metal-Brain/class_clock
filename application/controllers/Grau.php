@@ -84,7 +84,7 @@ class Grau extends CI_Controller {
     * @param $idGrau Id do grau a ser removido
     * @author Jean Brock | Vitor Silvério | Thalita Barbosas
     */
-    function deletar ($idGrau) {
+    function deletar ($id) {
         try {
             $grau = Grau_model::findOrFail($id);
             $grau->delete();
