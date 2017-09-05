@@ -10,15 +10,15 @@
 			$this->load->template('cursos/cursos',compact('cursos'),'cursos/js_cursos');
 		}
         
-		public function cadastrar() {					
-				$cursos = Curso_model::all();
-				$this->load->template('cursos/cadastrar',compact('cursos'),'cursos/js_cursos');
-			}
+		public function cadastrar() {			
+			$cursos = Curso_model::all();
+			$this->load->template('cursos/cadastrar',compact('cursos'),'cursos/js_cursos');
 			
+		}	
 		
 		public function salvar(){
-			try {
-				DB::transaction(function () {
+			if($this->validar()){
+				try {
 					$curso = new Curso_model();
 					$curso->nome_curso = $this->input->post('nome_curso');
 					$curso->grau_id = $this->input->post('grau_id');
@@ -28,12 +28,14 @@
 					$curso->fechamento = $this->input->post('fechamento');
 					//var_dump($curso);
 					$curso->save();
-				});
-				$this->session->set_flashdata('success','Turno cadastrado com sucesso');
-			} catch (Exception $e) {
-				$this->session->set_flashdata('danger','Problemas ao cadastrar o turno, tente novamente!');
+				
+					$this->session->set_flashdata('success','Turno cadastrado com sucesso');
+				} catch (Exception $e) {}
 			}
-        }
+			$this->session->set_flashdata('danger','Problemas ao cadastrar o turno, tente novamente!');
+			redirect ("cursos/cadastrar");
+			
+        	}
 		
 		public function editar(){
 			if($this->validar()){
@@ -45,8 +47,8 @@
 		}
 		
 		private function atualizar($id){
-			try {
-				DB::transaction(function ($id) use ($id) {
+			if($this->validar(){
+				try {
 					$curso = Curso_model::findOrFail($id);
 					$curso->nome_curso = $this->input->post('nome_curso');
 					$curso->grau_id = $this->input->post('grau_id');
@@ -55,24 +57,21 @@
 					$curso->qtd_semestre = $this->input->post('qtd_semestre');
 					$curso->fechamento = $this->input->post('fechamento');
 					$curso->save();
-				});
-				$this->session->set_flashdata('success','Curso atualizado com sucesso');
-			} catch (Exception $e) {
+					$this->session->set_flashdata('success','Curso atualizado com sucesso');
+				} catch (Exception $e) {}
 				$this->session->set_flashdata('danger','Problemas ao atualizar os dados do curso, tente novamente!');
+				redirect('Curso');
 			}
-			redirect('Curso');
+			
 		}
 		
 		public function deletar(){
 			try {
-				DB::transaction(function ($id) use ($id) {
-					$curso = Curso_model::findOrFail($id);
-					$curso->delete();
-				});
+				$curso = Curso_model::findOrFail($id);
+				$curso->delete();
 				$this->session->set_flashdata('success','Curso deletado com sucesso');
-			}catch (Exception $e) {
-				$this->session->set_flashdata('danger','Erro ao deletar um curso, tente novamente');
-			}
+			}catch (Exception $e) {}
+			$this->session->set_flashdata('danger','Erro ao deletar um curso, tente novamente');
 			redirect("Curso");
 		}
 		
@@ -81,8 +80,8 @@
 			echo json_encode($disciplinas);
 		}
         
-        public function validar(){
-            $this->form_validation->set_rules('nome_curso', 
+       		 public function validar(){
+            		$this->form_validation->set_rules('nome_curso', 
 							  'nome do curso',
 							   array('required',
 							     	 'min_length[5]',
@@ -121,7 +120,7 @@
             return $this->form_validation->run();
         }
 		
-	}
+}
 	/*
 	public function verificaNome(){
       $validate_data = array('nome_curso' => $this->input->get('nome_curso'));
