@@ -46,15 +46,13 @@ class Tipo_sala extends CI_Controller {
 
     if ( $this->form_validation->run() ) {
       try{
-        DB::transaction(function () use ($id){
           $dados = array(
             'nome_tipo_sala'      => $this->input->post('nome_tipo_sala'),
             'descricao_tipo_sala' => $this->input->post('descricao_tipo_sala')
           );
 
           $tipo_sala = TipoSala_model::findOrFail($id);
-          $tipo_sala->update($dados);
-        });
+          $tipo_sala->update($dados); 
       }catch(Exception $e){
         $this->session->set_flashdata('danger','Problemas ao atualizar o tipo de sala, tente novamente!');
       }
