@@ -19,7 +19,8 @@
         function cadastrar () {
             $disciplinas = Disciplina_model::all();
             $cursos = Curso_model::all();
-            $this->load->template('disciplinas/disciplinasCadastrar',compact('disciplinas','cursos'),'disciplinas/js_disciplinas');
+            $tipo_salas = TipoSala_model::all();
+            $this->load->template('disciplinas/disciplinasCadastrar',compact('disciplinas','cursos','tipo_salas'),'disciplinas/js_disciplinas');
         }
 
         /**

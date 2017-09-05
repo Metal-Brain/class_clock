@@ -27,12 +27,12 @@
 
 					<div class="form-group">
 						<label>Sigla</label>
-						<input type="text" class="form-control" id="sigla_disciplina" name="sigla_disciplina" placeholder="ex: LOPA1" value="<?= set_value('sigla_disciplina') ?>" style="max-width:300px;" >
+						<input type="text" class="form-control" id="sigla_disciplina" name="sigla_disciplina" placeholder="ex: LOPA1" value="<?= set_value('sigla_disciplina') ?>" style="max-width:400px;" >
 					</div>
 
 					<div class="form-group">
 						<label>Curso</label>	
-						<select class="form-control" style="max-width:300px;">
+						<select class="form-control" style="max-width:400px;">
                             
 							  <option>Selecione</option>
                             <?php
@@ -47,23 +47,31 @@
 			
 					<div class="form-group">
 						<label>Quantidade de professores</label>
-						<input type="number" class="form-control" id="qtd_professor" name="qtd_professor" placeholder="ex: 1" value="<?= set_value('qtd_professor') ?>" style="max-width:300px;">
+						<input type="number" class="form-control" id="qtd_professor" name="qtd_professor" placeholder="ex: 1" value="<?= set_value('qtd_professor') ?>" style="max-width:400px;">
 					</div>
 									
 					<div class="form-group">
 						<label>Semestre</label>
-						<input type="number" class="form-control" id="modulo" name="modulo" placeholder="ex: 6" value="<?= set_value('modulo') ?>" style="max-width: 300px">
+						<input type="number" class="form-control" id="modulo" name="modulo" placeholder="ex: 6" value="<?= set_value('modulo') ?>" style="max-width: 400px">
 					</div>
 									
 					<div class="form-group">
 						<label>Qtd. Aulas por Semana</label>
-						<input type="number" class="form-control" id="carga_semanal" name="carga_semanal" placeholder="ex: 4" value="<?= set_value('carga_semanal') ?>" style="max-width:300px;">
+						<input type="number" class="form-control" id="carga_semanal" name="carga_semanal" placeholder="ex: 4" value="<?= set_value('carga_semanal') ?>" style="max-width:400px;">
 					</div>
 
 					<div class="form-group">
 						<label>Tipo de sala Necessária</label>	
-						<select class="form-control" style="max-width:300px;">
-							 <option>Selecione</option>
+						<select class="form-control" style="max-width:400px;">
+							   <option>Selecione</option>
+                            <?php
+                                foreach($tipo_salas as $tipo_sala){
+                            ?>
+                              <option value="<?=$tipo_sala['id'] ?>"><?=$tipo_sala['nome_tipo_sala'] ?></option>    
+							<?php
+                                }
+                            ?>
+                            
 							 
 						</select>
 					</div>	
