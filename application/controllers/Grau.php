@@ -51,20 +51,21 @@ class Grau extends CI_Controller {
     */
     function editar($id) {
         $grau = Grau_model::findOrFail($id);
-        $this->load->template('graus/grausEditar',compact('grau'));
+        $this->load->template('graus/grausEditar',compact('grau', 'id'));
     }
 
     /**
     * Atualiza os dados no banco de acordo com os dados do formulário
     * @author Jean Brock | Vitor Silvério | Thalita Barbosa
     */
-    function atualizar ($idGrau) {
+    function atualizar ($id) {
         if($this->validar()){
             try {
-                $grau = Grau_model::withTrashed()->findOrFail($id);   
-                $grau->nome_grau = $this->input->post('nome_grau');
-                $grau->codigo = $this->input->post('codigo');
-                $grau->save();
+                Grau_model::where('id', $id)
+                            ->update([
+                                "nome_grau"  => $this->input->post('nome_grau'),
+                                "codigo"     => $this->input->post('codigo')
+                            ]);
 
                 $this->session->set_flashdata('success','Grau atualizado com sucesso');
                 redirect('Grau');
@@ -80,7 +81,7 @@ class Grau extends CI_Controller {
     * @param $idGrau Id do grau a ser removido
     * @author Jean Brock | Vitor Silvério | Thalita Barbosas
     */
-    function deletar ($idGrau) {
+    function deletar ($id) {
         try {
             $grau = Grau_model::findOrFail($id);
             $grau->delete();
