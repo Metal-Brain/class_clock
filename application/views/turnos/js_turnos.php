@@ -73,6 +73,8 @@
 				index++;
 				aula++;
 				$("#horarios").append(content);
+				//carrega as máscaras novamente
+				mask();
 			});
 
 		});
