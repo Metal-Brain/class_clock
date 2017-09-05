@@ -21,6 +21,10 @@ class Disciplina_model extends Model{
     public function curso(){
         return $this->belongsTo(Curso_model::class);
     }
+	
+	public function tipo_salas(){
+		return $this->belongsToMany(Tipo_sala_model::class);
+	}
 }
 
 ?>
