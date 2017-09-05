@@ -73,8 +73,8 @@ class Tipo_sala extends CI_Controller {
 
   private function validar(){
     // Criando regra de validação do formulário
-    $this->form_validation->set_rules('nome_tipo_sala','nome',array('required','max_length[30]','trim','strtolower'));
-    $this->form_validation->set_rules('descricao_tipo_sala','descrição',array('required','max_length[254]','trim','strtolower'));
+    $this->form_validation->set_rules('nome_tipo_sala','nome',array('required','max_length[30]','trim', 'is_unique[tipo_sala.nome_tipo_sala]'));
+    $this->form_validation->set_rules('descricao_tipo_sala','descrição',array('required','max_length[254]','trim'));
     // Setando os delimitadores da mensagem de erro.
     $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
   }
