@@ -18,7 +18,8 @@
         */
         function cadastrar () {
             $disciplinas = Disciplina_model::all();
-            $this->load->template('disciplinas/disciplinas',compact('disciplinas'),'disciplinas/js_disciplinas');
+            $cursos = Curso_model::all();
+            $this->load->template('disciplinas/disciplinasCadastrar',compact('disciplinas','cursos'),'disciplinas/js_disciplinas');
         }
 
         /**
