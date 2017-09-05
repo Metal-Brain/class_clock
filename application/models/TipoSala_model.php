@@ -9,6 +9,10 @@
     class TipoSala_model extends Model{
 
         protected $table = 'tipo_sala';
+		
+		public function disciplinas(){
+			return $this->belongsToMany(Disciplina_model::class);
+		}
 
     }
 
