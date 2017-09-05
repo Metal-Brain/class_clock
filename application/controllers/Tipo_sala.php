@@ -42,7 +42,10 @@ class Tipo_sala extends CI_Controller {
   }
 
   public function atualizar($id){
-    $this->validar();
+    $this->form_validation->set_rules('nome_tipo_sala','nome',array('required','max_length[30]','trim'));
+    $this->form_validation->set_rules('descricao_tipo_sala','descrição',array('required','max_length[254]','trim'));
+    // Setando os delimitadores da mensagem de erro.
+    $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
 
     if ( $this->form_validation->run() ) {
       try{
