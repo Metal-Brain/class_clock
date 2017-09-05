@@ -1,10 +1,12 @@
-	<footer class="text-center">
-		<div class="container">
+	</div>
+	<div class="row">
+		<footer class="text-center">
 			<p><strong>Instituto Federal de Educação, Ciência e Tecnologia de São Paulo - Câmpus Caraguatatuba</strong></p>
 			<p>Avenida Bahia, 1739 - Indaiá - Caraguatatuba - SP - CEP: 11665-071</p>
 			<p class="text-center">Desenvolvimento Metal Brain</p>
-		</div>
-	</footer>
+		</footer>
+	</div>
+	
 </div>
 <script src="<?= base_url('assets/js/jquery-3.1.1.min.js')?>"></script>
 <script src="<?= base_url('assets/js/bootstrap.min.js')?>"></script>

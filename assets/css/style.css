@@ -1,21 +1,21 @@
 html {
-    position: relative;
+    /*position: relative;*/
     min-height: 100%;
 }
 
 footer {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    height: auto;
-    width: 100%;
+    /*position: absolute;*/
+    /*left: 0;
+    bottom: 0;*/
+    /*height: auto;*/
+    /*width: 100%;*/
     background-color: #EAEAEA;
     padding-top: 10px;
 }
 
 body {
     font-family: 'Roboto Mono', monospace;
-    padding-bottom: 100px;
+    /*padding-bottom: 100px;*/
 }
 
 .container-fluid {
@@ -138,4 +138,13 @@ header a:hover {
 
 .nav-tabs>li>a {
     padding: 10px 10px;
+}
+
+h2 {
+	padding: 0px!important;
+	margin: 0px!important;
+}
+
+.page-header{
+	padding-bottom: 10px!important;
 }
