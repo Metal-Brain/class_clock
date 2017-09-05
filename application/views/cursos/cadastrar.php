@@ -1,5 +1,5 @@
  <div class="col-xs=10 col-sm-10 col-md-10">
-								<form  name="formCurso" method="post" action="<?= site_url('curso/cadastrar')?>">
+								<form  name="formCurso" method="post" action="<?= site_url('curso/salvar')?>">
 										<div class="row">	
 											<div class="col-xs-12 col-sm-12 col-md-11 form-group">
 										

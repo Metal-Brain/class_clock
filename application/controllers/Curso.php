@@ -10,14 +10,11 @@
 			$this->load->template('cursos/cursos',compact('cursos'),'cursos/js_cursos');
 		}
         
-		public function cadastrar() {			
-			if($this->validar()){
-				$this->salvar();
-			}else{
+		public function cadastrar() {					
 				$cursos = Curso_model::all();
-				$this->load->template('cursos/cursos',compact('cursos'),'cursos/js_cursos');
+				$this->load->template('cursos/cadastrar',compact('cursos'),'cursos/js_cursos');
 			}
-		}	
+			
 		
 		public function salvar(){
 			try {
