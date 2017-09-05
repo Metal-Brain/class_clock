@@ -23,7 +23,7 @@ class Disciplina_model extends Model{
     }
 	
 	public function tipo_salas(){
-		return $this->belongsToMany(Tipo_sala_model::class);
+		return $this->belongsToMany(TipoSala_model::class);
 	}
 }
 
