@@ -4,22 +4,15 @@
 			<div class="col-md-5 form-group">
 				<label>Nome:</label>
 				<input name="nome_turno" class="form-control" placeholder="Nome" value="<?= $turno->nome_turno?>">
+				<button id="btnAdd" type="button" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Adicionar Aula</button>
 				<?= form_error('nome_turno') ?>
 			</div>
 		</div>
-		<?php $index = 0; ?>
-		<?php foreach ($turno->horarios as $horario) : ?>
-			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-2 form-group">
-					<label >Horário de entrada:</label>
-					<input name="horario[<?= $index++; ?>]" class="form-control hora" type="time" value="<?= substr($horario->inicio, 0, -3); ?>">
-				</div>
-				<div class="col-xs-12 col-sm-12 col-md-2 form-group">
-					<label >Horário de saída:</label>
-					<input name="horario[<?= $index++; ?>]" class="form-control hora" type="time" value="<?= substr($horario->fim, 0, -3); ?>">
-				</div>
-			</div>
-		<?php endforeach; ?>
+
+		<div id="horarios">
+
+		</div>
+
 		<?= form_error('horario[]') ?>
 
 		<div class="row">
