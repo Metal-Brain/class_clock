@@ -29,7 +29,12 @@ class Grau extends CI_Controller {
     * @author Jean Brock | Vitor Silvério | Thalita Barbosa
     */
     function salvar () {
-        if($this->validar()){
+        $this->form_validation->set_rules('nome_grau','nome',array('required','max_length[50]',
+                                          'trim','regex_match[/^\D+$/]','alpha_numeric_spaces','is_unique[grau.nome_grau]'));
+        $this->form_validation->set_rules('codigo','codigo', array('required','integer','greater_than[0]','max_length[5]'));
+        $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
+
+        if($this->form_validation->run()){
             try {
                 $grau = new Grau_model();
                 $grau->nome_grau = $this->input->post('nome_grau');
@@ -59,7 +64,12 @@ class Grau extends CI_Controller {
     * @author Jean Brock | Vitor Silvério | Thalita Barbosa
     */
     function atualizar ($id) {
-        if($this->validar()){
+        $this->form_validation->set_rules('nome_grau','nome',array('required','max_length[50]',
+                                          'trim','regex_match[/^\D+$/]','alpha_numeric_spaces'));
+        $this->form_validation->set_rules('codigo','codigo', array('required','integer','greater_than[0]','max_length[5]'));
+        $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
+
+        if($this->form_validation->run()){
             try {
                 Grau_model::where('id', $id)
                             ->update([
@@ -92,19 +102,5 @@ class Grau extends CI_Controller {
         }
 
         redirect('Grau');
-    }
-
-
-    /**
-    * Valida os dados a serem utilizados durante o salvamento e atualização do grau
-    * @author Jean Brock | Vitor Silvério | Thalita Barbosa
-    * @return boolean Retorna se os dados passaram ou não na validação
-    */
-    private function validar() {
-        $this->form_validation->set_rules('nome_grau','nome',array('required','max_length[50]','trim','regex_match[/^\D+$/]','alpha_numeric_spaces','is_unique[grau.nome_grau]'));
-        $this->form_validation->set_rules('codigo','codigo', array('required','integer','greater_than[0]','max_length[5]'));
-        $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
-
-        return $this->form_validation->run();
     }
 }
