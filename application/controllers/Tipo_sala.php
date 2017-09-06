@@ -37,14 +37,13 @@ class Tipo_sala extends CI_Controller {
           'descricao_tipo_sala' => $this->input->post('descricao_tipo_sala')
         ];
 
-        TipoSala_model::firstOrCreate($dados);
-      }catch(Exception $e){
-        $this->session->set_flashdata('danger','Problemas ao cadastrar o tipo de sala, tente novamente!');
-      }
-    }else{
-      $this->session->set_flashdata('danger','Problemas ao cadastrar o tipo de sala, tente novamente!');
+		TipoSala_model::firstOrCreate($dados);
+		
+		$this->session->set_flashdata('success','Tipo Sala cadastrado com sucesso');
+		redirect('Tipo_sala');
+      }catch(Exception $e){}
     }
-
+    $this->session->set_flashdata('danger','Problemas ao cadastrar o tipo de sala, tente novamente!');
     redirect('Tipo_sala');
   }
 
@@ -68,20 +67,19 @@ class Tipo_sala extends CI_Controller {
 
     if( $this->form_validation->run() ){
       try{
-          $dados = array(
+          $dados = [
             'nome_tipo_sala'      => $this->input->post('nome_tipo_sala'),
             'descricao_tipo_sala' => $this->input->post('descricao_tipo_sala')
-          );
+		  ];
 
           $tipo_sala = TipoSala_model::findOrFail($id);
-          $tipo_sala->update($dados); 
-      }catch(Exception $e){
-        $this->session->set_flashdata('danger','Problemas ao atualizar o tipo de sala, tente novamente!');
-      }
-    }else{
-      $this->session->set_flashdata('danger','Problemas ao atualizar o tipo de sala, tente novamente!');
+		  $tipo_sala->update($dados);
+		  
+		  $this->session->set_flashdata('success','Tipo Sala atualizado com sucesso');
+		  redirect('Tipo_sala');
+      }catch(Exception $e){}
     }
-
+    $this->session->set_flashdata('danger','Problemas ao atualizar o tipo de sala, tente novamente!');
     redirect('Tipo_sala');
   }
 

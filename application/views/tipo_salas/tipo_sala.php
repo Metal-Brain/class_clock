@@ -40,11 +40,11 @@
 			<?php foreach ($tipo_salas as $tipo_salas) { ?>
             <td><center><?= $tipo_salas['nome_tipo_sala']; ?></center></td>
             <td><center><?= $tipo_salas['descricao_tipo_sala']; ?></center></td>
-				<td clas="text-center">
-					<a class="btn btn-warning glyphicon glyphicon-pencil" title="Editar" href="<?= site_url('Tipo_Sala/editar/'.$tipo_salas->id)?>"></a>
-					<a class="btn btn-danger glyphicon glyphicon-remove" title="Remover" href="<?= site_url('Tipo_Sala/deletar/'.$tipo_salas->id)?>"></a>
-				</td>
-				</tr>
+			<td clas="text-center">
+				<a class="btn btn-warning glyphicon glyphicon-pencil" title="Editar" href="<?= site_url('Tipo_Sala/editar/'.$tipo_salas->id)?>"></a>
+				<a class="btn btn-danger glyphicon glyphicon-remove" title="Remover" href="<?= site_url('Tipo_Sala/deletar/'.$tipo_salas->id)?>"></a>
+			</td>
+			</tr>
 			<?php } ?>
 		</tbody>
 	</table>
