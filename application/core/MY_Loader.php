@@ -1,10 +1,5 @@
 <?php
-
-/**
- *
- */
-class My_Loader extends CI_Loader
-{
+class My_Loader extends CI_Loader {
 
   function template($path,$data = null) {
     $this->view('includes/header');
@@ -13,6 +8,3 @@ class My_Loader extends CI_Loader
     $this->view('includes/footer');
   }
 }
-
-
-?>
