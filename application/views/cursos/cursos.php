@@ -1,4 +1,7 @@
-<div class="container col-md-12 col-lg-10">
+<!--<pre>
+		<?php print_r($cursos) ?>
+</pre> -->
+	<div class="container col-md-12 col-lg-10">
 	<!-- Alertas de sucesso / erro -->
 	<div class="row" style="margin-top: 5px;">
 		<div class="col-md-12">
@@ -13,7 +16,7 @@
 			<?php endif; ?>
 		</div>
 	</div>
-
+	
 	<!-- Início do conteúdo da view-->
 	<div class="top-bar" style="padding: 0 0 15px 0">
 		<div class="row">
@@ -29,6 +32,7 @@
 			<tr>
 				<th class="text-center">Código</th>
 				<th class="text-center">Nome</th>
+				<th class="text-center">Sigla</th>
 				<th class="text-center">Quantidade de Semestres</th>
 				<th class="text-center">Modalidade</th>
 				<th class="text-center">Fechamento</th>
@@ -36,9 +40,16 @@
 		</thead>
 
 		<tbody>
+
 			<?php foreach ($cursos as $curso) { ?>
+	
 				<tr <?php if($curso->deletado_em): echo 'class="danger"'; endif; ?>>
+					<td class="text-center"><?= ucwords($curso['codigo_curso']); ?></td>
 					<td class="text-center"><?= ucwords($curso['nome_curso']); ?></td>
+					<td class="text-center"><?= ucwords($curso['sigla_curso']); ?></td>
+					<td class="text-center"><?= ucwords($curso['qtd_semestre']); ?></td>
+					<td class="text-center"><?= ucwords($curso['grau_id']); ?></td>
+					<td class="text-center"><?= ucwords($curso['fechamento']); ?></td>
 	
 					<td class="text-center"><?= ( empty($curso->deletado_em) ) ? 'Ativado' : 'Desativado'?></td>
 					<td class="text-center">
@@ -53,4 +64,6 @@
 			<?php } ?>
 		</tbody>
 	</table>
+	
+	
 </div>
