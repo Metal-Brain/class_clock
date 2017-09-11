@@ -15,22 +15,15 @@
   </div>
 
   <!-- Início do conteúdo da view-->
-  <div class="top-bar" style="padding: 0 0 15px 0">
+ <div class="top-bar" style="padding: 0 0 15px 0">
     <div class="row">
-      <div class="col-md-5">
-        <div class="input-group">
-          <input type="text"
-           class="form-control input-filter"
-            placeholder="Pesquisar"
-            />
-          <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-        </div>
-      </div>
-      <div class="col-md-2">
-        <a class="btn btn-success" href="<?= base_url('index.php/Grau/cadastrar')?>"><span class="glyphicon glyphicon-plus"></span> Cadastrar</a>
+      <div class="col-md-12">
+      <h2 class="page-header">Modalidade
+        <a class="btn btn-success" href="<?= base_url('index.php/Curso/cadastrar')?>"><span class="glyphicon glyphicon-plus"></span> Cadastrar</a>
+      </h2>
       </div>
     </div>
-  </div>
+</div>
 
   <table id="GrauTable" class="table table-striped">
     <thead>
