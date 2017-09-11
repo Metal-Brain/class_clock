@@ -83,7 +83,7 @@ class Turno extends CI_Controller {
   public function atualizar ($id) {
     $turno = Turno_model::withTrashed()->findOrFail($id);
 
-    if($turno->nome_turno != $this->input->post('nome_turno')){
+    if(ucwords($turno->nome_turno) != $this->input->post('nome_turno')){
       $this->form_validation->set_rules('nome_turno','nome',array('required','max_length[25]','is_unique[turno.nome_turno]','trim','strtolower'));
     }else {
       $this->form_validation->set_rules('nome_turno','nome',array('required','max_length[25]','trim','strtolower'));
