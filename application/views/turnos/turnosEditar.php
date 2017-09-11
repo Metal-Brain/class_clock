@@ -1,4 +1,4 @@
-<div class="container col-xs-12 col-sm-12 col-md-10 col-lg-10" style="padding-top: 5px">
+<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10" style="padding-top: 5px">
 	<form id="formTurnos" method="post" action="<?= site_url('turno/atualizar/'.$id)?>">
 		<div class="row">
 			<div class="col-md-5 form-group">
