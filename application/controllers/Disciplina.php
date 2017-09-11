@@ -17,10 +17,12 @@
         * @return view Formulário de cadastro de disciplinas
         */
         function cadastrar () {
-            $disciplinas = Disciplina_model::all();
-            $cursos = Curso_model::all();
-            $tipo_salas = TipoSala_model::all();
-            $this->load->template('disciplinas/disciplinasCadastrar',compact('disciplinas','cursos','tipo_salas'),'disciplinas/js_disciplinas');
+			$data = array(
+				'disciplinas' => Disciplina_model::all(),
+				'cursos' => Curso_model::all(),
+				'tipo_salas' => TipoSala_model::all(),
+				);
+            $this->load->template('disciplinas/disciplinasCadastrar',compact('data'),'disciplinas/js_disciplinas');
         }
 
         /**
@@ -29,20 +31,23 @@
         * @since 2017/08/28
         */
         function salvar () {
-            if ($this->validar()) {
+            //if ($this->validar()) {
                 try {
                     $disciplinas = new Disciplina_model();
-                    $disciplinas->nome_disciplina  = $this->input->post('nome_disciplina') ;
+					$disciplinas->curso_id = $this->input->post('curso_id');
+					$disciplinas->tipo_sala_id = $this->input->post('tipo_sala_id');
+					$disciplinas->nome_disciplina  = $this->input->post('nome_disciplina') ;
                     $disciplinas->sigla_disciplina = $this->input->post('sigla_disciplina');
-                    $disciplinas->modulo           = $this->input->post('modulo')          ;
-                    $disciplinas->qtd_professor    = $this->input->post('qtd_professor')   ;
-                    $disciplinas->qtd_aulas        = $this->input->post('qtd_aulas')       ;
+					$disciplinas->modulo = $this->input->post('modulo');
+					$disciplinas->qtd_professor = $this->input->post('qtd_professor');
+					$disciplinas->qtd_aulas = $this->input->post('qtd_aulas');
+					
                     $disciplinas->save();
 
                     $this->session->set_flashdata('success','Disciplina cadastrada com sucesso');
                     redirect("disciplina");
                 } catch (Exception $ignored){}
-            }
+            //}
 
             $this->session->set_flashdata('danger','Problemas ao cadastrar a Disciplina, tente novamente!');
             redirect("disciplina/cadastrar");
@@ -54,9 +59,13 @@
         * @since 2017/08/28
         * @return view formulário de edição de disciplina
         */
-        function editar ($id) {
-            $disciplinas = Disciplina_model::findOrFail($id);
-            $this->load->template('disciplina/disciplinas', compact('disciplinas'));
+        function editar($id) {
+            $data = array(
+				'disciplinas' => Disciplina_model::all(),
+				'cursos' => Curso_model::all(),
+				'tipo_salas' => TipoSala_model::all(),
+				);
+            $this->load->template('disciplinas/disciplinasEditar', compact('data','id'));
         }
 
         /**
@@ -65,23 +74,25 @@
         * @since 2018/08/28
         */
         function atualizar ($id) {
-            if($this->validar()){
+           // if($this->validar()){
                 try {
                     $disciplinas = Disciplina_model::findOrFail($id);
                     $disciplinas->nome_disciplina  = $this->input->post('nome_disciplina') ;
                     $disciplinas->sigla_disciplina = $this->input->post('sigla_disciplina');
+					$disciplinas->curso_id		   = $this->input->post('curso_id');
                     $disciplinas->modulo           = $this->input->post('modulo')          ;
                     $disciplinas->qtd_professor    = $this->input->post('qtd_professor')   ;
                     $disciplinas->qtd_aulas        = $this->input->post('qtd_aulas')   ;
-                    $disciplinas->save();
+					$disciplinas->tipo_sala_id     = $this->input->post('tipo_sala_id');
+                    $disciplinas->update();
 
                     $this->session->set_flashdata('success','Disciplina atualizada com sucesso');
                     redirect("disciplina");
                 } catch (Exception $ignored){}
-            }
+           // }
 
             $this->session->set_flashdata('danger','Problemas ao atualizar os dados da Disciplina, tente novamente!');
-            redirect('disciplina/editar');
+            redirect('disciplina/editar/'.$id);
         }
 
         /**
