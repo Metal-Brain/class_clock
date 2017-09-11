@@ -1,13 +1,13 @@
 <!--<pre>
-		<?php print_r($curso) ?>
+		<?php print_r($data) ?>
 </pre> -->
  <div class="col-xs=10 col-sm-10 col-md-10">
-								<form  name="formCurso" method="post" action="<?= site_url('curso/atualizar')?>">
+								<form  name="formCurso" method="post" action="<?= site_url('curso/atualizar/'.$id)?>">
 										<div class="row">	
 											<div class="col-xs-12 col-sm-12 col-md-11 form-group">
 										
 												<label>Nome:</label>
-												<input class="form-control" placeholder="Nome" name="nome_curso" id="nome_curso" maxlength="75" required value="<?= $curso->nome_curso?>">
+												<input class="form-control" placeholder="Nome" name="nome_curso" id="nome_curso" maxlength="75" required value="<?= $data['curso']->nome_curso?>">
 												
 											</div>
 										</div>
@@ -20,7 +20,7 @@
 										<div class="row">
 											<div class="form-group col-sm-3 col-md-2">
 											<label>Sigla</label>
-												<input class="form-control" placeholder="ex: ADS" name="sigla_curso" id="sigla_curso" maxlength="3" required value="<?= $curso->sigla_curso?>">
+												<input class="form-control" placeholder="ex: ADS" name="sigla_curso" id="sigla_curso" maxlength="3" required value="<?= $data['curso']->sigla_curso?>">
 																		
 											</div>
 										</div>
@@ -34,7 +34,7 @@
 										<div class="row">
 											<div class="form-group col-sm-3 col-md-2">
 											<label>Codigo</label>
-												<input class="form-control" placeholder="ex: 123" type="number" name="codigo_curso" id="codigo_curso" maxlength="5"required value="<?= $curso->codigo_curso?>">
+												<input class="form-control" placeholder="ex: 123" type="number" name="codigo_curso" id="codigo_curso" maxlength="5"required value="<?= $data['curso']->codigo_curso?>">
 																		
 											</div>
 										</div>
@@ -49,7 +49,7 @@
 										<div class="row">
 											<div class="form-group col-sm-3 col-md-2">
 												<label>Quantidade de semestres</label>
-												<input class="form-control" placeholder="ex: 2" type="number" name="qtd_semestre" id="qtd_semestre" maxlength="2" required value="<?= $curso->qtd_semestre?>">
+												<input class="form-control" placeholder="ex: 2" type="number" name="qtd_semestre" id="qtd_semestre" maxlength="2" required value="<?= $data['curso']->qtd_semestre?>">
 												
 											</div>
 										</div>
@@ -63,15 +63,21 @@
 										
 											<div class="col-xs-12 col-sm-12 col-md-11 form-group">
 												<label>Fechamento</label><br>
-												<label><input type="radio" name="fechamento" id="radioBimestral" value="Bimestral">Bimestral</label>
-												<label><input type="radio" name="fechamento" id="radioSemestral" value="Semestral">Semestral</label>
+												<label><input type="radio" name="fechamento" id="radioBimestral" value="B">Bimestral</label>
+												<label><input type="radio" name="fechamento" id="radioSemestral" value="S">Semestral</label>
 											</div>
 										</div>
 										
 										<div class="row">
 											<div class="form-group col-sm-5 col-md-4">
-												<label>modalidade</label>
-												<?= form_dropdown('modalidade', $grau_id, set_value('modalidade'), array('class' => 'form-control')) ?>
+												<label>Modalidade</label>
+												<select name="grau_id">
+												<option value=""></option>
+												<?php
+													foreach($data['grau'] as $grau){
+														echo '<option value="'. $grau['id'] .'">'. $grau['nome_grau'] .'</option>';}
+												?>
+												</select>
 											</div>
 										</div>
 

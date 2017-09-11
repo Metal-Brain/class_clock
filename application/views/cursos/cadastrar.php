@@ -34,7 +34,7 @@
 										<div class="row">
 											<div class="form-group col-sm-3 col-md-2">
 											<label>Codigo</label>
-												<input class="form-control" placeholder="ex: 123" type="number" name="codigo_curso" id="codigo_curso" maxlength="5"required>
+												<input class="form-control" placeholder="ex: 123" type="number" name="codigo_curso" id="codigo_curso" maxlength="5" required>
 																		
 											</div>
 										</div>
@@ -63,15 +63,22 @@
 										
 											<div class="col-xs-12 col-sm-12 col-md-11 form-group">
 												<label>Fechamento</label><br>
-												<label><input type="radio" name="fechamento" id="radioBimestral" value="Bimestral">Bimestral</label>
-												<label><input type="radio" name="fechamento" id="radioSemestral" value="Semestral">Semestral</label>
+												<label><input type="radio" name="fechamento" id="radioBimestral" value="B">Bimestral</label>
+												<label><input type="radio" name="fechamento" id="radioSemestral" value="S">Semestral</label>
 											</div>
 										</div>
 										
 										<div class="row">
 											<div class="form-group col-sm-5 col-md-4">
-												<label>modalidade</label>
-												<?= form_dropdown('modalidade', $grau_id, set_value('modalidade'), array('class' => 'form-control')) ?>
+												<label>Modalidade</label>
+												<select name="grau_id">
+												<option value=""></option>
+												<?php
+													foreach($data as $grau){
+														echo '<option value="'. $grau['id'] .'">'. $grau['nome_grau'] .'</option>';}
+												?>
+												</select>
+												
 											</div>
 										</div>
 

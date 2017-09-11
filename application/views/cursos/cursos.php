@@ -40,15 +40,20 @@
 		</thead>
 
 		<tbody>
-
-			<?php foreach ($cursos as $curso) { ?>
-	
+			<?php foreach ($data['cursos'] as $curso) { ?>
+			
 				<tr <?php if($curso->deletado_em): echo 'class="danger"'; endif; ?>>
-					<td class="text-center"><?= ucwords($curso['codigo_curso']); ?></td>
+					<td class="text-center"><?= ucwords($curso['id']); ?></td>
 					<td class="text-center"><?= ucwords($curso['nome_curso']); ?></td>
 					<td class="text-center"><?= ucwords($curso['sigla_curso']); ?></td>
 					<td class="text-center"><?= ucwords($curso['qtd_semestre']); ?></td>
-					<td class="text-center"><?= ucwords($curso['grau_id']); ?></td>
+					<td class="text-center"><?php 
+						foreach($data['grau'] as $grau){
+							if($curso['grau_id'] == $grau['id']):
+								echo $grau['nome_grau']; 
+							endif;
+						}
+					?></td> 
 					<td class="text-center"><?= ucwords($curso['fechamento']); ?></td>
 	
 					<td class="text-center"><?= ( empty($curso->deletado_em) ) ? 'Ativado' : 'Desativado'?></td>
