@@ -1,6 +1,6 @@
- <div class="col-xs=8 col-sm-8 col-md-10">   
+ <div class="col-xs=8 col-sm-8 col-md-10">      
 
-            <form id="formDisciplina" class="form-Control"action="<?= site_url('disciplina/salvar')?>" method="post">
+            <form id="formDisciplina" class="form-Control"action="<?= site_url('Disciplina/atualizar/'.$id)?>" method="post">
             		<h1>Editar Disciplina</h1>
 				
 					<div class="form-group">
