@@ -149,6 +149,7 @@ class Turno extends CI_Controller {
     try {
       $turno = Turno_model::withTrashed()->findOrFail($id);
       $turno->restore();
+      $this->session->set_flashdata('success','Turno ativado com sucesso');
     } catch (Exception $e) {
       $this->session->set_flashdata('danger','Erro ao ativar o turno. Tente novamente!');
     }

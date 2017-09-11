@@ -1,6 +1,33 @@
 
 	<script type="text/javascript">
+
+		function confirmDelete(id, msg, funcao) {
+			bootbox.confirm({
+    		message: msg,
+    		buttons: {
+        	confirm: {
+            label: 'Sim',
+            className: 'btn-success'
+        	},
+        	cancel: {
+            label: 'Não',
+            className: 'btn-danger'
+        	}
+    		},
+    		callback: function (result) {
+        	if (result == true)
+						  window.location.href = '<?= site_url("turno/") ?>' + funcao + '/' + id;
+    		}
+			});
+		}
+
 		$(document).ready(function () {
+
+
+			$("#TurnoTable").DataTable();
+
+
+
 			var mask = function () {
 				$('.hora').mask('00:00');
 			}
@@ -91,9 +118,9 @@
 			// função para adicionar um novo horario no cadastro de turno
 			$('#btnAdd',$("#turnoCadastrar")).click(addHorario);
 
+			mask();
 		});
 
-		mask();
 </script>
 <script type="text/javascript">
 	$.validator.addClassRules({
