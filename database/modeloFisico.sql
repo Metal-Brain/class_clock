@@ -88,6 +88,7 @@ CREATE TABLE IF NOT EXISTS `horario`.`disciplina` (
   `tipo_sala_id` TINYINT(4) NOT NULL,
   `nome_disciplina` VARCHAR(50) NOT NULL,
   `sigla_disciplina` CHAR(5) NOT NULL,
+	`modulo` TINYINT(2) NOT NULL,
   `qtd_professor` TINYINT(1) NOT NULL,
   `qtd_aulas` TINYINT(2) NOT NULL,
   `deletado_em` TIMESTAMP NULL DEFAULT NULL,
