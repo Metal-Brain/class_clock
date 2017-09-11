@@ -247,7 +247,7 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- Inserção de dados
 -- -----------------------------------------------------
 
-INSERT INTO area(nome) VALUES ('Administrador'), ('CRA'), ('DAE'), ('Docente');
+INSERT INTO tipo(nome) VALUES ('Administrador'), ('CRA'), ('DAE'), ('Docente');
 
 INSERT INTO tipo_sala(nome_tipo_sala, descricao_tipo_sala) VALUES("Teorica", "Mesas e Cadeiras");
 INSERT INTO tipo_sala(nome_tipo_sala, descricao_tipo_sala) VALUES("Pratica", "Computadores");
