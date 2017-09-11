@@ -47,17 +47,18 @@
 		  <td><center><?= $grau['nome_grau']; ?></td>
           <td><center><?= $grau['codigo']; ?></td>
 	
-        <td><center>
-		
+       <!-- <td class="text-center"><?= ( empty($grau->deletado_em) ) ? 'Ativado' : 'Desativado'?></td>-->
+          <td class="text-center">
 
-          <?php if ( empty($grau->deletado_em) ) : ?>
-             <a class="btn btn-warning glyphicon glyphicon-pencil" title="Editar" href="<?= site_url('Grau/editar/'.$grau->id)?>"></a>
-			   <a class="btn btn-danger glyphicon glyphicon-remove" title="Remover" href="<?= site_url('Grau/deletar/'.$grau->id)?>"></a>
-		  <?php else : ?>
-				<button onClick="table(<?= $grau['id'] ?>)" type="button" class="btn btn-success delete" title="Ativar"><span class="glyphicon glyphicon-ok"></span></button>
-          <?php endif; ?>
+            <a class="btn btn-warning glyphicon glyphicon-pencil" title="Editar" href="<?= site_url('grau/editar/'.$grau->id)?>"></a>
+             <a class="btn btn-danger glyphicon glyphicon-remove" title="Remover" href="<?= site_url('grau/deletar/'.$grau->id)?>"></a>
+            <!--<?php if ( empty($grau->deletado_em) ) : ?> -->
+            
+            <!--<?php else : ?> -->
+           <!--   <a class="btn btn-success glyphicon glyphicon-check" title="Ativar" href="<?= site_url('grau/ativar/'.$grau->id)?>"></a> -->
+<!--<?php endif; ?> -->
         </td>
-        </tr>
+        </tr> 
       <?php } ?>
     </tbody>
   </table>

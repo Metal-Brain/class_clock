@@ -37,5 +37,10 @@
                            <span class="glyphicon glyphicon-duplicate"></span> <span class="sidebar-label">FPA</span>
                        </a>
                    </li>
+                    <li class="">
+                       <a href="<?= base_url('index.php/Grau')?>">
+                           <span class="glyphicon glyphicon-duplicate"></span> <span class="sidebar-label" >Modalidades</span>
+                       </a>
+                   </li>
                </ul>
            </div>
