@@ -1,55 +1,70 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
+require "exceptions/ValidationFailException.php";
+
 class MY_Controller extends CI_Controller {
 
     protected $previous_page;
+    protected $name;
 
     public function __construct() {
         parent::__construct();
 
-        // pega a página anterior
-
-        // $this->previous_page = $this->session->userdata('_previous_page');
-        // $this->session->set_userdata('_previous_page', current_url());
+        // Nome para ser utilizado em falhas
+        if(is_null($this->name)){ $this->name = get_class($this); }
 
         // Informa o método que controlará as exceções
-        // set_exception_handler([$this, '_exception_handler']);
+        set_exception_handler([$this, '_exception_handler']);
     }
 
-    // /**
-    // * @author: Vitor "Pliavi"
-    // * retorna para página anterior
-    // */
-    // protected function back() {
-    //     if(!empty($this->previous_page)){
-    //         redirect($this->previous_page);
-    //     } else {
-    //         throw new UnexpectedValueException('Nenhuma url para retorno encontrada');
-    //     }
-    // }
+    function run_validation() {
+        if(!$this->form_validation->run()) {
+            throw new ValidationFailException("Falha na validação");
+        }
+    }
 
-    // public function _exception_handler($exception) {
-    //     $exception_name = $this->get_exception_name($exception);
-    //
-    //     switch ($exception_name) {
-    //         case 'ModelNotFoundException':
-    //             // $name = $exception->getModel();
-    //             echo $this->previous_page;
-    //             // $this->back();
-    //             break;
-    //         case 'QueryException':
-    //             echo $this->previous_page;
-    //             // $this->back();
-    //             break;
-    //         default:
-    //             _exception_handler($exception);
-    //             break;
-    //     }
-    //
-    // }
-    //
-    // private function get_exception_name($exception) {
-    //     $broke_name = explode("\\", get_class($exception));
-    //     return end($broke_name);
-    // }
+    function request($field, $xss = null) {
+        return $this->input->post_get($field, $xss);
+    }
+
+    function set_validation($field, $label='', $rules='', $errors=[]){
+        $this->form_validation->set_rules($field, $label, $rules, $errors);
+    }
+
+    function set_validations($rules=[]){
+        foreach ($rules as $rule) {
+            list($field, $label, $rules, $errors) = [
+                $rule[0],
+                isset($rule[1]) ? $rule[1] : '',
+                isset($rule[2]) ? $rule[2] : '',
+                isset($rule[3]) ? $rule[3] : [],
+            ];
+            $this->set_validation($field, $label, $rules, $errors);
+        }
+    }
+
+    function _exception_handler($exception) {
+        $sess = $this->session;
+        $exception_name = $this->get_exception_name($exception);
+
+        switch ($exception_name) {
+            case 'ModelNotFoundException':
+                $sess->set_flashdata('danger', "{$model} não encontrado.");
+                back();
+                break;
+            case 'ValidationFailException':
+                $sess->set_flashdata('danger',"O cadastro de {$this->name} falhou!");
+                back();
+                break;
+            default:
+                // Se não for nenhum, chama o Exception Handler padrão do CodeIgniter
+                _exception_handler($exception);
+                break;
+        }
+    }
+
+    private function get_exception_name($exception) {
+        $broke_name = explode("\\", get_class($exception));
+        return end($broke_name);
+    }
 }
