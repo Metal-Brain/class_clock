@@ -1,4 +1,4 @@
- <div class="col-xs=8 col-sm-8 col-md-10">   
+  <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10" style="padding-top: 5px">  
 
             <form id="formDisciplina" class="form-Control"action="<?= site_url('disciplina/salvar')?>" method="post">
             		<h1>Editar Disciplina</h1>

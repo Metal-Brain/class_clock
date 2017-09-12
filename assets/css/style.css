@@ -3,12 +3,12 @@ html {
     min-height: 100%;
 }
 
-footer {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    height: auto;
-    width: 100%;
+#footer {
+    /*position: absolute;*/
+    /*left: 0;
+    bottom: 0;*/
+    /*height: auto;*/
+    /*width: 100%;*/
     background-color: #EAEAEA;
     padding-top: 10px;
 }
@@ -72,7 +72,7 @@ header a:hover {
     height: 90px;
 }
 
-.navpills{
+.navpills {
     margin: 10px;
 }
 
@@ -114,8 +114,9 @@ header a:hover {
 }
 
 .error {
-	color: #FF0000;
+    color: #FF0000;
 }
+
 
 /* Bootstrap Override */
 

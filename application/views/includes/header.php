@@ -56,7 +56,7 @@
             </div>
         </div>
 
-        <div class="row">
+		<div id="content" class="row"> 
           <div class="col-lg-offset-3 col-lg-6">
             <?php if ($this->session->flashdata('success')) : ?>
               <div class="alert alert-success">
