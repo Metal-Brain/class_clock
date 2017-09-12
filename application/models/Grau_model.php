@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-use Illuminate\Database\Eloquent\Model;
+
 
   /**
    *  Essa classe é um modelo que representa a relação Grau no banco de dados

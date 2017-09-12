@@ -19,7 +19,7 @@
     <div class="row">
       <div class="col-md-12">
       <h2 class="page-header">Modalidade
-        <a class="btn btn-success" href="<?= base_url('index.php/Curso/cadastrar')?>"><span class="glyphicon glyphicon-plus"></span> Cadastrar</a>
+        <a class="btn btn-success" href="<?= base_url('index.php/Grau/cadastrar')?>"><span class="glyphicon glyphicon-plus"></span> Cadastrar</a>
       </h2>
       </div>
     </div>
@@ -30,6 +30,8 @@
       <tr>
         <th><center>Nome</th>
         <th><center>Código</th>
+        <th></th>
+
 
       </tr>
     </thead>
@@ -40,16 +42,16 @@
 		  <td><center><?= $grau['nome_grau']; ?></td>
           <td><center><?= $grau['codigo']; ?></td>
 	
-       <!-- <td class="text-center"><?= ( empty($grau->deletado_em) ) ? 'Ativado' : 'Desativado'?></td>-->
+        <td class="text-center"><?= ( empty($grau->deletado_em) ) ? 'Ativado' : 'Desativado'?></td>
           <td class="text-center">
 
             <a class="btn btn-warning glyphicon glyphicon-pencil" title="Editar" href="<?= site_url('grau/editar/'.$grau->id)?>"></a>
-             <a class="btn btn-danger glyphicon glyphicon-remove" title="Remover" href="<?= site_url('grau/deletar/'.$grau->id)?>"></a>
-            <!--<?php if ( empty($grau->deletado_em) ) : ?> -->
             
-            <!--<?php else : ?> -->
-           <!--   <a class="btn btn-success glyphicon glyphicon-check" title="Ativar" href="<?= site_url('grau/ativar/'.$grau->id)?>"></a> -->
-<!--<?php endif; ?> -->
+            <?php if ( empty($grau->deletado_em) ) : ?> 
+              <button class="btn btn-danger" type="button" id="btn-delete" onclick="confirmDelete(<?= $grau->id ?>,'Deseja desativar a modalidade?','deletar')"> <i class="glyphicon glyphicon-remove"></i></button>
+            <?php else : ?> 
+            <button class="btn btn-success" type="button" id="btn-delete" onclick="confirmDelete(<?= $grau->id ?>,'Deseja ativar a modalidade?','ativar')"> <i class="glyphicon glyphicon-check"></i></button>
+            <?php endif; ?>
         </td>
         </tr> 
       <?php } ?>
