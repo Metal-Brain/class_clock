@@ -109,6 +109,16 @@ header a:hover {
     margin-top: 20px;
 }
 
+.width-400{
+	max-width: 400px;
+}
+
+.width-180{
+	max-width: 180px;
+}
+
+
+
 /* Bootstrap Override */
 
 .nav-pills>li.active>a,
