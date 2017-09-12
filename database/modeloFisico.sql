@@ -9,6 +9,7 @@ USE `horario` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `horario`.`grau` (
   `id` TINYINT NOT NULL AUTO_INCREMENT,
+  `codigo` TINYINT(6) NOT NULL UNIQUE,
   `nome_grau` VARCHAR(50) NOT NULL,
   `codigo` INT NOT NULL,
   `deletado_em` TIMESTAMP NULL,
