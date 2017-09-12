@@ -9,5 +9,3 @@
             return $this->hasMany(Docente_model::class);
         }
     }
-
-?>
