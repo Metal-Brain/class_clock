@@ -132,8 +132,4 @@ $autoload['language'] = array();
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-<<<<<<< HEAD
 $autoload['model'] = array('DB', 'Model', 'Turno_model','TipoSala_model');
-=======
-$autoload['model'] = array('Model','Grau_model');
->>>>>>> c08707413da09f89315dd93e44e30a40b963b140
