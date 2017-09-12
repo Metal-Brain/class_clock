@@ -27,7 +27,7 @@
 			</div>
 		</div>
 	</div>
-	<table id="CursoTable" class="table table-striped">
+	<table id="TurnoTable" class="table table-striped">
 		<thead>
 			<tr>
 				<th class="text-center">Código</th>
