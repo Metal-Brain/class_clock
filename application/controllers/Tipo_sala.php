@@ -9,7 +9,7 @@ class Tipo_sala extends CI_Controller {
   * Retorna uma lista com todos os tipo salas ativos
   */
   function index () {
-    $tipo_salas = TipoSala_model::all();
+    $tipo_salas = TipoSala_model::withTrashed()->get();
     $this->load->template('tipo_salas/tipo_sala', compact('tipo_salas'), 'tipo_salas/js_tipo_sala');
   }
 
@@ -87,8 +87,29 @@ class Tipo_sala extends CI_Controller {
   * Deleta (desativa) o tipo sala passado
   */
   public function deletar($id){
-    TipoSala_model::findOrFail($id)->delete();
+    try{
+      TipoSala_model::findOrFail($id)->delete();
+      $this->session->set_flashdata('success','Tipo sala desativado com sucesso');
+    }catch(Exception $e){
+      $this->session->set_flashdata('danger','Erro ao desativar o Tipo Sala. Tente novamente!');
+    }
+
     redirect('Tipo_sala');
+  }
+
+  /*
+  * Ativar um Tipo Sala já deletato
+  */
+  function ativar($id){
+    try {
+      $tipo_sala = TipoSala_model::withTrashed()->findOrFail($id);
+      $tipo_sala->restore();
+      $this->session->set_flashdata('success','Tipo sala ativado com sucesso');
+    } catch (Exception $e) {
+      $this->session->set_flashdata('danger','Erro ao ativar o Tipo Sala. Tente novamente!');
+    }
+
+    redirect("Tipo_sala");
   }
 
 }
