@@ -51,10 +51,11 @@
 					</td>
 					<td class="text-center"><?= ( empty($turno->deletado_em) ) ? 'Ativado' : 'Desativado'?></td>
 					<td class="text-center">
-						<a class="btn btn-warning glyphicon glyphicon-pencil" title="Editar" href="<?= site_url('Turno/editar/'.$turno->id)?>"></a>
 						<?php if ( empty($turno->deletado_em) ) : ?>
+							<a class="btn btn-warning glyphicon glyphicon-pencil" title="Editar" href="<?= site_url('Turno/editar/'.$turno->id)?>"></a>
 							<button class="btn btn-danger" type="button" id="btn-delete" onclick="confirmDelete(<?= $turno->id ?>,'Deseja desativar o turno?','deletar')"> <i class="glyphicon glyphicon-remove"></i></button>
 						<?php else : ?>
+							<a class="btn btn-warning glyphicon glyphicon-pencil disabled" title="Editar" href="<?= site_url('Turno/editar/'.$turno->id)?>"></a>
 							<button class="btn btn-success" type="button" id="btn-delete" onclick="confirmDelete(<?= $turno->id ?>,'Deseja ativar o turno?','ativar')"> <i class="glyphicon glyphicon-check"></i></button>
 						<?php endif; ?>
 					</td>
