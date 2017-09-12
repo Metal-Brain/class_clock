@@ -4,12 +4,12 @@ class Pessoa extends MY_Controller {
     private $id_docente = 1;
 
     function index() {
-        //$pessoas = Pessoa_model::all();
-        $this->load->template('pessoas/pessoas', compact('pessoas'));
+        $pessoas = Pessoa_model::all();
+        $this->load->template('pessoas', compact('pessoas'));
     }
 
     function cadastrar() {
-        //$tipos = Tipo_model::all();
+        $tipos = Tipo_model::all();
         $this->load->template('pessoas/cadastrar', compact('tipos'));
     }
 
@@ -128,6 +128,18 @@ class Pessoa extends MY_Controller {
     function deletar($id) {
         Pessoa_model::findOrFail($id)->delete();
         $this->session->set_flashdata('success', 'Pessoa deletada com sucesso');
+    }
+
+    /**
+     * Ativa a Pessoa
+     * @author Denny Azevedo
+     * @since 2017/09/11
+     * @param ID da Pessoa
+     */
+    function ativar ($id)
+    {
+        Pessoa_model::withTrashed()->findOrFail($id)->restore();
+        $this->session->set_flashdata('success','Pessoa ativada com sucesso');
     }
 
 }
