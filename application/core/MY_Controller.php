@@ -24,7 +24,11 @@ class MY_Controller extends CI_Controller {
     }
 
     function request($field, $xss = null) {
-        return $this->input->post_get($field, $xss);
+        return $this->input->get_post($field, $xss);
+    }
+
+    function request_all() {
+        return $this->request();
     }
 
     function set_validation($field, $label='', $rules='', $errors=[]){

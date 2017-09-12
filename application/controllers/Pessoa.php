@@ -4,6 +4,9 @@ class Pessoa extends MY_Controller {
     private $id_docente = 1;
 
     function index() {
+        print_r($this->request_all());
+
+        exit(1);
         $pessoas = Pessoa_model::all();
         $this->load->template('pessoas', compact('pessoas'));
     }
