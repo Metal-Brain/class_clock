@@ -12,6 +12,8 @@
 
 		<!-- Style -->
 		<link href="<?= base_url('assets/css/style.css')?>" rel="stylesheet">
+		
+		<link href="<?= base_url('assets/DataTables/dataTables.bootstrap.min.css')?>" rel="stylesheet">
 	</head>
 
 	<body>
@@ -51,3 +53,4 @@
 					</ul>
 				</div>
 			</div>
+			<div id="content" class="row">

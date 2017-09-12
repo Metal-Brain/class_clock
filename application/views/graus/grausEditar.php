@@ -1,5 +1,5 @@
  <div class="col-xs=10 col-sm-10 col-md-10">
-        <form id="formEditar" method="post"action="<?= site_url('grau/atualizar/'.$id)?>">
+        <form id="formEditar" method="post" action="<?= site_url('grau/atualizar/'.$id)?>">
           <div class="form-group" >
 
               <label>Nome:</label>
