@@ -16,7 +16,7 @@
 
 	<div class="row">
 		<div class="col-md-12 form-group">
-			<a class="btn btn-danger active" href="<?= base_url('index.php/Tipo_sala')?>" style="float: right;"><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
+			<button class="btn btn-danger active" type="button" id="btn-delete" style="float: right;" onclick="cancelEdition('Deseja abandonar sua edição?')"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
 			<button type="submit" class="btn btn-success active salvar" style="float: right; margin-right: 10px;"><span class="glyphicon glyphicon-floppy-disk"></span> Salvar</button>
 		</div>
 	</div>
