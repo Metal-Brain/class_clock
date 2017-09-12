@@ -7,4 +7,6 @@
 			}
 		}
 	});
+
+	$("#Tipo_SalaTable").DataTable();
 </script>
