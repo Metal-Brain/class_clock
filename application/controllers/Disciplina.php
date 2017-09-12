@@ -6,7 +6,7 @@
     */
     class Disciplina extends CI_Controller {
         function index () {
-            $disciplinas = Disciplina_model::all();
+            $disciplinas = Disciplina_model::withTrashed()->get();
             $this->load->template('disciplinas/disciplinas',compact('disciplinas'),'disciplinas/js_disciplinas');
         }
 
@@ -31,7 +31,7 @@
         * @since 2017/08/28
         */
         function salvar () {
-            //if ($this->validar()) {
+            if ($this->validar()) {
                 try {
                     $disciplinas = new Disciplina_model();
 					$disciplinas->curso_id = $this->input->post('curso_id');
@@ -41,13 +41,13 @@
 					$disciplinas->modulo = $this->input->post('modulo');
 					$disciplinas->qtd_professor = $this->input->post('qtd_professor');
 					$disciplinas->qtd_aulas = $this->input->post('qtd_aulas');
-					
+
                     $disciplinas->save();
 
                     $this->session->set_flashdata('success','Disciplina cadastrada com sucesso');
                     redirect("disciplina");
                 } catch (Exception $ignored){}
-            //}
+            }
 
             $this->session->set_flashdata('danger','Problemas ao cadastrar a Disciplina, tente novamente!');
             redirect("disciplina/cadastrar");
@@ -64,6 +64,7 @@
 				'disciplinas' => Disciplina_model::all(),
 				'cursos' => Curso_model::all(),
 				'tipo_salas' => TipoSala_model::all(),
+        'disciplina' => Disciplina_model::find($id),
 				);
             $this->load->template('disciplinas/disciplinasEditar', compact('data','id'));
         }
@@ -74,7 +75,7 @@
         * @since 2018/08/28
         */
         function atualizar ($id) {
-           // if($this->validar()){
+          //  if($this->validar()){
                 try {
                     $disciplinas = Disciplina_model::findOrFail($id);
                     $disciplinas->nome_disciplina  = $this->input->post('nome_disciplina') ;
@@ -89,7 +90,7 @@
                     $this->session->set_flashdata('success','Disciplina atualizada com sucesso');
                     redirect("disciplina");
                 } catch (Exception $ignored){}
-           // }
+          //  }
 
             $this->session->set_flashdata('danger','Problemas ao atualizar os dados da Disciplina, tente novamente!');
             redirect('disciplina/editar/'.$id);
@@ -115,6 +116,24 @@
         }
 
         /**
+        * Ativa uma disciplina.
+        * @author Gilberto Pagani Sevilio
+        * @since 2017/09/11
+        * @param ID da disciplina
+        */
+       function ativar ($id) {
+         try {
+           $disciplinas = Disciplina_model::withTrashed()->findOrFail($id);
+           $disciplinas->restore();
+           $this->session->set_flashdata('success','Disciplina ativada com sucesso');
+         } catch (Exception $e) {
+           $this->session->set_flashdata('danger','Erro ao ativar a Disciplina. Tente novamente!');
+         }
+         redirect("disciplina");
+       }
+
+
+        /**
         * Valida os campos utilizados no cadastro e edição
         * @return boolean Indica se a validação passou ou não
         */
@@ -130,6 +149,7 @@
             $this->form_validation->set_rules('sigla_disciplina',
                                               'sigla',
                                               array('required',
+                                                    'min_length[3]',
                                                     'max_length[5]',
                                                     'is_unique[disciplina.sigla_disciplina]',
                                                     'strtoupper'

@@ -31,9 +31,9 @@
 	      </div>
 	    </div>
 	  </div>
-       		    
+
         <!-- Aqui é a Listagem dos Itens -->
-      
+
                 <table id="disciplinaTable" class="table table-striped">
                     <thead>
                         <tr>
@@ -43,7 +43,7 @@
                             <th><center>Qtd. Professores</th>
                             <th><center>Modulo</th>
                             <th><center>Qtd. Aulas Semanais</th>
-                            <th><center>Tipo de sala</th>                            
+                            <th><center>Tipo de sala</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -56,11 +56,11 @@
 							<td><center><?= $disciplina['modulo']; ?></td>
 							<td><center><?= $disciplina['qtd_aulas'] ?></td>
 							<td><center><?= $disciplina['tipo_sala_id']; ?></td>
-							<td class="text-center"><?= ( empty($turno->deletado_em) ) ? 'Ativado' : 'Desativado'?></td>
+							<td class="text-center"><?= ( empty($disciplina->deletado_em) ) ? 'Ativado' : 'Desativado'?></td>
 							<td class="text-center">
-								<a class="btn btn-warning glyphicon glyphicon-pencil" title="Editar" href="<?= site_url('Disciplina/editar/'.$disciplina->id)?>"></a>
 								<?php if ( empty($disciplina->deletado_em) ) : ?>
-									<a class="btn btn-danger glyphicon glyphicon-remove" title="Remover" href="<?= site_url('Disciplina/deletar/'.$disciplina->id)?>"></a>
+									<a class="btn btn-warning glyphicon glyphicon-pencil" title="Editar" href="<?= site_url('Disciplina/editar/'.$disciplina->id)?>"></a>
+									<a class="btn btn-danger glyphicon glyphicon-remove" title="Desativar" href="<?= site_url('Disciplina/deletar/'.$disciplina->id)?>"></a>
 								<?php else : ?>
 								<a class="btn btn-success glyphicon glyphicon-check" title="Ativar" href="<?= site_url('Disciplina/ativar/'.$disciplina->id)?>"></a>
 								<?php endif; ?>
@@ -69,7 +69,6 @@
 						<?php endforeach; ?>
                     </tbody>
                 </table>
-            
-        
-</div>
 
+
+</div>

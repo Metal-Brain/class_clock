@@ -1,6 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-use Illuminate\Database\Eloquent\Model;
 
 /**
  * Esta classe é um modelo do banco de dados que representa as disciplinas que a instituição possui
@@ -21,7 +20,7 @@ class Disciplina_model extends Model{
     public function curso(){
         return $this->belongsTo(Curso_model::class);
     }
-	
+
 	public function tipo_salas(){
 		return $this->belongsToMany(TipoSala_model::class);
 	}
