@@ -35,7 +35,7 @@
                 } catch (Exception $ignored) {}
             }
             $this->session->set_flashdata('danger','Problemas ao cadastrar o curso, tente novamente!');
-            redirect('curso');
+            redirect('curso/cadastrar');
 		}
 
 		public function editar($id) {
@@ -43,7 +43,7 @@
 				'curso' => Curso_model::findOrFail($id),
 				'grau' => Grau_model::all('id','nome_grau')
 			);
-			$this->load->template('cursos/editar', compact('data','id'));		 
+			$this->load->template('cursos/editar', compact('data','id'), 'cursos/js_cursos');		 
 		}
 
 		public function atualizar($id){
@@ -89,7 +89,7 @@
 			
             $this->form_validation->set_rules('codigo_curso','codigo','required|integer|greater_than[0]');
 			
-            $this->form_validation->set_rules('sigla_curso','sigla','required|max_length[5]|strtoupper');
+            $this->form_validation->set_rules('sigla_curso','sigla','required|max_length[3]|strtoupper');
 				
             $this->form_validation->set_rules('qtd_semestre','semestres','required|integer|greater_than[0]');
 			
