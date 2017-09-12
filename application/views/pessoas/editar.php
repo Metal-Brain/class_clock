@@ -1,19 +1,51 @@
-<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10" style="padding-top: 5px">
-	<form id="formTurnos" method="post" action="<?= site_url('turno/atualizar/'.$id)?>">
+<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
+	<form id="formPessoas" method="post" action="<?= site_url('pessoa/atualizar/'.$id)?>">
 		<div class="row">
 			<div class="col-md-5 form-group">
 				<label>Nome:</label>
-				<input name="nome_turno" class="form-control" placeholder="Nome" value="<?= $turno->nome_turno?>">
-				<?= form_error('nome_turno') ?>
+				<input id="nome" name="nome" class="form-control" type="text" placeholder="Nome" value="<?= set_value('nome')?>">
+				<?= form_error('nome') ?>
 			</div>
 		</div>
-
-		<div id="horarios">
-			<button id="btnAdd" type="button" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Adicionar Aula</button>
-
+		<div class="row">
+			<div class="col-md-2 form-group">
+				<label>Prontuário:</label>
+				<input id="prontuario" name="prontuario" class="form-control" type="text" placeholder="Prontuário" maxlength="6" value="<?= set_value('prontuario')?>">
+				<?= form_error('prontuario') ?>
+			</div>
+			
+			<div class="col-md-3 form-group">
+				<label>Senha:</label>
+				<input id="senha" name="senha" class="form-control" type="text" placeholder="Senha" maxlength="6" value="<?= set_value('senha')?>">
+				<?= form_error('senha') ?>
+			</div>
 		</div>
-
-		<?= form_error('horario[]') ?>
+		<!-- SOMENTE PARA DOCENTE 
+		<div class="row">
+			<div class="col-md-2 form-group">
+				<label>Data de nascimento:</label>
+				<input id="data_nascimento" name="data_nascimento" class="form-control" type="date" value="<?= set_value('data_nascimento')?>">
+				<?= form_error('data_nascimento') ?>
+			</div>
+		</div> -->
+		<div class="row">
+			<div class="col-md-5 form-group">
+				<label>E-mail:</label>
+				<input id="email" name="email" class="form-control" type="email" placeholder="E-mail" value="<?= set_value('email')?>">
+				<?= form_error('email') ?>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-5 form-group">
+				<label>Tipo:</label>
+				<div class="checkbox" style="margin-top: 0px;">
+					<label><input type="checkbox" value="">Administrador</label>
+					<label><input type="checkbox" value="">CRA</label>
+					<label><input type="checkbox" value="">DAE</label>
+					<label><input type="checkbox" value="">Docente</label>
+				</div>
+			</div>
+		</div>
 
 		<div class="row">
 			<div class="col-md-12 form-group">

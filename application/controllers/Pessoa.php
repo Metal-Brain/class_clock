@@ -4,12 +4,12 @@ class Pessoa extends MY_Controller {
     private $id_docente = 1;
 
     function index() {
-        $pessoas = Pessoa_model::all();
-        $this->load->template('pessoas', compact('pessoas'));
+        //$pessoas = Pessoa_model::all();
+        $this->load->template('pessoas/pessoas', compact('pessoas'));
     }
 
     function cadastrar() {
-        $tipos = Tipo_model::all();
+        //$tipos = Tipo_model::all();
         $this->load->template('pessoas/cadastrar', compact('tipos'));
     }
 
