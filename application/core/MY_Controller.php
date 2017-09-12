@@ -17,16 +17,33 @@ class MY_Controller extends CI_Controller {
         set_exception_handler([$this, '_exception_handler']);
     }
 
+    /**
+    * Roda a validação e gera uma exceção em caso de falha
+    * @author Vitor "Pliavi"
+    * @throws ValidationFailException
+    */
     function run_validation() {
         if(!$this->form_validation->run()) {
             throw new ValidationFailException("Falha na validação");
         }
     }
 
-    function request($field, $xss = null) {
+    /**
+    * Busca valores nos verbos GET e POST
+    * @author Vitor "Pliavi"
+    * @param $field campo a ser buscado
+    * @param $xss verifica a necessidade de cross-site script
+    * @return null|mixed Dado solicitado
+    */
+    function request($field = null, $xss = null) {
         return $this->input->get_post($field, $xss);
     }
 
+    /**
+    * Busca todos os valores nos verbos GET e POST
+    * @author Vitor "Pliavi"
+    * @return array array com todos os dados
+    */
     function request_all() {
         return $this->request();
     }
