@@ -47,7 +47,7 @@
 		}
 
 		public function atualizar($id){
-      		if($this->validar()) {
+      		if($this->validar('1')) {
         			try {
 							$curso = Curso_model::findOrFail($id);
 							$curso->update(['nome_curso'=>$this->input->post('nome_curso'),
@@ -80,7 +80,7 @@
           redirect("curso");
       }
 
-      public function validar() {
+      public function validar($flag = null) {
 				    // TODO: Separar as regras  de validação do Salvar e atualizar
 					// Pra remover o is_unique quando atualizar
 			$this->form_validation->set_rules('nome_curso','nome','required|min_length[5]|trim|ucwords'); 
@@ -89,7 +89,12 @@
 			
             $this->form_validation->set_rules('codigo_curso','codigo','required|integer|greater_than[0]');
 			
-            $this->form_validation->set_rules('sigla_curso','sigla','required|max_length[3]|strtoupper');
+            if($flag == null){
+                $this->form_validation->set_rules('sigla_curso','sigla','required|max_length[3]|strtoupper|is_unique[curso.sigla_curso]');
+            }else{
+                $this->form_validation->set_rules('sigla_curso','sigla','required|max_length[3]|strtoupper');
+            }
+            
 				
             $this->form_validation->set_rules('qtd_semestre','semestres','required|integer|greater_than[0]');
 			
