@@ -1,5 +1,6 @@
 <script type="text/javascript">
 	$(document).ready(function(){
+		 alert("Hello! I am an alert box!");
 		$('#formCurso').validate({
 			rules: {
 				codigo_curso: { required: true, minlength: 1,maxlength: 5},
@@ -19,6 +20,11 @@
 	});
 </script>
 
+<script>
+function myFunction() {
+    alert("Hello! I am an alert box!");
+}
+</script>
 <script type="text/javascript">
     $(document).ready(function () {
         $("#cursoTable").DataTable({

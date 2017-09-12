@@ -1,22 +1,8 @@
 <!--<pre>
 		<?php print_r($data) ?>
-</pre> -->
+</pre> --> 
  <div class="col-xs=10 col-sm-10 col-md-10">
-						<div class="row" style="margin-top: 5px;">
-							<div class="col-md-12">
-								<?php if ($this->session->flashdata('success')) : ?>
-									<div class="alert alert-success">
-										<p><span class="glyphicon glyphicon-ok-sign"></span> <?= $this->session->flashdata('success') ?></p>
-									</div>
-								<?php elseif ($this->session->flashdata('danger')) : ?>
-									<div class="alert alert-danger">
-										<p><span class="glyphicon glyphicon-remove-sign"></span> <?= $this->session->flashdata('danger') ?></p>
-									</div>
-								<?php endif; ?>
-							</div>
-						</div>
-								<form  name="formCurso" method="post" action="<?= site_url('curso/atualizar/'.$id)?>">
-										<h1>Editar Curso</h1>
+								<form  id="formCurso" name="formCurso" method="post" action="<?= site_url('curso/atualizar/'.$id)?>">
 										<div class="row">	
 											<div class="col-xs-12 col-sm-12 col-md-11 form-group">
 										
@@ -77,8 +63,19 @@
 										
 											<div class="col-xs-12 col-sm-12 col-md-11 form-group">
 												<label>Fechamento</label><br>
-												<label><input type="radio" name="fechamento" id="radioBimestral" value="B">Bimestral</label>
-												<label><input type="radio" name="fechamento" id="radioSemestral" value="S">Semestral</label>
+												<?php
+													if($data['curso']->fechamento =='B'){
+														echo'<label><input type="radio" name="fechamento" id="radioBimestral" value="B" checked>Bimestral</label>';	
+														echo'<label><input type="radio" name="fechamento" id="radioSemestral" value="S">Semestral</label>';
+														
+													}elseif($data['curso']->fechamento =='S'){
+														echo'<label><input type="radio" name="fechamento" id="radioBimestral" value="B">Bimestral</label>';	
+														echo'<label><input type="radio" name="fechamento" id="radioSemestral" value="S" checked>Semestral</label>';
+													}
+												
+												?>
+												
+												
 											</div>
 										</div>
 										
@@ -86,10 +83,19 @@
 											<div class="form-group col-sm-5 col-md-4">
 												<label>Modalidade</label>
 												<select name="grau_id">
-												<option value=""></option>
+											
 												<?php
 													foreach($data['grau'] as $grau){
-														echo '<option value="'. $grau['id'] .'">'. $grau['nome_grau'] .'</option>';}
+														
+												if($grau['id'] == $data['curso']->grau_id){
+															
+													echo '<option value="'. $grau['id'] .'" selected>'. $grau['nome_grau'] .'</option>';
+												}else{
+													echo '<option value="'. $grau['id'] .'">'. $grau['nome_grau'] .'</option>';
+													 }
+														
+														
+														}
 												?>
 												</select>
 											</div>
@@ -103,7 +109,7 @@
 										
 										<div class="row">
 											<div class="col-md-12 form-group">
-												<a class="btn btn-danger active" href="<?= base_url('index.php/Curso')?>" style="float: right;"><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
+												<a class="btn btn-danger active" href="<?= base_url('index.php/Grau')?>" style="float: right;"><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
 												<button type="submit" class="btn btn-success active salvar" style="float: right; margin-right: 10px;"><span class="glyphicon glyphicon-floppy-disk"></span> Salvar</button>
 											</div>
 										</div>
