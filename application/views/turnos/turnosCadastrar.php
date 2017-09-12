@@ -1,5 +1,4 @@
 <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
-	<h2>Teste</h2>
 	<form id="formTurnos" action="<?= site_url('turno/salvar')?>" method="post">
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-5 form-group">
@@ -11,11 +10,11 @@
 		<div class="row" id="turnoCadastrar">
 			<div class="col-xs-12 col-sm-12 col-md-12 form-group">
 				<button id="btnAdd" type="button" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Adicionar Aula</button>
-				<button id="btnRemove" type="button" class="btn btn-danger add-field"><span class="glyphicon glyphicon-minus"></span> Remover Aula</button>
 			</div>
 		</div>
 		<div id="horarios">
 
+			<?= form_error('horario[]') ?>
 		</div>
 		<div class="row">
 			<div class="col-md-12 form-group">

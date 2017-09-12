@@ -168,11 +168,16 @@ class Turno extends CI_Controller {
     $resultado = TRUE;
     $horarios = $this->input->post('horario');
 
-    foreach ($horarios as $horario) {
-      if (empty($horario)) {
-        $this->form_validation->set_message('horarioRequired','Informe todos os horários');
-        $resultado = FALSE;
-        break;
+    if (sizeof($horarios) < 2) {
+      $this->form_validation->set_message('horarioRequired','Informe ao menos um aula');
+      $resultado = FALSE;
+    } else {
+      foreach ($horarios as $horario) {
+        if (empty($horario)) {
+          $this->form_validation->set_message('horarioRequired','Informe todos os horários');
+          $resultado = FALSE;
+          break;
+        }
       }
     }
 
