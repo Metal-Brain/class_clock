@@ -1,8 +1,23 @@
 <!--<pre>
-		<?php print_r($grau_id) ?>
+		<?php print_r($grau_id); ?>
 </pre> -->
  <div class="col-xs=10 col-sm-10 col-md-10">
+ <!-- Alertas de sucesso / erro -->
+						<div class="row" style="margin-top: 5px;">
+							<div class="col-md-12">
+								<?php if ($this->session->flashdata('success')) : ?>
+									<div class="alert alert-success">
+										<p><span class="glyphicon glyphicon-ok-sign"></span> <?= $this->session->flashdata('success') ?></p>
+									</div>
+								<?php elseif ($this->session->flashdata('danger')) : ?>
+									<div class="alert alert-danger">
+										<p><span class="glyphicon glyphicon-remove-sign"></span> <?= $this->session->flashdata('danger') ?></p>
+									</div>
+								<?php endif; ?>
+							</div>
+						</div>	
 								<form  name="formCurso" method="post" action="<?= site_url('curso/salvar')?>">
+										<h1>Cadastrar Curso</h1>
 										<div class="row">	
 											<div class="col-xs-12 col-sm-12 col-md-11 form-group">
 										
@@ -92,6 +107,13 @@
 											<div class="col-md-12 form-group">
 												<a class="btn btn-danger active" href="<?= base_url('index.php/Curso')?>" style="float: right;"><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
 												<button type="submit" class="btn btn-success active salvar" style="float: right; margin-right: 10px;"><span class="glyphicon glyphicon-floppy-disk"></span> Salvar</button>
+											</div>
+										</div>
+										
+								</form>
+											
+							</div>
+
 											</div>
 										</div>
 										
