@@ -32,6 +32,9 @@
 				$('.hora').mask('00:00');
 			}
 			var addHorario = function () {
+				if($(".text-danger")){
+					$(".text-danger").remove();
+				}
 				var content = `
 				<div class="row">
 					<div class="col-xs-12 col-sm-12 col-md-1 form-group">
