@@ -13,6 +13,9 @@
     <!-- Style -->
     <link href="<?= base_url('assets/css/style.css')?>" rel="stylesheet">
 
+    <!-- DataTable -->
+    <link href="<?= base_url('assets/DataTables/dataTables.bootstrap.min.css')?>" rel="stylesheet">
+
 </head>
 
 <body>
