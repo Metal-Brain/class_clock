@@ -5,7 +5,7 @@
         protected $table = 'area';
         protected $guarded = [];
 
-        public docente(){
+        public function docente(){
             return $this->hasMany(Docente_model::class);
         }
     }
