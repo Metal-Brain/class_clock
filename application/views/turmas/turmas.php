@@ -26,7 +26,7 @@
 
 	<!-- Lista de 'botoes' links do Bootstrap -->
 	<?php if ($this->session->nivel == 1) :?>
-	<ul class="nav nav-pills">
+	<ul class="nav nav-pills navpills">
 		<!-- 'botao' link para a listagem -->
 		<li class="active"><a data-toggle="pill" href="#list">Listar todas</a></li>
 		<!-- 'botao' link para novo registro -->
