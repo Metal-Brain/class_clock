@@ -39,6 +39,7 @@
     <!-- Aqui é onde popula a tabela com os dados que vem do backend, onde cada view vai configurar de acordo.-->
     <tbody>
       <?php foreach ($graus as $grau) { ?>
+      <tr <?php if($grau->deletado_em): echo 'class="danger"'; endif; ?>>
     <!-- <?= ($graus['valid'] ? '<tr>' : '<tr class="danger">') ?>  -->
 		  <td><center><?= $grau['nome_grau']; ?></td>
           <td><center><?= $grau['codigo']; ?></td>
