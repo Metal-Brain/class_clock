@@ -13732,7 +13732,7 @@ if (typeof jQuery === 'undefined') {
 				 *      } );
 				 *    } );
 				 */
-				"sNext": "Next",
+				"sNext": "Próximo",
 	
 	
 				/**
@@ -13755,7 +13755,7 @@ if (typeof jQuery === 'undefined') {
 				 *      } );
 				 *    } );
 				 */
-				"sPrevious": "Previous"
+				"sPrevious": "Anterior"
 			},
 	
 			/**
@@ -13778,7 +13778,7 @@ if (typeof jQuery === 'undefined') {
 			 *      } );
 			 *    } );
 			 */
-			"sEmptyTable": "No data available in table",
+			"sEmptyTable": "Não existem itens cadastrados",
 	
 	
 			/**
@@ -13810,7 +13810,7 @@ if (typeof jQuery === 'undefined') {
 			 *      } );
 			 *    } );
 			 */
-			"sInfo": "Showing _START_ to _END_ of _TOTAL_ entries",
+			"sInfo": "_START_-_END_ de _TOTAL_",
 	
 	
 			/**
@@ -13831,7 +13831,7 @@ if (typeof jQuery === 'undefined') {
 			 *      } );
 			 *    } );
 			 */
-			"sInfoEmpty": "Showing 0 to 0 of 0 entries",
+			"sInfoEmpty": "Exibindo 0 de 0",
 	
 	
 			/**
@@ -13971,7 +13971,7 @@ if (typeof jQuery === 'undefined') {
 			 *      } );
 			 *    } );
 			 */
-			"sLengthMenu": "Show _MENU_ entries",
+			"sLengthMenu": "Exibir _MENU_ itens",
 	
 	
 			/**
@@ -14051,7 +14051,7 @@ if (typeof jQuery === 'undefined') {
 			 *      } );
 			 *    } );
 			 */
-			"sSearch": "Search:",
+			"sSearch": "Pesquisar:",
 	
 	
 			/**

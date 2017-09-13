@@ -27,7 +27,7 @@
 			</div>
 		</div>
 	</div>
-	<table id="TurnoTable" class="table table-striped">
+	<table id="cursoTable" class="table table-striped">
 		<thead>
 			<tr>
 				<th class="text-center">Código</th>
@@ -36,6 +36,8 @@
 				<th class="text-center">Quantidade de Semestres</th>
 				<th class="text-center">Modalidade</th>
 				<th class="text-center">Fechamento</th>
+				<th class="text-center">Status</th>
+				<th class="text-center">Ações</th>
 			</tr>
 		</thead>
 

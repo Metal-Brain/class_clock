@@ -23,16 +23,12 @@
 		
 		
 	});
-		
-			 alert("Hello! I am an alert box!");
-			
-	
 	
 </script>
 <script type="text/javascript">
-	$(document).ready(function(){
-		alert("test");
-	});
+  $(document).ready(function () {
+        $('#cursoTable').DataTable();
+    });
 </script>
 <script>
 function myFunction() {
