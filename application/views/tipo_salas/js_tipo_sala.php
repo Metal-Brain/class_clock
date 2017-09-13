@@ -47,6 +47,11 @@
 			}
 		}
 	});
+    
+	$('#Tipo_SalaTable').dataTable( {
+		"language": {
+			"url": "<?= base_url('assets/DataTables/translatePortuguese.js');?>"
+		}
+	} );
 
-	$("#Tipo_SalaTable").DataTable();
 </script>
