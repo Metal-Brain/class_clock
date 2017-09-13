@@ -11,7 +11,7 @@
            }, "Por favor insira somente caracteres numéricos acima de zero");
 
 
-    /*$("#formCadastrar").validate({
+    $("#formCadastrar").validate({
   rules: {
     nome_grau: {
       required: true,
@@ -35,7 +35,7 @@
     }
      
   }
-});*/
+});
 
    
 	
@@ -87,7 +87,7 @@
  $(document).ready(function(){
 
    $("#GrauTable").DataTable();
- })
+ });
 </script>
 
 <script type="text/javascript">
