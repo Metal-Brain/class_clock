@@ -48,8 +48,8 @@
 										<div class="row">
 											<div class="form-group col-sm-3 col-md-2">
 											<label>Codigo</label>
-												<input class="form-control" placeholder="ex: 123" type="number" name="codigo_curso" id="codigo_curso" maxlength="5">
-																		
+												<input class="form-control" placeholder="ex: 123" type="number" onKeyPress="if(this.value.length==5) return false;" name="codigo_curso" id="codigo_curso">
+							
 											</div>
 										</div>
 
