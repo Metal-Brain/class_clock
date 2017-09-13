@@ -60,9 +60,10 @@
 	
 					<td class="text-center"><?= ( empty($curso->deletado_em) ) ? 'Ativado' : 'Desativado'?></td>
 					<td class="text-center">
-						<a class="btn btn-warning glyphicon glyphicon-pencil" title="Editar" href="<?= site_url('curso/editar/'.$curso->id)?>"></a>
+						
 						<?php if ( empty($curso->deletado_em) ) : ?>
-							<a class="btn btn-danger glyphicon glyphicon-remove" title="Remover" href="<?= site_url('curso/deletar/'.$curso->id)?>"></a>
+						<a class="btn btn-warning glyphicon glyphicon-pencil" title="Editar" href="<?= site_url('curso/editar/'.$curso->id)?>"></a>
+							<button class="btn btn-danger" type="button" id="btn-delete" onclick="confirmDelete(<?= $curso->id ?>,'Deseja desativar o turno?','deletar')"> <i class="glyphicon glyphicon-remove"></i></button>
 						<?php else : ?>
 							<a class="btn btn-success glyphicon glyphicon-check" title="Ativar" href="<?= site_url('curso/ativar/'.$curso->id)?>"></a>
 						<?php endif; ?>
