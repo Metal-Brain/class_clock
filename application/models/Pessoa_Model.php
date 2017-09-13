@@ -5,11 +5,11 @@
         protected $table = 'pessoa';
         protected $guarded = [];
 
-        public docente(){
+        public function docente(){
             return $this->hasOne(Docente_model::class);
         }
         
-        public tipo(){
+        public function tipo(){
             return $this->belongsToMany(Tipo_model::class);
         }
 

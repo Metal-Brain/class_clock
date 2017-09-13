@@ -5,7 +5,7 @@
         protected $table = 'tipo';
         protected $guarded = [];
 
-        public docente(){
+        public function docente(){
             return $this->belongsToMany(Docente_model::class);
         }
         

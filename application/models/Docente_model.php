@@ -5,11 +5,11 @@
         protected $table = 'docente';
         protected $guarded = [];
         
-        public pessoa(){
-            return $this->hasOne(Pessoa_model::class);
+        public function pessoa(){
+            return $this->belongsTo(Pessoa_model::class);
         }
 
-        public area(){
+        public function area(){
             return $this->belongsTo(Area_model::class);
         }
 
