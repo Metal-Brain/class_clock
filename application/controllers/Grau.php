@@ -29,9 +29,21 @@ class Grau extends CI_Controller {
     * @author Jean Brock | Vitor Silvério | Thalita Barbosa
     */
     function salvar () {
-        $this->form_validation->set_rules('nome_grau','nome',array('required','max_length[50]',
-                                          'trim','regex_match[/^\D+$/]','alpha_numeric_spaces','is_unique[grau.nome_grau]'));
-        $this->form_validation->set_rules('codigo','codigo', array('required','integer','greater_than[0]','max_length[5]'));
+        $this->form_validation->set_rules('nome_grau',
+                                          'nome',
+                                          array('required','max_length[50]',
+                                            'trim',
+                                            'regex_match[/^\D+$/]',
+                                            'alpha_numeric_spaces',
+                                            'is_unique[grau.nome_grau]')
+                                         );
+        $this->form_validation->set_rules('codigo',
+                                          'codigo',
+                                           array('required',
+                                                 'integer',
+                                                 'greater_than[0]',
+                                                 'max_length[5]')
+                                         );
         $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
 
         if($this->form_validation->run()){
@@ -57,7 +69,7 @@ class Grau extends CI_Controller {
     * @author Jean Brock | Vitor Silvério | Thalita Barbosa
     */
     function editar($id) {
-        $grau = Grau_model::WithTrashed()->findOrFail($id);
+        $grau = Grau_model::withTrashed()->findOrFail($id);
         $this->load->template('graus/grausEditar',compact('grau', 'id'),'graus/js_graus');
     }
 
@@ -66,9 +78,21 @@ class Grau extends CI_Controller {
     * @author Jean Brock | Vitor Silvério | Thalita Barbosa
     */
     function atualizar ($id) {
-        $this->form_validation->set_rules('nome_grau','nome',array('required','max_length[50]',
-                                          'trim','regex_match[/^\D+$/]','alpha_numeric_spaces'));
-        $this->form_validation->set_rules('codigo','codigo', array('required','integer','greater_than[0]','max_length[5]'));
+        $this->form_validation->set_rules('nome_grau',
+                                          'nome',
+                                          array('required',
+                                                'max_length[50]',
+                                                'trim',
+                                                'regex_match[/^\D+$/]',
+                                                'alpha_numeric_spaces')
+                                         );
+        $this->form_validation->set_rules('codigo',
+                                          'codigo', 
+                                          array('required',
+                                                'integer',
+                                                'greater_than[0]',
+                                                'max_length[5]')
+                                         );
         $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
 
         if($this->form_validation->run()){
@@ -105,4 +129,22 @@ class Grau extends CI_Controller {
 
         redirect('Grau');
     }
+    
+    /**
+    * Ativa o Grau
+    * @author Thalita Barbosa
+    * @since 2017/09/12
+    * @param ID do grau
+   */
+    function ativar ($id) {
+        try {
+            $grau = Grau_model::withTrashed()->findOrFail($id);
+            $grau->restore();
+            $this->session->set_flashdata('success','Grau ativado com sucesso');
+        } catch (Exception $e) {
+            $this->session->set_flashdata('danger','Erro ao ativar o grau. Tente novamente!');
+    }
+            redirect("grau");
+  }
+
 }
