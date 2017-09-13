@@ -94,8 +94,6 @@
 
 
         public function validar($flag = null) {
-            // TODO: Separar as regras  de validação do Salvar e atualizar
-            // Pra remover o is_unique quando atualizar
             $this->form_validation->set_rules('nome_curso','nome','required|min_length[5]|trim|ucwords'); 
 
             $this->form_validation->set_rules('grau_id','modalidade','required|integer');
