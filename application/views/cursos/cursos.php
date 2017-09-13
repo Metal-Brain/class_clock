@@ -1,10 +1,10 @@
 <!--<pre>
 		<?php print_r($cursos) ?>
 </pre> -->
-	<div class="container col-md-12 col-lg-10">
+	<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
 	<!-- Alertas de sucesso / erro -->
 	<div class="row" style="margin-top: 5px;">
-		<div class="col-md-12">
+		<div class="col-sm-10 col-md-12">
 			<?php if ($this->session->flashdata('success')) : ?>
 				<div class="alert alert-success">
 					<p><span class="glyphicon glyphicon-ok-sign"></span> <?= $this->session->flashdata('success') ?></p>
