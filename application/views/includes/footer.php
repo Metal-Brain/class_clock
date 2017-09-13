@@ -1,4 +1,4 @@
-</div><!-- #content -->
+	</div><!-- #content -->
 	<div id="footer" class="row text-center">
 		<div class="col-md-12">
 			<p><strong>Instituto Federal de Educação, Ciência e Tecnologia de São Paulo - Câmpus Caraguatatuba</strong></p>
