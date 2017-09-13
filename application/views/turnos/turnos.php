@@ -1,64 +1,64 @@
-<div class="container col-md-12 col-lg-10">
+<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
 	<!-- Alertas de sucesso / erro -->
-	<div class="row">
-		<div class="col-lg-offset-3 col-lg-6">
+	<div class="row" style="margin-top: 5px;">
+		<div class="col-md-12">
 			<?php if ($this->session->flashdata('success')) : ?>
 				<div class="alert alert-success">
-					<p class="text-center"><?= $this->session->flashdata('success') ?></p>
+					<p><span class="glyphicon glyphicon-ok-sign"></span> <?= $this->session->flashdata('success') ?></p>
 				</div>
 			<?php elseif ($this->session->flashdata('danger')) : ?>
 				<div class="alert alert-danger">
-					<p class="text-center"><?= $this->session->flashdata('danger') ?></p>
+					<p><span class="glyphicon glyphicon-remove-sign"></span> <?= $this->session->flashdata('danger') ?></p>
 				</div>
 			<?php endif; ?>
 		</div>
 	</div>
-	
+
 	<!-- Início do conteúdo da view-->
-	<div class="top-bar" style="padding: 0 0 15px 0">
+	<div style="padding: 0 0 15px 0">
 		<div class="row">
-			<div class="col-md-5">
-				<div class="input-group">
-					<input type="text" class="form-control input-filter" placeholder="Pesquisar">
-					<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-				</div>
-			</div>
-			<div class="col-md-2">
+			<div class="col-md-12">
+			<h2 class="page-header">Turno
 				<a class="btn btn-success" href="<?= base_url('index.php/Turno/cadastrar')?>"><span class="glyphicon glyphicon-plus"></span> Cadastrar</a>
+			</h2>
 			</div>
 		</div>
 	</div>
 	<table id="TurnoTable" class="table table-striped">
 		<thead>
 			<tr>
-				<th><center>Nome</th>
-				<th><center>Qtd. Aulas</th>
-				<th><center>Horário de entrada</th>
-				<th><center>Horário de saída</th>
-				<th><center>Status</th>
-				<th><center>Ação</th>
+				<th class="text-center">Nome</th>
+				<th class="text-center">Qtd. Aulas</th>
+				<th class="text-center">Horário das Aulas</th>
+				<th class="text-center">Status</th>
+				<th class="text-center">Ações</th>
 			</tr>
 		</thead>
 		<!-- Aqui é onde popula a tabela com os dados que vem do backend, onde cada view vai configurar de acordo.-->
 		<tbody>
 			<?php foreach ($turnos as $turno) { ?>
-				<?= ($turno['status'] ? '<tr>' : '<tr class="danger">') ?>
-					<td><center><?= $turno['nome_turno']; ?></td>
-					<td><center><?= $turno['qtdAula']; ?></td>
-					<td><center><?= $turno['inicio']; ?></td>
-					<td><center><?= $turno['fim']; ?></td>
-					<td><center><?php if ($turno['status']): echo "Ativo";
-					else: echo "Inativo";
-					endif; ?></td>
-				<td><center>
-					<?php if ($turno['status']): ?>
-						<!-- Esse button editar vai chamar o outro tab-pane editar, não está direcionado pois os dados que ele tenta passar estão com problema, se deixar apeanas o data-toggle= pill e o href editar vai chamar o tabpane -->
-						<button type="button"  data-toggle="pill" href="#editar" class="btn btn-warning" title="Editar" data-toggle="modal" data-target="#exampleModal" data-whatevernomeTurno="<?= $turno['nomeTurno']; ?>" data-whateverid="<?= $turno['id']; ?>" data-whateverqtdAula="<?= $turno['qtdAula']; ?>"  data-whateverinicio="<?= $turno['inicio']; ?>" data-whateverfim="<?= $turno['fim']; ?>"><span class="glyphicon glyphicon-pencil"></span></button>
-						<button onClick="exclude(<?= $turno['id'] ?>);" type="button" class="btn btn-danger" title="Desativar"><span class="glyphicon glyphicon-remove"></span></button>
-					<?php else : ?>
-						<button onClick="able(<?= $turno['id'] ?>)" type="button" class="btn btn-success delete" title="Ativar"><span class="glyphicon glyphicon-ok"></span></button>
-					<?php endif; ?>
-				</td>
+				<tr <?php if($turno->deletado_em): echo 'class="danger"'; endif; ?>>
+					<td class="text-center"><?= ucwords($turno['nome_turno']); ?></td>
+					<td class="text-center">
+						<?= $turno->qtd_horarios(); ?>
+					</td>
+					<td class="text-center">
+						<?php foreach ($turno->horarios as $horario) :?>
+							<?= removerSegundos($horario->inicio); ?>
+							<?= removerSegundos($horario->fim); ?>
+							<br>
+						<?php endforeach; ?>
+					</td>
+					<td class="text-center"><?= ( empty($turno->deletado_em) ) ? 'Ativado' : 'Desativado'?></td>
+					<td class="text-center">
+						<?php if ( empty($turno->deletado_em) ) : ?>
+							<a class="btn btn-warning glyphicon glyphicon-pencil" title="Editar" href="<?= site_url('Turno/editar/'.$turno->id)?>"></a>
+							<button class="btn btn-danger" type="button" id="btn-delete" onclick="confirmDelete(<?= $turno->id ?>,'Deseja desativar o turno?','deletar')"> <i class="glyphicon glyphicon-remove"></i></button>
+						<?php else : ?>
+							<a class="btn btn-warning glyphicon glyphicon-pencil disabled" title="Editar" href="<?= site_url('Turno/editar/'.$turno->id)?>"></a>
+							<button class="btn btn-success" type="button" id="btn-delete" onclick="confirmDelete(<?= $turno->id ?>,'Deseja ativar o turno?','ativar')"> <i class="glyphicon glyphicon-check"></i></button>
+						<?php endif; ?>
+					</td>
 				</tr>
 			<?php } ?>
 		</tbody>
