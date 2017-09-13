@@ -57,7 +57,7 @@ class Grau extends CI_Controller {
     * @author Jean Brock | Vitor Silvério | Thalita Barbosa
     */
     function editar($id) {
-        $grau = Grau_model::WithTrashed()->findOrFail($id);
+        $grau = Grau_model::withTrashed()->findOrFail($id);
         $this->load->template('graus/grausEditar',compact('grau', 'id'),'graus/js_graus');
     }
 
@@ -105,4 +105,22 @@ class Grau extends CI_Controller {
 
         redirect('Grau');
     }
+    
+      /**
+        * Ativa o Grau
+        * @author Thalita Barbosa
+        * @since 2017/09/12
+        * @param ID do grau
+   */
+    function ativar ($id) {
+        try {
+            $grau = Grau_model::withTrashed()->findOrFail($id);
+            $grau->restore();
+            $this->session->set_flashdata('success','Grau ativado com sucesso');
+        } catch (Exception $e) {
+            $this->session->set_flashdata('danger','Erro ao ativar o grau. Tente novamente!');
+    }
+            redirect("grau");
+  }
+
 }
