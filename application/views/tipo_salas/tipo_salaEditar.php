@@ -3,7 +3,7 @@
 
 	<div class="form-group">	
 		<label>Nome:</label>
-		<input name="nome_tipo_sala" class="form-control" required maxlength="30" value="<?= $tipo_salas->nome_tipo_sala?>">
+		<input name="nome_tipo_sala" class="form-control" required maxlength="30" value="<?= htmlspecialchars($tipo_salas->nome_tipo_sala) ?>">
 		<?= form_error('nome_tipo_sala') ?>
 	</div>
 

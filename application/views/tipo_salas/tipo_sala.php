@@ -38,7 +38,7 @@
 		<!-- Aqui é onde popula a tabela com os dados que vem do backend, onde cada view vai configurar de acordo.-->
 		<tbody>
 			<?php foreach ($tipo_salas as $tipo_salas) : ?>
-			<tr <?php if($tipo_salas->deletado_em): echo 'class="danger"'; endif; ?>>
+			<tr <?php if($tipo_salas->deletado_em): echo 'class="danger"'; endif; ?> >
 				<td class="text-center"><?= $tipo_salas['nome_tipo_sala']; ?></td>
 				<td class="text-center"><?= $tipo_salas['descricao_tipo_sala']; ?></td>
 				<td class="text-center"><?= ( empty($tipo_salas->deletado_em) ) ? 'Ativado' : 'Desativado'?></td>
