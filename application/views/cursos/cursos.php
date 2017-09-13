@@ -65,7 +65,7 @@
 						<a class="btn btn-warning glyphicon glyphicon-pencil" title="Editar" href="<?= site_url('curso/editar/'.$curso->id)?>"></a>
 							<button class="btn btn-danger" type="button" id="btn-delete" onclick="confirmDelete(<?= $curso->id ?>,'Deseja desativar o Curso?','deletar')"> <i class="glyphicon glyphicon-remove"></i></button>
 						<?php else : ?>
-							<a class="btn btn-success glyphicon glyphicon-check" title="Ativar" href="<?= site_url('curso/ativar/'.$curso->id)?>"></a>
+							<button class="btn btn-success" type="button" id="btn-delete" onclick="confirmDelete(<?= $curso->id ?>,'Deseja ativar o Curso?','ativar')"> <i class="glyphicon glyphicon-check"></i></button>
 						<?php endif; ?>
 					</td>
 				</tr>
