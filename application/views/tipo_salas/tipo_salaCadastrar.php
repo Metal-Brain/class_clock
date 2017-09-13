@@ -1,4 +1,4 @@
-<div class="container col-xs=10 col-sm-10 col-md-10" style="padding-top: 5px">
+<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
 
 	<form id="formTipo_Sala" action="<?= site_url('tipo_sala/salvar')?>" method="post">
 		<div class="form-group">
