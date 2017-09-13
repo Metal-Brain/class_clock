@@ -39,8 +39,8 @@
 		<tbody>
 			<?php foreach ($tipo_salas as $tipo_salas) : ?>
 			<tr <?php if($tipo_salas->deletado_em): echo 'class="danger"'; endif; ?> >
-				<td class="text-center"><?= $tipo_salas['nome_tipo_sala']; ?></td>
-				<td class="text-center"><?= $tipo_salas['descricao_tipo_sala']; ?></td>
+				<td class="text-center"><?= htmlspecialchars($tipo_salas->nome_tipo_sala) ?></td>
+				<td class="text-center"><?= htmlspecialchars($tipo_salas->descricao_tipo_sala); ?></td>
 				<td class="text-center"><?= ( empty($tipo_salas->deletado_em) ) ? 'Ativado' : 'Desativado'?></td>
 				<td class="text-center">
 					<?php if ( empty($tipo_salas->deletado_em) ) : ?>
