@@ -31,7 +31,7 @@
         * @since 2017/08/28
         */
         function salvar () {
-            if ($this->validar()) {
+          //  if ($this->validar()) {
                 try {
                     $disciplinas = new Disciplina_model();
 					$disciplinas->curso_id = $this->input->post('curso_id');
@@ -47,7 +47,7 @@
                     $this->session->set_flashdata('success','Disciplina cadastrada com sucesso');
                     redirect("disciplina");
                 } catch (Exception $ignored){}
-            }
+          //  }
 
             $this->session->set_flashdata('danger','Problemas ao cadastrar a Disciplina, tente novamente!');
             redirect("disciplina/cadastrar");
@@ -66,7 +66,7 @@
 				'tipo_salas' => TipoSala_model::all(),
         'disciplina' => Disciplina_model::find($id),
 				);
-            $this->load->template('disciplinas/disciplinasEditar', compact('data','id'));
+            $this->load->template('disciplinas/disciplinasEditar', compact('data','id'),'disciplinas/js_disciplinas');
         }
 
         /**
@@ -142,7 +142,6 @@
                                               'nome da disciplina',
                                               array('required',
                                                     'min_length[5]',
-                                                    'is_unique[disciplina.nome_disciplina]',
                                                     'ucwords'
                                                     )
                                              );
@@ -151,7 +150,6 @@
                                               array('required',
                                                     'min_length[3]',
                                                     'max_length[5]',
-                                                    'is_unique[disciplina.sigla_disciplina]',
                                                     'strtoupper'
                                                    )
                                              );

@@ -2,8 +2,10 @@
 
 
 <script>
-
-    $("#curso_selecionado").val("Fisica");
+    $(document).ready(function()
+    {
+      $("div.test select").val("<?php $data['disciplina']['curso_id']  ?>");
+    });
 
     $("#formDisciplina").validate({
   rules: {

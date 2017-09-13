@@ -13,7 +13,7 @@
 						<input type="text" class="form-control" name="sigla_disciplina" placeholder="ex: LOPA1" value="<?= $data['disciplina']['sigla_disciplina'] ?>" style="max-width:300px;" >
 					</div>
 
-					<div class="form-group">
+					<div class="form-group test">
 						<label>Curso</label>
 						<select name="curso_id" class="form-control" style="max-width:400px;">
 
@@ -55,4 +55,5 @@
 						<button type="submit" class="btn btn-success active salvar" style="float: right; margin-right: 10px;"><span class="glyphicon glyphicon-floppy-disk"></span> Salvar</button>
 					</div>
             </form>
+            
         </div>
