@@ -4,8 +4,7 @@ require "exceptions/ValidationFailException.php";
 
 class MY_Controller extends CI_Controller {
 
-    protected $previous_page;
-    protected $name;
+    protected $name; // Nome alternativo para mostrar nos erros
 
     public function __construct() {
         parent::__construct();
@@ -48,11 +47,23 @@ class MY_Controller extends CI_Controller {
         return $this->request();
     }
 
+    /**
+    * Adiciona uma regra de validação
+    * @author Vitor "Pliavi"
+    * @param $field campo a ser verificado
+    * @param $label nome alternativo do campo
+    * @param $rules regras de validação
+    * @param $errors mensagens de erro
+    */
     function set_validation($field, $label='', $rules='', $errors=[]){
         $this->form_validation->set_rules($field, $label, $rules, $errors);
     }
 
-    function set_validations($rules=[]){
+    /**
+    * Adiciona várias regras de validação
+    * @param $rules array de regras de validação
+    */
+    function set_validations($rules=[]) {
         foreach ($rules as $rule) {
             list($field, $label, $rules, $errors) = [
                 $rule[0],
@@ -64,6 +75,11 @@ class MY_Controller extends CI_Controller {
         }
     }
 
+    /**
+    * Controla exceções específicas e já dá os retornos automaticamente, é função mágica
+    * @author Vitor "Pliavi"
+    * @param $exception entrada de exceção
+    */
     function _exception_handler($exception) {
         $sess = $this->session;
         $exception_name = $this->get_exception_name($exception);
@@ -84,6 +100,11 @@ class MY_Controller extends CI_Controller {
         }
     }
 
+    /**
+    * Pega o último nome da exceção, removendo o namespace caso exista
+    * @author Vitor "Pliavi"
+    * @param $exception
+    */
     private function get_exception_name($exception) {
         $broke_name = explode("\\", get_class($exception));
         return end($broke_name);
