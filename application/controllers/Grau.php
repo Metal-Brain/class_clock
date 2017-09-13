@@ -12,7 +12,7 @@ class Grau extends CI_Controller {
     * @author Jean Brock | Vitor Silvério | Thalita Barbosa
     */
     function index () {
-        $graus = Grau_model::all();
+        $graus = Grau_model::withTrashed()->get();
         $this->load->template('graus/graus', compact('graus'),'graus/js_graus');
     }
 
