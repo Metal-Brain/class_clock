@@ -17,7 +17,7 @@
         */
 
         public function turno(){
-            return $this->belongsTo(Turno_model::class, 'horario_id');
+            return $this->belongsTo(Turno_model::class);
         }
 
     }
