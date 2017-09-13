@@ -31,11 +31,12 @@
 				<label><input type="checkbox" value="">Administrador</label>
 				<label><input type="checkbox" value="">CRA</label>
 				<label><input type="checkbox" value="">DAE</label>
-				<label><input type="checkbox" value="">Docente</label>
+				<label><input class ="checkdocente-toggle" type="checkbox" value="" data-element="#conteudo-docente"> Docente</label>
 			</div>
 		</div>
 		
 		<!-- Docente -->
+		<div id="conteudo-docente">
 		<label>Data de nascimento:</label>
 		<div class="form-group width-180">
 			<input id="data_nascimento" name="data_nascimento" class="form-control" type="date" value="<?= set_value('data_nascimento')?>">
@@ -47,8 +48,7 @@
 			<input id="ingressoCampus" name="ingressoCampus" class="form-control" type="date" value="<?= set_value('ingressoCampus')?>">
 			<?= form_error('ingressoCampus') ?>
 		</div>
-		
-		
+				
 		<label>Data de ingresso no câmpus:</label>
 		<div class="form-group width-180">
 			<input id="ingressoIFSP" name="ingressoIFSP" class="form-control" type="date" value="<?= set_value('ingressoIFSP')?>">
@@ -71,7 +71,7 @@
 		<label>Regime de contrato:</label>
 		<div class="form-group width-180">
 			<div class="dropdown">
-				<button class="btn dropdown-toggle" type="button" data-toggle="dropdown">Selecione
+				<button class="btn dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">Selecione
 				<span class="caret"></span></button>
 				<ul class="dropdown-menu">
 					<li><a href="#">HTML</a></li>
@@ -80,6 +80,7 @@
 				</ul>
 			</div>
 		</div>
+		</div>
 		
 		<div class="form-group">
 			<a class="btn btn-danger active" href="<?= base_url('index.php/pessoa')?>" style="float: right;"><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
@@ -87,3 +88,13 @@
 		</div>
 	</form>
 </div>
+
+<script type="text/javascript">
+	$(function() {
+		$(".checkdocente-toggle").click(function(e){
+			e.preventDefault();
+			el = $(this).data('element');
+			$(el).toggle();
+		});
+	});
+</script>
