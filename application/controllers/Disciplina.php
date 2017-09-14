@@ -31,26 +31,26 @@
         * @since 2017/08/28
         */
         function salvar () {
-          //  if ($this->validar()) {
+            if ($this->validar()) {
                 try {
-                    $disciplinas = new Disciplina_model();
-					$disciplinas->curso_id = $this->input->post('curso_id');
-					$disciplinas->tipo_sala_id = $this->input->post('tipo_sala_id');
-					$disciplinas->nome_disciplina  = $this->input->post('nome_disciplina') ;
-                    $disciplinas->sigla_disciplina = $this->input->post('sigla_disciplina');
-					$disciplinas->modulo = $this->input->post('modulo');
-					$disciplinas->qtd_professor = $this->input->post('qtd_professor');
-					$disciplinas->qtd_aulas = $this->input->post('qtd_aulas');
+                    $disciplina = new Disciplina_model();
+					$disciplina->curso_id = $this->input->post('curso_id');
+					$disciplina->tipo_sala_id = $this->input->post('tipo_sala_id');
+					$disciplina->nome_disciplina  = $this->input->post('nome_disciplina') ;
+                    $disciplina->sigla_disciplina = $this->input->post('sigla_disciplina');
+					$disciplina->modulo = $this->input->post('modulo');
+					$disciplina->qtd_professor = $this->input->post('qtd_professor');
+					$disciplina->qtd_aulas = $this->input->post('qtd_aulas');
 
-                    $disciplinas->save();
+                    $disciplina->save();
 
                     $this->session->set_flashdata('success','Disciplina cadastrada com sucesso');
                     redirect("disciplina");
                 } catch (Exception $ignored){}
-          //  }
+            }
 
             $this->session->set_flashdata('danger','Problemas ao cadastrar a Disciplina, tente novamente!');
-            redirect("disciplina/cadastrar");
+            redirect("disciplina");
         }
 
         /**
@@ -61,10 +61,9 @@
         */
         function editar($id) {
             $data = array(
-				'disciplinas' => Disciplina_model::all(),
 				'cursos' => Curso_model::all(),
 				'tipo_salas' => TipoSala_model::all(),
-        'disciplina' => Disciplina_model::find($id),
+                'disciplina' => Disciplina_model::find($id),
 				);
             $this->load->template('disciplinas/disciplinasEditar', compact('data','id'),'disciplinas/js_disciplinas');
         }
@@ -75,22 +74,22 @@
         * @since 2018/08/28
         */
         function atualizar ($id) {
-          //  if($this->validar()){
+            if($this->validar()){
                 try {
-                    $disciplinas = Disciplina_model::findOrFail($id);
-                    $disciplinas->nome_disciplina  = $this->input->post('nome_disciplina') ;
-                    $disciplinas->sigla_disciplina = $this->input->post('sigla_disciplina');
-					$disciplinas->curso_id		   = $this->input->post('curso_id');
-                    $disciplinas->modulo           = $this->input->post('modulo')          ;
-                    $disciplinas->qtd_professor    = $this->input->post('qtd_professor')   ;
-                    $disciplinas->qtd_aulas        = $this->input->post('qtd_aulas')   ;
-					$disciplinas->tipo_sala_id     = $this->input->post('tipo_sala_id');
-                    $disciplinas->update();
+                    $disciplina = Disciplina_model::withTrashed()->findOrFail($id);
+                    $disciplina->nome_disciplina  = $this->input->post('nome_disciplina') ;
+                    $disciplina->sigla_disciplina = $this->input->post('sigla_disciplina');
+					$disciplina->curso_id		   = $this->input->post('curso_id');
+                    $disciplina->modulo           = $this->input->post('modulo')          ;
+                    $disciplina->qtd_professor    = $this->input->post('qtd_professor')   ;
+                    $disciplina->qtd_aulas        = $this->input->post('qtd_aulas')   ;
+					$disciplina->tipo_sala_id     = $this->input->post('tipo_sala_id');
+                    $disciplina->update();
 
                     $this->session->set_flashdata('success','Disciplina atualizada com sucesso');
                     redirect("disciplina");
                 } catch (Exception $ignored){}
-          //  }
+            }
 
             $this->session->set_flashdata('danger','Problemas ao atualizar os dados da Disciplina, tente novamente!');
             redirect('disciplina/editar/'.$id);
@@ -107,9 +106,9 @@
                 $disciplinas = Disciplina_model::findOrFail($id);
                 $disciplinas->delete();
 
-                $this->session->set_flashdata('success','Disciplina deletada com sucesso');
+                $this->session->set_flashdata('success','Disciplina desativada com sucesso');
             } catch (Exception $e) {
-                $this->session->set_flashdata('danger','Erro ao deletar uma Disciplina, tente novamente');
+                $this->session->set_flashdata('danger','Erro ao desativar a Disciplina, tente novamente');
             }
 
             redirect("disciplina");
@@ -132,53 +131,20 @@
          redirect("disciplina");
        }
 
-
-        /**
-        * Valida os campos utilizados no cadastro e edição
-        * @return boolean Indica se a validação passou ou não
-        */
-        private function validar () {
-            $this->form_validation->set_rules('nome_disciplina',
-                                              'nome da disciplina',
-                                              array('required',
-                                                    'min_length[5]',
-                                                    'ucwords'
-                                                    )
-                                             );
-            $this->form_validation->set_rules('sigla_disciplina',
-                                              'sigla',
-                                              array('required',
-                                                    'min_length[3]',
-                                                    'max_length[5]',
-                                                    'strtoupper'
-                                                   )
-                                             );
-            $this->form_validation->set_rules('modulo',
-                                              'modulo',
-                                              array('required',
-                                                    'integer',
-                                                    'greater_than[0]',
-                                                    'less_than[20]'
-                                                   )
-                                             );
-            $this->form_validation->set_rules('qtd_professor',
-                                              'quantidade de professores',
-                                              array('required',
-                                                    'integer',
-                                                    'greater_than[0]',
-                                                    'less_than[10]'
-                                                   )
-                                             );
-            $this->form_validation->set_rules('qtd_aulas',
-                                              'quantidade de aulas',
-                                              array('required',
-                                                    'integer',
-                                                    'greater_than[0]',
-                                                    'less_than[10]'
-                                                   )
-                                             );
-
-            $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
+        public function validar () {
+            $this->form_validation->set_rules('nome_disciplina','nome','required|min_length[5]|max_length[50]|trim|ucwords');
+                          
+            $this->form_validation->set_rules('sigla_disciplina','sigla','required|min_length[3]|max_length[5]');
+            
+            $this->form_validation->set_rules('curso_id','curso','required');
+            
+            $this->form_validation->set_rules('modulo','modulo','required|integer|greater_than[0]|less_than[100]');
+            
+            $this->form_validation->set_rules('qtd_professor','professores','required|integer|greater_than[0]|less_than[11]');
+            
+            $this->form_validation->set_rules('qtd_aulas','aulas','required|integer|greater_than[0]|less_than[100]');
+            
+            $this->form_validation->set_rules('tipo_sala_id','sala','required');
 
             return $this->form_validation->run();
         }
