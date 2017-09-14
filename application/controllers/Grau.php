@@ -84,14 +84,16 @@ class Grau extends CI_Controller {
                                                 'max_length[50]',
                                                 'trim',
                                                 'regex_match[/^\D+$/]',
-                                                'alpha_numeric_spaces')
+                                                'alpha_dash',
+												'alpha_numeric_spaces')
                                          );
         $this->form_validation->set_rules('codigo',
                                           'codigo', 
                                           array('required',
                                                 'integer',
-                                                'greater_than[0]',
-                                                'max_length[5]')
+                                                'greater_than[1]',
+                                                'max_length[5]',
+												'is_natural_no_zero')
                                          );
         $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
 
