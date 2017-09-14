@@ -3,7 +3,7 @@
 		<div class="row">
 			<div class="col-md-5 form-group">
 				<label>Nome:</label>
-				<input name="nome_turno" class="form-control" placeholder="Nome" value="<?= ucwords($turno->nome_turno)?>">
+				<input name="nome_turno" class="form-control" placeholder="Nome" value="<?= htmlspecialchars(ucwords($turno->nome_turno))?>">
 				<?= form_error('nome_turno') ?>
 			</div>
 		</div>
