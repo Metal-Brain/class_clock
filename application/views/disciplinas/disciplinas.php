@@ -16,56 +16,49 @@
 
 	  <!-- Início do conteúdo da view-->
 	  <div class="top-bar" style="padding: 0 0 15px 0">
-	    <div class="row">
-	      <div class="col-md-5">
-	        <div class="input-group">
-	          <input type="text"
-	           class="form-control input-filter"
-	            placeholder="Pesquisar"
-	            />
-	          <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-	        </div>
-	      </div>
-	      <div class="col-md-2">
-	        <a class="btn btn-success" href="<?= base_url('Disciplina/cadastrar')?>"><span class="glyphicon glyphicon-plus"></span> Cadastrar</a>
-	      </div>
-	    </div>
-	  </div>
+		<div class="row">
+			<div class="col-md-12">
+			<h2 class="page-header">Disciplinas
+				<a class="btn btn-success" href="<?= base_url('index.php/Disciplina/cadastrar')?>"><span class="glyphicon glyphicon-plus"></span> Cadastrar</a>
+			</h2>
+			</div>
+		</div>
+</div>
 
         <!-- Aqui é a Listagem dos Itens -->
 
                 <table id="disciplinaTable" class="table table-striped">
                     <thead>
                         <tr>
-                            <th><center>Nome</th>
-                            <th><center>Sigla</th>
-                            <th><center>Curso</th>
-                            <th><center>Qtd. Professores</th>
-                            <th><center>Modulo</th>
-                            <th><center>Qtd. Aulas Semanais</th>
-                            <th><center>Tipo de sala</th>
+                            <th class="text-center">Nome</th>
+                            <th class="text-center">Sigla</th>
+                            <th class="text-center">Curso</th>
+                            <th class="text-center">Qtd. Professores</th>
+                            <th class="text-center">Modulo</th>
+                            <th class="text-center">Qtd. Aulas Semanais</th>
+                            <th class="text-center">Tipo de sala</th>
+                            <th class="text-center">Status</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($disciplinas as $disciplina): ?>
-                            <?= ($disciplina['status'] ? '<tr>' : '<tr class="danger">') ?>
-							<td><center><?= $disciplina['nome_disciplina']; ?></td>
-							<td><center><?= $disciplina['sigla_disciplina']; ?></td>
-							<td><center><?= $disciplina['curso_id']; ?></td>
-							<td><center><?= $disciplina['qtd_professor']; ?></td>
-							<td><center><?= $disciplina['modulo']; ?></td>
-							<td><center><?= $disciplina['qtd_aulas'] ?></td>
-							<td><center><?= $disciplina['tipo_sala_id']; ?></td>
+                            <tr <?php if($disciplina->deletado_em): echo 'class="danger"'; endif; ?>>
+                            <td class="text-center"><?= $disciplina['nome_disciplina']; ?></td>
+							<td class="text-center"><?= $disciplina['sigla_disciplina']; ?></td>
+							<td class="text-center"><?= $disciplina['curso_id']; ?></td>
+							<td class="text-center"><?= $disciplina['qtd_professor']; ?></td>
+							<td class="text-center"><?= $disciplina['modulo']; ?></td>
+							<td class="text-center"><?= $disciplina['qtd_aulas'] ?></td>
+							<td class="text-center"><?= $disciplina['tipo_sala_id']; ?></td>
 							<td class="text-center"><?= ( empty($disciplina->deletado_em) ) ? 'Ativado' : 'Desativado'?></td>
 							<td class="text-center">
 								<?php if ( empty($disciplina->deletado_em) ) : ?>
-									<a class="btn btn-warning glyphicon glyphicon-pencil" title="Editar" href="<?= site_url('Disciplina/editar/'.$disciplina->id)?>"></a>
-									<a class="btn btn-danger glyphicon glyphicon-remove" title="Desativar" href="<?= site_url('Disciplina/deletar/'.$disciplina->id)?>"></a>
+									<a class="btn btn-warning glyphicon glyphicon-pencil" title="Editar" href="<?= site_url('Disciplina/editar/'.$disciplina->id)?>" ></a>
+									<button class="btn btn-danger" type="button" id="btn-delete" onclick="confirmDelete(<?= $disciplina->id ?>,'Deseja desativar a Disciplina?','deletar')"> <i class="glyphicon glyphicon-remove"></i></button>
 								<?php else : ?>
-								<a class="btn btn-success glyphicon glyphicon-check" title="Ativar" href="<?= site_url('Disciplina/ativar/'.$disciplina->id)?>"></a>
+								    <button class="btn btn-success" type="button" id="btn-delete" onclick="confirmDelete(<?= $disciplina->id ?>,'Deseja ativar a Disciplina?','ativar')"> <i class="glyphicon glyphicon-check"></i></button>
 								<?php endif; ?>
 						    </td>
-							</tr>
 						<?php endforeach; ?>
                     </tbody>
                 </table>

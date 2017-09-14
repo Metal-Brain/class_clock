@@ -1,21 +1,21 @@
   <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10" style="padding-top: 5px">  
 
-            <form id="formDisciplina" class="form-Control"action="<?= site_url('disciplina/salvar')?>" method="post">
-            		<h1>Editar Disciplina</h1>
+            <form id="formDisciplina" class="form-Control" action="<?= site_url('Disciplina/salvar')?>" method="post">
+            		<h1>Cadastrar Disciplina</h1>
 				
 					<div class="form-group">
 						<label>Nome</label>
-						<input type="text" class="form-control" name="nome_disciplina" placeholder="nome" value="<?= set_value('nome_disciplina') ?>">
+						<input type="text" class="form-control" id="nome_curso" name="nome_disciplina" placeholder="Nome" >
 					</div>
 
 					<div class="form-group">
 						<label>Sigla</label>
-						<input type="text" class="form-control" name="sigla_disciplina" placeholder="ex: LOPA1" value="<?= set_value('sigla_disciplina') ?>" style="max-width:300px;" >
+						<input type="text" class="form-control" id="sigla_curso" name="sigla_disciplina" placeholder="ex: LOPA1" style="max-width:300px;" >
 					</div>
 
 					<div class="form-group">
 						<label>Curso</label>	
-						<select name="curso_id" class="form-control" style="max-width:400px;">
+						<select name="curso_id" id="curso_id" class="form-control" style="max-width:400px;">
                             
 							  <option>Selecione</option>
                             <?php foreach($data['cursos'] as $curso){ ?>
@@ -26,22 +26,22 @@
 			
 					<div class="form-group">
 						<label>Quantidade de professores</label>
-						<input type="number" class="form-control" name="qtd_professor" placeholder="ex: 1" value="<?= set_value('qtd_professor') ?>" style="max-width:300px;">
+						<input type="number" class="form-control" id="qtd_professor" name="qtd_professor" placeholder="ex: 1" style="max-width:300px;">
 					</div>
 									
 					<div class="form-group">
 						<label>Módulo</label>
-						<input type="number" class="form-control" name="modulo" placeholder="ex: 6" value="<?= set_value('modulo') ?>" style="max-width: 300px">
+						<input type="number" class="form-control" id="modulo" name="modulo" placeholder="ex: 6" style="max-width: 300px">
 					</div>
 									
 					<div class="form-group">
 						<label>Qtd. Aulas por Semana</label>
-						<input type="number" class="form-control" name="qtd_aulas" placeholder="ex: 4" value="<?= set_value('carga_semanal') ?>" style="max-width:300px;">
+						<input type="number" class="form-control" id="qtd_aulas" name="qtd_aulas" placeholder="ex: 4" style="max-width:300px;">
 					</div>
 
 					<div class="form-group">
 						<label>Tipo de sala Necessária</label>	
-						<select name="tipo_sala_id" class="form-control" style="max-width:400px;">
+						<select name="tipo_sala_id" id="tipo_sala_id" class="form-control" style="max-width:400px;">
                             
 							  <option>Selecione</option>
                             <?php foreach($data['tipo_salas'] as $curso){ ?>
