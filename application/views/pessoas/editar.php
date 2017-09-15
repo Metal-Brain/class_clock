@@ -13,19 +13,19 @@
 				<input id="prontuario" name="prontuario" class="form-control" type="text" placeholder="Prontuário" maxlength="6" value="<?= set_value('prontuario')?>">
 				<?= form_error('prontuario') ?>
 			</div>
-			
+
 			<div class="col-md-3 form-group">
 				<label>Senha:</label>
 				<input id="senha" name="senha" class="form-control" type="text" placeholder="Senha" maxlength="6" value="<?= set_value('senha')?>">
 				<?= form_error('senha') ?>
 			</div>
 		</div>
-		<!-- SOMENTE PARA DOCENTE 
+		<!-- SOMENTE PARA DOCENTE
 		<div class="row">
 			<div class="col-md-2 form-group">
 				<label>Data de nascimento:</label>
-				<input id="data_nascimento" name="data_nascimento" class="form-control" type="date" value="<?= set_value('data_nascimento')?>">
-				<?= form_error('data_nascimento') ?>
+				<input id="nascimento" name="nascimento" class="form-control" type="date" value="<?= set_value('nascimento')?>">
+				<?= form_error('nascimento') ?>
 			</div>
 		</div> -->
 		<div class="row">
@@ -39,17 +39,17 @@
 			<div class="col-md-5 form-group">
 				<label>Tipo:</label>
 				<div class="checkbox" style="margin-top: 0px;">
-					<label><input type="checkbox" value="">Administrador</label>
-					<label><input type="checkbox" value="">CRA</label>
-					<label><input type="checkbox" value="">DAE</label>
-					<label><input type="checkbox" value="">Docente</label>
+					<label><input name="tipos[]" type="checkbox" value="1">Administrador</label>
+					<label><input name="tipos[]" type="checkbox" value="2">CRA</label>
+					<label><input name="tipos[]" type="checkbox" value="3">DAE</label>
+					<label><input name="tipos[]" type="checkbox" value="4">Docente</label>
 				</div>
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="col-md-12 form-group">
-				<a class="btn btn-danger active" href="<?= base_url('index.php/Turno')?>" style="float: right;"><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
+				<a class="btn btn-danger active" href="<?= base_url('index.php/pessoa')?>" style="float: right;"><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
 				<button type="submit" class="btn btn-success active salvar" style="float: right; margin-right: 10px;"><span class="glyphicon glyphicon-floppy-disk"></span> Salvar</button>
 			</div>
 		</div>

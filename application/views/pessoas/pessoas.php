@@ -29,7 +29,6 @@
 			<tr>
 				<th class="text-center">Nome</th>
 				<th class="text-center">Prontuário</th>
-				<th class="text-center">Data de Nascimento</th>
 				<th class="text-center">E-mail</th>
 				<th class="text-center">Status</th>
 				<th class="text-center">Ações</th>
@@ -41,7 +40,6 @@
 				<tr <?php if($pessoa->deletado_em): echo 'class="danger"'; endif; ?>>
 					<td class="text-center"><?= ucwords($pessoa['nome']); ?></td>
 					<td class="text-center"><?= $pessoa['prontuario']; ?></td>
-					<td class="text-center"><?= $pessoa['data_nascimento']; ?></td>
 					<td class="text-center"><?= $pessoa['email']; ?></td>
 					<td class="text-center"><?= ( empty($pessoa->deletado_em) ) ? 'Ativado' : 'Desativado'?></td>
 					<td class="text-center">
