@@ -5,12 +5,12 @@ class Pessoa extends MY_Controller {
 
     function index() {
         $pessoas = Pessoa_model::all();
-        $this->load->template('pessoas/pessoas', compact('pessoas'));
+        $this->load->template('pessoas/pessoas', compact('pessoas'),'pessoas/js_pessoas');
     }
 
     function cadastrar() {
         $tipos = Tipo_model::all();
-        $this->load->template('pessoas/cadastrar', compact('tipos'));
+        $this->load->template('pessoas/cadastrar', compact('tipos'),'pessoas/js_pessoas');
     }
 
     function salvar() {
