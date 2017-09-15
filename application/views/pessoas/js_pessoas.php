@@ -104,7 +104,7 @@
 		}
 	});
 
-	$("#formTurnos").validate({
+	$("#formPessoas").validate({
 		errorClass: 'text-danger',
 		errorElement: 'span',
 		rules: {
@@ -113,6 +113,15 @@
 				maxlength: 25
 			}
 		}
+	});
+</script>
+<script type="text/javascript">
+	$(function() {
+		$(".checkdocente-toggle").click(function(e){
+			e.preventDefault();
+			el = $(this).data('element');
+			$(el).toggle();
+		});
 	});
 </script>
 </body>
