@@ -14,8 +14,8 @@
             $this->attributes['senha'] = password_hash($senha, PASSWORD_BCRYPT);
         }
 
-        public function docente(){
-            return $this->hasOne(Docente_model::class);
+        public function docente() {
+            return $this->hasOne(Docente_model::class, 'pessoa_id');
         }
 
         public function tipos() {
