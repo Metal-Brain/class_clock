@@ -60,7 +60,7 @@ class Pessoa extends MY_Controller {
         });
 
         $this->session->set_flashdata('success', 'Pessoa cadastrada com sucesso');
-        redirect('/pessoa/pessoas');
+        redirect('/pessoa');
     }
 
     /**
@@ -117,7 +117,7 @@ class Pessoa extends MY_Controller {
         });
 
         $this->session->set_flashdata('success', 'Pessoa atualizada com sucesso');
-        redirect('/pessoa/pessoas');
+        redirect('/pessoa');
     }
 
     /**
