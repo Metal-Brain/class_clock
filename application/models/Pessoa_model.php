@@ -3,7 +3,7 @@
     class Pessoa_model extends Model{
 
         protected $table = 'pessoa';
-        protected $guarded = [];
+        protected $fillable = [ "nome", "prontuario", "senha", "email" ];
 
         /**
         * Pega a senha do usuário e passa pelo blowfish assim que seu valor é dado.
@@ -16,6 +16,10 @@
 
         public function docente(){
             return $this->hasOne(Docente_model::class);
+        }
+
+        public function tipos() {
+            return $this->belongsToMany(Tipo_model::class, 'tipo_pessoa', 'pessoa_id', 'tipo_id');
         }
 
     }
