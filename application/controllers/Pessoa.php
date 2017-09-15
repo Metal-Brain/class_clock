@@ -9,7 +9,7 @@ class Pessoa extends MY_Controller {
     */
     function index() {
         $pessoas = Pessoa_model::withTrashed()->get();
-        $this->load->template('pessoas/pessoas', compact('pessoas'));
+        $this->load->template('pessoas/pessoas', compact('pessoas'),'pessoas/js_pessoas');
     }
 
     /**
@@ -17,8 +17,8 @@ class Pessoa extends MY_Controller {
     * @author Vitor "Pliavi"
     */
     function cadastrar() {
-        $tipos = Tipo_model::withTrashed()->get();
-        $this->load->template('pessoas/cadastrar', compact('tipos'));
+        $tipos = Tipo_model::all();
+        $this->load->template('pessoas/cadastrar', compact('tipos'),'pessoas/js_pessoas');
     }
 
     /**

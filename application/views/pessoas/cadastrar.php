@@ -74,9 +74,9 @@
 				<button class="btn dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">Selecione
 				<span class="caret"></span></button>
 				<ul class="dropdown-menu">
-					<li><a href="#">HTML</a></li>
-					<li><a href="#">CSS</a></li>
-					<li><a href="#">JavaScript</a></li>
+					<li><a href="#">1</a></li>
+					<li><a href="#">2</a></li>
+					<li><a href="#">3</a></li>
 				</ul>
 			</div>
 		</div>
@@ -89,12 +89,4 @@
 	</form>
 </div>
 
-<script type="text/javascript">
-	$(function() {
-		$(".checkdocente-toggle").click(function(e){
-			e.preventDefault();
-			el = $(this).data('element');
-			$(el).toggle();
-		});
-	});
-</script>
+
