@@ -11,6 +11,7 @@ function back() {
     if($sess->userdata('_previous_page') != $sess->userdata('_current_page')){
         redirect($sess->userdata('_previous_page'));
     } else {
-        throw new RuntimeException('O redirecionamento página anterior entrou em loop');
+        echo "Erro antes do loop: " . $sess->flashdata('_last_exception') . "\n<br>";
+        die('O redirecionamento página anterior entrou em loop');
     }
 }

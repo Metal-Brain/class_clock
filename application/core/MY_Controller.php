@@ -84,6 +84,8 @@ class MY_Controller extends CI_Controller {
         $sess = $this->session;
         $exception_name = $this->get_exception_name($exception);
 
+        $this->session->set_flashdata('_last_exception',$exception->getMessage());
+
         switch ($exception_name) {
             case 'ModelNotFoundException':
                 $sess->set_flashdata('danger', "{$model} não encontrado.");
@@ -91,6 +93,7 @@ class MY_Controller extends CI_Controller {
                 break;
             case 'ValidationFailException':
                 $sess->set_flashdata('danger',"O cadastro de {$this->name} falhou!");
+                log_message('error', validation_errors());
                 back();
                 break;
             default:
