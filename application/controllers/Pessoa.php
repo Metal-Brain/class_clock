@@ -19,7 +19,6 @@ class Pessoa extends MY_Controller {
     function cadastrar() {
         $tipos = Tipo_model::all();
         $this->load->template('pessoas/cadastrar', compact('tipos'),'pessoas/js_pessoas');
-        
     }
 
     /**
@@ -58,9 +57,10 @@ class Pessoa extends MY_Controller {
 
             // Monta as relações de tipo
             $pessoa->tipos()->sync($this->request('tipos'));
-
-            $this->session->set_flashdata('success', 'Pessoa cadastrada com sucesso');
         });
+
+        $this->session->set_flashdata('success', 'Pessoa cadastrada com sucesso');
+        redirect('/pessoa/pessoas');
     }
 
     /**
@@ -86,7 +86,7 @@ class Pessoa extends MY_Controller {
 
             $this->set_validations([
                 ['nome', 'nome', 'required|min_length[5]'],
-                ['prontuario', 'prontuário', 'required|exact_length[7]'],
+                ['prontuario', 'prontuário', 'required|exact_length[6]'],
                 ['senha', 'senha', 'required|min_length[6]'],
                 ['email', 'email', 'required|valid_email'],
                 ['tipos[]', 'tipos', 'required']
@@ -114,9 +114,10 @@ class Pessoa extends MY_Controller {
 
             // Realinha os tipos
             $pessoa->tipos()->sync($this->request('tipos'));
-
-            $this->session->set_flashdata('success', 'Pessoa atualizada com sucesso');
         });
+
+        $this->session->set_flashdata('success', 'Pessoa atualizada com sucesso');
+        redirect('/pessoa/pessoas');
     }
 
     /**
