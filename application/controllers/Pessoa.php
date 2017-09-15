@@ -19,6 +19,7 @@ class Pessoa extends MY_Controller {
     function cadastrar() {
         $tipos = Tipo_model::all();
         $this->load->template('pessoas/cadastrar', compact('tipos'),'pessoas/js_pessoas');
+        
     }
 
     /**
