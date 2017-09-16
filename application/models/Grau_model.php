@@ -11,6 +11,11 @@
 
     protected $table = 'grau';
     public $timestamps = false;
+    protected $fillable = ['nome_grau', 'codigo'];
+
+    public function curso(){
+      return $this->hasMany(Curso_model::class);
+    }
 
   }
 ?>
