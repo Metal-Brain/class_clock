@@ -9,7 +9,7 @@
 class Disciplina_model extends Model{
 
     protected $table = 'disciplina';
-    public $timestamps = false;
+    protected $fillable = ['id', 'curso_id', 'tipo_sala_id', 'nome_disciplina', 'sigla_disciplina', 'modulo', 'qtd_professor', 'qtd_aulas'];
 
     /**
      * Função responsável para retornar todos os horarios linkados com o turno
