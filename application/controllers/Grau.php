@@ -42,18 +42,22 @@ class Grau extends CI_Controller {
                                            array('required',
                                                  'integer',
                                                  'greater_than[0]',
-                                                 'max_length[5]'),
+                                                 'max_length[5]',
                                                  'is_unique[grau.codigo_grau]')
                                          );
         $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
 
         if($this->form_validation->run()){
             try {
+                DB::transaction(function () {
+                                           
                 $grau = new Grau_model();
                 $grau->nome_grau = $this->input->post('nome_grau');
                 $grau->codigo = $this->input->post('codigo');
                 $grau->save();
-
+                    
+                }
+                                
                 $this->session->set_flashdata('success','Grau cadastrado com sucesso');
                 
             } catch (Exception $ignored){}
