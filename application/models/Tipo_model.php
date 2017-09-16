@@ -2,7 +2,7 @@
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Tipo_model extends Eloquent {
-    protected $table = 'tipo_pessoa';
+    protected $table = 'tipo';
     protected $fillable = ['nome'];
     public $timestamps = false;
 }

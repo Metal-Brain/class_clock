@@ -71,7 +71,13 @@ class Pessoa extends MY_Controller {
     function editar($id) {
         $pessoa = Pessoa_model::findOrFail($id);
         $tipos = Tipo_model::all();
-        $this->load->template('pessoas/editar', compact('pessoa', 'tipos'));
+		$tipos_pessoa=[];
+		
+		foreach($pessoa->tipos as $t){
+			$tipos_pessoa[] = $t->id;
+		}
+		
+        $this->load->template('pessoas/editar', compact('pessoa', 'tipos_pessoa', 'tipos'));
     }
 
     /**
@@ -128,6 +134,7 @@ class Pessoa extends MY_Controller {
     function deletar($id) {
         Pessoa_model::findOrFail($id)->delete();
         $this->session->set_flashdata('success', 'Pessoa deletada com sucesso');
+		redirect('/pessoa');
     }
 
     /**
@@ -139,6 +146,7 @@ class Pessoa extends MY_Controller {
     function ativar ($id) {
         Pessoa_model::withTrashed()->findOrFail($id)->restore();
         $this->session->set_flashdata('success','Pessoa ativada com sucesso');
+		redirect('/pessoa');
     }
 
 }

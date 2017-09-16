@@ -1,5 +1,3 @@
-<h1><?= $this->session->flashdata('success') ?></h1>
-<h1><?= $this->session->flashdata('danger') ?></h1>
 <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
 	<form id="formPessoas" action="<?= site_url('pessoa/salvar')?>" method="post">
 		<label>Nome:</label>
@@ -39,49 +37,45 @@
 
 		<!-- Docente -->
 		<div id="conteudo-docente">
-		<label>Data de nascimento:</label>
-		<div class="form-group width-180">
-			<input id="nascimento" name="nascimento" class="form-control" type="date" value="<?= set_value('nascimento')?>">
-			<?= form_error('nascimento') ?>
-		</div>
-
-		<label>Data de ingresso no câmpus:</label>
-		<div class="form-group width-180">
-			<input id="ingresso_campus" name="ingresso_campus" class="form-control" type="date" value="<?= set_value('ingresso_campus')?>">
-			<?= form_error('ingresso_campus') ?>
-		</div>
-
-		<label>Data de ingresso no câmpus:</label>
-		<div class="form-group width-180">
-			<input id="ingresso_ifsp" name="ingresso_ifsp" class="form-control" type="date" value="<?= set_value('ingresso_ifsp')?>">
-			<?= form_error('ingresso_ifsp') ?>
-		</div>
-
-		<!-- <label>Área:</label>
-		<div class="form-group width-180">
-			<div class="dropdown">
-				<button class="btn dropdown-toggle" type="button" data-toggle="dropdown">Selecione
-				<span class="caret"></span></button>
-				<ul class="dropdown-menu">
-					<li><a href="#">HTML</a></li>
-					<li><a href="#">CSS</a></li>
-					<li><a href="#">JavaScript</a></li>
-				</ul>
+			<label>Data de nascimento:</label>
+			<div class="form-group width-180">
+				<input id="nascimento" name="nascimento" class="form-control" type="date" value="<?= set_value('nascimento')?>">
+				<?= form_error('nascimento') ?>
 			</div>
-		</div> -->
 
-		<label>Regime de contrato:</label>
-		<div class="form-group width-180">
-			<div class="dropdown">
-				<button class="btn dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">Selecione
-				<span class="caret"></span></button>
-				<ul class="dropdown-menu">
-					<li><a href="#">1</a></li>
-					<li><a href="#">2</a></li>
-					<li><a href="#">3</a></li>
-				</ul>
+			<label>Data de ingresso no câmpus:</label>
+			<div class="form-group width-180">
+				<input id="ingresso_campus" name="ingresso_campus" class="form-control" type="date" value="<?= set_value('ingresso_campus')?>">
+				<?= form_error('ingresso_campus') ?>
 			</div>
-		</div>
+
+			<label>Data de ingresso no câmpus:</label>
+			<div class="form-group width-180">
+				<input id="ingresso_ifsp" name="ingresso_ifsp" class="form-control" type="date" value="<?= set_value('ingresso_ifsp')?>">
+				<?= form_error('ingresso_ifsp') ?>
+			</div>
+
+			<!-- <label>Área:</label>
+			<div class="form-group width-180">
+				<div class="dropdown">
+					<button class="btn dropdown-toggle" type="button" data-toggle="dropdown">Selecione
+					<span class="caret"></span></button>
+					<ul class="dropdown-menu">
+						<li><a href="#">HTML</a></li>
+						<li><a href="#">CSS</a></li>
+						<li><a href="#">JavaScript</a></li>
+					</ul>
+				</div>
+			</div> -->
+
+			<label>Regime de contrato:</label>
+			<div class="form-group width-180">
+				<select class="form-control" id="sel1">
+					<option>Selecione</option>
+					<option value="0">20 horas semanais</option>
+					<option value="1">40 horas semanais</option>
+				</select>
+			</div>
 		</div>
 
 		<div class="form-group">
