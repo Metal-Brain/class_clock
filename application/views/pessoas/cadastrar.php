@@ -31,17 +31,32 @@
 				<label><input name="tipos[]" type="checkbox" value="1">Administrador</label>
 				<label><input name="tipos[]" type="checkbox" value="2">CRA</label>
 				<label><input name="tipos[]" type="checkbox" value="3">DAE</label>
-				<label><input name="tipos[]" class ="checkdocente-toggle" type="checkbox" value="4" data-element="#conteudo-docente"> Docente</label>
+				<label class="checkdocente-toggle"><input name="tipos[]" type="checkbox" value="4"> Docente</label>
 			</div>
 		</div>
 
 		<!-- Docente -->
+<<<<<<< HEAD
 		<div id="conteudo-docente">
 			<label>Data de nascimento:</label>
 			<div class="form-group width-180">
 				<input id="nascimento" name="nascimento" class="form-control" type="date" value="<?= set_value('nascimento')?>">
 				<?= form_error('nascimento') ?>
 			</div>
+=======
+		<div id="conteudo-docente" style="display: none;">
+		<label>Data de nascimento:</label>
+		<div class="form-group width-180">
+			<input id="nascimento" name="nascimento" class="form-control" type="date" value="<?= set_value('nascimento')?>">
+			<?= form_error('nascimento') ?>
+		</div>
+
+		<label>Data de ingresso no câmpus:</label>
+		<div class="form-group width-180">
+			<input id="ingresso_campus" name="ingresso_campus" class="form-control" type="date" value="<?= set_value('ingresso_campus')?>">
+			<?= form_error('ingresso_campus') ?>
+		</div>
+>>>>>>> ac01af0ee58d7bef4a144c95e5f54cfd162d7edb
 
 			<label>Data de ingresso no câmpus:</label>
 			<div class="form-group width-180">
