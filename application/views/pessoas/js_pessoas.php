@@ -116,13 +116,11 @@
 	});
 </script>
 <script type="text/javascript">
-	$(function() {
-		$(".checkdocente-toggle").click(function(e){
-			e.preventDefault();
-			el = $(this).data('element');
-			$(el).toggle();
+
+		$(".checkdocente-toggle").click(function(){
+			$('#conteudo-docente').toggle();
 		});
-	});
+
 </script>
 </body>
 </html>

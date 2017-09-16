@@ -33,12 +33,12 @@
 				<label><input name="tipos[]" type="checkbox" value="1">Administrador</label>
 				<label><input name="tipos[]" type="checkbox" value="2">CRA</label>
 				<label><input name="tipos[]" type="checkbox" value="3">DAE</label>
-				<label><input name="tipos[]" class ="checkdocente-toggle" type="checkbox" value="4" data-element="#conteudo-docente"> Docente</label>
+				<label class="checkdocente-toggle"><input name="tipos[]" type="checkbox" value="4"> Docente</label>
 			</div>
 		</div>
 
 		<!-- Docente -->
-		<div id="conteudo-docente">
+		<div id="conteudo-docente" style="display: none;">
 		<label>Data de nascimento:</label>
 		<div class="form-group width-180">
 			<input id="nascimento" name="nascimento" class="form-control" type="date" value="<?= set_value('nascimento')?>">
