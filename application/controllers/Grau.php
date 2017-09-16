@@ -42,7 +42,8 @@ class Grau extends CI_Controller {
                                            array('required',
                                                  'integer',
                                                  'greater_than[0]',
-                                                 'max_length[5]')
+                                                 'max_length[5]'),
+                                                 'is_unique[grau.codigo_grau]')
                                          );
         $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
 
@@ -82,20 +83,45 @@ class Grau extends CI_Controller {
         $this->load->template('graus/GrausEditar',compact('grau','id'),'graus/js_graus');
     }
 
-  public function atualizar ($idGrau) {
-	   $this->load->model(array(
-      'Grau_model'
-    ));
-    try {
-      DB::transaction(function ($id) use ($idGrau) {
-	    $grau = Grau_model::withTrashed()->findOrFail($id);
-        $grau->codigo = $this->input->post('codigo');
-        $grau->nome_grau = $this->input->post('nome_grau');
-        $grau->save();
-      });
-      $this->session->set_flashdata('success','Grau atualizado com sucesso');
-    } catch (Exception $e) {
-      $this->session->set_flashdata('danger','Problemas ao atualizar os dados do grau, tente novamente!');
+    /**
+    * Atualiza os dados no banco de acordo com os dados do formulário
+    * @author Jean Brock | Vitor Silvério | Thalita Barbosa
+    */
+    function atualizar ($id) {
+        $this->form_validation->set_rules('nome_grau',
+                                          'nome',
+                                          array('required',
+                                                'max_length[50]',
+                                                'trim',
+                                                'regex_match[/^\D+$/]',
+                                                'alpha_dash',
+												'alpha_numeric_spaces')
+                                         );
+        $this->form_validation->set_rules('codigo',
+                                          'codigo',
+                                          array('required',
+                                                'integer',
+                                                'greater_than[0]',
+                                                'max_length[5]',
+												'is_natural_no_zero',
+                                          );
+        $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
+
+        if($this->form_validation->run()){
+            try {
+                Grau_model::where('id', $id)
+                            ->update([
+                                "nome_grau"  => $this->input->post('nome_grau'),
+                                "codigo"     => $this->input->post('codigo')
+                            ]);
+
+                $this->session->set_flashdata('success','Grau atualizado com sucesso');
+                redirect('Grau');
+            } catch (Exception $ignored){}
+        }
+
+        $this->session->set_flashdata('danger','Problemas ao atualizar os dados do grau, tente novamente!');
+        redirect('Grau');
     }
 
     /**
