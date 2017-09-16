@@ -18,11 +18,11 @@ class Disciplina_model extends Model{
     */
 
     public function curso(){
-        return $this->belongsTo(Curso_model::class);
+        return $this->belongsTo(Curso_model::class, 'curso_id');
     }
 
 	public function tipo_salas(){
-		return $this->belongsToMany(TipoSala_model::class);
+		return $this->belongsToMany(TipoSala_model::class, 'tipo_sala_id');
 	}
 }
 
