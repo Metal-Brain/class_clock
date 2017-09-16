@@ -16,7 +16,7 @@ class Grau extends CI_Controller {
         $this->load->template('graus/graus', compact('graus'),'graus/js_graus');
     }
 
-    /**     
+    /**
     * Formulário de cadastro
     * @author Jean Brock | Vitor Silvério | Thalita Barbosa
     */
@@ -43,22 +43,24 @@ class Grau extends CI_Controller {
                                                  'integer',
                                                  'greater_than[0]',
                                                  'max_length[5]',
-                                                 'is_unique[grau.codigo]')
+                                                 'is_unique[grau.codigo]'
+                                                 )
                                          );
         $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
 
         if($this->form_validation->run()){
             try {
-                                                       
+
                 $grau = new Grau_model();
                 <?=htmlspecialchars($grau->nome_grau)?> = $this->input->post('nome_grau');
                 $grau->codigo = $this->input->post('codigo');
-                $grau->save();     
-                                
+                $grau->save();
+
                 $this->session->set_flashdata('success','Grau cadastrado com sucesso');
-        }
-             catch (Exception $ignored){}
                 redirect('Grau');
+
+            } catch (Exception $ignored){}
+            redirect('Grau/cadastrar');
         }
 
         $this->session->set_flashdata('danger','Problemas ao cadastrar o grau, tente novamente!');
@@ -89,7 +91,7 @@ class Grau extends CI_Controller {
 												'alpha_numeric_spaces')
                                          );
         $this->form_validation->set_rules('codigo',
-                                          'codigo', 
+                                          'codigo',
                                           array('required',
                                                 'integer',
                                                 'greater_than[0]',
@@ -132,7 +134,7 @@ class Grau extends CI_Controller {
 
         redirect('Grau');
     }
-    
+
     /**
     * Ativa o Grau
     * @author Thalita Barbosa
