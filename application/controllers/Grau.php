@@ -55,10 +55,9 @@ class Grau extends CI_Controller {
                 $grau->save();
 
                 $this->session->set_flashdata('success','Grau cadastrado com sucesso');
-                redirect("Grau");
-            } catch (Exception $ignored){
-                exit('teste');
-            }
+                
+            } catch (Exception $ignored){}
+            redirect("Grau");
         }
 
         $this->session->set_flashdata('danger','Problemas ao cadastrar o grau, tente novamente!');
