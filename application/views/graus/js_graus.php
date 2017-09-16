@@ -3,12 +3,13 @@
 
  
 
-           jQuery.validator.addMethod("isString", function(value, element) {
+          /* jQuery.validator.addMethod("isString", function(value, element) {
                var regExp = /^[1-9]*$/g;
                if(regExp.test(value)) return true;
 
                return false
            }, "Por favor insira somente caracteres numéricos acima de zero");
+          */
 
 
     $("#formCadastrar").validate({
@@ -21,7 +22,8 @@
     codigo: {
       required: true, 
 	  maxlength: 5,
-    isString:true
+    /*isString:true*/
+    min: 1
     }
   },
     messages: {

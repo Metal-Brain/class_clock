@@ -20,11 +20,12 @@
 
             <div class="form-group">
               <label>Codigo:</label>
-              <input type="text"
+              <input type="number"
                 class="form-control"
                 id="codigo"
                 name="codigo"
                 placeholder="Código da Modalidade"
+                onKeyPress="if(this.value.length >=5) return false;"
                 value="<?= set_value('codigo') ?>"
                 />
             </div>
@@ -33,6 +34,7 @@
 			<div class="col-md-12 form-group">
 				<a class="btn btn-danger active" href="<?= base_url('index.php/Grau')?>" style="float: right;"><span class="glyphicon glyphicon-remove"></span> Voltar</a>
 				<button type="submit" class="btn btn-success active salvar" style="float: right; margin-right: 10px;"><span class="glyphicon glyphicon-floppy-disk"></span> Salvar</button>
+
 			</div>
 		</div>
         </form>
