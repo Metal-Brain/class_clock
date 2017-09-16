@@ -93,7 +93,7 @@ class Grau extends CI_Controller {
                                                 'integer',
                                                 'greater_than[0]',
                                                 'max_length[5]',
-												'is_natural_no_zero',
+												'is_natural_no_zero')
                                           );
         $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
 
