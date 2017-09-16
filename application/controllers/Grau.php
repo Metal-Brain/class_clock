@@ -42,7 +42,8 @@ class Grau extends CI_Controller {
                                            array('required',
                                                  'integer',
                                                  'greater_than[0]',
-                                                 'max_length[5]')
+                                                 'max_length[5]'),
+                                                 'is_unique[grau.codigo_grau]')
                                          );
         $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
 
@@ -91,10 +92,10 @@ class Grau extends CI_Controller {
                                           'codigo', 
                                           array('required',
                                                 'integer',
-                                                'greater_than[1]',
+                                                'greater_than[0]',
                                                 'max_length[5]',
-												'is_natural_no_zero')
-                                         );
+												'is_natural_no_zero',
+                                          );
         $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
 
         if($this->form_validation->run()){
