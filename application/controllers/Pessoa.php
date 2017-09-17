@@ -149,4 +149,22 @@ class Pessoa extends MY_Controller {
 		redirect('/pessoa');
     }
 
+    /**
+     * Verifica se o prontuário é único
+     * @author Yasmin Sayad
+     * @since 2017/09/17
+     * @param Prontuario
+    */
+    public function verificaProntuario(){
+        $validate_data = array('prontuario' => $this->input->get('prontuario'));
+        $this->form_validation->set_data($validate_data);
+        $this->form_validation->set_rules('prontuario', 'prontuario', 'is_unique[Pessoa.prontuario]');
+  
+        if($this->form_validation->run() == FALSE){
+            echo "false";
+        }else{
+            echo "true";
+        }
+    }
+
 }

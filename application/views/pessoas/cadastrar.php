@@ -24,7 +24,6 @@
 			<?= form_error('email') ?>
 		</div>
 
-
 		<label>Tipo:</label>
 		<div class="form-group">
 			<div class="checkbox" style="margin-top: 0px;">
@@ -36,27 +35,12 @@
 		</div>
 
 		<!-- Docente -->
-<<<<<<< HEAD
-		<div id="conteudo-docente">
+		<div id="conteudo-docente" style="display: none;">
 			<label>Data de nascimento:</label>
 			<div class="form-group width-180">
 				<input id="nascimento" name="nascimento" class="form-control" type="date" value="<?= set_value('nascimento')?>">
 				<?= form_error('nascimento') ?>
 			</div>
-=======
-		<div id="conteudo-docente" style="display: none;">
-		<label>Data de nascimento:</label>
-		<div class="form-group width-180">
-			<input id="nascimento" name="nascimento" class="form-control" type="date" value="<?= set_value('nascimento')?>">
-			<?= form_error('nascimento') ?>
-		</div>
-
-		<label>Data de ingresso no câmpus:</label>
-		<div class="form-group width-180">
-			<input id="ingresso_campus" name="ingresso_campus" class="form-control" type="date" value="<?= set_value('ingresso_campus')?>">
-			<?= form_error('ingresso_campus') ?>
-		</div>
->>>>>>> ac01af0ee58d7bef4a144c95e5f54cfd162d7edb
 
 			<label>Data de ingresso no câmpus:</label>
 			<div class="form-group width-180">
