@@ -58,10 +58,15 @@ class Tipo_sala extends CI_Controller {
   * Atualiza os dados no banco
   */
   public function atualizar($id){
-    // Criando regra de validação do formulário
-    $this->form_validation->set_rules('nome_tipo_sala','nome',array('required','max_length[30]','trim'));
+    $tipo_sala = TipoSala_model::findOrFail($id);
+    
+    if($tipo_sala->nome_tipo_sala != $this->input->post('nome_tipo_sala')){
+      $this->form_validation->set_rules('nome_tipo_sala','nome',array('required','max_length[30]','trim', 'is_unique[tipo_sala.nome_tipo_sala]'));
+    }else{
+      $this->form_validation->set_rules('nome_tipo_sala','nome',array('required','max_length[30]','trim'));
+    }
+
     $this->form_validation->set_rules('descricao_tipo_sala','descrição',array('required','max_length[254]','trim'));
-    // Setando os delimitadores da mensagem de erro.
     $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
 
     if( $this->form_validation->run() ){
@@ -69,17 +74,15 @@ class Tipo_sala extends CI_Controller {
           $dados = [
             'nome_tipo_sala'      => $this->input->post('nome_tipo_sala'),
             'descricao_tipo_sala' => $this->input->post('descricao_tipo_sala')
-		  ];
-
-          $tipo_sala = TipoSala_model::findOrFail($id);
-		  $tipo_sala->update($dados);
+      ];
+      
+		    $tipo_sala->update($dados);
 		  
 		  $this->session->set_flashdata('success','Tipo Sala atualizado com sucesso');
 		  redirect('Tipo_sala');
       }catch(Exception $e){}
     }
-    $this->session->set_flashdata('danger','Problemas ao atualizar o tipo de sala, tente novamente!');
-    redirect('Tipo_sala');
+    $this->editar($id);
   }
 
   /*
