@@ -63,7 +63,7 @@
 										<div class="row">
 											<div class="form-group col-sm-3 col-md-2">
 												<label>Quantidade de semestres</label>
-												<input class="form-control" placeholder="ex: 2" type="number" name="qtd_semestre" id="qtd_semestre" maxlength="2">
+												<input class="form-control" placeholder="ex: 2" type="number"  onKeyPress="if(this.value.length==2) return false;" name="qtd_semestre" id="qtd_semestre" maxlength="2">
 												
 											</div>
 										</div>
