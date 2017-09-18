@@ -43,8 +43,7 @@ class Tipo_sala extends CI_Controller {
 		redirect('Tipo_sala');
       }catch(Exception $e){}
     }
-    $this->session->set_flashdata('danger','Problemas ao cadastrar o tipo de sala, tente novamente!');
-    redirect('Tipo_sala');
+    $this->cadastrar();
   }
 
   /*
