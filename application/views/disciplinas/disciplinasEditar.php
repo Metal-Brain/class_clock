@@ -5,7 +5,7 @@
 
 					<div class="form-group">
 						<label>Nome</label>
-						<input type="text" class="form-control" name="nome_disciplina" placeholder="Nome" value="<?= $data['disciplina']['nome_disciplina'] ?>">
+						<input type="text" class="form-control" name="nome_disciplina" placeholder="Nome" value="<?= htmlspecialchars($data['disciplina']['nome_disciplina']) ?>">
 					</div>
 
 					<div class="form-group">
