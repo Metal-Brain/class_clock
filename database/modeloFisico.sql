@@ -261,16 +261,16 @@ INSERT INTO grau(nome_grau, codigo) VALUES("Pos Graduação", "00231");
 INSERT INTO grau(nome_grau, codigo) VALUES("Mestrado", "001321");
 INSERT INTO grau(nome_grau, codigo) VALUES("Doutorado", "44121");
 
+INSERT INTO curso(codigo_curso, grau_id, nome_curso, sigla_curso, qtd_semestre, fechamento) 
+    VALUES(1, 1, "Análise e Desenvolvimento de Sistemas", "ADS", 6, 2);
 INSERT INTO curso(grau_id, nome_curso, sigla_curso, qtd_semestre, fechamento) 
-    VALUES(1, "Análise e Desenvolvimento de Sistemas", "ADS", 6, 2);
+    VALUES(2, 2, "Processos Gerenciais", "PRG", 8, 2);
 INSERT INTO curso(grau_id, nome_curso, sigla_curso, qtd_semestre, fechamento) 
-    VALUES(2, "Processos Gerenciais", "PRG", 8, 2);
+    VALUES(3, 3, "Fisica", "FIS", 4, 2);
 INSERT INTO curso(grau_id, nome_curso, sigla_curso, qtd_semestre, fechamento) 
-    VALUES(3, "Fisica", "FIS", 4, 2);
+    VALUES(4, 4, "Computação Avançada", "CPA", 3, 1);
 INSERT INTO curso(grau_id, nome_curso, sigla_curso, qtd_semestre, fechamento) 
-    VALUES(4, "Computação Avançada", "CPA", 3, 1);
-INSERT INTO curso(grau_id, nome_curso, sigla_curso, qtd_semestre, fechamento) 
-    VALUES(5, "Cura do Cancer", "CDC", 8, 2);
+    VALUES(5, 5, "Cura do Cancer", "CDC", 8, 2);
 
 INSERT INTO disciplina(curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas)
     VALUES(1, 5, "Análise de Sistemas", "ADS", 2, 4);
