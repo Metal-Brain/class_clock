@@ -51,7 +51,7 @@ class Grau extends CI_Controller {
             try {
                                                        
                 $grau = new Grau_model();
-                $grau->nome_grau = $this->input->post('nome_grau');
+                <?=htmlspecialchars($grau->nome_grau)?> = $this->input->post('nome_grau');
                 $grau->codigo = $this->input->post('codigo');
                 $grau->save();     
                                 
