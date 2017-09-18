@@ -44,7 +44,7 @@
                     <tbody>
                         <?php foreach ($disciplinas as $disciplina): ?>
                             <tr <?php if($disciplina->deletado_em): echo 'class="danger"'; endif; ?>>
-                            <td class="text-center"><?= $disciplina['nome_disciplina']; ?></td>
+                            <td class="text-center"><?= htmlspecialchars($disciplina['nome_disciplina']); ?></td>
 							<td class="text-center"><?= $disciplina['sigla_disciplina']; ?></td>
 							<td class="text-center"><?= $disciplina['curso_id']; ?></td>
 							<td class="text-center"><?= $disciplina['qtd_professor']; ?></td>
