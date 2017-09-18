@@ -72,11 +72,11 @@ class Pessoa extends MY_Controller {
         $pessoa = Pessoa_model::findOrFail($id);
         $tipos = Tipo_model::all();
 		$tipos_pessoa=[];
-		
+
 		foreach($pessoa->tipos as $t){
 			$tipos_pessoa[] = $t->id;
 		}
-		
+
         $this->load->template('pessoas/editar', compact('pessoa', 'tipos_pessoa', 'tipos'));
     }
 
@@ -155,15 +155,15 @@ class Pessoa extends MY_Controller {
      * @since 2017/09/17
      * @param Prontuario
     */
-    public function verificaProntuario(){
-        $validate_data = array('prontuario' => $this->input->get('prontuario'));
+    public function verificaProntuario() {
+        $validate_data = array('prontuario' => $this->request('prontuario'));
         $this->form_validation->set_data($validate_data);
-        $this->form_validation->set_rules('prontuario', 'prontuario', 'is_unique[Pessoa.prontuario]');
-  
-        if($this->form_validation->run() == FALSE){
-            echo "false";
-        }else{
+        $this->form_validation->set_rules('prontuario', 'prontuario', 'is_unique[pessoa.prontuario]');
+
+        if($this->form_validation->run()) {
             echo "true";
+        } else {
+            echo "false";
         }
     }
 
