@@ -38,6 +38,7 @@
                             <th class="text-center">Qtd. Aulas Semanais</th>
                             <th class="text-center">Tipo de sala</th>
                             <th class="text-center">Status</th>
+                            <th class="text-center">Ações</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -52,13 +53,14 @@
 							<td class="text-center"><?= $disciplina['tipo_sala_id']; ?></td>
 							<td class="text-center"><?= ( empty($disciplina->deletado_em) ) ? 'Ativado' : 'Desativado'?></td>
 							<td class="text-center">
-								<?php if ( empty($disciplina->deletado_em) ) : ?>
-									<a class="btn btn-warning glyphicon glyphicon-pencil" title="Editar" href="<?= site_url('Disciplina/editar/'.$disciplina->id)?>" ></a>
-									<button class="btn btn-danger" type="button" id="btn-delete" onclick="confirmDelete(<?= $disciplina->id ?>,'Deseja desativar a Disciplina?','deletar')"> <i class="glyphicon glyphicon-remove"></i></button>
-								<?php else : ?>
-								    <button class="btn btn-success" type="button" id="btn-delete" onclick="confirmDelete(<?= $disciplina->id ?>,'Deseja ativar a Disciplina?','ativar')"> <i class="glyphicon glyphicon-check"></i></button>
-								<?php endif; ?>
-						    </td>
+						<?php if ( empty($disciplina->deletado_em) ) : ?>
+							<a class="btn btn-warning glyphicon glyphicon-pencil" title="Editar" href="<?= site_url('Disciplina/editar/'.$disciplina->id)?>"></a>
+							<button class="btn btn-danger" type="button" id="btn-delete" onclick="confirmDelete(<?= $disciplina->id ?>,'Deseja desativar a Disciplina?','deletar')"> <i class="glyphicon glyphicon-remove"></i></button>
+						<?php else : ?>
+							<a class="btn btn-warning glyphicon glyphicon-pencil disabled" title="Editar" href="<?= site_url('Disciplina/editar/'.$disciplina->id)?>"></a>
+							<button class="btn btn-success" type="button" id="btn-delete" onclick="confirmDelete(<?= $disciplina->id ?>,'Deseja ativar a Disciplina?','ativar')"> <i class="glyphicon glyphicon-check"></i></button>
+						<?php endif; ?>
+					</td>
 						<?php endforeach; ?>
                     </tbody>
                 </table>
