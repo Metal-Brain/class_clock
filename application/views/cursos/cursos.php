@@ -46,8 +46,8 @@
 			
 				<tr <?php if($curso->deletado_em): echo 'class="danger"'; endif; ?>>
 					<td class="text-center"><?= ucwords($curso['codigo_curso']); ?></td>
-					<td class="text-center"><?= ucwords($curso['nome_curso']); ?></td>
-					<td class="text-center"><?= ucwords($curso['sigla_curso']); ?></td>
+					<td class="text-center"><?= htmlspecialchars(ucwords($curso['nome_curso'])); ?></td>
+					<td class="text-center"><?= htmlspecialchars(ucwords($curso['sigla_curso'])); ?></td>
 					<td class="text-center"><?= ucwords($curso['qtd_semestre']); ?></td>
 					<td class="text-center"><?php 
 						foreach($data['grau'] as $grau){
