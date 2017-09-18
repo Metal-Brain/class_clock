@@ -150,3 +150,15 @@ CREATE TABLE IF NOT EXISTS `horario`.`horario` (
     ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
+
+INSERT INTO grau(nome_grau, codigo) VALUES("Tecnologia", "00001");
+INSERT INTO grau(nome_grau, codigo) VALUES("Bacharel", "00021");
+INSERT INTO grau(nome_grau, codigo) VALUES("Pos Graduação", "00231");
+INSERT INTO grau(nome_grau, codigo) VALUES("Mestrado", "001321");
+INSERT INTO grau(nome_grau, codigo) VALUES("Doutorado", "44121");
+ 
+INSERT INTO curso(grau_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento) VALUES(1,"123", "Análise e Desenvolvimento de Sistemas", "ADS", 6, "S");
+INSERT INTO curso(grau_id, codigo_curso,nome_curso, sigla_curso, qtd_semestre, fechamento) VALUES(2,"123",  "Processos Gerenciais", "PRG", 8, "S");
+INSERT INTO curso(grau_id,codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento) VALUES(3,"123",  "Fisica", "FIS", 4, "S");
+INSERT INTO curso(grau_id, codigo_curso,nome_curso, sigla_curso, qtd_semestre, fechamento) VALUES(4,"123",  "Computação Avançada", "CPA", 3, "B");
+INSERT INTO curso(grau_id,codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento) VALUES(5,"123",  "Cura do Cancer", "CDC", 8, 'S');
