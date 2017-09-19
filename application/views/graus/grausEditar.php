@@ -23,7 +23,6 @@
                 class="form-control"
                 id="codigo"
                 name="codigo"
-                placeholder="Código da Modalidade"
                 value="<?= $grau->codigo?>"
                 />
             </div>

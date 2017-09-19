@@ -20,12 +20,11 @@
 
             <div class="form-group">
               <label>Codigo:</label>
-              <input type="number"
+              <input type="text"
                 class="form-control"
                 id="codigo"
                 name="codigo"
                 placeholder="Código da Modalidade"
-                onKeyPress="if(this.value.length >=5) return false;"
                 value="<?= set_value('codigo') ?>"
                 />
             </div>
