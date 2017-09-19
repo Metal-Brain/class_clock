@@ -97,7 +97,7 @@
             $sigla = $this->input->post('sigla_curso');
             $codigo = $this->input->post('codigo_curso');
             
-            if($this->validar_sigla_curso($sigla, $codigo, $id) == false){
+            if($this->validar_sigla_codigo($sigla, $codigo, $id) == false){
                 return false;
             }else{
             
@@ -117,7 +117,7 @@
             }
         }
         
-        public function validar_sigla_curso($sigla, $codigo, $id){
+        public function validar_sigla_codigo($sigla, $codigo, $id){
             error_reporting(0);
             $cursos_mesma_sigla = Curso_model::withTrashed()->where('sigla_curso',$sigla)->where('id','!=', $id)->get();
             $cursos_mesmo_codigo = Curso_model::withTrashed()->where('codigo_curso',$codigo)->where('id','!=', $id)->get();
