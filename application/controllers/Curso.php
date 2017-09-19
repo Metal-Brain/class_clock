@@ -94,21 +94,21 @@
 
 
         public function validar($flag = null) {
-            $this->form_validation->set_rules('nome_curso','nome','required|min_length[5]|trim|strtolower|ucwords'); 
+            $this->form_validation->set_rules('nome_curso','nome','required|min_length[5]|max_length[75]|trim|strtolower|ucwords'); 
 
             $this->form_validation->set_rules('grau_id','modalidade','required|integer');
 
             
             if($flag == null){
-                $this->form_validation->set_rules('sigla_curso','sigla','required|max_length[3]|strtoupper|is_unique[curso.sigla_curso]');
-                $this->form_validation->set_rules('codigo_curso','codigo','required|integer|greater_than[0]|is_unique[curso.codigo_curso]');
+                $this->form_validation->set_rules('sigla_curso','sigla','required|exact_length[3]|strtoupper|is_unique[curso.sigla_curso]');
+                $this->form_validation->set_rules('codigo_curso','codigo','required|integer|greater_than[0]|less_than[100000]|is_unique[curso.codigo_curso]');
             }else{
-                $this->form_validation->set_rules('sigla_curso','sigla','required|max_length[3]|strtoupper');
-                $this->form_validation->set_rules('codigo_curso','codigo','required|integer|greater_than[0]');
+                $this->form_validation->set_rules('sigla_curso','sigla','required|exact_length[3]|strtoupper');
+                $this->form_validation->set_rules('codigo_curso','codigo','required|integer|greater_than[0]|less_than[100000]');
             }
 
 
-            $this->form_validation->set_rules('qtd_semestre','semestres','required|integer|greater_than[0]');
+            $this->form_validation->set_rules('qtd_semestre','semestres','required|integer|greater_than[0]|less_than[3]');
 
             $this->form_validation->set_rules('fechamento','fechamento','required');
 
