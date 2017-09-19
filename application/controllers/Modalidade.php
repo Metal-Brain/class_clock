@@ -1,19 +1,19 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- *  Regras de negócio sobre Grau.
+ *  Regras de negócio sobre Modalidade.
  * @author Jean Brock
  * @since 2017/08/20
  */
-class Grau extends CI_Controller {
+class Modalidade extends CI_Controller {
 
     /**
-    * Página inicial dos graus
+    * Página inicial dos modalidades
     * @author Jean Brock | Vitor Silvério | Thalita Barbosa
     */
     function index () {
-        $graus = Grau_model::withTrashed()->get();
-        $this->load->template('graus/graus', compact('graus'),'graus/js_graus');
+        $modalidades = Modalidade_model::withTrashed()->get();
+        $this->load->template('modalidades/modalidades', compact('modalidades'),'modalidades/js_modalidades');
     }
 
     /**
@@ -21,7 +21,7 @@ class Grau extends CI_Controller {
     * @author Jean Brock | Vitor Silvério | Thalita Barbosa
     */
     function cadastrar() {
-        $this->load->template('graus/grausCadastrar',[],'graus/js_graus');
+        $this->load->template('modalidades/modalidadesCadastrar',[],'modalidades/js_modalidades');
     }
 
     /**
@@ -29,13 +29,13 @@ class Grau extends CI_Controller {
     * @author Jean Brock | Vitor Silvério | Thalita Barbosa
     */
     function salvar () {
-        $this->form_validation->set_rules('nome_grau',
+        $this->form_validation->set_rules('nome_modalidade',
                                           'nome',
                                           array('required','max_length[50]',
                                             'trim',
                                             'regex_match[/^\D+$/]',
                                             /*'alpha_numeric_spaces',*/
-                                            'is_unique[grau.nome_grau]')
+                                            'is_unique[modalidade.nome_modalidade]')
                                          );
         $this->form_validation->set_rules('codigo',
                                           'codigo',
@@ -43,7 +43,7 @@ class Grau extends CI_Controller {
                                                  'integer',
                                                  'greater_than[0]',
                                                  'max_length[5]',
-                                                 'is_unique[grau.codigo]'
+                                                 'is_unique[modalidade.codigo]'
                                                  )
                                          );
         $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
@@ -51,19 +51,19 @@ class Grau extends CI_Controller {
         if($this->form_validation->run()){
             try {
 
-                $grau = new Grau_model();
-                $grau->nome_grau = $this->input->post('nome_grau');
-                $grau->codigo = $this->input->post('codigo');
-                $grau->save();
+                $modalidade = new Modalidade_model();
+                $modalidade->nome_modalidade = $this->input->post('nome_modalidade');
+                $modalidade->codigo = $this->input->post('codigo');
+                $modalidade->save();
 
-                $this->session->set_flashdata('success','Grau cadastrado com sucesso');
-                redirect('Grau');
+                $this->session->set_flashdata('success','Modalidade cadastrada com sucesso');
+                redirect('Modalidade');
 
             } catch (Exception $ignored){}
-            redirect('Grau/cadastrar');
+            redirect('Modalidade/cadastrar');
         }
 
-        $this->session->set_flashdata('danger','Problemas ao cadastrar o grau, tente novamente!');
+        $this->session->set_flashdata('danger','Problemas ao cadastrar a modalidade, tente novamente!');
         $this->cadastrar();
     }
 
@@ -72,8 +72,8 @@ class Grau extends CI_Controller {
     * @author Jean Brock | Vitor Silvério | Thalita Barbosa
     */
     function editar($id) {
-        $grau = Grau_model::withTrashed()->findOrFail($id);
-        $this->load->template('graus/grausEditar',compact('grau', 'id'),'graus/js_graus');
+        $modalidade = Modalidade_model::withTrashed()->findOrFail($id);
+        $this->load->template('modalidades/modalidadesEditar',compact('modalidade', 'id'),'modalidades/js_modalidades');
     }
 
     /**
@@ -81,13 +81,13 @@ class Grau extends CI_Controller {
     * @author Jean Brock | Vitor Silvério | Thalita Barbosa
     */
     function atualizar ($id) {
-        $this->form_validation->set_rules('nome_grau',
+        $this->form_validation->set_rules('nome_modalidade',
                                           'nome',
                                           array('required',
                                                 'max_length[50]',
                                                 'trim',
-                                                'regex_match[/^\D+$/]',
-                                                'alpha_dash')
+                                                'regex_match[/^\D+$/]'
+                                                /*'alpha_dash'*/)
 												/*'alpha_numeric_spaces')*/
                                          );
         $this->form_validation->set_rules('codigo',
@@ -102,54 +102,54 @@ class Grau extends CI_Controller {
 
         if($this->form_validation->run()){
             try {
-                Grau_model::where('id', $id)
+                Modalidade_model::where('id', $id)
                             ->update([
-                                "nome_grau"  => $this->input->post('nome_grau'),
+                                "nome_modalidade"  => $this->input->post('nome_modalidade'),
                                 "codigo"     => $this->input->post('codigo')
                             ]);
 
-                $this->session->set_flashdata('success','Grau atualizado com sucesso');
-                redirect('Grau');
+                $this->session->set_flashdata('success','Modalidade atualizada com sucesso');
+                redirect('Modalidade');
             } catch (Exception $ignored){}
         }
 
-        $this->session->set_flashdata('danger','Problemas ao atualizar os dados do grau, tente novamente!');
-        redirect('Grau');
+        $this->session->set_flashdata('danger','Problemas ao atualizar os dados da modalidade, tente novamente!');
+        redirect('Modalidade');
     }
 
     /**
-    * Deleta um grau
-    * @param $idGrau Id do grau a ser removido
+    * Deleta um modalidade
+    * @param $idModalidade Id do modalidade a ser removido
     * @author Jean Brock | Vitor Silvério | Thalita Barbosas
     */
     function deletar ($id) {
         try {
-            $grau = Grau_model::findOrFail($id);
-            $grau->delete();
+            $modalidade = Modalidade_model::findOrFail($id);
+            $modalidade->delete();
 
-            $this->session->set_flashdata('success','Grau deletado com sucesso');
+            $this->session->set_flashdata('success','Modalidade deletada com sucesso');
         }catch (Exception $e) {
-            $this->session->set_flashdata('danger','Erro ao deletar um grau, tente novamente');
+            $this->session->set_flashdata('danger','Erro ao deletar uma modalidade, tente novamente');
         }
 
-        redirect('Grau');
+        redirect('Modalidade');
     }
 
     /**
-    * Ativa o Grau
+    * Ativa o Modalidade
     * @author Thalita Barbosa
     * @since 2017/09/12
-    * @param ID do grau
+    * @param ID do modalidade
    */
     function ativar ($id) {
         try {
-            $grau = Grau_model::withTrashed()->findOrFail($id);
-            $grau->restore();
-            $this->session->set_flashdata('success','Grau ativado com sucesso');
+            $modalidade = Modalidade_model::withTrashed()->findOrFail($id);
+            $modalidade->restore();
+            $this->session->set_flashdata('success','Modalidade ativada com sucesso');
         } catch (Exception $e) {
-            $this->session->set_flashdata('danger','Erro ao ativar o grau. Tente novamente!');
+            $this->session->set_flashdata('danger','Erro ao ativar a modalidade. Tente novamente!');
     }
-            redirect('Grau');
+            redirect('Modalidade');
   }
 
 }
