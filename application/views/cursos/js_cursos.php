@@ -11,9 +11,9 @@
 					grau_id: {required: true, min: 1}
 				},
 				messages: {
-					codigo_curso: { required: 'Campo obrigatório', minlength: 'O campo nome deve ter no mínimo 1 caracteres', maxlength:'O campo nome deve ter no maximo 5 caracteres', min: 'Digite um valor maior ou igual a 1'},
+					codigo_curso: { required: 'Campo obrigatório', minlength: 'O campo codigo deve ter no mínimo 1 caracteres', maxlength:'O campo codigo deve ter no maximo 5 caracteres', min: 'Digite um valor maior ou igual a 1'},
 					nome_curso: { required: 'Campo obrigatório', minlength: 'O campo nome deve ter no mínimo 5 caracteres', maxlength:'O campo nome deve ter no maximo 75 caracteres'},
-					sigla_curso: { required: 'Campo obrigatório',minlength: 'O campo nome deve ter no mínimo 3 caracteres',  maxlength: 'O campo sigla deve ter no máximo 3 caracteres'},
+					sigla_curso: { required: 'Campo obrigatório',minlength: 'O campo sigla deve ter no mínimo 3 caracteres',  maxlength: 'O campo sigla deve ter no máximo 3 caracteres'},
 					qtd_semestre: { required: 'Campo obrigatório', number: 'Digite apenas números', min: 'Digite um valor maior ou igual a 1', max: 'Digite um valor menor ou igual a 19'},
 					grau_id: {required: 'Campo obrigatório', min: 'Campo obrigatório' }
 				}
