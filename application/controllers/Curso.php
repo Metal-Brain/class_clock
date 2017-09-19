@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
     /**
-    * Essa classe contem todos as função de Curso
+    * Essa classe contem todas as funções de Curso
     * @author Nikolas Lencioni
     * @since 2018/08/30
     */
@@ -49,7 +49,7 @@
         }
 
         public function atualizar($id){
-            if($this->validar('1')) {
+            if($this->validar($id)) {
                 try {
                     $curso = Curso_model::withTrashed()->findOrFail($id);
                     $curso->update(['nome_curso'=>$this->input->post('nome_curso'),
@@ -62,9 +62,7 @@
 
                     $this->session->set_flashdata('success', 'Curso atualizado com sucesso');
                     redirect('curso');
-                } catch (Exception $ignored) {
-                    exit ($ignored);
-                }
+                } catch (Exception $ignored) {}
             }
 
             $this->session->set_flashdata('danger', 'Problemas ao atualizar os dados do curso, tente novamente!');
@@ -95,29 +93,40 @@
             redirect("curso");
         }
 
-
-
-        public function validar($flag = null) {
-            $this->form_validation->set_rules('nome_curso','nome','required|min_length[5]|max_length[75]|trim|strtolower|ucwords'); 
-
-            $this->form_validation->set_rules('grau_id','modalidade','required|integer');
-
+        public function validar($id) {
+            $sigla = $this->input->post('sigla_curso');
+            $codigo = $this->input->post('codigo_curso');
             
-            if($flag == null){
-                $this->form_validation->set_rules('sigla_curso','sigla','required|alpha|exact_length[3]|strtoupper|is_unique[curso.sigla_curso]');
-                $this->form_validation->set_rules('codigo_curso','codigo','required|integer|greater_than[0]|less_than[100000]|is_unique[curso.codigo_curso]');
+            if($this->validar_sigla_curso($sigla, $codigo, $id) == false){
+                return false;
             }else{
+            
+                $this->form_validation->set_rules('nome_curso','nome','required|min_length[5]|max_length[75]|trim|strtolower|ucwords'); 
+
+                $this->form_validation->set_rules('grau_id','modalidade','required|integer');
+
                 $this->form_validation->set_rules('sigla_curso','sigla','required|alpha|exact_length[3]|strtoupper');
+                
                 $this->form_validation->set_rules('codigo_curso','codigo','required|integer|greater_than[0]|less_than[100000]');
+
+                $this->form_validation->set_rules('qtd_semestre','semestres','required|integer|greater_than[0]');
+
+                $this->form_validation->set_rules('fechamento','fechamento','required');
+
+                return $this->form_validation->run();
             }
-
-
-            $this->form_validation->set_rules('qtd_semestre','semestres','required|integer|greater_than[0]');
-
-            $this->form_validation->set_rules('fechamento','fechamento','required');
-
-            return $this->form_validation->run();
         }
-
+        
+        public function validar_sigla_curso($sigla, $codigo, $id){
+            error_reporting(0);
+            $cursos_mesma_sigla = Curso_model::withTrashed()->where('sigla_curso',$sigla)->where('id','!=', $id)->get();
+            $cursos_mesmo_codigo = Curso_model::withTrashed()->where('codigo_curso',$codigo)->where('id','!=', $id)->get();
+            
+            if($cursos_mesma_sigla['0']!=null || $cursos_mesmo_codigo['0']!=null){
+                return false;
+            }else{
+                return true;
+            }
+        }
     }
 ?>
