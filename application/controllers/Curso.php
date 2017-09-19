@@ -94,7 +94,7 @@
 
 
         public function validar($flag = null) {
-            $this->form_validation->set_rules('nome_curso','nome','required|min_length[5]|trim|ucwords'); 
+            $this->form_validation->set_rules('nome_curso','nome','required|min_length[5]|trim|strtolower|ucwords'); 
 
             $this->form_validation->set_rules('grau_id','modalidade','required|integer');
 
