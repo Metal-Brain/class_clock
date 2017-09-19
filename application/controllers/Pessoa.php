@@ -26,41 +26,42 @@ class Pessoa extends MY_Controller {
     * @author Vitor "Pliavi"
     */
     function salvar() {
-        DB::transaction(function() {
-            // Se o docente estiver na lista de tipos
-            $has_docente = in_array($this->id_docente, $this->request('tipos'));
-
-            $this->set_validations([
-                ['nome', 'nome', 'required|min_length[5]'],
-                ['prontuario', 'prontuário', 'required|is_unique[pessoa.prontuario]|exact_length[6]'],
-                ['senha', 'senha', 'required|min_length[6]'],
-                ['email', 'email', 'required|valid_email'],
-                ['tipos[]', 'tipos', 'required']
+        $has_docente = in_array($this->id_docente, $this->request('tipos')?:[]);
+        
+        $this->set_validations([
+            ['nome', 'nome', 'required|min_length[5]'],
+            ['prontuario', 'prontuário', 'required|is_unique[pessoa.prontuario]|exact_length[6]|numeric'],
+            ['senha', 'senha', 'required|min_length[6]'],
+            ['email', 'email', 'required|valid_email'],
+            ['tipos[]', 'tipos', 'required']
             ]);
+            
+        if($has_docente) {
+            $this->set_validations([
+                ['nascimento', 'data de nascimento', 'required|valid_date'],
+                ['ingresso_campus', 'data de ingresso no câmpus', 'required|valid_date'],
+                ['ingresso_ifsp', 'data de ingresso no IFSP', 'required|valid_date'],
+                ['area', 'área', 'required'],
+                ['regime_contrato', 'regime de contrato', 'required|in_list[20, 40]'],
+            ]);
+        }
+                
+        if($this->run_validation()) {
+            DB::transaction(function() {
+                $pessoa = Pessoa_model::create($this->request_all());
+                if($has_docente) {
+                    $docente = Docente_model::create($this->request_all());
+                }
 
-            if($has_docente) {
-                $this->set_validations([
-                    ['nascimento', 'data de nascimento', 'required|valid_date'],
-                    ['ingresso_campus', 'data de ingresso no câmpus', 'required|valid_date'],
-                    ['ingresso_ifsp', 'data de ingresso no IFSP', 'required|valid_date'],
-                    ['area', 'área', 'required'],
-                    ['regime_contrato', 'regime de contrato', 'required|in_list[20, 40]'],
-                ]);
-            }
-
-            $this->run_validation();
-
-            $pessoa = Pessoa_model::create($this->request_all());
-            if($has_docente) {
-                $docente = Docente_model::create($this->request_all());
-            }
-
-            // Monta as relações de tipo
-            $pessoa->tipos()->sync($this->request('tipos'));
-        });
-
-        $this->session->set_flashdata('success', 'Pessoa cadastrada com sucesso');
-        redirect('/pessoa');
+                // Monta as relações de tipo
+                $pessoa->tipos()->sync($this->request('tipos'));
+            });
+            $this->session->set_flashdata('success', 'Pessoa cadastrada com sucesso');
+            redirect('/pessoa');
+        } else {
+            $this->session->set_flashdata('danger', 'Não foi possível cadastrar a pessoa');
+            $this->cadastrar();
+        }
     }
 
     /**
@@ -88,7 +89,7 @@ class Pessoa extends MY_Controller {
     function atualizar($id) {
         DB::transaction(function() use ($id) {
             $pessoa = Pessoa_model::findOrFail($id);
-            $has_docente = in_array($this->id_docente, $this->request('tipos')); // Se o docente estiver na lista de tipos
+            $has_docente = in_array($this->id_docente, $this->request('tipos')?:[]); // Se o docente estiver na lista de tipos
 
             $this->set_validations([
                 ['nome', 'nome', 'required|min_length[5]'],
@@ -108,22 +109,27 @@ class Pessoa extends MY_Controller {
                 ]);
             }
 
-            $this->run_validation();
+            if ($this->run_validation()) {
+                $pessoa->update($this->request_all());
+                if($has_docente) {
+                    $docente = $pessoa->docente;
+                    $docente->update($this->request_all());
+                } else if(!is_null($pessoa->docente)){
+                    $pessoa->docente->delete();
+                }
 
-            $pessoa->update($this->request_all());
-            if($has_docente) {
-                $docente = $pessoa->docente;
-                $docente->update($this->request_all());
-            } else if(!is_null($pessoa->docente)){
-                $pessoa->docente->delete();
+                // Realinha os tipos
+                $pessoa->tipos()->sync($this->request('tipos'));
+
+                $this->session->set_flashdata('success', 'Pessoa atualizada com sucesso');
+                redirect('/pessoa');
+            } else {
+                $this->session->set_flashdata('danger', 'Não foi possível atualizar a pessoa');
+                $this->editar();
             }
 
-            // Realinha os tipos
-            $pessoa->tipos()->sync($this->request('tipos'));
         });
 
-        $this->session->set_flashdata('success', 'Pessoa atualizada com sucesso');
-        redirect('/pessoa');
     }
 
     /**

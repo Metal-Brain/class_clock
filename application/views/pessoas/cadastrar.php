@@ -2,36 +2,48 @@
 	<form id="formPessoas" action="<?= site_url('pessoa/salvar')?>" method="post">
 		<label>Nome:</label>
 		<div class="form-group width-400">
-			<input id="nome" name="nome" class="form-control" type="text" placeholder="Nome" value="<?= set_value('nome')?>" pattern="[a-zA-Z]+">
-			<?= form_error('nome') ?>
+
+			<input id="nome" name="nome" class="form-control" type="text" placeholder="Nome" value="<?= set_value('nome')?>">
+			<span class="text-danger">
+				<?= form_error('nome') ?>
+			</span>
 		</div>
 
 		<label>Prontuário:</label>
 		<div class="form-group width-180">
 			<input id="prontuario" name="prontuario" class="form-control" type="text" placeholder="Prontuário" maxlength="6" value="<?= set_value('prontuario')?>">
-			<?= form_error('prontuario') ?>
+			<span class="text-danger">
+				<?= form_error('prontuario') ?>
+			</span>
 		</div>
 
 		<label>Senha:</label>
 		<div class="form-group width-180">
 			<input id="senha" name="senha" class="form-control" type="password" placeholder="Senha" value="<?= set_value('senha')?>">
-			<?= form_error('senha') ?>
+			<span class="text-danger">
+				<?= form_error('senha') ?>
+			</span>
 		</div>
 
 		<label>E-mail:</label>
 		<div class="form-group width-400">
 			<input id="email" name="email" class="form-control" type="email" placeholder="E-mail" value="<?= set_value('email')?>">
-			<?= form_error('email') ?>
+			<span class="text-danger">
+				<?= form_error('email') ?>
+			</span>
 		</div>
 
 		<label>Tipo:</label>
 		<div class="form-group">
 			<div class="checkbox" style="margin-top: 0px;">
-				<label><input name="tipos[]" type="checkbox" value="1">Administrador</label>
-				<label><input name="tipos[]" type="checkbox" value="2">CRA</label>
-				<label><input name="tipos[]" type="checkbox" value="3">DAE</label>
-				<label class="checkdocente-toggle"><input name="tipos[]" type="checkbox" value="4"> Docente</label>
+				<label><input <?= set_checkbox('tipos[]', 1) ?> name="tipos[]" type="checkbox" value="1" >Administrador</label>
+				<label><input <?= set_checkbox('tipos[]', 2) ?> name="tipos[]" type="checkbox" value="2">CRA</label>
+				<label><input <?= set_checkbox('tipos[]', 3) ?> name="tipos[]" type="checkbox" value="3">DAE</label>
+				<label><input <?= set_checkbox('tipos[]', 4) ?> name="tipos[]" type="checkbox" value="4" id="checkdocente-toggle" >Docente</label>
 			</div>
+			<span class="text-danger">
+				<?= form_error('tipos[]') ?>
+			</span>
 		</div>
 
 		<!-- Docente -->
@@ -39,19 +51,25 @@
 			<label>Data de nascimento:</label>
 			<div class="form-group width-180">
 				<input id="nascimento" name="nascimento" class="form-control" type="date" value="<?= set_value('nascimento')?>">
-				<?= form_error('nascimento') ?>
+				<span class="text-danger">
+					<?= form_error('nascimento') ?>
+				</span>
 			</div>
 
 			<label>Data de ingresso no câmpus:</label>
 			<div class="form-group width-180">
 				<input id="ingresso_campus" name="ingresso_campus" class="form-control" type="date" value="<?= set_value('ingresso_campus')?>">
-				<?= form_error('ingresso_campus') ?>
+				<span class="text-danger">
+					<?= form_error('ingresso_campus') ?>
+				</span>
 			</div>
 
 			<label>Data de ingresso no câmpus:</label>
 			<div class="form-group width-180">
 				<input id="ingresso_ifsp" name="ingresso_ifsp" class="form-control" type="date" value="<?= set_value('ingresso_ifsp')?>">
-				<?= form_error('ingresso_ifsp') ?>
+				<span class="text-danger">
+					<?= form_error('ingresso_ifsp') ?>
+				</span>
 			</div>
 
 			<!-- <label>Área:</label>

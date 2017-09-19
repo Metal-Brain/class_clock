@@ -11,7 +11,7 @@
 					prontuario: {
 						required: true,
 						minlength: 6,
-						remote: '<?= base_url("index.php/Pessoa/verificaProntuario/") ?>'
+						remote: "<?= base_url('index.php/Pessoa/verificaProntuario/') ?>"
 					},
 					senha: {
 						required: true,
@@ -21,6 +21,7 @@
 						required: true,
 						email: true
 					}
+
 				},
 				messages: {
 					prontuario: {
@@ -39,10 +40,19 @@
 		</script>
 		<script type="text/javascript">
 
-				$(".checkdocente-toggle").click(function(){
-					$('#conteudo-docente').toggle();
-				});
+			$(document).ready(function(){
+				if($("#checkdocente-toggle:checked").length > 0){
+					$('#conteudo-docente').show();
+				}
+			});
 
+			$("#checkdocente-toggle").change(function() {
+				if(this.checked){
+					$('#conteudo-docente').show();
+				} else {
+					$('#conteudo-docente').hide();
+				}
+			});
 		</script>
 	</body>
 </html>

@@ -22,9 +22,7 @@ class MY_Controller extends CI_Controller {
     * @throws ValidationFailException
     */
     function run_validation() {
-        if(!$this->form_validation->run()) {
-            throw new ValidationFailException("Falha na validação");
-        }
+        return $this->form_validation->run();
     }
 
     /**
@@ -94,7 +92,7 @@ class MY_Controller extends CI_Controller {
             case 'ValidationFailException':
                 $sess->set_flashdata('danger',"O cadastro de {$this->name} falhou!");
                 log_message('error', validation_errors());
-                back();
+                redirect($exception->getURL());
                 break;
             default:
                 // Se não for nenhum, chama o Exception Handler padrão do CodeIgniter
