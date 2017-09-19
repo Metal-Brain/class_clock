@@ -32,10 +32,12 @@
 
                     $this->session->set_flashdata('success','Curso cadastrado com sucesso');
                     redirect('curso');
-                } catch (Exception $ignored) {}
+                } catch (Exception $ignored) {
+                    exit ($ignored);
+                }
             }
             $this->session->set_flashdata('danger','Problemas ao cadastrar o curso, tente novamente!');
-            redirect('curso/cadastrar');
+            $this->cadastrar();
         }
 
         public function editar($id) {
@@ -60,11 +62,13 @@
 
                     $this->session->set_flashdata('success', 'Curso atualizado com sucesso');
                     redirect('curso');
-                } catch (Exception $ignored) {}
+                } catch (Exception $ignored) {
+                    exit ($ignored);
+                }
             }
 
             $this->session->set_flashdata('danger', 'Problemas ao atualizar os dados do curso, tente novamente!');
-            redirect('curso/editar/'.$id);
+            $this->editar($id);
         }
         
         public function ativar($id){
@@ -94,7 +98,7 @@
 
 
         public function validar($flag = null) {
-            $this->form_validation->set_rules('nome_curso','nome','required|alpha_dash|min_length[5]|max_length[75]|trim|strtolower|ucwords'); 
+            $this->form_validation->set_rules('nome_curso','nome','required|min_length[5]|max_length[75]|trim|strtolower|ucwords'); 
 
             $this->form_validation->set_rules('grau_id','modalidade','required|integer');
 
@@ -108,7 +112,7 @@
             }
 
 
-            $this->form_validation->set_rules('qtd_semestre','semestres','required|integer|greater_than[0]|less_than[3]');
+            $this->form_validation->set_rules('qtd_semestre','semestres','required|integer|greater_than[0]');
 
             $this->form_validation->set_rules('fechamento','fechamento','required');
 
