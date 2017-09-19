@@ -2,7 +2,7 @@
 	<form id="formPessoas" action="<?= site_url('pessoa/salvar')?>" method="post">
 		<label>Nome:</label>
 		<div class="form-group width-400">
-			<input id="nome" name="nome" class="form-control" type="text" placeholder="Nome" value="<?= set_value('nome')?>">
+			<input id="nome" name="nome" class="form-control" type="text" placeholder="Nome" value="<?= set_value('nome')?>" pattern="[a-zA-Z]+">
 			<?= form_error('nome') ?>
 		</div>
 

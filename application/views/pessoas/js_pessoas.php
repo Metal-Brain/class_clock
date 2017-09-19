@@ -30,6 +30,14 @@
 			});
 		</script>
 		<script type="text/javascript">
+			
+			    document.getElementById("nome").onkeypress = function(e) {
+         var chr = String.fromCharCode(e.which);
+         if ("qwertyuioplkjhgfdsazxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM".indexOf(chr) < 0)
+           return false;
+       };
+		</script>
+		<script type="text/javascript">
 
 				$(".checkdocente-toggle").click(function(){
 					$('#conteudo-docente').toggle();
