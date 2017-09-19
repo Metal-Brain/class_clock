@@ -100,10 +100,10 @@
 
             
             if($flag == null){
-                $this->form_validation->set_rules('sigla_curso','sigla','required|exact_length[3]|strtoupper|is_unique[curso.sigla_curso]');
+                $this->form_validation->set_rules('sigla_curso','sigla','required|alpha|exact_length[3]|strtoupper|is_unique[curso.sigla_curso]');
                 $this->form_validation->set_rules('codigo_curso','codigo','required|integer|greater_than[0]|less_than[100000]|is_unique[curso.codigo_curso]');
             }else{
-                $this->form_validation->set_rules('sigla_curso','sigla','required|exact_length[3]|strtoupper');
+                $this->form_validation->set_rules('sigla_curso','sigla','required|alpha|exact_length[3]|strtoupper');
                 $this->form_validation->set_rules('codigo_curso','codigo','required|integer|greater_than[0]|less_than[100000]');
             }
 
