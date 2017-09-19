@@ -27,7 +27,7 @@ class Pessoa extends MY_Controller {
     */
     function salvar() {
         $has_docente = in_array($this->id_docente, $this->request('tipos')?:[]);
-        
+
         $this->set_validations([
             ['nome', 'nome', 'required|min_length[5]'],
             ['prontuario', 'prontuário', 'required|is_unique[pessoa.prontuario]|exact_length[6]|numeric'],
@@ -35,7 +35,7 @@ class Pessoa extends MY_Controller {
             ['email', 'email', 'required|valid_email'],
             ['tipos[]', 'tipos', 'required']
             ]);
-            
+
         if($has_docente) {
             $this->set_validations([
                 ['nascimento', 'data de nascimento', 'required|valid_date'],
@@ -45,7 +45,7 @@ class Pessoa extends MY_Controller {
                 ['regime_contrato', 'regime de contrato', 'required|in_list[20, 40]'],
             ]);
         }
-                
+
         if($this->run_validation()) {
             DB::transaction(function() {
                 $pessoa = Pessoa_model::create($this->request_all());
@@ -72,7 +72,7 @@ class Pessoa extends MY_Controller {
     function editar($id) {
         $pessoa = Pessoa_model::findOrFail($id);
         $tipos = Tipo_model::all();
-		$tipos_pessoa=[];
+		$tipos_pessoa = [];
 
 		foreach($pessoa->tipos as $t){
 			$tipos_pessoa[] = $t->id;
@@ -87,30 +87,35 @@ class Pessoa extends MY_Controller {
     * @param $id ID da pessoa a ser atualizada
     */
     function atualizar($id) {
-        DB::transaction(function() use ($id) {
-            $pessoa = Pessoa_model::findOrFail($id);
-            $has_docente = in_array($this->id_docente, $this->request('tipos')?:[]); // Se o docente estiver na lista de tipos
+        $pessoa = Pessoa_model::findOrFail($id);
+        $has_docente = in_array($this->id_docente, $this->request('tipos')?:[]); // Se o docente estiver na lista de tipos
 
+        $this->set_validations([
+            ['nome', 'nome', 'required|min_length[5]'],
+            ['prontuario', 'prontuário', 'required|exact_length[6]'],
+            ['senha', 'senha', 'min_length[6]'],
+            ['email', 'email', 'required|valid_email'],
+            ['tipos[]', 'tipos', 'required']
+        ]);
+
+        if($has_docente) {
             $this->set_validations([
-                ['nome', 'nome', 'required|min_length[5]'],
-                ['prontuario', 'prontuário', 'required|exact_length[6]'],
-                ['senha', 'senha', 'required|min_length[6]'],
-                ['email', 'email', 'required|valid_email'],
-                ['tipos[]', 'tipos', 'required']
+                ['nascimento', 'data de nascimento', 'required|valid_date'],
+                ['ingresso_campus', 'data de ingresso no câmpus', 'required|valid_date'],
+                ['ingresso_ifsp', 'data de ingresso no IFSP', 'required|valid_date'],
+                ['area', 'área', 'required'],
+                ['regime_contrato', 'regime de contrato', 'required|in_list[20, 40]'],
             ]);
+        }
 
-            if($has_docente) {
-                $this->set_validations([
-                    ['nascimento', 'data de nascimento', 'required|valid_date'],
-                    ['ingresso_campus', 'data de ingresso no câmpus', 'required|valid_date'],
-                    ['ingresso_ifsp', 'data de ingresso no IFSP', 'required|valid_date'],
-                    ['area', 'área', 'required'],
-                    ['regime_contrato', 'regime de contrato', 'required|in_list[20, 40]'],
-                ]);
+        if ($this->run_validation()) {
+            $pessoa_data = $this->request_all();
+            if(empty(trim($pessoa_data['senha']))){
+                unset($pessoa_data['senha']);
             }
 
-            if ($this->run_validation()) {
-                $pessoa->update($this->request_all());
+            DB::transaction(function() use ($id, $pessoa, $pessoa_data, $has_docente) {
+                $pessoa->update($pessoa_data);
                 if($has_docente) {
                     $docente = $pessoa->docente;
                     $docente->update($this->request_all());
@@ -120,16 +125,14 @@ class Pessoa extends MY_Controller {
 
                 // Realinha os tipos
                 $pessoa->tipos()->sync($this->request('tipos'));
+            });
 
-                $this->session->set_flashdata('success', 'Pessoa atualizada com sucesso');
-                redirect('/pessoa');
-            } else {
-                $this->session->set_flashdata('danger', 'Não foi possível atualizar a pessoa');
-                $this->editar();
-            }
-
-        });
-
+            $this->session->set_flashdata('success', 'Pessoa atualizada com sucesso');
+            redirect('/pessoa');
+        } else {
+            $this->session->set_flashdata('danger', 'Não foi possível atualizar a pessoa');
+            $this->editar();
+        }
     }
 
     /**
