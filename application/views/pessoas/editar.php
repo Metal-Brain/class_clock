@@ -14,7 +14,7 @@
 
 		<div class="form-group width-180">
 			<label>Senha:</label>
-			<input id="senha" name="senha" class="form-control" type="text" minlength="6">
+			<input id="senha" name="senha" class="form-control" type="password" minlength="6">
 			<?= form_error('senha') ?>
 		</div>
 
