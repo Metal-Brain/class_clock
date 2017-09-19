@@ -9,7 +9,7 @@
 
         <div class="form-group">
 			<label>Descrição:</label>
-			<textarea id="descricao_tipo_sala" name="descricao_tipo_sala" class="form-control" rows="5" required maxlength="254" placeholder="Descrição" required value="<?= set_value('descricao_tipo_sala')?>"></textarea>
+			<textarea id="descricao_tipo_sala" name="descricao_tipo_sala" class="form-control" rows="5" required maxlength="254" placeholder="Descrição" required><?= set_value('descricao_tipo_sala')?></textarea>
 			<?= form_error('descricao_tipo_sala') ?>
 		</div>
 		
