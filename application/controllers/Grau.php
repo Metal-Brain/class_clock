@@ -34,7 +34,7 @@ class Grau extends CI_Controller {
                                           array('required','max_length[50]',
                                             'trim',
                                             'regex_match[/^\D+$/]',
-                                            'alpha_numeric_spaces',
+                                            /*'alpha_numeric_spaces',*/
                                             'is_unique[grau.nome_grau]')
                                          );
         $this->form_validation->set_rules('codigo',
@@ -87,8 +87,8 @@ class Grau extends CI_Controller {
                                                 'max_length[50]',
                                                 'trim',
                                                 'regex_match[/^\D+$/]',
-                                                'alpha_dash',
-												'alpha_numeric_spaces')
+                                                'alpha_dash')
+												/*'alpha_numeric_spaces')*/
                                          );
         $this->form_validation->set_rules('codigo',
                                           'codigo',

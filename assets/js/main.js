@@ -10,8 +10,8 @@ $('#sidebar-semestres').addClass('active');
   $('#sidebar-funcionarios').addClass('active');
 }else if(path_atual.indexOf("Instituicao") != -1){
   $('#sidebar-instituicao').addClass('active');
-}else if(path_atual.indexOf("FPA") != -1){
-  $('#sidebar-fpa').addClass('active');
+}else if(path_atual.indexOf("Grau") != -1){
+    $('#sidebar-grau').addClass('active');
 }else{
   $('#sidebar-home').addClass('active');
 }
