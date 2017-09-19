@@ -3,7 +3,7 @@
 	<form id="formTipo_Sala" action="<?= site_url('tipo_sala/salvar')?>" method="post">
 		<div class="form-group">
 			<label>Tipo de Sala:</label>
-			<input id="nome_tipo_sala" name="nome_tipo_sala" class="form-control" type="text" placeholder="Ex: Laboratório de ADS" maxlength="30" required value="<?= set_value('nome_tipo_sala')?>">
+			<input id="nome_tipo_sala" name="nome_tipo_sala" class="form-control" type="text" placeholder="Ex: Laboratório de ADS" maxlength="30" required autofocus value="<?= set_value('nome_tipo_sala')?>">
 			<?= form_error('nome_tipo_sala') ?>
 		</div>
 
