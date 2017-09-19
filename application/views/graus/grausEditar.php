@@ -23,7 +23,7 @@
                 class="form-control"
                 id="codigo"
                 name="codigo"
-                value=" <?=htmlspecialchars($grau->nome_grau)?> "
+                value=" <?=htmlspecialchars($grau->codigo)?> "
                 />
             </div>
 
