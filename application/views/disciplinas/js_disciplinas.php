@@ -131,6 +131,14 @@
         });
     }
 </script>
+<script type="text/javascript">
+        document.getElementById("nome_curso").onkeypress = function(e) {
+         var chr = /^[a-zA-Z\u00C0-\u017F]$/;
+         var patt = new RegExp(chr);
+         var res = patt.test(String.fromCharCode(e.which));
+         return res;
+       };
+</script>
 
 </html>
 </body>

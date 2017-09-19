@@ -12,6 +12,8 @@ $('#sidebar-semestres').addClass('active');
   $('#sidebar-instituicao').addClass('active');
 }else if(path_atual.indexOf("FPA") != -1){
   $('#sidebar-fpa').addClass('active');
+ } else if(path_atual.indexOf("disciplina") != -1){
+  $('#sidebar-disciplinas').addClass('active');
 }else{
   $('#sidebar-home').addClass('active');
 }

@@ -36,5 +36,10 @@
 			   <span class="glyphicon glyphicon-duplicate"></span> <span class="sidebar-label">FPA</span>
 		   </a>
 	   </li>
+	     <li id="sidebar-disciplinas">
+		   <a href="http://localhost/class_clock/index.php/disciplina">
+			   <span class="glyphicon glyphicon-tree-deciduous"></span> <span class="sidebar-label">Disciplinas</span>
+		   </a>
+	   </li>
    </ul>
 </div>
