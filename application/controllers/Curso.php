@@ -14,7 +14,7 @@
         }
 
         public function cadastrar() {
-            $data = Modalidade_model::withTrashed()->get();			
+            $data = Modalidade_model::withTrashed()->get();
             $this->load->template('cursos/cadastrar', compact('data'), 'cursos/js_cursos');
         }
 
@@ -43,7 +43,7 @@
                 'curso' => Curso_model::withTrashed()->findOrFail($id),
                 'modalidade' => Modalidade_model::all('id','nome_modalidade')
             );
-            $this->load->template('cursos/editar', compact('data','id'), 'cursos/js_cursos');		 
+            $this->load->template('cursos/editar', compact('data','id'), 'cursos/js_cursos');
         }
 
         public function atualizar($id){
@@ -56,7 +56,7 @@
                         "sigla_curso" => $this->input->post('sigla_curso'),
                         "qtd_semestre" => $this->input->post('qtd_semestre'),
                         "fechamento" => $this->input->post('fechamento')
-                    ]);	
+                    ]);
 
                     $this->session->set_flashdata('success', 'Curso atualizado com sucesso');
                     redirect('curso');
@@ -66,7 +66,7 @@
             $this->session->set_flashdata('danger', 'Problemas ao atualizar os dados do curso, tente novamente!');
             $this->editar($id);
         }
-        
+
         public function ativar($id){
             try{
                 $curso = Curso_model::withTrashed()->findOrFail($id);
@@ -92,38 +92,28 @@
         }
 
         public function validar($id = null) {
+            $this->form_validation->set_rules('nome_curso','nome','required|min_length[5]|max_length[75]|trim|strtolower|ucwords');
+            $this->form_validation->set_rules('modalidade_id','modalidade','required|integer');
+            $this->form_validation->set_rules('sigla_curso','sigla_curso','required|alpha|exact_length[3]|strtoupper');
+            $this->form_validation->set_rules('codigo_curso','codigo_curso','required|integer|greater_than[0]|less_than[100000]');
+            $this->form_validation->set_rules('qtd_semestre','semestres','required|integer|greater_than[0]');
+            $this->form_validation->set_rules('fechamento','fechamento','required');
+
             $sigla = $this->input->post('sigla_curso');
-            $codigo = $this->input->post('codigo_curso');
-            
-            if($this->validar_sigla_codigo($sigla, $codigo, $id) == false){
-                return false;
-            }else{
-            
-                $this->form_validation->set_rules('nome_curso','nome','required|min_length[5]|max_length[75]|trim|strtolower|ucwords'); 
-
-                $this->form_validation->set_rules('modalidade_id','modalidade','required|integer');
-
-                $this->form_validation->set_rules('sigla_curso','sigla','required|alpha|exact_length[3]|strtoupper');
-                
-                $this->form_validation->set_rules('codigo_curso','codigo','required|integer|greater_than[0]|less_than[100000]');
-
-                $this->form_validation->set_rules('qtd_semestre','semestres','required|integer|greater_than[0]');
-
-                $this->form_validation->set_rules('fechamento','fechamento','required');
-
+            $cursos_mesma_sigla = Curso_model::withTrashed()->where('sigla_curso',$sigla)->where('id','!=',$id)->get();
+            if(!empty($cursos_mesma_sigla[0])){
+                $this->form_validation->set_rules('sigla_curso','sigla','is_unique[curso.sigla_curso]');
                 return $this->form_validation->run();
             }
-        }
-        
-        public function validar_sigla_codigo(){
-            $validate_data = array('sigla_curso' => $this->input->get('sigla_curso'));
-            $this->form_validation->set_data($validate_data);
-            $this->form_validation->set_rules('sigla_curso', 'sigla_curso', 'is_unique[curso.sigla_curso]');
-            if($this->form_validation->run()) {
-                echo "true";
-            } else {
-                echo "false";
+
+            $codigo = $this->input->post('codigo_curso');
+            $cursos_mesmo_codigo = Curso_model::withTrashed()->where('codigo_curso',$codigo)->where('id','!=',$id)->get();
+            if(!empty($cursos_mesmo_codigo[0])){
+                $this->form_validation->set_rules('codigo_curso','codigo','is_unique[curso.codigo_curso]');
+                return $this->form_validation->run();
             }
+
+            return $this->form_validation->run();
         }
-    }
+      }
 ?>
