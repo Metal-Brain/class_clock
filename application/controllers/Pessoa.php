@@ -41,16 +41,20 @@ class Pessoa extends MY_Controller {
                 ['nascimento', 'data de nascimento', 'required|valid_date'],
                 ['ingresso_campus', 'data de ingresso no câmpus', 'required|valid_date'],
                 ['ingresso_ifsp', 'data de ingresso no IFSP', 'required|valid_date'],
-                ['area', 'área', 'required'],
-                ['regime_contrato', 'regime de contrato', 'required|in_list[20, 40]'],
+                // ['area', 'área', 'required'], FIXME: adicionar essa validação quando a area for existente
+                ['regime', 'regime de contrato', 'required|in_list[0,1]'],
             ]);
         }
 
         if($this->run_validation()) {
-            DB::transaction(function() {
+            DB::transaction(function() use ($has_docente) {
                 $pessoa = Pessoa_model::create($this->request_all());
                 if($has_docente) {
-                    $docente = Docente_model::create($this->request_all());
+                    // FIXME: Colocar área, aqui foi feito um workaround presetando uma área
+                    $dados_docente = $this->request_all();
+                    $dados_docente['area_id'] = 1; // FIXME: Esta linha deverá ser removida quando a área for existente
+                    $dados_docente['pessoa_id'] = $pessoa->id;
+                    $docente = Docente_model::create($dados_docente);
                 }
 
                 // Monta as relações de tipo
@@ -103,8 +107,8 @@ class Pessoa extends MY_Controller {
                 ['nascimento', 'data de nascimento', 'required|valid_date'],
                 ['ingresso_campus', 'data de ingresso no câmpus', 'required|valid_date'],
                 ['ingresso_ifsp', 'data de ingresso no IFSP', 'required|valid_date'],
-                ['area', 'área', 'required'],
-                ['regime_contrato', 'regime de contrato', 'required|in_list[20, 40]'],
+                // ['area', 'área', 'required'], FIXME: adicionar essa validação quando a area for existente
+                ['regime', 'regime de contrato', 'required|in_list[0,1]'],
             ]);
         }
 
@@ -118,7 +122,15 @@ class Pessoa extends MY_Controller {
                 $pessoa->update($pessoa_data);
                 if($has_docente) {
                     $docente = $pessoa->docente;
-                    $docente->update($this->request_all());
+                    $dados_docente = $this->request_all();
+                    $dados_docente['area_id'] = 1; // FIXME: Esta linha deverá ser removida quando a área for existente
+                    $dados_docente['pessoa_id'] = $id;
+                    if(is_null($docente)){
+                        // FIXME: Colocar área, aqui foi feito um workaround presetando uma área
+                        $docente = Docente_model::create($dados_docente);
+                    } else {
+                        $docente->update($dados_docente);
+                    }
                 } else if(!is_null($pessoa->docente)){
                     $pessoa->docente->delete();
                 }
