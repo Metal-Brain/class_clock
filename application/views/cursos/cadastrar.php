@@ -48,7 +48,7 @@
 										<div class="row">
 											<div class="form-group col-sm-3 col-md-2">
 											<label>Codigo</label>
-												<input class="form-control" placeholder="ex: 123" type="number" onKeyPress="if(this.value.length==5) return false;" name="codigo_curso" id="codigo_curso">
+												<input class="form-control" placeholder="ex: 123" type="number" onKeyPress="var key = event.keyCode || event.charCode; if((this.value.length==5) && !(key == 8)) return false;" name="codigo_curso" id="codigo_curso">
 							
 											</div>
 										</div>
@@ -63,7 +63,7 @@
 										<div class="row">
 											<div class="form-group col-sm-3 col-md-2">
 												<label>Quantidade de semestres</label>
-												<input class="form-control" placeholder="ex: 2" type="number"  onKeyPress="if(this.value.length==2) return false;" name="qtd_semestre" id="qtd_semestre" maxlength="2">
+												<input class="form-control" placeholder="ex: 2" type="number"  onKeyPress="var key = event.keyCode || event.charCode; if((this.value.length==2) && !(key == 8)) return false;" name="qtd_semestre" id="qtd_semestre" maxlength="2">
 												
 											</div>
 										</div>
