@@ -261,15 +261,15 @@ INSERT INTO grau(nome_grau, codigo) VALUES("Pos Graduação", "00231");
 INSERT INTO grau(nome_grau, codigo) VALUES("Mestrado", "001321");
 INSERT INTO grau(nome_grau, codigo) VALUES("Doutorado", "44121");
 
-INSERT INTO curso(grau_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento) 
+INSERT INTO curso(grau_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento)
     VALUES(1, 111, "Análise e Desenvolvimento de Sistemas", "ADS", 6, "B");
-INSERT INTO curso(grau_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento) 
+INSERT INTO curso(grau_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento)
     VALUES(2, 222, "Processos Gerenciais", "PRG", 8, "S");
-INSERT INTO curso(grau_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento) 
+INSERT INTO curso(grau_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento)
     VALUES(3, 333, "Fisica", "FIS", 4, "S");
-INSERT INTO curso(grau_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento) 
+INSERT INTO curso(grau_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento)
     VALUES(4, 444, "Computação Avançada", "CPA", 3, "B");
-INSERT INTO curso(grau_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento) 
+INSERT INTO curso(grau_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento)
     VALUES(5, 544, "Cura do Cancer", "CDC", 8, "B");
 
 INSERT INTO disciplina(curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas)
@@ -294,3 +294,5 @@ INSERT INTO horario(turno_id, inicio, fim) VALUES(2, '13:10:00', '14:00');
 INSERT INTO horario(turno_id, inicio, fim) VALUES(3, '20:10:00', '21:00');
 INSERT INTO horario(turno_id, inicio, fim) VALUES(4, '9:10:00', '10:00');
 INSERT INTO horario(turno_id, inicio, fim) VALUES(5, '10:10:00', '20:00');
+
+INSERT INTO area(id, nome) VALUES(1, "FIXME: Precisa colocar área no controller Pessoa!");
