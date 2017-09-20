@@ -18,7 +18,7 @@
         */
         function cadastrar () {
 			$data = array(
-				'disciplinas' => Disciplina_model::all(),
+				'disciplinas' => Disciplina_model::withTrashed()->get(),
 				'cursos' => Curso_model::all(),
 				'tipo_salas' => TipoSala_model::all(),
 				);
@@ -33,19 +33,24 @@
         function salvar () {
             if ($this->validar()) {
                 try {
+                  if (Disciplina_model::where("sigla_disciplina", $this->input->post('sigla_disciplina'))->where("curso_id", $this->input->post('curso_id'))->first()==null) {
                     $disciplina = new Disciplina_model();
-					$disciplina->curso_id = $this->input->post('curso_id');
-					$disciplina->tipo_sala_id = $this->input->post('tipo_sala_id');
-					$disciplina->nome_disciplina  = $this->input->post('nome_disciplina') ;
+                    $disciplina->curso_id = $this->input->post('curso_id');
+                    $disciplina->tipo_sala_id = $this->input->post('tipo_sala_id');
+                    $disciplina->nome_disciplina  = $this->input->post('nome_disciplina') ;
                     $disciplina->sigla_disciplina = $this->input->post('sigla_disciplina');
-					$disciplina->modulo = $this->input->post('modulo');
-					$disciplina->qtd_professor = $this->input->post('qtd_professor');
-					$disciplina->qtd_aulas = $this->input->post('qtd_aulas');
+                    $disciplina->modulo = $this->input->post('modulo');
+                    $disciplina->qtd_professor = $this->input->post('qtd_professor');
+                    $disciplina->qtd_aulas = $this->input->post('qtd_aulas');
 
                     $disciplina->save();
 
                     $this->session->set_flashdata('success','Disciplina cadastrada com sucesso');
                     redirect("disciplina");
+                  }else{
+                    $this->session->set_flashdata('danger','Disciplina já esta cadastrada');
+                    redirect("disciplina");
+                  }
                 } catch (Exception $ignored){}
             }
 
@@ -133,17 +138,17 @@
 
         public function validar () {
             $this->form_validation->set_rules('nome_disciplina','nome','required|min_length[5]|max_length[50]|trim|ucwords');
-                          
+
             $this->form_validation->set_rules('sigla_disciplina','sigla','required|min_length[3]|max_length[5]');
-            
+
             $this->form_validation->set_rules('curso_id','curso','required');
-            
+
             $this->form_validation->set_rules('modulo','modulo','required|integer|greater_than[0]|less_than[100]');
-            
+
             $this->form_validation->set_rules('qtd_professor','professores','required|integer|greater_than[0]|less_than[11]');
-            
+
             $this->form_validation->set_rules('qtd_aulas','aulas','required|integer|greater_than[0]|less_than[100]');
-            
+
             $this->form_validation->set_rules('tipo_sala_id','sala','required');
 
             return $this->form_validation->run();
