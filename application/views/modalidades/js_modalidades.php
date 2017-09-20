@@ -43,14 +43,14 @@
 <script type="text/javascript">
 
           jQuery.validator.addMethod("validaNome", function(value, element) {
-               var regExp = /^\D+$/;
+               var regExp = /^\D+$/g;
                if(regExp.test(value)) return true;
 
                return false
            }, 'Nome inválido');
 
            jQuery.validator.addMethod("validaCodigo", function(value, element) {
-               var regExp = /^\d+$/;
+               var regExp = /^\d+$/g;
                if(regExp.test(value)) return true;
 
                return false

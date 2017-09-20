@@ -35,7 +35,8 @@ class Modalidade extends CI_Controller {
                                             'trim',
                                             'regex_match[/^\D+$/]',
                                             /*'alpha_numeric_spaces',*/
-                                            'is_unique[modalidade.nome_modalidade]')
+                                            'is_unique[modalidade.nome_modalidade]'),
+                                          array('is_unique' => 'Nome já existente.')
                                          );
         $this->form_validation->set_rules('codigo',
                                           'codigo',
@@ -44,7 +45,8 @@ class Modalidade extends CI_Controller {
                                                  'greater_than[0]',
                                                  'max_length[5]',
                                                  'is_unique[modalidade.codigo]'
-                                                 )
+                                                 ),
+                                           array('is_unique' => 'Código já existente.')
                                          );
         $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
 
@@ -57,14 +59,14 @@ class Modalidade extends CI_Controller {
                 $modalidade->save();
 
                 $this->session->set_flashdata('success','Modalidade cadastrada com sucesso');
-                redirect('Modalidade');
 
-            } catch (Exception $ignored){}
-            redirect('Modalidade/cadastrar');
+            } catch (Exception $ignored){
+                $this->session->set_flashdata('danger','Problemas ao cadastrar a modalidade, tente novamente!');
+            }
+            redirect('Modalidade');
+        }else{
+            $this->cadastrar();
         }
-
-        $this->session->set_flashdata('danger','Problemas ao cadastrar a modalidade, tente novamente!');
-        $this->cadastrar();
     }
     redirect("Grau");
   }
@@ -123,7 +125,7 @@ class Modalidade extends CI_Controller {
         }
 
         $this->session->set_flashdata('danger','Problemas ao atualizar os dados da modalidade, tente novamente!');
-        redirect('Modalidade');
+        redirect('Modalidade/editar');
     }
 
     /**
