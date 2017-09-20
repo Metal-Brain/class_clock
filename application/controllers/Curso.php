@@ -8,13 +8,13 @@
         public function index () {
             $data = array(
                 'cursos' => Curso_model::withTrashed()->get(),
-                'grau' => Grau_model::all('id','nome_grau')
+                'modalidade' => Modalidade_model::all('id','nome_modalidade')
             );
             $this->load->template('cursos/cursos', compact('data'), 'cursos/js_cursos');
         }
 
         public function cadastrar() {
-            $data = Grau_model::withTrashed()->get();			
+            $data = Modalidade_model::withTrashed()->get();			
             $this->load->template('cursos/cadastrar', compact('data'), 'cursos/js_cursos');
         }
 
@@ -23,7 +23,7 @@
                 try {
                     $curso = new Curso_model();
                     $curso->nome_curso = $this->input->post('nome_curso');
-                    $curso->grau_id = $this->input->post('grau_id');
+                    $curso->modalidade_id = $this->input->post('modalidade_id');
                     $curso->codigo_curso = $this->input->post('codigo_curso');
                     $curso->sigla_curso = $this->input->post('sigla_curso');
                     $curso->qtd_semestre = $this->input->post('qtd_semestre');
@@ -32,9 +32,7 @@
 
                     $this->session->set_flashdata('success','Curso cadastrado com sucesso');
                     redirect('curso');
-                } catch (Exception $ignored) {
-                    exit ($ignored);
-                }
+                } catch (Exception $ignored) {}
             }
             $this->session->set_flashdata('danger','Problemas ao cadastrar o curso, tente novamente!');
             $this->cadastrar();
@@ -43,7 +41,7 @@
         public function editar($id) {
             $data = array(
                 'curso' => Curso_model::withTrashed()->findOrFail($id),
-                'grau' => Grau_model::all('id','nome_grau')
+                'modalidade' => Modalidade_model::all('id','nome_modalidade')
             );
             $this->load->template('cursos/editar', compact('data','id'), 'cursos/js_cursos');		 
         }
@@ -53,7 +51,7 @@
                 try {
                     $curso = Curso_model::withTrashed()->findOrFail($id);
                     $curso->update(['nome_curso'=>$this->input->post('nome_curso'),
-                        "grau_id" => $this->input->post('grau_id'),
+                        "modalidade_id" => $this->input->post('modalidade_id'),
                         "codigo_curso" => $this->input->post('codigo_curso'),
                         "sigla_curso" => $this->input->post('sigla_curso'),
                         "qtd_semestre" => $this->input->post('qtd_semestre'),
@@ -93,7 +91,7 @@
             redirect("curso");
         }
 
-        public function validar($id) {
+        public function validar($id = null) {
             $sigla = $this->input->post('sigla_curso');
             $codigo = $this->input->post('codigo_curso');
             
@@ -103,7 +101,7 @@
             
                 $this->form_validation->set_rules('nome_curso','nome','required|min_length[5]|max_length[75]|trim|strtolower|ucwords'); 
 
-                $this->form_validation->set_rules('grau_id','modalidade','required|integer');
+                $this->form_validation->set_rules('modalidade_id','modalidade','required|integer');
 
                 $this->form_validation->set_rules('sigla_curso','sigla','required|alpha|exact_length[3]|strtoupper');
                 
@@ -117,15 +115,14 @@
             }
         }
         
-        public function validar_sigla_codigo($sigla, $codigo, $id){
-            error_reporting(0);
-            $cursos_mesma_sigla = Curso_model::withTrashed()->where('sigla_curso',$sigla)->where('id','!=', $id)->get();
-            $cursos_mesmo_codigo = Curso_model::withTrashed()->where('codigo_curso',$codigo)->where('id','!=', $id)->get();
-            
-            if($cursos_mesma_sigla['0']!=null || $cursos_mesmo_codigo['0']!=null){
-                return false;
-            }else{
-                return true;
+        public function validar_sigla_codigo(){
+            $validate_data = array('sigla_curso' => $this->input->get('sigla_curso'));
+            $this->form_validation->set_data($validate_data);
+            $this->form_validation->set_rules('sigla_curso', 'sigla_curso', 'is_unique[curso.sigla_curso]');
+            if($this->form_validation->run()) {
+                echo "true";
+            } else {
+                echo "false";
             }
         }
     }

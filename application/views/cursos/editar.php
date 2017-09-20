@@ -96,16 +96,16 @@
 										<div class="row">
 											<div class="form-group col-sm-5 col-md-4">
 												<label>Modalidade</label>
-												<select name="grau_id">
+												<select name="modalidade_id">
 											
 												<?php
-													foreach($data['grau'] as $grau){
+													foreach($data['modalidade'] as $modalidade){
 														
-												if($grau['id'] == $data['curso']->grau_id){
+												if($modalidade['id'] == $data['curso']->modalidade_id){
 															
-													echo '<option value="'. $grau['id'] .'" selected>'. $grau['nome_grau'] .'</option>';
+													echo '<option value="'. $modalidade['id'] .'" selected>'. $modalidade['nome_modalidade'] .'</option>';
 												}else{
-													echo '<option value="'. $grau['id'] .'">'. $grau['nome_grau'] .'</option>';
+													echo '<option value="'. $modalidade['id'] .'">'. $modalidade['nome_modalidade'] .'</option>';
 													 }
 														
 														

@@ -19,7 +19,7 @@
     * @since 2017/08/26
     */
 
-    public function grau(){
+    public function modalidade(){
       return $this->belongsTo(Modalidade_Model::class, 'curso_id');
     }
 

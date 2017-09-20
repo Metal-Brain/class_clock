@@ -6,9 +6,13 @@
 					
 					codigo_curso: { required: true, minlength: 1,maxlength: 5,min: 1},
 					nome_curso: { required: true, minlength: 5,maxlength: 75},
-					sigla_curso: { required: true, minlength: 3,maxlength: 3},
+					sigla_curso: { required: true,
+                                  minlength: 3,
+                                  maxlength: 3,
+                                  remote: "<?= base_url('index.php/Curso/validar_sigla_curso/') ?>"
+                                 },
 					qtd_semestre: { required: true, number: true, min: 1, max: 20},
-					grau_id: {required: true, min: 1}
+					modalidade_id: {required: true, min: 1}
 				},
 				messages: {
 					codigo_curso: 
@@ -37,8 +41,10 @@
                          max: 'Digite um valor menor ou igual a 19'
                         },
                     
-					grau_id: 
-                        {required: 'Campo obrigatório',}
+					modalidade_id: 
+                        {required: 'Campo obrigatório',
+                         remote: 'A sigla deve ser única',
+                        },
 				}
 			});
 		

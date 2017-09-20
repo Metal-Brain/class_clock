@@ -50,9 +50,9 @@
 					<td class="text-center"><?= htmlspecialchars(ucwords($curso['sigla_curso'])); ?></td>
 					<td class="text-center"><?= ucwords($curso['qtd_semestre']); ?></td>
 					<td class="text-center"><?php 
-						foreach($data['grau'] as $grau){
-							if($curso['grau_id'] == $grau['id']):
-								echo $grau['nome_grau']; 
+						foreach($data['modalidade'] as $modalidade){
+							if($curso['modalidade_id'] == $modalidade['id']):
+								echo $modalidade['nome_modalidade']; 
 							endif;
 						}
 					?></td> 

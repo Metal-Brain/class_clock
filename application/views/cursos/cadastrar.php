@@ -1,5 +1,5 @@
 <!--<pre>
-		<?php print_r($grau_id) ?>
+		<?php print_r($modalidade_id) ?>
 </pre> -->
  <div class="col-xs=10 col-sm-10 col-md-10">
      <div class="row" style="margin-top: 5px;">
@@ -85,11 +85,11 @@
 										<div class="row">
 											<div class="form-group col-sm-5 col-md-4">
 												<label>Modalidade</label>
-												<select name="grau_id">
+												<select name="modalidade_id">
 												
 												<?php
-													foreach($data as $grau){
-														echo '<option value="'. $grau['id'] .'">'. $grau['nome_grau'] .'</option>';}
+													foreach($data as $modalidade){
+														echo '<option value="'. $modalidade['id'] .'">'. $modalidade['nome_modalidade'] .'</option>';}
 												?>
 												</select>
 												
@@ -98,7 +98,7 @@
 
 										<div class="row">
 										  <div class="col-md-3 margin-top-error">
-											<?= form_error('grau_id') ?>
+											<?= form_error('modalidade_id') ?>
 										  </div>
 										</div>
 									
