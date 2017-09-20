@@ -19,6 +19,12 @@
                     maxlength:5,
                     minlength:3
                 },
+                curso_id:{
+                  required:true,
+                },
+                tipo_sala_id:{
+                  required:true,
+                },
                 qtd_professor:{
                     required:true,
                     min:1,
@@ -41,6 +47,12 @@
                     required:'Campo nome é obrigatório',
                     minlength:'O nome deve conter pelo menos 5 caracteres',
                     maxlength:'O nome deve ter no máximo 50 caracteres'
+                },
+                curso_id:{
+                    required:'Campo Curso é obrigatório',
+                },
+                tipo_sala_id:{
+                  required:'Campo Tipo de Sala é obrigatório',
                 },
                 sigla_disciplina:{
                     required:'Campo sigla é obrigatório',
@@ -142,5 +154,3 @@
 
 </html>
 </body>
-
-
