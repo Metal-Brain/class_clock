@@ -10,7 +10,7 @@
 
     public $timestamps = false;
     protected $table = 'curso';
-    protected $fillable = array('codigo', 'grau_id', 'codigo_curso', 'nome_curso', 'sigla_curso', 'qtd_semestre', 'fechamento');
+    protected $fillable = array('codigo', 'modalidade_id', 'codigo_curso', 'nome_curso', 'sigla_curso', 'qtd_semestre', 'fechamento');
 
 
     /**
@@ -20,7 +20,7 @@
     */
 
     public function grau(){
-      return $this->belongsTo(Grau_Model::class, 'curso_id');
+      return $this->belongsTo(Modalidade_Model::class, 'curso_id');
     }
 
     /**
