@@ -32,9 +32,9 @@ class Pessoa extends MY_Controller {
             ['nome', 'nome', 'required|min_length[5]'],
             ['prontuario', 'prontuário', 'required|is_unique[pessoa.prontuario]|exact_length[6]|numeric'],
             ['senha', 'senha', 'required|min_length[6]'],
-            ['email', 'email', 'required|valid_email'],
+            ['email', 'email', 'required|valid_email|strtolower'],
             ['tipos[]', 'tipos', 'required']
-            ]);
+        ]);
 
         if($has_docente) {
             $this->set_validations([
@@ -94,7 +94,7 @@ class Pessoa extends MY_Controller {
             ['nome', 'nome', 'required|min_length[5]'],
             ['prontuario', 'prontuário', 'required|exact_length[6]'],
             ['senha', 'senha', 'min_length[6]'],
-            ['email', 'email', 'required|valid_email'],
+            ['email', 'email', 'required|valid_email|strtolower'],
             ['tipos[]', 'tipos', 'required']
         ]);
 

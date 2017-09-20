@@ -64,7 +64,7 @@
 				</span>
 			</div>
 
-			<label>Data de ingresso no câmpus:</label>
+			<label>Data de ingresso no IFSP:</label>
 			<div class="form-group width-180">
 				<input id="ingresso_ifsp" name="ingresso_ifsp" class="form-control" type="date" value="<?= set_value('ingresso_ifsp')?>">
 				<span class="text-danger">
@@ -85,9 +85,10 @@
 				</div>
 			</div> -->
 
+			<!-- ALTERAR PARA RADIO -->
 			<label>Regime de contrato:</label>
 			<div class="form-group width-180">
-				<select class="form-control" id="sel1">
+				<select class="form-control" id="regime" name="regime" value="<?= set_value('regime')?>">
 					<option>Selecione</option>
 					<option value="0">20 horas semanais</option>
 					<option value="1">40 horas semanais</option>
