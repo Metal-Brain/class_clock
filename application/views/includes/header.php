@@ -16,7 +16,10 @@
 		<link href="<?= base_url('assets/DataTables/dataTables.bootstrap.min.css')?>" rel="stylesheet">
 	</head>
 
-	<body>
+    <!-- DataTable -->
+    <link href="<?= base_url('assets/DataTables/dataTables.bootstrap.min.css')?>" rel="stylesheet">
+
+</head>
 
 		<div class="container-fluid">
 			<div class="row hidden-print">
