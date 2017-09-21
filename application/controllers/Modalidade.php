@@ -140,7 +140,7 @@ class Modalidade extends CI_Controller {
 
             $this->session->set_flashdata('success','Modalidade deletada com sucesso');
         }catch (Exception $e) {
-            $this->session->set_flashdata('danger','Erro ao deletar uma modalidade, tente novamente');
+            $this->session->set_flashdata('danger','Erro ao desativar uma modalidade, tente novamente');
         }
 
         redirect('Modalidade');
