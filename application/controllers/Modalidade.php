@@ -76,6 +76,10 @@ class Modalidade extends CI_Controller {
     function editar($id) {
         $modalidade = Modalidade_model::withTrashed()->findOrFail($id);
         $this->load->template('modalidades/modalidadesEditar',compact('modalidade', 'id'),'modalidades/js_modalidades');
+        
+        
+        
+      
     }
 
     /**
@@ -116,7 +120,7 @@ class Modalidade extends CI_Controller {
         }
 
         $this->session->set_flashdata('danger','Problemas ao atualizar os dados da modalidade, tente novamente!');
-        redirect('Modalidade/editar');
+        redirect('Modalidade/editar/'.$id);
     }
 
     /**
