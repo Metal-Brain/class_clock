@@ -71,20 +71,17 @@ class Modalidade extends CI_Controller {
     redirect("Grau");
   }
 
-  function editar($id){
-   	   $this->load->model(array(
-      'Grau_model'
-    ));
-    // Criando regra de validação do formulário
-    $this->form_validation->set_rules('nome_grau','nome',array('required','max_length[50]','trim','strtolower'));
-    $this->form_validation->set_rules('codigo','codigo', array('required','integer','greater_than[0]','max_length[5]'));
-    // Setando os delimitadores da mensagem de erro.
-    $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
-    if ( $this->form_validation->run()) {
-        $this->atualizar();
-    } else {
-        $grau = Grau_model::findOrFail($id);
-        $this->load->template('graus/GrausEditar',compact('grau','id'),'graus/js_graus');
+    /**
+    * Formulário de Edição
+    * @author Jean Brock | Vitor Silvério | Thalita Barbosa
+    */
+    function editar($id) {
+        $modalidade = Modalidade_model::withTrashed()->findOrFail($id);
+        $this->load->template('modalidades/modalidadesEditar',compact('modalidade', 'id'),'modalidades/js_modalidades');
+
+
+
+
     }
 
     /**
@@ -125,7 +122,7 @@ class Modalidade extends CI_Controller {
         }
 
         $this->session->set_flashdata('danger','Problemas ao atualizar os dados da modalidade, tente novamente!');
-        redirect('Modalidade/editar');
+        redirect('Modalidade/editar/'.$id);
     }
 
     /**
