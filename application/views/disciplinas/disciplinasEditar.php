@@ -1,5 +1,20 @@
  <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10" style="padding-top: 5px">
 
+   <div class="row" style="margin-top: 5px;">
+   <div class="col-md-12">
+     <?php if ($this->session->flashdata('success')) : ?>
+       <div class="alert alert-success">
+         <p><span class="glyphicon glyphicon-ok-sign"></span> <?= $this->session->flashdata('success') ?></p>
+       </div>
+     <?php elseif ($this->session->flashdata('danger')) : ?>
+       <div class="alert alert-danger">
+         <p><span class="glyphicon glyphicon-remove-sign"></span> <?= $this->session->flashdata('danger') ?></p>
+       </div>
+     <?php endif; ?>
+   </div>
+   </div>
+   
+
             <form id="formDisciplina" class="form-Control"  method="post" action="<?= site_url('Disciplina/atualizar/'.$id)?>">
             		<h1>Editar Disciplina</h1>
 
@@ -10,7 +25,7 @@
 
 					<div class="form-group">
 						<label>Sigla</label>
-						<input type="text" class="form-control" name="sigla_disciplina" placeholder="ex: LOPA1" style="max-width:300px;" value="<?= $data['disciplina']['sigla_disciplina'] ?>">
+						<input type="text" class="form-control" name="sigla_disciplina" id="sigla_curso" placeholder="ex: LOPA1" style="max-width:300px;" value="<?= $data['disciplina']['sigla_disciplina'] ?>">
 					</div>
 
 					<div class="form-group test">
@@ -28,7 +43,7 @@
 					</div>
 
 					<div class="form-group">
-						<label>Módulo</label>
+						<label>Módulos</label>
 						<input type="number" class="form-control" name="modulo" placeholder="ex: 6" style="max-width: 300px" value="<?= $data['disciplina']['modulo'] ?>">
 					</div>
 
@@ -51,5 +66,5 @@
 						<button type="submit" class="btn btn-success active salvar" style="float: right; margin-right: 10px;"><span class="glyphicon glyphicon-floppy-disk"></span> Salvar</button>
 					</div>
             </form>
-            
+
         </div>

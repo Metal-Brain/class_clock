@@ -2,6 +2,14 @@
         $(document).ready(function () {
             $('#disciplinaTable').DataTable();
         });
+
+        document.getElementById("sigla_curso").onkeypress = function(e) {
+         var chr = /^[a-zA-Z0-9 ]$/;
+         var patt = new RegExp(chr);
+         var res = patt.test(String.fromCharCode(e.which));
+         return res;
+        };
+
 </script>
 
 <script>
@@ -56,23 +64,23 @@
                 },
                 sigla_disciplina:{
                     required:'Campo sigla é obrigatório',
-                    maxlength: 'Tamanho maximo do campo é 5',
-                    minlength:'Tamanho mínimo do campo é 3'
+                    maxlength: 'Tamanho maximo do campo é 5 caracteres',
+                    minlength:'Tamanho mínimo do campo é 3 caracteres'
                 },
                 qtd_professor:{
                     required:'Campo quantidade de professores é obrigatório',
                     min:'Tamanho mínimo do campo é 1',
-                    max:'Tamanho máximo do campo é 10'
+                    max:'Tamanho maximo do campo é 1 caracter ou ate numero 9'
                 },
                 modulo:{
                     required:'Campo modulo é obrigatório',
                     min:'Tamanho mínimo do campo é 1',
-                    max:'Tamanho máximo do campo é 1'
+                    max:'Tamanho maximo do campo é 2 caracteres ou até numero 99'
                 },
                 qtd_aulas:{
                     required:'Campo Qtd. Aulas por semana é obrigatório',
                     min:'Tamanho mínimo do campo é 1',
-                    max:'Tamanho máximo do campo é 99'
+                    max:'Tamanho maximo do campo é 2 caracteres ou até numero 99'
                 }
             }
         });
@@ -143,14 +151,7 @@
         });
     }
 </script>
-<script type="text/javascript">
-        document.getElementById("nome_curso").onkeypress = function(e) {
-         var chr = /^[a-zA-Z\u00C0-\u017F]$/;
-         var patt = new RegExp(chr);
-         var res = patt.test(String.fromCharCode(e.which));
-         return res;
-       };
-</script>
+
 
 </html>
 </body>

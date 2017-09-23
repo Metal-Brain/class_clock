@@ -49,7 +49,7 @@
                     redirect("disciplina");
                   }else{
                     $this->session->set_flashdata('danger','Disciplina já esta cadastrada');
-                    redirect("disciplina");
+                    redirect("disciplina/cadastrar");
                   }
                 } catch (Exception $ignored){}
             }
@@ -81,6 +81,7 @@
         function atualizar ($id) {
             if($this->validar()){
                 try {
+                  if (Disciplina_model::where("sigla_disciplina", $this->input->post('sigla_disciplina'))->where("curso_id", $this->input->post('curso_id'))->first()==null) {
                     $disciplina = Disciplina_model::withTrashed()->findOrFail($id);
                     $disciplina->nome_disciplina  = $this->input->post('nome_disciplina') ;
                     $disciplina->sigla_disciplina = $this->input->post('sigla_disciplina');
@@ -93,6 +94,10 @@
 
                     $this->session->set_flashdata('success','Disciplina atualizada com sucesso');
                     redirect("disciplina");
+                  }else{
+                    $this->session->set_flashdata('danger','Disciplina já esta cadastrada');
+                    redirect('disciplina/editar/'.$id);
+                  }
                 } catch (Exception $ignored){}
             }
 
