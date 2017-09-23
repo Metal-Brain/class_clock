@@ -261,17 +261,6 @@ INSERT INTO modalidade(nome_modalidade, codigo) VALUES("Pos Graduação", "00231
 INSERT INTO modalidade(nome_modalidade, codigo) VALUES("Mestrado", "001321");
 INSERT INTO modalidade(nome_modalidade, codigo) VALUES("Doutorado", "44121");
 
-<<<<<<< HEAD
-INSERT INTO curso(grau_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento)
-    VALUES(1, 111, "Análise e Desenvolvimento de Sistemas", "ADS", 6, "B");
-INSERT INTO curso(grau_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento)
-    VALUES(2, 222, "Processos Gerenciais", "PRG", 8, "S");
-INSERT INTO curso(grau_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento)
-    VALUES(3, 333, "Fisica", "FIS", 4, "S");
-INSERT INTO curso(grau_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento)
-    VALUES(4, 444, "Computação Avançada", "CPA", 3, "B");
-INSERT INTO curso(grau_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento)
-=======
 INSERT INTO curso(modalidade_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento)
     VALUES(1, 111, "Análise e Desenvolvimento de Sistemas", "ADS", 6, "B");
 INSERT INTO curso(modalidade_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento)
@@ -281,7 +270,6 @@ INSERT INTO curso(modalidade_id, codigo_curso, nome_curso, sigla_curso, qtd_seme
 INSERT INTO curso(modalidade_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento)
     VALUES(4, 444, "Computação Avançada", "CPA", 3, "B");
 INSERT INTO curso(modalidade_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento)
->>>>>>> 39f03e8b87e418b71d66c2cab4fc72bf37748ca0
     VALUES(5, 544, "Cura do Cancer", "CDC", 8, "B");
 
 INSERT INTO disciplina(curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas)
