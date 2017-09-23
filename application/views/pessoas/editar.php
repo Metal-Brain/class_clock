@@ -1,4 +1,20 @@
 <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
+	<!-- Alertas de sucesso / erro -->
+	<div class="row" style="margin-top: 5px;">
+		<div class="col-md-12">
+			<?php if ($this->session->flashdata('success')) : ?>
+				<div class="alert alert-success">
+					<p><span class="glyphicon glyphicon-ok-sign"></span> <?= $this->session->flashdata('success') ?></p>
+				</div>
+			<?php elseif ($this->session->flashdata('danger')) : ?>
+				<div class="alert alert-danger">
+					<p><span class="glyphicon glyphicon-remove-sign"></span> <?= $this->session->flashdata('danger') ?></p>
+				</div>
+			<?php endif; ?>
+		</div>
+	</div>
+	
+	<!-- Início do conteúdo da view-->
 	<form id="formPessoas" method="post" action="<?= site_url('pessoa/atualizar/'.$pessoa->id)?>">
 		<div class="form-group width-400">
 			<label>Nome:</label>
@@ -30,12 +46,12 @@
 				<label><input <?= in_array(1, $tipos_pessoa)?"checked":"" ?> name="tipos[]" type="checkbox" value="1">Administrador</label>
 				<label><input <?= in_array(2, $tipos_pessoa)?"checked":"" ?> name="tipos[]" type="checkbox" value="2">CRA</label>
 				<label><input <?= in_array(3, $tipos_pessoa)?"checked":"" ?> name="tipos[]" type="checkbox" value="3">DAE</label>
-				<label><input <?= in_array(4, $tipos_pessoa)?"checked":"" ?> name="tipos[]" type="checkbox" value="4">Docente</label>
+				<label><input <?= in_array(4, $tipos_pessoa)?"checked":"" ?> name="tipos[]" type="checkbox" value="4" class="checkdocente-toggle">Docente</label>
 			</div>
 		</div>
 
 		<!-- Docente -->
-		<div id="conteudo-docente" style="display: none;">
+		<div class="conteudo-docente" style="display: none;">
 			<label>Data de nascimento:</label>
 			<div class="form-group width-180">
 				<input id="nascimento" name="nascimento" class="form-control" type="date" value="<?= set_value('nascimento')?>">
@@ -67,13 +83,14 @@
 				</div>
 			</div> -->
 
+			<!-- VERIFICAR COMO TRAZER QUAL ESTAVA MARCADO -->
 			<label>Regime de contrato:</label>
-			<div class="form-group width-180">
-				<select class="form-control" id="sel1">
-					<option>Selecione</option>
-					<option value="0">20 horas semanais</option>
-					<option value="1">40 horas semanais</option>
-				</select>
+			<div class="form-group">
+				<label class="radio-inline"><input type="radio" name="regime" value="0">20 horas semanais</label>
+				<label class="radio-inline"><input type="radio" name="regime" value="1">40 horas semanais</label>
+				<span class="text-danger">
+					<?= form_error('regime') ?>
+				</span>
 			</div>
 		</div>
 

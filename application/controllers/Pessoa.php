@@ -82,7 +82,7 @@ class Pessoa extends MY_Controller {
 			$tipos_pessoa[] = $t->id;
 		}
 
-        $this->load->template('pessoas/editar', compact('pessoa', 'tipos_pessoa', 'tipos'));
+        $this->load->template('pessoas/editar', compact('pessoa', 'tipos_pessoa', 'tipos'), 'pessoas/js_pessoas');
     }
 
     /**

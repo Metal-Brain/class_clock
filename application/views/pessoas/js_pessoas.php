@@ -30,27 +30,19 @@
 				}
 			});
 		</script>
-		<script type="text/javascript">
-			
-			    document.getElementById("nome").onkeypress = function(e) {
-         var chr = String.fromCharCode(e.which);
-         if ("qwertyuioplkjhgfdsazxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM".indexOf(chr) < 0)
-           return false;
-       };
-		</script>
-		<script type="text/javascript">
 
+		<script type="text/javascript">
 			$(document).ready(function(){
-				if($("#checkdocente-toggle:checked").length > 0){
-					$('#conteudo-docente').show();
+				if($(".checkdocente-toggle:checked").length > 0){
+					$('.conteudo-docente').show();
 				}
 			});
 
-			$("#checkdocente-toggle").change(function() {
+			$(".checkdocente-toggle").change(function() {
 				if(this.checked){
-					$('#conteudo-docente').show();
+					$('.conteudo-docente').show();
 				} else {
-					$('#conteudo-docente').hide();
+					$('.conteudo-docente').hide();
 				}
 			});
 		</script>
