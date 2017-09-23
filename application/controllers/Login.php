@@ -7,48 +7,43 @@
    */
   class Login extends CI_Controller {
 
+    /**
+     * Função para o usuário fazer o login
+     * @author Caio de Freitas
+     * @since 2017/09/23
+     */
     public function index(){
 
-      $this->load->model('Usuario_model');
-
-      $this->form_validation->set_rules('matricula','matrícula',array('required','exact_length[8]'));
-      $this->form_validation->set_rules('password','Senha',array('required','trim'));
+      $this->form_validation->set_rules('prontuario','prontuario',array('required','exact_length[6]'));
+      $this->form_validation->set_rules('senha','Senha',array('required','trim'));
 
       if ($this->form_validation->run() == false) {
-
         $this->load->view('login');
       } else {
+        print("formulario validado");
 
-        $usuario = array(
-          'matricula' => $this->input->post('matricula'),
-          'senha'     => hash('sha256', $this->input->post('password'))
-        );
+        try {
+          $prontuario = $this->input->post('prontuario');
+          $senha = hash('sha256',$this->input->post('senha'));
 
-        $usuario = $this->Usuario_model->validate($usuario);
+          $usuario = Pessoa_model::where('prontuario',$prontuario)->where('senha',$senha)->firstOrFail();
 
-        // verifica se foi encontrado o usuário
-        if ($usuario == NULL) {
-          $this->session->set_flashdata('danger','Matrícula ou senha incorretos');
-        } else {
+          // Joga os dados do usuário na sessão
           $this->session->set_userdata($usuario);
-          if ($this->Usuario_model->isProfessor($usuario)) {
-            $isCoordenador = $this->Usuario_model->isCoordenador($usuario);
 
-            $this->session->set_userdata('nivel', 2);
-            $this->session->set_userdata('isCoordenador', $isCoordenador);
-            redirect('Professor/preferencia');
-          } else if ($this->Usuario_model->isDae($usuario)){			  
-			  $this->session->set_userdata('nivel', 3);
-			  redirect('Curso');
-		  }
-
-          $this->session->set_userdata('nivel', 1);
-          redirect('Curso');
-
+          // Verifica o tipo de usuário que esta entrando para ser redirecionado
+          // para sua página.
+          switch ($usuario->tipos()->first()) {
+            case 1:
+              redirect("Turno");
+              break;
+            // TODO: Adicionar os redirecionamentos
+          }
+        } catch (Exception $e) {
+          $this->session->set_flashdata('danger','Prontuário ou senha incorretos, tente novamente');
+          redirect("/");
         }
-        redirect('/');
-      }
-
+		  }
     }
 
     function verificaLogin(){
