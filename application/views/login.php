@@ -13,20 +13,19 @@
 			<div class="container">
 			  <div class="row">
 				  <div class="col-sm-12 col-md-10 col-md-offset-1">
-						<img src="<?= base_url('assets/img/class_clock.jpg')?>"  class="logoClassClock" style="margin: 20px auto; display: block;"/>
+						<img src="<?= base_url('assets/img/logo-black.png')?>"  class="logoClassClock" style="margin: 20px auto; display: block;"/>
 						<div class="tab-content">
 							<!-- tela login -->
 							<div id="principal" class="col-md-6 col-md-offset-3 tab-pane fade in active">
-								<h2 style="text-align:center">Login</h2>
 								<?= form_open('',array('id'=>'login','class'=>'form-horizontal')); ?>
 									<div class="form-group input-group" align="center">
 										<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-										<?= form_input('matricula',set_value('matricula'), array('class'=>'form-control','placeholder'=>'ex: 0000000','maxlength'=>'8')) ?>
+										<?= form_input('prontuario',set_value('prontuario'), array('class'=>'form-control','placeholder'=>'ex: 0000000','maxlength'=>'6')) ?>
 									</div>
 
 									<div class="form-group input-group ">
 										<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-										<?= form_password('password',null,array('id'=>'password','class'=>'form-control','placeholder'=>'Senha')) ?>
+										<?= form_password('senha',null,array('id'=>'senha','class'=>'form-control','placeholder'=>'Senha')) ?>
 									</div>
 
 									<div class="form-group">
@@ -103,9 +102,6 @@
 									</div>
 
 									<div class="col-md-6 col-md-offset-3 inline">
-
-
-
 										<button type='submit' class='btn bt-lg btn-primary' style="background-color: #4CAF50">Redefinir</button>
 										<button type='button' class='btn bt-lg btn-default'  data-toggle="pill" href="#principal">Cancelar</button>
 									</div>
@@ -117,7 +113,7 @@
 
 						<!-- img logo -->
 						<div style="border-bottom: 1px #606060 solid;">
-							  <img src="<?= base_url('assets/img/ifsp.jpg')?>"  class="logo" style="margin: 20px auto 40px; display: block;"/>
+							  <img src="<?= base_url('assets/img/ifsp.jpg')?>"  class="logo" style="margin: 20px auto 40px; display: block; width:500px;"/>
 						</div>
 						<!-- Fim logo -->
 					</div>
