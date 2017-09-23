@@ -34,7 +34,7 @@
                         { required: 'Campo obrigatório',
                          number: 'Digite apenas números',
                          min: 'Digite um valor maior ou igual a 1',
-                         max: 'Digite um valor menor ou igual a 19'
+                         max: 'Digite um valor menor ou igual a 20'
                         },
 
 					modalidade_id:
