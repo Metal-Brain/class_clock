@@ -1,5 +1,5 @@
 		<script type="text/javascript">
-			$("#formPessoas").validate({
+			$(".formPessoas").validate({
 				errorClass: 'text-danger',
 				errorElement: 'span',
 				rules: {
@@ -33,6 +33,8 @@
 
 		<script type="text/javascript">
 			$(document).ready(function(){
+				$("#PessoaTable").DataTable();
+
 				if($(".checkdocente-toggle:checked").length > 0){
 					$('.conteudo-docente').show();
 				}

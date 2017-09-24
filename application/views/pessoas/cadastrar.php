@@ -15,7 +15,7 @@
 	</div>
 
 	<!-- Início do conteúdo da view-->
-	<form id="formPessoas" action="<?= site_url('pessoa/salvar')?>" method="post">
+	<form class="formPessoas" action="<?= site_url('pessoa/salvar')?>" method="post">
 		<label>Nome:</label>
 		<div class="form-group width-400">
 

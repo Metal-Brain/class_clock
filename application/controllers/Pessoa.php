@@ -30,7 +30,7 @@ class Pessoa extends MY_Controller {
 
         $this->set_validations([
             ['nome', 'nome', 'required|min_length[5]'],
-            ['prontuario', 'prontuário', 'required|is_unique[pessoa.prontuario]|exact_length[6]|numeric'],
+            ['prontuario', 'prontuário', 'required|is_unique[pessoa.prontuario]|exact_length[6]'],
             ['senha', 'senha', 'required|min_length[6]'],
             ['email', 'email', 'required|valid_email|strtolower'],
             ['tipos[]', 'tipos', 'required']
@@ -154,7 +154,7 @@ class Pessoa extends MY_Controller {
     */
     function deletar($id) {
         Pessoa_model::findOrFail($id)->delete();
-        $this->session->set_flashdata('success', 'Pessoa deletada com sucesso');
+        $this->session->set_flashdata('success', 'Pessoa desativada com sucesso');
 		redirect('/pessoa');
     }
 

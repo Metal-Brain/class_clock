@@ -15,28 +15,28 @@
 	</div>
 	
 	<!-- Início do conteúdo da view-->
-	<form id="formPessoas" method="post" action="<?= site_url('pessoa/atualizar/'.$pessoa->id)?>">
+	<form class="formPessoas" method="post" action="<?= site_url('pessoa/atualizar/'.$pessoa->id)?>">
 		<div class="form-group width-400">
 			<label>Nome:</label>
-			<input id="nome" name="nome" class="form-control" type="text" placeholder="Nome" value="<?= $pessoa->nome ?>">
+			<input id="nome_editar" name="nome" class="form-control" type="text" placeholder="Nome" value="<?= htmlspecialchars($pessoa->nome) ?>">
 			<?= form_error('nome') ?>
 		</div>
 		
 		<div class="form-group width-180">
 			<label>Prontuário:</label>
-			<input id="prontuario" name="prontuario" class="form-control" type="text" placeholder="Prontuário" maxlength="6" value="<?= $pessoa->prontuario ?>">
+			<input id="prontuario_editar" name="prontuario_editar" class="form-control" type="text" placeholder="Prontuário" maxlength="6" value="<?= $pessoa->prontuario ?>">
 			<?= form_error('prontuario') ?>
 		</div>
 
 		<div class="form-group width-180">
 			<label>Senha:</label>
-			<input id="senha" name="senha" class="form-control" type="password" minlength="6">
+			<input id="senha_editar" name="senha_editar" class="form-control" type="password" minlength="6">
 			<?= form_error('senha') ?>
 		</div>
 
 		<div class="form-group width-400">
 			<label>E-mail:</label>
-			<input id="email" name="email" class="form-control" type="email" placeholder="E-mail" value="<?= $pessoa->email ?>">
+			<input id="email_editar" name="email" class="form-control" type="email" placeholder="E-mail" value="<?= $pessoa->email ?>">
 			<?= form_error('email') ?>
 		</div>
 		
@@ -54,19 +54,19 @@
 		<div class="conteudo-docente" style="display: none;">
 			<label>Data de nascimento:</label>
 			<div class="form-group width-180">
-				<input id="nascimento" name="nascimento" class="form-control" type="date" value="<?= set_value('nascimento')?>">
+				<input id="nascimento_editar" name="nascimento" class="form-control" type="date" value="<?= @$pessoa->docente->nascimento ?>">
 				<?= form_error('nascimento') ?>
 			</div>
 
 			<label>Data de ingresso no câmpus:</label>
 			<div class="form-group width-180">
-				<input id="ingresso_campus" name="ingresso_campus" class="form-control" type="date" value="<?= set_value('ingresso_campus')?>">
+				<input id="ingresso_campus_editar" name="ingresso_campus" class="form-control" type="date" value="<?= @$pessoa->docente->ingresso_campus ?>">
 				<?= form_error('ingresso_campus') ?>
 			</div>
 
 			<label>Data de ingresso no câmpus:</label>
 			<div class="form-group width-180">
-				<input id="ingresso_ifsp" name="ingresso_ifsp" class="form-control" type="date" value="<?= set_value('ingresso_ifsp')?>">
+				<input id="ingresso_ifsp_editar" name="ingresso_ifsp" class="form-control" type="date" value="<?= @$pessoa->docente->ingresso_ifsp ?>">
 				<?= form_error('ingresso_ifsp') ?>
 			</div>
 
@@ -86,8 +86,8 @@
 			<!-- VERIFICAR COMO TRAZER QUAL ESTAVA MARCADO -->
 			<label>Regime de contrato:</label>
 			<div class="form-group">
-				<label class="radio-inline"><input type="radio" name="regime" value="0">20 horas semanais</label>
-				<label class="radio-inline"><input type="radio" name="regime" value="1">40 horas semanais</label>
+				<label class="radio-inline"><input <?= @$pessoa->docente->regime == 0 ?"checked":"" ?> type="radio" name="regime_editar" value="0">20 horas semanais</label>
+				<label class="radio-inline"><input <?= @$pessoa->docente->regime == 1 ?"checked":"" ?> type="radio" name="regime_editar" value="1">40 horas semanais</label>
 				<span class="text-danger">
 					<?= form_error('regime') ?>
 				</span>

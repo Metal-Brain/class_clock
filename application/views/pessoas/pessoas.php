@@ -45,7 +45,7 @@
 					<td class="text-center">
 						<?php if ( empty($pessoa->deletado_em) ) : ?>
 							<a class="btn btn-warning glyphicon glyphicon-pencil" title="Editar" href="<?= site_url('pessoa/editar/'.$pessoa->id)?>"></a>
-							<a class="btn btn-danger glyphicon glyphicon-remove" title="Remover" href="<?= site_url('pessoa/deletar/'.$pessoa->id)?>"></a>
+							<a class="btn btn-danger glyphicon glyphicon-remove" title="Desativar" href="<?= site_url('pessoa/deletar/'.$pessoa->id)?>"></a>
 						<?php else : ?>
 							<a class="btn btn-success glyphicon glyphicon-check" title="Ativar" href="<?= site_url('pessoa/ativar/'.$pessoa->id)?>"></a>
 						<?php endif; ?>
