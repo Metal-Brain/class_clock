@@ -50,5 +50,10 @@
 				}
 			});
 		</script>
+		<script type="text/javascript">
+
+				$('.data').datepicker({ dateFormat: "dd-mm-yy" }).val();
+		
+		</script>
 	</body>
 </html>

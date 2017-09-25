@@ -66,7 +66,7 @@
 		<div class="conteudo-docente" style="display: none;">
 			<label>Data de nascimento:</label>
 			<div class="form-group width-180">
-				<input id="nascimento" name="nascimento" class="form-control" type="date" value="<?= set_value('nascimento')?>">
+				<input id="nascimento" name="nascimento" class="form-control data" value="<?= set_value('nascimento')?>">
 				<span class="text-danger">
 					<?= form_error('nascimento') ?>
 				</span>
@@ -74,7 +74,7 @@
 
 			<label>Data de ingresso no câmpus:</label>
 			<div class="form-group width-180">
-				<input id="ingresso_campus" name="ingresso_campus" class="form-control" type="date" value="<?= set_value('ingresso_campus')?>">
+				<input id="ingresso_campus" name="ingresso_campus" class="form-control data" value="<?= set_value('ingresso_campus')?>">
 				<span class="text-danger">
 					<?= form_error('ingresso_campus') ?>
 				</span>
@@ -82,7 +82,7 @@
 
 			<label>Data de ingresso no IFSP:</label>
 			<div class="form-group width-180">
-				<input id="ingresso_ifsp" name="ingresso_ifsp" class="form-control" type="date" value="<?= set_value('ingresso_ifsp')?>">
+				<input id="ingresso_ifsp" name="ingresso_ifsp" class="form-control data" value="<?= set_value('ingresso_ifsp')?>">
 				<span class="text-danger">
 					<?= form_error('ingresso_ifsp') ?>
 				</span>
