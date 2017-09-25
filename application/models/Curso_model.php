@@ -1,5 +1,5 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
-  /**
+  <?php defined('BASEPATH') OR exit('No direct script access allowed');
+    /**
   * Modelo responsável pelo curso
   * @author Lucas Leonel
   * @since 2017/08/26
