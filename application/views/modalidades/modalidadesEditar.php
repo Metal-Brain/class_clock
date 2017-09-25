@@ -12,6 +12,10 @@
                 placeholder="Ex:Tecnólogo"
                 value="<?=htmlspecialchars($modalidade->nome_modalidade)?>"
                 />
+              
+              <?php
+                    echo(form_error("nome_modalidade"));
+                ?>
 
 
             </div>
@@ -24,7 +28,9 @@
                 id="codigo"
                 name="codigo"
                 value="<?=htmlspecialchars($modalidade->codigo)?>"
-                />
+                /> <?php
+                    echo(form_error("codigo"));
+                ?>
             </div>
 
 			<div class="row">
