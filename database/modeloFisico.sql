@@ -78,7 +78,7 @@ ENGINE = InnoDB;
 CREATE  TABLE IF NOT EXISTS `horario`.`curso` (
   `id` SMALLINT(6) NOT NULL AUTO_INCREMENT ,
   `docente_id` INT NULL ,
-  `grau_id` TINYINT(4) NOT NULL ,
+  `modalidade_id` TINYINT(4) NOT NULL ,
   `codigo_curso` CHAR(5) NOT NULL ,
   `nome_curso` VARCHAR(75) NOT NULL ,
   `sigla_curso` CHAR(3) NOT NULL ,
