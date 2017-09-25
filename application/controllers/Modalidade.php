@@ -89,23 +89,24 @@ class Modalidade extends CI_Controller {
     * @author Jean Brock | Vitor Silvério | Thalita Barbosa
     */
     function atualizar ($id) {
+        $modalidade = Modalidade_model::findOrFail($id);
         $this->form_validation->set_rules('nome_modalidade',
                                           'nome',
                                           array('required',
                                                 'max_length[50]',
                                                 'trim',
-                                                'regex_match[/^\D+$/]'
-                                                /*'alpha_dash'*/)
-												/*'alpha_numeric_spaces')*/
-                                         );
+                                                'regex_match[/^\D+$/]',
+                                                "is_unique_except[modalidade.nome_modalidade,{$modalidade->nome_modalidade}]"
+                                                ));
         $this->form_validation->set_rules('codigo',
                                           'codigo',
                                           array('required',
                                                 'integer',
                                                 'greater_than[0]',
                                                 'max_length[5]',
-												'is_natural_no_zero')
-                                          );
+												'is_natural_no_zero',
+                                                "is_unique_except[modalidade.codigo,{$modalidade->codigo}]"
+                                          ));
         $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
 
         if($this->form_validation->run()){
@@ -122,7 +123,7 @@ class Modalidade extends CI_Controller {
         }
 
         $this->session->set_flashdata('danger','Problemas ao atualizar os dados da modalidade, tente novamente!');
-        redirect('Modalidade/editar/'.$id);
+        $this->editar($id);
     }
 
     /**
