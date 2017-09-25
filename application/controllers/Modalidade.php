@@ -136,7 +136,7 @@ class Modalidade extends CI_Controller {
             $modalidade = Modalidade_model::findOrFail($id);
             $modalidade->delete();
 
-            $this->session->set_flashdata('success','Modalidade deletada com sucesso');
+            $this->session->set_flashdata('success','Modalidade desativada com sucesso');
         }catch (Exception $e) {
             $this->session->set_flashdata('danger','Erro ao desativar uma modalidade, tente novamente');
         }
