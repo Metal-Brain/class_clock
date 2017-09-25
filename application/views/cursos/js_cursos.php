@@ -1,6 +1,27 @@
 <script type="text/javascript">
-	$(document).ready(function () {
+jQuery.validator.addMethod("verifica-coordenador", function(value) {
+	
+	
+	var coordenadores = [];
+	foreach($coordenadores as $coordenador){
+		
+		coordenadores.push(coordenador.id);
+		
+	}
 
+
+
+  //  var states = ['PA', "CA"] // of course you will need to add more
+    var in_array = coordenadores;
+    if (in_array == -1) {
+        return false;
+    }else{
+        return true;
+    }
+}, "Campo Obrigatorio");
+
+	$(document).ready(function () {
+		
 		$('#formCurso').validate({
 				rules: {
 
@@ -8,7 +29,8 @@
 					nome_curso: { required: true, minlength: 5,maxlength: 75},
 					sigla_curso: { required: true,minlength: 3,maxlength: 3},
 					qtd_semestre: { required: true, number: true, min: 1, max: 20},
-					modalidade_id: {required: true, min: 1}
+					modalidade_id: {required: true, min: 1},
+					verifica-coordenador:{required:true}
 				},
 				messages: {
 					codigo_curso:
@@ -39,6 +61,8 @@
 
 					modalidade_id:
                         {required: 'Campo obrigatório'},
+					verifica-coordenador:
+                        {required: 'Campo obrigatório'}
 				}
 			});
 
@@ -46,6 +70,10 @@
 
 
 	});
+	
+	
+
+//$("#formCurso").validate();
 
 </script>
 <script type="text/javascript">

@@ -35,6 +35,7 @@
 				<th class="text-center">Sigla</th>
 				<th class="text-center">Quantidade de Semestres</th>
 				<th class="text-center">Modalidade</th>
+				<th class="text-center">Coordenador</th>
 				<th class="text-center">Fechamento</th>
 				<th class="text-center">Status</th>
 				<th class="text-center">Ações</th>
@@ -56,6 +57,7 @@
 							endif;
 						}
 					?></td> 
+					<td class="text-center"><?= ucwords($curso['coordenador']); ?></td>
 					<td class="text-center"><?= ucwords($curso['fechamento']); ?></td>
 	
 					<td class="text-center"><?= ( empty($curso->deletado_em) ) ? 'Ativado' : 'Desativado'?></td>

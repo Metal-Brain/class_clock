@@ -101,7 +101,21 @@
 											<?= form_error('modalidade_id') ?>
 										  </div>
 										</div>
-									
+										
+										<div class="row">
+											<div class="col-md-12 form-group">										
+												<label> Coordenador</label>
+												<input list="coordenadores" class="form-control verifica-coordenador" name="coordenador">
+												  <datalist id="coordenadores">
+													<?php
+														foreach($coordenadores as $coordenador){
+															echo '<option value="'. $coordenador['id'] .'">'. $coordenador['nome'] .'</option>';}
+													?>
+													
+												  </datalist>
+											</div>	
+										</div>	
+										
 										<div class="row">
 											<div class="col-md-12 form-group">
 												<a class="btn btn-danger active" href="<?= base_url('index.php/Curso')?>" style="float: right;"><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
