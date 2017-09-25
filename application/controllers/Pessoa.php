@@ -96,7 +96,7 @@ class Pessoa extends MY_Controller {
 
         $this->set_validations([
             ['nome', 'nome', 'required|min_length[5]'],
-            ['prontuario', 'prontuário', 'required|exact_length[6]'],
+            ['prontuario', 'prontuário', "required|exact_length[6]|is_unique_except[pessoa.prontuario,{$pessoa->prontuario}]"],
             ['senha', 'senha', 'min_length[6]'],
             ['email', 'email', 'required|valid_email|strtolower'],
             ['tipos[]', 'tipos', 'required']
@@ -143,7 +143,7 @@ class Pessoa extends MY_Controller {
             redirect('/pessoa');
         } else {
             $this->session->set_flashdata('danger', 'Não foi possível atualizar a pessoa');
-            $this->editar();
+            $this->editar($id);
         }
     }
 

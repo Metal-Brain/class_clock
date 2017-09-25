@@ -13,7 +13,7 @@
 			<?php endif; ?>
 		</div>
 	</div>
-	
+
 	<!-- Início do conteúdo da view-->
 	<form class="formPessoas" method="post" action="<?= site_url('pessoa/atualizar/'.$pessoa->id)?>">
 		<div class="form-group width-400">
@@ -21,16 +21,16 @@
 			<input id="nome_editar" name="nome" class="form-control" type="text" placeholder="Nome" value="<?= htmlspecialchars($pessoa->nome) ?>">
 			<?= form_error('nome') ?>
 		</div>
-		
+
 		<div class="form-group width-180">
 			<label>Prontuário:</label>
-			<input id="prontuario_editar" name="prontuario_editar" class="form-control" type="text" placeholder="Prontuário" maxlength="6" value="<?= $pessoa->prontuario ?>">
+			<input id="prontuario_editar" name="prontuario" class="form-control" type="text" placeholder="Prontuário" maxlength="6" value="<?= $pessoa->prontuario ?>">
 			<?= form_error('prontuario') ?>
 		</div>
 
 		<div class="form-group width-180">
 			<label>Senha:</label>
-			<input id="senha_editar" name="senha_editar" class="form-control" type="password" minlength="6">
+			<input id="senha_editar" name="senha" class="form-control" type="password" minlength="6">
 			<?= form_error('senha') ?>
 		</div>
 
@@ -39,7 +39,7 @@
 			<input id="email_editar" name="email" class="form-control" type="email" placeholder="E-mail" value="<?= $pessoa->email ?>">
 			<?= form_error('email') ?>
 		</div>
-		
+
 		<div class="form-group">
 			<label>Tipo:</label>
 			<div class="checkbox" style="margin-top: 0px;">
@@ -86,8 +86,8 @@
 			<!-- VERIFICAR COMO TRAZER QUAL ESTAVA MARCADO -->
 			<label>Regime de contrato:</label>
 			<div class="form-group">
-				<label class="radio-inline"><input <?= @$pessoa->docente->regime == 0 ?"checked":"" ?> type="radio" name="regime_editar" value="0">20 horas semanais</label>
-				<label class="radio-inline"><input <?= @$pessoa->docente->regime == 1 ?"checked":"" ?> type="radio" name="regime_editar" value="1">40 horas semanais</label>
+				<label class="radio-inline"><input <?= @$pessoa->docente->regime == 0 ?"checked":"" ?> type="radio" name="regime" value="0">20 horas semanais</label>
+				<label class="radio-inline"><input <?= @$pessoa->docente->regime == 1 ?"checked":"" ?> type="radio" name="regime" value="1">40 horas semanais</label>
 				<span class="text-danger">
 					<?= form_error('regime') ?>
 				</span>

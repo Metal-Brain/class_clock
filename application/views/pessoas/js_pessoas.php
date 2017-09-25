@@ -14,7 +14,9 @@
 						remote: "<?= base_url('index.php/Pessoa/verificaProntuario/') ?>"
 					},
 					senha: {
-						required: true,
+						if(document.getElementById("senha_editar") == null){
+                            required: true,
+                        }
 						minlength: 6
 					},
 					email: {
