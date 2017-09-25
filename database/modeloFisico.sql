@@ -251,7 +251,7 @@
       `disciplina_id` SMALLINT(6) NOT NULL ,
       `periodo_id` INT NOT NULL ,
       `turno_id` TINYINT(4) NOT NULL ,
-      `qtd_alunos_matriculados` INT NOT NULL ,
+      `qtd_alunos` INT NOT NULL ,
       `dp` TINYINT(1) NOT NULL ,
       PRIMARY KEY (`id`) ,
       INDEX `fk_disciplina_has_periodo_periodo1_idx` (`periodo_id` ASC) ,
@@ -304,7 +304,7 @@
     CREATE  TABLE IF NOT EXISTS `horario`.`preferencia` (
       `fpa_id` INT NOT NULL ,
       `disciplinas_oferecidas_id` INT NOT NULL ,
-      `ordem_preferencia` INT NOT NULL ,
+      `ordem` INT NOT NULL ,
       PRIMARY KEY (`fpa_id`, `disciplinas_oferecidas_id`) ,
       INDEX `fk_disciplina_has_fpa_fpa1_idx` (`fpa_id` ASC) ,
       INDEX `fk_preferencias_disciplinas_oferecidas1_idx` (`disciplinas_oferecidas_id` ASC) ,
