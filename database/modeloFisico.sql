@@ -9,9 +9,9 @@ USE `horario` ;
 -- -----------------------------------------------------
 -- Table `horario`.`grau`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `horario`.`grau` (
+CREATE  TABLE IF NOT EXISTS `horario`.`modalidade` (
   `id` TINYINT(4) NOT NULL AUTO_INCREMENT ,
-  `nome_grau` VARCHAR(50) NOT NULL ,
+  `nome_modalidade` VARCHAR(50) NOT NULL ,
   `codigo` INT(11) NOT NULL ,
   `deletado_em` TIMESTAMP NULL DEFAULT NULL ,
   PRIMARY KEY (`id`) ,
@@ -339,21 +339,21 @@ INSERT INTO tipo_sala(nome_tipo_sala, descricao_tipo_sala) VALUES("Hibrida", "Me
 INSERT INTO tipo_sala(nome_tipo_sala, descricao_tipo_sala) VALUES("Auditorio", "Apresentacoes");
 INSERT INTO tipo_sala(nome_tipo_sala, descricao_tipo_sala) VALUES("VideoConferencia", "Videoconferencias ao vivo");
 
-INSERT INTO grau(nome_grau, codigo) VALUES("Tecnologia", "00001");
-INSERT INTO grau(nome_grau, codigo) VALUES("Bacharel", "00021");
-INSERT INTO grau(nome_grau, codigo) VALUES("Pos Graduação", "00231");
-INSERT INTO grau(nome_grau, codigo) VALUES("Mestrado", "001321");
-INSERT INTO grau(nome_grau, codigo) VALUES("Doutorado", "44121");
+INSERT INTO modalidade(nome_modalidade, codigo) VALUES("Tecnologia", "00001");
+INSERT INTO modalidade(nome_modalidade, codigo) VALUES("Bacharel", "00021");
+INSERT INTO modalidade(nome_modalidade, codigo) VALUES("Pos Graduação", "00231");
+INSERT INTO modalidade(nome_modalidade, codigo) VALUES("Mestrado", "001321");
+INSERT INTO modalidade(nome_modalidade, codigo) VALUES("Doutorado", "44121");
 
-INSERT INTO curso(grau_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento)
+INSERT INTO curso(modalidade_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento)
     VALUES(1, 111, "Análise e Desenvolvimento de Sistemas", "ADS", 6, "B");
-INSERT INTO curso(grau_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento)
+INSERT INTO curso(modalidade_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento)
     VALUES(2, 222, "Processos Gerenciais", "PRG", 8, "S");
-INSERT INTO curso(grau_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento)
+INSERT INTO curso(modalidade_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento)
     VALUES(3, 333, "Fisica", "FIS", 4, "S");
-INSERT INTO curso(grau_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento)
+INSERT INTO curso(modalidade_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento)
     VALUES(4, 444, "Computação Avançada", "CPA", 3, "B");
-INSERT INTO curso(grau_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento)
+INSERT INTO curso(modalidade_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento)
     VALUES(5, 544, "Cura do Cancer", "CDC", 8, "B");
 
 INSERT INTO disciplina(curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas)
