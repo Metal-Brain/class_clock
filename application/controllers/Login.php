@@ -28,8 +28,15 @@
 
           $usuario = Pessoa_model::where('prontuario',$prontuario)->where('senha',$senha)->firstOrFail();
 
+          $dados =  [
+            'id' => $usuario->id,
+            'nome'  => $usuario->nome,
+            'email' => $usuario->email,
+            'tipo'  => $usuario->tipos()->first()->id,
+          ];
+
           // Joga os dados do usuário na sessão
-          $this->session->set_userdata($usuario);
+          $this->session->set_userdata('usuario_logado',$dados);
 
           // Verifica o tipo de usuário que esta entrando para ser redirecionado
           // para sua página.
