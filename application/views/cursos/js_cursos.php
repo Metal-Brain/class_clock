@@ -1,27 +1,22 @@
 <script type="text/javascript">
-jQuery.validator.addMethod("verifica-coordenador", function(value) {
-	
-	
-	var coordenadores = [];
-	foreach($coordenadores as $coordenador){
-		
-		coordenadores.push(coordenador.id);
-		
-	}
-
-
-
-  //  var states = ['PA', "CA"] // of course you will need to add more
-    var in_array = coordenadores;
-    if (in_array == -1) {
-        return false;
-    }else{
-        return true;
-    }
-}, "Campo Obrigatorio");
+//Comentado porque quando funcionando nao permite que o arquivo js_cursos seja importado no navegador
+// jQuery.validator.addMethod("verifica-coordenador", function(value){
+//
+// 	var coordenadores = [];
+// 	foreach($coordenadores as $coordenador){
+// 		coordenadores.push(coordenador.id);
+// 	}
+//   //  var states = ['PA', "CA"] // of course you will need to add more
+//     var in_array = coordenadores;
+//     if (in_array == -1) {
+//         return false;
+//     }else{
+//         return true;
+//     }
+// }, "Campo Obrigatorio");
 
 	$(document).ready(function () {
-		
+
 		$('#formCurso').validate({
 				rules: {
 
@@ -30,7 +25,7 @@ jQuery.validator.addMethod("verifica-coordenador", function(value) {
 					sigla_curso: { required: true,minlength: 3,maxlength: 3},
 					qtd_semestre: { required: true, number: true, min: 1, max: 20},
 					modalidade_id: {required: true, min: 1},
-					verifica-coordenador:{required:true}
+					verifica_coordenador:{required:true}
 				},
 				messages: {
 					codigo_curso:
@@ -61,7 +56,7 @@ jQuery.validator.addMethod("verifica-coordenador", function(value) {
 
 					modalidade_id:
                         {required: 'Campo obrigatório'},
-					verifica-coordenador:
+					verifica_coordenador:
                         {required: 'Campo obrigatório'}
 				}
 			});
@@ -70,8 +65,8 @@ jQuery.validator.addMethod("verifica-coordenador", function(value) {
 
 
 	});
-	
-	
+
+
 
 //$("#formCurso").validate();
 

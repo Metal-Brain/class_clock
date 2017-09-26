@@ -96,13 +96,7 @@
       $this->form_validation->set_rules('sigla_curso','sigla_curso','required|alpha|exact_length[3]|strtoupper');
       $this->form_validation->set_rules('codigo_curso','codigo_curso','required|integer|greater_than[0]|less_than[100000]');
       $this->form_validation->set_rules('qtd_semestre','semestres','required|integer|greater_than[0]');
-      $this->form_validation->set_rules('fechamento','fechamento','required');
-
-      $sigla = $this->input->post('sigla_curso');
-      $cursos_mesma_sigla = Curso_model::withTrashed()->where('sigla_curso',$sigla)->where('id','!=',$id)->get();
-      if(!empty($cursos_mesma_sigla[0])){
-        $this->form_validation->set_rules('sigla_curso','sigla','is_unique[curso.sigla_curso]');
-      }
+      $this->form_validation->set_rules('fechamento','fechamento','required');  
 
       $codigo = $this->input->post('codigo_curso');
       $cursos_mesmo_codigo = Curso_model::withTrashed()->where('codigo_curso',$codigo)->where('id','!=',$id)->get();
