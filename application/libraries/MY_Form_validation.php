@@ -15,6 +15,13 @@ class MY_Form_validation extends CI_Form_validation {
         return $d && $d->format($format) == $date;
     }
 
+    public function valid_date_br($date){
+        $this->CI->form_validation->set_message('valid_date_br', 'O campo %s não contém uma data válida.');
+        $format = 'd-m-Y';
+        $d = DateTime::createFromFormat($format, $date);
+        return $d && $d->format($format) == $date;
+    }
+
     public function is_unique_except($value, $field_and_except){
         $controller = $this->CI;
         $db = $controller->db;
