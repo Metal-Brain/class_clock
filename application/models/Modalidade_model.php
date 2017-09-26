@@ -1,5 +1,7 @@
-
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
+
+
+
   /**
    *  Essa classe é um modelo que representa a relação Modalidade no banco de dados
    *  @author Caio de Freitas e Lucas Leonel
@@ -16,3 +18,6 @@
     }
 
   }
+
+
+?>

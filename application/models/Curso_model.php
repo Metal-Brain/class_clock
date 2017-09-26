@@ -1,5 +1,4 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
-
   /**
   * Modelo responsável pelo curso
   * @author Lucas Leonel
@@ -32,7 +31,5 @@
     public function disciplinas(){
       return $this->hasMany(Disciplinas_Model::class, 'curso_id');
     }
-
   }
-
 ?>

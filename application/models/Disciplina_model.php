@@ -1,7 +1,4 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
-
-use Illuminate\Database\Eloquent\Model;
-
 /**
  * Esta classe é um modelo do banco de dados que representa as disciplinas que a instituição possui
  * @author Cleyton de Castro

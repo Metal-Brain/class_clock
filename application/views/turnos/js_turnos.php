@@ -23,8 +23,11 @@
 
 		$(document).ready(function () {
 
-
-			$("#TurnoTable").DataTable();
+			$('#TurnoTable').dataTable( {
+				"language": {
+					"url": "<?= base_url('assets/DataTables/translatePortuguese.js');?>"
+				}
+			} );
 
 
 
