@@ -5,14 +5,12 @@
   class MY_Auth {
 
     private $CI;
-    private $allowedMethods;
-    private $allowedControllers;
+    private $allowedControllersAndMethods;
     private $ignore;
 
     function __construct($params) {
       $this->CI =& get_instance();
-      $this->allowedMethods = $params['allowedMethods'];
-      $this->allowedControllers = $params['allowedControllers'];
+      $this->allowedControllersAndMethods = $params['allowedControllersAndMethods'];
       $this->ignore = $params['ignore'];
     }
 
@@ -25,8 +23,10 @@
 
         if (!$this->hasSession()) redirect('/');
 
-        if (!in_array($class,$this->allowedControllers) && !in_array($method,$this->allowedMethods) ) {
-          redirect('authError');
+        if (!key_exists($class,$this->allowedControllersAndMethods)){
+          if(!in_array($method, $this->allowedControllersAndMethods[$class])){
+            redirect('authError');
+          }
         }
       }
 
