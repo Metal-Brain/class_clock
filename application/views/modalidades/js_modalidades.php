@@ -25,11 +25,11 @@
               messages: {   
                     nome_modalidade: {
                        required: 'Campo nome é obrigatório',
-          	           maxlength: 'Tamanho maximo do campo é 50'
+          	           maxlength: 'Tamanho maximo do campo é 50 caracteres'
                   },
                     codigo:{
                        required:'Campo codigo é obrigatório',
-	                     maxlength: 'Tamanho maximo do campo é 5',
+	                     maxlength: 'Tamanho maximo do campo é 5 caracteres',
                        min: 'Por favor insira somente numéros acima de zero'
                   }
 
