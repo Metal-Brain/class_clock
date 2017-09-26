@@ -43,7 +43,7 @@ class Modalidade extends CI_Controller {
                                            array('required',
                                                  'integer',
                                                  'greater_than[0]',
-                                                 'max_length[5]',
+                                                 'max_length[4]',
                                                  'is_unique[modalidade.codigo]'
                                                  ),
                                            array('is_unique' => 'Código já existente.')
@@ -101,7 +101,7 @@ class Modalidade extends CI_Controller {
                                           array('required',
                                                 'integer',
                                                 'greater_than[0]',
-                                                'max_length[5]',
+                                                'max_length[4]',
 												'is_natural_no_zero',
                                                 "is_unique_except[modalidade.codigo,{$modalidade->codigo}]"
                                           ));
