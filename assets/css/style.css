@@ -142,8 +142,12 @@ header a:hover {
 }
 
 h2 {
-	padding: 0px!important;
-	margin: 0px!important;
+    padding: 0px!important;
+    margin: 0px!important;
+}
+
+.bold{
+    font-weight: bold;
 }
 
 .bold{
