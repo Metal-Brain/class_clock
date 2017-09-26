@@ -33,7 +33,7 @@
         function salvar () {
             if ($this->validar()) {
                 try {
-                  if (Disciplina_model::where("sigla_disciplina", $this->input->post('sigla_disciplina'))->where("curso_id", $this->input->post('curso_id'))->first()==null) {
+                  if (Disciplina_model::withTrashed()->where("sigla_disciplina", $this->input->post('sigla_disciplina'))->where("curso_id", $this->input->post('curso_id'))->first()==null) {
                     $disciplina = new Disciplina_model();
                     $disciplina->curso_id = $this->input->post('curso_id');
                     $disciplina->tipo_sala_id = $this->input->post('tipo_sala_id');
@@ -81,7 +81,7 @@
         function atualizar ($id) {
             if($this->validar()){
                 try {
-                  if (Disciplina_model::where("sigla_disciplina", $this->input->post('sigla_disciplina'))->where("curso_id", $this->input->post('curso_id'))->first()==null) {
+                  if (Disciplina_model::withTrashed()->where("sigla_disciplina", $this->input->post('sigla_disciplina'))->where("curso_id", $this->input->post('curso_id'))->first()==null || Disciplina_model::where("sigla_disciplina", $this->input->post('sigla_disciplina'))->where("curso_id", $this->input->post('curso_id'))->where("id", $id)->first()) {
                     $disciplina = Disciplina_model::withTrashed()->findOrFail($id);
                     $disciplina->nome_disciplina  = $this->input->post('nome_disciplina') ;
                     $disciplina->sigla_disciplina = $this->input->post('sigla_disciplina');

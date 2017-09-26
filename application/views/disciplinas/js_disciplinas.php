@@ -36,7 +36,7 @@
                 qtd_professor:{
                     required:true,
                     min:1,
-                    max:10,
+                    max:9,
                     number:true
                 },
                 modulo:{

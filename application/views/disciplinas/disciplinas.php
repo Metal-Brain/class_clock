@@ -34,7 +34,7 @@
                             <th class="text-center">Sigla</th>
                             <th class="text-center">Curso</th>
                             <th class="text-center">Qtd. Professores</th>
-                            <th class="text-center">Modulo</th>
+                            <th class="text-center">Módulos</th>
                             <th class="text-center">Qtd. Aulas Semanais</th>
                             <th class="text-center">Tipo de sala</th>
                             <th class="text-center">Status</th>
