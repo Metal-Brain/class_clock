@@ -26,7 +26,7 @@
 											</div>
 										</div>
 										<div class="row">
-										  <div class="col-md-3 margin-top-error">
+										  <div class="col-md-3 margin-top-error error">
 											<?= form_error('nome_curso') ?>
 										  </div>
 										</div>
@@ -40,7 +40,7 @@
 										</div>
 
 										<div class="row">
-										  <div class="col-md-3 margin-top-error">
+										  <div class="col-md-3 margin-top-error error">
 											<?= form_error('sigla_curso') ?>
 										  </div>
 										</div>
@@ -54,7 +54,7 @@
 										</div>
 
 										<div class="row">
-										  <div class="col-md-3 margin-top-error">
+										  <div class="col-md-3 margin-top-error error">
 											<?= form_error('codigo_curso') ?>
 										  </div>
 										</div>
@@ -69,7 +69,7 @@
 										</div>
 
 										<div class="row">
-										  <div class="col-md-3 margin-top-error">
+										  <div class="col-md-3 margin-top-error error">
 											<?= form_error('qtd_semestre') ?>
 										  </div>
 										</div>
@@ -97,7 +97,7 @@
 										</div>
 
 										<div class="row">
-										  <div class="col-md-3 margin-top-error">
+										  <div class="col-md-3 margin-top-error error">
 											<?= form_error('modalidade_id') ?>
 										  </div>
 										</div>
