@@ -1,201 +1,243 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php
+
+/**
+ *
+ */
+class Turma extends CI_Controller {
 
   /**
-   *  Essa classe é responsavel por todas regras de negócio sobre turma.
-   *  @since 2017/04/15
-   *  @author Jean Brock
+   * Exibe todos os Turmas cadastrados no banco de dados.
+   * @author Caio de Freitas
+   * @since 2017/08/26
    */
-  class Turma extends CI_Controller {
+  function index () {
+    //$this->load->helper('date');
+    //$Turmas = Turma_model::withTrashed()->get();
+    $this->load->template('turmas/turmas',compact('turmas'),'turmas/js_turmas');
+  }
 
-    public function index () {
-      if (verificaSessao() && verificaNivelPagina(array(1,3)))
-        $this->cadastrar();
-      else
-        redirect('/');
-    }
+  function cadastrar () {
+    $this->load->template('Turmas/TurmasCadastrar',[],'Turmas/js_Turmas');
+  }
 
+  /**
+   * Salva um novo usuário no banco de dados.
+   * @author Caio de Freitas
+   * @since 2017/08/23
+   */
+  public function salvar () {
 
-    // =========================================================================
-    // ==========================CRUD de Turma =================================
-    // =========================================================================
+    $this->form_validation->set_rules('nome_Turma','nome',array('required','max_length[25]','is_unique[Turma.nome_Turma]','trim','strtolower'));
+    $this->form_validation->set_rules('horario[]','horario',array('callback_horarioRequired','callback_timeValidate','callback_horarioAula'));
 
-    /**
-      * Valida os dados do forumulário de cadastro de turmas.
-      * Caso o formulario esteja valido, envia os dados para o modelo realizar
-      * a persistencia dos dados.
-      *  @since 2017/04/15
-      *  @author Jean Brock
-      */
-    public function cadastrar () {
+    $this->form_validation->set_message('is_unique','O nome do Turma informado já está cadastrado');
+    $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
 
-      if (verificaSessao() && verificaNivelPagina(array(1,3))) {
-        // Carrega a biblioteca para validação dos dados.
-        $this->load->library(array('form_validation','session'));
-        $this->load->helper(array('form','url','dropdown'));
-        $this->load->model(array(
-          'Turma_model',
-          'Disciplina_model'
-        ));
+    if ($this->form_validation->run()) {
+      try {
+        DB::transaction(function () {
+          $Turma = new Turma_model();
+          $Turma->nome_Turma = $this->input->post('nome_Turma');
+          $Turma->save();
 
+          $horarios = $this->input->post('horario');
 
-        // Definir as regras de validação para cada campo do formulário.
-        $this->form_validation->set_rules('sigla', 'sigla', array('required', 'max_length[10]', 'is_unique[Turma.sigla]','strtoupper'));
-        $this->form_validation->set_rules('disciplina', 'disciplina', array('greater_than[0]','required'), array('greater_than' => 'Selecione a disciplina.'));
-		$this->form_validation->set_rules('qtdAlunos', 'quantidade de alunos', array('required', 'integer', 'greater_than[0]','max_length[3]'));
-        // Definição dos delimitadores
-        $this->form_validation->set_error_delimiters('<p class="text-danger">','</p>');
+          for ($i = 0; $i < sizeof($horarios); $i += 2) {
+            $horario = new Horario_model;
 
-        // Verifica se o formulario é valido
-        if ($this->form_validation->run() == FALSE) {
-
-          $this->session->set_flashdata('formDanger','<strong>Não foi possível cadastrar a turma, pois existe(m) erro(s) no formulário:</strong>');
-
-          $dados['disciplina']   = convert($this->Disciplina_model->getAll(TRUE));
-          $dados['turmas'] = $this->Turma_model->getAll();
-
-          $this->load->view('includes/header', $dados);
-          $this->load->view('includes/sidebar');
-          $this->load->view('turmas/turmas');
-          $this->load->view('includes/footer');
-          $this->load->view('turmas/js_turmas');
-
-        }else{
-
-          $turma = array(
-            'sigla'         => $this->input->post('sigla'),
-            'qtdAlunos'     => $this->input->post('qtdAlunos'),
-            'dp'            => ($this->input->post("dp") == NULL) ? 0 : 1,
-            'disciplina'   =>$this->input->post('disciplina')
-          );
-
-          if ($this->Turma_model->insert($turma)) {
-            $this->session->set_flashdata('success','Turma cadastrada com sucesso');
-          } else {
-            $this->session->set_flashdata('danger','Não foi possível cadastrar o turma, tente novamente ou entre em contato com o administrador do sistema.');
+            $horario->inicio = $horarios[$i];
+            $horario->fim = $horarios[$i+1];
+            $horario->Turma_id = $Turma->id;
+            $horario->save();
           }
-            redirect('Turma');
+        });
 
+        $this->session->set_flashdata('success','Turma cadastrado com sucesso');
+
+      } catch (Exception $e) {
+        $this->session->set_flashdata('danger','Problemas ao cadastrar o Turma, tente novamente!');
+      }
+
+      redirect("Turma");
+    } else {
+      $this->cadastrar();
+    }
+
+  }
+
+  /**
+   * Formulário para alterar os dados do Turma
+   * @author Caio de Freitas
+   * @since 2017/08/26
+   */
+  function editar ($id) {
+      $Turma = Turma_model::withTrashed()->findOrFail($id);
+      $this->load->template('Turmas/TurmasEditar',compact('Turma','id'),'Turmas/js_Turmas');
+  }
+
+  /**
+   * Edita os dados do Turma no banco de dados.
+   * @author Caio de Freitas
+   * @since 2017/08/26
+   */
+  public function atualizar ($id) {
+    $Turma = Turma_model::withTrashed()->findOrFail($id);
+
+    if(ucwords($Turma->nome_Turma) != $this->input->post('nome_Turma')){
+      $this->form_validation->set_rules('nome_Turma','nome',array('required','max_length[25]','is_unique[Turma.nome_Turma]','trim','strtolower'));
+    }else {
+      $this->form_validation->set_rules('nome_Turma','nome',array('required','max_length[25]','trim','strtolower'));
+    }
+    $this->form_validation->set_rules('horario[]','horario',array('callback_horarioRequired','callback_timeValidate','callback_horarioAula'));
+
+    $this->form_validation->set_message('is_unique','O nome do Turma informado já está cadastrado');
+    $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
+
+    if ($this->form_validation->run()) {
+      try {
+        $Turma->nome_Turma = $this->input->post('nome_Turma');
+        $horarios = $this->input->post('horario');
+
+        $Turma->horarios()->forceDelete();
+        for ($i = 0; $i < sizeof($horarios); $i += 2) {
+          $horario = new Horario_model;
+
+          $horario->inicio = $horarios[$i];
+          $horario->fim = $horarios[$i+1];
+          $horario->Turma_id = $Turma->id;
+          $horario->save();
         }
-      }else{
-        redirect('/');
+
+        $Turma->save();
+        $this->session->set_flashdata('success','Turma atualizado com sucesso');
+      } catch (Exception $e) {
+        $this->session->set_flashdata('danger','Problemas ao atualizar os dados do Turma, tente novamente!');
+      }
+      redirect('Turma');
+    } else {
+      $this->editar($id);
+    }
+
+  }
+
+  /**
+   * Desativa um Turma cadastrado no banco de dados.
+   * @author Caio de Freitas
+   * @param ID do Turma
+   */
+  function deletar ($id) {
+    try {
+      $Turma = Turma_model::findOrFail($id);
+      $Turma->delete();
+
+      $this->session->set_flashdata('success','Turma deletado com sucesso');
+    } catch (Exception $e) {
+      $this->session->set_flashdata('danger','Erro ao deletar um Turma, tente novamente');
+    }
+
+    redirect("Turma");
+
+  }
+
+  /**
+   * Ativa o Turma
+   * @author Caio de Freitas
+   * @since 2017/08/31
+   * @param ID do Turma
+   */
+  function ativar ($id) {
+    try {
+      $Turma = Turma_model::withTrashed()->findOrFail($id);
+      $Turma->restore();
+      $this->session->set_flashdata('success','Turma ativado com sucesso');
+    } catch (Exception $e) {
+      $this->session->set_flashdata('danger','Erro ao ativar o Turma. Tente novamente!');
+    }
+
+    redirect("Turma");
+
+  }
+
+  /**
+   * Função para validar a obrigatoriedade dos horarios.
+   * Verifica se todos os valores de horario são diferentes de NULL.
+   * @author Caio de Freitas
+   * @since 2017/08/30
+   */
+  public function horarioRequired() {
+    $resultado = TRUE;
+    $horarios = $this->input->post('horario');
+
+    if (sizeof($horarios) < 2) {
+      $this->form_validation->set_message('horarioRequired','Informe ao menos um aula');
+      $resultado = FALSE;
+    } else {
+      foreach ($horarios as $horario) {
+        if (empty($horario)) {
+          $this->form_validation->set_message('horarioRequired','Informe todos os horários');
+          $resultado = FALSE;
+          break;
+        }
       }
     }
 
-    /**
-      * Essa função irá atualizar os dados da turma.
-      * Se esses dados estiverem validos, Envia os dados para modelo.
-      * e ira altera-los.
-      * @since 2017/04/15
-      * @author Jean Brock
-    */
+    return $resultado;
+  }
 
-    public function atualizar () {
-            if (verificaSessao() && verificaNivelPagina(array(1))) {
-              // Carrega a biblioteca para validação dos dados.
-              $this->load->library(array('form_validation','session'));
-              $this->load->helper(array('form','url','dropdown'));
-              $this->load->model(array(
-                'Turma_model',
-                'Disciplina_model'
-              ));
+  /**
+   * Função para validar os horarios das aulas.
+   * A aula possui um horario de inicio e um horário de fim, o horarário "fim"
+   * não pode ser menor do que o horário de inicio;
+   * @author Caio de Freitas
+   * @since 2017/08/30
+   * @return Retorna um BOOLEAN TRUE caso os horários da aula estejam corretos.
+   */
+  public function horarioAula () {
+    $resultado = true;
+    $horario = $this->input->post("horario");
 
+    for ($i = 0; $i < sizeof($horario); $i += 2){
+      $horarioInicio  = strtotime($horario[$i]);
+      $horarioFim     = strtotime($horario[$i+1]);
 
-              // Definir as regras de validação para cada campo do formulário.
-              $this->form_validation->set_rules('recipient-sigla', 'sigla', array('required', 'max_length[10]','strtoupper'));
-              $this->form_validation->set_rules('recipient-disciplina', 'disciplina', array('greater_than[0]','required'), array('greater_than' => 'Selecione a disciplina'));
-			  $this->form_validation->set_rules('recipient-qtdAlunos', 'quantidade de alunos', array('required', 'integer', 'greater_than[0]','max_length[3]'));
-              // Definição dos delimitadores
-              $this->form_validation->set_error_delimiters('<p class="text-danger">','</p>');
-
-              // Verifica se o formulario é valido
-              if ($this->form_validation->run() == FALSE) {
-
-                $this->session->set_flashdata('formDanger','<strong>Não foi possível cadastrar a turma, pois existe(m) erro(s) no formulário:</strong>');
-
-                $dados['disciplina']   = convert($this->Disciplina_model->getAll(TRUE));
-                $dados['turmas'] = $this->Turma_model->getAll();
-                $this->load->view('includes/header', $dados);
-                $this->load->view('includes/sidebar');
-                $this->load->view('turmas/turmas');
-                $this->load->view('includes/footer');
-                $this->load->view('turmas/js_turmas');
-
-              }else{
-
-                $id = $this->input->post('recipient-id');
-
-                // Pega os dados do formulário
-                $turma = array(
-                  'sigla'         => $this->input->post('recipient-sigla'),
-                  'qtdAlunos'     => $this->input->post('recipient-qtdAlunos'),
-                  'dp'            => ($this->input->post("recipient-dp") == NULL) ? 0 : 1,
-                  'disciplina'   =>$this->input->post('recipient-disciplina')
-                );
-
-
-                if ($this->Turma_model->updateTurma($id, $turma)) {
-                  $this->session->set_flashdata('success','Turma cadastrada com sucesso');
-                } else {
-                  $this->session->set_flashdata('danger','Não foi possível cadastrar o turma, tente novamente ou entre em contato com o administrador do sistema.');
-                }
-                  redirect('Turma/atualizar');
-
-              }
-            }else{
-              redirect('/');
-            }
-    }
-
-    /**
-      * Essa função irá procurar o id da turma
-      * e irá alterar a propriedade dele para True ou False,
-      * assim não exclindo do banco.
-      * @since 2017/04/15
-      * @author Jean Brock
-    */
-    public function desativar ($id) {
-      if (verificaSessao() && verificaNivelPagina(array(1))) {
-        $this->load->model(array('Turma_model'));
-
-        if ($this->Turma_model->deleteTurma($id))
-          $this->session->set_flashdata('success','Turma desativada com sucesso');
-        else
-          $this->session->set_flashdata('danger','Não foi possível desativar a turma, tente novamente mais tarde ou entre em contato com o administrador do sistema.');
-
-        redirect('Turma');
-      }else{
-        redirect('/');
+      // Verifica se o horario fim é menor do que o horário de inicio
+      if ($horarioFim <= $horarioInicio) {
+        $this->form_validation->set_message('horarioAula','O horário fim não pode ser maior ou igual ao horário de inicio');
+        $resultado = false;
+        break;
       }
     }
 
-	   public function ativar ($id) {
-       if (verificaSessao() && verificaNivelPagina(array(1))) {
-         $this->load->model('Turma_model');
+    return $resultado;
+  }
 
-         if ( $this->Turma_model->able($id) )
-           $this->session->set_flashdata('success','Turma ativada com sucesso');
-         else
-           $this->session->set_flashdata('danger','Não foi possível ativar a turma, tente novamente ou entre em contato com o administrador do sistema.');
+  /**
+   * Função que valida o vetor de horarios
+   * @author Caio de Freitas
+   * @since 2017/08/23
+   * @param vetor com os horários
+   */
+  public function timeValidate() {
+    $result = TRUE;
+    $horarios = $this->input->post('horario');
 
-         redirect('Turma');
-       }else{
-         redirect('/');
-       }
+    foreach ($horarios as $horario) {
+      $horario = explode(':', $horario);
 
-    }
-	
-	public function verificaTurma(){
-      $validate_data = array('sigla' => $this->input->get('sigla'));
-      $this->form_validation->set_data($validate_data);
-      $this->form_validation->set_rules('sigla', 'sigla da disciplina', 'is_unique[Turma.sigla]');
-
-      if($this->form_validation->run() == FALSE){
-        echo "false";
-      }else{
-        echo "true";
+      if (!is_numeric($horario[0]) || !is_numeric($horario[1])) {
+        $this->form_validation->set_message('timeValidate','Os valores informados não são numéricos');
+        $result = FALSE;
+        break;
+      } else if ( $horario[0] >= 24 || $horario[1] > 59) {
+        $this->form_validation->set_message('timeValidate','Hora inválida');
+        $result = FALSE;
+        break;
       }
     }
-	
-   }
+
+    return $result;
+  }
+}
+
 
 ?>

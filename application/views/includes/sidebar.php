@@ -11,6 +11,12 @@
 		   </a>
 	   </li>
 
+     <li id="sidebar-turno">
+		   <a href="http://localhost/class_clock/index.php/Turma">
+			   <span class="glyphicon glyphicon-time"></span> <span class="sidebar-label">Turmas</span>
+		   </a>
+	   </li>
+
 	   <li id="sidebar-cursos">
 		   <a href="">
 			   <span class="glyphicon glyphicon-education"></span> <span class="sidebar-label">Cursos</span>

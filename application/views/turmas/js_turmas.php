@@ -1,133 +1,152 @@
-<script type="text/javascript">
-    $('#exampleModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget) // Button that triggered the modal
-        var recipient = button.data('whatever') // Extract info from data-* attributes
-        var recipientsigla = button.data('whateversigla')
-        var recipientqtdAlunos = button.data('whateverqtd')
-        var recipientdp = button.data('whateverdp')
-        var recipientdisciplina = button.data('whateverdisciplina')
-        var recipientId = button.data('whateverid')
-        var recipientIdDisciplina = button.data('whateveriddisciplina')
-        console.log(recipientIdDisciplina);
-        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-        var modal = $(this)
-        modal.find('.modal-title').text('Alterar Turma')
-        modal.find('#recipient-sigla').val(recipientsigla)
-        modal.find('#recipient-qtdAlunos').val(recipientqtdAlunos)
-        modal.find('#recipient-dp').prop('checked',recipientdp)
-        modal.find('select[name=recipient-disciplina] option[value='+recipientIdDisciplina+']').prop('selected',true)
-        modal.find('#recipient-id').val(recipientId)
-    });
-	
-	
-	 $('#exampleModal2').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget) // Button that triggered the modal
-        var recipient = button.data('whatever') // Extract info from data-* attributes
-        var recipientsigla = button.data('whateversigla')
-        var recipientqtdAlunos = button.data('whateverqtd')
-        var recipientdp = button.data('whateverdp')
-        var recipientdisciplina = button.data('whateverdisciplina')
-        var recipientId = button.data('whateverid')
-        var recipientIdDisciplina = button.data('whateveriddisciplina')
-        console.log(recipientIdDisciplina);
-        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-        var modal = $(this)
-        modal.find('.modal-title').text('Alterar Turma')
-        modal.find('#recipient-sigla').val(recipientsigla)
-        modal.find('#recipient-qtdAlunos').val(recipientqtdAlunos)
-        modal.find('#recipient-dp').prop('checked',recipientdp)
-        modal.find('select[name=recipient-disciplina] option[value='+recipientIdDisciplina+']').prop('selected',true)
-        modal.find('#recipient-id').val(recipientId)
-    });
-</script>
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        $("#turmaTable").DataTable({
-            "language": {
-                "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Portuguese-Brasil.json"
-            }
-        });
-    });
-</script>
+	<script type="text/javascript">
 
-<script>
-    function exclude(id) {
-        bootbox.confirm({
-            message: "Realmente deseja desativar essa turma?",
-            buttons: {
-                confirm: {
-                    label: 'Sim',
-                    className: 'btn-success'
-                },
-                cancel: {
-                    label: 'Não',
-                    className: 'btn-danger'
-                }
-            },
-            callback: function (result) {
-                if (result)
-                    window.location.href = '<?= base_url("index.php/Turma/desativar/") ?>' + id
-            }
-        });
-    }
+		function confirmDelete(id, msg, funcao) {
+			bootbox.confirm({
+    		message: msg,
+    		buttons: {
+        	confirm: {
+            label: 'Sim',
+            className: 'btn-success'
+        	},
+        	cancel: {
+            label: 'Não',
+            className: 'btn-danger'
+        	}
+    		},
+    		callback: function (result) {
+        	if (result == true)
+						  window.location.href = '<?= site_url("turma/") ?>' + funcao + '/' + id;
+    		}
+			});
+		}
 
-    function able(id) {
-        bootbox.confirm({
-            message: "Realmente deseja reativar essa turma?",
-            buttons: {
-                confirm: {
-                    label: 'Sim',
-                    className: 'btn-success'
-                },
-                cancel: {
-                    label: 'Não',
-                    className: 'btn-danger'
-                }
-            },
-            callback: function (result) {
-                if (result)
-                    window.location.href = '<?= base_url("index.php/Turma/ativar/") ?>' + id
-            }
-        });
-    }
-</script>
+		$(document).ready(function () {
 
-<script type="text/javascript">
-	$(document).ready(function(){
-		$('#cadastrarTurma').validate({
-			rules: {
-				sigla: { required: true, maxlength: 10, remote: '<?= base_url("index.php/Turma/verificaTurma/") ?>' },
-				disciplina: { required: true, min: 1 },
-				qtdAlunos: { required: true, number: true, maxlength: 3, min: 1, max: 999 }
-			},
-			messages: {
-				sigla: { required: 'Campo obrigatório', maxlength: 'O campo sigla deve ter no máximo 10 caracteres', remote: 'Esta sigla já está em uso' },
-				disciplina: { required: 'Campo obrigatório'},
-				qtdAlunos: { required: 'Campo obrigatório', number: 'Digite apenas números', maxlength: 'Digite um valor menor ou igual a 999', min: 'Digite um valor maior ou igual a 1', max: 'Digite um valor menor ou igual a 999' }
+			$('#TurmaTable').dataTable( {
+				"language": {
+					"url": "<?= base_url('assets/DataTables/translatePortuguese.js');?>"
+				}
+			} );
+
+
+
+			var mask = function () {
+				$('.hora').mask('00:00');
 			}
+			var addHorario = function () {
+				if($(".text-danger")){
+					$(".text-danger").remove();
+				}
+				var content = `
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-1 form-group">
+						<p class="aula"><strong>Aula `+ (aula + 1) +`</strong></p>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-2 form-group">
+						<label >Horário de entrada:</label>
+						<input name="horario[`+index+`]" class="form-control hora" type="text" value="">
+					</div>`;
+
+					index++;
+
+					content += `
+					<div class="col-xs-12 col-sm-12 col-md-2 form-group">
+						<label >Horário de saída:</label>
+						<input name="horario[`+index+`]" class="form-control hora" type="text" value="">
+					</div>
+					<div col-md-2 style="padding: 25px 0 0 0;">
+						<button id="btnRemove" type="button" class="btn btn-danger add-field"><span class="glyphicon glyphicon-remove"></span></button>
+					</div>
+				</div>`;
+				index++;
+				aula++;
+				$("#horarios").append(content);
+				//carrega as máscaras novamente
+				mask();
+			}
+
+			var url = window.location.href;
+			var aula = 0;
+			var index = 0;
+
+			if ( url.indexOf('Turma/editar') > -1 ) {
+				var horarios = <?= (isset($Turma->horarios)) ? json_encode($Turma->horarios) : '{}' ?>;
+
+				horarios.forEach(function (horario) {
+					var content = `
+					<div class="row">
+						<div class="col-xs-12 col-sm-12 col-md-1 form-group">
+							<p class="aula"><strong>Aula `+ (aula + 1) +`</strong></p>
+						</div>
+						<div class="col-xs-12 col-sm-12 col-md-2 form-group">
+							<label >Horário de entrada:</label>
+							<input name="horario[`+index+`]" class="form-control hora" type="text" value="`+horario.inicio.substring(0,5)+`">
+						</div>`;
+
+					index++;
+
+					content += `
+						<div class="col-xs-12 col-sm-12 col-md-2 form-group">
+							<label >Horário de saída:</label>
+							<input name="horario[`+index+`]" class="form-control hora" type="text" value="`+horario.fim.substring(0,5)+`">
+						</div>
+						<div col-md-2 style="padding: 25px 0 0 0;">
+							<button id="btnRemove" type="button" class="btn btn-danger add-field"><span class="glyphicon glyphicon-remove"></span></button>
+						</div>
+					</div>`;
+					index++;
+					aula++;
+					$("#horarios").append(content);
+				});
+			}
+
+
+			$('#horarios').on('click','#btnRemove',function(){
+				var row = $(this).parent().parent();
+				row.remove();
+				// index vetor
+				novos = $("input.hora");
+				for (index = 0; index < novos.length; index++) {
+					novos[index].name = 'horario['+index+']';
+				}
+
+				// index aula
+				var listAula = $("p.aula");
+				for (aula = 0; aula < listAula.length; aula ++) {
+					listAula[aula].innerHTML = '<strong> Aula ' + (aula + 1)+'</strong>';
+				}
+			});
+
+			// função para adicionar um novo campo de horario
+			$('#btnAdd',$('#horarios')).click(addHorario);
+
+			// função para adicionar um novo horario no cadastro de Turma
+			$('#btnAdd',$("#TurmaCadastrar")).click(addHorario);
+
+			mask();
 		});
+
+</script>
+<script type="text/javascript">
+	$.validator.addClassRules({
+		hora: {
+			required: true,
+			maxlength: 5,
+			minlength: 5
+		}
+	});
+
+	$("#formTurmas").validate({
+		errorClass: 'text-danger',
+		errorElement: 'span',
+		rules: {
+			nome_Turma: {
+				required: true,
+				maxlength: 25
+			}
+		}
 	});
 </script>
-
-<script type="text/javascript">
-	$(document).ready(function(){
-		$('#atualizarTurma').validate({
-			rules: {
-				'recipient-sigla': { required: true, maxlength: 10 },
-				'recipient-disciplina': { required: true, min: 1 },
-				'recipient-qtdAlunos': { required: true, number: true, maxlength: 3, min: 1, max: 999 }
-			},
-			messages: {
-				'recipient-sigla': { required: 'Campo obrigatório', maxlength: 'O campo sigla deve ter no máximo 10 caracteres' },
-				'recipient-disciplina': { required: 'Campo obrigatório'},
-				'recipient-qtdAlunos': { required: 'Campo obrigatório', number: 'Digite apenas números', maxlength: 'Digite um valor menor ou igual a 999', min: 'Digite um valor maior ou igual a 1', max: 'Digite um valor menor ou igual a 999' }
-			}
-		});
-	});
-</script>
-
 </body>
 </html>
