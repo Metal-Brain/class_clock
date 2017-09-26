@@ -1,14 +1,8 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
+use Illuminate\Database\Eloquent\Model as Eloquent;
 
-    class Tipo_model extends Model{
-
-        protected $table = 'tipo';
-        protected $guarded = [];
-
-        public function docente(){
-            return $this->belongsToMany(Docente_model::class);
-        }
-        
-    }
-
-?>
+class Tipo_model extends Eloquent {
+    protected $table = 'tipo';
+    protected $fillable = ['nome'];
+    public $timestamps = false;
+}

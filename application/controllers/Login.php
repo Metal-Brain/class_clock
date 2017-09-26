@@ -20,7 +20,6 @@
       if ($this->form_validation->run() == false) {
         $this->load->view('login');
       } else {
-        print("formulario validado");
 
         try {
           $prontuario = $this->input->post('prontuario');
