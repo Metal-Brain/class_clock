@@ -38,7 +38,7 @@ class Pessoa extends MY_Controller {
 
     if($has_docente) {
       $this->set_validations([
-        ['nascimento', 'data de nascimento', 'required|valid_date'],
+        ['nascimento', 'data de nascimento', 'required|valid_date_br'],
         ['ingresso_campus', 'data de ingresso no câmpus', 'required|valid_date_br'],
         ['ingresso_ifsp', 'data de ingresso no IFSP', 'required|valid_date_br'],
         // ['area', 'área', 'required'], FIXME: adicionar essa validação quando a area for existente
@@ -104,7 +104,7 @@ class Pessoa extends MY_Controller {
 
     if($has_docente) {
       $this->set_validations([
-        ['nascimento', 'data de nascimento', 'required|valid_date'],
+        ['nascimento', 'data de nascimento', 'required|valid_date_br'],
         ['ingresso_campus', 'data de ingresso no câmpus', 'required|valid_date_br'],
         ['ingresso_ifsp', 'data de ingresso no IFSP', 'required|valid_date_br'],
         // ['area', 'área', 'required'], FIXME: adicionar essa validação quando a area for existente
