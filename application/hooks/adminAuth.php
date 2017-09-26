@@ -7,16 +7,13 @@
 
     public function checkAuth($param) {
       $ci =& get_instance();
-      $ci->load->library('my_auth',[
-        'allowedControllers'=>[
-          'Turno',
-          'Login'
+      $ci->load->library('my_auth',
+      [
+        'allowedControllersAndMethods' =>
+        [
+          'Turno' => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar']
         ],
-        'allowedMethods'    => [
-          'index',
-          'cadastrar'
-        ],
-        'ignore' => $param
+          'ignore' => $param
       ]);
       $ci->my_auth->hasAccess();
     }
