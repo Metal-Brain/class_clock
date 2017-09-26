@@ -1,4 +1,18 @@
  <div class="col-xs=10 col-sm-10 col-md-10">
+      <div class="row" style="margin-top: 5px;">
+        <div class="col-md-12">
+          <?php if (validation_errors()) : ?>
+            <div class="alert alert-danger text-center bold">
+              <p class="glyphicon glyphicon-remove-sign">Erros:</p>
+              <?= validation_errors() ?>
+            </div>    
+          <?php endif; ?>
+        </div>
+    </div>
+  
+             
+              
+       
         <form id="formEditar" method="post" action="<?= site_url('modalidade/atualizar/'.$id)?>">
           <div class="form-group" >
 
@@ -13,9 +27,7 @@
                 value="<?=htmlspecialchars($modalidade->nome_modalidade)?>"
                 />
               
-              <?php
-                    echo(form_error("nome_modalidade"));
-                ?>
+            
 
 
             </div>
@@ -28,9 +40,7 @@
                 id="codigo"
                 name="codigo"
                 value="<?=htmlspecialchars($modalidade->codigo)?>"
-                /> <?php
-                    echo(form_error("codigo"));
-                ?>
+                /> 
             </div>
 
 			<div class="row">

@@ -146,6 +146,10 @@ h2 {
 	margin: 0px!important;
 }
 
+.bold{
+    font-weight: bold;
+}
+
 .page-header{
 	padding-bottom: 10px!important;
 }
