@@ -15,3 +15,5 @@ $('#sidebar-semestres').addClass('active');
 }else{
   $('#sidebar-home').addClass('active');
 }
+
+$('.dropdown-toggle').dropdown();
