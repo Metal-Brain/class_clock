@@ -51,11 +51,6 @@
 			});
 		</script>
 		<script type="text/javascript">
-<<<<<<< HEAD
-
-				$('.data').datepicker({ dateFormat: "dd/mm/yy" }).val();
-
-=======
 			jQuery(function($){
 				$.datepicker.regional['pt-BR'] = {
 					closeText: 'Fechar',
@@ -78,8 +73,7 @@
 				$.datepicker.setDefaults($.datepicker.regional['pt-BR']);
 			});
 			$('.data').datepicker().val();
-		
->>>>>>> 577ff9ba6e5e512a01c68a60d31462021051b296
+
 		</script>
 	</body>
 </html>

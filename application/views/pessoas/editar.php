@@ -54,19 +54,19 @@
 		<div class="conteudo-docente" style="display: none;">
 			<label>Data de nascimento:</label>
 			<div class="form-group width-180">
-				<input id="nascimento_editar" name="nascimento" class="form-control" type="date" value="<?= @$pessoa->docente->nascimento ?>">
+				<input id="nascimento_editar" name="nascimento" class="form-control data" value="<?= @$pessoa->docente->nascimento ?>">
 				<?= form_error('nascimento') ?>
 			</div>
 
 			<label>Data de ingresso no câmpus:</label>
 			<div class="form-group width-180">
-				<input id="ingresso_campus_editar" name="ingresso_campus" class="form-control" type="date" value="<?= @$pessoa->docente->ingresso_campus ?>">
+				<input id="ingresso_campus_editar" name="ingresso_campus" class="form-control data" value="<?= @$pessoa->docente->ingresso_campus ?>">
 				<?= form_error('ingresso_campus') ?>
 			</div>
 
 			<label>Data de ingresso no câmpus:</label>
 			<div class="form-group width-180">
-				<input id="ingresso_ifsp_editar" name="ingresso_ifsp" class="form-control" type="date" value="<?= @$pessoa->docente->ingresso_ifsp ?>">
+				<input id="ingresso_ifsp_editar" name="ingresso_ifsp" class="form-control data" value="<?= @$pessoa->docente->ingresso_ifsp ?>">
 				<?= form_error('ingresso_ifsp') ?>
 			</div>
 

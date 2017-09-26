@@ -21,15 +21,15 @@ class Docente_model extends Model {
     }
 
     public function getNascimentoAttribute() {
-        return sqlToBr($this->nascimento);
+        return sqlToBr($this->attributes['nascimento']);
     }
 
     public function getIngressoCampusAttribute(){
-        return sqlToBr($this->ingresso_campus);
+        return sqlToBr($this->attributes['ingresso_campus']);
     }
 
     public function getIngressoIfspAttribute(){
-        return sqlToBr($this->ingresso_ifsp);
+        return sqlToBr($this->attributes['ingresso_ifsp']);
     }
 
     public function pessoa() {
