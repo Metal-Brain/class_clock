@@ -17,5 +17,5 @@ $hook['post_controller_constructor'] = [
   'function'  => 'checkAuth',
   'filename'  => 'adminAuth.php',
   'filepath'  => 'hooks',
-  'params'    => ['Login']
+  'params'    => ['Login', 'authError']
 ];
