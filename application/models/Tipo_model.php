@@ -7,6 +7,6 @@ class Tipo_model extends Eloquent {
     public $timestamps = false;
 
     public function docente(){
-        return $this->belongsToMany(Docente_model:class, 'tipo_pessoa', 'tipo_id', 'pessoa_id');
+        return $this->belongsToMany(Docente_model::class, 'tipo_pessoa', 'tipo_id', 'pessoa_id');
     }
 }
