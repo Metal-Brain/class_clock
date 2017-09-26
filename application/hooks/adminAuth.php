@@ -5,7 +5,7 @@
    */
   class adminAuth {
 
-    public function checkAuth() {
+    public function checkAuth($param) {
       $ci =& get_instance();
       $ci->load->library('my_auth',[
         'allowedControllers'=>[
@@ -15,7 +15,8 @@
         'allowedMethods'    => [
           'index',
           'cadastrar'
-        ]
+        ],
+        'ignore' => $param
       ]);
       $ci->my_auth->hasAccess();
     }
