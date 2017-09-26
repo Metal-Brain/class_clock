@@ -130,7 +130,7 @@
 														foreach($coordenadores as $coordenador){
 															if($coordenador['id'] == $data['curso']->coordenador['id']){
 																echo '<option value="'. $coordenador['id'] .'"  selected>'. $coordenador['nome'] .'</option>';}
-															}else{
+															else{
 																echo '<option value="'. $coordenador['id'] .'">'. $coordenador['nome'] .'</option>';}
 															}	
 													?>
