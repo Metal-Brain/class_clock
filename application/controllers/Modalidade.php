@@ -33,17 +33,16 @@ class Modalidade extends CI_Controller {
                                           'nome',
                                           array('required','max_length[50]',
                                             'trim',
-                                            'regex_match[/^\D+$/]',
+                                            'regex_match[/^\D+$/]')
                                             /*'alpha_numeric_spaces',*/
-                                            'is_unique[modalidade.nome_modalidade]'),
-                                          array('is_unique' => 'Nome já existente.')
+                                                                                    
                                          );
         $this->form_validation->set_rules('codigo',
                                           'codigo',
                                            array('required',
                                                  'integer',
                                                  'greater_than[0]',
-                                                 'max_length[4]',
+                                                 'max_length[5]',
                                                  'is_unique[modalidade.codigo]'
                                                  ),
                                            array('is_unique' => 'Código já existente.')
@@ -93,9 +92,8 @@ class Modalidade extends CI_Controller {
                                           array('required',
                                                 'max_length[50]',
                                                 'trim',
-                                                'regex_match[/^\D+$/]',
-                                                "is_unique_except[modalidade.nome_modalidade,{$modalidade->nome_modalidade}]"
-                                                ));
+                                                'regex_match[/^\D+$/]')
+                                        );
         $this->form_validation->set_rules('codigo',
                                           'codigo',
                                           array('required',
