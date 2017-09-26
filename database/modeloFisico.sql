@@ -52,8 +52,8 @@
       `id` INT NOT NULL AUTO_INCREMENT ,
       `pessoa_id` INT NOT NULL ,
       `area_id` SMALLINT NOT NULL ,
-      `ingressoCampus` DATE NOT NULL ,
-      `ingressoIFSP` DATE NOT NULL ,
+      `ingresso_campus` DATE NOT NULL ,
+      `ingresso_ifsp` DATE NOT NULL ,
       `regime` CHAR(1) NOT NULL ,
       `deletado_em` TIMESTAMP NULL ,
       PRIMARY KEY (`id`) ,
@@ -357,16 +357,16 @@
     INSERT INTO curso(modalidade_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento)
         VALUES(5, 544, "Cura do Cancer", "CDC", 8, "B");
 
-    INSERT INTO disciplina(curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas)
-        VALUES(1, 5, "Análise de Sistemas", "ADS", 2, 4);
-    INSERT INTO disciplina(curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas)
-        VALUES(2, 4, "Matemática", "MAT", 1, 6);
-    INSERT INTO disciplina(curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas)
-        VALUES(3, 3, "Fisica Avancada", "FSA", 1, 8);
-    INSERT INTO disciplina(curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas)
-        VALUES(4, 2, "Hardware", "HDW", 2, 2);
-    INSERT INTO disciplina(curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas)
-        VALUES(5, 1, "Medicina", "MED", 2, 2);
+    INSERT INTO disciplina(curso_id, tipo_sala_id, nome_disciplina, modulo, sigla_disciplina, qtd_professor, qtd_aulas)
+        VALUES(1, 5, "Análise de Sistemas", 1, "ADS", 2, 4);
+    INSERT INTO disciplina(curso_id, tipo_sala_id, nome_disciplina, modulo, sigla_disciplina, qtd_professor, qtd_aulas)
+        VALUES(2, 4, "Matemática", 1, "MAT", 1, 6);
+    INSERT INTO disciplina(curso_id, tipo_sala_id, nome_disciplina, modulo, sigla_disciplina, qtd_professor, qtd_aulas)
+        VALUES(3, 3, "Fisica Avancada", 1, "FSA", 1, 8);
+    INSERT INTO disciplina(curso_id, tipo_sala_id, nome_disciplina, modulo, sigla_disciplina, qtd_professor, qtd_aulas)
+        VALUES(4, 2, "Hardware", 1, "HDW", 2, 2);
+    INSERT INTO disciplina(curso_id, tipo_sala_id, nome_disciplina, modulo, sigla_disciplina, qtd_professor, qtd_aulas)
+        VALUES(5, 1, "Medicina", 1, "MED", 2, 2);
 
     INSERT INTO turno(nome_turno) VALUES("Matutino");
     INSERT INTO turno(nome_turno) VALUES("Vespertino");
