@@ -23,9 +23,12 @@
 
         try {
           $prontuario = $this->input->post('prontuario');
-          $senha = hash('sha256',$this->input->post('senha'));
+          $senha = $this->input->post('senha');
 
-          $usuario = Pessoa_model::where('prontuario',$prontuario)->where('senha',$senha)->firstOrFail();
+          $usuario = Pessoa_model::where('prontuario',$prontuario)->firstOrFail();
+
+          // Verifica a senha do usuário
+          if ( !password_verify($senha, $usuario->senha) ) throw new Exception('Dados de login incorretos');
 
           $dados =  [
             'id' => $usuario->id,
