@@ -35,7 +35,7 @@ class Modalidade extends CI_Controller {
                                             'trim',
                                             'regex_match[/^\D+$/]')
                                             /*'alpha_numeric_spaces',*/
-                                                                                    
+
                                          );
         $this->form_validation->set_rules('codigo',
                                           'codigo',
@@ -67,8 +67,6 @@ class Modalidade extends CI_Controller {
             $this->cadastrar();
         }
     }
-    redirect("Grau");
-  }
 
     /**
     * Formulário de Edição
@@ -142,11 +140,11 @@ class Modalidade extends CI_Controller {
         redirect('Modalidade');
     }
 
-      /**
-        * Ativa o Grau
-        * @author Thalita Barbosa
-        * @since 2017/09/12
-        * @param ID do grau
+    /**
+    * Ativa o Modalidade
+    * @author Thalita Barbosa
+    * @since 2017/09/12
+    * @param ID do modalidade
    */
     function ativar ($id) {
         try {

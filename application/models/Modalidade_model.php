@@ -3,19 +3,21 @@
 
 
   /**
-   *  Essa classe é um modelo que representa a relação Grau no banco de dados
+   *  Essa classe é um modelo que representa a relação Modalidade no banco de dados
    *  @author Caio de Freitas e Lucas Leonel
    *  @since 2017/03/24
    */
-  class Grau_model extends Model {
+  class Modalidade_model extends Model {
 
-    protected $table = 'grau';
+    protected $table = 'modalidade';
     public $timestamps = false;
-    protected $fillable = ['nome_grau', 'codigo'];
+    protected $fillable = ['nome_modalidade', 'codigo'];
 
     public function curso(){
       return $this->hasMany(Curso_model::class);
     }
 
   }
+
+
 ?>
