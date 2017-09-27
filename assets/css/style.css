@@ -115,7 +115,7 @@ header a:hover {
 }
 
 .error {
-	color: #FF0000;
+    color: #FF0000;
 }
 
 /* Bootstrap Override */
@@ -142,8 +142,16 @@ header a:hover {
 }
 
 h2 {
-	padding: 0px!important;
-	margin: 0px!important;
+    padding: 0px!important;
+    margin: 0px!important;
+}
+
+.bold{
+    font-weight: bold;
+}
+
+.bold{
+    font-weight: bold;
 }
 
 .page-header{

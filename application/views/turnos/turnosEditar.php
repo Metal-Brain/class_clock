@@ -13,8 +13,6 @@
 
 		</div>
 
-		<?= form_error('horario[]') ?>
-
 		<div class="row">
 			<div class="col-md-12 form-group">
 				<a class="btn btn-danger active" href="<?= base_url('index.php/Turno')?>" style="float: right;"><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
