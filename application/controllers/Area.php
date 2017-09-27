@@ -109,7 +109,7 @@ class Area extends CI_Controller {
         $this->session->set_flashdata('success','Área cadastrada com sucesso');
 
        catch (Exception $e) {
-        $this->session->set_flashdata('danger','Problemas ao cadastrar a área, tente novamente!');
+        $this->session->set_flashdata('danger','Problemas ao atualizar a área, tente novamente!');
       }
 
       redirect("area");
