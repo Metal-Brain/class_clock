@@ -214,7 +214,7 @@
     -- -----------------------------------------------------
     CREATE  TABLE IF NOT EXISTS `horario`.`periodo` (
       `id` INT NOT NULL AUTO_INCREMENT ,
-      `nome` VARCHAR(45) NOT NULL ,
+      `nome` CHAR(6) NOT NULL ,
       PRIMARY KEY (`id`) ,
       UNIQUE INDEX `nome_UNIQUE` (`nome` ASC) )
     ENGINE = InnoDB;

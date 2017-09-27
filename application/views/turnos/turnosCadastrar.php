@@ -1,5 +1,5 @@
 <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
-	<form id="formTurnos" action="<?= site_url('turno/salvar')?>" method="post">
+	<form id="formTurnos" action="<?= site_url('Turno/salvar')?>" method="post">
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-5 form-group">
 				<label>Nome:</label>

@@ -58,7 +58,7 @@ class Turno extends CI_Controller {
         $this->session->set_flashdata('danger','Problemas ao cadastrar o turno, tente novamente!');
       }
 
-      redirect("turno");
+      redirect("Turno");
     } else {
       $this->cadastrar();
     }
@@ -155,7 +155,7 @@ class Turno extends CI_Controller {
       $this->session->set_flashdata('danger','Erro ao ativar o turno. Tente novamente!');
     }
 
-    redirect("turno");
+    redirect("Turno");
 
   }
 
