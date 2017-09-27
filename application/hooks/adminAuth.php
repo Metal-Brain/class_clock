@@ -11,7 +11,9 @@
       [
         'allowedControllersAndMethods' =>
         [
-          'Turno' => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar']
+          'Turno'       => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
+          'Tipo_Sala'   => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
+          'modalidade'  => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar']
         ],
           'ignore' => $param
       ]);
