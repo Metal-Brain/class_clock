@@ -11,14 +11,15 @@
             <div class="col-md-12">
                 <h4><strong>Selecione o método desejado:</strong></h4>
             </div>
-            <ul class="nav nav-pills">
-                <li><a data-toggle="pill" href="#disciplinas">Disciplinas</a></li>
-            </ul>
 
-            <div id="disciplinas" class="tab-pane fade">
-                <h3>Disciplina</h3>
-            </div>
-            <!-- TODO fazer as modificações>
+              <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="width:171px; height:40px;">Selecionar
+                <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Disponibilidade</a></li>
+                    <li><a href="#">Indisponibilidade</a></li>
+                </ul>
+              </div>
           </div>
         </div>
       </div>
