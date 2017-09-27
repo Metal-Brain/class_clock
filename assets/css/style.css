@@ -12,6 +12,16 @@ html {
     background-color: #EAEAEA;
     padding-top: 10px;
 }
+#footer1 {
+    
+position: sticky;
+    left: 0;
+    bottom: 0;
+    height: auto;
+    width: 100%;
+    background-color: #EAEAEA;
+    padding-top: 10px;      
+}
 
 body {
     font-family: 'Roboto Mono', monospace;

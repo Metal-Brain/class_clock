@@ -112,19 +112,20 @@
 						</div>
 
 						<!-- img logo -->
-						<div style="border-bottom: 1px #606060 solid;">
-							  <img src="<?= base_url('assets/img/ifsp.jpg')?>"  class="logo" style="margin: 20px auto 40px; display: block; width:500px;"/>
+						<div>
+							  <img src="<?= base_url('assets/img/ifsp.jpg')?>"  class="logo img-responsive" style="margin: 20px auto 40px; display: block; width:500px;"/>
 						</div>
 						<!-- Fim logo -->
 					</div>
 				</div>
 			</div>
 
-			<div class="row">
-				<div id="footer" class="col" style="text-align:center">
-					<p>Desenvolvido por Metal Code</p>
+			<!--<div id="footer1" class="text-center">
+				<div class="col-md-12">
+				<p><strong>Desenvolvido por Metal Code</strong></p>
 				</div>
-			</div><!--Fecha row-->
+			</div> -->
+
 
 		</div><!--Fecha container-fluid-->
 
