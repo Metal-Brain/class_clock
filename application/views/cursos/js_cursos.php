@@ -1,20 +1,13 @@
 <script type="text/javascript">
-//Comentado porque quando funcionando nao permite que o arquivo js_cursos seja importado no navegador
-// jQuery.validator.addMethod("verifica-coordenador", function(value){
-//
-// 	var coordenadores = [];
-// 	foreach($coordenadores as $coordenador){
-// 		coordenadores.push(coordenador.id);
-// 	}
-//   //  var states = ['PA', "CA"] // of course you will need to add more
-//     var in_array = coordenadores;
-//     if (in_array == -1) {
-//         return false;
-//     }else{
-//         return true;
-//     }
-// }, "Campo Obrigatorio");
-
+jQuery.validator.addMethod("verifica-coordenador", function(value) {
+    var coordenadores = ["teste","teste2","teste3"] // of course you will need to add more
+    var in_array = $.inArray(value.toLowerCase(), coordenadores);
+    if (in_array == -1) {
+        return false;
+    }else{
+        return true;
+    }
+}, "Entre com um coordenador valido");
 	$(document).ready(function () {
 
 		$('#formCurso').validate({
@@ -57,7 +50,7 @@
 					modalidade_id:
                         {required: 'Campo obrigatório'},
 					verifica_coordenador:
-                        {required: 'Campo obrigatório'}
+                        {required: 'Entre com um coordenador valido'}
 				}
 			});
 
