@@ -15,6 +15,26 @@
 					}
 				}
 			});
+
+			function confirm(id, msg, funcao) {
+				bootbox.confirm({
+					message: msg,
+					buttons: {
+						confirm: {
+							label: 'Sim',
+							className: 'btn-success'
+						},
+						cancel: {
+							label: 'Não',
+							className: 'btn-danger'
+						}
+					},
+					callback: function (result) {
+						if (result == true)
+							window.location.href = '<?= site_url("periodo/") ?>' + funcao + '/' + id;
+					}
+				});
+			}
 		</script>
 
 		<script type="text/javascript">

@@ -18,7 +18,7 @@ class Periodo extends CI_Controller
 
     function cadastrar()
     {
-        $this->load->template('periodos/periodosCadastrar',[],'periodos/js_periodos');
+        $this->load->template('periodos/cadastrar',[],'periodos/js_periodos');
     }
 
     /**
@@ -28,7 +28,7 @@ class Periodo extends CI_Controller
      */
     public function salvar()
     {
-        $this->form_validation->set_rules('nome','nome',array('required','max_length[25]','is_unique[periodo.nome]','trim','strtolower'));
+        $this->form_validation->set_rules('nome','nome',array('required','max_length[6]','is_unique[periodo.nome]','trim','strtolower'));
         $this->form_validation->set_message('is_unique','O nome do período informado já está cadastrado');
         $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
         if ($this->form_validation->run())
@@ -63,7 +63,7 @@ class Periodo extends CI_Controller
     function editar($id)
     {
         $periodo = Periodo_model::withTrashed()->findOrFail($id);
-        $this->load->template('periodos/periodosEditar',compact('periodo','id'),'periodos/js_periodos');
+        $this->load->template('periodos/editar',compact('periodo','id'),'periodos/js_periodos');
     }
 
     /**
@@ -76,11 +76,11 @@ class Periodo extends CI_Controller
         $periodo = Periodo_model::withTrashed()->findOrFail($id);
         if(ucwords($periodo->nome) != $this->input->post('nome'))
         {
-            $this->form_validation->set_rules('nome','nome',array('required','max_length[45]','is_unique[periodo.nome]','trim','strtolower'));
+            $this->form_validation->set_rules('nome','nome',array('required','max_length[6]','is_unique[periodo.nome]','trim','strtolower'));
         }
         else
         {
-            $this->form_validation->set_rules('nome','nome',array('required','max_length[45]','trim','strtolower'));
+            $this->form_validation->set_rules('nome','nome',array('required','max_length[6]','trim','strtolower'));
         }
         $this->form_validation->set_message('is_unique','O nome do período informado já está cadastrado');
         $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
@@ -88,7 +88,7 @@ class Periodo extends CI_Controller
         {
             try
             {
-                $periodo->nome_turno = $this->input->post('nome');
+                $periodo->nome = $this->input->post('nome');
                 $periodo->save();
                 $this->session->set_flashdata('success','Período atualizado com sucesso');
             }
@@ -119,7 +119,7 @@ class Periodo extends CI_Controller
         }
         catch (Exception $e)
         {
-            $this->session->set_flashdata('danger','Erro ao desativar um período, tente novamente');
+            $this->session->set_flashdata('danger','Erro ao desativar um período, tente novamente!');
         }
         redirect("Periodo");
     }

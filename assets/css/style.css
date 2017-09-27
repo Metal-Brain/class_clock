@@ -118,6 +118,10 @@ header a:hover {
 	color: #FF0000;
 }
 
+.width-400{
+    max-width: 400px;
+}
+
 /* Bootstrap Override */
 
 .nav-pills>li.active>a,
