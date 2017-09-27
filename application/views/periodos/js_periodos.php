@@ -6,7 +6,7 @@
 					nome: {
 						required: true,
 						minlength: 5,
-						maxlength: 150
+						maxlength: 6
 					}
 				},
 				nome: {
@@ -35,7 +35,27 @@
 					}
 				});
 			}
-		</script>
+
+            function somenteNumeros(num)
+            {
+                var er = /[^0-9.-]/;
+                var per = num.value;
+                er.lastIndex = 0;
+                var campo = num;
+                if (er.test(campo.value))
+                {
+                    campo.value = "";
+                }
+                else
+                {
+                    if(per.length ==4)
+                    {
+                        num.value = per += "-";
+                    }
+                }
+            }
+
+        </script>
 
 		<script type="text/javascript">
 			$(document).ready(function(){

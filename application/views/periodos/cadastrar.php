@@ -18,7 +18,7 @@
 	<form class="formPeriodos" action="<?= site_url('periodo/salvar')?>" method="post">
 		<label>Nome:</label>
 		<div class="form-group width-400">
-			<input id="nome" name="nome" class="form-control" type="text" placeholder="Nome" value="<?= set_value('nome')?>" maxlength="6">
+			<input id="nome" name="nome" class="form-control" type="text" placeholder="Nome" onkeyup="somenteNumeros(this);"  value="<?= set_value('nome')?>" maxlength="6">
 			<span class="text-danger">
 				<?= form_error('nome') ?>
 			</span>

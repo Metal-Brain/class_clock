@@ -18,7 +18,7 @@
 	<form class="formPeriodos" method="post" action="<?= site_url('periodo/atualizar/'.$periodo->id)?>">
 		<div class="form-group width-400">
 			<label>Nome:</label>
-			<input id="nome_editar" name="nome" class="form-control" type="text" placeholder="Nome" value="<?= htmlspecialchars($periodo->nome) ?>">
+			<input id="nome_editar" name="nome" class="form-control" type="text" placeholder="Nome" onkeyup="somenteNumeros(this);" value="<?= htmlspecialchars($periodo->nome) ?>">
 			<?= form_error('nome') ?>
 		</div>
 
