@@ -1,48 +1,32 @@
-<?php
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-/**
- *
- */
-class Turma extends CI_Controller {
+class Turma extends MY_Controller {
 
-  /**
-   * Exibe todos os Turmas cadastrados no banco de dados.
-   * @author Caio de Freitas
-   * @since 2017/08/26
-   */
-  function index () {
-    //$this->load->helper('date');
-    //$Turmas = Turma_model::withTrashed()->get();
-    $turmas = Turma_model::all();
-    $this->load->template('turmas/turmas',compact('turmas'),'turmas/js_turmas');
-  }
+    function index () {
+      $turmas = Turma_model::all();
+
+      $this->load->template('turmas/turmas',compact('turmas'),'turmas/js_turmas');
+    }
 
   function cadastrar () {
-    $disciplinas = [
-      ['id' => 1, 'nome_disciplina' => 'disciplina 01'],
-      ['id' => 2, 'nome_disciplina' => 'disciplina 02']
-    ];
-
     $disciplinas = Disciplina_model::all();
     $turnos = Turno_model::all();
 
     $this->load->template('Turmas/turmasCadastrar', compact('disciplinas', 'turnos'), 'Turmas/js_Turmas');
   }
 
-  /**
-   * Salva um novo usuário no banco de dados.
-   * @author Caio de Freitas
-   * @since 2017/08/23
-   */
+  // TODO FIXME
   public function salvar () {
+    $this->set_validations([
+      ['dp', 'Dependência', 'required'],
+      ['qtd_alunos', 'Quantidade de Alunos', 'required|numeric'],
+      ['disciplina_id', 'Disciplina', 'required|exists[disciplina,id]'],
+      ['turno_id', 'Turno', 'required|exists[turno,id]'],
+      ['periodo_id', 'Período', 'required|exists[periodo,id]'],
+    ]);
 
-    $this->form_validation->set_rules('nome_Turma','nome',array('required','max_length[25]','is_unique[Turma.nome_Turma]','trim','strtolower'));
-    $this->form_validation->set_rules('horario[]','horario',array('callback_horarioRequired','callback_timeValidate','callback_horarioAula'));
 
-    $this->form_validation->set_message('is_unique','O nome do Turma informado já está cadastrado');
-    $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
-
-    if ($this->form_validation->run()) {
+    if ($this->run_validation()) {
       try {
         DB::transaction(function () {
           $Turma = new Turma_model();
@@ -74,21 +58,15 @@ class Turma extends CI_Controller {
 
   }
 
-  /**
-   * Formulário para alterar os dados do Turma
-   * @author Caio de Freitas
-   * @since 2017/08/26
-   */
   function editar ($id) {
-      $Turma = Turma_model::withTrashed()->findOrFail($id);
-      $this->load->template('Turmas/TurmasEditar',compact('Turma','id'),'Turmas/js_Turmas');
+    $turma = Turma_model::withTrashed()->findOrFail($id);
+    $disciplinas = Disciplina_model::all();
+    $turnos = Turno_model::all();
+
+    $this->load->template('Turmas/TurmasEditar', compact('turma', 'disciplinas', 'turnos'), 'Turmas/js_Turmas');
   }
 
-  /**
-   * Edita os dados do Turma no banco de dados.
-   * @author Caio de Freitas
-   * @since 2017/08/26
-   */
+  // TODO FIXME
   public function atualizar ($id) {
     $Turma = Turma_model::withTrashed()->findOrFail($id);
 
@@ -129,11 +107,6 @@ class Turma extends CI_Controller {
 
   }
 
-  /**
-   * Desativa um Turma cadastrado no banco de dados.
-   * @author Caio de Freitas
-   * @param ID do Turma
-   */
   function deletar ($id) {
     try {
       $Turma = Turma_model::findOrFail($id);
@@ -144,27 +117,20 @@ class Turma extends CI_Controller {
       $this->session->set_flashdata('danger','Erro ao deletar um Turma, tente novamente');
     }
 
-    redirect("Turma");
-
+    redirect("turma");
   }
 
-  /**
-   * Ativa o Turma
-   * @author Caio de Freitas
-   * @since 2017/08/31
-   * @param ID do Turma
-   */
   function ativar ($id) {
-    try {
+    try{
       $Turma = Turma_model::withTrashed()->findOrFail($id);
       $Turma->restore();
+
       $this->session->set_flashdata('success','Turma ativado com sucesso');
     } catch (Exception $e) {
       $this->session->set_flashdata('danger','Erro ao ativar o Turma. Tente novamente!');
     }
 
-    redirect("Turma");
-
+    redirect("turma");
   }
 
   /**
@@ -247,6 +213,3 @@ class Turma extends CI_Controller {
     return $result;
   }
 }
-
-
-?>
