@@ -21,13 +21,18 @@
 
       if ( !in_array($class,$this->ignore) ) {
 
-        if (!$this->hasSession()) redirect('/');
-
-        if (!key_exists($class,$this->allowedControllersAndMethods)){
-          if(!in_array($method, $this->allowedControllersAndMethods[$class])){
-            redirect('authError');
-          }
+        if (!$this->hasSession()){
+          $message = "Necessário estar logado para acessar " . $class;
+          $this->CI->session->set_flashdata('danger', $message);
+          redirect('/');
         }
+
+        if (!key_exists($class,$this->allowedControllersAndMethods))
+          redirect('authError');
+        
+        if(!in_array($method, $this->allowedControllersAndMethods[$class]))
+            redirect('authError');
+        
       }
 
     }
