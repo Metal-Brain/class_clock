@@ -1,17 +1,3 @@
-<script type="text/javascript">
-        $(document).ready(function () {
-            $('#disciplinaTable').DataTable();
-        });
-
-        document.getElementById("sigla_curso").onkeypress = function(e) {
-         var chr = /^[a-zA-Z0-9 ]$/;
-         var patt = new RegExp(chr);
-         var res = patt.test(String.fromCharCode(e.which));
-         return res;
-        };
-
-</script>
-
 <script>
     $(document).ready(function(){
 

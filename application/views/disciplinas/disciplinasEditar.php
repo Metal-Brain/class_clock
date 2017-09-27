@@ -13,7 +13,7 @@
      <?php endif; ?>
    </div>
    </div>
-   
+
 
             <form id="formDisciplina" class="form-Control"  method="post" action="<?= site_url('Disciplina/atualizar/'.$id)?>">
             		<h1>Editar Disciplina</h1>
@@ -25,7 +25,7 @@
 
 					<div class="form-group">
 						<label>Sigla</label>
-						<input type="text" class="form-control" name="sigla_disciplina" id="sigla_curso" placeholder="ex: LOPA1" style="max-width:300px;" value="<?= $data['disciplina']['sigla_disciplina'] ?>">
+						<input type="text" class="form-control" name="sigla_disciplina" id="sigla_curso" placeholder="ex: LOPA1" style="max-width:300px;" onKeyPress="var key = event.keyCode || event.charCode; if((this.value.length==5) && !(key == 8)) return false;" value="<?= $data['disciplina']['sigla_disciplina'] ?>">
 					</div>
 
 					<div class="form-group test">

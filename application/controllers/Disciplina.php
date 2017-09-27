@@ -95,7 +95,7 @@
                     $this->session->set_flashdata('success','Disciplina atualizada com sucesso');
                     redirect("disciplina");
                   }else{
-                    $this->session->set_flashdata('danger','Disciplina já esta cadastrada');
+                    $this->session->set_flashdata('danger','Sigla já esta cadastrada');
                     redirect('disciplina/editar/'.$id);
                   }
                 } catch (Exception $ignored){}
