@@ -42,5 +42,10 @@
 			   <span class="glyphicon glyphicon-duplicate"></span> <span class="sidebar-label">FPA</span>
 		   </a>
 	   </li>
+     <li id="sidebar-modalidade">
+      <a href="http://localhost/class_clock/index.php/Modalidade">
+        <span class="glyphicon glyphicon-list-alt"></span> <span class="sidebar-label">Modalidade</span>
+      </a>
+    </li>
    </ul>
 </div>

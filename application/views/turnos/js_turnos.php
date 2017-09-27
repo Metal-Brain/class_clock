@@ -22,7 +22,7 @@
 		}
 
 		$(document).ready(function () {
-			
+
 			$('#TurnoTable').dataTable( {
 				"language": {
 					"url": "<?= base_url('assets/DataTables/translatePortuguese.js');?>"
