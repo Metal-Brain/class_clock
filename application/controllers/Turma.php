@@ -13,11 +13,20 @@ class Turma extends CI_Controller {
   function index () {
     //$this->load->helper('date');
     //$Turmas = Turma_model::withTrashed()->get();
+    $turmas = Turma_model::all();
     $this->load->template('turmas/turmas',compact('turmas'),'turmas/js_turmas');
   }
 
   function cadastrar () {
-    $this->load->template('Turmas/TurmasCadastrar',[],'Turmas/js_Turmas');
+    $disciplinas = [
+      ['id' => 1, 'nome_disciplina' => 'disciplina 01'],
+      ['id' => 2, 'nome_disciplina' => 'disciplina 02']
+    ];
+
+    $disciplinas = Disciplina_model::all();
+    $turnos = Turno_model::all();
+
+    $this->load->template('Turmas/turmasCadastrar', compact('disciplinas', 'turnos'), 'Turmas/js_Turmas');
   }
 
   /**

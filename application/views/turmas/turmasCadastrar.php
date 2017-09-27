@@ -19,7 +19,7 @@
 							<h1>Cadastrar Turma</h1>
 				<div class="form-group">
 					<label>Periodo</label>
-					<input type="text" class="form-control" id="nome_curso" name="periodo_id" placeholder="Periodo" style="max-width:400px;" >
+					<input type="text" class="form-control" id="nome_curso" name="periodo_id" readonly="true" placeholder="Periodo" style="max-width:400px;" >
 				</div>
 
 				<div class="form-group">
@@ -33,9 +33,9 @@
 					<select name="disciplina_id" id="disciplina_id" class="form-control" style="max-width:400px;">
 
 							<option value="" disabled selected>Selecione</option>
-													<?php foreach($data['disciplina'] as $disciplina){ ?>
+							<?php foreach($disciplinas as $disciplina): ?>
 							<option value="<?=$disciplina['id'] ?>"><?=$disciplina['nome_disciplina'] ?></option>
-						<?php }?>
+						<?php endforeach ?>
 					</select>
 				</div>
 
@@ -44,7 +44,7 @@
 					<select name="turno_id" id="turno_id" class="form-control" style="max-width:400px;">
 
 							<option value="" disabled selected>Selecione</option>
-							<?php foreach($data['turno'] as $turno){ ?>
+							<?php foreach($turnos as $turno){ ?>
 							<option value="<?=$turno['id'] ?>"><?=$turno['nome_turno'] ?></option>
 							<?php }?>
 					</select>
