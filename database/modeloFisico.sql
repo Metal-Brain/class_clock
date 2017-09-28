@@ -215,10 +215,11 @@
     CREATE  TABLE IF NOT EXISTS `horario`.`periodo` (
       `id` INT NOT NULL AUTO_INCREMENT ,
       `nome` CHAR(6) NOT NULL ,
+      `ativo` CHAR(1) NOT NULL ,
+      `deletado_em` TIMESTAMP NULL ,
       PRIMARY KEY (`id`) ,
       UNIQUE INDEX `nome_UNIQUE` (`nome` ASC) )
     ENGINE = InnoDB;
-
 
     -- -----------------------------------------------------
     -- Table `horario`.`fpa`
