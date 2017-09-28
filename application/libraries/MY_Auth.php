@@ -16,8 +16,8 @@
 
     public function hasAccess () {
 
-      $class = $this->CI->router->class;
-      $method = $this->CI->router->method;
+      $class = strtolower($this->CI->router->class);
+      $method = strtolower($this->CI->router->method);
 
       if ( !in_array($class,$this->ignore) ) {
 
@@ -29,10 +29,10 @@
 
         if (!key_exists($class,$this->allowedControllersAndMethods))
           redirect('authError');
-        
+
         if(!in_array($method, $this->allowedControllersAndMethods[$class]))
             redirect('authError');
-        
+
       }
 
     }
