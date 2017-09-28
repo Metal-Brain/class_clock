@@ -30,11 +30,13 @@ class Pessoa extends MY_Controller {
 
     $this->set_validations([
       ['nome', 'nome', 'required|min_length[5]'],
-      ['prontuario', 'prontuário', 'required|is_unique[pessoa.prontuario]|exact_length[6]'],
+      ['prontuario', 'prontuário', 'required|alpha_numeric|is_unique[pessoa.prontuario]|exact_length[6]'],
       ['senha', 'senha', 'required|min_length[6]'],
-      ['email', 'email', 'required|valid_email|strtolower'],
+      ['email', 'email', 'required|valid_email|strtolower|regex_match[/^[a-zA-Z0-9._@-]+$/]'],
       ['tipos[]', 'tipos', 'required']
     ]);
+    $this->form_validation->set_message('is_unique', '{field} já cadastrado');
+    $this->form_validation->set_message('alpha_numeric', '{field} é composto por apenas por números e letras');
 
     if($has_docente) {
       $this->set_validations([
@@ -96,11 +98,13 @@ class Pessoa extends MY_Controller {
 
     $this->set_validations([
       ['nome', 'nome', 'required|min_length[5]'],
-      ['prontuario', 'prontuário', "required|exact_length[6]|is_unique_except[pessoa.prontuario,{$pessoa->prontuario}]"],
+      ['prontuario', 'prontuário', "required|alpha_numeric|exact_length[6]|is_unique_except[pessoa.prontuario,{$pessoa->prontuario}]"],
       ['senha', 'senha', 'min_length[6]'],
-      ['email', 'email', 'required|valid_email|strtolower'],
+      ['email', 'email', 'required|valid_email|strtolower|regex_match[/^[a-zA-Z0-9._@-]+$/]'],
       ['tipos[]', 'tipos', 'required']
     ]);
+    $this->form_validation->set_message('is_unique_except', '{field} já cadastrado');
+    $this->form_validation->set_message('alpha_numeric', '{field} é composto por apenas por números e letras');
 
     if($has_docente) {
       $this->set_validations([
