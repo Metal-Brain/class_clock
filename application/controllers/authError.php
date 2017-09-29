@@ -8,7 +8,7 @@ class authError extends CI_Controller
 
   function index()
   {
-    echo 'Você não tem permissão';
+    $this->load->view('authError/authError', compact('authError'));
   }
 }
 
