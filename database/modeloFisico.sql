@@ -31,45 +31,50 @@
 
 
     -- -----------------------------------------------------
-    -- Table `horario`.`pessoa`
-    -- -----------------------------------------------------
-    CREATE  TABLE IF NOT EXISTS `horario`.`pessoa` (
-      `id` INT NOT NULL AUTO_INCREMENT ,
-      `nome` VARCHAR(150) NOT NULL ,
-      `prontuario` CHAR(6) NOT NULL ,
-      `senha` CHAR(64) NOT NULL ,
-      `nascimento` DATE NOT NULL ,
-      `email` VARCHAR(100) NOT NULL ,
-      `deletado_em` TIMESTAMP NULL ,
-      PRIMARY KEY (`id`) )
-    ENGINE = InnoDB;
+-- Table `horario`.`pessoa`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `horario`.`pessoa` ;
+
+CREATE TABLE IF NOT EXISTS `horario`.`pessoa` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(150) NOT NULL,
+  `prontuario` CHAR(6) NOT NULL,
+  `senha` CHAR(64) NOT NULL,
+  `email` VARCHAR(100) NOT NULL,
+  `deletado_em` TIMESTAMP NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
 
 
-    -- -----------------------------------------------------
-    -- Table `horario`.`docente`
-    -- -----------------------------------------------------
-    CREATE  TABLE IF NOT EXISTS `horario`.`docente` (
-      `id` INT NOT NULL AUTO_INCREMENT ,
-      `pessoa_id` INT NOT NULL ,
-      `area_id` SMALLINT NOT NULL ,
-      `ingresso_campus` DATE NOT NULL ,
-      `ingresso_ifsp` DATE NOT NULL ,
-      `regime` CHAR(1) NOT NULL ,
-      `deletado_em` TIMESTAMP NULL ,
-      PRIMARY KEY (`id`) ,
-      INDEX `fk_docente_area1_idx` (`area_id` ASC) ,
-      INDEX `fk_docente_pessoa1_idx` (`pessoa_id` ASC) ,
-      CONSTRAINT `fk_docente_area1`
-        FOREIGN KEY (`area_id` )
-        REFERENCES `horario`.`area` (`id` )
-        ON DELETE NO ACTION
-        ON UPDATE NO ACTION,
-      CONSTRAINT `fk_docente_pessoa1`
-        FOREIGN KEY (`pessoa_id` )
-        REFERENCES `horario`.`pessoa` (`id` )
-        ON DELETE NO ACTION
-        ON UPDATE NO ACTION)
-    ENGINE = InnoDB;
+-- -----------------------------------------------------
+-- Table `horario`.`docente`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `horario`.`docente` ;
+
+CREATE TABLE IF NOT EXISTS `horario`.`docente` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `pessoa_id` INT NOT NULL,
+  `area_id` SMALLINT NOT NULL,
+  `nascimento` DATE NOT NULL,
+  `ingresso_campus` DATE NOT NULL,
+  `ingresso_ifsp` DATE NOT NULL,
+  `regime` CHAR(1) NOT NULL,
+  `deletado_em` TIMESTAMP NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_docente_area1_idx` (`area_id` ASC),
+  INDEX `fk_docente_pessoa1_idx` (`pessoa_id` ASC),
+  CONSTRAINT `fk_docente_area1`
+    FOREIGN KEY (`area_id`)
+    REFERENCES `horario`.`area` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_docente_pessoa1`
+    FOREIGN KEY (`pessoa_id`)
+    REFERENCES `horario`.`pessoa` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
 
 
     -- -----------------------------------------------------
