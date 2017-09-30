@@ -26,7 +26,7 @@
     CREATE  TABLE IF NOT EXISTS `horario`.`area` (
       `id` SMALLINT NOT NULL AUTO_INCREMENT ,
       `nome_area` VARCHAR(50) NOT NULL ,
-      `cod` CHAR(2) NOT NULL ,
+      `codigo` CHAR(2) NOT NULL ,
       `deletado_em` TIMESTAMP NULL DEFAULT NULL ,
       PRIMARY KEY (`id`) )
     ENGINE = InnoDB;
