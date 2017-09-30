@@ -41,27 +41,23 @@ class Area extends CI_Controller {
                                      );
 
     $this->form_validation->set_message('is_unique','O nome da área informada já está cadastrada');
-    $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
+    //$this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
 
-    if ($this->form_validation->run()) {
-      try {
-       
-          $area = new Area_model();
-          $area->codigo = $this->input->post('codigo');
-          $area->nome_area = $this->input->post('nome_area');
-          $area->save();
-         
-          $this->session->set_flashdata('success','Área cadastrada com sucesso');
-        } catch (Exception $e) {
-        $this->session->set_flashdata('danger','Problemas ao cadastrar a área, tente novamente!');
-      }
-
-      redirect("area");
-    } else {
-      $this->cadastrar();
+         if($this->form_validation->run()){
+            try {
+                $area = new Area_model();
+                $area->nome_area = $this->input->post('nome_area');
+                $area->codigo = $this->input->post('codigo');
+                $area->save();
+                $this->session->set_flashdata('success','Área cadastrada com sucesso');
+            } catch (Exception $ignored){
+                $this->session->set_flashdata('danger','Problemas ao cadastrar a área, tente novamente!');
+            }
+            redirect('Area');
+        }else{
+            $this->cadastrar();
+        }
     }
-  }
-
   
 
   /**
@@ -94,25 +90,20 @@ class Area extends CI_Controller {
                                      );
 
 
-    if ($this->form_validation->run()) {
-      try {
-       
-          $area = new Area_model();
-          $area->codigo = $this->input->post('codigo');
-          $area->nome_area = $this->input->post('nome_area');
-          $area->save();
-
-           $this->session->set_flashdata('success','Área cadastrada com sucesso');
+      if($this->form_validation->run()){
+            try {
+               Area_model::where('id', $id)
+                            ->update([                                
+                                "codigo"     => $this->input->post('codigo'),
+                                "nome_area"  => $this->input->post('nome_area')
+                            ]);
+                $this->session->set_flashdata('success','Área atualizada com sucesso');
+                redirect('Area');
+            } catch (Exception $ignored){}
         }
-
-       catch (Exception $e) {
-        $this->session->set_flashdata('danger','Problemas ao atualizar a área, tente novamente!');
-      }
-
-      redirect("area");
-    } else {
-      $this->editar($id);
-  }
+        $this->session->set_flashdata('danger','Problemas ao atualizar os dados da área, tente novamente!');
+        $this->editar($id);
+    }
   }
 
   /**
