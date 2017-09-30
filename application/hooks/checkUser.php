@@ -19,7 +19,7 @@ class checkUser {
         $user = $this->CI->session->userdata('usuario_logado');
 
         if ( !in_array($this->controller, $param) ) {
-            
+
             if (!isset($user)){
                 $message = "Necessário estar logado para acessar " . $class;
                 $this->CI->session->set_flashdata('danger', $message);
@@ -42,7 +42,7 @@ class checkUser {
                     break;
             }
         }
-        
+
     }
 
     private function setAdmin(){
@@ -50,7 +50,8 @@ class checkUser {
         [
             'turno'       => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
             'tipo_sala'   => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
-            'modalidade'  => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar']
+            'modalidade'  => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
+            'curso'       => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar']
         ];
 
         $this->hasAccess($acess);
