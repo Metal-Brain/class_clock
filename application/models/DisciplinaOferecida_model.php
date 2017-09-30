@@ -10,16 +10,14 @@
         }
 
         public function periodo(){
-            return $this->belongsTo(Periodo_model:class, 'periodo_id');
+            return $this->belongsTo(Periodo_model::class, 'periodo_id');
         }
 
         public function turno(){
-            return $this->belongsTo(Turno_model:class, 'turno_id');
+            return $this->belongsTo(Turno_model::class, 'turno_id');
         }
 
         public function preferencias(){
-            return $this->belongsToMany(Fpa_model:class, 'preferencia', 'fpa_id', 'disciplinas_oferecidas_id')->withPivot('ordem');
+            return $this->belongsToMany(Fpa_model::class, 'preferencia', 'fpa_id', 'disciplinas_oferecidas_id')->withPivot('ordem');
         }
     }
-
-}
