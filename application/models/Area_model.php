@@ -6,8 +6,6 @@
         protected $fillable = ['nome'];
 
         public function docente(){
-            return $this->hasMany(Docente_model:class, 'area_id');
+            return $this->hasMany(Docente_model::class, 'area_id');
         }
-
     }
-}
