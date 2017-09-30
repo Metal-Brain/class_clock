@@ -331,6 +331,18 @@ ENGINE = InnoDB;
 
     USE `horario` ;
 
+    -- -----------------------------------------------------
+    -- Stored Procedure responsável por ativar o periodo
+    -- -----------------------------------------------------
+    DROP PROCEDURE IF EXISTS ativa_periodo;
+    DELIMITER //
+    CREATE PROCEDURE IF NOT EXISTS ativa_periodo(idPeriodo INT)
+    BEGIN
+    	UPDATE periodo SET ativo = 0 WHERE id != idPeriodo;
+    	UPDATE periodo SET ativo = 1 WHERE id = idPeriodo;
+    END//
+    DELIMITER ;
+
 
     SET SQL_MODE=@OLD_SQL_MODE;
     SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
