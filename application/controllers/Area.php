@@ -40,8 +40,9 @@ class Area extends CI_Controller {
                                             'is_unique[area.nome_area]')
                                      );
 
-    $this->form_validation->set_message('is_unique','O nome da área informada já está cadastrada');
-    //$this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
+    $this->form_validation->set_message('is_unique','O código da área informada já está cadastrado');
+    $this->form_validation->set_message('is_unique','O nome da área informada já está cadastrado');
+    $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
 
          if($this->form_validation->run()){
             try {
@@ -104,7 +105,6 @@ class Area extends CI_Controller {
         $this->session->set_flashdata('danger','Problemas ao atualizar os dados da área, tente novamente!');
         $this->editar($id);
     }
-  }
 
   /**
    * Desativa uma area cadastrada no banco de dados.
