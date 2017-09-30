@@ -25,7 +25,8 @@
     -- -----------------------------------------------------
     CREATE  TABLE IF NOT EXISTS `horario`.`area` (
       `id` SMALLINT NOT NULL AUTO_INCREMENT ,
-      `nome` VARCHAR(50) NOT NULL ,
+      `nome_area` VARCHAR(50) NOT NULL ,
+      `cod` CHAR(2) NOT NULL ,
       PRIMARY KEY (`id`) )
     ENGINE = InnoDB;
 
