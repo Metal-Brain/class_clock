@@ -18,7 +18,7 @@ jQuery.validator.addMethod("verifica-coordenador", function(value) {
 					sigla_curso: { required: true,minlength: 3,maxlength: 3},
 					qtd_semestre: { required: true, number: true, min: 1, max: 20},
 					modalidade_id: {required: true, min: 1},
-					verifica_coordenador:{required:true}
+					//verifica_coordenador:{required:true}
 				},
 				messages: {
 					codigo_curso:
@@ -49,8 +49,8 @@ jQuery.validator.addMethod("verifica-coordenador", function(value) {
 
 					modalidade_id:
                         {required: 'Campo obrigatório'},
-					verifica_coordenador:
-                        {required: 'Entre com um coordenador valido'}
+					//verifica_coordenador:
+                        //{required: 'Entre com um coordenador valido'}
 				}
 			});
 
