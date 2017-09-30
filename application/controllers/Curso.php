@@ -91,12 +91,12 @@
     }
 
     public function validar($id = null) {
-      $this->form_validation->set_rules('nome_curso','nome','required|alpha_numeric_spaces|min_length[5]|max_length[75]|trim|ucwords');
+      $this->form_validation->set_rules('nome_curso','nome','required|alpha_accent|min_length[5]|max_length[75]|trim|ucwords');
       $this->form_validation->set_rules('modalidade_id','modalidade','required|integer');
       $this->form_validation->set_rules('sigla_curso','sigla_curso','required|alpha|exact_length[3]|strtoupper');
       $this->form_validation->set_rules('codigo_curso','codigo_curso','required|integer|greater_than[0]|less_than[100000]');
       $this->form_validation->set_rules('qtd_semestre','semestres','required|integer|greater_than[0]');
-      $this->form_validation->set_rules('fechamento','fechamento','required');  
+      $this->form_validation->set_rules('fechamento','fechamento','required');
 
       $codigo = $this->input->post('codigo_curso');
       $cursos_mesmo_codigo = Curso_model::withTrashed()->where('codigo_curso',$codigo)->where('id','!=',$id)->get();
