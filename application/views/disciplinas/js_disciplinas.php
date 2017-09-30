@@ -1,6 +1,8 @@
 <script>
     $(document).ready(function(){
 
+      	$("#disciplinaTable").DataTable();
+
         $("#formDisciplina").validate({
             rules: {
                 nome_disciplina: {

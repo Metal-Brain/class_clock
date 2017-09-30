@@ -21,6 +21,10 @@ class Disciplina_model extends Model{
         return $this->belongsTo(Curso_model::class, 'curso_id');
     }
 
+    public function setNomeAttribute($nome_disciplina) {
+      $this->attributes['nome_disciplina'] = ucwords(mb_strtolower($nome_disciplina, "utf-8"));
+    }
+
 	public function tipo_salas(){
 		return $this->belongsToMany(TipoSala_model::class, 'tipo_sala_id');
 	}
