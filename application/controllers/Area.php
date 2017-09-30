@@ -31,7 +31,7 @@ class Area extends CI_Controller {
                                       'codigo',
                                       array('required',
                                             'max_length[2]',
-                                            'is_unique[area.codigo]')                                            )
+                                            'is_unique[area.codigo]')                                            
                                      );
     $this->form_validation->set_rules('nome_area',
                                       'nome',
@@ -50,12 +50,9 @@ class Area extends CI_Controller {
           $area->codigo = $this->input->post('codigo');
           $area->nome_area = $this->input->post('nome_area');
           $area->save();
-
-        };
-
-        $this->session->set_flashdata('success','Área cadastrada com sucesso');
-
-       catch (Exception $e) {
+         
+          $this->session->set_flashdata('success','Área cadastrada com sucesso');
+        } catch (Exception $e) {
         $this->session->set_flashdata('danger','Problemas ao cadastrar a área, tente novamente!');
       }
 
@@ -63,6 +60,7 @@ class Area extends CI_Controller {
     } else {
       $this->cadastrar();
     }
+  }
 
   
 
@@ -81,12 +79,12 @@ class Area extends CI_Controller {
    * @author Thalita
    * @since 2017/09/25
    */
-  public function atualizar ($id) {
+  function atualizar ($id) {
      $this->form_validation->set_rules('codigo',
                                       'codigo',
                                       array('required',
                                             'max_length[2]',
-                                             "is_unique_except[area.codigo,{$area->codigo}]")                                            )
+                                             "is_unique_except[area.codigo,{$area->codigo}]")                                            
                                      );
     $this->form_validation->set_rules('nome_area',
                                       'nome',
@@ -104,9 +102,8 @@ class Area extends CI_Controller {
           $area->nome_area = $this->input->post('nome_area');
           $area->save();
 
-        };
-
-        $this->session->set_flashdata('success','Área cadastrada com sucesso');
+           $this->session->set_flashdata('success','Área cadastrada com sucesso');
+        }
 
        catch (Exception $e) {
         $this->session->set_flashdata('danger','Problemas ao atualizar a área, tente novamente!');
@@ -115,6 +112,7 @@ class Area extends CI_Controller {
       redirect("area");
     } else {
       $this->editar($id);
+  }
   }
 
   /**
@@ -155,5 +153,5 @@ class Area extends CI_Controller {
 
   }
 }
-
 ?>
+
