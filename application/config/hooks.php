@@ -13,9 +13,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 
 $hook['post_controller_constructor'] = [
-  'class'     => 'adminAuth',
-  'function'  => 'checkAuth',
-  'filename'  => 'adminAuth.php',
+  'class'     => 'checkUser',
+  'function'  => 'check',
+  'filename'  => 'checkUser.php',
   'filepath'  => 'hooks',
-  'params'    => ['Login', 'authError']
+  'params'    => ['login', 'autherror']
 ];
