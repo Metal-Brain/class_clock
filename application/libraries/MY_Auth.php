@@ -31,7 +31,7 @@
           redirect('authError');
 
         if(!in_array($method, $this->allowedControllersAndMethods[$class]))
-            redirect('authError');
+          redirect('authError');
 
       }
 
