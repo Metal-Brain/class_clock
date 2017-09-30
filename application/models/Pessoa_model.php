@@ -15,7 +15,7 @@
         }
 
         public function setNomeAttribute($nome) {
-            $this->attributes['nome'] = mb_strtolower($nome, 'utf-8');
+            $this->attributes['nome'] = ucwords(mb_strtolower($nome, "utf-8"));
         }
 
         public function docente() {

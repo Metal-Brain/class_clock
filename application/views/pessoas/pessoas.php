@@ -38,16 +38,16 @@
 		<tbody>
 			<?php foreach ($pessoas as $pessoa) { ?>
 				<tr <?php if($pessoa->deletado_em): echo 'class="danger"'; endif; ?>>
-					<td class="text-center"><?= ucwords($pessoa['nome']); ?></td>
+					<td class="text-center"><?= $pessoa['nome']; ?></td>
 					<td class="text-center"><?= $pessoa['prontuario']; ?></td>
 					<td class="text-center"><?= $pessoa['email']; ?></td>
 					<td class="text-center"><?= ( empty($pessoa->deletado_em) ) ? 'Ativado' : 'Desativado'?></td>
 					<td class="text-center">
 						<?php if ( empty($pessoa->deletado_em) ) : ?>
 							<a class="btn btn-warning glyphicon glyphicon-pencil" title="Editar" href="<?= site_url('pessoa/editar/'.$pessoa->id)?>"></a>
-							<a class="btn btn-danger glyphicon glyphicon-remove" title="Desativar" href="<?= site_url('pessoa/deletar/'.$pessoa->id)?>"></a>
+							<button class="btn btn-danger" type="button" id="btn-delete" onclick="confirmDelete(<?= $pessoa->id ?>,'Deseja desativar a pessoa?','deletar')"> <i class="glyphicon glyphicon-remove"></i></button>
 						<?php else : ?>
-							<a class="btn btn-success glyphicon glyphicon-check" title="Ativar" href="<?= site_url('pessoa/ativar/'.$pessoa->id)?>"></a>
+						<button class="btn btn-success" type="button" id="btn-delete" onclick="confirmDelete(<?= $pessoa->id ?>,'Deseja ativar a pessoa?','ativar')"> <i class="glyphicon glyphicon-check"></i></button>
 						<?php endif; ?>
 					</td>
 				</tr>

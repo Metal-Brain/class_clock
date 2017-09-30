@@ -1,4 +1,24 @@
 		<script type="text/javascript">
+			function confirmDelete(id, msg, funcao) {
+				bootbox.confirm({
+					message: msg,
+					buttons: {
+						confirm: {
+							label: 'Sim',
+							className: 'btn-success'
+						},
+						cancel: {
+							label: 'Não',
+							className: 'btn-danger'
+						}
+					},
+					callback: function (result) {
+					if (result == true)
+						window.location.href = '<?= site_url("pessoa/") ?>' + funcao + '/' + id;
+					}
+				});
+			}
+			
 			$(".formPessoas").validate({
 				errorClass: 'text-danger',
 				errorElement: 'span',
@@ -14,9 +34,9 @@
 						remote: "<?= base_url('index.php/Pessoa/verificaProntuario/') ?>"
 					},
 					senha: {
-						if(document.getElementById("senha_editar") == null){
+						/*if(document.getElementById("senha_editar") == null){
                             required: true,
-                        }
+                        }*/
 						minlength: 6
 					},
 					email: {
