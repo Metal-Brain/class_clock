@@ -25,51 +25,58 @@
     -- -----------------------------------------------------
     CREATE  TABLE IF NOT EXISTS `horario`.`area` (
       `id` SMALLINT NOT NULL AUTO_INCREMENT ,
-      `nome` VARCHAR(50) NOT NULL ,
+      `nome_area` VARCHAR(50) NOT NULL ,
+      `codigo` CHAR(2) NOT NULL ,
+      `deletado_em` TIMESTAMP NULL DEFAULT NULL ,
       PRIMARY KEY (`id`) )
     ENGINE = InnoDB;
 
 
     -- -----------------------------------------------------
-    -- Table `horario`.`pessoa`
-    -- -----------------------------------------------------
-    CREATE  TABLE IF NOT EXISTS `horario`.`pessoa` (
-      `id` INT NOT NULL AUTO_INCREMENT ,
-      `nome` VARCHAR(150) NOT NULL ,
-      `prontuario` CHAR(6) NOT NULL ,
-      `senha` CHAR(64) NOT NULL ,
-      `nascimento` DATE NOT NULL ,
-      `email` VARCHAR(100) NOT NULL ,
-      `deletado_em` TIMESTAMP NULL ,
-      PRIMARY KEY (`id`) )
-    ENGINE = InnoDB;
+-- Table `horario`.`pessoa`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `horario`.`pessoa` ;
+
+CREATE TABLE IF NOT EXISTS `horario`.`pessoa` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(150) NOT NULL,
+  `prontuario` CHAR(6) NOT NULL,
+  `senha` CHAR(64) NOT NULL,
+  `email` VARCHAR(100) NOT NULL,
+  `deletado_em` TIMESTAMP NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
 
 
-    -- -----------------------------------------------------
-    -- Table `horario`.`docente`
-    -- -----------------------------------------------------
-    CREATE  TABLE IF NOT EXISTS `horario`.`docente` (
-      `id` INT NOT NULL AUTO_INCREMENT ,
-      `pessoa_id` INT NOT NULL ,
-      `area_id` SMALLINT NOT NULL ,
-      `ingresso_campus` DATE NOT NULL ,
-      `ingresso_ifsp` DATE NOT NULL ,
-      `regime` CHAR(1) NOT NULL ,
-      `deletado_em` TIMESTAMP NULL ,
-      PRIMARY KEY (`id`) ,
-      INDEX `fk_docente_area1_idx` (`area_id` ASC) ,
-      INDEX `fk_docente_pessoa1_idx` (`pessoa_id` ASC) ,
-      CONSTRAINT `fk_docente_area1`
-        FOREIGN KEY (`area_id` )
-        REFERENCES `horario`.`area` (`id` )
-        ON DELETE NO ACTION
-        ON UPDATE NO ACTION,
-      CONSTRAINT `fk_docente_pessoa1`
-        FOREIGN KEY (`pessoa_id` )
-        REFERENCES `horario`.`pessoa` (`id` )
-        ON DELETE NO ACTION
-        ON UPDATE NO ACTION)
-    ENGINE = InnoDB;
+-- -----------------------------------------------------
+-- Table `horario`.`docente`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `horario`.`docente` ;
+
+CREATE TABLE IF NOT EXISTS `horario`.`docente` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `pessoa_id` INT NOT NULL,
+  `area_id` SMALLINT NOT NULL,
+  `nascimento` DATE NOT NULL,
+  `ingresso_campus` DATE NOT NULL,
+  `ingresso_ifsp` DATE NOT NULL,
+  `regime` CHAR(1) NOT NULL,
+  `deletado_em` TIMESTAMP NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_docente_area1_idx` (`area_id` ASC),
+  INDEX `fk_docente_pessoa1_idx` (`pessoa_id` ASC),
+  CONSTRAINT `fk_docente_area1`
+    FOREIGN KEY (`area_id`)
+    REFERENCES `horario`.`area` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_docente_pessoa1`
+    FOREIGN KEY (`pessoa_id`)
+    REFERENCES `horario`.`pessoa` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
 
 
     -- -----------------------------------------------------
@@ -215,10 +222,11 @@
     CREATE  TABLE IF NOT EXISTS `horario`.`periodo` (
       `id` INT NOT NULL AUTO_INCREMENT ,
       `nome` CHAR(6) NOT NULL ,
+      `ativo` CHAR(1) NOT NULL ,
+      `deletado_em` TIMESTAMP NULL ,
       PRIMARY KEY (`id`) ,
       UNIQUE INDEX `nome_UNIQUE` (`nome` ASC) )
     ENGINE = InnoDB;
-
 
     -- -----------------------------------------------------
     -- Table `horario`.`fpa`
@@ -323,6 +331,18 @@
 
     USE `horario` ;
 
+    -- -----------------------------------------------------
+    -- Stored Procedure responsável por ativar o periodo
+    -- -----------------------------------------------------
+    DROP PROCEDURE IF EXISTS ativa_periodo;
+    DELIMITER //
+    CREATE PROCEDURE IF NOT EXISTS ativa_periodo(idPeriodo INT)
+    BEGIN
+    	UPDATE periodo SET ativo = 0 WHERE id != idPeriodo;
+    	UPDATE periodo SET ativo = 1 WHERE id = idPeriodo;
+    END//
+    DELIMITER ;
+
 
     SET SQL_MODE=@OLD_SQL_MODE;
     SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
@@ -380,4 +400,4 @@
     INSERT INTO horario(turno_id, inicio, fim) VALUES(4, '9:10:00', '10:00');
     INSERT INTO horario(turno_id, inicio, fim) VALUES(5, '10:10:00', '20:00');
 
-    INSERT INTO area(id, nome) VALUES(1, "FIXME: Precisa colocar área no controller Pessoa!");
+    INSERT INTO area(id, nome_area, codigo) VALUES(1, "Banco de dados", 01), (2, "Inteligência Artificial", 02), (3, "Redes de Computadores", 03);

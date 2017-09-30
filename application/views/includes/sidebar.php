@@ -12,7 +12,7 @@
 	   </li>
 
 	   <li id="sidebar-cursos">
-		   <a href="">
+		   <a href="http://localhost/class_clock/index.php/Curso">
 			   <span class="glyphicon glyphicon-education"></span> <span class="sidebar-label">Cursos</span>
 		   </a>
 	   </li>
