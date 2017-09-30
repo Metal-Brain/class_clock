@@ -27,6 +27,7 @@
       `id` SMALLINT NOT NULL AUTO_INCREMENT ,
       `nome_area` VARCHAR(50) NOT NULL ,
       `cod` CHAR(2) NOT NULL ,
+      `deletado_em` TIMESTAMP NULL DEFAULT NULL ,
       PRIMARY KEY (`id`) )
     ENGINE = InnoDB;
 
@@ -387,4 +388,4 @@ ENGINE = InnoDB;
     INSERT INTO horario(turno_id, inicio, fim) VALUES(4, '9:10:00', '10:00');
     INSERT INTO horario(turno_id, inicio, fim) VALUES(5, '10:10:00', '20:00');
 
-    INSERT INTO area(id, nome) VALUES(1, "FIXME: Precisa colocar área no controller Pessoa!");
+    INSERT INTO area(id, nome_area, codigo) VALUES(1, "Banco de dados", 01), (2, "Inteligência Artificial", 02), (3, "Redes de Computadores", 03);
