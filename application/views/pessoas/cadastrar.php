@@ -35,7 +35,7 @@
 
 		<label>Senha:</label>
 		<div class="form-group width-180">
-			<input id="senha" name="senha" class="form-control" type="password" placeholder="Senha" value="<?= set_value('senha')?>">
+			<input id="senha" name="senha" class="form-control" type="text" placeholder="Senha" value="<?= set_value('senha')?>">
 			<span class="text-danger">
 				<?= form_error('senha') ?>
 			</span>
