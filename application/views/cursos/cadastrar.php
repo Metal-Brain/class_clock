@@ -102,19 +102,19 @@
 										  </div>
 										</div>
 										
-										<!--<div class="row">
+										<div class="row">
 											<div class="col-md-12 form-group">										
 												<label> Coordenador</label>
 												<input list="coordenadores" class="form-control verifica-coordenador" name="coordenador">
 												  <datalist id="coordenadores">
 													<?php
-														//foreach($coordenadores as $coordenador){
-															//echo '<option value="'. $coordenador['id'] .'">'. $coordenador['nome'] .'</option>';}
+														foreach($coordenadores as $coordenador){
+															echo '<option value="'. $coordenador['id'] .'">'. $coordenador['nome'] .'</option>';}
 													?>
 													
 												  </datalist>
 											</div>	
-										</div>	-->
+										</div>
 										
 										<div class="row">
 											<div class="col-md-12 form-group">
