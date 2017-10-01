@@ -11,7 +11,7 @@ class Area extends CI_Controller {
    * @since 2017/09/25
    */
   function index () {
-    
+
     $areas = Area_model::withTrashed()->get();
     $this->load->template('areas/areas',compact('areas'),'areas/js_areas');
   }
@@ -31,7 +31,7 @@ class Area extends CI_Controller {
                                       'codigo',
                                       array('required',
                                             'max_length[2]',
-                                            'is_unique[area.codigo]')                                            
+                                            'is_unique[area.codigo]')
                                      );
     $this->form_validation->set_rules('nome_area',
                                       'nome',
@@ -40,8 +40,9 @@ class Area extends CI_Controller {
                                             'is_unique[area.nome_area]')
                                      );
 
-    $this->form_validation->set_message('is_unique','O código da área informada já está cadastrado');
-    $this->form_validation->set_message('is_unique','O nome da área informada já está cadastrado');
+
+    $this->form_validation->set_message('is_unique[area.codigo]','O nome da área informada já está cadastrado');
+    $this->form_validation->set_message('is_unique[area.nome_area]','O código da área informada já está cadastrado');
     $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
 
          if($this->form_validation->run()){
@@ -59,7 +60,7 @@ class Area extends CI_Controller {
             $this->cadastrar();
         }
     }
-  
+
 
   /**
    * Formulário para alterar os dados da area
@@ -81,10 +82,9 @@ class Area extends CI_Controller {
                                       'codigo',
                                       array('required',
                                             'max_length[2]',
-                                             "is_unique_except[area.codigo,{$area->codigo}]")                                            
+                                             "is_unique_except[area.codigo,{$area->codigo}]")
                                      );
     $this->form_validation->set_rules('nome_area',
-                                      'nome',
                                       array('required',
                                             'max_length[25]',
                                              "is_unique_except[area.nome_area,{$area->nome_area}]")
@@ -94,7 +94,7 @@ class Area extends CI_Controller {
       if($this->form_validation->run()){
             try {
                Area_model::where('id', $id)
-                            ->update([                                
+                            ->update([
                                 "codigo"     => $this->input->post('codigo'),
                                 "nome_area"  => $this->input->post('nome_area')
                             ]);
@@ -145,4 +145,3 @@ class Area extends CI_Controller {
   }
 }
 ?>
-

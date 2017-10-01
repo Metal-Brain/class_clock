@@ -17,17 +17,16 @@
 	<!-- Formulário para inserção de dados da view-->
 	<form class="formAreas" action="<?= site_url('area/salvar')?>" method="post">
 		<label>Código</label>
-		<div class="form-group width-400">
-
-			<input id="codigo" name="codigo" class="form-control" type="text" placeholder="Código" value="<?= set_value('codigo')?>">
+		<div class="form-group">
+			<input id="codigo" name="codigo" class="form-control" type="number" placeholder="Código" value="<?= set_value('codigo')?>">
 			<span class="text-danger">
 				<?= form_error('codigo') ?>
 			</span>
 		</div>
 
 		<label>Área</label>
-		<div class="form-group width-180">
-			<input id="area" name="area" class="form-control" type="text" placeholder="Área" maxlength="6" value="<?= set_value('nome_area')?>">
+		<div class="form-group">
+			<input id="nome_area" name="nome_area" class="form-control" type="text" placeholder="Área"  value="<?= set_value('nome_area')?>">
 			<span class="text-danger">
 				<?= form_error('nome_area') ?>
 			</span>
