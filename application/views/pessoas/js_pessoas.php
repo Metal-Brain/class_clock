@@ -47,7 +47,7 @@
 				},
 				messages: {
 					prontuario: {
-						remote: 'O campo deve conter um valor único.'
+						remote: 'Prontuário já cadastrado.'
 					}
 				}
 			});

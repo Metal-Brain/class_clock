@@ -16,7 +16,7 @@
 
 	<!-- Início do conteúdo da view-->
 	<form class="formPessoas" action="<?= site_url('pessoa/salvar')?>" method="post">
-		<label>Nome:</label>
+		<label>Nome completo:</label>
 		<div class="form-group width-400">
 
 			<input id="nome" name="nome" class="form-control" type="text" placeholder="Nome" value="<?= set_value('nome')?>">

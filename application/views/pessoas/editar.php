@@ -17,27 +17,35 @@
 	<!-- Início do conteúdo da view-->
 	<form class="formPessoas" method="post" action="<?= site_url('pessoa/atualizar/'.$pessoa->id)?>">
 		<div class="form-group width-400">
-			<label>Nome:</label>
+			<label>Nome completo:</label>
 			<input id="nome_editar" name="nome" class="form-control" type="text" placeholder="Nome" value="<?= htmlspecialchars($pessoa->nome) ?>">
-			<?= form_error('nome') ?>
+			<span class="text-danger">
+				<?= form_error('nome') ?>
+			</span>
 		</div>
 
 		<div class="form-group width-180">
 			<label>Prontuário:</label>
 			<input id="prontuario_editar" name="prontuario" class="form-control" type="text" placeholder="Prontuário" maxlength="6" value="<?= $pessoa->prontuario ?>">
-			<?= form_error('prontuario') ?>
+			<span class="text-danger">
+				<?= form_error('prontuario') ?>
+			</span>
 		</div>
 
 		<div class="form-group width-180">
 			<label>Senha:</label>
 			<input id="senha_editar" name="senha" class="form-control" type="text" minlength="6">
-			<?= form_error('senha') ?>
+			<span class="text-danger">
+				<?= form_error('senha') ?>
+			</span>
 		</div>
 
 		<div class="form-group width-400">
 			<label>E-mail:</label>
 			<input id="email_editar" name="email" class="form-control" type="email" placeholder="E-mail" value="<?= $pessoa->email ?>">
-			<?= form_error('email') ?>
+			<span class="text-danger">
+				<?= form_error('email') ?>
+			</span>
 		</div>
 
 		<div class="form-group">
@@ -48,6 +56,9 @@
 				<label><input <?= in_array(3, $tipos_pessoa)?"checked":"" ?> name="tipos[]" type="checkbox" value="3">DAE</label>
 				<label><input <?= in_array(4, $tipos_pessoa)?"checked":"" ?> name="tipos[]" type="checkbox" value="4" class="checkdocente-toggle">Docente</label>
 			</div>
+			<span class="text-danger">
+				<?= form_error('tipos[]') ?>
+			</span>
 		</div>
 
 		<!-- Docente -->
@@ -55,19 +66,25 @@
 			<label>Data de nascimento:</label>
 			<div class="form-group width-180">
 				<input id="nascimento_editar" name="nascimento" class="form-control data" value="<?= @$pessoa->docente->nascimento ?>">
-				<?= form_error('nascimento') ?>
+				<span class="text-danger">
+					<?= form_error('nascimento') ?>
+				</span>
 			</div>
 
 			<label>Data de ingresso no câmpus:</label>
 			<div class="form-group width-180">
 				<input id="ingresso_campus_editar" name="ingresso_campus" class="form-control data" value="<?= @$pessoa->docente->ingresso_campus ?>">
-				<?= form_error('ingresso_campus') ?>
+				<span class="text-danger">
+					<?= form_error('ingresso_campus') ?>
+				</span>
 			</div>
 
 			<label>Data de ingresso no câmpus:</label>
 			<div class="form-group width-180">
 				<input id="ingresso_ifsp_editar" name="ingresso_ifsp" class="form-control data" value="<?= @$pessoa->docente->ingresso_ifsp ?>">
-				<?= form_error('ingresso_ifsp') ?>
+				<span class="text-danger">
+					<?= form_error('ingresso_ifsp') ?>
+				</span>
 			</div>
 
 			<!-- <label>Área:</label>

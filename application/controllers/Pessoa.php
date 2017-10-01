@@ -36,7 +36,7 @@ class Pessoa extends MY_Controller {
       ['tipos[]', 'tipos', 'required']
     ]);
     $this->form_validation->set_message('is_unique', '{field} já cadastrado');
-    $this->form_validation->set_message('alpha_numeric', '{field} é composto por apenas por números e letras');
+    $this->form_validation->set_message('alpha_numeric', 'O campo {field} deve conter apenas letras e números.');
 
     if($has_docente) {
       $this->set_validations([
@@ -104,7 +104,7 @@ class Pessoa extends MY_Controller {
       ['tipos[]', 'tipos', 'required']
     ]);
     $this->form_validation->set_message('is_unique_except', '{field} já cadastrado');
-    $this->form_validation->set_message('alpha_numeric', '{field} é composto por apenas por números e letras');
+    $this->form_validation->set_message('alpha_numeric', 'O campo {field} deve conter apenas letras e números.');
 
     if($has_docente) {
       $this->set_validations([
