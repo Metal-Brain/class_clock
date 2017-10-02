@@ -39,7 +39,7 @@
 				required: true,
 				maxlength: 25
 			},
-			coodigo: {
+			codigo: {
 				required: true,
 				minlength: 1,
 				maxlength: 2
