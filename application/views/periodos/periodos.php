@@ -41,9 +41,10 @@
 					<td class="text-center">
 						<?php if ( empty($periodo->deletado_em) ): ?>
 							<a class="btn btn-warning glyphicon glyphicon-pencil" title="Editar" href="<?= site_url('periodo/editar/'.$periodo->id)?>"></a>
-							<button class="btn btn-danger" type="button" id="btn-delete" onclick="confirm(<?= $periodo->id ?>,'Realmente deseja desativar o período ativo?','deletar')"> <i class="glyphicon glyphicon-remove"></i></button>
+							<button class="btn btn-danger" title="Desativar" type="button" id="btn-delete" onclick="confirm(<?= $periodo->id ?>,'Realmente deseja desativar o período ativo?','deletar')"> <i class="glyphicon glyphicon-remove"></i></button>
 						<?php else : ?>
-							<button class="btn btn-success" type="button" id="btn-delete" onclick="confirm(<?= $periodo->id ?>,'Deseja ativar o turno?','ativar')"> <i class="glyphicon glyphicon-ok"></i></button>
+							<a class="btn btn-warning glyphicon glyphicon-pencil disabled" title="Editar" href="<?= site_url('periodo/editar/'.$periodo->id)?>"></a>
+							<button class="btn btn-success" title="Ativar" type="button" id="btn-delete" onclick="confirm(<?= $periodo->id ?>,'Deseja ativar o período?','ativar')"> <i class="glyphicon glyphicon-ok"></i></button>
 						<?php endif; ?>
 					</td>
 				</tr>
