@@ -12,7 +12,7 @@ $('#sidebar-semestres').addClass('active');
   $('#sidebar-instituicao').addClass('active');
 }else if(path_atual.indexOf("FPA") != -1){
   $('#sidebar-fpa').addClass('active');
-else if(path_atual.indexOf("Áreas") != -1){
+}else if(path_atual.indexOf("Areas") != -1){
 $('#sidebar-area').addClass('active');
 }else{
   $('#sidebar-home').addClass('active');

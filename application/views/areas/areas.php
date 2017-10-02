@@ -29,6 +29,8 @@
 			<tr>
 				<th class="text-center">Código</th>
 				<th class="text-center">Área</th>
+        <th class="text-center">&nbsp;</th>
+        <th class="text-center">&nbsp;</th>
 			</tr>
 		</thead>
 		<!--Informações do Back aqui-->

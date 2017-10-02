@@ -22,6 +22,7 @@
 		}
 
 
+
 </script>
 <script type="text/javascript">
 
@@ -32,7 +33,7 @@
 			nome_turno: {
 				required: true,
 				maxlength: 25
-			}
+			},
 			coodigo: {
 				required: true,
 				minlength: 2,
@@ -40,6 +41,14 @@
 			}
 		}
 	});
+
+  $(document).ready(function () {
+    $('#areaTable').dataTable( {
+      "language": {
+        "url": "<?= base_url('assets/DataTables/translatePortuguese.js');?>"
+      }
+    } );
+  });
 </script>
 </body>
 </html>
