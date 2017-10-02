@@ -174,7 +174,7 @@ ENGINE = InnoDB;
       PRIMARY KEY (`id`))
     ENGINE = InnoDB
     AUTO_INCREMENT = 6
-    DEFAULT CHARACTER SET = latin1
+    DEFAULT CHARACTER SET = latin1;
 
     CREATE TABLE IF NOT EXISTS `horario`.`turno_horario` (
       `turno_id` TINYINT(4) NOT NULL,
@@ -193,7 +193,7 @@ ENGINE = InnoDB;
         ON DELETE NO ACTION
         ON UPDATE NO ACTION)
     ENGINE = InnoDB
-    DEFAULT CHARACTER SET = latin1
+    DEFAULT CHARACTER SET = latin1;
 
     -- -----------------------------------------------------
     -- Table `horario`.`tipo`
@@ -405,11 +405,5 @@ ENGINE = InnoDB;
     INSERT INTO turno(nome_turno) VALUES("Noturno");
     INSERT INTO turno(nome_turno) VALUES("Integral");
     INSERT INTO turno(nome_turno) VALUES("Diário");
-
-    INSERT INTO horario(turno_id, inicio, fim) VALUES(1, '9:10:00', '10:00');
-    INSERT INTO horario(turno_id, inicio, fim) VALUES(2, '13:10:00', '14:00');
-    INSERT INTO horario(turno_id, inicio, fim) VALUES(3, '20:10:00', '21:00');
-    INSERT INTO horario(turno_id, inicio, fim) VALUES(4, '9:10:00', '10:00');
-    INSERT INTO horario(turno_id, inicio, fim) VALUES(5, '10:10:00', '20:00');
 
     INSERT INTO area(id, nome_area, codigo) VALUES(1, "Banco de dados", 01), (2, "Inteligência Artificial", 02), (3, "Redes de Computadores", 03);
