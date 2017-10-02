@@ -16,7 +16,7 @@
     		},
     		callback: function (result) {
         	if (result == true)
-						  window.location.href = '<?= site_url("turno/") ?>' + funcao + '/' + id;
+						  window.location.href = '<?= site_url("area/") ?>' + funcao + '/' + id;
     		}
 			});
 		}
@@ -26,7 +26,7 @@
 </script>
 <script type="text/javascript">
 
-	$("#formTurnos").validate({
+	$("#formAreas").validate({
 		errorClass: 'text-danger',
 		errorElement: 'span',
 		rules: {
