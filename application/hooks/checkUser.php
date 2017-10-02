@@ -14,6 +14,10 @@ class checkUser {
         $this->method       = strtolower($this->CI->router->method);
     }
 
+    /*
+    * Verificar se existe usuário logado e qual seu respectivo nível de acesso
+    * @param controllers que não precisam de validação e/ou usuário logado
+    */
     public function check($param) {
 
         $user = $this->CI->session->userdata('usuario_logado');
@@ -28,14 +32,16 @@ class checkUser {
 
             switch($user['tipo']){
                 case 1:
-                    $this->setAdmin();
+                    $this->setAccessToAdmin();
                     break;
                 case 2:
-                    $this->setCRA();
+                    $this->setAccessToCRA();
                     break;
                 case 3;
+                    $this->setAccessToDAE();
                     break;
                 case 4;
+                    $this->setAccessToDocente();
                     break;
                 default:
                     redirect('authError');
@@ -45,7 +51,10 @@ class checkUser {
 
     }
 
-    private function setAdmin(){
+    /*
+    * seta os controllers e métodos que o perfil administrador pode acessar
+    */
+    private function setAccessToAdmin(){
         $acess =
         [
             'turno'       => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
@@ -57,7 +66,10 @@ class checkUser {
         $this->hasAccess($acess);
     }
 
-    private function setCRA(){
+    /*
+    * seta os controllers e métodos que o perfil CRA pode acessar
+    */
+    private function setAccessToCRA(){
         $acess =
         [
             'turno'       => ['index'],
@@ -68,12 +80,43 @@ class checkUser {
         $this->hasAccess($acess);
     }
 
+    /*
+    * seta os controllers e métodos que o perfil DAE pode acessar
+    */
+    private function setAccessToDAE(){
+        $acess =
+        [
+            'turno'       => ['index'],
+            'tipo_sala'   => ['index'],
+            'modalidade'  => ['index']
+        ];
+
+        $this->hasAccess($acess);
+    }
+
+    /*
+    * seta os controllers e métodos que o perfil docente pode acessar
+    */
+    private function setAccessToDocente(){
+        $acess =
+        [
+            'turno'       => ['index'],
+            'tipo_sala'   => ['index'],
+            'modalidade'  => ['index']
+        ];
+
+        $this->hasAccess($acess);
+    }
+
+    /*
+    * verifica se o usuário pode acessar controller e método requisitado
+    */
     private function hasAccess ($acess) {
         if (!key_exists($this->controller, $acess))
-        redirect('authError');
+            redirect('authError');
 
         if(!in_array($this->method, $acess[$this->controller]))
-        redirect('authError');
+            redirect('authError');
     }
 
 }
