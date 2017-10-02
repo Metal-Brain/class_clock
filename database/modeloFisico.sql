@@ -166,22 +166,34 @@ ENGINE = InnoDB;
     -- -----------------------------------------------------
     -- Table `horario`.`horario`
     -- -----------------------------------------------------
-    CREATE  TABLE IF NOT EXISTS `horario`.`horario` (
-      `id` TINYINT(4) NOT NULL AUTO_INCREMENT ,
-      `turno_id` TINYINT(4) NOT NULL ,
-      `inicio` TIME NOT NULL ,
-      `fim` TIME NOT NULL ,
-      `deletado_em` TIMESTAMP NULL DEFAULT NULL ,
-      PRIMARY KEY (`id`) ,
-      INDEX `fk_horario_turno_idx` (`turno_id` ASC) ,
-      CONSTRAINT `fk_horario_turno`
-        FOREIGN KEY (`turno_id` )
-        REFERENCES `horario`.`turno` (`id` )
-        ON DELETE CASCADE
-        ON UPDATE CASCADE)
+    CREATE TABLE IF NOT EXISTS `horario`.`horario` (
+      `id` TINYINT(4) NOT NULL AUTO_INCREMENT,
+      `inicio` TIME NOT NULL,
+      `fim` TIME NOT NULL,
+      `deletado_em` TIMESTAMP NULL DEFAULT NULL,
+      PRIMARY KEY (`id`))
     ENGINE = InnoDB
-    DEFAULT CHARACTER SET = latin1;
+    AUTO_INCREMENT = 6
+    DEFAULT CHARACTER SET = latin1
 
+    CREATE TABLE IF NOT EXISTS `horario`.`turno_horario` (
+      `turno_id` TINYINT(4) NOT NULL,
+      `horario_id` TINYINT(4) NOT NULL,
+      PRIMARY KEY (`turno_id`, `horario_id`),
+      INDEX `fk_turno_has_horario_horario1_idx` (`horario_id` ASC),
+      INDEX `fk_turno_has_horario_turno1_idx` (`turno_id` ASC),
+      CONSTRAINT `fk_turno_has_horario_turno1`
+        FOREIGN KEY (`turno_id`)
+        REFERENCES `horario`.`turno` (`id`)
+        ON DELETE NO ACTION
+        ON UPDATE NO ACTION,
+      CONSTRAINT `fk_turno_has_horario_horario1`
+        FOREIGN KEY (`horario_id`)
+        REFERENCES `horario`.`horario` (`id`)
+        ON DELETE NO ACTION
+        ON UPDATE NO ACTION)
+    ENGINE = InnoDB
+    DEFAULT CHARACTER SET = latin1
 
     -- -----------------------------------------------------
     -- Table `horario`.`tipo`
