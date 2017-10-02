@@ -20,6 +20,10 @@
     		}
 			});
 		}
+	
+		$(document).ready(function () {
+			
+			$('#AreaTable').dataTable()
 
 
 </script>
@@ -29,11 +33,11 @@
 		errorClass: 'text-danger',
 		errorElement: 'span',
 		rules: {
-			nome_turno: {
+			nome_area: {
 				required: true,
 				maxlength: 25
-			}
-			coodigo: {
+			},
+			codigo: {
 				required: true,
 				minlength: 2,
 				maxlength: 2
