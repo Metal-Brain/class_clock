@@ -45,9 +45,10 @@
 					<td class="text-center">
 						<?php if ( empty($pessoa->deletado_em) ) : ?>
 							<a class="btn btn-warning glyphicon glyphicon-pencil" title="Editar" href="<?= site_url('pessoa/editar/'.$pessoa->id)?>"></a>
-							<button class="btn btn-danger" type="button" id="btn-delete" onclick="confirmDelete(<?= $pessoa->id ?>,'Deseja desativar a pessoa?','deletar')"> <i class="glyphicon glyphicon-remove"></i></button>
+							<button class="btn btn-danger" title="Desativar" type="button" id="btn-delete" onclick="confirmDelete(<?= $pessoa->id ?>,'Deseja desativar a pessoa?','deletar')"> <i class="glyphicon glyphicon-remove"></i></button>
 						<?php else : ?>
-						<button class="btn btn-success" type="button" id="btn-delete" onclick="confirmDelete(<?= $pessoa->id ?>,'Deseja ativar a pessoa?','ativar')"> <i class="glyphicon glyphicon-check"></i></button>
+							<a class="btn btn-warning glyphicon glyphicon-pencil disabled" title="Editar" href="<?= site_url('pessoa/editar/'.$pessoa->id)?>"></a>
+							<button class="btn btn-success" title="Ativar" type="button" id="btn-delete" onclick="confirmDelete(<?= $pessoa->id ?>,'Deseja ativar a pessoa?','ativar')"> <i class="glyphicon glyphicon-check"></i></button>
 						<?php endif; ?>
 					</td>
 				</tr>

@@ -28,15 +28,7 @@
 						minlength: 5,
 						maxlength: 150
 					},
-					prontuario: {
-						required: true,
-						minlength: 6,
-						remote: "<?= base_url('index.php/Pessoa/verificaProntuario/') ?>"
-					},
 					senha: {
-						/*if(document.getElementById("senha_editar") == null){
-                            required: true,
-                        }*/
 						minlength: 6
 					},
 					email: {
@@ -44,11 +36,6 @@
 						email: true
 					}
 
-				},
-				messages: {
-					prontuario: {
-						remote: 'Prontuário já cadastrado.'
-					}
 				}
 			});
 		</script>

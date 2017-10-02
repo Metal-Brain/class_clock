@@ -25,7 +25,7 @@ class MY_Form_validation extends CI_Form_validation {
     public function is_unique_except($value, $field_and_except){
         $controller = $this->CI;
         $db = $controller->db;
-        $controller->form_validation->set_message('is_unique_except', 'O campo {field} deve conter um valor único.');
+        //$controller->form_validation->set_message('is_unique_except', 'O campo {field} deve conter um valor único.');
         list($table_field, $except) = explode(',', $field_and_except);
         list($table, $field) = explode('.', $table_field);
 

@@ -35,7 +35,7 @@ class Pessoa extends MY_Controller {
       ['email', 'email', 'required|valid_email|strtolower|regex_match[/^[a-zA-Z0-9._@-]+$/]'],
       ['tipos[]', 'tipos', 'required']
     ]);
-    $this->form_validation->set_message('is_unique', '{field} já cadastrado');
+    $this->form_validation->set_message('is_unique', 'Prontuário já cadastrado.');
     $this->form_validation->set_message('alpha_numeric', 'O campo {field} deve conter apenas letras e números.');
 
     if($has_docente) {
@@ -103,7 +103,7 @@ class Pessoa extends MY_Controller {
       ['email', 'email', 'required|valid_email|strtolower|regex_match[/^[a-zA-Z0-9._@-]+$/]'],
       ['tipos[]', 'tipos', 'required']
     ]);
-    $this->form_validation->set_message('is_unique_except', '{field} já cadastrado');
+    $this->form_validation->set_message('is_unique_except', 'Prontuário já cadastrado.');
     $this->form_validation->set_message('alpha_numeric', 'O campo {field} deve conter apenas letras e números.');
 
     if($has_docente) {
