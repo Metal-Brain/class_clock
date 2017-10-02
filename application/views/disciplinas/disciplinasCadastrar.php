@@ -14,7 +14,7 @@
     </div>
     </div>
 
-    
+
             <form id="formDisciplina" class="form-Control" action="<?= site_url('Disciplina/salvar')?>" method="post">
             		<h1>Cadastrar Disciplina</h1>
 
@@ -45,7 +45,7 @@
 					</div>
 
 					<div class="form-group">
-						<label>Módulos</label>
+						<label>Módulo no curso que ocorrerá</label>
 						<input type="number" class="form-control" id="modulo" name="modulo" placeholder="ex: 6" style="max-width: 300px">
 					</div>
 

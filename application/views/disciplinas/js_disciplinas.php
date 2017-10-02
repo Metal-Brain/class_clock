@@ -3,6 +3,14 @@
 
       	$("#disciplinaTable").DataTable();
 
+               document.getElementById("sigla_curso").onkeypress = function(e) {
+                var chr = /^[a-zA-Z0-9 ]$/;
+                var patt = new RegExp(chr);
+                var res = patt.test(String.fromCharCode(e.which));
+                return res;
+               };
+
+
         $("#formDisciplina").validate({
             rules: {
                 nome_disciplina: {
@@ -139,7 +147,6 @@
         });
     }
 </script>
-
 
 </html>
 </body>
