@@ -20,6 +20,10 @@
     		}
 			});
 		}
+	
+		$(document).ready(function () {
+			
+			$('#AreaTable').dataTable()
 
 
 </script>

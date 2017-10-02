@@ -24,7 +24,7 @@
 			</div>
 		</div>
 	</div>
-	<table id="areaTable" class="table table-striped">
+	<table id="AreaTable" class="table table-striped">
 		<thead>
 			<tr>
 				<th class="text-center">Código</th>
