@@ -12,7 +12,7 @@
          * @since 2017/08/19
         */
         public function turno(){
-            return $this->belongsToMany(Turno_model::class, 'turnos_horarios');
+            return $this->belongsToMany(Turno_model::class, 'turno_horario');
         }
     }
 ?>
