@@ -20,23 +20,28 @@
     		}
 			});
 		}
-
-
-
 </script>
+
 <script type="text/javascript">
+  $(document).ready(function(){
+    $('#AreaTable').dataTable( {
+      "language": {
+        "url": "<?= base_url('assets/DataTables/translatePortuguese.js');?>"
+      }
+    } );
+  });
 
 	$("#formAreas").validate({
 		errorClass: 'text-danger',
 		errorElement: 'span',
 		rules: {
-			nome_turno: {
+			nome_area: {
 				required: true,
 				maxlength: 25
 			},
 			coodigo: {
 				required: true,
-				minlength: 2,
+				minlength: 1,
 				maxlength: 2
 			}
 		}
