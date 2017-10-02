@@ -12,7 +12,7 @@
          * @since 2017/08/19
         */
         public function turno(){
-            return $this->belongsTo(Turno_model::class);
+            return $this->belongsToMany(Turno_model::class);
         }
     }
 ?>

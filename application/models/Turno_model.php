@@ -13,7 +13,7 @@
          * @since 2017/08/19
         */
         public function horarios() {
-            return $this->hasMany(Horario_model::class, 'turno_id')->orderBy('horario.inicio', 'asc');
+            return $this->belongsToMany(Horario_model::class, 'turno_id')->orderBy('horario.inicio', 'asc');
         }
         /**
          * Retorna a quantidade de horarios de um Turno
