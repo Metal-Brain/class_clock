@@ -1,25 +1,96 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-use Illuminate\Database\Eloquent\Model as Eloquent;
+class Turma extends MY_Controller {
 
-class DisciplinaOferecida_model extends model{
-    protected $table = 'disciplina_oferecida';
-    protected $fillable = [ 'disciplina_id', 'periodo_id', 'turno_id', 'qtd_alunos', 'dp' ];
-    public $timestamps = false;
+  function index () {
+    $turmas = Turma_model::all();
+    $this->load->template('turmas/turmas',compact('turmas'),'turmas/js_turmas');
+  }
 
-    public function disciplina(){
-        return $this->belongsTo(Disciplina_model::class, 'disciplina_id');
+  function cadastrar () {
+    $disciplinas = Disciplina_model::all();
+    $turnos = Turno_model::all();
+
+    $this->load->template('turmas/cadastrar', compact('disciplinas', 'turnos'), 'turmas/js_Turmas');
+  }
+
+  public function salvar () {
+    $this->set_validations([
+      ['dp', 'Dependência', 'required'],
+      ['qtd_alunos', 'Quantidade de Alunos', 'required|numeric'],
+      ['disciplina_id', 'Disciplina', 'required|numeric'],
+      ['turno_id', 'Turno', 'required|numeric'],
+      ['periodo_id', 'Período', 'required|numeric'],
+    ]);
+
+    if ($this->run_validation()) {
+      try{
+        $turma = Turma_model::create($this->request_all());
+        $this->session->set_flashdata('success','Turma cadastrada com sucesso');
+        redirect("turma");
+      } catch (Exception $e) {
+        $this->session->set_flashdata('danger','Problemas ao cadastrar a Turma, tente novamente!');
+        $this->cadastrar();
+      }
+    } else {
+      $this->cadastrar();
     }
 
-    public function periodo(){
-        return $this->belongsTo(Periodo_model::class, 'periodo_id');
+  }
+
+  function editar ($id) {
+    $turma = Turma_model::withTrashed()->findOrFail($id);
+    $disciplinas = Disciplina_model::all();
+    $turnos = Turno_model::all();
+
+    $this->load->template('turmas/editar', compact('turma', 'disciplinas', 'turnos'), 'turmas/js_turmas');
+  }
+
+  public function atualizar ($id) {
+    $this->set_validations([
+      ['dp', 'Dependência', 'required'],
+      ['qtd_alunos', 'Quantidade de Alunos', 'required|numeric'],
+      ['disciplina_id', 'Disciplina', 'required|numeric'],
+      ['turno_id', 'Turno', 'required|numeric'],
+      ['periodo_id', 'Período', 'required|numeric'],
+    ]);
+    
+    if ($this->form_validation->run()) {
+      try {
+        $turma = Turma_model::withTrashed()->findOrFail($id);
+        $turma->update($this->request_all());
+        $this->session->set_flashdata('success','Turma atualizado com sucesso');
+        redirect('turma');
+      } catch (Exception $e) {
+        $this->session->set_flashdata('danger','Problemas ao atualizar os dados da Turma, tente novamente!');
+        $this->editar($id);
+      }
+    } else {
+      $this->editar($id);
     }
 
-    public function turno(){
-        return $this->belongsTo(Turno_model::class, 'turno_id');
+  }
+
+  function deletar ($id) {
+    try {
+      Turma_model::findOrFail($id)->delete();
+      $this->session->set_flashdata('success', 'Turma deletado com sucesso');
+    } catch (Exception $e) {
+      $this->session->set_flashdata('danger', 'Erro ao deletar a Turma, tente novamente');
     }
 
-    public function preferencias(){
-        return $this->belongsToMany(Fpa_model::class, 'preferencia', 'fpa_id', 'disciplinas_oferecidas_id')->withPivot('ordem');
+    redirect("turma");
+  }
+
+  function ativar ($id) {
+    try{
+      Turma_model::withTrashed()->findOrFail($id)->restore();
+      $this->session->set_flashdata('success','Turma ativada com sucesso');
+    } catch (Exception $e) {
+      $this->session->set_flashdata('danger','Erro ao ativar a Turma. Tente novamente!');
     }
+
+    redirect("turma");
+  }
+
 }

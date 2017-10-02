@@ -1,11 +1,8 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-use Illuminate\Database\Eloquent\Model as Eloquent;
-
-class Turma_model extends Eloquent {
+class Turma_model extends Model {
     protected $table = 'disciplina_oferecida';
     protected $fillable = ['disciplina_id', 'periodo_id', 'turno_id', 'qtd_alunos', 'dp'];
-    public $timestamps = false;
 
     public function disciplina(){
         return $this->belongsTo(Disciplina_model::class, 'disciplina_id');
