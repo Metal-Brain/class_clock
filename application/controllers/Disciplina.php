@@ -144,7 +144,7 @@
         public function validar () {
             $this->form_validation->set_rules('nome_disciplina','nome','required|min_length[5]|max_length[50]|trim|ucwords');
 
-            $this->form_validation->set_rules('sigla_disciplina','sigla','required|min_length[3]|max_length[5]');
+            $this->form_validation->set_rules('sigla_disciplina','sigla','required|min_length[3]|max_length[5]|alpha_numeric');
 
             $this->form_validation->set_rules('curso_id','curso','required');
 
