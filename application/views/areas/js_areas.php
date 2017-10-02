@@ -16,26 +16,35 @@
     		},
     		callback: function (result) {
         	if (result == true)
-						  window.location.href = '<?= site_url("turno/") ?>' + funcao + '/' + id;
+						  window.location.href = '<?= site_url("area/") ?>' + funcao + '/' + id;
     		}
 			});
 		}
 
 
 </script>
+
+<script type="text/javascript">
+  $('AreaTable').dataTable( {
+    "language": {
+      "url": "<?= base_url('assets/DataTables/translatePortuguese.js');?>"
+    }
+  } );
+</script>
+
 <script type="text/javascript">
 
-	$("#formTurnos").validate({
+	$("#formAreas").validate({
 		errorClass: 'text-danger',
 		errorElement: 'span',
 		rules: {
-			nome_turno: {
+			nome_area: {
 				required: true,
 				maxlength: 25
-			}
-			coodigo: {
+			},
+			codigo: {
 				required: true,
-				minlength: 2,
+				minlength: 1,
 				maxlength: 2
 			}
 		}
