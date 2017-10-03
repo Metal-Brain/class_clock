@@ -3,7 +3,7 @@
 		<div class="row">
 			<div class="col-md-6 form-group">
 				<label>Código</label>
-				<input name="codigo" class="form-control" placeholder="Código" value="<?= htmlspecialchars(ucwords($area->codigo))?>">
+				<input name="codigo" class="form-control" placeholder="Código" type="number" value="<?= htmlspecialchars(ucwords($area->codigo))?>">
 				<?= form_error('codigo') ?>
         <br>
 				<input name="nome_area" class="form-control" placeholder="Área" value="<?= htmlspecialchars(ucwords($area->nome_area))?>">

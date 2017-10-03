@@ -20,7 +20,17 @@
     		}
 			});
 		}
-</script>
+
+		$(document).ready(function () {
+   			$('#areaTable').dataTable( {
+      		"language": {
+        	"url": "<?= base_url('assets/DataTables/translatePortuguese.js');?>"
+     	 	 }
+   			} );
+  		});
+
+	</script>
+
 
 <script type="text/javascript">
   $(document).ready(function(){
@@ -47,13 +57,7 @@
 		}
 	});
 
-  $(document).ready(function () {
-    $('#areaTable').dataTable( {
-      "language": {
-        "url": "<?= base_url('assets/DataTables/translatePortuguese.js');?>"
-      }
-    } );
-  });
+  
 </script>
 </body>
 </html>

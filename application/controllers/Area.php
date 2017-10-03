@@ -31,6 +31,7 @@ class Area extends CI_Controller {
                                       'codigo',
                                       array('required',
                                             'max_length[2]',
+                                            'numeric',
                                             'is_unique[area.codigo]')
                                      );
     $this->form_validation->set_rules('nome_area',
@@ -78,6 +79,8 @@ class Area extends CI_Controller {
    * @since 2017/09/25
    */
   function atualizar ($id) {
+     $area = Area_model::findOrFail($id);
+
      $this->form_validation->set_rules('codigo',
                                       'codigo',
                                       array('required',
@@ -93,11 +96,10 @@ class Area extends CI_Controller {
 
       if($this->form_validation->run()){
             try {
-               Area_model::where('id', $id)
-                            ->update([
-                                "codigo"     => $this->input->post('codigo'),
-                                "nome_area"  => $this->input->post('nome_area')
-                            ]);
+                $area->update([
+                    "codigo"     => $this->input->post('codigo'),
+                    "nome_area"  => $this->input->post('nome_area')
+                ]);
                 $this->session->set_flashdata('success','Área atualizada com sucesso');
                 redirect('Area');
             } catch (Exception $ignored){}
