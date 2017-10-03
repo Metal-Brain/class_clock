@@ -13,4 +13,8 @@ class Fpa_model extends Model{
     public function preferencia(){
         return $this->belongsToMany(DisciplinasOferecidas_model::class, 'disponibilidade', 'fpa_id', 'disciplinas_oferecidas_id')->withPivot('ordem');
     }
+
+    public function periodo(){
+      return $this->belongsTo(Periodo_model::class, 'periodo_id');
+    }
 }
