@@ -16,7 +16,7 @@
 		</div>
 	</div>
 
-	
+
 	<!-- Início do conteúdo da view-->
 	<div style="padding: 0 0 15px 0">
 		<div class="row">
@@ -27,7 +27,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<table id="Tipo_SalaTable" class="table table-striped">
 		<thead>
 			<tr>
@@ -57,4 +57,6 @@
 			<?php endforeach; ?>
 		</tbody>
 	</table>
+	<div>
+	</div>	
 </div>

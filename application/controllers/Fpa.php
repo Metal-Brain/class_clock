@@ -14,7 +14,8 @@ class Fpa extends CI_Controller{
   }
 
   public function salvar(){
-
+    $disp = $this->input->post('disp');
+    print_r($disp);
   }
 
   public function editar(){
