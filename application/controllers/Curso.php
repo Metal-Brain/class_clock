@@ -16,13 +16,11 @@
 
     public function cadastrar() {
       $data = array(
+        'cursos' => Curso_model::withTrashed()->get(),
         'modalidades' => Modalidade_model::withTrashed()->get(),
-        'docentes' => DB::table('pessoa')
-                          ->join('docente', 'pessoa.id', '=', 'docente.pessoa_id')
-                          ->join('curso', 'docente.pessoa_id', '!=', 'curso.docente_id')
+        'docentes' => DB::table('docente')
+                          ->join('pessoa', 'docente.pessoa_id', '=', 'pessoa.id')
                           ->select('pessoa.nome', 'docente.id')
-                          //->where('docente.pessoa_id', '!=', 'curso.docente_id')
-                          ->distinct()
                           ->get()
       );
       $this->load->template('cursos/cadastrar', compact('data'), 'cursos/js_cursos');
@@ -51,15 +49,13 @@
 
     public function editar($id) {
       $data = array(
+        'cursos' => Curso_model::withTrashed()->get(),
         'curso' => Curso_model::withTrashed()->findOrFail($id),
         'modalidades' => Modalidade_model::all('id','nome_modalidade'),
-        //'coordenador' => Pessoa_model::findOrFail($docente_id),
         'docentes' => DB::table('docente')
-                      ->join('pessoa', 'docente.pessoa_id', '=', 'pessoa.id')
-                      ->join('curso', 'docente.pessoa_id', '!=', 'curso.docente_id')
-                      ->select('pessoa.nome', 'docente.pessoa_id')
-                      ->distinct()
-                      ->get()
+                          ->join('pessoa', 'docente.pessoa_id', '=', 'pessoa.id')
+                          ->select('pessoa.nome', 'docente.id')
+                          ->get()
       );
       $this->load->template('cursos/editar', compact('data','id'), 'cursos/js_cursos');
     }
@@ -68,14 +64,14 @@
       if($this->validar($id)) {
         try {
           $curso = Curso_model::withTrashed()->findOrFail($id);
-          $curso->update(['nome_curso'=>$this->input->post('nome_curso'),
-          "modalidade_id" => $this->input->post('modalidade_id'),
-          "docente_id" => $this->input->post('docente_id'),
-          "codigo_curso" => $this->input->post('codigo_curso'),
-          "sigla_curso" => $this->input->post('sigla_curso'),
-          "qtd_semestre" => $this->input->post('qtd_semestre'),
-          "fechamento" => $this->input->post('fechamento')
-          ]);
+          $curso->nome_curso = $this->input->post('nome_curso');
+          $curso->modalidade_id = $this->input->post('modalidade_id');
+          $curso->docente_id = $this->input->post('docente_id');
+          $curso->codigo_curso = $this->input->post('codigo_curso');
+          $curso->sigla_curso = $this->input->post('sigla_curso');
+          $curso->qtd_semestre = $this->input->post('qtd_semestre');
+          $curso->fechamento = $this->input->post('fechamento');
+          $curso->save();
 
           $this->session->set_flashdata('success', 'Curso atualizado com sucesso');
           redirect('curso');
@@ -100,9 +96,10 @@
     public function deletar($id){
       try {
         $curso = Curso_model::findOrFail($id);
+        //$curso->docente_id = null;
+        //$curso->save();
         $curso->delete();
         $this->session->set_flashdata('success','Curso deletado com sucesso');
-
         redirect("curso");
       }catch (Exception $ignored) {}
       $this->session->set_flashdata('danger','Erro ao deletar um curso, tente novamente');
