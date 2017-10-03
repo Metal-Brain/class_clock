@@ -27,13 +27,8 @@
         <div class="row">
           <div class="col-md-offset-1 col-md-10">
             <div class="table-responsive">
-              @loop -> turno
               <table class="table">
                 <thead>
-                  <tr>
-                    <!-- Abaixo ainda será decidido o que vai vir. add noturno como teste -->
-                    <th colspan="7" class="text-center">Noturno</th>
-                  </tr>
                   <tr>
                     <th>Horarios</th>
                     <th>Segunda</th>
@@ -45,9 +40,9 @@
                   </tr>
                 </thead>
                 <tbody>
-                  @loop -> horarios
+                  <?php foreach ($horarios as $horarios) :?>
                   <tr>
-                    <td></td>
+                    <td><?= removerSegundos($horarios->inicio) . '-' . removerSegundos($horarios->fim) ?></td>
                     <td><input type="checkbox" name="" value=""></td>
                     <td><input type="checkbox" name="" value=""></td>
                     <td><input type="checkbox" name="" value=""></td>
@@ -55,9 +50,9 @@
                     <td><input type="checkbox" name="" value=""></td>
                     <td><input type="checkbox" name="" value=""></td>
                   </tr>
+                <?php endforeach;?>
                 </tbody>
               </table>
-              @endloop
             </div>
           </div>
 
