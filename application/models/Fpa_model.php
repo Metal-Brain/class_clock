@@ -11,6 +11,6 @@ class Fpa_model extends Model{
 
     //Função que retorna as preferências do professor em relação as disciplinas oferecidas no semestre.
     public function preferencia(){
-        return $this->belongsToMany(DisciplinasOferecidas_model::class, 'disponibilidade', 'fpa_id', 'disciplinas_oferecidas_id')->withPivot('ordem');
+        return $this->belongsToMany(Turma_model::class, 'disponibilidade', 'fpa_id', 'disciplinas_oferecidas_id')->withPivot('ordem');
     }
 }
