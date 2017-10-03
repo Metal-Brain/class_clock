@@ -25,7 +25,8 @@
 
 					<div class="form-group">
 						<label>Sigla</label>
-            <input type="text" class="form-control" name="sigla_disciplina" id="sigla_curso" placeholder="ex: LOPA1" style="max-width:300px;" value="<?= $data['disciplina']['sigla_disciplina'] ?>">
+
+						<input maxlength="5" type="text" class="form-control" name="sigla_disciplina" id="sigla_curso" placeholder="ex: LOPA1" style="max-width:300px;" value="<?= $data['disciplina']['sigla_disciplina'] ?>">
 					</div>
 
 					<div class="form-group test">
