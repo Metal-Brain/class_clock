@@ -11,9 +11,9 @@
     protected $fillable = ['nome'];
 
     //Função responsável por retornas as disciplinas oferecidas do semestre.
-    public function disciplinaOferecida()
+    public function turma()
     {
-      return $this->hasMany(DisciplinaOferecida_model::class, 'periodo_id');
+      return $this->hasMany(Turma_model::class, 'periodo_id');
     }
 
     //Função responsável por retornar todos as FPAS referente ao período.
