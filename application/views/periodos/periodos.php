@@ -35,15 +35,16 @@
 		<!-- Aqui é onde popula a tabela com os dados que vem do backend, onde cada view vai configurar de acordo.-->
 		<tbody>
 			<?php foreach ($periodos as $periodo) { ?>
-				<tr <?php if(empty($periodo->deletado_em)): echo 'class="success"'; endif; ?>>
+				<tr <?php if($periodo->deletado_em): echo 'class="danger"'; endif; ?>>
 					<td class="text-center"><?= ucwords($periodo['nome']); ?></td>
 					<td class="text-center"><?= ( empty($periodo->deletado_em) ) ? 'Ativado' : 'Desativado'?></td>
 					<td class="text-center">
-						<?php if ( empty($periodo->deletado_em) ): ?>
-							<a class="btn btn-warning glyphicon glyphicon-pencil" title="Editar" href="<?= site_url('periodo/editar/'.$periodo->id)?>"></a>
-							<button class="btn btn-danger" type="button" id="btn-delete" onclick="confirm(<?= $periodo->id ?>,'Realmente deseja desativar o período ativo?','deletar')"> <i class="glyphicon glyphicon-remove"></i></button>
-						<?php else : ?>
-							<button class="btn btn-success" type="button" id="btn-delete" onclick="confirm(<?= $periodo->id ?>,'Deseja ativar o turno?','ativar')"> <i class="glyphicon glyphicon-ok"></i></button>
+						<?php if (empty($periodo->deletado_em)): ?>
+						<a class="btn btn-warning glyphicon glyphicon-pencil" title="Editar" href="<?= site_url('periodo/editar/'.$periodo->id)?>"></a>
+						<button class="btn btn-danger" title="Desativar" type="button" id="btn-delete" onclick="confirmDelete(<?= $periodo->id ?>,'Deseja desativar o período?','deletar')"> <i class="glyphicon glyphicon-remove"></i></button>
+					<?php else : ?>
+						<a class="btn btn-warning glyphicon glyphicon-pencil disabled" title="Editar" href="<?= site_url('periodo/editar/'.$periodo->id)?>"></a>
+						<button class="btn btn-success" title="Ativar" type="button" id="btn-delete" onclick="confirmDelete(<?= $periodo->id ?>,'Deseja ativar o período?','ativar')"> <i class="glyphicon glyphicon-check"></i></button>
 						<?php endif; ?>
 					</td>
 				</tr>
