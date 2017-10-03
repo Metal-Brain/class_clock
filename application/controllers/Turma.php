@@ -3,7 +3,7 @@
 class Turma extends MY_Controller {
 
   function index () {
-    $turmas = Turma_model::all();
+    $turmas = Periodo_model::whereAtivo(true)->firstOrFail()->turmas;
     $this->load->template('turmas/turmas',compact('turmas'),'turmas/js_turmas');
   }
 
@@ -19,13 +19,15 @@ class Turma extends MY_Controller {
       ['dp', 'Dependência', 'required'],
       ['qtd_alunos', 'Quantidade de Alunos', 'required|numeric'],
       ['disciplina_id', 'Disciplina', 'required|numeric'],
-      ['turno_id', 'Turno', 'required|numeric'],
-      ['periodo_id', 'Período', 'required|numeric'],
+      ['turno_id', 'Turno', 'required|numeric']
     ]);
 
     if ($this->run_validation()) {
       try{
-        $turma = Turma_model::create($this->request_all());
+        $data = $this->request_all();
+        $data['periodo_id'] = Periodo_model::whereAtivo(true)->firstOrFail()->id;
+
+        $turma = Turma_model::create($data);
         $this->session->set_flashdata('success','Turma cadastrada com sucesso');
         redirect("turma");
       } catch (Exception $e) {
@@ -51,10 +53,9 @@ class Turma extends MY_Controller {
       ['dp', 'Dependência', 'required'],
       ['qtd_alunos', 'Quantidade de Alunos', 'required|numeric'],
       ['disciplina_id', 'Disciplina', 'required|numeric'],
-      ['turno_id', 'Turno', 'required|numeric'],
-      ['periodo_id', 'Período', 'required|numeric'],
+      ['turno_id', 'Turno', 'required|numeric']
     ]);
-    
+
     if ($this->form_validation->run()) {
       try {
         $turma = Turma_model::withTrashed()->findOrFail($id);
