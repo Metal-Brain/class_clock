@@ -17,7 +17,13 @@
     public function cadastrar() {
       $data = array(
         'modalidades' => Modalidade_model::withTrashed()->get(),
-        'docentes' => DB::table('docente')->join('pessoa', 'docente.pessoa_id', '=', 'pessoa.id')->join('curso', 'docente.pessoa_id', '!=', 'curso.docente_id')->select('pessoa.nome', 'docente.pessoa_id')->get()
+        'docentes' => DB::table('pessoa')
+                          ->join('docente', 'pessoa.id', '=', 'docente.pessoa_id')
+                          ->join('curso', 'docente.pessoa_id', '!=', 'curso.docente_id')
+                          ->select('pessoa.nome', 'docente.id')
+                          //->where('docente.pessoa_id', '!=', 'curso.docente_id')
+                          ->distinct()
+                          ->get()
       );
       $this->load->template('cursos/cadastrar', compact('data'), 'cursos/js_cursos');
     }
@@ -43,12 +49,17 @@
       $this->cadastrar();
     }
 
-    public function editar($id, $docente_id) {
+    public function editar($id) {
       $data = array(
         'curso' => Curso_model::withTrashed()->findOrFail($id),
         'modalidades' => Modalidade_model::all('id','nome_modalidade'),
         //'coordenador' => Pessoa_model::findOrFail($docente_id),
-        //'docentes' => DB::table('docente')->join('pessoa', 'docente.pessoa_id', '=', 'pessoa.id')->join('curso', 'docente.pessoa_id', '!=', 'curso.docente_id')->select('pessoa.nome', 'docente.pessoa_id')->get()
+        'docentes' => DB::table('docente')
+                      ->join('pessoa', 'docente.pessoa_id', '=', 'pessoa.id')
+                      ->join('curso', 'docente.pessoa_id', '!=', 'curso.docente_id')
+                      ->select('pessoa.nome', 'docente.pessoa_id')
+                      ->distinct()
+                      ->get()
       );
       $this->load->template('cursos/editar', compact('data','id'), 'cursos/js_cursos');
     }

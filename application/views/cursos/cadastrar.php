@@ -1,6 +1,6 @@
-<!--<pre>
+<pre>
 		<?php print_r($data['docentes']) ?>
-</pre>-->
+</pre>
  <div class="col-xs=10 col-sm-10 col-md-10">
      <div class="row" style="margin-top: 5px;">
 		<div class="col-md-12">

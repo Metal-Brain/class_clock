@@ -354,6 +354,31 @@ ENGINE = InnoDB;
 
     INSERT INTO tipo(nome) VALUES ('Administrador'), ('CRA'), ('DAE'), ('Docente');
 
+    INSERT INTO area(id, nome_area, codigo)
+        VALUES(1, "Banco de dados", 01),
+              (2, "Inteligência Artificial", 02),
+              (3, "Redes de Computadores", 03);
+
+    INSERT INTO pessoa(nome, prontuario, senha, email) VALUES("João José", "cg1234", "joaojose", "joaojose@gmail.com");
+    INSERT INTO pessoa(nome, prontuario, senha, email) VALUES("Maria Roberta", "cg4321", "mariaroberta", "mariaroberta@gmail.com");
+    INSERT INTO pessoa(nome, prontuario, senha, email) VALUES("Renato Vander", "cg1122", "renatovander", "renatovander@gmail.com");
+    INSERT INTO pessoa(nome, prontuario, senha, email) VALUES("Antonio Augusto", "cg4444", "antonioaugusto", "antonioaugusto@gmail.com");
+    INSERT INTO pessoa(nome, prontuario, senha, email) VALUES("Celia Amanda", "cg8965", "celiaamanda", "celiaamanda@gmail.com");
+    INSERT INTO pessoa(nome, prontuario, senha, email) VALUES("Norberto Alves", "cg7536", "norbertoalves", "norbertoalves@gmail.com");
+
+    INSERT INTO docente(pessoa_id, area_id, nascimento, ingresso_campus, ingresso_ifsp, regime)
+        VALUES(1, 1, "1980/01/01", "2000/01/01", "2002/01/01", "N");
+    INSERT INTO docente(pessoa_id, area_id, nascimento, ingresso_campus, ingresso_ifsp, regime)
+        VALUES(2, 2, "1990/05/05", "2002/06/06", "2003/03/03", "S");
+    INSERT INTO docente(pessoa_id, area_id, nascimento, ingresso_campus, ingresso_ifsp, regime)
+        VALUES(3, 3, "1992/06/05", "2001/06/06", "2002/03/03", "G");
+    INSERT INTO docente(pessoa_id, area_id, nascimento, ingresso_campus, ingresso_ifsp, regime)
+        VALUES(4, 1, "1985/01/01", "2001/01/01", "2004/01/01", "O");
+    INSERT INTO docente(pessoa_id, area_id, nascimento, ingresso_campus, ingresso_ifsp, regime)
+        VALUES(5, 2, "1989/05/05", "2001/06/06", "2001/03/03", "V");
+    INSERT INTO docente(pessoa_id, area_id, nascimento, ingresso_campus, ingresso_ifsp, regime)
+        VALUES(6, 3, "1977/06/05", "1999/06/06", "2000/03/03", "P");
+
     INSERT INTO tipo_sala(nome_tipo_sala, descricao_tipo_sala) VALUES("Teorica", "Mesas e Cadeiras");
     INSERT INTO tipo_sala(nome_tipo_sala, descricao_tipo_sala) VALUES("Pratica", "Computadores");
     INSERT INTO tipo_sala(nome_tipo_sala, descricao_tipo_sala) VALUES("Hibrida", "Mesas, cadeiras e computadores");
@@ -366,16 +391,16 @@ ENGINE = InnoDB;
     INSERT INTO modalidade(nome_modalidade, codigo) VALUES("Mestrado", "001321");
     INSERT INTO modalidade(nome_modalidade, codigo) VALUES("Doutorado", "44121");
 
-    INSERT INTO curso(modalidade_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento)
-        VALUES(1, 111, "Análise e Desenvolvimento de Sistemas", "ADS", 6, "B");
-    INSERT INTO curso(modalidade_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento)
-        VALUES(2, 222, "Processos Gerenciais", "PRG", 8, "S");
-    INSERT INTO curso(modalidade_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento)
-        VALUES(3, 333, "Fisica", "FIS", 4, "S");
-    INSERT INTO curso(modalidade_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento)
-        VALUES(4, 444, "Computação Avançada", "CPA", 3, "B");
-    INSERT INTO curso(modalidade_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento)
-        VALUES(5, 544, "Cura do Cancer", "CDC", 8, "B");
+    INSERT INTO curso(docente_id, modalidade_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento)
+        VALUES(1, 1, 111, "Análise e Desenvolvimento de Sistemas", "ADS", 6, "B");
+    INSERT INTO curso(docente_id, modalidade_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento)
+        VALUES(2, 2, 222, "Processos Gerenciais", "PRG", 8, "S");
+    INSERT INTO curso(docente_id, modalidade_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento)
+        VALUES(3, 3, 333, "Fisica", "FIS", 4, "S");
+    INSERT INTO curso(docente_id, modalidade_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento)
+        VALUES(4, 4, 444, "Computação Avançada", "CPA", 3, "B");
+    INSERT INTO curso(docente_id, modalidade_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento)
+        VALUES(5, 5, 544, "Cura do Cancer", "CDC", 8, "B");
 
     INSERT INTO disciplina(curso_id, tipo_sala_id, nome_disciplina, modulo, sigla_disciplina, qtd_professor, qtd_aulas)
         VALUES(1, 5, "Análise de Sistemas", 1, "ADS", 2, 4);
@@ -399,5 +424,3 @@ ENGINE = InnoDB;
     INSERT INTO horario(turno_id, inicio, fim) VALUES(3, '20:10:00', '21:00');
     INSERT INTO horario(turno_id, inicio, fim) VALUES(4, '9:10:00', '10:00');
     INSERT INTO horario(turno_id, inicio, fim) VALUES(5, '10:10:00', '20:00');
-
-    INSERT INTO area(id, nome_area, codigo) VALUES(1, "Banco de dados", 01), (2, "Inteligência Artificial", 02), (3, "Redes de Computadores", 03);

@@ -72,7 +72,7 @@
 					<td class="text-center">
 
 							<?php if ( empty($curso->deletado_em) ) : ?>
-							<a class="btn btn-warning glyphicon glyphicon-pencil" title="Editar" href="<?= site_url('Curso/editar/'.$curso->id, $curso->docente_id)?>"></a>
+							<a class="btn btn-warning glyphicon glyphicon-pencil" title="Editar" href="<?= site_url('Curso/editar/'.$curso->id)?>"></a>
 							<button class="btn btn-danger" type="button" id="btn-delete" onclick="confirmDelete(<?= $curso->id ?>,'Deseja desativar o Curso?','deletar')"> <i class="glyphicon glyphicon-remove"></i></button>
 						<?php else : ?>
 							<a class="btn btn-warning glyphicon glyphicon-pencil disabled" title="Editar" href="<?= site_url('Cursp/editar/'.$curso->id)?>"></a>
