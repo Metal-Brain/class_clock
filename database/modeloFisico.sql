@@ -245,15 +245,16 @@
 
 
     -- -----------------------------------------------------
-    -- Table `horario`.`disciplina_oferecida`
+    -- Table `horario`.`turma`
     -- -----------------------------------------------------
-    CREATE  TABLE IF NOT EXISTS `horario`.`disciplina_oferecida` (
+    CREATE  TABLE IF NOT EXISTS `horario`.`turma` (
       `id` INT NOT NULL ,
       `disciplina_id` SMALLINT(6) NOT NULL ,
       `periodo_id` INT NOT NULL ,
       `turno_id` TINYINT(4) NOT NULL ,
       `qtd_alunos` INT NOT NULL ,
       `dp` TINYINT(1) NOT NULL ,
+      `deletado_em` TIMESTAMP,
       PRIMARY KEY (`id`) ,
       INDEX `fk_disciplina_has_periodo_periodo1_idx` (`periodo_id` ASC) ,
       INDEX `fk_disciplina_has_periodo_disciplina1_idx` (`disciplina_id` ASC) ,
