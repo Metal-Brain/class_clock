@@ -2,7 +2,9 @@
     $(document).ready(function(){
 
       	$("#disciplinaTable").DataTable();
-
+        jQuery.validator.addMethod("alphanumeric", function(value, element) {
+          return this.optional(element) || /^[a-zA-Z0-9]+$/.test(value);
+        });
 
                 // document.getElementById("sigla_curso").onkeypress = function(e) {
                 //   if ((this.value.length==5) && !(key == 8)){
@@ -25,7 +27,8 @@
                 sigla_disciplina: {
                     required: true,
                     maxlength:5,
-                    minlength:3
+                    minlength:3,
+                    alphanumeric: true
                 },
                 curso_id:{
                   required:true,
@@ -65,7 +68,8 @@
                 sigla_disciplina:{
                     required:'Campo sigla é obrigatório',
                     maxlength: 'Tamanho maximo do campo é 5 caracteres',
-                    minlength:'Tamanho mínimo do campo é 3 caracteres'
+                    minlength:'Tamanho mínimo do campo é 3 caracteres',
+                    alphanumeric:'Não insira caracteres especiais.'
                 },
                 qtd_professor:{
                     required:'Campo quantidade de professores é obrigatório',

@@ -25,7 +25,7 @@
 
 					<div class="form-group">
 						<label>Sigla</label>
-						<input type="text" class="form-control" id="sigla_curso" name="sigla_disciplina" placeholder="ex: LOPA1" style="max-width:300px;" >
+						<input maxlength="5" type="text" class="form-control" id="sigla_curso" name="sigla_disciplina" placeholder="ex: LOPA1" style="max-width:300px;" >
 					</div>
 
 					<div class="form-group">
