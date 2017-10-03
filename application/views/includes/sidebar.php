@@ -32,7 +32,7 @@
 		   </a>
 	   </li>
 	   <li id="sidebar-fpa">
-		   <a href="">
+		   <a href="http://localhost/class_clock/index.php/Fpa">
 			   <span class="glyphicon glyphicon-duplicate"></span> <span class="sidebar-label">FPA</span>
 		   </a>
 	   </li>
