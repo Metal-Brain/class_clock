@@ -8,11 +8,13 @@ class Fpa extends CI_Controller{
   }
 
   public function cadastrar(){
-    $this->load->template('fpas/fpaCadastrar', [], 'fpas/js_fpa');
+    $horarios = Horario::orderBy('inicio')->get();
+
+    $this->load->template('fpas/fpaCadastrar', [$horarios], 'fpas/js_fpa');
   }
 
   public function salvar(){
-    
+
   }
 
   public function editar(){
@@ -24,7 +26,7 @@ class Fpa extends CI_Controller{
   }
 
   public function deletar(){
-    
+
   }
 
 }
