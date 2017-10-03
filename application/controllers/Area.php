@@ -81,13 +81,11 @@ class Area extends CI_Controller {
      $this->form_validation->set_rules('codigo',
                                       'codigo',
                                       array('required',
-                                            'max_length[2]',
-                                             "is_unique_except[area.codigo,{$area->codigo}]")
+                                            'max_length[2]')
                                      );
     $this->form_validation->set_rules('nome_area',
                                       array('required',
-                                            'max_length[25]',
-                                             "is_unique_except[area.nome_area,{$area->nome_area}]")
+                                            'max_length[25]')
                                      );
 
 
