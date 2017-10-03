@@ -29,7 +29,7 @@ class Periodo extends CI_Controller
     public function salvar()
     {
         $this->form_validation->set_rules('nome','nome',array('required','max_length[6]','is_unique[periodo.nome]','trim','strtolower'));
-        $this->form_validation->set_message('is_unique','O nome do período informado já está cadastrado');
+        $this->form_validation->set_message('is_unique','O ano e o semestre informados já estão cadastrados.');
         $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
         if ($this->form_validation->run())
         {
@@ -82,7 +82,7 @@ class Periodo extends CI_Controller
         {
             $this->form_validation->set_rules('nome','nome',array('required','max_length[6]','trim','strtolower'));
         }
-        $this->form_validation->set_message('is_unique','O nome do período informado já está cadastrado');
+        $this->form_validation->set_message('is_unique', 'O ano e o semestre informados já estão cadastrados.');
         $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
         if ($this->form_validation->run())
         {

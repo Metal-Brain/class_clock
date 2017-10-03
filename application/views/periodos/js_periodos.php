@@ -8,11 +8,6 @@
 						minlength: 5,
 						maxlength: 6
 					}
-				},
-				nome: {
-					prontuario: {
-						remote: 'O campo deve conter um valor único.'
-					}
 				}
 			});
 
@@ -36,25 +31,21 @@
 				});
 			}
 
-            function somenteNumeros(num)
-            {
-                var er = /[^0-9.-]/;
-                var per = num.value;
-                er.lastIndex = 0;
-                var campo = num;
-                if (er.test(campo.value))
-                {
-                    campo.value = "";
-                }
-                else
-                {
-                    if(per.length ==4)
-                    {
-                        num.value = per += "-";
-                    }
-                }
-            }
+			function mascara(o,f){
+				v_obj = o;
+				v_fun = f;
+				setTimeout("execmascara()",1);
+			}
 
+			function execmascara(){
+				v_obj.value = v_fun(v_obj.value);
+			}
+
+			function somenteNumeros(num){
+				num = num.replace(/\D/g,"");
+				num = num.replace(/^(\d{4})(\d)/,"$1-$2");
+				return num;
+			}
         </script>
 
 		<script type="text/javascript">
