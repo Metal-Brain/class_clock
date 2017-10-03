@@ -124,8 +124,8 @@
 										<div class="row">
 											<div class="col-md-12 form-group">										
 												<label> Coordenador</label>
-												<input list="coordenadores" class="form-control verifica-coordenador" name="coordenador">
-												  <datalist id="coordenadores">
+												<select class="form-control" name="docente_id">
+												
 													<?php
 														foreach($coordenadores as $coordenador){
 															if($coordenador['id'] == $data['curso']->coordenador['id']){
@@ -135,7 +135,7 @@
 															}	
 													?>
 													
-												  </datalist>
+											    </select>
 											</div>	
 										</div>
 										

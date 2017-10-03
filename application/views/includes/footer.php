@@ -16,3 +16,4 @@
 <script src="<?= base_url('assets/DataTables/datatables.js')?>"></script>
 <script src="<?= base_url('assets/js/bootbox.min.js')?>"></script>
 <script src="<?= base_url('assets/js/main.js')?>"></script>
+<script src="<?= base_url('assets/js/select2.min.js')?>"></script>

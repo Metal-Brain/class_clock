@@ -14,12 +14,15 @@
 		<link href="<?= base_url('assets/css/style.css')?>" rel="stylesheet">
 
 		<link href="<?= base_url('assets/DataTables/dataTables.bootstrap.min.css')?>" rel="stylesheet">
-	</head>
+	
 
     <!-- DataTable -->
     <link href="<?= base_url('assets/DataTables/dataTables.bootstrap.min.css')?>" rel="stylesheet">
+	<!-- Select2 -->
+	<link href="<?= base_url('assets/css/select2.min.css')?>" rel="stylesheet">
+	
+	</head>
 
-</head>
 
 		<div class="container-fluid">
 			<div class="row hidden-print">
