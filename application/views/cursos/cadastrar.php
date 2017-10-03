@@ -1,6 +1,6 @@
 <!--<pre>
-		<?php print_r($modalidade_id) ?>
-</pre> -->
+		<?php print_r($data['docentes']) ?>
+</pre>-->
  <div class="col-xs=10 col-sm-10 col-md-10">
      <div class="row" style="margin-top: 5px;">
 		<div class="col-md-12">
@@ -17,12 +17,12 @@
 	</div>
 								<form  id="formCurso" name="formCurso" method="post" action="<?= site_url('curso/salvar')?>">
                                         <h1>Cadastrar Curso</h1>
-										<div class="row">	
+										<div class="row">
 											<div class="col-xs-12 col-sm-12 col-md-11 form-group">
-										
+
 												<label>Nome:</label>
 												<input class="form-control" placeholder="Nome" name="nome_curso" id="nome_curso" maxlength="75">
-												
+
 											</div>
 										</div>
 										<div class="row">
@@ -35,7 +35,7 @@
 											<div class="form-group col-sm-3 col-md-2">
 											<label>Sigla</label>
 												<input class="form-control" placeholder="ex: ADS" name="sigla_curso" id="sigla_curso" maxlength="3">
-																		
+
 											</div>
 										</div>
 
@@ -44,12 +44,12 @@
 											<?= form_error('sigla_curso') ?>
 										  </div>
 										</div>
-										
+
 										<div class="row">
 											<div class="form-group col-sm-3 col-md-2">
 											<label>Codigo</label>
 												<input class="form-control" placeholder="ex: 123" type="number" onKeyPress="var key = event.keyCode || event.charCode; if((this.value.length==5) && !(key == 8)) return false;" name="codigo_curso" id="codigo_curso">
-							
+
 											</div>
 										</div>
 
@@ -64,7 +64,7 @@
 											<div class="form-group col-sm-3 col-md-2">
 												<label>Quantidade de semestres</label>
 												<input class="form-control" placeholder="ex: 2" type="number"  onKeyPress="var key = event.keyCode || event.charCode; if((this.value.length==2) && !(key == 8)) return false;" name="qtd_semestre" id="qtd_semestre" maxlength="2">
-												
+
 											</div>
 										</div>
 
@@ -73,26 +73,26 @@
 											<?= form_error('qtd_semestre') ?>
 										  </div>
 										</div>
-										<div class="row">	
-										
+										<div class="row">
+
 											<div class="col-xs-12 col-sm-12 col-md-11 form-group">
 												<label>Fechamento</label><br>
 												<label><input type="radio" name="fechamento" id="radioBimestral" value="B" checked>Bimestral</label>
 												<label><input type="radio" name="fechamento" id="radioSemestral" value="S">Semestral</label>
 											</div>
 										</div>
-										
+
 										<div class="row">
 											<div class="form-group col-sm-5 col-md-4">
 												<label>Modalidade</label>
 												<select name="modalidade_id">
-												
+
 												<?php
-													foreach($data as $modalidade){
+													foreach($data['modalidades'] as $modalidade){
 														echo '<option value="'. $modalidade['id'] .'">'. $modalidade['nome_modalidade'] .'</option>';}
 												?>
 												</select>
-												
+
 											</div>
 										</div>
 
@@ -101,29 +101,29 @@
 											<?= form_error('modalidade_id') ?>
 										  </div>
 										</div>
-										
+
 										<div class="row">
-											<div class="col-md-12 form-group">										
+											<div class="col-md-12 form-group">
 												<label> Coordenador</label>
 												<select class="form-control" name="docente_id">
 
 													<?php
-														foreach($coordenadores as $coordenador){
-															echo '<option value="'. $coordenador['id'] .'">'. $coordenador['nome'] .'</option>';}
+														foreach($data['docentes'] as $coordenador){
+															echo '<option value="'. $coordenador->id .'">'. $coordenador->nome .'</option>';}
 													?>
-											
+
 												 </select>
-											
-											</div>	
+
+											</div>
 										</div>
-										
+
 										<div class="row">
 											<div class="col-md-12 form-group">
 												<a class="btn btn-danger active" href="<?= base_url('index.php/Curso')?>" style="float: right;"><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
 												<button type="submit" class="btn btn-success active salvar" style="float: right; margin-right: 10px;"><span class="glyphicon glyphicon-floppy-disk"></span> Salvar</button>
 											</div>
 										</div>
-										
+
 								</form>
 												<!--<button onclick="myFunction()">Try it</button> -->
 							</div>
