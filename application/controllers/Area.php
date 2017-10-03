@@ -31,14 +31,19 @@ class Area extends CI_Controller {
                                       'codigo',
                                       array('required',
                                             'max_length[2]',
-                                            'numeric',
-                                            'is_unique[area.codigo]')
+
+                                            'is_unique[area.codigo]',
+                                           'is_natural_no_zero',),
+                                      array('is_unique' => 'Código já existente.')
+
                                      );
     $this->form_validation->set_rules('nome_area',
                                       'nome',
                                       array('required',
                                             'max_length[25]',
-                                            'is_unique[area.nome_area]')
+                                            'is_unique[area.nome_area]',
+                                            'regex_match[/^\D+$/]'),
+                                    array('is_unique' => 'Nome já existente.')
                                      );
 
 
@@ -79,18 +84,18 @@ class Area extends CI_Controller {
    * @since 2017/09/25
    */
   function atualizar ($id) {
-     $area = Area_model::findOrFail($id);
-
+      $area = Area_model::findOrFail($id);
      $this->form_validation->set_rules('codigo',
                                       'codigo',
                                       array('required',
                                             'max_length[2]',
-                                             "is_unique_except[area.codigo,{$area->codigo}]")
+                                            "is_unique_except[area.codigo,{$area->codigo}]",
+                                           'is_natural_no_zero',)
                                      );
     $this->form_validation->set_rules('nome_area',
                                       array('required',
                                             'max_length[25]',
-                                             "is_unique_except[area.nome_area,{$area->nome_area}]")
+                                            'regex_match[/^\D+$/]', "is_unique_except[area.nome_area,{$area->nome_area}]")
                                      );
 
 
