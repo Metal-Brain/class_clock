@@ -42,11 +42,14 @@
 					<td class="text-center"><?= ( empty($area->deletado_em) ) ? 'Ativado' : 'Desativado'?></td>
 					<td class="text-center">
 						<?php if ( empty($area->deletado_em) ) : ?>
-							<a class="btn btn-warning glyphicon glyphicon-pencil" title="Editar" href="<?= site_url('area/editar/'.$area->id)?>"></a>
-							<a class="btn btn-danger glyphicon glyphicon-remove" title="Desativar" href="<?= site_url('area/deletar/'.$area->id)?>"></a>
+                            <a class="btn btn-warning glyphicon glyphicon-pencil" title="Editar" href="<?= site_url('Area/editar/'.$area->id)?>"></a>
+							<button class="btn btn-danger" type="button" id="btn-delete" onclick="confirmDelete(<?= $area->id ?>,'Deseja desativar a área?','deletar')"> <i class="glyphicon glyphicon-remove"></i></button>
 						<?php else : ?>
-							<a class="btn btn-success glyphicon glyphicon-check" title="Ativar" href="<?= site_url('area/ativar/'.$area->id)?>"></a>
+							<a class="btn btn-warning glyphicon glyphicon-pencil disabled" title="Editar" href="<?= site_url('Area/editar/'.$area->id)?>"></a>
+							<button class="btn btn-success" type="button" id="btn-delete" onclick="confirmDelete(<?= $area->id ?>,'Deseja ativar a área?','ativar')"> <i class="glyphicon glyphicon-check"></i></button>
+                        
 						<?php endif; ?>
+
 					</td>
 				</tr>
 			<?php } ?>

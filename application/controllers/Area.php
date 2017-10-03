@@ -31,8 +31,7 @@ class Area extends CI_Controller {
                                       'codigo',
                                       array('required',
                                             'max_length[2]',
-                                            'is_unique[area.codigo]',
-                                           'is_natural_no_zero',),
+                                            'is_unique[area.codigo]'),
                                       array('is_unique' => 'Código já existente.')
                                      );
     $this->form_validation->set_rules('nome_area',
