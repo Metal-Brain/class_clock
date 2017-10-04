@@ -134,4 +134,4 @@ $autoload['language'] = array();
 */
 $autoload['model'] = array('DB','Model','Turno_model','Horario_model','Curso_model',
   'Disciplina_model','Docente_model','Pessoa_model','Tipo_model','Modalidade_model',
-  'TipoSala_model', 'Turma_model');
+  'TipoSala_model', 'Turma_model', 'Periodo_model');

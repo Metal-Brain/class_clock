@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Turma_model extends Model {
-    protected $table = 'disciplina_oferecida';
+    protected $table = 'turma';
     protected $fillable = ['disciplina_id', 'periodo_id', 'turno_id', 'qtd_alunos', 'dp'];
 
     public function disciplina(){

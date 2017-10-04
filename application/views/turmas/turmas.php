@@ -26,27 +26,24 @@
 </div>
 
         <!-- Aqui é a Listagem dos Itens -->
-
                 <table id="turmaTable" class="table table-striped">
                     <thead>
                         <tr>
                             <th class="text-center">Periodo</th>
+										        <th class="text-center">Disciplina</th>
+														<th class="text-center">Turno</th>
+														<th class="text-center">Qtd. Alunos</th>
 														<th class="text-center">Dependência</th>
-                            <th class="text-center">Disciplina</th>
-                            <th class="text-center">Turno</th>
-                            <th class="text-center">Qtd. Alunos</th>
-
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($turmas as $turma): ?>
                             <tr <?php if($turma->deletado_em): echo 'class="danger"'; endif; ?>>
-                            <td class="text-center"><?= htmlspecialchars($turma['disciplina_id']); ?></td>
-							<td class="text-center"><?= $turma['periodo_id']; ?></td>
-							<td class="text-center"><?= $turma['turno_id']; ?></td>
-							<td class="text-center"><?= $turma['qtd_alunos']; ?></td>
-							<td class="text-center"><?= $turma['dp']; ?></td>
-							<td class="text-center"><?= ( empty($turma->deletado_em) ) ? 'Ativado' : 'Desativado'?></td>
+							<td class="text-center"><?= $turma->periodo->nome; ?></td>
+							<td class="text-center"><?= $turma->disciplina->nome_disciplina; ?></td>
+							<td class="text-center"><?= $turma->turno->nome_turno ?></td>
+							<td class="text-center"><?= $turma->qtd_alunos ?></td>
+							<td class="text-center"><?= ( empty($turma->dp) ) ? 'Sim' : 'Não'?></td>
 							<td class="text-center">
 						<?php if ( empty($turma->deletado_em) ) : ?>
 							<a class="btn btn-warning glyphicon glyphicon-pencil" title="Editar" href="<?= site_url('Turma/editar/'.$turma->id)?>"></a>

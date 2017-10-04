@@ -11,7 +11,7 @@ class MY_Controller extends CI_Controller {
         if(is_null($this->name)){ $this->name = get_class($this); }
 
         // Informa o método que controlará as exceções
-        set_exception_handler([$this, '_exception_handler']);
+        // set_exception_handler([$this, '_exception_handler']);
     }
 
     /**
