@@ -408,6 +408,6 @@ ENGINE = InnoDB;
     INSERT INTO turno(nome_turno) VALUES("Integral");
     INSERT INTO turno(nome_turno) VALUES("Diário");
 
-    INSERT INTO periodo('nome', 'ativo') VALUES ('2017-1', '0'), ('2017-2', '0'), ('2018-1', '1');
+    INSERT INTO periodo(nome, ativo) VALUES ('2017-1', '0'), ('2017-2', '0'), ('2018-1', '1');
 
     INSERT INTO area(id, nome_area, codigo) VALUES(1, "Banco de dados", 01), (2, "Inteligência Artificial", 02), (3, "Redes de Computadores", 03);
