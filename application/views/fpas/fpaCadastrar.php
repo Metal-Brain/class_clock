@@ -66,6 +66,7 @@
             <div class="table-responsive">
               <form action="<?= site_url('fpa/salvar')?>" method="POST">
               <table class="table">
+                <h4 class="text-center">Selecione o dia em que você nao estará disponivel!</h4>
                 <thead>
                   <tr>
                     <th>Segunda</th>
