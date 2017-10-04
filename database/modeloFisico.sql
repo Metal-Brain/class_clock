@@ -234,7 +234,7 @@ ENGINE = InnoDB;
     CREATE  TABLE IF NOT EXISTS `horario`.`periodo` (
       `id` INT NOT NULL AUTO_INCREMENT ,
       `nome` CHAR(6) NOT NULL ,
-      `ativo` CHAR(1) NOT NULL ,
+      `ativo` CHAR(1) NOT NULL DEFAULT 0,
       `deletado_em` TIMESTAMP NULL ,
       PRIMARY KEY (`id`) ,
       UNIQUE INDEX `nome_UNIQUE` (`nome` ASC) )
@@ -267,13 +267,13 @@ ENGINE = InnoDB;
     -- Table `horario`.`turma`
     -- -----------------------------------------------------
     CREATE  TABLE IF NOT EXISTS `horario`.`turma` (
-      `id` INT NOT NULL ,
+      `id` INT NOT NULL AUTO_INCREMENT,
       `disciplina_id` SMALLINT(6) NOT NULL ,
       `periodo_id` INT NOT NULL ,
       `turno_id` TINYINT(4) NOT NULL ,
       `qtd_alunos` INT NOT NULL ,
       `dp` TINYINT(1) NOT NULL ,
-      `deletado_em` TIMESTAMP,
+      `deletado_em` TIMESTAMP NULL DEFAULT NULL,
       PRIMARY KEY (`id`) ,
       INDEX `fk_disciplina_has_periodo_periodo1_idx` (`periodo_id` ASC) ,
       INDEX `fk_disciplina_has_periodo_disciplina1_idx` (`disciplina_id` ASC) ,
@@ -325,19 +325,19 @@ ENGINE = InnoDB;
     -- -----------------------------------------------------
     CREATE  TABLE IF NOT EXISTS `horario`.`preferencia` (
       `fpa_id` INT NOT NULL ,
-      `disciplinas_oferecidas_id` INT NOT NULL ,
+      `turma_id` INT NOT NULL ,
       `ordem` INT NOT NULL ,
       PRIMARY KEY (`fpa_id`, `disciplinas_oferecidas_id`) ,
       INDEX `fk_disciplina_has_fpa_fpa1_idx` (`fpa_id` ASC) ,
-      INDEX `fk_preferencias_disciplinas_oferecidas1_idx` (`disciplinas_oferecidas_id` ASC) ,
+      INDEX `fk_preferencias_turma1_idx` (`turma_id` ASC) ,
       CONSTRAINT `fk_disciplina_has_fpa_fpa1`
         FOREIGN KEY (`fpa_id` )
         REFERENCES `horario`.`fpa` (`id` )
         ON DELETE NO ACTION
         ON UPDATE NO ACTION,
-      CONSTRAINT `fk_preferencias_disciplinas_oferecidas1`
-        FOREIGN KEY (`disciplinas_oferecidas_id` )
-        REFERENCES `horario`.`disciplina_oferecida` (`id` )
+      CONSTRAINT `fk_preferencias_turma1`
+        FOREIGN KEY (`turma_id` )
+        REFERENCES `horario`.`turma` (`id` )
         ON DELETE NO ACTION
         ON UPDATE NO ACTION)
     ENGINE = InnoDB
@@ -407,5 +407,7 @@ ENGINE = InnoDB;
     INSERT INTO turno(nome_turno) VALUES("Noturno");
     INSERT INTO turno(nome_turno) VALUES("Integral");
     INSERT INTO turno(nome_turno) VALUES("Diário");
+
+    INSERT INTO periodo('nome', 'ativo') VALUES ('2017-1', '0'), ('2017-2', '0'), ('2018-1', '1');
 
     INSERT INTO area(id, nome_area, codigo) VALUES(1, "Banco de dados", 01), (2, "Inteligência Artificial", 02), (3, "Redes de Computadores", 03);
