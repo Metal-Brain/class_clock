@@ -8,7 +8,6 @@
       </div>
 
         <div class="row">
-          <div class="container">
             <div class="col-md-12">
                 <h4><strong>Selecione o método desejado:</strong></h4>
             </div>
@@ -21,11 +20,10 @@
                     <li><a href="#" id="showIndisponibilidade">Indisponibilidade</a></li>
                 </ul>
               </div>
-          </div>
         </div>
-
+        <!-- Criando a tabela de disponibilidade-->
         <div id="disponibilidade" class="row" style="display:none;">
-          <div class="col-md-offset-1 col-md-10">
+          <div class="col-md-12">
             <div class="table-responsive">
               <form action="<?= site_url('fpa/salvar')?>" method="POST">
               <table class="table">
@@ -56,14 +54,17 @@
                 </tbody>
               </table>
             </div>
-            <a class="btn btn-danger active" href="<?= base_url('index.php/Fpa')?>" style="float: right;"><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
-            <button type="submit" class="btn btn-success active salvar" style="float: right; margin-right: 10px;"><span class="glyphicon glyphicon-floppy-disk"></span> Salvar</button>
+            <div class="col-md-12">
+              <a class="btn btn-danger active" href="<?= base_url('index.php/Fpa')?>" style="float: right;"><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
+              <button type="submit" class="btn btn-success active salvar" style="float: right; margin-right: 10px;"><span class="glyphicon glyphicon-floppy-disk"></span> Salvar</button>
+            </div>
           </form>
           </div>
         </div>
 
+        <!-- Aqui ocorre a tabela de indisponibilidade-->
         <div id="indisponibilidade" class="row" style="display:none;">
-          <div class="col-md-offset-1 col-md-10">
+          <div class="col-md-12">
             <div class="table-responsive">
               <form action="<?= site_url('fpa/salvar')?>" method="POST">
               <table class="table">
@@ -90,8 +91,10 @@
                 </tbody>
               </table>
             </div>
-            <a class="btn btn-danger active" href="<?= base_url('index.php/Fpa')?>" style="float: right;"><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
-            <button type="submit" class="btn btn-success active salvar" style="float: right; margin-right: 10px;"><span class="glyphicon glyphicon-floppy-disk"></span> Salvar</button>
+            <div class="col-md-12">
+              <a class="btn btn-danger active" href="<?= base_url('index.php/Fpa')?>" style="float: right;"><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
+              <button type="submit" class="btn btn-success active salvar" style="float: right; margin-right: 10px;"><span class="glyphicon glyphicon-floppy-disk"></span> Salvar</button>
+            </div>
           </form>
           </div>
         </div>
