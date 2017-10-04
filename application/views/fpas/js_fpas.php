@@ -3,7 +3,12 @@
 
       $('#showDisponibilidade').click(function () {
         $('#disponibilidade').fadeIn('slow');
+        $('#indisponibilidade').hide('slow');
       });
+      $('#showIndisponibilidade').click(function(){
+        $('#indisponibilidade').fadeIn('slow');
+        $('#disponibilidade').hide('slow');
+      })
     });
 </script>
 

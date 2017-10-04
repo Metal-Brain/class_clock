@@ -18,7 +18,7 @@
                 <span class="caret"></span></button>
                 <ul class="dropdown-menu">
                     <li><a href="#" id="showDisponibilidade">Disponibilidade</a></li>
-                    <li><a href="#" id="">Indisponibilidade</a></li>
+                    <li><a href="#" id="showIndisponibilidade">Indisponibilidade</a></li>
                 </ul>
               </div>
           </div>
@@ -52,6 +52,39 @@
                     <td><input type="checkbox" name="disp[sab][]" value="<?= $horarios->id ?>"></td>
                   </tr>
                 <?php endforeach;?>
+                </tbody>
+              </table>
+            </div>
+            <a class="btn btn-danger active" href="<?= base_url('index.php/Fpa')?>" style="float: right;"><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
+            <button type="submit" class="btn btn-success active salvar" style="float: right; margin-right: 10px;"><span class="glyphicon glyphicon-floppy-disk"></span> Salvar</button>
+          </form>
+          </div>
+        </div>
+
+        <div id="indisponibilidade" class="row" style="display:none;">
+          <div class="col-md-offset-1 col-md-10">
+            <div class="table-responsive">
+              <form action="<?= site_url('fpa/salvar')?>" method="POST">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Segunda</th>
+                    <th>Terça</th>
+                    <th>Quarta</th>
+                    <th>Quinta</th>
+                    <th>Sexta</th>
+                    <th>Sabado</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><input type="radio" name="indisponibilidade" value="seg"></td>
+                    <td><input type="radio" name="indisponibilidade" value="ter"></td>
+                    <td><input type="radio" name="indisponibilidade" value="qua"></td>
+                    <td><input type="radio" name="indisponibilidade" value="qui"></td>
+                    <td><input type="radio" name="indisponibilidade" value="sex"></td>
+                    <td><input type="radio" name="indisponibilidade" value="sab"></td>
+                  </tr>
                 </tbody>
               </table>
             </div>
