@@ -1,7 +1,7 @@
 <div class="col-md-10 col-lg-10">
    <div style="padding: 0 0 15px 0">
 
-    
+
 
        <!-- Início do conteúdo da view-->
   <div style="padding: 0 0 15px 0">
@@ -15,9 +15,9 @@
   </div>
 
         <div class="row">
-          <div class="col-md-offset-1 col-md-10">
+          <div class="col-md-12">
             <div class="table-responsive">
-             
+
               <table id="FpaTable" class="table table-striped">
                 <thead>
                   <tr>
@@ -29,10 +29,10 @@
                     <td></td>
                   </tr>
                 </tbody>
-                    
+
 
               </table>
-            
+
             </div>
           </div>
 
