@@ -16,22 +16,28 @@ class Fpa extends CI_Controller{
   public function salvar(){
     try{
       DB::transaction(function (){
-        $fpa = Fpa::create([
-          "docente_id" => $_SESSION['usuarioLogado']['id'],
-          "periodo_id" => Fpa::periodo()->id
-        ]);
+        $dados = [
+          "docente_id" => 1,//$_SESSION['usuarioLogado']['id'],
+          "periodo_id" => Periodo_model::periodoAtivo()->id
+        ];
+        
+        $fpa = Fpa_model::firstOrCreate($dados);
 
-        $disponibilidade = $this->input->post('disponibilidade');
-          foreach($disponibilidade as $dia_semana => $horarios){
-            foreach($horarios as $horario_id){
-              $horario = Horario_model::find($horario_id);
-              $fpa->disponibilidade()->attach($horario, ["dia_semana" => $dia_semana]);
-            }
+        $disponibilidade = $this->input->post('disp');
+        foreach($disponibilidade as $dia_semana => $horarios){
+          foreach($horarios as $horario_id){
+            Disponibilidade_model::firstOrCreate([
+              'fpa_id' => $fpa->id,
+              'horario_id' => $horario_id, 
+              'dia_semana' => $dia_semana
+            ]);
           }
+        }
       });
       $this->session->set_flashdata('success','FPA cadastrado com sucesso');
     } catch (Exception $e){
       $this->session->set_flashdata('danger','Problemas ao cadastrar a FPA, tente novamente!');
+      echo $e->getMessage();
     }
   }
 
