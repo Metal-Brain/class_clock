@@ -327,7 +327,7 @@ ENGINE = InnoDB;
       `fpa_id` INT NOT NULL ,
       `turma_id` INT NOT NULL ,
       `ordem` INT NOT NULL ,
-      PRIMARY KEY (`fpa_id`, `disciplinas_oferecidas_id`) ,
+      PRIMARY KEY (`fpa_id`, `turma_id`) ,
       INDEX `fk_disciplina_has_fpa_fpa1_idx` (`fpa_id` ASC) ,
       INDEX `fk_preferencias_turma1_idx` (`turma_id` ASC) ,
       CONSTRAINT `fk_disciplina_has_fpa_fpa1`
