@@ -11,7 +11,7 @@ class Turma extends MY_Controller {
     $disciplinas = Disciplina_model::all();
     $turnos = Turno_model::all();
 
-    $this->load->template('turmas/cadastrar', compact('disciplinas', 'turnos'), 'turmas/js_Turmas');
+    $this->load->template('turmas/cadastrar', compact('disciplinas', 'turnos'), 'turmas/js_turmas');
   }
 
   public function salvar () {
