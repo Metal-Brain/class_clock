@@ -14,6 +14,19 @@ class Fpa extends CI_Controller{
   }
 
   public function salvar(){
+    $disponibilidade    = $this->input->post('disp');
+    $indisponibilidade  = $this->input->post('indisponibilidade');
+
+    if(isset($disponibilidade)){
+      $this->disponibilidade($disponibilidade);
+    }else if(isset($indisponibilidade)){
+      $this->indisponibilidade($indisponibilidade);
+    }
+
+    $this->cadastrar();
+  }
+
+  private function disponibilidade($disponibilidade){
     try{
       DB::transaction(function (){
         $dados = [
@@ -23,7 +36,6 @@ class Fpa extends CI_Controller{
         
         $fpa = Fpa_model::firstOrCreate($dados);
 
-        $disponibilidade = $this->input->post('disp');
         foreach($disponibilidade as $dia_semana => $horarios){
           foreach($horarios as $horario_id){
             Disponibilidade_model::firstOrCreate([
@@ -38,6 +50,30 @@ class Fpa extends CI_Controller{
     } catch (Exception $e){
       $this->session->set_flashdata('danger','Problemas ao cadastrar a FPA, tente novamente!');
       echo $e->getMessage();
+    }
+  }
+
+  private function indisponibilidade($indisponibilidade){
+    $horarios = Horario_model::orderBy('inicio')->get();
+
+    $dia_semana = ['seg', 'ter', 'qua', 'qui', 'sex', 'sab'];
+    $dia_semana = array_diff($dia_semana, array($indisponibilidade));
+
+    $dados = [
+      "docente_id" => 1,//$_SESSION['usuarioLogado']['id'],
+      "periodo_id" => Periodo_model::periodoAtivo()->id
+    ];
+    
+    $fpa = Fpa_model::firstOrCreate($dados);
+
+    foreach($dia_semana as $dia_semana){
+      foreach($horarios as $horario){
+        Disponibilidade_model::firstOrCreate([
+          'fpa_id' => $fpa->id,
+          'horario_id' => $horario->id, 
+          'dia_semana' => $dia_semana
+        ]);
+      }
     }
   }
 
