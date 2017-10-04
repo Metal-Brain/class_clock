@@ -30,8 +30,8 @@
               <form action="<?= site_url('fpa/salvar')?>" method="POST">
               <table class="table">
                 <thead>
-                  <tr>
-                    <th>Horarios</th>
+                  <tr >
+                    <th class="text-center">Horarios</th>
                     <th>Segunda</th>
                     <th>Terça</th>
                     <th>Quarta</th>
@@ -42,7 +42,7 @@
                 </thead>
                 <tbody>
                   <?php foreach ($horarios as $horarios) :?>
-                  <tr>
+                  <tr >
                     <td><?= removerSegundos($horarios->inicio) . '-' . removerSegundos($horarios->fim) ?></td>
                     <td><input type="checkbox" name="disp[seg][]" value="<?= $horarios->id ?>"></td>
                     <td><input type="checkbox" name="disp[ter][]" value="<?= $horarios->id ?>"></td>
