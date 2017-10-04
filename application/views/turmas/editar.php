@@ -1,5 +1,5 @@
 <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10" style="padding-top: 5px">
-	<form id="formTurmas" method="post" action="<?= site_url('Turma/atualizar/'.$id)?>">
+	<form id="formTurmas" method="post" action="<?= site_url('Turma/atualizar/'.$turma->id)?>">
 		<div class="row">
 			<div class="col-md-5 form-group">
 				<label>Nome:</label>

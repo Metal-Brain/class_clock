@@ -19,8 +19,8 @@
 					<h1>Cadastrar Turma</h1>
 						<div class="form-group">
 							<label>Depedência</label><br />
-							<label class="radio-inline"><input type="radio" name="optradio">SIM</label>
-							<label class="radio-inline"><input type="radio" name="optradio">NÃO</label>
+							<label class="radio-inline"><input type="radio" name="dp">SIM</label>
+							<label class="radio-inline"><input type="radio" name="dp">NÃO</label>
 						</div>
 
 						<div class="form-group">
