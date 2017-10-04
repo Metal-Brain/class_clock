@@ -18,10 +18,10 @@
       $data = array(
         'cursos' => Curso_model::withTrashed()->get(),
         'modalidades' => Modalidade_model::withTrashed()->get(),
-        'docentes' => DB::table('docente')
-                          ->join('pessoa', 'docente.pessoa_id', '=', 'pessoa.id')
-                          ->select('pessoa.nome', 'docente.id')
-                          ->get()
+        'coordenadores' => DB::table('docente')->join('curso', 'docente.id', '=', 'curso.docente_id')->select('docente.id')->get(),
+        'docentes' => DB::table('docente')->join('pessoa', '')select('docente.id', 'docente.nome')->get(),
+        //'docentes' => DB::table('docente')->join('curso', 'docente.id', '!=', 'curso.docente_id')->select('curso.nome_curso',  'docente.id')->distinct()->get(),
+        //'docentes' => DB::table('docente')->join('pessoa', 'docente.pessoa_id', '=', 'pessoa.id')->select('pessoa.nome', 'docente.id')->get()
       );
       $this->load->template('cursos/cadastrar', compact('data'), 'cursos/js_cursos');
     }
@@ -122,6 +122,9 @@
       return $this->form_validation->run();
     }
   }
+
+  //select nome, docente.id as docente_id from pessoa inner join docente on pessoa.id = docente.pessoa_id
+  //where docente.id not in (SELECT docente_id from curso where docente_id is not null);
 
 //INSERT INTO curso(docente_id, modalidade_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento) VALUES(1, 1, 1356, "Análise e Desenvolvimento", "ADW", 6, "S");
 //INSERT INTO pessoa(nome, prontuario, senha, email) VALUES("João José", "cg1234", "joaojose", "joaojose@gmail.com");

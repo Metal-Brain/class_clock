@@ -401,6 +401,8 @@ ENGINE = InnoDB;
         VALUES(4, 4, 444, "Computação Avançada", "CPA", 3, "B");
     INSERT INTO curso(docente_id, modalidade_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento)
         VALUES(5, 5, 544, "Cura do Cancer", "CDC", 8, "B");
+	INSERT INTO curso(modalidade_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento)
+        VALUES(5, 544, "CuraSADASD do Cancer", "ADC", 8, "B");
 
     INSERT INTO disciplina(curso_id, tipo_sala_id, nome_disciplina, modulo, sigla_disciplina, qtd_professor, qtd_aulas)
         VALUES(1, 5, "Análise de Sistemas", 1, "ADS", 2, 4);

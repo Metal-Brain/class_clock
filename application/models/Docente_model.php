@@ -4,13 +4,17 @@
 
         protected $table = 'docente';
         protected $guarded = [];
-        
+
         public function pessoa(){
             return $this->belongsTo(Pessoa_model::class);
         }
 
         public function area(){
             return $this->belongsTo(Area_model::class);
+        }
+
+        public function curso(){
+            return $this->hasMany(Docente_model::class, 'curso_id');
         }
 
     }
