@@ -16,7 +16,7 @@
 
 	<!-- Início do conteúdo da view-->
 	<form class="formPeriodos" action="<?= site_url('periodo/salvar')?>" method="post">
-		<label>Ano e semestre:</label>
+		<label>Ano / semestre:</label>
 		<div class="form-group width-400">
 			<input id="nome" name="nome" class="form-control" type="text" placeholder="Ano e semestre" onkeyup="mascara(this,somenteNumeros);"  value="<?= set_value('nome')?>" maxlength="5">
 			<span class="text-danger">

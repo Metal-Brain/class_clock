@@ -17,7 +17,7 @@
 	<!-- Início do conteúdo da view-->
 	<form class="formPeriodos" method="post" action="<?= site_url('periodo/atualizar/'.$periodo->id)?>">
 		<div class="form-group width-400">
-			<label>Ano e semestre:</label>
+			<label>Ano / semestre:</label>
 			<input id="nome_editar" name="nome" class="form-control" type="text" placeholder="Ano e Semestre" onkeyup="mascara(this,somenteNumeros);" value="<?= htmlspecialchars($periodo->nome) ?>" maxlength="5">
 			<?= form_error('nome') ?>
 		</div>

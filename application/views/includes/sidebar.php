@@ -36,5 +36,10 @@
 			   <span class="glyphicon glyphicon-duplicate"></span> <span class="sidebar-label">FPA</span>
 		   </a>
 	   </li>
+	   <li id="sidebar-periodos">
+		   <a href="http://localhost/class_clock/index.php/periodo">
+			   <span class="glyphicon glyphicon-pushpin"></span> <span class="sidebar-label">Períodos</span>
+		   </a>
+	   </li>
    </ul>
 </div>
