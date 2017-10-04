@@ -9,7 +9,9 @@
       $data = array(
         'cursos' => Curso_model::withTrashed()->get(),
         'modalidade' => Modalidade_model::all('id','nome_modalidade'),
-        'docentes' => DB::table('pessoa')->join('docente', 'pessoa.id', '=', 'docente.pessoa_id')->select('pessoa.nome', 'pessoa.id')->get()
+        'docentes' => Pessoa_model::join('docente', 'pessoa.id', '=', 'docente.pessoa_id')
+                                  ->select('pessoa.nome', 'pessoa.id')
+                                  ->get(),
       );
       $this->load->template('cursos/cursos', compact('data'), 'cursos/js_cursos');
     }
@@ -18,10 +20,14 @@
       $data = array(
         'cursos' => Curso_model::withTrashed()->get(),
         'modalidades' => Modalidade_model::withTrashed()->get(),
-        'coordenadores' => DB::table('docente')->join('curso', 'docente.id', '=', 'curso.docente_id')->select('docente.id')->get(),
-        'docentes' => DB::table('docente')->join('pessoa', '')select('docente.id', 'docente.nome')->get(),
-        //'docentes' => DB::table('docente')->join('curso', 'docente.id', '!=', 'curso.docente_id')->select('curso.nome_curso',  'docente.id')->distinct()->get(),
-        //'docentes' => DB::table('docente')->join('pessoa', 'docente.pessoa_id', '=', 'pessoa.id')->select('pessoa.nome', 'docente.id')->get()
+        'docentes' => Pessoa_model::join('docente', 'pessoa.id', '=', 'docente.pessoa_id')
+                                  ->whereNotIn('docente.id', function($query){
+                                      $query->from('curso')
+                                            ->where('curso.docente_id', '!=', null)
+                                            ->select('curso.docente_id');
+                                    })
+                                  ->select('docente.id', 'pessoa.nome')
+                                  ->get(),
       );
       $this->load->template('cursos/cadastrar', compact('data'), 'cursos/js_cursos');
     }
@@ -32,7 +38,9 @@
           $curso = new Curso_model();
           $curso->nome_curso = $this->input->post('nome_curso');
           $curso->modalidade_id = $this->input->post('modalidade_id');
-          $curso->docente_id = $this->input->post('docente_id');
+          if($this->input->post('docente_id')){
+            $curso->docente_id = $this->input->post('docente_id');
+          }else($curso->docente_id = null);
           $curso->codigo_curso = $this->input->post('codigo_curso');
           $curso->sigla_curso = $this->input->post('sigla_curso');
           $curso->qtd_semestre = $this->input->post('qtd_semestre');
@@ -48,14 +56,24 @@
     }
 
     public function editar($id) {
+      $curso = Curso_model::withTrashed()->findOrFail($id);
+      $docente_id = $curso['docente_id'];
+
       $data = array(
-        'cursos' => Curso_model::withTrashed()->get(),
-        'curso' => Curso_model::withTrashed()->findOrFail($id),
+        'curso' => $curso,
         'modalidades' => Modalidade_model::all('id','nome_modalidade'),
-        'docentes' => DB::table('docente')
-                          ->join('pessoa', 'docente.pessoa_id', '=', 'pessoa.id')
-                          ->select('pessoa.nome', 'docente.id')
-                          ->get()
+        'coordenador' => Pessoa_model::join('docente', 'pessoa.id', '=', 'docente.pessoa_id')
+                                      ->where('docente.id', '=', $docente_id)
+                                      ->select('pessoa.nome', 'docente.id')
+                                      ->get(),
+        'docentes' => Pessoa_model::join('docente', 'pessoa.id', '=', 'docente.pessoa_id')
+                                  ->whereNotIn('docente.id', function($query){
+                                      $query->from('curso')
+                                            ->where('curso.docente_id', '!=', null)
+                                            ->select('curso.docente_id');
+                                    })
+                                  ->select('docente.id', 'pessoa.nome')
+                                  ->get(),
       );
       $this->load->template('cursos/editar', compact('data','id'), 'cursos/js_cursos');
     }
@@ -66,7 +84,9 @@
           $curso = Curso_model::withTrashed()->findOrFail($id);
           $curso->nome_curso = $this->input->post('nome_curso');
           $curso->modalidade_id = $this->input->post('modalidade_id');
-          $curso->docente_id = $this->input->post('docente_id');
+          if($this->input->post('docente_id')){
+            $curso->docente_id = $this->input->post('docente_id');
+          }else($curso->docente_id = null);
           $curso->codigo_curso = $this->input->post('codigo_curso');
           $curso->sigla_curso = $this->input->post('sigla_curso');
           $curso->qtd_semestre = $this->input->post('qtd_semestre');
@@ -96,8 +116,8 @@
     public function deletar($id){
       try {
         $curso = Curso_model::findOrFail($id);
-        //$curso->docente_id = null;
-        //$curso->save();
+        $curso->docente_id = null;
+        $curso->save();
         $curso->delete();
         $this->session->set_flashdata('success','Curso deletado com sucesso');
         redirect("curso");
@@ -123,13 +143,6 @@
     }
   }
 
-  //select nome, docente.id as docente_id from pessoa inner join docente on pessoa.id = docente.pessoa_id
+  //select pessoa.nome, docente.id from pessoa inner join docente on pessoa.id = docente.pessoa_id
   //where docente.id not in (SELECT docente_id from curso where docente_id is not null);
-
-//INSERT INTO curso(docente_id, modalidade_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento) VALUES(1, 1, 1356, "Análise e Desenvolvimento", "ADW", 6, "S");
-//INSERT INTO pessoa(nome, prontuario, senha, email) VALUES("João José", "cg1234", "joaojose", "joaojose@gmail.com");
-//INSERT INTO docente(pessoa_id, area_id, nascimento, ingresso_campus, ingresso_ifsp, regime) VALUES(1, 1, "01/01/1980", "01/01/2000", "01/01/2002", "N");
-
-//INSERT INTO pessoa(nome, prontuario, senha, email) VALUES("asivdasd", "cg1234", "joaojose", "joadasdasdojose@gmail.com");
-//INSERT INTO docente(pessoa_id, area_id, nascimento, ingresso_campus, ingresso_ifsp, regime) VALUES(2, 1, "01/01/1980", "01/01/2000", "01/01/2002", "S");
 ?>

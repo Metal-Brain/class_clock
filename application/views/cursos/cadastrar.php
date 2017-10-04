@@ -1,7 +1,7 @@
-<pre>
+<!--<pre>
 		<?php print_r($data['docentes']) ?>
-		<?php// print_r($data['cursos'][1]->docente_id) ?>
-</pre>
+		<?php print_r($data['cursos'][1]->docente_id) ?>
+</pre>-->
  <div class="col-xs=10 col-sm-10 col-md-10">
      <div class="row" style="margin-top: 5px;">
 		<div class="col-md-12">
@@ -109,10 +109,9 @@
 												<select class="form-control" name="docente_id">
 
 													<?php
+															echo '<option value="">Sem Coordenador</option>';
 															foreach($data['docentes'] as $docente){
-																if(!in_array($docente->id, $data['coordenadores']->id)):
 																	echo '<option value="'. $docente->id .'">'. $docente->nome .'</option>';
-																endif;
 															}
 													?>
 
