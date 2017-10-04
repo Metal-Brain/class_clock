@@ -20,7 +20,7 @@
       return $this->hasMany(Fpa_model::class, 'periodo_id');
     }
 
-    public function periodoAtivo(){
-      return Periodo_model::where('ativo', '1')->get();
+    public static function periodoAtivo(){
+      return Periodo_model::whereAtivo(true)->firstOrFail();
     }
   }
