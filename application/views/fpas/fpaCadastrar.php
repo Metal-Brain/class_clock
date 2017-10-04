@@ -29,27 +29,28 @@
             <div class="table-responsive">
               <form action="<?= site_url('fpa/salvar')?>" method="POST">
               <table class="table">
+                  <h4 class="text-center">Selecione os horários em que você estará disponível!</h4>
                 <thead>
                   <tr >
-                    <th class="text-center">Horarios</th>
-                    <th>Segunda</th>
-                    <th>Terça</th>
-                    <th>Quarta</th>
-                    <th>Quinta</th>
-                    <th>Sexta</th>
-                    <th>Sabado</th>
+                    <th  class="text-center">Horarios</th>
+                    <th class="text-center">Segunda</th>
+                    <th class="text-center">Terça</th>
+                    <th class="text-center">Quarta</th>
+                    <th class="text-center">Quinta</th>
+                    <th class="text-center">Sexta</th>
+                    <th class="text-center">Sabado</th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php foreach ($horarios as $horarios) :?>
                   <tr >
-                    <td><?= removerSegundos($horarios->inicio) . '-' . removerSegundos($horarios->fim) ?></td>
-                    <td><input type="checkbox" name="disp[seg][]" value="<?= $horarios->id ?>"></td>
-                    <td><input type="checkbox" name="disp[ter][]" value="<?= $horarios->id ?>"></td>
-                    <td><input type="checkbox" name="disp[qua][]" value="<?= $horarios->id ?>"></td>
-                    <td><input type="checkbox" name="disp[qui][]" value="<?= $horarios->id ?>"></td>
-                    <td><input type="checkbox" name="disp[sex][]" value="<?= $horarios->id ?>"></td>
-                    <td><input type="checkbox" name="disp[sab][]" value="<?= $horarios->id ?>"></td>
+                    <td class="text-center"><?= removerSegundos($horarios->inicio) . '-' . removerSegundos($horarios->fim) ?></td>
+                    <td class="text-center"><input type="checkbox" name="disp[seg][]" value="<?= $horarios->id ?>"></td>
+                    <td class="text-center"><input type="checkbox" name="disp[ter][]" value="<?= $horarios->id ?>"></td>
+                    <td class="text-center"><input type="checkbox" name="disp[qua][]" value="<?= $horarios->id ?>"></td>
+                    <td class="text-center"><input type="checkbox" name="disp[qui][]" value="<?= $horarios->id ?>"></td>
+                    <td class="text-center"><input type="checkbox" name="disp[sex][]" value="<?= $horarios->id ?>"></td>
+                    <td class="text-center"><input type="checkbox" name="disp[sab][]" value="<?= $horarios->id ?>"></td>
                   </tr>
                 <?php endforeach;?>
                 </tbody>
@@ -69,22 +70,22 @@
                 <h4 class="text-center">Selecione o dia em que você nao estará disponivel!</h4>
                 <thead>
                   <tr>
-                    <th>Segunda</th>
-                    <th>Terça</th>
-                    <th>Quarta</th>
-                    <th>Quinta</th>
-                    <th>Sexta</th>
-                    <th>Sabado</th>
+                    <th class="text-center">Segunda</th>
+                    <th class="text-center">Terça</th>
+                    <th class="text-center">Quarta</th>
+                    <th class="text-center">Quinta</th>
+                    <th class="text-center">Sexta</th>
+                    <th class="text-center">Sabado</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><input type="radio" name="indisponibilidade" value="seg"></td>
-                    <td><input type="radio" name="indisponibilidade" value="ter"></td>
-                    <td><input type="radio" name="indisponibilidade" value="qua"></td>
-                    <td><input type="radio" name="indisponibilidade" value="qui"></td>
-                    <td><input type="radio" name="indisponibilidade" value="sex"></td>
-                    <td><input type="radio" name="indisponibilidade" value="sab"></td>
+                    <td class="text-center"><input type="radio" name="indisponibilidade" value="seg"></td>
+                    <td class="text-center"><input type="radio" name="indisponibilidade" value="ter"></td>
+                    <td class="text-center"><input type="radio" name="indisponibilidade" value="qua"></td>
+                    <td class="text-center"><input type="radio" name="indisponibilidade" value="qui"></td>
+                    <td class="text-center"><input type="radio" name="indisponibilidade" value="sex"></td>
+                    <td class="text-center"><input type="radio" name="indisponibilidade" value="sab"></td>
                   </tr>
                 </tbody>
               </table>
