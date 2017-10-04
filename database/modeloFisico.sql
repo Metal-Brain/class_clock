@@ -410,4 +410,7 @@ ENGINE = InnoDB;
 
     INSERT INTO periodo(nome, ativo) VALUES ('2017-1', '0'), ('2017-2', '0'), ('2018-1', '1');
 
+    INSERT INTO `horario` (`id`, `inicio`, `fim`, `deletado_em`) VALUES (NULL, '09:00:00', '09:50:00', NULL), (NULL, '09:50:00', '10:40:00', NULL);
+    INSERT INTO `turno_horario` (`turno_id`, `horario_id`) VALUES ('1', '7'), ('1', '6'), ('2', '6'), ('3', '6'), ('3', '7');
+
     INSERT INTO area(id, nome_area, codigo) VALUES(1, "Banco de dados", 01), (2, "Inteligência Artificial", 02), (3, "Redes de Computadores", 03);
