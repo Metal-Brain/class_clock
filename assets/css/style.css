@@ -114,9 +114,15 @@ header a:hover {
     margin-top: 20px;
 }
 
-.error {
-    color: #FF0000;
+.width-400{
+	max-width: 400px;
 }
+
+.width-180{
+	max-width: 180px;
+}
+
+
 
 /* Bootstrap Override */
 
