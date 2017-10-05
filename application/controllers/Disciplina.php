@@ -1,210 +1,161 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
-
-  /**
-   *  Essa classe é responsavel por todas regras de negócio sobre disciplinas.
-   *  @since 2017/03/17
-   *  @author Caio de Freitas
-   */
-  class Disciplina extends CI_Controller {
-
-    public function index () {
-      if (verificaSessao() && verificaNivelPagina(array(1,3)))
-        $this->cadastro();
-      else
-        redirect('/');
-    }
-
-
-    // =========================================================================
-    // ==========================CRUD de disciplinas============================
-    // =========================================================================
-
+<?php
     /**
-      * Valida os dados do forumulário de cadastro de disciplinas.
-      * Caso o formulario esteja valido, envia os dados para o modelo realizar
-      * a persistencia dos dados.
-      * @author Caio de Freitas
-      * @since 2017/03/17
-      */
-    public function cadastro () {
-      // Carrega a biblioteca para validação dos dados.
-      if (verificaSessao() && verificaNivelPagina(array(1,3))) {
-        $this->load->library(array('form_validation','session'));
-        $this->load->helper(array('form','url'));
-        $this->load->model(array('Disciplina_model'));
-
-        // Definir as regras de validação para cada campo do formulário.
-        $this->form_validation->set_rules('nome', 'nome da disciplina', array('required','min_length[5]', 'is_unique[Disciplina.nome]','ucwords'));
-        $this->form_validation->set_rules('sigla', 'sigla', array('required', 'max_length[5]', 'is_unique[Disciplina.sigla]','strtoupper'));
-        $this->form_validation->set_rules('qtdProf', 'quantidade de professores', array('required', 'integer', 'greater_than[0]', 'less_than[10]'));
-        $this->form_validation->set_rules('semestre', 'semestre', array('required', 'integer', 'greater_than[0]', 'less_than[20]'));
-        $this->form_validation->set_rules('qtdAulas', 'quantidade de aulas', array('required', 'integer', 'greater_than[0]', 'less_than[10]'));
-        // Definição dos delimitadores
-        $this->form_validation->set_error_delimiters('<p class="text-danger">','</p>');
-
-        // Verifica se o formulario é valido
-        if ($this->form_validation->run() == FALSE) {
-
-          $this->session->set_flashdata('formDanger','<strong>Não foi possível cadastrar a disciplina, pois existe(m) erro(s) no formulário:</strong>');
-
-          $dados['disciplinas'] = $this->Disciplina_model->getAll();
-
-
-          $this->load->view('includes/header',$dados);
-          $this->load->view('includes/sidebar');
-          $this->load->view('disciplinas/disciplinas');
-		      $this->load->view('includes/footer');
-		      $this->load->view('disciplinas/js_disciplinas');
-
-        } else {
-
-          // Pega os dados do formulário
-          $disciplina = array(
-            'nome'      => $this->input->post("nome"),
-            'sigla'     => $this->input->post('sigla'),
-            'qtdProf'   => $this->input->post("qtdProf"),
-            'semestre'  => $this->input->post("semestre"),
-            'qtdAulas'   => $this->input->post("qtdAulas")
-          );
-
-          if ($this->Disciplina_model->insert($disciplina)){
-            $this->session->set_flashdata('success','Disciplina cadastrada com sucesso');
-          } else {
-            $this->session->set_flashdata('danger','Não foi possível cadastrar a disciplina, tente novamente ou entre em contato com o administrador do sistema.');
-          }
-
-          redirect('Disciplina');
-
+    *  Regras de negócio sobre disciplinas.
+    *  @since 2018/08/28
+    *  @author Thalita Barbosa
+    */
+    class Disciplina extends CI_Controller {
+        function index () {
+            $disciplinas = Disciplina_model::withTrashed()->get();
+            $this->load->template('disciplinas/disciplinas',compact('disciplinas'),'disciplinas/js_disciplinas');
         }
-      }else{
-        redirect('/');
-      }
-    }
 
-    /**
-      * Deleta uma disciplina.
-      * @author Caio de Freitas
-      * @since  2017/03/21
-      * @param $id ID da disciplina
-      */
-    public function desativar ($id) {
-      // Carrega os modelos necessarios
-      if (verificaSessao() && verificaNivelPagina(array(1))) {
-        $this->load->model(array('Disciplina_model','CursoTemDisciplina_model'));
-
-        if ($this->CursoTemDisciplina_model->hasRelation($id) != 0)
-          $this->session->set_flashdata('danger','Essa disciplina não pode ser desativada pois ainda está vinculada a algum curso!');
-        elseif ( $this->Disciplina_model->disable($id) )
-          $this->session->set_flashdata('success','Disciplina desativada com sucesso');
-        else
-          $this->session->set_flashdata('danger','Não foi possível desativar a disciplina, tente novamente ou entre em contato com o administrador do sistema.');
-
-        redirect('Disciplina');
-      }else{
-        redirect('/');
-      }
-    }
-
-    public function ativar ($id) {
-      if (verificaSessao() && verificaNivelPagina(array(1))) {
-        $this->load->model('Disciplina_model');
-
-        if ( $this->Disciplina_model->able($id) )
-          $this->session->set_flashdata('success','Disciplina ativada com sucesso!');
-        else
-          $this->session->set_flashdata('danger','Não foi possível ativar a disciplina, tente novamente ou entre em contato com o administrador do sistema');
-
-        redirect('Disciplina');
-      }else{
-        redirect('/');
-      }
-    }
-
-    /**
-      * Altera os dado da disciplina.
-      * @author Caio de Freitas
-      * @since 2017/03/21
-      * @param $id ID da disciplina
-      */
-    public function atualizar () {
-      if (verificaSessao() && verificaNivelPagina(array(1))) {
-        $this->load->library('form_validation');
-        $this->load->model(array('Disciplina_model'));
-
-        // Definir as regras de validação para cada campo do formulário.
-        $this->form_validation->set_rules('recipient-nome', 'nome', array('required','min_length[5]','ucwords'));
-        $this->form_validation->set_rules('recipient-sigla', 'sigla', array('required', 'max_length[5]','strtoupper'));
-        $this->form_validation->set_rules('recipient-qtd-prof', 'quantidade de professores', array('required', 'integer', 'greater_than[0]'));
-        $this->form_validation->set_rules('recipient-semestre', 'semestre', array('required', 'integer', 'greater_than[0]','less_than[20]'));
-        $this->form_validation->set_rules('recipient-qtdAula', 'quantidade de aulas', array('required', 'integer', 'greater_than[0]', 'less_than[10]'));
-        // Definição dos delimitadores
-        $this->form_validation->set_error_delimiters('<p class="text-danger">','</p>');
-
-        // Verifica se o formulario é valido
-        if ($this->form_validation->run() == FALSE) {
-
-          $this->session->set_flashdata('formDanger','<strong>Não foi possível atualizar os dados da disciplina:</strong>');
-
-          $dados['disciplinas'] = $this->Disciplina_model->getAll();
-
-
-          $this->load->view('includes/header',$dados);
-          $this->load->view('includes/sidebar');
-          $this->load->view('disciplinas/disciplinas');
-          $this->load->view('includes/footer');
-          $this->load->view('disciplinas/js_disciplinas');
-      } else {
-
-          $id = $this->input->post('recipient-id');
-
-          // Pega os dados do formulário
-          $disciplina = array(
-            'nome'        => $this->input->post("recipient-nome"),
-            'sigla'       => $this->input->post('recipient-sigla'),
-            'qtdProf'     => $this->input->post("recipient-qtd-prof"),
-            'semestre'    => $this->input->post("recipient-semestre"),
-            'qtdAulas'     => $this->input->post("recipient-qtdAula")
-          );
-
-
-          if ( $this->Disciplina_model->update($id, $disciplina) )
-            $this->session->set_flashdata('success', 'Disciplina atualizada com sucesso');
-          else
-            $this->session->set_flashdata('danger','Não foi possível atualizar os dados da disciplina, tente novamente ou entre em contato com o administrador do sistema.<br/> Caso tenha alterado a <b>sigla</b> e/ou <b>nome</b>, verifique se ela já não foi utilizada.');
-
-
-          redirect('Disciplina');
-
+        /**
+        * Forumulário de cadastro de disciplinas.
+        * @author Thalita Barbosa
+        * @since 2018/08/28
+        * @return view Formulário de cadastro de disciplinas
+        */
+        function cadastrar () {
+			$data = array(
+				'disciplinas' => Disciplina_model::withTrashed()->get(),
+				'cursos' => Curso_model::all(),
+				'tipo_salas' => TipoSala_model::all(),
+				);
+            $this->load->template('disciplinas/disciplinasCadastrar',compact('data'),'disciplinas/js_disciplinas');
         }
-      }else{
-        redirect('/');
-      }
+
+        /**
+        * Salva uma nova disciplina no banco de dados.
+        * @author Denny Azevedo
+        * @since 2017/08/28
+        */
+        function salvar () {
+            if ($this->validar()) {
+                try {
+                  if (Disciplina_model::withTrashed()->where("sigla_disciplina", $this->input->post('sigla_disciplina'))->where("curso_id", $this->input->post('curso_id'))->first()==null) {
+                    $disciplina = new Disciplina_model();
+                    $disciplina->curso_id = $this->input->post('curso_id');
+                    $disciplina->tipo_sala_id = $this->input->post('tipo_sala_id');
+                    $disciplina->nome_disciplina  = $this->input->post('nome_disciplina') ;
+                    $disciplina->sigla_disciplina = $this->input->post('sigla_disciplina');
+                    $disciplina->modulo = $this->input->post('modulo');
+                    $disciplina->qtd_professor = $this->input->post('qtd_professor');
+                    $disciplina->qtd_aulas = $this->input->post('qtd_aulas');
+
+                    $disciplina->save();
+
+                    $this->session->set_flashdata('success','Disciplina cadastrada com sucesso');
+                    redirect("disciplina");
+                  }else{
+                    $this->session->set_flashdata('danger','Disciplina já esta cadastrada');
+                    redirect("disciplina/cadastrar");
+                  }
+                } catch (Exception $ignored){}
+            }
+
+            $this->session->set_flashdata('danger','Problemas ao cadastrar a Disciplina, tente novamente!');
+            redirect("disciplina");
+        }
+
+        /**
+        * Formulário para alterar os dados da Disciplina
+        * @author Denny Azevedo
+        * @since 2017/08/28
+        * @return view formulário de edição de disciplina
+        */
+        function editar($id) {
+            $data = array(
+				'cursos' => Curso_model::all(),
+				'tipo_salas' => TipoSala_model::all(),
+                'disciplina' => Disciplina_model::find($id),
+				);
+            $this->load->template('disciplinas/disciplinasEditar', compact('data','id'),'disciplinas/js_disciplinas');
+        }
+
+        /**
+        * Edita os dado da disciplina.
+        * @author Denny Azevedo
+        * @since 2018/08/28
+        */
+        function atualizar ($id) {
+            if($this->validar()){
+                try {
+                  if (Disciplina_model::withTrashed()->where("sigla_disciplina", $this->input->post('sigla_disciplina'))->where("curso_id", $this->input->post('curso_id'))->first()==null || Disciplina_model::where("sigla_disciplina", $this->input->post('sigla_disciplina'))->where("curso_id", $this->input->post('curso_id'))->where("id", $id)->first()) {
+                    $disciplina = Disciplina_model::withTrashed()->findOrFail($id);
+                    $disciplina->nome_disciplina  = $this->input->post('nome_disciplina') ;
+                    $disciplina->sigla_disciplina = $this->input->post('sigla_disciplina');
+					$disciplina->curso_id		   = $this->input->post('curso_id');
+                    $disciplina->modulo           = $this->input->post('modulo')          ;
+                    $disciplina->qtd_professor    = $this->input->post('qtd_professor')   ;
+                    $disciplina->qtd_aulas        = $this->input->post('qtd_aulas')   ;
+					$disciplina->tipo_sala_id     = $this->input->post('tipo_sala_id');
+                    $disciplina->update();
+
+                    $this->session->set_flashdata('success','Disciplina atualizada com sucesso');
+                    redirect("disciplina");
+                  }else{
+                    $this->session->set_flashdata('danger','Sigla já esta cadastrada');
+                    redirect('disciplina/editar/'.$id);
+                  }
+                } catch (Exception $ignored){}
+            }
+
+            $this->session->set_flashdata('danger','Problemas ao atualizar os dados da Disciplina, tente novamente!');
+            redirect('disciplina/editar/'.$id);
+        }
+
+        /**
+        * Deleta uma disciplina.
+        * @author Denny Azevedo
+        * @since  2018/08/28
+        * @param $id ID da disciplina
+        */
+        function deletar ($id) {
+            try {
+                $disciplinas = Disciplina_model::findOrFail($id);
+                $disciplinas->delete();
+
+                $this->session->set_flashdata('success','Disciplina desativada com sucesso');
+            } catch (Exception $e) {
+                $this->session->set_flashdata('danger','Erro ao desativar a Disciplina, tente novamente');
+            }
+
+            redirect("disciplina");
+        }
+
+        /**
+        * Ativa uma disciplina.
+        * @author Gilberto Pagani Sevilio
+        * @since 2017/09/11
+        * @param ID da disciplina
+        */
+       function ativar ($id) {
+         try {
+           $disciplinas = Disciplina_model::withTrashed()->findOrFail($id);
+           $disciplinas->restore();
+           $this->session->set_flashdata('success','Disciplina ativada com sucesso');
+         } catch (Exception $e) {
+           $this->session->set_flashdata('danger','Erro ao ativar a Disciplina. Tente novamente!');
+         }
+         redirect("disciplina");
+       }
+
+        public function validar () {
+            $this->form_validation->set_rules('nome_disciplina','nome','required|min_length[5]|max_length[50]|trim|ucwords');
+
+            $this->form_validation->set_rules('sigla_disciplina','sigla','required|min_length[3]|max_length[5]|alpha_numeric');
+
+            $this->form_validation->set_rules('curso_id','curso','required');
+
+            $this->form_validation->set_rules('modulo','modulo','required|integer|greater_than[0]|less_than[100]');
+
+            $this->form_validation->set_rules('qtd_professor','professores','required|integer|greater_than[0]|less_than[11]');
+
+            $this->form_validation->set_rules('qtd_aulas','aulas','required|integer|greater_than[0]|less_than[100]');
+
+            $this->form_validation->set_rules('tipo_sala_id','sala','required');
+
+            return $this->form_validation->run();
+        }
     }
-
-    public function verificaNome(){
-      $validate_data = array('nome' => $this->input->get('nome'));
-      $this->form_validation->set_data($validate_data);
-      $this->form_validation->set_rules('nome', 'nome da disciplina', 'is_unique[Disciplina.nome]');
-
-      if($this->form_validation->run() == FALSE){
-        echo "false";
-      }else{
-        echo "true";
-      }
-    }
-
-    public function verificaSigla(){
-      $validate_data = array('sigla' => $this->input->get('sigla'));
-      $this->form_validation->set_data($validate_data);
-      $this->form_validation->set_rules('sigla', 'sigla da disciplina', 'is_unique[Disciplina.sigla]');
-
-      if($this->form_validation->run() == FALSE){
-        echo "false";
-      }else{
-        echo "true";
-      }
-    }
-
-  }
-
-?>

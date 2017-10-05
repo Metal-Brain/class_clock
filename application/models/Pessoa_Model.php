@@ -14,6 +14,10 @@
             $this->attributes['senha'] = password_hash($senha, PASSWORD_BCRYPT);
         }
 
+        public function setNomeAttribute($nome) {
+            $this->attributes['nome'] = ucwords(mb_strtolower($nome, "utf-8"));
+        }
+
         public function docente() {
             return $this->hasOne(Docente_model::class, 'pessoa_id');
         }

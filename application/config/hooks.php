@@ -12,10 +12,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 
-$hook['post_controller_constructor'] = [
+$hook['post_controller_constructor'][] = [
   'class'     => 'checkUser',
   'function'  => 'check',
   'filename'  => 'checkUser.php',
   'filepath'  => 'hooks',
   'params'    => ['login', 'autherror']
 ];
+
+/* Hook para utilizazção em redirecionamentos */
+$hook['post_controller_constructor'][] = array(
+        'class'    => 'RouteHook',
+        'function' => 'setPreviousPage',
+        'filename' => 'RouteHook.php',
+        'filepath' => 'hooks'
+);
