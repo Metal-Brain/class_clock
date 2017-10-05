@@ -15,5 +15,6 @@
 <script type="text/javascript" src="<?= base_url('assets/js/jquery.validate.traducao.js')?>" charset="utf-8"></script>
 <script src="<?= base_url('assets/DataTables/datatables.js')?>"></script>
 <script src="<?= base_url('assets/js/bootbox.min.js')?>"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script src="<?= base_url('assets/js/main.js')?>"></script>
 <script src="<?= base_url('assets/js/select2.min.js')?>"></script>
