@@ -166,22 +166,34 @@ ENGINE = InnoDB;
     -- -----------------------------------------------------
     -- Table `horario`.`horario`
     -- -----------------------------------------------------
-    CREATE  TABLE IF NOT EXISTS `horario`.`horario` (
-      `id` TINYINT(4) NOT NULL AUTO_INCREMENT ,
-      `turno_id` TINYINT(4) NOT NULL ,
-      `inicio` TIME NOT NULL ,
-      `fim` TIME NOT NULL ,
-      `deletado_em` TIMESTAMP NULL DEFAULT NULL ,
-      PRIMARY KEY (`id`) ,
-      INDEX `fk_horario_turno_idx` (`turno_id` ASC) ,
-      CONSTRAINT `fk_horario_turno`
-        FOREIGN KEY (`turno_id` )
-        REFERENCES `horario`.`turno` (`id` )
-        ON DELETE CASCADE
-        ON UPDATE CASCADE)
+    CREATE TABLE IF NOT EXISTS `horario`.`horario` (
+      `id` TINYINT(4) NOT NULL AUTO_INCREMENT,
+      `inicio` TIME NOT NULL,
+      `fim` TIME NOT NULL,
+      `deletado_em` TIMESTAMP NULL DEFAULT NULL,
+      PRIMARY KEY (`id`))
     ENGINE = InnoDB
+    AUTO_INCREMENT = 6
     DEFAULT CHARACTER SET = latin1;
 
+    CREATE TABLE IF NOT EXISTS `horario`.`turno_horario` (
+      `turno_id` TINYINT(4) NOT NULL,
+      `horario_id` TINYINT(4) NOT NULL,
+      PRIMARY KEY (`turno_id`, `horario_id`),
+      INDEX `fk_turno_has_horario_horario1_idx` (`horario_id` ASC),
+      INDEX `fk_turno_has_horario_turno1_idx` (`turno_id` ASC),
+      CONSTRAINT `fk_turno_has_horario_turno1`
+        FOREIGN KEY (`turno_id`)
+        REFERENCES `horario`.`turno` (`id`)
+        ON DELETE NO ACTION
+        ON UPDATE NO ACTION,
+      CONSTRAINT `fk_turno_has_horario_horario1`
+        FOREIGN KEY (`horario_id`)
+        REFERENCES `horario`.`horario` (`id`)
+        ON DELETE NO ACTION
+        ON UPDATE NO ACTION)
+    ENGINE = InnoDB
+    DEFAULT CHARACTER SET = latin1;
 
     -- -----------------------------------------------------
     -- Table `horario`.`tipo`
@@ -222,7 +234,7 @@ ENGINE = InnoDB;
     CREATE  TABLE IF NOT EXISTS `horario`.`periodo` (
       `id` INT NOT NULL AUTO_INCREMENT ,
       `nome` CHAR(6) NOT NULL ,
-      `ativo` CHAR(1) NOT NULL ,
+      `ativo` CHAR(1) NOT NULL DEFAULT 0,
       `deletado_em` TIMESTAMP NULL ,
       PRIMARY KEY (`id`) ,
       UNIQUE INDEX `nome_UNIQUE` (`nome` ASC) )
@@ -252,15 +264,16 @@ ENGINE = InnoDB;
 
 
     -- -----------------------------------------------------
-    -- Table `horario`.`disciplina_oferecida`
+    -- Table `horario`.`turma`
     -- -----------------------------------------------------
-    CREATE  TABLE IF NOT EXISTS `horario`.`disciplina_oferecida` (
-      `id` INT NOT NULL ,
+    CREATE  TABLE IF NOT EXISTS `horario`.`turma` (
+      `id` INT NOT NULL AUTO_INCREMENT,
       `disciplina_id` SMALLINT(6) NOT NULL ,
       `periodo_id` INT NOT NULL ,
       `turno_id` TINYINT(4) NOT NULL ,
       `qtd_alunos` INT NOT NULL ,
       `dp` TINYINT(1) NOT NULL ,
+      `deletado_em` TIMESTAMP NULL DEFAULT NULL,
       PRIMARY KEY (`id`) ,
       INDEX `fk_disciplina_has_periodo_periodo1_idx` (`periodo_id` ASC) ,
       INDEX `fk_disciplina_has_periodo_disciplina1_idx` (`disciplina_id` ASC) ,
@@ -290,6 +303,7 @@ ENGINE = InnoDB;
     CREATE  TABLE IF NOT EXISTS `horario`.`disponibilidade` (
       `fpa_id` INT NOT NULL ,
       `horario_id` TINYINT(4) NOT NULL ,
+	  `dia_semana` VARCHAR(10) NOT NULL,
       INDEX `fk_fpa_has_horario_horario1_idx` (`horario_id` ASC) ,
       INDEX `fk_fpa_has_horario_fpa1_idx` (`fpa_id` ASC) ,
       PRIMARY KEY (`fpa_id`, `horario_id`) ,
@@ -311,19 +325,19 @@ ENGINE = InnoDB;
     -- -----------------------------------------------------
     CREATE  TABLE IF NOT EXISTS `horario`.`preferencia` (
       `fpa_id` INT NOT NULL ,
-      `disciplinas_oferecidas_id` INT NOT NULL ,
+      `turma_id` INT NOT NULL ,
       `ordem` INT NOT NULL ,
-      PRIMARY KEY (`fpa_id`, `disciplinas_oferecidas_id`) ,
+      PRIMARY KEY (`fpa_id`, `turma_id`) ,
       INDEX `fk_disciplina_has_fpa_fpa1_idx` (`fpa_id` ASC) ,
-      INDEX `fk_preferencias_disciplinas_oferecidas1_idx` (`disciplinas_oferecidas_id` ASC) ,
+      INDEX `fk_preferencias_turma1_idx` (`turma_id` ASC) ,
       CONSTRAINT `fk_disciplina_has_fpa_fpa1`
         FOREIGN KEY (`fpa_id` )
         REFERENCES `horario`.`fpa` (`id` )
         ON DELETE NO ACTION
         ON UPDATE NO ACTION,
-      CONSTRAINT `fk_preferencias_disciplinas_oferecidas1`
-        FOREIGN KEY (`disciplinas_oferecidas_id` )
-        REFERENCES `horario`.`disciplina_oferecida` (`id` )
+      CONSTRAINT `fk_preferencias_turma1`
+        FOREIGN KEY (`turma_id` )
+        REFERENCES `horario`.`turma` (`id` )
         ON DELETE NO ACTION
         ON UPDATE NO ACTION)
     ENGINE = InnoDB
@@ -394,10 +408,9 @@ ENGINE = InnoDB;
     INSERT INTO turno(nome_turno) VALUES("Integral");
     INSERT INTO turno(nome_turno) VALUES("Diário");
 
-    INSERT INTO horario(turno_id, inicio, fim) VALUES(1, '9:10:00', '10:00');
-    INSERT INTO horario(turno_id, inicio, fim) VALUES(2, '13:10:00', '14:00');
-    INSERT INTO horario(turno_id, inicio, fim) VALUES(3, '20:10:00', '21:00');
-    INSERT INTO horario(turno_id, inicio, fim) VALUES(4, '9:10:00', '10:00');
-    INSERT INTO horario(turno_id, inicio, fim) VALUES(5, '10:10:00', '20:00');
+    INSERT INTO periodo(nome, ativo) VALUES ('2017-1', '0'), ('2017-2', '0'), ('2018-1', '1');
+
+    INSERT INTO `horario` (`id`, `inicio`, `fim`, `deletado_em`) VALUES (NULL, '09:00:00', '09:50:00', NULL), (NULL, '09:50:00', '10:40:00', NULL);
+    INSERT INTO `turno_horario` (`turno_id`, `horario_id`) VALUES ('1', '7'), ('1', '6'), ('2', '6'), ('3', '6'), ('3', '7');
 
     INSERT INTO area(id, nome_area, codigo) VALUES(1, "Banco de dados", 01), (2, "Inteligência Artificial", 02), (3, "Redes de Computadores", 03);
