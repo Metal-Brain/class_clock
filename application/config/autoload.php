@@ -89,7 +89,7 @@ $autoload['drivers'] = array();
 |
 |	$autoload['helper'] = array('url', 'file');
 */
-$autoload['helper'] = array('form','url','auth','dropdown_helper');
+$autoload['helper'] = array('form','url','auth','dropdown_helper', 'route', 'date');
 
 /*
 | -------------------------------------------------------------------
@@ -132,4 +132,4 @@ $autoload['language'] = array();
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = array('DB', 'Model', 'Turno_model','TipoSala_model', 'Horario_model', 'Periodo_model');
+$autoload['model'] = array('DB','Model','Turno_model','Horario_model','Curso_model','Disciplina_model','Docente_model','Pessoa_model','Tipo_model','Modalidade_model','TipoSala_model');

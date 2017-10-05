@@ -6,6 +6,11 @@
     */
     class TipoSala_model extends Model{
         protected $table = 'tipo_sala';
-        protected $fillable = ['nome_tipo_sala', 'descricao_tipo_sala'];
+
+		public function disciplinas(){
+			return $this->belongsToMany(Disciplina_model::class);
+		}
+
     }
+
 ?>
