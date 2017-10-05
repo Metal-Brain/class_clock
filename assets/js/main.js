@@ -14,6 +14,8 @@ $('#sidebar-semestres').addClass('active');
   $('#sidebar-fpa').addClass('active');
 }else if(path_atual.indexOf("pessoa") != -1){
   $('#sidebar-pessoa').addClass('active');
+}else if(path_atual.indexOf("disciplina") != -1){
+  $('#sidebar-disciplinas').addClass('active');
 }else{
   $('#sidebar-home').addClass('active');
 }
