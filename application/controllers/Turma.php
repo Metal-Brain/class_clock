@@ -3,7 +3,8 @@
 class Turma extends MY_Controller {
 
   function index () {
-    $turmas = Periodo_model::whereAtivo(true)->firstOrFail()->turmas;
+    $turmas = Periodo_model::whereAtivo(true)->firstOrFail()->turmas_por_turno;
+    $turmas = Periodo_model::whereAtivo(true)->firstOrFail()->turmas;// Comente esta linha para utilizar turmas_por_turno
     $this->load->template('turmas/turmas',compact('turmas'),'turmas/js_turmas');
   }
 
