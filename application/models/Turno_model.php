@@ -17,6 +17,9 @@
             return $this->hasMany(Horario_model::class, 'turno_id')->orderBy('horario.inicio', 'asc');
         }
 
+        public function getNomeAttribute(){ return $this->attributes['nome_turno']; }
+        public function setNomeAttribute($nome){ $this->attributes['nome_turno'] = $nome; }
+
         /**
          * Retorna todos as turmas linkadas com o turno ordenadas pelo turno;
          * @author Lucas Leonel

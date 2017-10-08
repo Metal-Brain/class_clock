@@ -19,7 +19,7 @@ class Periodo_model extends Model {
         $turmas = $this->turmas;
 
         foreach ($turmas as $turma) {
-            $turno = $turma->turno->nome_turno;
+            $turno = $turma->turno->nome;
             $turmas_turno[$turno][] = $turma;
         }
 
