@@ -20,8 +20,8 @@ class Base extends CI_Controller {
     */
 	function Index() {
     // Recuperar os registros cadastrados na tabela contatos
-		$data['contatos'] = $this->csv_model->get_contatos();
-		$this->load->view('home', $data);
+		$data['disciplina'] = $this->csv_model->get_contatos();
+		$this->load->view('disciplinas', $data);
 	}
   /**
     * Faz a improtação do CSV
@@ -31,7 +31,7 @@ class Base extends CI_Controller {
     */
 	function ImportCsv() {
     // Recuperar os registros cadastrados na tabela contatos
-		$data['contatos'] = $this->csv_model->get_contatos();
+		$data['disciplina'] = $this->csv_model->get_contatos();
 		$data['error'] = '';
     // Define as configurações para o upload do CSV
 		$config['upload_path'] = './uploads/';
@@ -52,9 +52,16 @@ class Base extends CI_Controller {
         // Faz a interação no array para poder gravar os dados na tabela 'contatos'
 				foreach ($csv_array as $row) {
 					$insert_data = array(
-						'nome' => $row['nome'],
-						'email' => $row['email']
+						'id' => $row['id'],
+						'curso_id' => $row['curso_id'],
+                        'tipo_sala_id' => $row['tipo_sala_id'],
+                        'nome_disciplina' => $row['nome_disciplina'],
+                        'sigla_disciplina' => $row['sigla_disciplina'],
+                        'qtd_professor' => $row['qtd_professor'],
+                        'qtd_aulas' => $row['qtd_aulas'],
+                        'deletado_em' => $row['deletado_em']
 					);
+
           // Insere os dados na tabela 'contatos'
 					$this->csv_model->insert_csv($insert_data);
 				}
