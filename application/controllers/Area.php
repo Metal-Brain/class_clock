@@ -41,8 +41,7 @@ class Area extends CI_Controller {
                                       array('required',
                                             'max_length[25]',
                                             'is_unique[area.nome_area]',
-                                            'regex_match[/^\D+$/]'),
-                                    array('is_unique' => 'Nome já existente.')
+                                            'regex_match[/^\D+$/]'))
                                      );
 
 
@@ -94,7 +93,7 @@ class Area extends CI_Controller {
     $this->form_validation->set_rules('nome_area',
                                       array('required',
                                             'max_length[25]',
-                                            'regex_match[/^\D+$/]', "is_unique_except[area.nome_area,{$area->nome_area}]")
+                                            'regex_match[/^\D+$/]')
                                      );
 
 
