@@ -35,11 +35,11 @@
 		<!-- Aqui é onde popula a tabela com os dados que vem do backend, onde cada view vai configurar de acordo.-->
 		<tbody>
 			<?php foreach ($periodos as $periodo) { ?>
-				<tr <?php if($periodo->deletado_em): echo 'class="danger"'; endif; ?>>
+				<tr <?php if(empty($periodo->deletado_em)): echo 'class="success"'; endif; ?>>
 					<td class="text-center"><?= ucwords($periodo['nome']); ?></td>
-					<td class="text-center"><?= ( empty($periodo->deletado_em) ) ? 'Ativado' : 'Desativado'?></td>
+					<td class="text-center"><?= (empty($periodo->deletado_em)) ? 'Ativado' : 'Desativado'?></td>
 					<td class="text-center">
-						<?php if (empty($periodo->deletado_em)): ?>
+						<?php if ($periodo->deletado_em): ?>
 						<a class="btn btn-warning glyphicon glyphicon-pencil" title="Editar" href="<?= site_url('periodo/editar/'.$periodo->id)?>"></a>
 						<button class="btn btn-danger" title="Desativar" type="button" id="btn-delete" onclick="confirm(<?= $periodo->id ?>,'Deseja desativar o período?','deletar')"> <i class="glyphicon glyphicon-remove"></i></button>
 					<?php else : ?>
