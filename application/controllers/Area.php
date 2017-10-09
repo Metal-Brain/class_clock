@@ -41,11 +41,10 @@ class Area extends CI_Controller {
                                       array('required',
                                             'max_length[25]',
                                             'is_unique[area.nome_area]',
-                                            'regex_match[/^\D+$/]'))
+                                            'regex_match[/^\D+$/]')
                                      );
 
 
-    $this->form_validation->set_message('is_unique[area.codigo]','O nome da área informada já está cadastrado');
     $this->form_validation->set_message('is_unique[area.nome_area]','O código da área informada já está cadastrado');
     $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
 
