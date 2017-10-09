@@ -52,7 +52,7 @@
 			codigo: {
 				required: true,
 				minlength: 1,
-				maxlength: 2
+				maxlength: 5
 			}
 		}
 	});
