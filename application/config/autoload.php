@@ -1,4 +1,4 @@
-<?php
+//<?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /*
@@ -133,3 +133,4 @@ $autoload['language'] = array();
 |	$autoload['model'] = array('first_model' => 'first');
 */
 $autoload['model'] = array('DB','Model','Turno_model','Horario_model', 'Disciplina_model', 'Curso_model','TipoSala_model');
+
