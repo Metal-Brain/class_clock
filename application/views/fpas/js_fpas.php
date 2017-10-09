@@ -19,4 +19,14 @@
     }
   } );
 </script>
-<!-- TODO Fazer as modificações>
+
+<script type="text/javascript">
+
+    $('input[type=checkbox]').on('change', function () {
+      // pega a quantidade de selecionados
+      var qt = $('input:not([disabled])[type=checkbox]:checked').length;
+      $('#contador').attr('data-value',qt);
+      //coloca o resultado na div contador
+      $('#contador').text(qt + (qt > 1 ? ' selecionados' : ' selecionado'));
+    });
+</script>

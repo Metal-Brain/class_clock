@@ -53,6 +53,7 @@
                 <?php endforeach;?>
                 </tbody>
               </table>
+              <div id="contador" data-value="0"> </div> <!-- Aqui ira aparecer o selecionados do checkbox-->
             </div>
             <div class="col-md-12">
               <a class="btn btn-danger active" href="<?= base_url('index.php/Fpa')?>" style="float: right;"><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
