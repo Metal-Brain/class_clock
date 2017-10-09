@@ -53,7 +53,7 @@
                 <?php endforeach;?>
                 </tbody>
               </table>
-              <div id="contador" data-value="0"> </div> <!-- Aqui ira aparecer o selecionados do checkbox-->
+              <div id="contador" data-value="0"> </div> <!-- Aqui ira aparecer os selecionados do checkbox-->
             </div>
             <div class="col-md-12">
               <a class="btn btn-danger active" href="<?= base_url('index.php/Fpa')?>" style="float: right;"><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
@@ -62,6 +62,7 @@
           </form>
           </div>
         </div>
+                                          <!-- Fim da tabela disponibilidade-->
 
         <!-- Aqui ocorre a tabela de indisponibilidade-->
         <div id="indisponibilidade" class="row" style="display:none;">
