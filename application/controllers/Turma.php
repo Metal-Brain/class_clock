@@ -2,6 +2,13 @@
 
 class Turma extends MY_Controller {
 
+  function __construct() {
+    if (Periodo_model::whereAtivo(true)->count() < 1) {
+      $this->session->set_flashdata('danger','Problemas ao cadastrar a Turma, tente novamente!');      
+      redirect('/');
+    }
+  }
+
   function index () {
     $turmas = Periodo_model::whereAtivo(true)->firstOrFail()->turmas_por_turno;
     $turmas = Periodo_model::whereAtivo(true)->firstOrFail()->turmas;// Comente esta linha para utilizar turmas_por_turno
