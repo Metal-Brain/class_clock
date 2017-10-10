@@ -46,8 +46,17 @@ class Fpa extends CI_Controller{
             ]);
           }
         }
-
-        foreach()
+        
+        $disciplinas = $this->input->post('disc');
+        $fpa->preferencia()->sync([]);
+        $ordem = 1;
+        foreach($disciplinas as $disciplina){
+          Disciplina_model::firstOrCreate([
+            'fpa_id' => $fpa->id,
+            'disciplina_id' => $disciplina->id,
+            'preferencia' => $ordem++
+          ]);  
+        }
       });
       $this->session->set_flashdata('success','FPA cadastrado com sucesso');
     } catch (Exception $e){
@@ -79,13 +88,25 @@ class Fpa extends CI_Controller{
         ]);
       }
     }
+
+    $disciplinas = $this->input->post('disc');
+    $fpa->preferencia()->sync([]);
+    $ordem = 1;
+    foreach($disciplinas as $disciplina){
+      Disciplina_model::firstOrCreate([
+        'fpa_id' => $fpa->id,
+        'disciplina_id' => $disciplina->id,
+        'preferencia' => $ordem++
+      ]);  
+    }
   }
 
   public function editar(){
     $fpa = Fpa::where('docente_id', $_SESSION['usuarioLogado']['id'])->where('ativo', 1);
     $horarios = Horario::orderBy('inicio')->get();
     $disponibilidade = $fpa->disponibilidade()->get();
-    $this->load->template('fpas/fpaEditar', [$fpa, $horarios, $disponibilidade], 'fpas/js_fpa');
+    $disciplinas = $fpa->preferencia()->get();
+    $this->load->template('fpas/fpaEditar', [$fpa, $horarios, $disponibilidade, $disciplinas], 'fpas/js_fpa');
   }
 
 }
