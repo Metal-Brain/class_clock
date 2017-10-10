@@ -35,6 +35,7 @@ class Fpa extends CI_Controller{
         ];
         
         $fpa = Fpa_model::firstOrCreate($dados);
+        $fpa->disponibilidade()->sync([]);
 
         foreach($disponibilidade as $dia_semana => $horarios){
           foreach($horarios as $horario_id){
@@ -45,6 +46,8 @@ class Fpa extends CI_Controller{
             ]);
           }
         }
+
+        foreach()
       });
       $this->session->set_flashdata('success','FPA cadastrado com sucesso');
     } catch (Exception $e){
@@ -65,6 +68,7 @@ class Fpa extends CI_Controller{
     ];
     
     $fpa = Fpa_model::firstOrCreate($dados);
+    $fpa->disponibilidade()->sync([]);
 
     foreach($dia_semana as $dia_semana){
       foreach($horarios as $horario){
@@ -80,16 +84,8 @@ class Fpa extends CI_Controller{
   public function editar(){
     $fpa = Fpa::where('docente_id', $_SESSION['usuarioLogado']['id'])->where('ativo', 1);
     $horarios = Horario::orderBy('inicio')->get();
-    $this->load->template('fpas/fpaEditar', [$fpa, $horarios], 'fpas/js_fpa');
+    $disponibilidade = $fpa->disponibilidade()->get();
+    $this->load->template('fpas/fpaEditar', [$fpa, $horarios, $disponibilidade], 'fpas/js_fpa');
   }
-
-  public function atualizar(){
-
-  }
-
-  public function deletar(){
-
-  }
-
 
 }
