@@ -144,8 +144,8 @@
 
 										<div class="row">
 											<div class="col-md-12 form-group">
-												<a class="btn btn-danger active" href="<?= base_url('index.php/curso')?>" style="float: right;"><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
-												<button type="submit" class="btn btn-success active salvar" style="float: right; margin-right: 10px;"><span class="glyphicon glyphicon-floppy-disk"></span> Salvar</button>
+												<a class="btn btn-danger active" title="Cancelar" href="<?= base_url('index.php/curso')?>" style="float: right;"><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
+												<button type="submit" title="Salvar" class="btn btn-success active salvar" style="float: right; margin-right: 10px;"><span class="glyphicon glyphicon-floppy-disk"></span> Salvar</button>
 											</div>
 										</div>
 
