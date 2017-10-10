@@ -72,7 +72,7 @@
                                       $query->from('curso')
                                             ->where('curso.docente_id', '!=', null)
                                             ->select('curso.docente_id');
-                                    })                                    
+                                    })
                                   ->where('docente.deletado_em', null)
                                   ->select('docente.id', 'pessoa.nome')
                                   ->get(),
@@ -129,7 +129,7 @@
     }
 
     public function validar($id = null) {
-      $this->form_validation->set_rules('nome_curso','nome','required|alpha_accent|min_length[5]|max_length[75]|trim|ucwords');
+      $this->form_validation->set_rules('nome_curso','nome','required|alpha_accent|min_length[5]|max_length[75]|trim|strtolower|ucwords');
       $this->form_validation->set_rules('modalidade_id','modalidade','required|integer');
       $this->form_validation->set_rules('sigla_curso','sigla_curso','required|alpha|exact_length[3]|strtoupper');
       $this->form_validation->set_rules('codigo_curso','codigo_curso','required|integer|greater_than[0]|less_than[100000]');
