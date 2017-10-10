@@ -25,7 +25,7 @@ DROP TABLE IF EXISTS `horario`.`area` ;
 
 CREATE TABLE IF NOT EXISTS `horario`.`area` (
   `id` SMALLINT(6) NOT NULL AUTO_INCREMENT,
-  `nome_area` VARCHAR(50) NOT NULL,
+  `nome` VARCHAR(50) NOT NULL,
   `codigo` CHAR(2) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
@@ -465,16 +465,16 @@ INSERT INTO curso(id, modalidade_id, codigo_curso, nome_curso, sigla_curso, qtd_
 INSERT INTO curso(id, modalidade_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento)
     VALUES(5, 5, 544, "Cura do Cancer", "CDC", 8, "B");
 
-INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas)
-    VALUES(1, 1, 5, "Análise de Sistemas", "ADS", 2, 4);
-INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas)
-    VALUES(2, 2, 4, "Matemática", "MAT", 1, 6);
-INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas)
-    VALUES(3, 3, 3, "Fisica Avancada", "FSA", 1, 8);
-INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas)
-    VALUES(4, 4, 2, "Hardware", "HDW", 2, 2);
-INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas)
-    VALUES(5, 5, 1, "Medicina", "MED", 2, 2);
+INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas, modulo)
+    VALUES(1, 1, 5, "Análise de Sistemas", "ADS", 2, 4, 1);
+INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas, modulo)
+    VALUES(2, 2, 4, "Matemática", "MAT", 1, 6, 2);
+INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas, modulo)
+    VALUES(3, 3, 3, "Fisica Avancada", "FSA", 1, 8, 3);
+INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas, modulo)
+    VALUES(4, 4, 2, "Hardware", "HDW", 2, 2, 4);
+INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas, modulo)
+    VALUES(5, 5, 1, "Medicina", "MED", 2, 2, 5);
 
 INSERT INTO turno(id, nome_turno) VALUES(1, "Matutino");
 INSERT INTO turno(id, nome_turno) VALUES(2, "Vespertino");
@@ -482,11 +482,11 @@ INSERT INTO turno(id, nome_turno) VALUES(3, "Noturno");
 INSERT INTO turno(id, nome_turno) VALUES(4, "Integral");
 INSERT INTO turno(id, nome_turno) VALUES(5, "Diário");
 
-INSERT INTO horario(id, turno_id, inicio, fim) VALUES(1, '9:10:00', '10:00');
-INSERT INTO horario(id, turno_id, inicio, fim) VALUES(2, '13:10:00', '14:00');
-INSERT INTO horario(id, turno_id, inicio, fim) VALUES(3, '20:10:00', '21:00');
-INSERT INTO horario(id, turno_id, inicio, fim) VALUES(4, '9:10:00', '10:00');
-INSERT INTO horario(id, turno_id, inicio, fim) VALUES(5, '10:10:00', '20:00');
+INSERT INTO horario(id, inicio, fim) VALUES(1, '9:10:00', '10:00');
+INSERT INTO horario(id, inicio, fim) VALUES(2, '13:10:00', '14:00');
+INSERT INTO horario(id, inicio, fim) VALUES(3, '20:10:00', '21:00');
+INSERT INTO horario(id, inicio, fim) VALUES(4, '9:10:00', '10:00');
+INSERT INTO horario(id, inicio, fim) VALUES(5, '10:10:00', '20:00');
 
 INSERT INTO turno_horario(turno_id, horario_id) VALUES(1, 1);
 INSERT INTO turno_horario(turno_id, horario_id) VALUES(1, 2);
@@ -494,6 +494,6 @@ INSERT INTO turno_horario(turno_id, horario_id) VALUES(1, 2);
 INSERT INTO area(id, nome) VALUES(1, "FIXME: Precisa colocar área no controller Pessoa!");
 
 INSERT INTO pessoa(id, nome, prontuario, senha, email) VALUES(1, "Usuario", "151515", "123456", "email@ifsp.edu");
-INSERT INTO pessoa(id, nome, prontuario, senha, email) VALUES(1, "Usuario", "151521", "123456", "joao@ifsp.edu");
+INSERT INTO pessoa(id, nome, prontuario, senha, email) VALUES(2, "Usuario", "151521", "123456", "joao@ifsp.edu");
 
-INSERT INTO docente(id, pessoa_id, area_id, nascimento, ingresso_campus, ingresso_ifsp, regime) VALUES(1, 1, 1, "08-11-1996", "08-11-2007", "08-11-2007", 1);
+INSERT INTO docente(id, pessoa_id, area_id, nascimento, ingresso_campus, ingresso_ifsp, regime) VALUES(1, 1, 1, "1996/08/11", "2007/08/11", "2007/08/11", 1);
