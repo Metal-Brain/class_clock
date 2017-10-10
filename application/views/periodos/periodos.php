@@ -40,11 +40,11 @@
 					<td class="text-center"><?= (empty($periodo->deletado_em)) ? 'Ativado' : 'Desativado'?></td>
 					<td class="text-center">
 						<?php if ($periodo->deletado_em): ?>
-						<a class="btn btn-warning glyphicon glyphicon-pencil" title="Editar" href="<?= site_url('periodo/editar/'.$periodo->id)?>"></a>
-						<button class="btn btn-danger" title="Desativar" type="button" id="btn-delete" onclick="confirm(<?= $periodo->id ?>,'Deseja desativar o período?','deletar')"> <i class="glyphicon glyphicon-remove"></i></button>
-					<?php else : ?>
 						<a class="btn btn-warning glyphicon glyphicon-pencil disabled" title="Editar" href="<?= site_url('periodo/editar/'.$periodo->id)?>"></a>
 						<button class="btn btn-success" title="Ativar" type="button" id="btn-delete" onclick="confirm(<?= $periodo->id ?>,'Deseja ativar o período?','ativar')"> <i class="glyphicon glyphicon-check"></i></button>
+					<?php else : ?>
+						<a class="btn btn-warning glyphicon glyphicon-pencil" title="Editar" href="<?= site_url('periodo/editar/'.$periodo->id)?>"></a>
+						<button class="btn btn-danger" title="Desativar" type="button" id="btn-delete" onclick="confirm(<?= $periodo->id ?>,'Deseja desativar o período?','deletar')"> <i class="glyphicon glyphicon-remove"></i></button>
 						<?php endif; ?>
 					</td>
 				</tr>
