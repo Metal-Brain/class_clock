@@ -20,7 +20,7 @@ class Base extends CI_Controller {
     */
 	function Index() {
     // Recuperar os registros cadastrados na tabela contatos
-		$data['disciplina'] = $this->csv_model->get_contatos();
+		$data['disciplina'] = $this->csv_model->nome();
 		$this->load->view('disciplinas', $data);
 	}
   /**
@@ -31,7 +31,7 @@ class Base extends CI_Controller {
     */
 	function ImportCsv() {
     // Recuperar os registros cadastrados na tabela contatos
-		$data['disciplina'] = $this->csv_model->get_contatos();
+		$data['disciplina'] = $this->csv_model->get_disciplina();
 		$data['error'] = '';
     // Define as configurações para o upload do CSV
 		$config['upload_path'] = './uploads/';
@@ -41,7 +41,7 @@ class Base extends CI_Controller {
 		// Se o upload falhar, exibe mensagem de erro na view
 		if (!$this->upload->do_upload('csvfile')) {
 			$data['error'] = $this->upload->display_errors();
-			$this->load->view('home', $data);
+			$this->load->view('disciplinas', $data);
 		} else {
 			$file_data = $this->upload->data();
 			$file_path =  './uploads/'.$file_data['file_name'];
@@ -70,7 +70,7 @@ class Base extends CI_Controller {
 				redirect();
 			} else
 			   $data['error'] = "Ocorreu um erro, desculpe!";
-			$this->load->view('home', $data);
+			$this->load->view('disciplinas', $data);
 		}
 	}
 }
