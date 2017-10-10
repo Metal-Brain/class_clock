@@ -137,7 +137,9 @@ class Periodo extends CI_Controller
         {
 
             $ativo = Periodo_model::where('deletado_em', null)->first();
-            $ativo->delete();
+            if($ativo){
+                $ativo->delete();                
+            }
             $periodo = Periodo_model::withTrashed()->findOrFail($id);
             $periodo->restore();
             $this->session->set_flashdata('success','Período ativado com sucesso');
