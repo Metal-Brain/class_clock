@@ -26,6 +26,7 @@
                                             ->where('curso.docente_id', '!=', null)
                                             ->select('curso.docente_id');
                                     })
+                                  ->where('docente.deletado_em', null)
                                   ->select('docente.id', 'pessoa.nome')
                                   ->get(),
       );
@@ -71,7 +72,8 @@
                                       $query->from('curso')
                                             ->where('curso.docente_id', '!=', null)
                                             ->select('curso.docente_id');
-                                    })
+                                    })                                    
+                                  ->where('docente.deletado_em', null)
                                   ->select('docente.id', 'pessoa.nome')
                                   ->get(),
       );
