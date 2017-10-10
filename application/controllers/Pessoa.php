@@ -157,7 +157,13 @@ class Pessoa extends MY_Controller {
   * @param $id ID da pessoa a ser desativada
   */
   function deletar($id) {
-    Pessoa_model::findOrFail($id)->delete();
+    $pessoa = Pessoa_model::findOrFail($id);
+    $docente = Docente_model::where('docente.pessoa_id', $id)->get();
+    $curso = Curso_model::where('curso.docente_id', $docente[0]->id)->get();
+    $curso[0]->docente_id = null;
+    $curso[0]->save();
+    $pessoa->delete();
+
     $this->session->set_flashdata('success', 'Pessoa desativada com sucesso');
     redirect('/pessoa');
   }

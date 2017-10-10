@@ -10,7 +10,7 @@
         'cursos' => Curso_model::withTrashed()->get(),
         'modalidade' => Modalidade_model::all('id','nome_modalidade'),
         'docentes' => Pessoa_model::join('docente', 'pessoa.id', '=', 'docente.pessoa_id')
-                                  ->select('pessoa.nome', 'pessoa.id')
+                                  ->select('pessoa.nome', 'docente.id')
                                   ->get(),
       );
       $this->load->template('cursos/cursos', compact('data'), 'cursos/js_cursos');
@@ -106,8 +106,7 @@
 
     public function ativar($id){
       try{
-      $curso = Curso_model::withTrashed()->findOrFail($id);
-      $curso->restore();
+      $curso = Curso_model::withTrashed()->findOrFail($id)->restore();
       $this->session->set_flashdata('success', 'Curso ativado com sucesso');
       }catch(Exception $e){
         $this->session->set_flashdata('danger', 'Não foi possivel ativar o curso');
