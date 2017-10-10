@@ -23,9 +23,11 @@
 
 <script type="text/javascript">
 
+  var qt;
+
     $('input[type=checkbox]').on('change', function () {
       // pega a quantidade de selecionados
-      var qt = $('input:not([disabled])[type=checkbox]:checked').length;
+      qt = $('input:not([disabled])[type=checkbox]:checked').length;
       $('#contador').attr('data-value',qt);
       //coloca o resultado na div contador
       $('#contador').text(qt + (qt > 1 ? ' selecionados' : ' selecionado'));
@@ -37,5 +39,26 @@
       }else{
         $('input[type=checkbox]:not(:checked)').prop('disabled', false);
       }
+
+      $("input[name=totalAula]").val(qt);
     });
+
+</script>
+
+<script type="text/javascript">
+
+    jQuery.validator.addMethod("minAula",function (value, element, param) {
+      return (value > param) ? true : false;
+    },'');
+
+
+    $(document).ready(function () {
+      $('#formDisp').validate({
+        rules: {
+          totalAula: {required: true, minAula: 14}
+        }
+      });
+    });
+
+
 </script>

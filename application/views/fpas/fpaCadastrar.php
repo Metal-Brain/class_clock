@@ -24,10 +24,10 @@
         <!-- Criando a tabela de disponibilidade-->
         <div id="disponibilidade" class="row" style="display:none;">
           <div class="col-md-12">
-            <div class="table-responsive">
-              <form action="<?= site_url('fpa/salvar')?>" method="POST">
-              <table class="table">
-                  <h4 class="text-center">Selecione os horários em que você estará disponível!</h4>
+            <form id="formDisp" action="<?= site_url('fpa/salvar')?>" method="POST">
+              <h4 class="text-center">Selecione os horários em que você estará disponível!</h4>
+              <div class="table-responsive">
+                <table class="table">
                 <thead>
                   <tr >
                     <th  class="text-center">Horarios</th>
@@ -53,8 +53,15 @@
                 <?php endforeach;?>
                 </tbody>
               </table>
-              <div id="contador" data-value="0"> </div> <!-- Aqui ira aparecer os selecionados do checkbox-->
-            </div>
+                <div id="contador" data-value="0"> </div>
+              </div>
+
+              <div class="form-group">
+                <div class="col-md-1">
+                  <input type="number" name="totalAula" class="form-control" min="0" readonly>
+                </div>
+              </div>
+
             <div class="col-md-12">
               <a class="btn btn-danger active" href="<?= base_url('index.php/Fpa')?>" style="float: right;"><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
               <button type="submit" class="btn btn-success active salvar" style="float: right; margin-right: 10px;"><span class="glyphicon glyphicon-floppy-disk"></span> Salvar</button>
@@ -62,7 +69,7 @@
           </form>
           </div>
         </div>
-                                          <!-- Fim da tabela disponibilidade-->
+        <!-- Fim da tabela disponibilidade-->
 
         <!-- Aqui ocorre a tabela de indisponibilidade-->
         <div id="indisponibilidade" class="row" style="display:none;">
