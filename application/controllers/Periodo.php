@@ -39,6 +39,7 @@ class Periodo extends CI_Controller
                 {
                     $periodo = new Periodo_model();
                     $periodo->nome = $this->input->post('nome');
+                    $periodo->deletado_em = date("Y-m-d H:i:s");
                     $periodo->save();
                 });
                 $this->session->set_flashdata('success','Período cadastrado com sucesso');
@@ -134,6 +135,9 @@ class Periodo extends CI_Controller
     {
         try
         {
+
+            $ativo = Periodo_model::where('deletado_em', null)->first();
+            $ativo->delete();
             $periodo = Periodo_model::withTrashed()->findOrFail($id);
             $periodo->restore();
             $this->session->set_flashdata('success','Período ativado com sucesso');
