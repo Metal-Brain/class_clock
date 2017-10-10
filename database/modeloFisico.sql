@@ -435,3 +435,65 @@ DEFAULT CHARACTER SET = latin1;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+-- -----------------------------------------------------
+-- Inserção de dados
+-- -----------------------------------------------------
+
+INSERT INTO tipo(nome) VALUES ('Administrador'), ('CRA'), ('DAE'), ('Docente');
+
+INSERT INTO tipo_sala(id, nome_tipo_sala, descricao_tipo_sala) VALUES(1, "Teorica", "Mesas e Cadeiras");
+INSERT INTO tipo_sala(id, nome_tipo_sala, descricao_tipo_sala) VALUES(2, "Pratica", "Computadores");
+INSERT INTO tipo_sala(id, nome_tipo_sala, descricao_tipo_sala) VALUES(3, "Hibrida", "Mesas, cadeiras e computadores");
+INSERT INTO tipo_sala(id, nome_tipo_sala, descricao_tipo_sala) VALUES(4, "Auditorio", "Apresentacoes");
+INSERT INTO tipo_sala(id, nome_tipo_sala, descricao_tipo_sala) VALUES(5, "VideoConferencia", "Videoconferencias ao vivo");
+
+INSERT INTO modalidade(id, nome_modalidade, codigo) VALUES(1, "Tecnologia", "00001");
+INSERT INTO modalidade(id, nome_modalidade, codigo) VALUES(2, "Bacharel", "00021");
+INSERT INTO modalidade(id, nome_modalidade, codigo) VALUES(3, "Pos Graduação", "00231");
+INSERT INTO modalidade(id, nome_modalidade, codigo) VALUES(4, "Mestrado", "001321");
+INSERT INTO modalidade(id, nome_modalidade, codigo) VALUES(5, "Doutorado", "44121");
+
+INSERT INTO curso(id, modalidade_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento)
+    VALUES(1, 1, 111, "Análise e Desenvolvimento de Sistemas", "ADS", 6, "B");
+INSERT INTO curso(id, modalidade_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento)
+    VALUES(2, 2, 222, "Processos Gerenciais", "PRG", 8, "S");
+INSERT INTO curso(id, modalidade_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento)
+    VALUES(3, 3, 333, "Fisica", "FIS", 4, "S");
+INSERT INTO curso(id, modalidade_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento)
+    VALUES(4, 4, 444, "Computação Avançada", "CPA", 3, "B");
+INSERT INTO curso(id, modalidade_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento)
+    VALUES(5, 5, 544, "Cura do Cancer", "CDC", 8, "B");
+
+INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas)
+    VALUES(1, 1, 5, "Análise de Sistemas", "ADS", 2, 4);
+INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas)
+    VALUES(2, 2, 4, "Matemática", "MAT", 1, 6);
+INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas)
+    VALUES(3, 3, 3, "Fisica Avancada", "FSA", 1, 8);
+INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas)
+    VALUES(4, 4, 2, "Hardware", "HDW", 2, 2);
+INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas)
+    VALUES(5, 5, 1, "Medicina", "MED", 2, 2);
+
+INSERT INTO turno(id, nome_turno) VALUES(1, "Matutino");
+INSERT INTO turno(id, nome_turno) VALUES(2, "Vespertino");
+INSERT INTO turno(id, nome_turno) VALUES(3, "Noturno");
+INSERT INTO turno(id, nome_turno) VALUES(4, "Integral");
+INSERT INTO turno(id, nome_turno) VALUES(5, "Diário");
+
+INSERT INTO horario(id, turno_id, inicio, fim) VALUES(1, '9:10:00', '10:00');
+INSERT INTO horario(id, turno_id, inicio, fim) VALUES(2, '13:10:00', '14:00');
+INSERT INTO horario(id, turno_id, inicio, fim) VALUES(3, '20:10:00', '21:00');
+INSERT INTO horario(id, turno_id, inicio, fim) VALUES(4, '9:10:00', '10:00');
+INSERT INTO horario(id, turno_id, inicio, fim) VALUES(5, '10:10:00', '20:00');
+
+INSERT INTO turno_horario(turno_id, horario_id) VALUES(1, 1);
+INSERT INTO turno_horario(turno_id, horario_id) VALUES(1, 2);
+
+INSERT INTO area(id, nome) VALUES(1, "FIXME: Precisa colocar área no controller Pessoa!");
+
+INSERT INTO pessoa(id, nome, prontuario, senha, email) VALUES(1, "Usuario", "151515", "123456", "email@ifsp.edu");
+INSERT INTO pessoa(id, nome, prontuario, senha, email) VALUES(1, "Usuario", "151521", "123456", "joao@ifsp.edu");
+
+INSERT INTO docente(id, pessoa_id, area_id, nascimento, ingresso_campus, ingresso_ifsp, regime) VALUES(1, 1, 1, "08-11-1996", "08-11-2007", "08-11-2007", 1);
