@@ -30,7 +30,7 @@ class Area extends CI_Controller {
     $this->form_validation->set_rules('codigo',
                                       'codigo',
                                       array('required',
-                                            'max_length[2]',
+                                            'max_length[5]',
                                             'is_unique[area.codigo]',
                                            'is_natural_no_zero'),
                                       array('is_unique' => 'Código já existente.')
@@ -40,7 +40,6 @@ class Area extends CI_Controller {
                                       'nome',
                                       array('required',
                                             'max_length[25]',
-                                            'is_unique[area.nome_area]',
                                             'regex_match[/^\D+$/]')
                                      );
 
@@ -85,7 +84,7 @@ class Area extends CI_Controller {
      $this->form_validation->set_rules('codigo',
                                       'codigo',
                                       array('required',
-                                            'max_length[2]',
+                                            'max_length[5]',
                                             "is_unique_except[area.codigo,{$area->codigo}]",
                                            'is_natural_no_zero')
                                      );
