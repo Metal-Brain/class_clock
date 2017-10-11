@@ -26,7 +26,7 @@ DROP TABLE IF EXISTS `horario`.`area` ;
 CREATE TABLE IF NOT EXISTS `horario`.`area` (
   `id` SMALLINT(6) NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(50) NOT NULL,
-  `codigo` CHAR(2) NULL,
+  `codigo` CHAR(5) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 2
