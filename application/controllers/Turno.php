@@ -15,6 +15,7 @@ class Turno extends CI_Controller {
     $turnos = Turno_model::withTrashed()->get();
     $this->load->template('turnos/turnos',compact('turnos'),'turnos/js_turnos');
   }
+    
 
   function cadastrar () {
     $this->load->template('turnos/turnosCadastrar',[],'turnos/js_turnos');
@@ -62,7 +63,7 @@ class Turno extends CI_Controller {
         $this->session->set_flashdata('danger','Problemas ao cadastrar o turno, tente novamente!');
       }
 
-      redirect("turno");
+      redirect("Turno");
     } else {
       $this->cadastrar();
     }
@@ -159,7 +160,7 @@ class Turno extends CI_Controller {
       $this->session->set_flashdata('danger','Erro ao ativar o turno. Tente novamente!');
     }
 
-    redirect("turno");
+    redirect("Turno");
 
   }
 

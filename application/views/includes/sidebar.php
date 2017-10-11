@@ -12,7 +12,7 @@
 	   </li>
 
 	   <li id="sidebar-cursos">
-		   <a href="">
+		   <a href="http://localhost/class_clock/index.php/Curso">
 			   <span class="glyphicon glyphicon-education"></span> <span class="sidebar-label">Cursos</span>
 		   </a>
 	   </li>
@@ -36,10 +36,15 @@
 			   <span class="glyphicon glyphicon-duplicate"></span> <span class="sidebar-label">FPA</span>
 		   </a>
 	   </li>
-     <li id="sidebar-modalidade">
-      <a href="http://localhost/class_clock/index.php/Modalidade">
-        <span class="glyphicon glyphicon-list-alt"></span> <span class="sidebar-label">Modalidade</span>
-      </a>
-    </li>
+	   <li id="sidebar-pessoa">
+		   <a href="http://localhost/class_clock/index.php/pessoa">
+			   <span class="glyphicon glyphicon-user"></span> <span class="sidebar-label">Pessoa</span>
+       </a>
+     </li>
+     <li id="sidebar-disciplinas">
+		   <a href="http://localhost/class_clock/index.php/disciplina">
+			   <span class="glyphicon glyphicon-tree-deciduous"></span> <span class="sidebar-label">Disciplinas</span>
+		   </a>
+	   </li>
    </ul>
 </div>

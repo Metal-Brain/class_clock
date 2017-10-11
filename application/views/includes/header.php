@@ -14,6 +14,9 @@
 		<link href="<?= base_url('assets/css/style.css')?>" rel="stylesheet">
 
 		<link href="<?= base_url('assets/DataTables/dataTables.bootstrap.min.css')?>" rel="stylesheet">
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+	</head>
+
     <!-- DataTable -->
     <link href="<?= base_url('assets/DataTables/dataTables.bootstrap.min.css')?>" rel="stylesheet">
 
@@ -42,13 +45,13 @@
 						</button>
 
 						<li class="dropdown pull-right">
-							<a href="#" data-toggle="dropdown" class="dropdown-toggle usuario">
-								Usuário <b class="caret"></b>
+							<a href="#" data-toggle="dropdown" class="dropdown-toggle usuario" role="button" aria-haspopup="true" aria-expanded="false">
+								<?= ucwords($this->session->usuario_logado['nome']) ?> <b class="caret"></b>
 							</a>
 							<ul class="dropdown-menu">
 								<li><a href="" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Meu perfil</a></li>
 								<li class="divider"></li>
-								<li><a href=""><span class="glyphicon glyphicon-off" aria-hidden="true"></span> Sair</a></li>
+								<li><a href="<?= site_url('Login/logout')?>"><span class="glyphicon glyphicon-off" aria-hidden="true"></span> Sair</a></li>
 							</ul>
 						</li>
 					</ul>

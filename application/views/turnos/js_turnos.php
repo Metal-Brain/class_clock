@@ -16,7 +16,7 @@
     		},
     		callback: function (result) {
         	if (result == true)
-						  window.location.href = '<?= site_url("turno/") ?>' + funcao + '/' + id;
+						  window.location.href = '<?= site_url("Turno/") ?>' + funcao + '/' + id;
     		}
 			});
 		}
