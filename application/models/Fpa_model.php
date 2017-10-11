@@ -6,7 +6,7 @@ class Fpa_model extends Model{
 
     //Função que retorna os horários disponíveis do docente em relação a FPA.
     public function disponibilidade(){
-        return $this->hasMany(Horario_model::class, 'disponibilidade', 'horario_id');
+        return $this->hasMany(Horario_model::class, 'disponibilidade', 'horario_id', "fpa_id");
     }
 
     //Função que retorna as preferências do professor em relação as disciplinas oferecidas no semestre.

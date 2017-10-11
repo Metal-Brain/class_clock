@@ -35,7 +35,7 @@ class Fpa extends CI_Controller{
         ];
         
         $fpa = Fpa_model::firstOrCreate($dados);
-        $fpa->disponibilidade()->sync([]);
+        $fpa->disponibilidade->sync([]);
 
         foreach($disponibilidade as $dia_semana => $horarios){
           foreach($horarios as $horario_id){
@@ -48,7 +48,7 @@ class Fpa extends CI_Controller{
         }
         
         $disciplinas = $this->input->post('disc');
-        $fpa->preferencia()->sync([]);
+        $fpa->preferencia->sync([]);
         $ordem = 1;
         foreach($disciplinas as $disciplina){
           Disciplina_model::firstOrCreate([
@@ -77,7 +77,7 @@ class Fpa extends CI_Controller{
     ];
     
     $fpa = Fpa_model::firstOrCreate($dados);
-    $fpa->disponibilidade()->sync([]);
+    $fpa->disponibilidade->sync([]);
 
     foreach($dia_semana as $dia_semana){
       foreach($horarios as $horario){
@@ -90,7 +90,7 @@ class Fpa extends CI_Controller{
     }
 
     $disciplinas = $this->input->post('disc');
-    $fpa->preferencia()->sync([]);
+    $fpa->preferencia->sync([]);
     $ordem = 1;
     foreach($disciplinas as $disciplina){
       Disciplina_model::firstOrCreate([
