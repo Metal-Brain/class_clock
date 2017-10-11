@@ -36,8 +36,8 @@ class Docente_model extends Model {
         return $this->belongsTo(Pessoa_model::class, 'pessoa_id');
     }
 
-    public function curso(){
-      return $this->hasMany(Docente_model::class, 'curso_id');
+    public function cursos(){
+      return $this->hasMany(Curso_model::class, 'docente_id');
     }
 
     public function area() {
@@ -45,5 +45,3 @@ class Docente_model extends Model {
     }
 
   }
-
-?>

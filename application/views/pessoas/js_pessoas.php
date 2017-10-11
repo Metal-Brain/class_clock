@@ -18,7 +18,7 @@
 					}
 				});
 			}
-			
+
 			$(".formPessoas").validate({
 				errorClass: 'text-danger',
 				errorElement: 'span',
