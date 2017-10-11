@@ -25,11 +25,10 @@ DROP TABLE IF EXISTS `horario`.`area` ;
 
 CREATE TABLE IF NOT EXISTS `horario`.`area` (
   `id` SMALLINT(6) NOT NULL AUTO_INCREMENT,
-  `nome` VARCHAR(50) NOT NULL,
+  `nome_area` VARCHAR(50) NOT NULL,
   `codigo` CHAR(5) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = latin1;
 
 
@@ -491,7 +490,7 @@ INSERT INTO horario(id, inicio, fim) VALUES(5, '10:10:00', '20:00');
 INSERT INTO turno_horario(turno_id, horario_id) VALUES(1, 1);
 INSERT INTO turno_horario(turno_id, horario_id) VALUES(1, 2);
 
-INSERT INTO area(id, nome) VALUES(1, "FIXME: Precisa colocar área no controller Pessoa!");
+INSERT INTO area(id, codigo, nome_area) VALUES(1, "12345", "Informática");
 
 INSERT INTO pessoa(id, nome, prontuario, senha, email) VALUES(1, "Usuario", "151515", "123456", "email@ifsp.edu");
 INSERT INTO pessoa(id, nome, prontuario, senha, email) VALUES(2, "Usuario", "151521", "123456", "joao@ifsp.edu");
