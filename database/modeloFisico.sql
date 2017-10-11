@@ -27,6 +27,7 @@ CREATE TABLE IF NOT EXISTS `horario`.`area` (
   `id` SMALLINT(6) NOT NULL AUTO_INCREMENT,
   `nome_area` VARCHAR(50) NOT NULL,
   `codigo` CHAR(5) NULL,
+  `deletado_em` TIMESTAMP NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
