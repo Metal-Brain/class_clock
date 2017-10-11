@@ -23,7 +23,7 @@ class Fpa extends CI_Controller{
       $this->indisponibilidade($indisponibilidade);
     }
 
-    $this->cadastrar();
+    $this->index();
   }
 
   private function disponibilidade($disponibilidade){

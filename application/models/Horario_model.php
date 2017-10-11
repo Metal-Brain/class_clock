@@ -16,5 +16,9 @@
         public function turno(){
             return $this->belongsToMany(Turno_model::class, 'turno_horario', 'turno_id', 'horario_id');
         }
+
+        public function fpa(){
+            return $this->belongsToMany(Fpa_model::class, 'disponibilidade', 'fpa_id', 'horario_id');
+        }
     }
 ?>
