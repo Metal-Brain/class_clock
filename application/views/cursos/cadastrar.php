@@ -22,7 +22,9 @@
 											<div class="col-xs-12 col-sm-12 col-md-11 form-group">
 
 												<label>Nome:</label>
-												<input class="form-control" placeholder="Nome" name="nome_curso" id="nome_curso" maxlength="75">
+												<input class="form-control" placeholder="Nome" onkeypress="this.value = this.value.toLowerCase();" 
+												onChange="this.value = this.value.toLowerCase();" 
+												onpaste="this.value = this.value.toLowerCase();" name="nome_curso" id="nome_curso" maxlength="75">
 
 											</div>
 										</div>
