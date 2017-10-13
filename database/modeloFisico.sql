@@ -177,7 +177,7 @@ DROP TABLE IF EXISTS `horario`.`periodo` ;
 CREATE TABLE IF NOT EXISTS `horario`.`periodo` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `nome` CHAR(6) NOT NULL,
-  `ativo` CHAR(1) NOT NULL,
+  `ativo` CHAR(1) NOT NULL DEFAULT '0',
   `deletado_em` TIMESTAMP NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `nome_UNIQUE` (`nome` ASC))
@@ -524,3 +524,5 @@ INSERT INTO docente(id, pessoa_id, area_id, nascimento, ingresso_campus, ingress
 INSERT INTO tipo_pessoa(tipo_id, pessoa_id) VALUES(1, 1), (4, 2);
 
 INSERT INTO semana(nome) VALUES ('Segunda-feira'),('Terça-feira'),('Quarta-feira'),('Quinta-feira'),('Sexta-feira'), ('Sabado');
+
+INSERT INTO periodo(nome, ativo) VALUES('2017-2', '0'), ('2018-1', '1'),('2017-1', '0');
