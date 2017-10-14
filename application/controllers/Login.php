@@ -40,14 +40,7 @@
           // Joga os dados do usuário na sessão
           $this->session->set_userdata('usuario_logado',$dados);
 
-          // Verifica o tipo de usuário que esta entrando para ser redirecionado
-          // para sua página.
-          switch ($usuario->tipos()->first()) {
-            case 1:
-              redirect("Turno");
-              break;
-            // TODO: Adicionar os redirecionamentos
-          }
+          redirect("Turno");
         } catch (Exception $e) {
           $this->session->set_flashdata('danger','Prontuário ou senha incorretos, tente novamente');
           redirect("/");
