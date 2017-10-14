@@ -16,6 +16,26 @@
 			   <span class="glyphicon glyphicon-education"></span> <span class="sidebar-label">Cursos</span>
 		   </a>
 	   </li>
+	   <li id="sidebar-salas">
+		   <a href="http://localhost/class_clock/index.php/sala">
+			   <span class="glyphicon glyphicon-education"></span> <span class="sidebar-label">Salas</span>
+		   </a>
+	   </li>
+	   <li id="sidebar-periodos">
+		   <a href="http://localhost/class_clock/index.php/periodo">
+			   <span class="glyphicon glyphicon-education"></span> <span class="sidebar-label">Periodos</span>
+		   </a>
+	   </li>
+	   <li id="sidebar-areas">
+		   <a href="http://localhost/class_clock/index.php/area">
+			   <span class="glyphicon glyphicon-education"></span> <span class="sidebar-label">Areas</span>
+		   </a>
+	   </li>
+	   <li id="sidebar-turmas">
+		   <a href="http://localhost/class_clock/index.php/turma">
+			   <span class="glyphicon glyphicon-education"></span> <span class="sidebar-label">Turmas</span>
+		   </a>
+	   </li> 
 	   <li id="sidebar-semestres">
 		   <a href="">
 			   <span class="glyphicon glyphicon-calendar"></span> <span class="sidebar-label">Semestres</span>
