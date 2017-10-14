@@ -17,10 +17,24 @@ class Fpa extends CI_Controller{
     $disponibilidade    = $this->input->post('disp');
     $indisponibilidade  = $this->input->post('indisponibilidade');
 
+    $fpa = Fpa_model::firstOrCreate($dados);
+    $fpa->disponibilidade->sync([]);
+
     if(isset($disponibilidade)){
       $this->disponibilidade($disponibilidade);
     }else if(isset($indisponibilidade)){
       $this->indisponibilidade($indisponibilidade);
+    }
+
+    $disciplinas = $this->input->post('disc');
+    $fpa->preferencia->sync([]);
+    $ordem = 1;
+    foreach($disciplinas as $disciplina){
+      Preferencia_model::firstOrCreate([
+        'fpa_id' => $fpa->id,
+        'disciplina_id' => $disciplina->id,
+        'preferencia' => $ordem++
+      ]);  
     }
 
     $this->index();
@@ -34,9 +48,6 @@ class Fpa extends CI_Controller{
           "periodo_id" => Periodo_model::periodoAtivo()->id
         ];
         
-        $fpa = Fpa_model::firstOrCreate($dados);
-        $fpa->disponibilidade->sync([]);
-
         foreach($disponibilidade as $dia_semana => $horarios){
           foreach($horarios as $horario_id){
             Disponibilidade_model::firstOrCreate([
@@ -45,17 +56,6 @@ class Fpa extends CI_Controller{
               'dia_semana' => $dia_semana
             ]);
           }
-        }
-        
-        $disciplinas = $this->input->post('disc');
-        $fpa->preferencia->sync([]);
-        $ordem = 1;
-        foreach($disciplinas as $disciplina){
-          Disciplina_model::firstOrCreate([
-            'fpa_id' => $fpa->id,
-            'disciplina_id' => $disciplina->id,
-            'preferencia' => $ordem++
-          ]);  
         }
       });
       $this->session->set_flashdata('success','FPA cadastrado com sucesso');
@@ -75,9 +75,6 @@ class Fpa extends CI_Controller{
       "docente_id" => 1,//$_SESSION['usuarioLogado']['id'],
       "periodo_id" => Periodo_model::periodoAtivo()->id
     ];
-    
-    $fpa = Fpa_model::firstOrCreate($dados);
-    $fpa->disponibilidade->sync([]);
 
     foreach($dia_semana as $dia_semana){
       foreach($horarios as $horario){
@@ -87,17 +84,6 @@ class Fpa extends CI_Controller{
           'dia_semana' => $dia_semana
         ]);
       }
-    }
-
-    $disciplinas = $this->input->post('disc');
-    $fpa->preferencia->sync([]);
-    $ordem = 1;
-    foreach($disciplinas as $disciplina){
-      Disciplina_model::firstOrCreate([
-        'fpa_id' => $fpa->id,
-        'disciplina_id' => $disciplina->id,
-        'preferencia' => $ordem++
-      ]);  
     }
   }
 
