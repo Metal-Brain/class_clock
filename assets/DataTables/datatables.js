@@ -13853,7 +13853,7 @@ if (typeof jQuery === 'undefined') {
 			 *      } );
 			 *    } );
 			 */
-			"sInfoFiltered": "(filtered from _MAX_ total entries)",
+			"sInfoFiltered": "(filtrado de um total de _MAX_ registros)",
 	
 	
 			/**
@@ -13995,7 +13995,7 @@ if (typeof jQuery === 'undefined') {
 			 *      } );
 			 *    } );
 			 */
-			"sLoadingRecords": "Loading...",
+			"sLoadingRecords": "Carregando...",
 	
 	
 			/**
@@ -14016,7 +14016,7 @@ if (typeof jQuery === 'undefined') {
 			 *      } );
 			 *    } );
 			 */
-			"sProcessing": "Processing...",
+			"sProcessing": "Processando...",
 	
 	
 			/**
@@ -14109,7 +14109,7 @@ if (typeof jQuery === 'undefined') {
 			 *      } );
 			 *    } );
 			 */
-			"sZeroRecords": "No matching records found"
+			"sZeroRecords": "Nenhum resultado encontrado"
 		},
 	
 	

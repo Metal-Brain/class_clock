@@ -13,3 +13,5 @@ class Area_model extends model{
         return $this->hasMany(Docente_model::class, 'area_id');
     }
 }
+
+

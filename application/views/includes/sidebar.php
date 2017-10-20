@@ -12,10 +12,30 @@
 	   </li>
 
 	   <li id="sidebar-cursos">
-		   <a href="">
+		   <a href="http://localhost/class_clock/index.php/Curso">
 			   <span class="glyphicon glyphicon-education"></span> <span class="sidebar-label">Cursos</span>
 		   </a>
 	   </li>
+	   <li id="sidebar-salas">
+		   <a href="http://localhost/class_clock/index.php/sala">
+			   <span class="glyphicon glyphicon-education"></span> <span class="sidebar-label">Salas</span>
+		   </a>
+	   </li>
+	   <li id="sidebar-periodos">
+		   <a href="http://localhost/class_clock/index.php/periodo">
+			   <span class="glyphicon glyphicon-education"></span> <span class="sidebar-label">Periodos</span>
+		   </a>
+	   </li>
+	   <li id="sidebar-areas">
+		   <a href="http://localhost/class_clock/index.php/area">
+			   <span class="glyphicon glyphicon-education"></span> <span class="sidebar-label">Areas</span>
+		   </a>
+	   </li>
+	   <li id="sidebar-turmas">
+		   <a href="http://localhost/class_clock/index.php/turma">
+			   <span class="glyphicon glyphicon-education"></span> <span class="sidebar-label">Turmas</span>
+		   </a>
+	   </li> 
 	   <li id="sidebar-semestres">
 		   <a href="">
 			   <span class="glyphicon glyphicon-calendar"></span> <span class="sidebar-label">Semestres</span>
@@ -36,9 +56,20 @@
 			   <span class="glyphicon glyphicon-duplicate"></span> <span class="sidebar-label">FPA</span>
 		   </a>
 	   </li>
+<<<<<<< HEAD
 	   <li id="sidebar-area">
 		   <a href="http://localhost/class_clock/index.php/Area">
 			   <span class="glyphicon glyphicon-duplicate"></span> <span class="sidebar-label">Áreas</span>
+=======
+	   <li id="sidebar-pessoa">
+		   <a href="http://localhost/class_clock/index.php/pessoa">
+			   <span class="glyphicon glyphicon-user"></span> <span class="sidebar-label">Pessoa</span>
+       </a>
+     </li>
+     <li id="sidebar-disciplinas">
+		   <a href="http://localhost/class_clock/index.php/disciplina">
+			   <span class="glyphicon glyphicon-tree-deciduous"></span> <span class="sidebar-label">Disciplinas</span>
+>>>>>>> master
 		   </a>
 	   </li>
    </ul>
