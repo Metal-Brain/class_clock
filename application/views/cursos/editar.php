@@ -134,11 +134,11 @@
 													<?php
                             echo '<option value="">Sem Coordenador</option>';
                             if($data['coordenador'][0]->id):
-                              echo '<option value="'. $data['coordenador'][0]->id .'"  selected>'. $data['coordenador'][0]->nome .'</option>';
+                              echo '<option value="'. $data['coordenador'][0]->id .'"  selected>['. $data['coordenador'][0]->prontuario ."] ".$data['coordenador'][0]->nome.'</option>';
                             endif;
 
 														foreach($data['docentes'] as $docente){
-																echo '<option value="'. $docente->id .'">'. $docente->nome .'</option>';
+															echo '<option value="'. $docente->id .'">['. $docente->prontuario ."] ".$docente->nome.'</option>';
                             }
 													?>
 

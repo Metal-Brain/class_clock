@@ -65,7 +65,7 @@
         'modalidades' => Modalidade_model::all('id','nome_modalidade'),
         'coordenador' => Pessoa_model::join('docente', 'pessoa.id', '=', 'docente.pessoa_id')
                                       ->where('docente.id', '=', $docente_id)
-                                      ->select('pessoa.nome', 'docente.id')
+                                      ->select('pessoa.nome', 'docente.id','pessoa.prontuario')
                                       ->get(),
         'docentes' => Pessoa_model::join('docente', 'pessoa.id', '=', 'docente.pessoa_id')
                                   ->whereNotIn('docente.id', function($query){

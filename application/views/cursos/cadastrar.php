@@ -113,7 +113,7 @@
 													<?php
 															echo '<option value="">Sem Coordenador</option>';
 															foreach($data['docentes'] as $docente){
-																	echo '<option value="'. $docente->id .'">'. $docente->nome .'</option>';
+																	echo '<option value="'. $docente->id .'">['. $docente->prontuario ."] ".$docente->nome.'</option>';
 															}
 													?>
 
