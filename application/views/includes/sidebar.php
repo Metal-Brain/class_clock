@@ -6,33 +6,33 @@
 		   </a>
 	   </li>
 	   <li id="sidebar-turno">
-		   <a href="http://localhost/class_clock/index.php/Turno">
+		   <a href="<?php echo base_url();?>index.php/Turno">
 			   <span class="glyphicon glyphicon-time"></span> <span class="sidebar-label">Turnos</span>
 		   </a>
 	   </li>
 
 	   <li id="sidebar-cursos">
-		   <a href="http://localhost/class_clock/index.php/Curso">
+		   <a href="<?php echo base_url();?>index.php/Curso">
 			   <span class="glyphicon glyphicon-education"></span> <span class="sidebar-label">Cursos</span>
 		   </a>
 	   </li>
 	   <li id="sidebar-salas">
-		   <a href="http://localhost/class_clock/index.php/sala">
-			   <span class="glyphicon glyphicon-education"></span> <span class="sidebar-label">Salas</span>
+		   <a href="<?php echo base_url();?>index.php/sala">
+			   <span class="glyphicon glyphicon-home"></span> <span class="sidebar-label">Salas</span>
 		   </a>
 	   </li>
 	   <li id="sidebar-periodos">
-		   <a href="http://localhost/class_clock/index.php/periodo">
-			   <span class="glyphicon glyphicon-education"></span> <span class="sidebar-label">Periodos</span>
+		   <a href="<?php echo base_url();?>index.php/periodo">
+			   <span class="glyphicon glyphicon-time"></span> <span class="sidebar-label">Periodos</span>
 		   </a>
 	   </li>
 	   <li id="sidebar-areas">
-		   <a href="http://localhost/class_clock/index.php/area">
-			   <span class="glyphicon glyphicon-education"></span> <span class="sidebar-label">Areas</span>
+		   <a href="<?php echo base_url();?>index.php/area">
+			   <span class="glyphicon glyphicon-list"></span> <span class="sidebar-label">Areas</span>
 		   </a>
 	   </li>
 	   <li id="sidebar-turmas">
-		   <a href="http://localhost/class_clock/index.php/turma">
+		   <a href="<?php echo base_url();?>index.php/turma">
 			   <span class="glyphicon glyphicon-education"></span> <span class="sidebar-label">Turmas</span>
 		   </a>
 	   </li> 
@@ -61,13 +61,18 @@
 			   <span class="glyphicon glyphicon-duplicate"></span> <span class="sidebar-label">FPA</span>
 		   </a>
 	   </li>
-	   <li id="sidebar-pessoa">
-		   <a href="http://localhost/class_clock/index.php/pessoa">
+	   <li id="sidebar-area">
+		   <a href="http://localhost/class_clock/index.php/Area">
+			   <span class="glyphicon glyphicon-duplicate"></span> <span class="sidebar-label">Áreas</span>
+			</a>
+		</li>
+	 <li id="sidebar-pessoa">
+		   <a href="<?php echo base_url();?>index.php/pessoa">
 			   <span class="glyphicon glyphicon-user"></span> <span class="sidebar-label">Pessoa</span>
        </a>
      </li>
      <li id="sidebar-disciplinas">
-		   <a href="http://localhost/class_clock/index.php/disciplina">
+		   <a href="<?php echo base_url();?>index.php/disciplina">
 			   <span class="glyphicon glyphicon-tree-deciduous"></span> <span class="sidebar-label">Disciplinas</span>
 		   </a>
 	   </li>

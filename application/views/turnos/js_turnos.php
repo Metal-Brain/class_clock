@@ -67,7 +67,6 @@
 			}
 
 			var url = window.location.href;
-			var aula = 0;
 			var index = 0;
 
 			if ( url.indexOf('Turno/editar') > -1 ) {

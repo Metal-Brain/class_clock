@@ -6,7 +6,7 @@ if(path_atual.indexOf("Turno") != -1){
 	$('#sidebar-cursos').addClass('active');
 }else if (path_atual.indexOf("Sala") != -1) {
 	$('#sidebar-salas').addClass('active');
-}else if (path_atual.indexOf("Periodo") != -1) {
+}else if (path_atual.indexOf("periodo") != -1) {
 	$('#sidebar-periodos').addClass('active');
 }else if (path_atual.indexOf("Area") != -1) {
 	$('#sidebar-areas').addClass('active');
@@ -22,10 +22,15 @@ if(path_atual.indexOf("Turno") != -1){
   $('#sidebar-instituicao').addClass('active');
 }else if(path_atual.indexOf("FPA") != -1){
   $('#sidebar-fpa').addClass('active');
+<<<<<<< HEAD
+}else if(path_atual.indexOf("Area") != -1){
+$('#sidebar-area').addClass('active');
+=======
 }else if(path_atual.indexOf("pessoa") != -1){
   $('#sidebar-pessoa').addClass('active');
 }else if(path_atual.indexOf("disciplina") != -1){
   $('#sidebar-disciplinas').addClass('active');
+>>>>>>> master
 }else{
   $('#sidebar-home').addClass('active');
 }
