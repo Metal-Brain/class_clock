@@ -56,12 +56,12 @@
 			   <span class="glyphicon glyphicon-duplicate"></span> <span class="sidebar-label">FPA</span>
 		   </a>
 	   </li>
-<<<<<<< HEAD
 	   <li id="sidebar-area">
 		   <a href="http://localhost/class_clock/index.php/Area">
 			   <span class="glyphicon glyphicon-duplicate"></span> <span class="sidebar-label">Áreas</span>
-=======
-	   <li id="sidebar-pessoa">
+			</a>
+		</li>
+	 <li id="sidebar-pessoa">
 		   <a href="<?php echo base_url();?>index.php/pessoa">
 			   <span class="glyphicon glyphicon-user"></span> <span class="sidebar-label">Pessoa</span>
        </a>
@@ -69,7 +69,6 @@
      <li id="sidebar-disciplinas">
 		   <a href="<?php echo base_url();?>index.php/disciplina">
 			   <span class="glyphicon glyphicon-tree-deciduous"></span> <span class="sidebar-label">Disciplinas</span>
->>>>>>> master
 		   </a>
 	   </li>
    </ul>
