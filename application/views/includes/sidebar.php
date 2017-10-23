@@ -36,6 +36,11 @@
 			   <span class="glyphicon glyphicon-education"></span> <span class="sidebar-label">Turmas</span>
 		   </a>
 	   </li> 
+	   <li id="sidebar-modalidades">
+		   <a href="http://localhost/class_clock/index.php/modalidade">
+			   <span class="glyphicon glyphicon-education"></span> <span class="sidebar-label">Modalidades</span>
+		   </a>
+	   </li>
 	   <li id="sidebar-semestres">
 		   <a href="">
 			   <span class="glyphicon glyphicon-calendar"></span> <span class="sidebar-label">Semestres</span>

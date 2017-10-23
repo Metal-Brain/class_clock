@@ -9,6 +9,8 @@
 
 
         $("#formCadastrar").validate({
+              errorClass: 'text-danger',
+			      	errorElement: 'span',
               rules: {
                      nome_modalidade: {
                      required: true,
@@ -25,12 +27,12 @@
               messages: {   
                     nome_modalidade: {
                        required: 'Campo nome é obrigatório',
-          	           maxlength: 'Tamanho maximo do campo é 50 caracteres'
+          	           maxlength: 'Tamanho máximo do campo é 50 caracteres'
                   },
                     codigo:{
-                       required:'Campo codigo é obrigatório',
-	                     maxlength: 'Tamanho maximo do campo é 5 caracteres',
-                       min: 'Por favor insira somente numéros acima de zero'
+                       required:'Campo código é obrigatório',
+	                     maxlength: 'Tamanho máximo do campo é 5 caracteres',
+                       min: 'Por favor insira somente números maiores que zero'
                   }
 
               }
