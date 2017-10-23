@@ -13,10 +13,11 @@
       <?php endif; ?>
     </div>
     </div>
+    		<h1>Cadastrar Disciplina</h1>
+            <button id="manipulaViewCadastroViaCSV" value="Cadastrar via CSV" class="btn btn-success"></button>
 
+            <form id="formDisciplina" class="formDisciplina" action="<?= site_url('Disciplina/salvar')?>" method="post">
 
-            <form id="formDisciplina" class="form-Control" action="<?= site_url('Disciplina/salvar')?>" method="post">
-            		<h1>Cadastrar Disciplina</h1>
 
 					<div class="form-group">
 						<label>Nome</label>
@@ -69,5 +70,52 @@
 						<a class="btn btn-danger active" href="<?= base_url('index.php/Disciplina')?>" style="float: right;"><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
 						<button type="submit" class="btn btn-success active salvar" style="float: right; margin-right: 10px;"><span class="glyphicon glyphicon-floppy-disk"></span> Salvar</button>
 					</div>
-            </form>
-        </div>
+
+					<!--Importação via CSV-->
+
+					<div class="form-group">
+					    <form method="post" action="<?=base_url('importar')?>" enctype="multipart/form-data">
+							<div>
+								<label>Selecione o arquivo CSV para importação:</label>
+								<input type="file" name="csvfile"/>
+							</div>
+
+							<input type="submit" value="Importar" class="btn btn-success" />
+						</form>
+
+							<table>
+								<caption>Contatos</caption>
+								<thead>
+									<tr>
+										<th>Nome</th>
+										<th>Sigla</th>
+										<th>Curso</th>
+										<th>Qtd. Professores</th>
+										<th>Módulos</th>
+										<th>Qtd. Aulas Semanais</th>
+										<th>Tipo de Sala</th>		
+									</tr>
+								</thead>
+								<tbody>
+
+									<?php if ($disciplinas == FALSE): ?>
+										<tr><td colspan="2">Nenhum contato encontrado</td></tr>
+									<?php else: ?>
+										<?php foreach ($disciplinas as $row): ?>
+											<tr>								
+												<td><?php echo $row['nome_disciplina']; ?></td>
+												<td><?php echo $row['sigla_disciplina']; ?></td>
+												<td><?php echo $row['curso_id']; ?></td>
+												<td><?php echo $row['qtd_professor']; ?></td>
+												<td><?php echo $row['modulo']; ?></td>
+												<td><?php echo $row['qtd_aulas']; ?></td>
+												<td><?php echo $row['tipo_sala_id']; ?></td>
+
+											</tr>
+										<?php endforeach; ?>
+									<?php endif; ?>
+								</tbody>
+							</table>
+						</div>           				            
+           			 </div>
+       			 </div>

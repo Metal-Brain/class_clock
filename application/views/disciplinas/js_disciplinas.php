@@ -147,6 +147,15 @@
         });
     }
 </script>
+<script type="text/javascript">
+    $("manipulaViewCadastroViaCSV").change(function() {
+                if(this.checked){
+                    $('.formDisciplina').show();
+                } else {
+                    $('.formDisciplina').hide();
+                }
+            });
+</script>
 
 </html>
 </body>
