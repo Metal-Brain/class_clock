@@ -22,15 +22,12 @@ if(path_atual.indexOf("Turno") != -1){
   $('#sidebar-instituicao').addClass('active');
 }else if(path_atual.indexOf("FPA") != -1){
   $('#sidebar-fpa').addClass('active');
-<<<<<<< HEAD
 }else if(path_atual.indexOf("Area") != -1){
 $('#sidebar-area').addClass('active');
-=======
 }else if(path_atual.indexOf("pessoa") != -1){
   $('#sidebar-pessoa').addClass('active');
 }else if(path_atual.indexOf("disciplina") != -1){
   $('#sidebar-disciplinas').addClass('active');
->>>>>>> master
 }else{
   $('#sidebar-home').addClass('active');
 }

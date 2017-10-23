@@ -11,12 +11,12 @@
   </div>
   
   <form id="formEditar" method="post" action="<?= site_url('modalidade/atualizar/'.$id)?>">
-    <div class="form-group" >
+    <div class="form-group width-400">
       <label>Nome:</label>
 			<input type="text" class="form-control" id="nome_modalidade" name="nome_modalidade" placeholder="Ex:Tecnólogo" value="<?=htmlspecialchars($modalidade->nome_modalidade)?>"/>
     </div>
 
-    <div class="form-group">
+    <div class="form-group width-180">
       <label>Código:</label>
         <input type="text" class="form-control" id="codigo" name="codigo" value="<?=htmlspecialchars($modalidade->codigo)?>"/> 
     </div>
