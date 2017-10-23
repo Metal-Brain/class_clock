@@ -15,6 +15,30 @@
 		<div id="horarios">
 
 			<?= form_error('horario[]') ?>
+
+			<?php $horarios = set_value('horario'); ?>
+			<?php if($horarios != ""): ?>
+			<?php for ($i = 0; $i < count($horarios)/2; $i++): ?>
+					<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-1 form-group">
+						<p class="aula"><strong>Aula <?= $i+1 ?></strong></p>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-2 form-group">
+						<label >Horário de entrada:</label>
+						<input name="horario[<?= $i ?>]" class="form-control hora" type="text" value="<?= $horarios[$i] ?>">
+					</div>
+
+				<div class="col-xs-12 col-sm-12 col-md-2 form-group">
+					<label >Horário de saída:</label>
+					<input name="horario[<?= $i ?>]" class="form-control hora" type="text" value="<?= $horarios[$i+1] ?>">
+				</div>
+				<div col-md-2 style="padding: 25px 0 0 0;">
+					<button id="btnRemove" type="button" class="btn btn-danger add-field"><span class="glyphicon glyphicon-remove"></span></button>
+				</div>
+			</div>
+		<?php endfor;endif; ?>
+
+
 		</div>
 		<div class="row">
 			<div class="col-md-12 form-group">
@@ -25,3 +49,7 @@
 	</form>
 	<!--div class="container" style="padding-top: 5px"-->
 </div>
+<script type="text/javascript">
+
+	var aula = <?= ($horarios != "") ? count($horarios) / 2 : 0 ?>
+</script>
