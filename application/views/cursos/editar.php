@@ -97,18 +97,18 @@
 											<div class="form-group col-sm-5 col-md-4">
 												<label>Modalidade</label>
 												<select name="modalidade_id">
-											
+
 												<?php
-													foreach($data['modalidade'] as $modalidade){
-														
+													foreach($data['modalidades'] as $modalidade){
+
 												if($modalidade['id'] == $data['curso']->modalidade_id){
-															
+
 													echo '<option value="'. $modalidade['id'] .'" selected>'. $modalidade['nome_modalidade'] .'</option>';
 												}else{
 													echo '<option value="'. $modalidade['id'] .'">'. $modalidade['nome_modalidade'] .'</option>';
 													 }
-														
-														
+
+
 														}
 												?>
 												</select>

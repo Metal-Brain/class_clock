@@ -86,9 +86,9 @@
 											<div class="form-group col-sm-5 col-md-4">
 												<label>Modalidade</label>
 												<select name="modalidade_id">
-												
+											
 												<?php
-													foreach($data as $modalidade){
+													foreach($data['modalidades'] as $modalidade){
 														echo '<option value="'. $modalidade['id'] .'">'. $modalidade['nome_modalidade'] .'</option>';}
 												?>
 												</select>
