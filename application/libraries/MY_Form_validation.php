@@ -1,5 +1,4 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
 class MY_Form_validation extends CI_Form_validation {
     protected $CI;
 
@@ -8,19 +7,13 @@ class MY_Form_validation extends CI_Form_validation {
         $this->CI =& get_instance();
     }
 
-    public function valid_date($date) {
-        $this->CI->form_validation->set_message('valid_date', 'O campo %s não contém uma data válida.');
-        $format = 'Y/m/d';
-        $d = DateTime::createFromFormat($format, $date);
-        return $d && $d->format($format) == $date;
-    }
-
     public function valid_date_br($date){
         $this->CI->form_validation->set_message('valid_date_br', 'O campo %s não contém uma data válida.');
         $format = 'd/m/Y';
         $d = DateTime::createFromFormat($format, $date);
         return $d && $d->format($format) == $date;
     }
+
 
     public function is_unique_except($value, $field_and_except){
         $controller = $this->CI;
@@ -39,4 +32,11 @@ class MY_Form_validation extends CI_Form_validation {
 
         return $db->get()->num_rows() == 0;
     }
+	
+	public function alpha_accent($str){
+    		$controller = $this->CI;
+        $controller->form_validation->set_message('alpha_accent', 'O campo {field} pode conter apenas letras, espaços e acentos.');
+    		return (bool) preg_match('/^[A-Za-z0-9áàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/', $str);
+	  }
+	
 }
