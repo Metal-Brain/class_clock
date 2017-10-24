@@ -19,7 +19,7 @@
     <div class="row">
       <div class="col-md-12">
         <h2 class="page-header">Modalidade
-          <a class="btn btn-success" title="Cadastrar" href="<?= base_url('index.php/Modalidade/cadastrar')?>"><span class="glyphicon glyphicon-plus"></span> Cadastrar</a>
+          <a class="btn btn-success" title="Cadastrar" href="<?= base_url('index.php/modalidade/cadastrar')?>"><span class="glyphicon glyphicon-plus"></span> Cadastrar</a>
         </h2>
       </div>
     </div>
