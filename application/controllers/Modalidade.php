@@ -46,7 +46,7 @@ class Modalidade extends CI_Controller {
                                                  'is_unique[modalidade.codigo]'
                                                  ),
                                            array('is_unique' => 'Código já existente.')
-                                         );
+                                         );                               
         $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
 
         if($this->form_validation->run()){
@@ -103,7 +103,7 @@ class Modalidade extends CI_Controller {
 												'is_natural_no_zero',
                                                 "is_unique_except[modalidade.codigo,{$modalidade->codigo}]"
                                           ));
-        // $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
+        $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
 
         if($this->form_validation->run()){
             try {
