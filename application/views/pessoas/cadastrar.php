@@ -18,7 +18,7 @@
 	<form class="formPessoas" action="<?= site_url('pessoa/salvar')?>" method="post">
 		<label>Nome completo:</label>
 		<div class="form-group width-400">
-			<input id="nome" name="nome" class="form-control" type="text" placeholder="Nome" value="<?= set_value('nome')?>">
+			<input id="nome" name="nome" class="form-control" type="text" placeholder="Nome" onkeyup="mascara(this,alphanum);" value="<?= set_value('nome')?>">
 			<span class="text-danger">
 				<?= form_error('nome') ?>
 			</span>
