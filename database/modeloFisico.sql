@@ -204,7 +204,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `horario`.`turma` ;
 
 CREATE TABLE IF NOT EXISTS `horario`.`turma` (
-  `id` INT(11) NOT NULL,
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
   `disciplina_id` SMALLINT(6) NOT NULL,
   `periodo_id` INT(11) NOT NULL,
   `turno_id` TINYINT(4) NOT NULL,
