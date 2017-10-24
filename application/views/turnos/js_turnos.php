@@ -73,6 +73,7 @@
 				var horarios = <?= (isset($turno->horarios)) ? json_encode($turno->horarios) : '{}' ?>;
 
 				horarios.forEach(function (horario) {
+					// var aula = 0;
 					var content = `
 					<div class="row">
 						<div class="col-xs-12 col-sm-12 col-md-1 form-group">

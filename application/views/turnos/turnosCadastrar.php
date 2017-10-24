@@ -50,6 +50,5 @@
 	<!--div class="container" style="padding-top: 5px"-->
 </div>
 <script type="text/javascript">
-
 	var aula = <?= ($horarios != "") ? count($horarios) / 2 : 0 ?>
 </script>
