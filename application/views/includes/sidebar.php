@@ -17,7 +17,7 @@
 		   </a>
 	   </li>
 	   <li id="sidebar-salas">
-		   <a href="<?php echo base_url();?>index.php/sala">
+		   <a href="<?php echo base_url();?>index.php/tipo_sala">
 			   <span class="glyphicon glyphicon-home"></span> <span class="sidebar-label">Salas</span>
 		   </a>
 	   </li>
@@ -35,7 +35,7 @@
 		   <a href="<?php echo base_url();?>index.php/turma">
 			   <span class="glyphicon glyphicon-education"></span> <span class="sidebar-label">Turmas</span>
 		   </a>
-	   </li> 
+	   </li>
 	   <li id="sidebar-modalidades">
 		   <a href="http://localhost/class_clock/index.php/modalidade">
 			   <span class="glyphicon glyphicon-education"></span> <span class="sidebar-label">Modalidades</span>
