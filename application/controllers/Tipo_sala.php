@@ -25,22 +25,20 @@ class Tipo_sala extends CI_Controller {
   */
   function salvar(){
     // Criando regra de validação do formulário
-    $this->form_validation->set_rules('nome_tipo_sala','nome',array('required','max_length[30]','trim', 'is_unique[tipo_sala.nome_tipo_sala]'));
+    $this->form_validation->set_rules('nome_tipo_sala','nome',array('required','max_length[30]','trim','ucwords','is_unique[tipo_sala.nome_tipo_sala]'));
     $this->form_validation->set_rules('descricao_tipo_sala','descrição',array('required','max_length[254]','trim'));
     // Setando os delimitadores da mensagem de erro.
     $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
 
-    if( $this->form_validation->run() ){
+    if($this->form_validation->run()){
       try{
-        $dados = [
-          'nome_tipo_sala'      => $this->input->post('nome_tipo_sala'),
-          'descricao_tipo_sala' => $this->input->post('descricao_tipo_sala')
-        ];
+        $tipo_sala = new TipoSala_model();
+        $tipo_sala->nome_tipo_sala = $this->input->post('nome_tipo_sala');
+        $tipo_sala->descricao_tipo_sala = $this->input->post('descricao_tipo_sala');
+        $tipo_sala->save();
 
-		TipoSala_model::firstOrCreate($dados);
-		
-		$this->session->set_flashdata('success','Tipo Sala cadastrado com sucesso');
-		redirect('Tipo_sala');
+		    $this->session->set_flashdata('success','Tipo Sala cadastrado com sucesso');
+		    redirect('Tipo_sala');
       }catch(Exception $e){}
     }
     $this->cadastrar();
@@ -59,11 +57,11 @@ class Tipo_sala extends CI_Controller {
   */
   public function atualizar($id){
     $tipo_sala = TipoSala_model::findOrFail($id);
-    
+
     if($tipo_sala->nome_tipo_sala != $this->input->post('nome_tipo_sala')){
-      $this->form_validation->set_rules('nome_tipo_sala','nome',array('required','max_length[30]','trim', 'is_unique[tipo_sala.nome_tipo_sala]'));
+      $this->form_validation->set_rules('nome_tipo_sala','nome',array('required','max_length[30]','trim','ucwords','alpha_accent','is_unique[tipo_sala.nome_tipo_sala]'));
     }else{
-      $this->form_validation->set_rules('nome_tipo_sala','nome',array('required','max_length[30]','trim'));
+      $this->form_validation->set_rules('nome_tipo_sala','nome',array('required','max_length[30]','trim','ucwords','alpha_accent'));
     }
 
     $this->form_validation->set_rules('descricao_tipo_sala','descrição',array('required','max_length[254]','trim'));
@@ -71,15 +69,13 @@ class Tipo_sala extends CI_Controller {
 
     if( $this->form_validation->run() ){
       try{
-          $dados = [
-            'nome_tipo_sala'      => $this->input->post('nome_tipo_sala'),
-            'descricao_tipo_sala' => $this->input->post('descricao_tipo_sala')
-      ];
-      
-		    $tipo_sala->update($dados);
-		  
-		  $this->session->set_flashdata('success','Tipo Sala atualizado com sucesso');
-		  redirect('Tipo_sala');
+        $tipo_sala = TipoSala_model::withTrashed()->findOrFail($id);
+        $tipo_sala->nome_tipo_sala = $this->input->post('nome_tipo_sala');
+        $tipo_sala->descricao_tipo_sala = $this->input->post('descricao_tipo_sala');
+		    $tipo_sala->save();
+
+  		  $this->session->set_flashdata('success','Tipo Sala atualizado com sucesso');
+  		  redirect('Tipo_sala');
       }catch(Exception $e){}
     }
     $this->editar($id);
@@ -113,5 +109,6 @@ class Tipo_sala extends CI_Controller {
 
     redirect("Tipo_sala");
   }
+
 
 }

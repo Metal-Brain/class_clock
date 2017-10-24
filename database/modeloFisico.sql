@@ -204,7 +204,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `horario`.`turma` ;
 
 CREATE TABLE IF NOT EXISTS `horario`.`turma` (
-  `id` INT(11) NOT NULL,
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
   `disciplina_id` SMALLINT(6) NOT NULL,
   `periodo_id` INT(11) NOT NULL,
   `turno_id` TINYINT(4) NOT NULL,
@@ -519,7 +519,7 @@ INSERT INTO pessoa(id, nome, prontuario, senha, email) VALUES(1, "Adminsitrador"
 INSERT INTO pessoa(id, nome, prontuario, senha, email) VALUES(2, "Docente 1", "151521", "$2y$10$2uOth8K7IW1YGSuCvAQDVe.6W53RSCOJWji9eCNTqN3DSfTHr.5oe
 ", "joao@ifsp.edu");
 
-INSERT INTO docente(id, pessoa_id, area_id, nascimento, ingresso_campus, ingresso_ifsp, regime) VALUES(1, 1, 1, "1996/08/11", "2007/08/11", "2007/08/11", 1);
+INSERT INTO docente(id, pessoa_id, area_id, nascimento, ingresso_campus, ingresso_ifsp, regime) VALUES(1, 2, 1, "1996/08/11", "2007/08/11", "2007/08/11", 1);
 
 INSERT INTO tipo_pessoa(tipo_id, pessoa_id) VALUES(1, 1), (4, 2);
 
