@@ -11,7 +11,7 @@
                };
 
 
-        $("#formDisciplina").validate({
+     /*  $("#formDisciplina").validate({
             rules: {
                 nome_disciplina: {
                     required: true,
@@ -79,7 +79,7 @@
                     max:'Tamanho maximo do campo é 2 caracteres ou até numero 99'
                 }
             }
-        });
+       });*/ 
     });
 
 </script>
@@ -148,11 +148,13 @@
     }
 </script>
 <script type="text/javascript">
-    $("manipulaViewCadastroViaCSV").change(function() {
-                if(this.checked){
+    $("#manipulaViewCadastroViaCSV").change(function() {
+                if(!this.checked){
+                    $('.csv').hide();
                     $('.formDisciplina').show();
                 } else {
-                    $('.formDisciplina').hide();
+                    $('.csv').show();
+                      $('.formDisciplina').hide();
                 }
             });
 </script>

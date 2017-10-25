@@ -13,10 +13,22 @@
       <?php endif; ?>
     </div>
     </div>
-    		<h1>Cadastrar Disciplina</h1>
-            <button id="manipulaViewCadastroViaCSV" value="Cadastrar via CSV" class="btn btn-success"></button>
+<h1>Cadastrar Disciplina</h1>
+<input type ="checkbox" id="manipulaViewCadastroViaCSV"  class="btn btn-success">
+           <label>clique no checkbox para importar um arquivo .csv</label>	
+    	<form method="post" class= "csv" style="display: none; " action="<?=base_url('base/importCsv')?>" enctype="multipart/form-data">
+    		
+            
+				<div>
+				<input type="file"  name="csvfile"/>	
+				<label>Selecione o arquivo CSV para importação:</label>	
+				</div>
+				<div>
+			 <input type="submit" value="Importar" class="btn btn-success" />
+				</div>		
+         </form>   
 
-            <form id="formDisciplina" class="formDisciplina" action="<?= site_url('Disciplina/salvar')?>" method="post">
+            <form id="formDisciplina" class="formDisciplina"  action="<?= site_url('Disciplina/salvar')?>" method="post">
 
 
 					<div class="form-group">
@@ -71,17 +83,11 @@
 						<button type="submit" class="btn btn-success active salvar" style="float: right; margin-right: 10px;"><span class="glyphicon glyphicon-floppy-disk"></span> Salvar</button>
 					</div>
 
+
 					<!--Importação via CSV-->
 
 					<div class="form-group">
-					    <form method="post" action="<?=base_url('importar')?>" enctype="multipart/form-data">
-							<div>
-								<label>Selecione o arquivo CSV para importação:</label>
-								<input type="file" name="csvfile"/>
-							</div>
-
-							<input type="submit" value="Importar" class="btn btn-success" />
-						</form>
+					    
 
 							<table>
 								<caption>Contatos</caption>
@@ -97,8 +103,8 @@
 									</tr>
 								</thead>
 								<tbody>
-
-									<?php if ($disciplinas == FALSE): ?>
+									<?php $disciplinas = &$disciplina ?>	
+									<?php if ($disciplinas == false): ?>
 										<tr><td colspan="2">Nenhum contato encontrado</td></tr>
 									<?php else: ?>
 										<?php foreach ($disciplinas as $row): ?>
@@ -116,6 +122,7 @@
 									<?php endif; ?>
 								</tbody>
 							</table>
-						</div>           				            
-           			 </div>
-       			 </div>
+						</div> 
+			</form>			
+    </div>
+       			
