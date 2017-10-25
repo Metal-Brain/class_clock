@@ -22,38 +22,48 @@
 							<label>Depedência</label><br />
 							<label class="radio-inline"><input value="1" type="radio" name="dp">SIM</label>
 							<label class="radio-inline"><input value="0" type="radio" name="dp" checked>NÃO</label>
+							<span class="text-danger">
+								<?= form_error('dp') ?>
+							</span>
 						</div>
 
 						<div class="form-group">
 							<label>Disciplina</label>
 							<select name="disciplina_id" id="disciplina_id" class="form-control" style="max-width:400px;">
-
-									<option value="" disabled selected>Selecione</option>
+								<option disabled selected>Selecione</option>
 									<?php foreach($disciplinas as $disciplina): ?>
 									<option value="<?=$disciplina['id'] ?>"><?=$disciplina['nome_disciplina'] ?></option>
 								<?php endforeach ?>
 							</select>
+							<span class="text-danger">
+								<?= form_error('disciplina_id') ?>
+							</span>
 						</div>
 
 						<div class="form-group">
 							<label>Turno</label>
 							<select name="turno_id" id="turno_id" class="form-control" style="max-width:400px;">
-
-									<option value="" disabled selected>Selecione</option>
+								<option disabled selected>Selecione</option>
 									<?php foreach($turnos as $turno){ ?>
 									<option value="<?=$turno['id'] ?>"><?=$turno['nome_turno'] ?></option>
-									<?php }?>
+								<?php }?>
 							</select>
+							<span class="text-danger">
+								<?= form_error('turno_id') ?>
+							</span>
 						</div>
 
 						<div class="form-group">
 							<label>Quantidade de alunos</label>
 							<input type="number" class="form-control" id="qtd_alunos" name="qtd_alunos" placeholder="ex: 1" style="max-width:300px;">
+							<span class="text-danger">
+								<?= form_error('qtd_alunos') ?>
+							</span>
 						</div>
 
-										<div class="form-group">
+						<div class="form-group">
 							<a class="btn btn-danger active" href="<?= base_url('index.php/Turma')?>" style="float: right;"><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
 							<button type="submit" class="btn btn-success active salvar" style="float: right; margin-right: 10px;"><span class="glyphicon glyphicon-floppy-disk"></span> Salvar</button>
 						</div>
-							</form>
+						</form>
 					</div>
