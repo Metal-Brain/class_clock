@@ -3,7 +3,9 @@
 
 	<div class="form-group">
 		<label>Nome:</label>
-		<input name="nome_tipo_sala" class="form-control" required maxlength="30" value="<?= htmlspecialchars($tipo_salas->nome_tipo_sala) ?>">
+		<input name="nome_tipo_sala" class="form-control"  onkeypress="this.value = this.value.toLowerCase();" 
+												onChange="this.value = this.value.toLowerCase();" 
+												onpaste="this.value = this.value.toLowerCase(); required maxlength="30" value="<?= htmlspecialchars($tipo_salas->nome_tipo_sala) ?>">
 	</div>
 
 	<div class="row">
