@@ -9,6 +9,7 @@
 			<?php elseif ($this->session->flashdata('danger')) : ?>
 				<div class="alert alert-danger">
 					<p><span class="glyphicon glyphicon-remove-sign"></span> <?= $this->session->flashdata('danger') ?></p>
+					<p><?=  var_dump(validation_errors()) ?></p>
 				</div>
 			<?php endif; ?>
 		</div>
@@ -19,8 +20,8 @@
 					<h1>Cadastrar Turma</h1>
 						<div class="form-group">
 							<label>Depedência</label><br />
-							<label class="radio-inline"><input type="radio" name="dp">SIM</label>
-							<label class="radio-inline"><input type="radio" name="dp">NÃO</label>
+							<label class="radio-inline"><input value="1" type="radio" name="dp">SIM</label>
+							<label class="radio-inline"><input value="0" type="radio" name="dp" checked>NÃO</label>
 						</div>
 
 						<div class="form-group">

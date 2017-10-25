@@ -3,8 +3,10 @@
 class Turma extends MY_Controller {
 
   function __construct() {
+    parent::__construct();
+
     if (Periodo_model::whereAtivo(true)->count() < 1) {
-      $this->session->set_flashdata('danger','Problemas ao cadastrar a Turma, tente novamente!');      
+      $this->session->set_flashdata('danger','Não há periodo ativo.');
       redirect('/');
     }
   }
@@ -39,7 +41,7 @@ class Turma extends MY_Controller {
         $this->session->set_flashdata('success','Turma cadastrada com sucesso');
         redirect("turma");
       } catch (Exception $e) {
-        $this->session->set_flashdata('danger','Problemas ao cadastrar a Turma, tente novamente!');
+        $this->session->set_flashdata('danger','Problemas ao cadastrar a Turma, tente novamente!' . $e->getMessage());
         $this->cadastrar();
       }
     } else {

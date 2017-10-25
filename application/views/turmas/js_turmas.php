@@ -23,11 +23,7 @@
 
 		$(document).ready(function () {
 
-			$('#TurmaTable').dataTable( {
-				"language": {
-					"url": "<?= base_url('assets/DataTables/translatePortuguese.js');?>"
-				}
-			} );
+			$('#TurmaTable').DataTable();
 
 
 
@@ -127,26 +123,6 @@
 			mask();
 		});
 
-</script>
-<script type="text/javascript">
-	$.validator.addClassRules({
-		hora: {
-			required: true,
-			maxlength: 5,
-			minlength: 5
-		}
-	});
-
-	$("#formTurmas").validate({
-		errorClass: 'text-danger',
-		errorElement: 'span',
-		rules: {
-			nome_Turma: {
-				required: true,
-				maxlength: 25
-			}
-		}
-	});
 </script>
 </body>
 </html>

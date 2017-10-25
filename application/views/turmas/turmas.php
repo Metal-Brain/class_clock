@@ -26,7 +26,7 @@
 </div>
 
         <!-- Aqui é a Listagem dos Itens -->
-                <table id="turmaTable" class="table table-striped">
+                <table id="TurmaTable" class="table table-striped">
                     <thead>
                         <tr>
                             <th class="text-center">Periodo</th>
