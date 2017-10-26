@@ -60,7 +60,10 @@ class checkUser {
             'turno'       => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
             'tipo_sala'   => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
             'modalidade'  => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
-            'curso'       => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar']
+            'curso'       => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
+            'pessoa'      => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
+            'area'        => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
+            'turma'       => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar']
         ];
 
         $this->hasAccess($acess);
@@ -74,6 +77,7 @@ class checkUser {
         [
             'turno'       => ['index'],
             'tipo_sala'   => ['index'],
+            'turma'       => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
             'modalidade'  => ['index']
         ];
 
