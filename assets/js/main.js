@@ -11,7 +11,9 @@ if(path_atual.indexOf("Turno") != -1){
 }else if (path_atual.indexOf("Area") != -1) {
 	$('#sidebar-areas').addClass('active');
 }else if (path_atual.indexOf("Turma") != -1) {
-	$('#sidebar-turmas').addClass('active');
+  $('#sidebar-turmas').addClass('active');
+}else if (path_atual.indexOf("modalidade") != -1) {
+	$('#sidebar-modalidades').addClass('active');
 }else if(path_atual.indexOf("Semestre") != -1){
 	$('#sidebar-semestres').addClass('active');
 }else if(path_atual.indexOf("Funcionario") != -1){
@@ -20,15 +22,12 @@ if(path_atual.indexOf("Turno") != -1){
   $('#sidebar-instituicao').addClass('active');
 }else if(path_atual.indexOf("FPA") != -1){
   $('#sidebar-fpa').addClass('active');
-<<<<<<< HEAD
 }else if(path_atual.indexOf("Area") != -1){
 $('#sidebar-area').addClass('active');
-=======
 }else if(path_atual.indexOf("pessoa") != -1){
   $('#sidebar-pessoa').addClass('active');
 }else if(path_atual.indexOf("disciplina") != -1){
   $('#sidebar-disciplinas').addClass('active');
->>>>>>> master
 }else{
   $('#sidebar-home').addClass('active');
 }

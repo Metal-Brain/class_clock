@@ -1,24 +1,19 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Class Clock</title>
-
 		<!-- Bootstrap -->
 		<link href="<?= base_url('assets/css/bootstrap.min.css')?>" rel="stylesheet">
-
 		<!-- Style -->
 		<link href="<?= base_url('assets/css/style.css')?>" rel="stylesheet">
-
 		<link href="<?= base_url('assets/DataTables/dataTables.bootstrap.min.css')?>" rel="stylesheet">
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <!-- DataTable -->
     <link href="<?= base_url('assets/DataTables/dataTables.bootstrap.min.css')?>" rel="stylesheet">
-
-</head>
+	</head>
 
 		<div class="container-fluid">
 			<div class="row hidden-print">
