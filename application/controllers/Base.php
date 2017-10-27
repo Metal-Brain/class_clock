@@ -36,13 +36,14 @@ class Base extends CI_Controller {
         //= $this->csv_model->getDisciplinas();
 		//$data['error'] = '';
     // Define as configurações para o upload do CSV
-		$config['upload_path'] = './uploads/';
+		$config['upload_path'] = BASEPATH.'/uploads/';
 		$config['allowed_types'] = 'csv';
 		$config['max_size'] = '1000';
 		$this->load->library('upload', $config);
 		// Se o upload falhar, exibe mensagem de erro na view
 		if (!$this->upload->do_upload('csvfile')) {
 			$data['error'] = $this->upload->display_errors();
+            die($data['error']);
 			$this->load->view('disciplinas/disciplinas', $data);
 		} else {
 			$file_data = $this->upload->data();
@@ -72,7 +73,7 @@ class Base extends CI_Controller {
 				redirect();
 			} else
 			   $data['error'] = "Ocorreu um erro, desculpe!";
-			$this->load->view('disciplinas', $data);
+			$this->load->view('disciplinas/disciplinas', $data);
 		}
 	}
 }
