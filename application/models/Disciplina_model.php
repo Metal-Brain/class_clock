@@ -28,6 +28,42 @@ class Disciplina_model extends Model{
 	public function tipo_salas(){
 		return $this->belongsToMany(TipoSala_model::class, 'tipo_sala_id');
 	}
+    
+     /**
+    * Método construtor
+    *
+    * @access  public
+    * @return  void
+    */
+    function __construct() {
+        parent::__construct();
+    }
+    
+    /**
+      * Recupera todos os contatos da tabela 'contatos'
+      *
+      * @access  public
+      * @return  void
+      */
+    
+    function getDisciplinas() {
+        $query = $this->db->get('disciplinas');
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        } else {
+            return FALSE;
+        }
+    }
+    
+    /**
+      * Insere o contato na tabela 'contatos'
+      *
+      * @access  public
+      * @return  void
+      */
+    function insert_csv($data) {
+        $this->db->insert('disciplinas', $data);
+    }
 }
 
 ?>

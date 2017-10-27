@@ -9,7 +9,7 @@ class Base extends CI_Controller {
     */
 	function __construct() {
 		parent::__construct();
-		$this->load->model('csv_model');
+		$this->load->model('Disciplina_model');
 		$this->load->library('csvimport');
 	}
   /**
@@ -20,8 +20,9 @@ class Base extends CI_Controller {
     */
 	function Index() {
     // Recuperar os registros cadastrados na tabela contatos
-		$data['disciplina'] = $this->csv_model->nome();
-		$this->load->view('disciplinas', $data);
+        $data['disciplinas']=[]; 
+            //= $this->csv_model->nome();
+		$this->load->view('disciplinas/disciplinas', $data);
 	}
   /**
     * Faz a improtação do CSV
@@ -31,8 +32,9 @@ class Base extends CI_Controller {
     */
 	function ImportCsv() {
     // Recuperar os registros cadastrados na tabela contatos
-		$data['disciplina'] = $this->csv_model->get_disciplina();
-		$data['error'] = '';
+		$data['disciplinas']=[];
+        //= $this->csv_model->getDisciplinas();
+		//$data['error'] = '';
     // Define as configurações para o upload do CSV
 		$config['upload_path'] = './uploads/';
 		$config['allowed_types'] = 'csv';
@@ -41,7 +43,7 @@ class Base extends CI_Controller {
 		// Se o upload falhar, exibe mensagem de erro na view
 		if (!$this->upload->do_upload('csvfile')) {
 			$data['error'] = $this->upload->display_errors();
-			$this->load->view('disciplinas', $data);
+			$this->load->view('disciplinas/disciplinas', $data);
 		} else {
 			$file_data = $this->upload->data();
 			$file_path =  './uploads/'.$file_data['file_name'];
