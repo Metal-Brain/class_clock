@@ -66,7 +66,7 @@ class Base extends CI_Controller {
 					);
 
           // Insere os dados na tabela 'contatos'
-					$this->csv_model->insert_csv($insert_data);
+					Disciplina_model::create($insert_data);
 				}
         
 				$this->session->set_flashdata('success', 'Dados importados com sucesso!');
