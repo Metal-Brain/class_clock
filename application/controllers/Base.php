@@ -47,7 +47,7 @@ class Base extends CI_Controller {
 			$this->load->view('disciplinas/disciplinas', $data);
 		} else {
 			$file_data = $this->upload->data();
-			$file_path =  './uploads/'.$file_data['file_name'];
+			$file_path =  '/uploads/'.$file_data['file_name'];
       // Chama o método 'get_array', da library csvimport, passando o path do
       // arquivo CSV. Esse método retornará um array.
       $csv_array = $this->csvimport->get_array($file_path);
