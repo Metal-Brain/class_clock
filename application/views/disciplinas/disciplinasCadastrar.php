@@ -16,7 +16,7 @@
 <h1>Cadastrar Disciplina</h1>
 <input type ="checkbox" id="manipulaViewCadastroViaCSV"  class="btn btn-success">
            <label>clique no checkbox para importar um arquivo .csv</label>	
-    	<form method="post" class= "csv" style="display: none; " action="<?=base_url('base/importCsv')?>" enctype="multipart/form-data">
+    	<form method="post" class= "csv" style="display: none; " action="<?=base_url('Base/ImportCsv')?>" enctype="multipart/form-data">
     		
             
 				<div>
@@ -105,10 +105,9 @@
 								<tbody>
 									<?php $disciplinas = &$disciplina ?>	
 									<?php if ($disciplinas == false): ?>
-										<tr><td colspan="2">Nenhuma disciplina encontrada</td></tr>
+										<tr><td colspan="2">Nenhum contato encontrado</td></tr>
 									<?php else: ?>
 										<?php foreach ($disciplinas as $row): ?>
-											<tr>								
 											<tr>								
 												<td><?php echo $row['nome_disciplina']; ?></td>
 												<td><?php echo $row['sigla_disciplina']; ?></td>

@@ -20,8 +20,8 @@ class Base extends CI_Controller {
     */
 	function Index() {
 
-       $disciplinas = Disciplina_model::withTrashed()->get();
-       $this->load->template('disciplinas/disciplinas',compact('disciplinas'),'disciplinas/js_disciplinas');
+            $disciplinas = Disciplina_model::withTrashed()->get();
+            $this->load->template('disciplinas/disciplinas',compact('disciplinas'),'disciplinas/js_disciplinas');
 		
 	}
   /**
@@ -32,7 +32,7 @@ class Base extends CI_Controller {
     */
 	function ImportCsv() {
         $disciplinas = Disciplina_model::withTrashed()->get();
-       $this->load->template('disciplinas/disciplinas',compact('disciplinas'),'disciplinas/js_disciplinas');
+        $this->load->template('disciplinas/disciplinas',compact('disciplinas'),'disciplinas/js_disciplinas');
   		$data['disciplinas']=[];
 
     // Define as configurações para o upload do CSV
