@@ -100,7 +100,7 @@
 					aula++;
 					$("#horarios").append(content);
 				});
-			} else if (url.indexOf('turno/atualizar') > -1) {
+			} else if (url.indexOf('Turno/atualizar') > -1) {
 				var horarios = <?= json_encode(set_value('horario')) ?>;
 
 				for (var i = 0; i < horarios.length; i = i + 2) {
