@@ -83,47 +83,6 @@
 						<a class="btn btn-danger active" href="<?= base_url('index.php/Disciplina')?>" style="float: right;"><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
 						<button type="submit" class="btn btn-success active salvar" style="float: right; margin-right: 10px;"><span class="glyphicon glyphicon-floppy-disk"></span> Salvar</button>
 					</div>
-
-
-					<!--Importação via CSV-->
-
-					<div class="form-group">
-					    
-
-							<table>
-								<caption>Disciplinas</caption>
-								<thead>
-									<tr>
-										<th>Nome</th>
-										<th>Sigla</th>
-										<th>Curso</th>
-										<th>Qtd. Professores</th>
-										<th>Módulos</th>
-										<th>Qtd. Aulas Semanais</th>
-										<th>Tipo de Sala</th>		
-									</tr>
-								</thead>
-								<tbody>
-									<?php $disciplinas = &$disciplina ?>	
-									<?php if ($disciplinas == false): ?>
-										<tr><td colspan="2">Nenhum contato encontrado</td></tr>
-									<?php else: ?>
-										<?php foreach ($disciplinas as $row): ?>
-											<tr>								
-												<td><?php echo $row['nome_disciplina']; ?></td>
-												<td><?php echo $row['sigla_disciplina']; ?></td>
-												<td><?php echo $row['curso_id']; ?></td>
-												<td><?php echo $row['qtd_professor']; ?></td>
-												<td><?php echo $row['modulo']; ?></td>
-												<td><?php echo $row['qtd_aulas']; ?></td>
-												<td><?php echo $row['tipo_sala_id']; ?></td>
-
-											</tr>
-										<?php endforeach; ?>
-									<?php endif; ?>
-								</tbody>
-							</table>
-						</div> 
 			</form>			
     </div>
        			

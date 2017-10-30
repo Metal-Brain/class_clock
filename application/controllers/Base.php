@@ -32,7 +32,8 @@ class Base extends CI_Controller {
     */
 	function ImportCsv() {
         $disciplinas = Disciplina_model::withTrashed()->get();
-        $this->load->template('disciplinas/disciplinas',compact('disciplinas'),'disciplinas/js_disciplinas');
+        $this->load->template('disciplinas/disciplinas',compact('disciplinas'),'importarCsv/js_disciplinas');
+        //alterei o caminho para apontar para a view onde serão expostos os dados presentes no arquivo CSV importado
   		$data['disciplinas']=[];
 
     // Define as configurações para o upload do CSV
