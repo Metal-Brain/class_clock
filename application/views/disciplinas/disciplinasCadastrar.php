@@ -90,7 +90,7 @@
 					    
 
 							<table>
-								<caption>Contatos</caption>
+								<caption>Disciplinas</caption>
 								<thead>
 									<tr>
 										<th>Nome</th>
@@ -105,9 +105,10 @@
 								<tbody>
 									<?php $disciplinas = &$disciplina ?>	
 									<?php if ($disciplinas == false): ?>
-										<tr><td colspan="2">Nenhum contato encontrado</td></tr>
+										<tr><td colspan="2">Nenhuma disciplina encontrada</td></tr>
 									<?php else: ?>
 										<?php foreach ($disciplinas as $row): ?>
+											<tr>								
 											<tr>								
 												<td><?php echo $row['nome_disciplina']; ?></td>
 												<td><?php echo $row['sigla_disciplina']; ?></td>

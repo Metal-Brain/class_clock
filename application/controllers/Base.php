@@ -19,10 +19,10 @@ class Base extends CI_Controller {
     * @return  void
     */
 	function Index() {
-    // Recuperar os registros cadastrados na tabela contatos
-        $data['disciplinas']=[]; 
-            //= $this->csv_model->nome();
-		$this->load->view('disciplinas/disciplinas', $data);
+
+       $disciplinas = Disciplina_model::withTrashed()->get();
+       $this->load->template('disciplinas/disciplinas',compact('disciplinas'),'disciplinas/js_disciplinas');
+		
 	}
   /**
     * Faz a improtação do CSV
@@ -31,10 +31,10 @@ class Base extends CI_Controller {
     * @return  void
     */
 	function ImportCsv() {
-    // Recuperar os registros cadastrados na tabela contatos
-		$data['disciplinas']=[];
-        //= $this->csv_model->getDisciplinas();
-		//$data['error'] = '';
+        $disciplinas = Disciplina_model::withTrashed()->get();
+       $this->load->template('disciplinas/disciplinas',compact('disciplinas'),'disciplinas/js_disciplinas');
+  		$data['disciplinas']=[];
+
     // Define as configurações para o upload do CSV
 		$config['upload_path'] = BASEPATH.'/uploads/';
 		$config['allowed_types'] = 'csv';
@@ -52,7 +52,7 @@ class Base extends CI_Controller {
       // arquivo CSV. Esse método retornará um array.
       $csv_array = $this->csvimport->get_array($file_path);
 			if ($csv_array) {
-        // Faz a interação no array para poder gravar os dados na tabela 'contatos'
+        // Faz a interação no array para poder gravar os dados na tabela 'disciplinas'
 				foreach ($csv_array as $row) {
 					$insert_data = array(
 						'id' => $row['id'],
@@ -65,7 +65,7 @@ class Base extends CI_Controller {
                         'deletado_em' => $row['deletado_em']
 					);
 
-          // Insere os dados na tabela 'contatos'
+          // Insere os dados na tabela 'disciplinas'
 					Disciplina_model::create($insert_data);
 				}
         
