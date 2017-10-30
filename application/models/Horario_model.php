@@ -12,7 +12,7 @@
          * @since 2017/08/19
         */
         protected $fillable = ['inicio', 'fim'];
-        
+
         public function turno(){
             return $this->belongsToMany(Turno_model::class, 'turno_horario', 'turno_id', 'horario_id');
         }

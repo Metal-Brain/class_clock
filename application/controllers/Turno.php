@@ -15,7 +15,7 @@ class Turno extends CI_Controller {
     $turnos = Turno_model::withTrashed()->get();
     $this->load->template('turnos/turnos',compact('turnos'),'turnos/js_turnos');
   }
-    
+
 
   function cadastrar () {
     $this->load->template('turnos/turnosCadastrar',[],'turnos/js_turnos');

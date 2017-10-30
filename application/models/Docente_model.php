@@ -1,10 +1,4 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
-class Docente_model extends Model {
-    protected $table = 'docente';
-    protected $fillable = [
-        "pessoa_id", "area_id", "ingresso_campus",
-        "ingresso_ifsp", "regime", "nascimento",
-    ];
 
 class Docente_model extends Model {
     protected $table = 'docente';

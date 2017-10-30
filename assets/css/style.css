@@ -94,7 +94,7 @@ header a:hover {
     background-color: #EAEAEA;
     padding: 4px 4px;
     border-radius: 0 5px 5px 0;
-    margin: 5px 0 0 0;
+    margin: 5px 0 5px 0;
 }
 
 .sidebar li {
@@ -166,10 +166,14 @@ h2 {
     font-weight: bold;
 }
 
-.bold{
-    font-weight: bold;
-}
-
 .page-header{
 	padding-bottom: 10px!important;
+}
+
+.error{
+  font-family: 'Roboto Mono', monospace;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1.42857143;
+  color: red;
 }

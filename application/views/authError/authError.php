@@ -25,9 +25,17 @@
       </header>
     </div>
 
-    <div class="col-md-12">
-      <h1 class="text-center">Ops, você não deveria estar aqui!</h1>
-      <img class="img-responsive center-block" src="<?= base_url('assets/img/professor.gif')?>">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="text-center">Ops, você não deveria estar aqui!</h1>
+        <img class="img-responsive center-block" src="<?= base_url('assets/img/professor.gif')?>">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-offset-3 col-md-6">
+        <a href="<?= site_url('Turno')?>" class="btn btn-success btn-lg btn-block">Voltar</a>
+      </div>
     </div>
 
   </body>

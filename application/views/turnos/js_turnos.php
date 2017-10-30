@@ -67,13 +67,14 @@
 			}
 
 			var url = window.location.href;
-			var aula = 0;
 			var index = 0;
+			var aula = 0;
 
 			if ( url.indexOf('Turno/editar') > -1 ) {
 				var horarios = <?= (isset($turno->horarios)) ? json_encode($turno->horarios) : '{}' ?>;
 
 				horarios.forEach(function (horario) {
+					// var aula = 0;
 					var content = `
 					<div class="row">
 						<div class="col-xs-12 col-sm-12 col-md-1 form-group">
@@ -99,6 +100,35 @@
 					aula++;
 					$("#horarios").append(content);
 				});
+			} else if (url.indexOf('Turno/atualizar') > -1) {
+				var horarios = <?= json_encode(set_value('horario')) ?>;
+
+				for (var i = 0; i < horarios.length; i = i + 2) {
+					var content = `
+					<div class="row">
+						<div class="col-xs-12 col-sm-12 col-md-1 form-group">
+							<p class="aula"><strong>Aula `+ (aula + 1) +`</strong></p>
+						</div>
+						<div class="col-xs-12 col-sm-12 col-md-2 form-group">
+							<label >Horário de entrada:</label>
+							<input name="horario[`+i+`]" class="form-control hora" type="text" value="`+horarios[i]+`">
+						</div>`;
+
+					index++;
+
+					content += `
+						<div class="col-xs-12 col-sm-12 col-md-2 form-group">
+							<label >Horário de saída:</label>
+							<input name="horario[`+(i + 1)+`]" class="form-control hora" type="text" value="`+horarios[i + 1]+`">
+						</div>
+						<div col-md-2 style="padding: 25px 0 0 0;">
+							<button id="btnRemove" type="button" class="btn btn-danger add-field"><span class="glyphicon glyphicon-remove"></span></button>
+						</div>
+					</div>`;
+					aula++;
+					$('#horarios').append(content);
+				}
+
 			}
 
 

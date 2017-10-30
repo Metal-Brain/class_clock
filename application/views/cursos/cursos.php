@@ -16,7 +16,7 @@
 			<?php endif; ?>
 		</div>
 	</div>
-	
+
 	<!-- Início do conteúdo da view-->
 	<div class="top-bar" style="padding: 0 0 15px 0">
 		<div class="row">
@@ -44,37 +44,38 @@
 
 		<tbody>
 			<?php foreach ($data['cursos'] as $curso) { ?>
-			
+
 				<tr <?php if($curso->deletado_em): echo 'class="danger"'; endif; ?>>
 					<td class="text-center"><?= ucwords($curso['codigo_curso']); ?></td>
 					<td class="text-center"><?= htmlspecialchars(ucwords($curso['nome_curso'])); ?></td>
 					<td class="text-center"><?= htmlspecialchars(ucwords($curso['sigla_curso'])); ?></td>
 					<td class="text-center"><?= ucwords($curso['qtd_semestre']); ?></td>
-					<td class="text-center"><?php 
+
+					<td class="text-center"><?php
 						foreach($data['modalidade'] as $modalidade){
 							if($curso['modalidade_id'] == $modalidade['id']):
-								echo $modalidade['nome_modalidade']; 
+								echo $modalidade['nome_modalidade'];
 							endif;
 						}
-					?></td> 
+					?></td>
+					
 					<td class="text-center"><?= ucwords($curso['coordenador']); ?></td>
 					<td class="text-center"><?= ucwords($curso['fechamento']); ?></td>
-	
 					<td class="text-center"><?= ( empty($curso->deletado_em) ) ? 'Ativado' : 'Desativado'?></td>
 					<td class="text-center">
-						
+
 							<?php if ( empty($curso->deletado_em) ) : ?>
 							<a class="btn btn-warning glyphicon glyphicon-pencil" title="Editar" href="<?= site_url('Curso/editar/'.$curso->id)?>"></a>
-							<button class="btn btn-danger" type="button" id="btn-delete" onclick="confirmDelete(<?= $curso->id ?>,'Deseja desativar o Curso?','deletar')"> <i class="glyphicon glyphicon-remove"></i></button>
+							<button class="btn btn-danger" type="button" id="btn-delete" title="Deletar" onclick="confirmDelete(<?= $curso->id ?>,'Deseja desativar o Curso?','deletar')"> <i class="glyphicon glyphicon-remove"></i></button>
 						<?php else : ?>
 							<a class="btn btn-warning glyphicon glyphicon-pencil disabled" title="Editar" href="<?= site_url('Cursp/editar/'.$curso->id)?>"></a>
-							<button class="btn btn-success" type="button" id="btn-delete" onclick="confirmDelete(<?= $curso->id ?>,'Deseja ativar o Curso?','ativar')"> <i class="glyphicon glyphicon-check"></i></button>
+							<button class="btn btn-success" type="button" id="btn-delete" title="Ativar" onclick="confirmDelete(<?= $curso->id ?>,'Deseja ativar o Curso?','ativar')"> <i class="glyphicon glyphicon-check"></i></button>
 						<?php endif; ?>
 					</td>
 				</tr>
 			<?php } ?>
 		</tbody>
 	</table>
-	
-	
+
+
 </div>
