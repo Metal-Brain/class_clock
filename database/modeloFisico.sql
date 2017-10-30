@@ -303,21 +303,21 @@ DROP TABLE IF EXISTS `horario`.`preferencia` ;
 
 CREATE TABLE IF NOT EXISTS `horario`.`preferencia` (
   `fpa_id` INT(11) NOT NULL,
-  `turma_id` INT(11) NOT NULL,
+  `disciplina_id` SMALLINT NOT NULL,
   `ordem` INT(11) NOT NULL,
-  PRIMARY KEY (`fpa_id`, `turma_id`),
   INDEX `fk_disciplina_has_fpa_fpa1_idx` (`fpa_id` ASC),
-  INDEX `fk_preferencias_disciplinas_oferecidas1_idx` (`turma_id` ASC),
+  PRIMARY KEY (`fpa_id`, `disciplina_id`),
+  INDEX `fk_preferencias_disciplinas_oferecidas1_idx` (`disciplina_id` ASC),
   CONSTRAINT `fk_disciplina_has_fpa_fpa1`
     FOREIGN KEY (`fpa_id`)
     REFERENCES `horario`.`fpa` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_preferencias_disciplinas_oferecidas1`
-    FOREIGN KEY (`turma_id`)
-    REFERENCES `horario`.`turma` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    FOREIGN KEY (`disciplina_id`)
+    REFERENCES `horario`.`disciplina` (`id`)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -449,6 +449,21 @@ CREATE TABLE IF NOT EXISTS `horario`.`quadro` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- View `horario`.`docente_preferencia`
+-- -----------------------------------------------------
+DROP VIEW IF EXISTS `docente_preferencia`;
+
+CREATE VIEW IF NOT EXISTS `docente_preferencia` AS
+SELECT docente.id AS docente_id, disciplina.nome_disciplina, curso.nome_curso, curso.id as curso_id from disciplina
+	JOIN curso ON disciplina.curso_id = curso.id
+	JOIN preferencia ON preferencia.disciplina_id = disciplina.id
+    JOIN fpa ON preferencia.fpa_id = fpa.id 
+    JOIN docente ON fpa.docente_id = docente.id
+    ORDER BY curso.nome_curso, disciplina.nome_disciplina ASC;
+
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
