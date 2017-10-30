@@ -14,7 +14,7 @@
 </script>
 
 <script type="text/javascript">
-  $('#FpaTable').dataTable( {
+  $('#fpaTable').dataTable( {
     "language": {
       "url": "<?= base_url('assets/DataTables/translatePortuguese.js');?>"
     }
