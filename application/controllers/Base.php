@@ -9,7 +9,7 @@ class Base extends CI_Controller {
     */
 	function __construct() {
 		parent::__construct();
-		$this->load->model('csv_model');
+		$this->load->model('Curso_model');
 		$this->load->library('csvimport');
 	}
   /**
@@ -19,9 +19,10 @@ class Base extends CI_Controller {
     * @return  void
     */
 	function Index() {
-    // Recuperar os registros cadastrados na tabela contatos
-		$data['curso'] = $this->csv_model->get_curso();
-		$this->load->view('cursos', $data);
+
+            $disciplinas = Disciplina_model::withTrashed()->get();
+            $this->load->template('cursos/cursos',compact('cursos'),'cursos/js_cursos');
+		
 	}
   /**
     * Faz a improtação do CSV
@@ -30,27 +31,31 @@ class Base extends CI_Controller {
     * @return  void
     */
 	function ImportCsv() {
-    // Recuperar os registros cadastrados na tabela contatos
-		$data['curso'] = $this->csv_model->get_curso();
-		$data['error'] = '';
+		//O segundo parametro são os dados que serão enviados para view
+        $this->load->template('importar/importarCsv',null,'importarCsv/js_cursos');
+        //alterei o caminho para apontar para a view onde serão expostos os dados presentes no arquivo CSV importado
+  		$data['cursos']=[];
+
     // Define as configurações para o upload do CSV
-		$config['upload_path'] = './uploads/';
+		$config['upload_path'] = base_url('uploads');
 		$config['allowed_types'] = 'csv';
 		$config['max_size'] = '1000';
 		$this->load->library('upload', $config);
 		// Se o upload falhar, exibe mensagem de erro na view
 		if (!$this->upload->do_upload('csvfile')) {
 			$data['error'] = $this->upload->display_errors();
-			$this->load->view('cursos', $data);
+            die($data['error']);
+			$this->load->view('cursos/cursos', $data);
 		} else {
 			$file_data = $this->upload->data();
-			$file_path =  './uploads/'.$file_data['file_name'];
+			$file_path =  base_url('uploads').$file_data['file_name'];
       // Chama o método 'get_array', da library csvimport, passando o path do
       // arquivo CSV. Esse método retornará um array.
-      $csv_array = $this->csvimport->get_array($file_path)
+      $csv_array = $this->csvimport->get_array($file_path);
 			if ($csv_array) {
-        // Faz a interação no array para poder gravar os dados na tabela 'contatos'
-				foreach ($csv_array as $row) {
+        // Faz a interação no array para poder gravar os dados na tabela 'disciplinas'
+				
+                foreach ($csv_array as $row) {
 					$insert_data = array(
 						'id' => $row['id'],
 						'docente_id' => $row['docente_id'],
@@ -62,15 +67,20 @@ class Base extends CI_Controller {
                         'fechamento' => $row['fechamento'],
 						'deletado_em' => $row['deletado_em']
 					);
-          // Insere os dados na tabela 'curso'
-					$this->csv_model->insert_csv($insert_data);
+          // Insere os dados na tabela 'disciplinas'
+					Disciplina_model::create($insert_data);
 				}
         
 				$this->session->set_flashdata('success', 'Dados importados com sucesso!');
 				redirect();
 			} else
 			   $data['error'] = "Ocorreu um erro, desculpe!";
-			$this->load->view('cursos', $data);
+			$this->load->view('cursos/cursos', $data);
 		}
 	}
 }
+
+
+
+
+
