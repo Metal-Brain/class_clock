@@ -31,13 +31,13 @@ class Base extends CI_Controller {
     * @return  void
     */
 	function ImportCsv() {
-        $disciplinas = Disciplina_model::withTrashed()->get();
-        $this->load->template('disciplinas/disciplinas',compact('disciplinas'),'importarCsv/js_disciplinas');
+		//O segundo parametro são os dados que serão enviados para view
+        $this->load->template('importar/importarCsv',null,'importarCsv/js_disciplinas');
         //alterei o caminho para apontar para a view onde serão expostos os dados presentes no arquivo CSV importado
   		$data['disciplinas']=[];
 
     // Define as configurações para o upload do CSV
-		$config['upload_path'] = BASEPATH.'/uploads/';
+		$config['upload_path'] = base_url('uploads');
 		$config['allowed_types'] = 'csv';
 		$config['max_size'] = '1000';
 		$this->load->library('upload', $config);
@@ -48,7 +48,7 @@ class Base extends CI_Controller {
 			$this->load->view('disciplinas/disciplinas', $data);
 		} else {
 			$file_data = $this->upload->data();
-			$file_path =  '/uploads/'.$file_data['file_name'];
+			$file_path =  base_url('uploads').$file_data['file_name'];
       // Chama o método 'get_array', da library csvimport, passando o path do
       // arquivo CSV. Esse método retornará um array.
       $csv_array = $this->csvimport->get_array($file_path);
