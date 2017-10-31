@@ -1,8 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
-
 class Pessoa extends MY_Controller {
   private $id_docente = 4;
-
   /**
   * Página inicial de pessoa
   * @author Vitor "Pliavi"
@@ -11,7 +9,6 @@ class Pessoa extends MY_Controller {
     $pessoas = Pessoa_model::withTrashed()->get();
     $this->load->template('pessoas/pessoas', compact('pessoas'),'pessoas/js_pessoas');
   }
-
   /**
   * Formulário de cadastro
   * @author Vitor "Pliavi"
@@ -20,14 +17,12 @@ class Pessoa extends MY_Controller {
     $tipos = Tipo_model::all();
     $this->load->template('pessoas/cadastrar', compact('tipos'),'pessoas/js_pessoas');
   }
-
   /**
   * Salva uma pessoa no banco
   * @author Vitor "Pliavi"
   */
   function salvar() {
     $has_docente = in_array($this->id_docente, $this->request('tipos')?:[]);
-
     $this->set_validations([
       ['nome', 'nome', 'required|min_length[5]'],
       ['prontuario', 'prontuário', 'required|alpha_numeric|is_unique[pessoa.prontuario]|exact_length[6]'],
@@ -37,7 +32,6 @@ class Pessoa extends MY_Controller {
     ]);
     $this->form_validation->set_message('is_unique', 'Prontuário já cadastrado.');
     $this->form_validation->set_message('alpha_numeric', 'O campo {field} deve conter apenas letras e números.');
-
     if($has_docente) {
       $this->set_validations([
         ['nascimento', 'data de nascimento', 'required|valid_date_br'],
@@ -47,7 +41,6 @@ class Pessoa extends MY_Controller {
         ['regime', 'regime de contrato', 'required|in_list[0,1]'],
       ]);
     }
-
     if($this->run_validation()) {
       DB::transaction(function() use ($has_docente) {
         $pessoa = Pessoa_model::create($this->request_all());
@@ -58,7 +51,6 @@ class Pessoa extends MY_Controller {
           $dados_docente['pessoa_id'] = $pessoa->id;
           $docente = Docente_model::create($dados_docente);
         }
-
         // Monta as relações de tipo
         $pessoa->tipos()->sync($this->request('tipos'));
       });
@@ -69,7 +61,6 @@ class Pessoa extends MY_Controller {
       $this->cadastrar();
     }
   }
-
   /**
   * Formulário de edição
   * @author Vitor "Pliavi"
@@ -79,14 +70,11 @@ class Pessoa extends MY_Controller {
     $pessoa = Pessoa_model::findOrFail($id);
     $tipos = Tipo_model::all();
     $tipos_pessoa = [];
-
     foreach($pessoa->tipos as $t){
       $tipos_pessoa[] = $t->id;
     }
-
     $this->load->template('pessoas/editar', compact('pessoa', 'tipos_pessoa', 'tipos'), 'pessoas/js_pessoas');
   }
-
   /**
   * Atualiza os dados da pessoa
   * @author Vitor "Pliavi"
@@ -95,7 +83,6 @@ class Pessoa extends MY_Controller {
   function atualizar($id) {
     $pessoa = Pessoa_model::findOrFail($id);
     $has_docente = in_array($this->id_docente, $this->request('tipos')?:[]); // Se o docente estiver na lista de tipos
-
     $this->set_validations([
       ['nome', 'nome', 'required|min_length[5]'],
       ['prontuario', 'prontuário', "required|alpha_numeric|exact_length[6]|is_unique_except[pessoa.prontuario,{$pessoa->prontuario}]"],
@@ -105,7 +92,6 @@ class Pessoa extends MY_Controller {
     ]);
     $this->form_validation->set_message('is_unique_except', 'Prontuário já cadastrado.');
     $this->form_validation->set_message('alpha_numeric', 'O campo {field} deve conter apenas letras e números.');
-
     if($has_docente) {
       $this->set_validations([
         ['nascimento', 'data de nascimento', 'required|valid_date_br'],
@@ -115,13 +101,11 @@ class Pessoa extends MY_Controller {
         ['regime', 'regime de contrato', 'required|in_list[0,1]'],
       ]);
     }
-
     if ($this->run_validation()) {
       $pessoa_data = $this->request_all();
       if(empty(trim($pessoa_data['senha']))){
         unset($pessoa_data['senha']);
       }
-
       DB::transaction(function() use ($id, $pessoa, $pessoa_data, $has_docente) {
         $pessoa->update($pessoa_data);
         if($has_docente) {
@@ -138,11 +122,9 @@ class Pessoa extends MY_Controller {
         } else if(!is_null($pessoa->docente)){
           $pessoa->docente->delete();
         }
-
         // Realinha os tipos
         $pessoa->tipos()->sync($this->request('tipos'));
       });
-
       $this->session->set_flashdata('success', 'Cadastro atualizado com sucesso');
       redirect('/pessoa');
     } else {
@@ -150,7 +132,6 @@ class Pessoa extends MY_Controller {
       $this->editar($id);
     }
   }
-
   /**
   * Desativa a pessoa
   * @author Vitor "Pliavi"
@@ -161,7 +142,6 @@ class Pessoa extends MY_Controller {
     $this->session->set_flashdata('success', 'Desativado com sucesso');
     redirect('/pessoa');
   }
-
   /**
   * Ativa a Pessoa
   * @author Denny Azevedo
@@ -173,7 +153,6 @@ class Pessoa extends MY_Controller {
     $this->session->set_flashdata('success','Ativado com sucesso');
     redirect('/pessoa');
   }
-
   /**
   * Verifica se o prontuário é único
   * @author Yasmin Sayad
@@ -184,12 +163,10 @@ class Pessoa extends MY_Controller {
     $validate_data = array('prontuario' => $this->request('prontuario'));
     $this->form_validation->set_data($validate_data);
     $this->form_validation->set_rules('prontuario', 'prontuario', 'is_unique[pessoa.prontuario]');
-
     if($this->form_validation->run()) {
       echo "true";
     } else {
       echo "false";
     }
   }
-
 }

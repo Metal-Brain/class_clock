@@ -10,7 +10,7 @@
         'cursos' => Curso_model::withTrashed()->get(),
         'modalidade' => Modalidade_model::all('id','nome_modalidade'),
         'docentes' => Pessoa_model::join('docente', 'pessoa.id', '=', 'docente.pessoa_id')
-                                  ->select('pessoa.nome', 'docente.id')
+                                  ->select('pessoa.nome', 'docente.id', 'pessoa.prontuario')
                                   ->get(),
       );
       $this->load->template('cursos/cursos', compact('data'), 'cursos/js_cursos');
@@ -27,7 +27,7 @@
                                             ->select('curso.docente_id');
                                     })
                                   ->where('docente.deletado_em', null)
-                                  ->select('docente.id', 'pessoa.nome')
+                                  ->select('docente.id', 'pessoa.nome', 'pessoa.prontuario')
                                   ->get(),
       );
       $this->load->template('cursos/cadastrar', compact('data'), 'cursos/js_cursos');
@@ -65,7 +65,7 @@
         'modalidades' => Modalidade_model::all('id','nome_modalidade'),
         'coordenador' => Pessoa_model::join('docente', 'pessoa.id', '=', 'docente.pessoa_id')
                                       ->where('docente.id', '=', $docente_id)
-                                      ->select('pessoa.nome', 'docente.id')
+                                      ->select('pessoa.nome', 'docente.id','pessoa.prontuario')
                                       ->get(),
         'docentes' => Pessoa_model::join('docente', 'pessoa.id', '=', 'docente.pessoa_id')
                                   ->whereNotIn('docente.id', function($query){
@@ -74,7 +74,7 @@
                                             ->select('curso.docente_id');
                                     })
                                   ->where('docente.deletado_em', null)
-                                  ->select('docente.id', 'pessoa.nome')
+                                  ->select('docente.id', 'pessoa.nome', 'pessoa.prontuario')
                                   ->get(),
       );
       $this->load->template('cursos/editar', compact('data','id'), 'cursos/js_cursos');
