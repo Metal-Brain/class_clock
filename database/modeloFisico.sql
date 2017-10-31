@@ -456,13 +456,14 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 DROP VIEW IF EXISTS `docente_preferencia`;
 
-CREATE VIEW IF NOT EXISTS `docente_preferencia` AS
-SELECT docente.id AS docente_id, disciplina.nome_disciplina, curso.nome_curso, curso.id as curso_id from disciplina
-	JOIN curso ON disciplina.curso_id = curso.id
-	JOIN preferencia ON preferencia.disciplina_id = disciplina.id
-    JOIN fpa ON preferencia.fpa_id = fpa.id 
-    JOIN docente ON fpa.docente_id = docente.id
-    ORDER BY curso.nome_curso, disciplina.nome_disciplina ASC;
+CREATE VIEW `docente_preferencia` AS
+select docente.id as docente_id, pessoa.nome, disciplina.nome_disciplina, curso.nome_curso, curso.id as curso_id from disciplina 
+	join pessoa on docente.pessoa_id = pessoa.id 
+	join curso on disciplina.curso_id = curso.id
+	join preferencia on preferencia.disciplina_id = disciplina.id 
+    join fpa on preferencia.fpa_id = fpa.id 
+    join docente on fpa.docente_id = docente.id
+    order by curso.nome_curso, disciplina.nome_disciplina ASC;
 
 
 
