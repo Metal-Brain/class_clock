@@ -44,8 +44,6 @@
 
 		<tbody>
 			<?php foreach ($data['cursos'] as $curso) { ?>
-
-
 				<tr <?php if($curso->deletado_em): echo 'class="danger"'; endif; ?>>
 					<td class="text-center"><?= ucwords($curso['codigo_curso']); ?></td>
 					<td class="text-center"><?= htmlspecialchars(ucwords($curso['nome_curso'])); ?></td>
@@ -66,7 +64,7 @@
 							endif;
 						}
 					?></td>
-
+          
 					<td class="text-center"><?= ucwords($curso['fechamento']); ?></td>
 					<td class="text-center"><?= ( empty($curso->deletado_em) ) ? 'Ativado' : 'Desativado'?></td>
 					<td class="text-center">

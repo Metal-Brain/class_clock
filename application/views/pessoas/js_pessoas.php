@@ -80,7 +80,24 @@
 				$.datepicker.setDefaults($.datepicker.regional['pt-BR']);
 			});
 			$('.data').datepicker().val();
+		</script>
 
+		<!-- PERMITE APENAS LETRAS E NÚMEROS NO INPUT "NOME" -->
+		<!-- OBS: Aceita espaços e letras acentuadas -->
+		<!-- By Minska :P -->
+		<script>
+			function mascara(o,f){
+				v_obj=o;
+				v_fun=f;
+				setTimeout("execmascara()",1);
+			}
+			function execmascara(){
+				v_obj.value=v_fun(v_obj.value);
+			}
+			function alphanum( v ){
+				v=v.replace(/[^a-zà-úA-ZÀ-Ú 0-9]/g,""); //Remove tudo que não quero rs
+				return v;
+			}
 		</script>
 	</body>
 </html>

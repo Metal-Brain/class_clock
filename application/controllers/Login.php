@@ -7,48 +7,45 @@
    */
   class Login extends CI_Controller {
 
+    /**
+     * Função para o usuário fazer o login
+     * @author Caio de Freitas
+     * @since 2017/09/23
+     */
     public function index(){
 
-      $this->load->model('Usuario_model');
-
-      $this->form_validation->set_rules('matricula','matrícula',array('required','exact_length[8]'));
-      $this->form_validation->set_rules('password','Senha',array('required','trim'));
+      $this->form_validation->set_rules('prontuario','prontuario',array('required','exact_length[6]'));
+      $this->form_validation->set_rules('senha','Senha',array('required','trim'));
 
       if ($this->form_validation->run() == false) {
-
         $this->load->view('login');
       } else {
 
-        $usuario = array(
-          'matricula' => $this->input->post('matricula'),
-          'senha'     => hash('sha256', $this->input->post('password'))
-        );
+        try {
+          $prontuario = $this->input->post('prontuario');
+          $senha = $this->input->post('senha');
 
-        $usuario = $this->Usuario_model->validate($usuario);
+          $usuario = Pessoa_model::where('prontuario',$prontuario)->firstOrFail();
 
-        // verifica se foi encontrado o usuário
-        if ($usuario == NULL) {
-          $this->session->set_flashdata('danger','Matrícula ou senha incorretos');
-        } else {
-          $this->session->set_userdata($usuario);
-          if ($this->Usuario_model->isProfessor($usuario)) {
-            $isCoordenador = $this->Usuario_model->isCoordenador($usuario);
+          // Verifica a senha do usuário
+          if ( !password_verify($senha, $usuario->senha) ) throw new Exception('Dados de login incorretos');
 
-            $this->session->set_userdata('nivel', 2);
-            $this->session->set_userdata('isCoordenador', $isCoordenador);
-            redirect('Professor/preferencia');
-          } else if ($this->Usuario_model->isDae($usuario)){			  
-			  $this->session->set_userdata('nivel', 3);
-			  redirect('Curso');
-		  }
+          $dados =  [
+            'id' => $usuario->id,
+            'nome'  => $usuario->nome,
+            'email' => $usuario->email,
+            'tipo'  => $usuario->tipos()->first()->id,
+          ];
 
-          $this->session->set_userdata('nivel', 1);
-          redirect('Curso');
+          // Joga os dados do usuário na sessão
+          $this->session->set_userdata('usuario_logado',$dados);
 
+          redirect("Turno");
+        } catch (Exception $e) {
+          $this->session->set_flashdata('danger','Prontuário ou senha incorretos, tente novamente');
+          redirect("/");
         }
-        redirect('/');
-      }
-
+		  }
     }
 
     function verificaLogin(){
