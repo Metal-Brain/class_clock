@@ -44,7 +44,7 @@
      <?php endif; ?>
      <?php if (in_array($tipoUsuario,[1,2])) :?>
 	   <li id="sidebar-modalidades">
-		   <a href="http://localhost/class_clock/index.php/modalidade">
+		   <a href="<?php echo base_url();?>index.php/modalidade">
 			   <span class="glyphicon glyphicon-education"></span> <span class="sidebar-label">Modalidades</span>
 		   </a>
 	   </li>
@@ -71,7 +71,7 @@
 	   </li>
      <?php if (in_array($tipoUsuario,[1,2])) :?>
      <li id="sidebar-area">
-		   <a href="http://localhost/class_clock/index.php/Area">
+		   <a href="<?php echo base_url();?>index.php/Area">
 			   <span class="glyphicon glyphicon-duplicate"></span> <span class="sidebar-label">Áreas</span>
 			 </a>
 		 </li>
