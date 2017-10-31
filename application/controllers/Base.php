@@ -68,7 +68,7 @@ class Base extends CI_Controller {
 						'deletado_em' => $row['deletado_em']
 					);
           // Insere os dados na tabela 'disciplinas'
-					Disciplina_model::create($insert_data);
+					Curso_model::create($insert_data);
 				}
         
 				$this->session->set_flashdata('success', 'Dados importados com sucesso!');
