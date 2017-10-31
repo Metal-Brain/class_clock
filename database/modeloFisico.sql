@@ -460,7 +460,7 @@ CREATE VIEW IF NOT EXISTS `docente_preferencia` AS
 SELECT docente.id AS docente_id, disciplina.nome_disciplina, curso.nome_curso, curso.id as curso_id from disciplina
 	JOIN curso ON disciplina.curso_id = curso.id
 	JOIN preferencia ON preferencia.disciplina_id = disciplina.id
-    JOIN fpa ON preferencia.fpa_id = fpa.id 
+    JOIN fpa ON preferencia.fpa_id = fpa.id
     JOIN docente ON fpa.docente_id = docente.id
     ORDER BY curso.nome_curso, disciplina.nome_disciplina ASC;
 
@@ -511,6 +511,36 @@ INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_discip
     VALUES(4, 4, 2, "Hardware", "HDW", 2, 2, 4);
 INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas, modulo)
     VALUES(5, 5, 1, "Medicina", "MED", 2, 2, 5);
+INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas, modulo)
+    VALUES(6, 1, 5, "Topicos Avançados", "TPA", 3, 4, 5);
+INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas, modulo)
+    VALUES(7, 2, 4, "Segurança da Informação", "SEG", 4, 4, 4);
+INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas, modulo)
+    VALUES(8, 3, 3, "Redes de Computadores", "RDC", 2, 7, 5);
+INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas, modulo)
+    VALUES(9, 4, 2, "Projeto Integrado", "PRI", 2, 6, 6);
+INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas, modulo)
+    VALUES(10, 5, 1, "Desenvolvimento Web 1", "DW1", 4, 4, 3);
+INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas, modulo)
+    VALUES(11, 1, 5, "Engenharia de Software", "ENG", 3, 4, 2);
+INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas, modulo)
+    VALUES(12, 2, 4, "Gestao de TI", "GTI", 2, 3, 3);
+INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas, modulo)
+    VALUES(13, 3, 3, "Sistemas de Informações Gerencias", "SIG", 5, 6, 2);
+INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas, modulo)
+    VALUES(14, 4, 2, "Implantação de Servidores", "IPS", 2, 6, 4);
+INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas, modulo)
+    VALUES(15, 5, 1, "Banco de Dados 1", "BD1", 2, 4, 1);
+INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas, modulo)
+    VALUES(16, 1, 5, "Probabilidade e Estatistica", "PEE", 3, 2, 2);
+INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas, modulo)
+    VALUES(17, 2, 4, "Ingles", "ING", 2, 4, 3);
+INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas, modulo)
+    VALUES(18, 3, 3, "Comunicação e Expressão", "CEE", 1, 2, 1);
+INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas, modulo)
+    VALUES(19, 4, 2, "Matematica Discreta 1", "MD1", 2, 6, 4);
+INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas, modulo)
+    VALUES(20, 5, 1, "Arquitetura de Computadores", "ARC", 2, 8, 6);
 
 INSERT INTO turno(id, nome_turno) VALUES(1, "Matutino");
 INSERT INTO turno(id, nome_turno) VALUES(2, "Vespertino");
@@ -529,10 +559,28 @@ INSERT INTO turno_horario(turno_id, horario_id) VALUES(1, 2);
 
 INSERT INTO area(id, codigo, nome_area) VALUES(1, "12345", "Informática");
 
-INSERT INTO pessoa(id, nome, prontuario, senha, email) VALUES(1, "Adminsitrador", "151515", "$2y$10$2uOth8K7IW1YGSuCvAQDVe.6W53RSCOJWji9eCNTqN3DSfTHr.5oe
-", "email@ifsp.edu");
-INSERT INTO pessoa(id, nome, prontuario, senha, email) VALUES(2, "Docente 1", "151521", "$2y$10$2uOth8K7IW1YGSuCvAQDVe.6W53RSCOJWji9eCNTqN3DSfTHr.5oe
-", "joao@ifsp.edu");
+INSERT INTO pessoa(id, nome, prontuario, senha, email) VALUES(1, "Adminsitrador", "151515", "$2y$10$2uOth8K7IW1YGSuCvAQDVe.6W53RSCOJWji9eCNTqN3DSfTHr.5oe", "email@ifsp.edu");
+
+INSERT INTO pessoa(id, nome, prontuario, senha, email) VALUES(2, "Docente 1", "123456", "docente1", "joao@ifsp.edu");
+INSERT INTO pessoa(id, nome, prontuario, senha, email) VALUES(3, "Docente 2", "654321", "docente2", "paula@ifsp.edu");
+INSERT INTO pessoa(id, nome, prontuario, senha, email) VALUES(4, "Docente 3", "012345", "docente3", "roberto@ifsp.edu");
+INSERT INTO pessoa(id, nome, prontuario, senha, email) VALUES(5, "Docente 4", "543210", "docente4", "alberto@ifsp.edu");
+INSERT INTO pessoa(id, nome, prontuario, senha, email) VALUES(6, "Docente 5", "111111", "docente5", "gilberto@ifsp.edu");
+INSERT INTO pessoa(id, nome, prontuario, senha, email) VALUES(7, "Docente 6", "222222", "docente6", "rogerio@ifsp.edu");
+INSERT INTO pessoa(id, nome, prontuario, senha, email) VALUES(8, "Docente 7", "333333", "docente7", "andreia@ifsp.edu");
+INSERT INTO pessoa(id, nome, prontuario, senha, email) VALUES(9, "Docente 8", "444444", "docente8", "astolfo@ifsp.edu");
+INSERT INTO pessoa(id, nome, prontuario, senha, email) VALUES(10, "Docente 9", "555555", "docente9", "lucas@ifsp.edu");
+INSERT INTO pessoa(id, nome, prontuario, senha, email) VALUES(11, "Docente 10", "666666", "docente10", "mario@ifsp.edu");
+INSERT INTO pessoa(id, nome, prontuario, senha, email) VALUES(12, "Docente 11", "917336", "docente11", "roberta@ifsp.edu");
+INSERT INTO pessoa(id, nome, prontuario, senha, email) VALUES(12, "Docente 12", "777777", "docente12", "gabriela@ifsp.edu");
+INSERT INTO pessoa(id, nome, prontuario, senha, email) VALUES(13, "Docente 13", "888888", "docente12", "gustavo@ifsp.edu");
+INSERT INTO pessoa(id, nome, prontuario, senha, email) VALUES(14, "Docente 14", "999999", "docente13", "olavo@ifsp.edu");
+INSERT INTO pessoa(id, nome, prontuario, senha, email) VALUES(15, "Docente 15", "127862", "docente14", "alexandre@ifsp.edu");
+INSERT INTO pessoa(id, nome, prontuario, senha, email) VALUES(16, "Docente 16", "987452", "docente15", "marcella@ifsp.edu");
+INSERT INTO pessoa(id, nome, prontuario, senha, email) VALUES(17, "Docente 17", "134671", "docente16", "deborah@ifsp.edu");
+INSERT INTO pessoa(id, nome, prontuario, senha, email) VALUES(18, "Docente 18", "131619", "docente17", "antonio@ifsp.edu");
+INSERT INTO pessoa(id, nome, prontuario, senha, email) VALUES(19, "Docente 19", "020498", "docente18", "lais@ifsp.edu");
+INSERT INTO pessoa(id, nome, prontuario, senha, email) VALUES(20, "Docente 20", "090895", "docente19", "rosemeire@ifsp.edu");
 
 INSERT INTO docente(id, pessoa_id, area_id, nascimento, ingresso_campus, ingresso_ifsp, regime) VALUES(1, 2, 1, "1996/08/11", "2007/08/11", "2007/08/11", 1);
 
