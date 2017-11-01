@@ -14,48 +14,25 @@ class Fpa extends CI_Controller{
   }
 
   public function salvar(){
-    $disponibilidade    = $this->input->post('disp');
-    $indisponibilidade  = $this->input->post('indisponibilidade');
-
+    $dados = [
+      "docente_id" => $_SESSION['usuarioLogado']['id'],
+      "periodo_id" => Periodo_model::periodoAtivo()->id
+    ];
     $fpa = Fpa_model::firstOrCreate($dados);
-    $fpa->disponibilidade->sync([]);
-
-    if(isset($disponibilidade)){
-      $this->disponibilidade($disponibilidade);
-    }else if(isset($indisponibilidade)){
-      $this->indisponibilidade($indisponibilidade);
-    }
-
-    $disciplinas = $this->input->post('disc');
-    $fpa->preferencia->sync([]);
-    $ordem = 1;
-    foreach($disciplinas as $disciplina){
-      Preferencia_model::firstOrCreate([
-        'fpa_id' => $fpa->id,
-        'disciplina_id' => $disciplina->id,
-        'preferencia' => $ordem++
-      ]);  
-    }
-
-    $this->index();
+    
   }
 
-  private function disponibilidade($disponibilidade){
+  public function salvarDisponibilidade($id){
+    $periodoAtivo = Periodo_model::periodoAtivo();
+    $fpa = Fpa_model::where('docente_id', $_SESSION['usuarioLogado']['id'])->where('periodo_id', $periodoAtivo->id);
+    $fpa->disponibilidade->sync([]);
+
     try{
       DB::transaction(function (){
-        $dados = [
-          "docente_id" => 1,//$_SESSION['usuarioLogado']['id'],
-          "periodo_id" => Periodo_model::periodoAtivo()->id
-        ];
-        
-        foreach($disponibilidade as $dia_semana => $horarios){
-          foreach($horarios as $horario_id){
-            Disponibilidade_model::firstOrCreate([
-              'fpa_id' => $fpa->id,
-              'horario_id' => $horario_id, 
-              'dia_semana' => $dia_semana
-            ]);
-          }
+        if(isset($disponibilidade)){
+          $this->disponibilidade($fpa);
+        }else if(isset($indisponibilidade)){
+          $this->indisponibilidade($fpa);
         }
       });
       $this->session->set_flashdata('success','FPA cadastrado com sucesso');
@@ -63,19 +40,27 @@ class Fpa extends CI_Controller{
       $this->session->set_flashdata('danger','Problemas ao cadastrar a FPA, tente novamente!');
       echo $e->getMessage();
     }
+    $this->index();
   }
 
-  private function indisponibilidade($indisponibilidade){
-    $horarios = Horario_model::orderBy('inicio')->get();
+  private function disponibilidade($fpa){
+    $disponibilidade = $this->input->post('disp');
+    foreach($disponibilidade as $dia_semana => $horarios){
+      foreach($horarios as $horario_id){
+        Disponibilidade_model::firstOrCreate([
+          'fpa_id' => $fpa->id,
+          'horario_id' => $horario_id, 
+          'dia_semana' => $dia_semana
+        ]);
+      }
+    }
+  }
 
+  private function indisponibilidade($fpa){
+    $indisponibilidade  = $this->input->post('indisponibilidade');
+    $horarios = Horario_model::orderBy('inicio')->get();
     $dia_semana = ['seg', 'ter', 'qua', 'qui', 'sex', 'sab'];
     $dia_semana = array_diff($dia_semana, array($indisponibilidade));
-
-    $dados = [
-      "docente_id" => 1,//$_SESSION['usuarioLogado']['id'],
-      "periodo_id" => Periodo_model::periodoAtivo()->id
-    ];
-
     foreach($dia_semana as $dia_semana){
       foreach($horarios as $horario){
         Disponibilidade_model::firstOrCreate([
@@ -87,12 +72,44 @@ class Fpa extends CI_Controller{
     }
   }
 
-  public function editar(){
-    $fpa = Fpa::where('docente_id', $_SESSION['usuarioLogado']['id'])->where('ativo', 1);
+  public function editarDisponibilidade(){
+    $periodoAtivo = Periodo_model::periodoAtivo();
+    $fpa = Fpa_model::where('docente_id', $_SESSION['usuarioLogado']['id'])->where('periodo_id', $periodoAtivo->id);
     $horarios = Horario::orderBy('inicio')->get();
     $disponibilidade = $fpa->disponibilidade()->get();
-    $disciplinas = $fpa->preferencia()->get();
-    $this->load->template('fpas/fpaEditar', [$fpa, $horarios, $disponibilidade, $disciplinas], 'fpas/js_fpa');
+    $this->load->template('fpas/fpaEditarDisponibilidade', [$fpa, $horarios, $disponibilidade], 'fpas/js_fpa');
   }
+
+  public function salvarPreferencias($id){
+    $periodoAtivo = Periodo_model::periodoAtivo();
+    $fpa = Fpa_model::where('docente_id', $_SESSION['usuarioLogado']['id'])->where('periodo_id', $periodoAtivo->id);
+    $disciplinas = $this->input->post('disc');
+    $fpa->preferencia->sync([]);
+    $ordem = 1;
+    try{
+      DB::transaction(function (){
+        foreach($disciplinas as $disciplina){
+          Preferencia_model::firstOrCreate([
+            'fpa_id' => $fpa->id,
+            'disciplina_id' => $disciplina->id,
+            'preferencia' => $ordem++
+          ]);  
+        }
+      });
+      $this->session->set_flashdata('success','Preferências de disciplinas cadastrado com sucesso');
+    } catch (Exception $e){
+      $this->session->set_flashdata('danger','Problemas ao cadastrar as preferências de disciplinas, tente novamente!');
+      echo $e->getMessage();
+    }
+  }
+
+  public function editarPreferencias(){
+    $periodoAtivo = Periodo_model::periodoAtivo();
+    $fpa = Fpa_model::where('docente_id', $_SESSION['usuarioLogado']['id'])->where('periodo_id', $periodoAtivo->id);
+    $disciplinas = Disciplina_model::all();
+    $disciplinasSelecionadas = $fpa->preferencia()->get();
+    $this->load->template('fpas/fpaEditarPreferencia', [$fpa, $disciplinas, $disciplinasSelecionadas], 'fpas/js_fpa');
+  }
+
 
 }
