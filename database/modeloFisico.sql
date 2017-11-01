@@ -63,6 +63,8 @@ CREATE TABLE IF NOT EXISTS `horario`.`docente` (
   `ingresso_campus` DATE NOT NULL,
   `ingresso_ifsp` DATE NOT NULL,
   `regime` CHAR(1) NOT NULL,
+  `titulacao` SMALLINT NULL COMMENT 'Campo graduação armazenará os números referentes à graduação do docente, sendo 4 = graduação, 3 = especialização, 2 = mestrado e 1 = doutorado.',
+  `nivel_carreira` CHAR(4) NULL,
   `deletado_em` TIMESTAMP NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_docente_area1_idx` (`area_id` ASC),
@@ -450,20 +452,41 @@ CREATE TABLE IF NOT EXISTS `horario`.`quadro` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `horario`.`classificacao`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `horario`.`classificacao` (
+  `id` SMALLINT NOT NULL,
+  `ordem` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
 
 -- -----------------------------------------------------
 -- View `horario`.`docente_preferencia`
 -- -----------------------------------------------------
 DROP VIEW IF EXISTS `docente_preferencia`;
 
-CREATE VIEW IF NOT EXISTS `docente_preferencia` AS
-SELECT docente.id AS docente_id, disciplina.nome_disciplina, curso.nome_curso, curso.id as curso_id from disciplina
-	JOIN curso ON disciplina.curso_id = curso.id
-	JOIN preferencia ON preferencia.disciplina_id = disciplina.id
-    JOIN fpa ON preferencia.fpa_id = fpa.id
-    JOIN docente ON fpa.docente_id = docente.id
-    ORDER BY curso.nome_curso, disciplina.nome_disciplina ASC;
+CREATE VIEW `docente_preferencia` AS
+select docente.id as docente_id, pessoa.nome, disciplina.nome_disciplina, curso.nome_curso, curso.id as curso_id from disciplina
+	join curso on disciplina.curso_id = curso.id
+	join preferencia on preferencia.disciplina_id = disciplina.id
+  join fpa on preferencia.fpa_id = fpa.id
+  join docente on fpa.docente_id = docente.id
+  join pessoa on docente.pessoa_id = pessoa.id
+  order by curso.nome_curso, disciplina.nome_disciplina ASC;
 
+  -- -----------------------------------------------------
+  -- View `horario`.`docente_preferencia`
+  -- -----------------------------------------------------
+  CREATE  OR REPLACE VIEW `docente_classificacao` AS
+  select curso.nome_curso, curso.id as curso_id, disciplina.nome_disciplina, disciplina.id, docente.id as docente_id, pessoa.nome from disciplina
+  	join curso on disciplina.curso_id = curso.id
+  	join preferencia on preferencia.disciplina_id = disciplina.id
+    join fpa on preferencia.fpa_id = fpa.id
+    join docente on fpa.docente_id = docente.id
+    join pessoa on docente.pessoa_id = pessoa.id
+    order by curso.nome_curso, disciplina.nome_disciplina, (SELECT ordem FROM classificacao ORDER BY id ASC) ASC;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
