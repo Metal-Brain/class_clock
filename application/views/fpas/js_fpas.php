@@ -34,7 +34,7 @@
 
 
       //método que valida o numero de checkbox que podem ser selecionados!
-      if(qt >= <?= $_SESSION["usuarioLogado"]["regime"] ? 20 : 40 ?> ){
+      if(qt >= <?= $_SESSION["usuario_logado"]["regime"] ? 20 : 40 ?> ){
         $('input[type=checkbox]:not(:checked)').prop('disabled', true);
       }else{
         $('input[type=checkbox]:not(:checked)').prop('disabled', false);
@@ -54,8 +54,8 @@
 
     $(document).ready(function () {
       $('#formDisp').validate({
-        rules: {
-          totalAula: {required: true, minAula: <?= $_SESSION["usuarioLogado"]["regime"] ? 14 : 21 ?>}
+        rules: { // regime 0 = 20h regime 1 = 40h
+          totalAula: {required: true, minAula: <?= $_SESSION["usuario_logado"]["regime"] ? 14 : 21 ?>}
         }
       });
     });

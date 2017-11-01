@@ -107,7 +107,8 @@ class checkUser {
         [
             'turno'       => ['index'],
             'tipo_sala'   => ['index'],
-            'modalidade'  => ['index']
+            'modalidade'  => ['index'],
+            'fpa'         => ['index','cadastrar','salvar']
         ];
 
         $this->hasAccess($acess);

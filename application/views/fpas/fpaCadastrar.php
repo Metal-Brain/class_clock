@@ -1,3 +1,6 @@
+
+<?php print_r($this->session->userdata('usuario_logado')) ?>
+
 <div class="col-md-10 col-lg-10">
   <!-- Alertas de sucesso / erro -->
 	<div class="row" style="margin-top: 5px;">
@@ -20,7 +23,7 @@
           <h2 class="page-header">FPA</h2>
       </div>
   </div>
-  
+
   <div class="row">
     <div class="col-md-12">
       <h4>Selecione o método desejado:</h4>
