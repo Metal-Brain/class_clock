@@ -32,10 +32,7 @@ class Csvimport {
             $this->_set_filepath($filepath);
         }
         // Retorna false se o arquivo não existir
-        if(! file_exists($filepath))
-        {
-            return FALSE;
-        }
+        
         // detecta o final da linha
         if(! $detect_line_endings)
         {
@@ -83,7 +80,7 @@ class Csvimport {
         // Abre o CSV para leitura
         $this->_get_handle();
         $row = 0;
-        while (($data = fgetcsv($this->handle, 0, $this->delimiter)) !== FALSE)
+        while (($data = fgetcsv(fopen($filepath,'r'), 0, $this->delimiter)) !== FALSE)
         {
             if($row < $this->initial_line)
             {
