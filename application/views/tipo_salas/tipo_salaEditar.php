@@ -1,17 +1,31 @@
 <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
 	<form id="formTipo_Sala" action="<?= site_url('tipo_sala/atualizar/'.$id)?>" method="post">
 
-	<div class="form-group">	
+	<div class="form-group">
 		<label>Nome:</label>
-		<input name="nome_tipo_sala" class="form-control" required maxlength="30" value="<?= htmlspecialchars($tipo_salas->nome_tipo_sala) ?>">
-		<?= form_error('nome_tipo_sala') ?>
+		<input name="nome_tipo_sala" class="form-control"  onkeypress="this.value = this.value.toLowerCase();" 
+												onChange="this.value = this.value.toLowerCase();" 
+												onpaste="this.value = this.value.toLowerCase(); required maxlength="30" value="<?= htmlspecialchars($tipo_salas->nome_tipo_sala) ?>">
 	</div>
+
+	<div class="row">
+		<div class="col-md-3 margin-top-error error">
+			<?= form_error('nome_tipo_sala') ?>
+		</div>
+	</div>
+
 
 	<div class="form-group">
 		<label>Descrição:</label>
 		<textarea name="descricao_tipo_sala" class="form-control" rows="5" required maxlength="254"><?= $tipo_salas->descricao_tipo_sala?></textarea>
-		<?= form_error('descricao_tipo_sala') ?>
 	</div>
+
+	<div class="row">
+		<div class="col-md-3 margin-top-error error">
+			<?= form_error('descricao_tipo_sala') ?>
+		</div>
+	</div>
+
 
 
 	<div class="row">

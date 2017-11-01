@@ -33,7 +33,7 @@ class Pessoa extends MY_Controller {
       ['prontuario', 'prontuário', 'required|alpha_numeric|is_unique[pessoa.prontuario]|exact_length[6]'],
       ['senha', 'senha', 'required|min_length[6]'],
       ['email', 'email', 'required|valid_email|strtolower|regex_match[/^[a-zA-Z0-9._@-]+$/]'],
-      ['tipos[]', 'tipos', 'required']
+      ['tipos[]', 'tipo', 'required']
     ]);
     $this->form_validation->set_message('is_unique', 'Prontuário já cadastrado.');
     $this->form_validation->set_message('alpha_numeric', 'O campo {field} deve conter apenas letras e números.');
@@ -62,10 +62,10 @@ class Pessoa extends MY_Controller {
         // Monta as relações de tipo
         $pessoa->tipos()->sync($this->request('tipos'));
       });
-      $this->session->set_flashdata('success', 'Pessoa cadastrada com sucesso');
+      $this->session->set_flashdata('success', 'Cadastrado realizado com sucesso');
       redirect('/pessoa');
     } else {
-      $this->session->set_flashdata('danger', 'Não foi possível cadastrar a pessoa');
+      $this->session->set_flashdata('danger', 'Não foi possível realizar o cadastro');
       $this->cadastrar();
     }
   }
@@ -143,10 +143,10 @@ class Pessoa extends MY_Controller {
         $pessoa->tipos()->sync($this->request('tipos'));
       });
 
-      $this->session->set_flashdata('success', 'Pessoa atualizada com sucesso');
+      $this->session->set_flashdata('success', 'Cadastro atualizado com sucesso');
       redirect('/pessoa');
     } else {
-      $this->session->set_flashdata('danger', 'Não foi possível atualizar a pessoa');
+      $this->session->set_flashdata('danger', 'Não foi possível atualizar o cadastro');
       $this->editar($id);
     }
   }
@@ -158,7 +158,7 @@ class Pessoa extends MY_Controller {
   */
   function deletar($id) {
     Pessoa_model::findOrFail($id)->delete();
-    $this->session->set_flashdata('success', 'Pessoa desativada com sucesso');
+    $this->session->set_flashdata('success', 'Desativado com sucesso');
     redirect('/pessoa');
   }
 
@@ -170,7 +170,7 @@ class Pessoa extends MY_Controller {
   */
   function ativar ($id) {
     Pessoa_model::withTrashed()->findOrFail($id)->restore();
-    $this->session->set_flashdata('success','Pessoa ativada com sucesso');
+    $this->session->set_flashdata('success','Ativado com sucesso');
     redirect('/pessoa');
   }
 

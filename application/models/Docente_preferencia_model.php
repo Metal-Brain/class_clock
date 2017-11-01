@@ -11,6 +11,7 @@
          * @author Lucas Leonel
          * @since 2017/08/19
         */
-        protected $fillable = ['docente_id', 'nome_disciplina', 'nome_curso', 'curso_id'];
+        protected $fillable = ['docente_id', 'nome', 'nome_disciplina', 'nome_curso', 'curso_id'];
+
     }
 ?>

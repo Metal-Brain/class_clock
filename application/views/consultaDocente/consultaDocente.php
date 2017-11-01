@@ -20,7 +20,6 @@
 			<div class="col-md-12">
 			<h2 class="page-header">Preferencia dos Docentes
 			</h2>
-			<?php var_dump($dados_usuario) ?>
 			</div>
 		</div>
 </div>
@@ -31,7 +30,7 @@
                         <tr>
                             <th class="text-center">Disciplina</th>
                             <th class="text-center">Curso</th>
-                            <th class="text-center">Docente</th>
+                            <th class="text-center">Nome do Docente</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -39,7 +38,7 @@
 												<tr>
 													<td class="text-center"><?= $preferencia['nome_disciplina']; ?></td>
 													<td class="text-center"><?= $preferencia['nome_curso']; ?></td>
-													<td class="text-center"><?= $preferencia['docente_id']; ?></td>
+													<td class="text-center"><?= $preferencia['nome']; ?></td>
 												</tr>
 						<?php endforeach; ?>
                     </tbody>

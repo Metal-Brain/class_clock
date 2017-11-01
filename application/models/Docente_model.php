@@ -40,4 +40,7 @@ class Docente_model extends Model {
         return $this->belongsTo(Area_model::class, 'area_id');
     }
 
+    public function tipo() {
+        return $this->belongsToMany(Tipo_model::class, 'tipo_pessoa', 'pessoa_id', 'tipo_id');
+    }
 }

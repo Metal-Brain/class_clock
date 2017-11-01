@@ -79,7 +79,7 @@
 				</span>
 			</div>
 
-			<label>Data de ingresso no câmpus:</label>
+			<label>Data de ingresso no IFSP:</label>
 			<div class="form-group width-180">
 				<input id="ingresso_ifsp_editar" name="ingresso_ifsp" class="form-control data" value="<?= @$pessoa->docente->ingresso_ifsp ?>">
 				<span class="text-danger">

@@ -6,8 +6,12 @@
     */
     class Disciplina extends CI_Controller {
         function index () {
-            $disciplinas = Disciplina_model::withTrashed()->get();
-            $this->load->template('disciplinas/disciplinas',compact('disciplinas'),'disciplinas/js_disciplinas');
+            $data = array(
+              'disciplinas' => Disciplina_model::withTrashed()->get(),
+              'cursos' => Curso_model::all('id','nome_curso'),
+              'tipo_salas' => TipoSala_model::all('id','nome_tipo_sala')
+            );
+            $this->load->template('disciplinas/disciplinas',compact('data'),'disciplinas/js_disciplinas');
         }
 
         /**
@@ -66,9 +70,9 @@
         */
         function editar($id) {
             $data = array(
-				'cursos' => Curso_model::all(),
-				'tipo_salas' => TipoSala_model::all(),
-                'disciplina' => Disciplina_model::find($id),
+      				'cursos' => Curso_model::all(),
+      				'tipo_salas' => TipoSala_model::all(),
+              'disciplina' => Disciplina_model::find($id),
 				);
             $this->load->template('disciplinas/disciplinasEditar', compact('data','id'),'disciplinas/js_disciplinas');
         }

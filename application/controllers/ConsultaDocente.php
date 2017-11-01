@@ -6,9 +6,20 @@
     */
     class ConsultaDocente extends CI_Controller {
         function index () {
-            $dados_usuario = $this->session->userdata();
+          if ($this->session->userdata()["usuario_logado"]["tipo"] == 1) {
+
             $preferencias = Docente_preferencia_model::withTrashed()->get();
-            $this->load->template('consultaDocente/consultaDocente',compact('preferencias','dados_usuario'),'consultaDocente/js_consultaDocente');
+            $this->load->template('consultaDocente/consultaDocente',compact('preferencias'),'consultaDocente/js_consultaDocente');
+
+          }
+          elseif ($this->session->userdata()["usuario_logado"]["tipo"] == 4) {
+
+            $preferencias = Docente_preferencia_model::withTrashed()->get();
+            $this->load->template('consultaDocente/consultaDocente',compact('preferencias'),'consultaDocente/js_consultaDocente');          }
+
+        }
+        else {
+          redirect('authError');
         }
 
 
