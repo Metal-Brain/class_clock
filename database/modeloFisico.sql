@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `horario`.`docente` (
   `ingresso_campus` DATE NOT NULL,
   `ingresso_ifsp` DATE NOT NULL,
   `regime` CHAR(1) NOT NULL,
-  `titulacao` SMALLINT NULL COMMENT 'Campo graduação armazenará os números referentes à graduação do docente, sendo 1 = graduação, 2 = especialização, 3 = mestrado e 4 = doutorado.',
+  `titulacao` SMALLINT NULL COMMENT 'Campo graduação armazenará os números referentes à graduação do docente, sendo 4 = graduação, 3 = especialização, 2 = mestrado e 1 = doutorado.',
   `nivel_carreira` CHAR(4) NULL,
   `deletado_em` TIMESTAMP NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
