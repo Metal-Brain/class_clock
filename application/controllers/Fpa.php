@@ -14,12 +14,17 @@ class Fpa extends CI_Controller{
   }
 
   public function salvar(){
-    $dados = [
-      "docente_id" => $_SESSION['usuarioLogado']['id'],
-      "periodo_id" => Periodo_model::periodoAtivo()->id
-    ];
-    $fpa = Fpa_model::firstOrCreate($dados);
-    
+    try{
+      $dados = [
+        "docente_id" => $_SESSION['usuarioLogado']['id'],
+        "periodo_id" => Periodo_model::periodoAtivo()->id
+      ];
+      $fpa = Fpa_model::firstOrCreate($dados);
+      $this->session->set_flashdata('success','FPA cadastrado com sucesso');
+    } catch (Exception $e){
+      $this->session->set_flashdata('danger','Problemas ao cadastrar a FPA, tente novamente!');
+      echo $e->getMessage();
+    }
   }
 
   public function salvarDisponibilidade($id){
@@ -35,9 +40,9 @@ class Fpa extends CI_Controller{
           $this->indisponibilidade($fpa);
         }
       });
-      $this->session->set_flashdata('success','FPA cadastrado com sucesso');
+      $this->session->set_flashdata('success','Disponibilidade cadastrada com sucesso');
     } catch (Exception $e){
-      $this->session->set_flashdata('danger','Problemas ao cadastrar a FPA, tente novamente!');
+      $this->session->set_flashdata('danger','Problemas ao cadastrar a disponibilidade, tente novamente!');
       echo $e->getMessage();
     }
     $this->index();
@@ -110,6 +115,5 @@ class Fpa extends CI_Controller{
     $disciplinasSelecionadas = $fpa->preferencia()->get();
     $this->load->template('fpas/fpaEditarPreferencia', [$fpa, $disciplinas, $disciplinasSelecionadas], 'fpas/js_fpa');
   }
-
-
+  
 }
