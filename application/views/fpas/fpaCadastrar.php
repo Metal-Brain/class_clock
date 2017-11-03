@@ -39,7 +39,7 @@
   <!-- Criando a tabela de disponibilidade-->
   <div id="disponibilidade" class="row" style="display:none;">
     <div class="col-md-12">
-      <form id="formDisp" action="<?= site_url('fpa/salvar')?>" method="POST">
+      <form id="formDisp" action="<?= site_url('fpa/salvarDisponibilidade')?>" method="POST">
         <h4 class="text-center">Selecione os horários em que você estará disponível!</h4>
         <div class="table-responsive">
           <table class="table">
@@ -71,8 +71,9 @@
         </div>
         <div class="form-group">
           <div class="col-md-4">
-            <input type="number" name="totalAula" class="" min="0" readonly style="width:25px;border:none;background:transparent;-moz-appearance:textfield;appearance:textfield;">
+            <input type="number" name="totalAula" class="" min="0" readonly style="color:#333;width:25px;border:none;background:transparent;-moz-appearance:textfield;appearance:textfield;">
 						<span id="contador" data-value="0"> </span>
+						<p id="msgErrors"></p>
           </div>
         </div>
         <div class="col-md-12">

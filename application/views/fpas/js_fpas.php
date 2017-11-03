@@ -49,11 +49,12 @@
 
     jQuery.validator.addMethod("minAula",function (value, element, param) {
       return (value > param) ? true : false;
-    },'');
+    },'Selecione no minimo {0} horarios');
 
 
     $(document).ready(function () {
       $('#formDisp').validate({
+        errorLabelContainer:'#msgErrors',
         rules: { // regime 0 = 20h regime 1 = 40h
           totalAula: {required: true, minAula: <?= $_SESSION["usuario_logado"]["regime"] ? 14 : 21 ?>}
         }
