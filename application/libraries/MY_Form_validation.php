@@ -32,11 +32,10 @@ class MY_Form_validation extends CI_Form_validation {
 
         return $db->get()->num_rows() == 0;
     }
-	
-	public function alpha_accent($str){
+
+    public function alpha_accent($str){
     		$controller = $this->CI;
         $controller->form_validation->set_message('alpha_accent', 'O campo {field} pode conter apenas letras, espaços e acentos.');
     		return (bool) preg_match('/^[A-Za-z0-9áàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/', $str);
 	  }
-	
 }
