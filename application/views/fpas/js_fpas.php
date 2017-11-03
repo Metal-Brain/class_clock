@@ -30,7 +30,7 @@
       qt = $('input:not([disabled])[type=checkbox]:checked').length;
       $('#contador').attr('data-value',qt);
       //coloca o resultado na div contador
-      $('#contador').text(qt + (qt > 1 ? ' selecionados' : ' selecionado'));
+      $('#contador').text((qt > 1 ? ' selecionados' : ' selecionado'));
 
 
       //método que valida o numero de checkbox que podem ser selecionados!

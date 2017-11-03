@@ -1,6 +1,3 @@
-
-<?php print_r($this->session->userdata('usuario_logado')) ?>
-
 <div class="col-md-10 col-lg-10">
   <!-- Alertas de sucesso / erro -->
 	<div class="row" style="margin-top: 5px;">
@@ -71,11 +68,11 @@
               <?php endforeach;?>
             </tbody>
           </table>
-          <div id="contador" data-value="0"> </div>
         </div>
         <div class="form-group">
-          <div class="col-md-1">
-            <input type="number" name="totalAula" class="form-control" min="0" readonly>
+          <div class="col-md-4">
+            <input type="number" name="totalAula" class="" min="0" readonly style="width:25px;border:none;background:transparent;-moz-appearance:textfield;appearance:textfield;">
+						<span id="contador" data-value="0"> </span>
           </div>
         </div>
         <div class="col-md-12">
