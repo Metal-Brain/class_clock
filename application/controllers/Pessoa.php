@@ -15,7 +15,22 @@ class Pessoa extends MY_Controller {
   */
   function cadastrar() {
     $tipos = Tipo_model::all();
-    $this->load->template('pessoas/cadastrar', compact('tipos'),'pessoas/js_pessoas');
+    $niveis = [
+      101 => 'D101',
+      102 => 'D102',
+      103 => 'D103',
+      104 => 'D104',
+      201 => 'D201',
+      202 => 'D202'
+    ];
+    $titulacoes = [
+      4 => "Graduação",
+      3 => "Especialização",
+      2 => "Mestrado",
+      1 => "Doutorado"
+    ];
+    $areas = Area_model::all();
+    $this->load->template('pessoas/cadastrar', compact('tipos', 'niveis', 'titulacoes', 'areas'),'pessoas/js_pessoas');
   }
   /**
   * Salva uma pessoa no banco
@@ -37,7 +52,9 @@ class Pessoa extends MY_Controller {
         ['nascimento', 'data de nascimento', 'required|valid_date_br'],
         ['ingresso_campus', 'data de ingresso no câmpus', 'required|valid_date_br'],
         ['ingresso_ifsp', 'data de ingresso no IFSP', 'required|valid_date_br'],
-        // ['area', 'área', 'required'], FIXME: adicionar essa validação quando a area for existente
+        ['area_id', 'área', 'required'],
+        ['titulacao', 'Titulação', 'required'],
+        ['nivel_carreira', 'Nível de Carreira', 'required'],
         ['regime', 'regime de contrato', 'required|in_list[0,1]'],
       ]);
     }
@@ -45,9 +62,7 @@ class Pessoa extends MY_Controller {
       DB::transaction(function() use ($has_docente) {
         $pessoa = Pessoa_model::create($this->request_all());
         if($has_docente) {
-          // FIXME: Colocar área, aqui foi feito um workaround presetando uma área
           $dados_docente = $this->request_all();
-          $dados_docente['area_id'] = 1; // FIXME: Esta linha deverá ser removida quando a área for existente
           $dados_docente['pessoa_id'] = $pessoa->id;
           $docente = Docente_model::create($dados_docente);
         }
@@ -70,10 +85,25 @@ class Pessoa extends MY_Controller {
     $pessoa = Pessoa_model::findOrFail($id);
     $tipos = Tipo_model::all();
     $tipos_pessoa = [];
+    $niveis = [
+      101 => 'D101',
+      102 => 'D102',
+      103 => 'D103',
+      104 => 'D104',
+      201 => 'D201',
+      202 => 'D202'
+    ];
+    $titulacoes = [
+      4 => "Graduação",
+      3 => "Especialização",
+      2 => "Mestrado",
+      1 => "Doutorado"
+    ];
+    $areas = Area_model::all();
     foreach($pessoa->tipos as $t){
       $tipos_pessoa[] = $t->id;
     }
-    $this->load->template('pessoas/editar', compact('pessoa', 'tipos_pessoa', 'tipos'), 'pessoas/js_pessoas');
+    $this->load->template('pessoas/editar', compact('pessoa', 'tipos_pessoa', 'tipos', 'titulacoes', 'niveis', 'areas'), 'pessoas/js_pessoas');
   }
   /**
   * Atualiza os dados da pessoa
@@ -97,7 +127,9 @@ class Pessoa extends MY_Controller {
         ['nascimento', 'data de nascimento', 'required|valid_date_br'],
         ['ingresso_campus', 'data de ingresso no câmpus', 'required|valid_date_br'],
         ['ingresso_ifsp', 'data de ingresso no IFSP', 'required|valid_date_br'],
-        // ['area', 'área', 'required'], FIXME: adicionar essa validação quando a area for existente
+        ['area_id', 'área', 'required'],
+        ['titulacao', 'Titulação', 'required'],
+        ['nivel_carreira', 'Nível de Carreira', 'required'],
         ['regime', 'regime de contrato', 'required|in_list[0,1]'],
       ]);
     }
@@ -111,10 +143,8 @@ class Pessoa extends MY_Controller {
         if($has_docente) {
           $docente = $pessoa->docente;
           $dados_docente = $this->request_all();
-          $dados_docente['area_id'] = 1; // FIXME: Esta linha deverá ser removida quando a área for existente
           $dados_docente['pessoa_id'] = $id;
           if(is_null($docente)){
-            // FIXME: Colocar área, aqui foi feito um workaround presetando uma área
             $docente = Docente_model::create($dados_docente);
           } else {
             $docente->update($dados_docente);
