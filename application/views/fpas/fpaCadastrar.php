@@ -77,8 +77,7 @@
           </div>
         </div>
         <div class="col-md-12">
-          <a class="btn btn-danger active" href="<?= base_url('index.php/Fpa')?>" style="float: right;"><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
-          <button type="submit" class="btn btn-success active salvar" style="float: right; margin-right: 10px;"><span class="glyphicon glyphicon-floppy-disk"></span> Salvar</button>
+          <a href="<?= base_url('index.php/Fpa/preferencias')?>" class="btn btn-primary" style="float: right;">Próximo <span class="glyphicon glyphicon-chevron-right"></span></a>
         </div>
       </form>
     </div>
@@ -116,8 +115,7 @@
         </form>
       </div>
       <div class="col-md-12">
-        <a class="btn btn-danger active" href="<?= base_url('index.php/Fpa')?>" style="float: right;"><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
-        <button type="submit" class="btn btn-success active salvar" style="float: right; margin-right: 10px;"><span class="glyphicon glyphicon-floppy-disk"></span> Salvar</button>
+        <a href="<?= base_url('index.php/preferencias')?>" class="btn btn-primary" style="float: right;">Próximo <span class="glyphicon glyphicon-chevron-right"></span></a>
       </div>
     </div>
   </div>
