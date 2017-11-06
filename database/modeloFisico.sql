@@ -497,14 +497,21 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- Stored procedure
 -- -----------------------------------------------------
 
-DROP procedure IF EXISTS `classificacao`;
-
+DROP procedure IF EXISTS classificacao;
 DELIMITER $$
-USE `horario`$$
-CREATE PROCEDURE `classificacao` (IN id INT)
+CREATE PROCEDURE classificacao (IN id INT)
   BEGIN
   	SELECT * FROM docente_classificacao WHERE curso_id = id;
   END$$
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS ativa_periodo;
+DELIMITER $$
+CREATE PROCEDURE IF NOT EXISTS ativa_periodo(idPeriodo INT)
+BEGIN
+	UPDATE periodo SET ativo = 0 WHERE id != idPeriodo;
+	UPDATE periodo SET ativo = 1 WHERE id = idPeriodo;
+END$$
 DELIMITER ;
 
 -- -----------------------------------------------------
