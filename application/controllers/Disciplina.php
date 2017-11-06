@@ -170,53 +170,33 @@
     * @return  void
     */
 	function ImportCsv() {
-		//O segundo parametro são os dados que serão enviados para view
-        $this->load->template('disciplinas/disciplinas');
-        //alterei o caminho para apontar para a view onde serão expostos os dados presentes no arquivo CSV importado
-  		$data['disciplinas']=[];
 
-        // Define as configurações para o upload do CSV
-		//$config['upload_path'] = base_url('uploads');
-		$config['allowed_types'] = 'csv';
-		$config['max_size'] = '1000';
-		$this->load->library('upload', $config);
-		// Se o upload falhar, exibe mensagem de erro na view
-		//if (!$this->upload->do_upload('csvfile')) {
-			//$data['error'] = $this->upload->display_errors();
-            //die($data['error']);
-			//$this->load->view('disciplinas/disciplinas', $data);
-		//} else {
-			//$file_data = $this->upload->data();
-			//$file_path =  base_url('uploads').$file_data['file_name'];
-      // Chama o método 'get_array', da library csvimport, passando o path do
-      // arquivo CSV. Esse método retornará um array.
-         $csv_array = $this->csvimport->get_array(file_get_contents($_FILES['csvfile']['tmp_name']));
+         $csv_array = CSVImporter::fromForm('csvfile');
+         //var_dump($csv_array);
         
 			 if ($csv_array) {
         // Faz a interação no array para poder gravar os dados na tabela 'disciplinas'
 				foreach ($csv_array as $row) {
                   try {
-                  if (Disciplina_model::withTrashed()->where("sigla_disciplina", $this->input->post('sigla_disciplina'))->where("curso_id", $this->input->post('curso_id'))->first()==null) {
+                  
                     $disciplina = new Disciplina_model();
-                    $disciplina->curso_id = $this->input->post('curso_id');
-                    $disciplina->tipo_sala_id = $this->input->post('tipo_sala_id');
-                    $disciplina->nome_disciplina  = $this->input->post('nome_disciplina') ;
-                    $disciplina->sigla_disciplina = $this->input->post('sigla_disciplina');
-                    $disciplina->modulo = $this->input->post('modulo');
-                    $disciplina->qtd_professor = $this->input->post('qtd_professor');
-                    $disciplina->qtd_aulas = $this->input->post('qtd_aulas');
+                    $disciplina->curso_id = $row[1];
+                    $disciplina->tipo_sala_id = $row[2];
+                    $disciplina->nome_disciplina  = $row[3] ;
+                    $disciplina->sigla_disciplina = $row[4];
+                    $disciplina->modulo = $row[5];
+                    $disciplina->qtd_professor = $row[6];
+                    $disciplina->qtd_aulas = $row[7];
 
                     $disciplina->save();
 
                     $this->session->set_flashdata('success','Disciplina cadastrada com sucesso');
-                    redirect("disciplina");
-                  }else{
-                    $this->session->set_flashdata('danger','Disciplina já esta cadastrada');
-                    redirect("disciplina/cadastrar");
-                  }
+                    
+               
                 } catch (Exception $ignored){}
-		//}
-	}
+                    
+			}
+                 redirect("Disciplina");
 }
 }
 }
