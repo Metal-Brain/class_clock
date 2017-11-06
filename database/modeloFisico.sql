@@ -286,7 +286,7 @@ CREATE TABLE IF NOT EXISTS `horario`.`disponibilidade` (
   `horario_id` TINYINT(4) NOT NULL,
   `dia_semana` CHAR(3) NOT NULL,
   `deletado_em` TIMESTAMP NULL DEFAULT NULL,
-  PRIMARY KEY (`fpa_id`, `horario_id`),
+  PRIMARY KEY (`fpa_id`, `horario_id`, `dia_semana`),
   INDEX `fk_fpa_has_horario_horario1_idx` (`horario_id` ASC),
   INDEX `fk_fpa_has_horario_fpa1_idx` (`fpa_id` ASC),
   CONSTRAINT `fk_fpa_has_horario_fpa1`
