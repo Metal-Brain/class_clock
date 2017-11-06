@@ -6,6 +6,7 @@ class Docente_model extends Model {
     protected $fillable = [
         "pessoa_id", "area_id", "ingresso_campus",
         "ingresso_ifsp", "regime", "nascimento",
+        "titulacao", "nivel_carreira"
     ];
 
     public function setNascimentoAttribute($value) {
@@ -36,8 +37,12 @@ class Docente_model extends Model {
         return $this->belongsTo(Pessoa_model::class, 'pessoa_id');
     }
 
+    public function cursos(){
+      return $this->hasMany(Curso_model::class, 'docente_id');
+    }
+
     public function area() {
-        return $this->belongsTo(Area_model::class, 'area_id');
+      return $this->belongsTo(Area_model::class, 'area_id');
     }
 
     public function tipo() {

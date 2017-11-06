@@ -136,9 +136,9 @@ class Turno extends CI_Controller {
       $turno = Turno_model::findOrFail($id);
       $turno->delete();
 
-      $this->session->set_flashdata('success','Turno deletado com sucesso');
+      $this->session->set_flashdata('success','Turno desativado com sucesso');
     } catch (Exception $e) {
-      $this->session->set_flashdata('danger','Erro ao deletar um turno, tente novamente');
+      $this->session->set_flashdata('danger','Erro ao desativar um turno, tente novamente');
     }
 
     redirect("Turno");
