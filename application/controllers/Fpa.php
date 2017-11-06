@@ -7,10 +7,16 @@ class Fpa extends CI_Controller{
     $this->load->template('fpas/fpas',compact('fpas'),'fpas/js_fpas');
   }
 
-  public function cadastrar(){
+  public function cadastrarDisponibilidade(){
     $horarios = Horario_model::orderBy('inicio')->get();
 
-    $this->load->template('fpas/fpaCadastrar', compact('horarios'), 'fpas/js_fpas');
+    $this->load->template('fpas/fpaCadastrarDisponibilidade', compact('horarios'), 'fpas/js_fpas');
+  }
+
+  public function cadastrarPreferencias(){
+    $disciplinas = Turma_model::all();
+
+    $this->load->template('fpas/fpaCadastrarPreferencias', compact('disciplinas'), 'fpas/js_fpas');
   }
 
   public function salvar(){
@@ -25,9 +31,12 @@ class Fpa extends CI_Controller{
       $this->session->set_flashdata('danger','Problemas ao cadastrar a FPA, tente novamente!');
       echo $e->getMessage();
     }
+
+    
   }
 
   public function salvarDisponibilidade($id){
+    $this->salvar();
     $periodoAtivo = Periodo_model::periodoAtivo();
     $fpa = Fpa_model::where('docente_id', $_SESSION['usuarioLogado']['id'])->where('periodo_id', $periodoAtivo->id);
     $fpa->disponibilidade->sync([]);
@@ -86,6 +95,7 @@ class Fpa extends CI_Controller{
   }
 
   public function salvarPreferencias($id){
+    $this->salvar();
     $periodoAtivo = Periodo_model::periodoAtivo();
     $fpa = Fpa_model::where('docente_id', $_SESSION['usuarioLogado']['id'])->where('periodo_id', $periodoAtivo->id);
     $disciplinas = $this->input->post('disc');
