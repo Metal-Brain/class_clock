@@ -53,5 +53,26 @@
 				$("#PeriodoTable").DataTable();
 			});
 		</script>
+		<script type="text/javascript">
+		    $("#manipulaViewCadastroViaCSV").change(function() {
+		                if(!this.checked){
+		                    $('.csv').hide();
+		                    $('.formPeriodos').show();
+		                } else {
+		                    $('.csv').show();
+		                      $('.formPeriodos').hide();
+		                }
+		            });
+		</script>
+		<script type="text/javascript">
+		    $("#csvCampo").change(function() {
+		                if(!this.checked){
+		                    $('.campoImportar').show();
+		                } else {
+		                    $('.campoImportar').hide();                   
+		                }
+            });
+
+		</script>
 	</body>
 </html>

@@ -15,6 +15,20 @@
 	</div>
 
 	<!-- Início do conteúdo da view-->
+	<input type ="checkbox" id="manipulaViewCadastroViaCSV"  class="btn btn-success">
+           <label>clique no checkbox para importar um arquivo .csv</label>	
+    	<form method="post" class= "csv" style="display: none; " action="<?=base_url('periodo/ImportCsv')?>" enctype="multipart/form-data">
+    		<!--      //redirecionamento BASE/ImportCsv -->
+
+            
+				<div>
+				<input id="csvCampo" type="file"  name="csvfile"/>	
+				<label>Selecione o arquivo CSV para importação:</label>	
+				</div>
+				<div>
+			 <input  type="submit" value="Importar" class="btn btn-success campoImportar" style="display: none"/>
+				</div>		
+         </form>   
 	<form class="formPeriodos" action="<?= site_url('periodo/salvar')?>" method="post">
 		<label>Ano / semestre:</label>
 		<div class="form-group width-400">

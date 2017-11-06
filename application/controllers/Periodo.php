@@ -150,14 +150,15 @@ class Periodo extends CI_Controller
         }
         redirect("Periodo");
     }
-    function ImportCsv() {
+}
+function ImportCsv() {
 
          $csv_array = CSVImporter::fromForm('csvfile');
          //var_dump($csv_array);
         
-			 if ($csv_array) {
+             if ($csv_array) {
         // Faz a interação no array para poder gravar os dados na tabela 'disciplinas'
-				foreach ($csv_array as $row) {
+                foreach ($csv_array as $row) {
                   try {
                   
                     $periodo = new Periodo_model();
@@ -170,10 +171,9 @@ class Periodo extends CI_Controller
                
                 } catch (Exception $ignored){}
                     
-			}
+            }
                  redirect("Periodo");
 }
-
-
 }
+
 ?>
