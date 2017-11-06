@@ -21,11 +21,11 @@
 
             
 				<div>
-				<input type="file"  name="csvfile"/>	
+				<input id="csvCampo" type="file"  name="csvfile"/>	
 				<label>Selecione o arquivo CSV para importação:</label>	
 				</div>
 				<div>
-			 <input type="submit" value="Importar" class="btn btn-success" />
+			 <input  type="submit" value="Importar" class="btn btn-success campoImportar" style="display: none"/>
 				</div>		
          </form>   
 

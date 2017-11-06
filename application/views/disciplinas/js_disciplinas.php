@@ -158,6 +158,16 @@
                 }
             });
 </script>
+<script type="text/javascript">
+    $("#csvCampo").change(function() {
+                if(!this.checked){
+                    $('.campoImportar').show();
+                } else {
+                    $('.campoImportar').hide();                   
+                }
+            });
+
+</script>
 
 </html>
 </body>
