@@ -30,6 +30,7 @@ CREATE TABLE IF NOT EXISTS `horario`.`area` (
   `id` SMALLINT(6) NOT NULL AUTO_INCREMENT,
   `nome_area` VARCHAR(50) NOT NULL,
   `codigo` CHAR(5) NULL,
+  `deletado_em` TIMESTAMP NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -244,6 +245,7 @@ CREATE TABLE IF NOT EXISTS `horario`.`fpa` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `docente_id` INT(11) NOT NULL,
   `periodo_id` INT(11) NOT NULL,
+  `deletado_em` TIMESTAMP NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_fpa_docente1_idx` (`docente_id` ASC),
   INDEX `fk_fpa_periodo1_idx` (`periodo_id` ASC),
@@ -282,6 +284,7 @@ DROP TABLE IF EXISTS `horario`.`disponibilidade` ;
 CREATE TABLE IF NOT EXISTS `horario`.`disponibilidade` (
   `fpa_id` INT(11) NOT NULL,
   `horario_id` TINYINT(4) NOT NULL,
+  `deletado_em` TIMESTAMP NULL DEFAULT NULL,
   PRIMARY KEY (`fpa_id`, `horario_id`),
   INDEX `fk_fpa_has_horario_horario1_idx` (`horario_id` ASC),
   INDEX `fk_fpa_has_horario_fpa1_idx` (`fpa_id` ASC),
@@ -307,6 +310,7 @@ CREATE TABLE IF NOT EXISTS `horario`.`preferencia` (
   `fpa_id` INT(11) NOT NULL,
   `disciplina_id` SMALLINT NOT NULL,
   `ordem` INT(11) NOT NULL,
+  `deletado_em` TIMESTAMP NULL DEFAULT NULL,
   INDEX `fk_disciplina_has_fpa_fpa1_idx` (`fpa_id` ASC),
   PRIMARY KEY (`fpa_id`, `disciplina_id`),
   INDEX `fk_preferencias_disciplinas_oferecidas1_idx` (`disciplina_id` ASC),
