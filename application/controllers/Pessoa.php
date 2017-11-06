@@ -32,6 +32,14 @@ class Pessoa extends MY_Controller {
     $areas = Area_model::all();
     $this->load->template('pessoas/cadastrar', compact('tipos', 'niveis', 'titulacoes', 'areas'),'pessoas/js_pessoas');
   }
+  public function prontuario_check($str)
+{
+   if ((preg_match('#[0-9]#', $str) && preg_match('#[a-zA-Z]#', $str))||(preg_match('#[0-9]#', $str))) {
+     return TRUE;
+   }
+   return FALSE;
+}
+  
   /**
   * Salva uma pessoa no banco
   * @author Vitor "Pliavi"
@@ -40,13 +48,14 @@ class Pessoa extends MY_Controller {
     $has_docente = in_array($this->id_docente, $this->request('tipos')?:[]);
     $this->set_validations([
       ['nome', 'nome', 'required|min_length[5]'],
-      ['prontuario', 'prontuário', 'required|alpha_numeric|is_unique[pessoa.prontuario]|exact_length[6]'],
+      ['prontuario', 'prontuário', 'required|alpha_numeric|is_unique[pessoa.prontuario]|exact_length[6]|callback_prontuario_check'],
       ['senha', 'senha', 'required|min_length[6]'],
       ['email', 'email', 'required|valid_email|strtolower|regex_match[/^[a-zA-Z0-9._@-]+$/]'],
       ['tipos[]', 'tipo', 'required']
     ]);
     $this->form_validation->set_message('is_unique', 'Prontuário já cadastrado.');
     $this->form_validation->set_message('alpha_numeric', 'O campo {field} deve conter apenas letras e números.');
+	$this->form_validation->set_message('prontuario_check', 'O campo Prontuario deve conter apenas letras e números ou apenas numeros.');
     if($has_docente) {
       $this->set_validations([
         ['nascimento', 'data de nascimento', 'required|valid_date_br'],
@@ -115,13 +124,14 @@ class Pessoa extends MY_Controller {
     $has_docente = in_array($this->id_docente, $this->request('tipos')?:[]); // Se o docente estiver na lista de tipos
     $this->set_validations([
       ['nome', 'nome', 'required|min_length[5]'],
-      ['prontuario', 'prontuário', "required|alpha_numeric|exact_length[6]|is_unique_except[pessoa.prontuario,{$pessoa->prontuario}]"],
+      ['prontuario', 'prontuário', "required|alpha_numeric|callback_prontuario_check|exact_length[6]|is_unique_except[pessoa.prontuario,{$pessoa->prontuario}]"],
       ['senha', 'senha', 'min_length[6]'],
       ['email', 'email', 'required|valid_email|strtolower|regex_match[/^[a-zA-Z0-9._@-]+$/]'],
       ['tipos[]', 'tipos', 'required']
     ]);
     $this->form_validation->set_message('is_unique_except', 'Prontuário já cadastrado.');
     $this->form_validation->set_message('alpha_numeric', 'O campo {field} deve conter apenas letras e números.');
+	$this->form_validation->set_message('prontuario_check', 'O campo Prontuario deve conter apenas letras e números ou apenas numeros.');
     if($has_docente) {
       $this->set_validations([
         ['nascimento', 'data de nascimento', 'required|valid_date_br'],
