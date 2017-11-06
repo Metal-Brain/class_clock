@@ -150,30 +150,32 @@ class Periodo extends CI_Controller
         }
         redirect("Periodo");
     }
-}
-function ImportCsv() {
 
-         $csv_array = CSVImporter::fromForm('csvfile');
-         //var_dump($csv_array);
+
+    function ImportCsv() {
+
+        $csv_array = CSVImporter::fromForm('csvfile');
+        //var_dump($csv_array);
         
-             if ($csv_array) {
+        if ($csv_array) {
         // Faz a interação no array para poder gravar os dados na tabela 'disciplinas'
-                foreach ($csv_array as $row) {
-                  try {
+            foreach ($csv_array as $row) {
+                try {
                   
                     $periodo = new Periodo_model();
                     $periodo->nome = $row[1];
                                         
                     $periodo->save();
 
-                    $this->session->set_flashdata('success','Periodo cadastrado com sucesso');
-                    
-               
+                    $this->session->set_flashdata('success','Periodo cadastrado com sucesso');    
                 } catch (Exception $ignored){}
                     
             }
                  redirect("Periodo");
+        }
+
+    }
 }
-}
+
 
 ?>
