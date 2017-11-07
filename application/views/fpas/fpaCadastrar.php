@@ -77,7 +77,7 @@
           </div>
         </div>
         <div class="col-md-12">
-          <a href="<?= base_url('index.php/Fpa/preferencias')?>" class="btn btn-primary" style="float: right;">Próximo <span class="glyphicon glyphicon-chevron-right"></span></a>
+          <button type="submit" class="btn btn-primary" style="float: right;">Próximo</button>
         </div>
       </form>
     </div>
@@ -87,8 +87,8 @@
   <!-- Aqui ocorre a tabela de indisponibilidade-->
   <div id="indisponibilidade" class="row" style="display:none;">
     <div class="col-md-12">
+			<form action="<?= site_url('fpa/salvarDisponibilidade')?>" method="POST">
       <div class="table-responsive">
-        <form action="<?= site_url('fpa/salvar')?>" method="POST">
           <table class="table">
             <h4 class="text-center">Selecione o dia em que você não estará disponível!</h4>
             <thead>
@@ -112,11 +112,12 @@
               </tr>
             </tbody>
           </table>
-        </form>
       </div>
       <div class="col-md-12">
-        <a href="<?= base_url('index.php/preferencias')?>" class="btn btn-primary" style="float: right;">Próximo <span class="glyphicon glyphicon-chevron-right"></span></a>
+				<button type="submit" class="btn btn-primary" style="float: right;">Próximo</button>
       </div>
+
+		</form>
     </div>
   </div>
 </div>
