@@ -63,11 +63,7 @@ class checkUser {
             'curso'       => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
             'pessoa'      => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
             'area'        => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
-<<<<<<< HEAD
             'turma'       => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
-=======
-            'turma'       => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar']
->>>>>>> b5a3a10e4a43eff841f9b834f84d3cb3ba09916b
         ];
 
         $this->hasAccess($acess);
@@ -111,16 +107,12 @@ class checkUser {
             'turno'       => ['index'],
             'tipo_sala'   => ['index'],
             'modalidade'  => ['index'],
-<<<<<<< HEAD
             'fpa'         => [
                 'index','cadastrarDisponibilidade',
                 'salvarDisponibilidade', 'cadastrarPreferencias',
                 'salvarPreferencias', 'editarPreferencias',
                 'editarDisponibilidade'
             ]
-=======
-            'fpa'         => ['index','cadastrarPreferencias','salvar']
->>>>>>> b5a3a10e4a43eff841f9b834f84d3cb3ba09916b
         ];
 
         $this->hasAccess($acess);

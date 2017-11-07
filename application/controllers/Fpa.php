@@ -29,8 +29,8 @@ class Fpa extends MY_Controller{
       $fpa = Fpa_model::firstOrCreate($dados);
       $this->session->set_flashdata('success','FPA cadastrado com sucesso');
     } catch (Exception $e){
-      $this->session->set_flashdata('danger','Problemas ao cadastrar a FPA, tente novamente!');
-      echo $e->getMessage();
+      $this->session
+      ssage();
     }
 
 
