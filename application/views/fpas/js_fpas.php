@@ -63,3 +63,33 @@
 
 
 </script>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+      var content = `
+        <div class="col-md-8">
+          <div class="form-group">
+          <label>Disciplina 1</label>
+            <select class="form-control" id="selectDisc" required>
+              <!-- Trazer do back as disciplinas cadastradas -->
+              <option  value=" " disabled selected hidden>Selecione</option>
+              <option>Sistemas de Informações Gerenciais</option>
+              <option>3</option>
+              <option>4</option>
+            </select>
+          </div>
+        </div>
+        <div col-md-2>
+            <button id="btnRemove" type="button" style="margin: 23px 0 0 0;" class="btn btn-danger add-field"><span class="glyphicon glyphicon-remove"></span></button>
+        </div>`;
+      $('#btnAdd').click(function (){
+        $('#disciplinas').append(content);
+      });
+
+    });
+
+
+</script>
+
+
