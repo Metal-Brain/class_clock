@@ -20,6 +20,7 @@
 			<div class="col-md-12">
 			<h2 class="page-header">Preferencia dos Docentes
 			</h2>
+			<?php var_dump($data["docentes"][0]["id"]) ?>
 			</div>
 		</div>
 </div>
