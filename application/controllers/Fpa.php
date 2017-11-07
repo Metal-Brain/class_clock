@@ -10,13 +10,13 @@ class Fpa extends CI_Controller{
   public function cadastrarDisponibilidade(){
     $horarios = Horario_model::orderBy('inicio')->get();
 
-    $this->load->template('fpas/fpaCadastrarDisponibilidade', compact('horarios'), 'fpas/js_fpas');
+    $this->load->template('fpas/fpasCadastrar', compact('horarios'), 'fpas/js_fpas');
   }
 
   public function cadastrarPreferencias(){
     $disciplinas = Turma_model::all();
 
-    $this->load->template('fpas/fpaCadastrarPreferencias', compact('disciplinas'), 'fpas/js_fpas');
+    $this->load->template('fpas/fpaPreferencias', compact('disciplinas'), 'fpas/js_fpas');
   }
 
   public function salvar(){

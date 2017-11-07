@@ -11,7 +11,7 @@ class checkUser {
     public function __construct(){
         $this->CI           = &get_instance();
         $this->controller   = strtolower($this->CI->router->class);
-        $this->method       = strtolower($this->CI->router->method);
+        $this->method       = $this->CI->router->method;
     }
 
     /*
@@ -63,8 +63,7 @@ class checkUser {
             'curso'       => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
             'pessoa'      => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
             'area'        => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
-            'turma'       => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
-            'fpa'       => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar']
+            'turma'       => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar']
         ];
 
         $this->hasAccess($acess);
@@ -108,7 +107,7 @@ class checkUser {
             'turno'       => ['index'],
             'tipo_sala'   => ['index'],
             'modalidade'  => ['index'],
-            'fpa'         => ['index','cadastrar','salvar']
+            'fpa'         => ['index','cadastrarPreferencias','salvar']
         ];
 
         $this->hasAccess($acess);
