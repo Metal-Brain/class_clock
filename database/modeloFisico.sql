@@ -286,8 +286,7 @@ CREATE TABLE IF NOT EXISTS `horario`.`disponibilidade` (
   `horario_id` TINYINT(4) NOT NULL,
   `dia_semana` CHAR(3) NOT NULL,
   `deletado_em` TIMESTAMP NULL DEFAULT NULL,
-  PRIMARY KEY (`fpa_id`, `horario_id`),
-  INDEX `fk_fpa_has_horario_horario1_idx` (`horario_id` ASC),
+  PRIMARY KEY (`fpa_id`, `horario_id`,`dia_semana` ),
   INDEX `fk_fpa_has_horario_fpa1_idx` (`fpa_id` ASC),
   CONSTRAINT `fk_fpa_has_horario_fpa1`
     FOREIGN KEY (`fpa_id`)
@@ -562,7 +561,7 @@ INSERT INTO turno_horario(turno_id, horario_id) VALUES(3, 3);
 
 INSERT INTO area(id, codigo, nome_area) VALUES(1, "12345", "Informática");
 INSERT INTO area(id, codigo, nome_area) VALUES(2, "54321", "Administração");
-INSERT INTO area(id, codigo, nome_area) VALUES(3, "123654", "Engenharia");
+INSERT INTO area(id, codigo, nome_area) VALUES(3, "12365", "Engenharia");
 
 INSERT INTO pessoa(id, nome, prontuario, senha, email, deletado_em) VALUES
   (1, 'Administrador', '151515', '$2y$10$uLseEnv679FVb2nJy47ecu25jofJY36htCoalU2DzgQvldniFOnDm', 'email@ifsp.edu', NULL);
@@ -716,3 +715,14 @@ INSERT INTO tipo_pessoa(tipo_id, pessoa_id) VALUES (1, 1), (2, 11), (4, 2), (4, 
 INSERT INTO semana(nome) VALUES ('Segunda-feira'),('Terça-feira'),('Quarta-feira'),('Quinta-feira'),('Sexta-feira'), ('Sabado');
 
 INSERT INTO periodo(nome, ativo) VALUES('2017-2', '0'), ('2018-1', '1'), ('2017-1', '0'), ('2016-1', '0'), ('2016-2', '0');
+
+INSERT INTO fpa(docente_id, periodo_id) VALUES ('1', '2'), ( '2', '2'), ( '3', '2'), ( '4', '2'), ( '5', '2'), ( '6', '2'), ( '7', '2'), ( '8', '2');
+
+INSERT INTO preferencia (fpa_id, disciplina_id, ordem) VALUES ('1', '2', '1'), ('1', '5', '2'), ('1', '6', '3');
+INSERT INTO preferencia (fpa_id, disciplina_id, ordem) VALUES ('2', '3', '1'), ('2', '10', '2'), ('2', '1', '3');
+INSERT INTO preferencia (fpa_id, disciplina_id, ordem) VALUES ('3', '11', '1'), ('3', '9', '2'), ('3', '20', '3');
+INSERT INTO preferencia (fpa_id, disciplina_id, ordem) VALUES ('4', '17', '1'), ('4', '7', '2'), ('4', '18', '3');
+INSERT INTO preferencia (fpa_id, disciplina_id, ordem) VALUES ('5', '6', '1'), ('5', '4', '2'), ('5', '16', '3');
+INSERT INTO preferencia (fpa_id, disciplina_id, ordem) VALUES ('6', '8', '1'), ('6', '1', '2'), ('6', '13', '3');
+INSERT INTO preferencia (fpa_id, disciplina_id, ordem) VALUES ('7', '9', '1'), ('7', '2', '2'), ('7', '8', '3');
+INSERT INTO preferencia (fpa_id, disciplina_id, ordem) VALUES ('8', '15', '1'), ('8', '12', '2'), ('8', '10', '3');
