@@ -50,7 +50,6 @@ CREATE TABLE IF NOT EXISTS `horario`.`pessoa` (
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
-
 -- -----------------------------------------------------
 -- Table `horario`.`docente`
 -- -----------------------------------------------------
@@ -456,15 +455,6 @@ CREATE TABLE IF NOT EXISTS `horario`.`quadro` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
--- -----------------------------------------------------
--- Table `horario`.`classificacao`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `horario`.`classificacao` (
-  `id` SMALLINT NOT NULL,
-  `ordem` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
-
 
 -- -----------------------------------------------------
 -- View `horario`.`docente_preferencia`
@@ -481,7 +471,7 @@ select docente.id as docente_id, pessoa.nome, disciplina.nome_disciplina, curso.
   order by curso.nome_curso, disciplina.nome_disciplina ASC;
 
   -- -----------------------------------------------------
-  -- View `horario`.`docente_preferencia`
+  -- View `horario`.`docente_classificacao`
   -- -----------------------------------------------------
   CREATE  OR REPLACE VIEW `docente_classificacao` AS
   select curso.nome_curso, curso.id as curso_id, disciplina.nome_disciplina, disciplina.id, docente.id as docente_id, pessoa.nome from disciplina
@@ -490,7 +480,8 @@ select docente.id as docente_id, pessoa.nome, disciplina.nome_disciplina, curso.
     join fpa on preferencia.fpa_id = fpa.id
     join docente on fpa.docente_id = docente.id
     join pessoa on docente.pessoa_id = pessoa.id
-    order by curso.nome_curso, disciplina.nome_disciplina, (SELECT ordem FROM classificacao ORDER BY id ASC) ASC;
+    order by curso.nome_curso, disciplina.nome_disciplina, 
+    docente.titulacao, docente.nivel_carreira, docente.ingresso_campus, docente.ingresso_ifsp, docente.nascimento ASC;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
@@ -511,7 +502,7 @@ DELIMITER ;
 
 DROP PROCEDURE IF EXISTS ativa_periodo;
 DELIMITER $$
-CREATE PROCEDURE IF NOT EXISTS ativa_periodo(idPeriodo INT)
+CREATE PROCEDURE ativa_periodo(idPeriodo INT)
 BEGIN
 	UPDATE periodo SET ativo = 0 WHERE id != idPeriodo;
 	UPDATE periodo SET ativo = 1 WHERE id = idPeriodo;
