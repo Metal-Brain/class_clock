@@ -180,8 +180,8 @@
                   try {
                   
                     $disciplina = new Disciplina_model();
-                    $disciplina->curso_id = $row[1];
-                    $disciplina->tipo_sala_id = $row[2];
+                    $disciplina->curso_id = Curso_model::whereCodigoCurso($row[1])->first()->id;
+                    $disciplina->tipo_sala_id = TipoSala_model::whereNomeTipoSala($row[2])->first()->id;
                     $disciplina->nome_disciplina  = $row[3] ;
                     $disciplina->sigla_disciplina = $row[4];
                     $disciplina->modulo = $row[5];
