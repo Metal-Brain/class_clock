@@ -22,7 +22,13 @@
             
 				<div>
 				<input id="csvCampo" type="file"  name="csvfile"/>	
-				<label>Selecione o arquivo CSV para importação:</label>	
+				<label>Selecione o arquivo CSV para importação:</label>
+
+				<article><br><br><br><h1>Orientações para criação do arquivo .csv</h1></article>
+						 <h3>O arquivo deve conter os valores respectivos campos:</h3>
+						 	<p>codigo, codigo_curso, tipo_sala, nome_disciplpina, modulo, sigla_disciplina, qtd_professor, qtd_aulas, deletado_em.</p>
+				
+				<a>Clique para baixar arquivo de exemplo</a>			 	 		
 				</div>
 				<div>
 			 <input  type="submit" value="Importar" class="btn btn-success campoImportar" style="display: none"/>
