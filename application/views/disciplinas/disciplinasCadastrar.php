@@ -16,9 +16,23 @@
 <h1>Cadastrar Disciplina</h1>
 <input type ="checkbox" id="manipulaViewCadastroViaCSV"  class="btn btn-success">
            <label>clique no checkbox para importar um arquivo .csv</label>	
+
     	<form method="post" class= "csv" style="display: none; " action="<?=base_url('Disciplina/importCsv')?>" enctype="multipart/form-data">
     		<!--      //redirecionamento BASE/ImportCsv -->
-
+    		 <table id="disciplinaTable" class="table table-striped">
+    			<thead>
+    				<tr>
+    					<th class="text-center">Curso</th>
+                        <th class="text-center">ID do Curso</th>
+    				</tr>
+    			</thead>
+    			<tbody>
+    				<?php foreach($data['cursos'] as $curso){ ?>
+						<td><?=$curso['nome_curso'] ?></td>
+						<td><?=$curso['id_curso'] ?></td>
+					<?php }?>	
+    			</tbody>         
+           </table>
             
 				<div>
 				<input id="csvCampo" type="file"  name="csvfile"/>	
