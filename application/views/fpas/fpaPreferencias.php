@@ -30,7 +30,7 @@
   <form id="formPref" action="" method="POST">
     <div class="row">
       <div class="col-md-12 form-group">
-        <button id="btnAdd" type="button" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Adicionar Aula</button>
+        <button id="btnAdd" type="button" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Adicionar disciplina</button>
       </div>
     </div>
 
