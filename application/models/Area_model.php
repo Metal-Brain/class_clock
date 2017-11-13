@@ -1,8 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-use Illuminate\Database\Eloquent\Model as Eloquent;
-    
-class Area_model extends Eloquent{
+
+class Area_model extends Model{
     
     protected $table = 'area';
     protected $fillable = ['nome_area'];
