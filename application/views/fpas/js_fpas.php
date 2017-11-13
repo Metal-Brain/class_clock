@@ -67,26 +67,39 @@
 <script type="text/javascript">
 
     $(document).ready(function () {
-      var content = `
-        <div class="col-md-8">
-          <div class="form-group">
-          <label>Disciplina 1</label>
-            <select class="form-control" id="selectDisc" required>
-              <!-- Trazer do back as disciplinas cadastradas -->
-              <option  value=" " disabled selected hidden>Selecione</option>
-              <option>Sistemas de Informações Gerenciais</option>
-              <option>3</option>
-              <option>4</option>
-            </select>
-          </div>
-        </div>
-        <div col-md-2>
-            <button id="btnRemove" type="button" style="margin: 23px 0 0 0;" class="btn btn-danger add-field"><span class="glyphicon glyphicon-remove"></span></button>
-        </div>`;
+      var tmp = 1;
       $('#btnAdd').click(function (){
+        var content = `
+        <div class="row">
+          <div class="col-md-8">
+            <div class="form-group">
+            <label class="disc">Disciplina `+tmp+`</label>
+              <select class="form-control" id="selectDisc" required>
+                <!-- Trazer do back as disciplinas cadastradas -->
+                <option  value=" " disabled selected hidden>Selecione</option>
+                <option>Sistemas de Informações Gerenciais</option>
+                <option>3</option>
+                <option>4</option>
+              </select>
+            </div>
+          </div>
+          <div col-md-2>
+              <button id="btnRemove" type="button" style="margin: 23px 0 0 0;" class="btn btn-danger add-field"><span class="glyphicon glyphicon-remove"></span></button>
+          </div>
+        </div>`;
+        tmp++;
         $('#disciplinas').append(content);
       });
+      $('#disciplinas').on('click','#btnRemove',function(){
+				var row = $(this).parent().parent();
+				row.remove();
 
+				// index disciplina
+				var listDisc = $("label.disc");
+				for (disciplina = 0; disciplina < listDisc.length; disciplina ++) {
+					listDisc[disciplina].innerHTML = '<strong>Disciplina ' + (disciplina + 1)+'</strong>';
+				}
+			});
     });
 
 

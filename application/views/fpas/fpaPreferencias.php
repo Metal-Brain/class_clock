@@ -25,20 +25,26 @@
     <div class="col-md-12">
       <h4>Selecione as disciplinas que deseja lecionar (por ordem de preferência):</h4>
     </div>
+  </div>
 
-    <form id="formPref" action="" method="POST">
+  <form id="formPref" action="" method="POST">
+    <div class="row">
       <div class="col-md-12 form-group">
-				<button id="btnAdd" type="button" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Adicionar Aula</button>
-			</div>
-
-      <div id="disciplinas">
-
+        <button id="btnAdd" type="button" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Adicionar Aula</button>
       </div>
+    </div>
+
+    <div id="disciplinas">
+
+    </div>
+
+    <div class="row">
       <div class="col-md-12">
           <a class="btn btn-danger active" href="<?= base_url('index.php/Fpa')?>" style="float: right;"><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
           <button type="submit" class="btn btn-success active salvar" style="float: right; margin-right: 10px;"><span class="glyphicon glyphicon-floppy-disk"></span> Salvar</button>
       </div>
-    </form>
-  </div>
+    </div>
+    
+  </form>
 
 </div>
