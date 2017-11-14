@@ -39,7 +39,7 @@
 <script type="text/javascript">
 
     jQuery.validator.addMethod("minAula",function (value, element, param) {
-      return (value > param) ? true : false;
+      return (value >= param) ? true : false;
     },'Selecione no minimo {0} horarios');
 
 
