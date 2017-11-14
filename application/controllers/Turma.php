@@ -27,7 +27,7 @@ class Turma extends MY_Controller {
   public function salvar () {
     $this->set_validations([
       ['dp', 'Dependência', 'required'],
-      ['qtd_alunos', 'Quantidade de Alunos', 'required|numeric|greater_than[0]'],
+      ['qtd_alunos', 'Quantidade de Alunos', 'required|numeric|greater_than[0]|less_than[1000]'],
       ['disciplina_id', 'Disciplina', 'required'],
       ['turno_id', 'Turno', 'required|numeric']
     ]);
