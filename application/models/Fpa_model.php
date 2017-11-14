@@ -22,8 +22,8 @@ class Fpa_model extends Model{
       return $this->belongsToMany(Horario_model::class, 'disponibilidade', 'horario_id', "fpa_id");
     }
 
-    public function turmas(){
-      return $this->belongsToMany(Turma_model::class, "preferencia", 'fpa_id', 'turma_id')->withPivot('ordem');
+    public function disciplinas(){
+      return $this->belongsToMany(Disciplina_model::class, "preferencia", 'fpa_id', 'disciplina_id')->withPivot('ordem');
     }
 
 

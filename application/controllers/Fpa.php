@@ -8,9 +8,7 @@ class Fpa extends MY_Controller{
   }
 
   public function cadastrarDisponibilidade(){
-
     $horarios = Horario_model::orderBy('inicio')->get();
-
     $this->load->template('fpas/fpaCadastrar', compact('horarios'), 'fpas/js_fpas');
   }
 
@@ -103,15 +101,15 @@ class Fpa extends MY_Controller{
     $docente_id = Docente_model::where('pessoa_id',$_SESSION['usuario_logado']['id'])->first()->id;
     $fpa = Fpa_model::where('docente_id', $docente_id)->where('periodo_id', $periodoAtivo->id)->first();
     $disciplinas = $this->input->post('disc');
-    $fpa->turmas()->sync([]);
+    $fpa->disciplinas()->sync([]);
     $ordem = 1;
     try{
-      DB::transaction(function () use ($disciplinas){
+      DB::transaction(function () use ($disciplinas, $fpa, $ordem){
         foreach($disciplinas as $disciplina){
           Preferencia_model::firstOrCreate([
             'fpa_id' => $fpa->id,
-            'disciplina_id' => $disciplina->id,
-            'preferencia' => $ordem++
+            'disciplina_id' => $disciplina,
+            'ordem' => $ordem++
           ]);
         }
       });
@@ -120,6 +118,7 @@ class Fpa extends MY_Controller{
       $this->session->set_flashdata('danger','Problemas ao cadastrar as preferências de disciplinas, tente novamente!');
       echo $e->getMessage();
     }
+    $this->index();
   }
 
   public function editarPreferencias(){

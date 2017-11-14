@@ -70,11 +70,11 @@
         <div class="col-md-8">
           <div class="form-group">
           <label>Disciplina 1</label>
-            <select class="form-control" id="selectDisc" required>
+            <select class="form-control" id="selectDisc" name='disc[]' required>
               <!-- Trazer do back as disciplinas cadastradas -->
               <option  value="" disabled selected hidden>Selecione</option>
               <?php foreach($turmas as $turma):?>
-                <option  value="<?= $turma->disciplina->id?>" ><?= $turma->disciplina->nome_disciplina?></option>
+                <option value="<?= $turma->disciplina->id?>" ><?= $turma->disciplina->nome_disciplina?></option>
               <?php endforeach;?>
             </select>
           </div>
