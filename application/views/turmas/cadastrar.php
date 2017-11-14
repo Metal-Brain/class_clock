@@ -20,19 +20,21 @@
 					<h1>Cadastrar Turma</h1>
 						<div class="form-group">
 							<label>Depedência</label><br />
-							<label class="radio-inline"><input <?= set_radio('dp', '1') ?> value="1" type="radio" name="dp">SIM</label>
-							<label class="radio-inline"><input <?= set_radio('dp', '0') ?> value="0" type="radio" name="dp">NÃO</label>
+							<label class="radio-inline"><input value="1" type="radio" name="dp">SIM</label>
+							<label class="radio-inline"><input value="0" type="radio" name="dp" checked>NÃO</label>
+						
+						</div>
+						<div class="form-group">
 							<span class="text-danger">
 								<?= form_error('dp') ?>
 							</span>
-						</div>
-
+						</div>	
 						<div class="form-group">
 							<label>Disciplina</label>
 							<select name="disciplina_id" id="disciplina_id" class="form-control" style="max-width:400px;">
 								<option disabled selected>Selecione</option>
 									<?php foreach($disciplinas as $disciplina): ?>
-									<option <?= (set_value("disciplina_id") == $disciplina["id"])?"selected":""?> value="<?=$disciplina['id'] ?>"><?=$disciplina['nome_disciplina'] ?></option>
+									<option value="<?=$disciplina['id'] ?>"><?=$disciplina['nome_disciplina'] ?></option>
 								<?php endforeach ?>
 							</select>
 							<span class="text-danger">
@@ -45,7 +47,7 @@
 							<select name="turno_id" id="turno_id" class="form-control" style="max-width:400px;">
 								<option disabled selected>Selecione</option>
 									<?php foreach($turnos as $turno){ ?>
-									<option <?= (set_value("turno_id") == $turno["id"])?"selected":""?> value="<?=$turno['id'] ?>"><?=$turno['nome_turno'] ?></option>
+									<option value="<?=$turno['id'] ?>"><?=$turno['nome_turno'] ?></option>
 								<?php }?>
 							</select>
 							<span class="text-danger">
@@ -55,7 +57,7 @@
 
 						<div class="form-group">
 							<label>Quantidade de alunos</label>
-							<input value="<?= set_value('qtd_alunos')?>" type="number" class="form-control" id="qtd_alunos" name="qtd_alunos" onKeyPress="var key = event.keyCode || event.charCode; if((this.value.length==3) && !(key == 8)) return false;" placeholder="ex: 1" style="max-width:300px;">
+							<input type="number" class="form-control" id="qtd_alunos" name="qtd_alunos" onKeyPress="var key = event.keyCode || event.charCode; if((this.value.length==3) && !(key == 8)) return false;" placeholder="ex: 1" style="max-width:300px;">
 							<span class="text-danger">
 								<?= form_error('qtd_alunos') ?>
 							</span>
