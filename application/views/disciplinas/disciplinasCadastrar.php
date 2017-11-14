@@ -40,12 +40,14 @@
 
 					<div class="form-group">
 						<label>Nome</label>
-						<input type="text" class="form-control" id="nome_curso" name="nome_disciplina" placeholder="Nome" >
+						<input type="text" class="form-control" onkeypress="this.value = this.value.toLowerCase();" 
+												onChange="this.value = this.value.toLowerCase();" 
+												onpaste="this.value = this.value.toLowerCase();" id="nome_curso" name="nome_disciplina" placeholder="Nome" >
 					</div>
 
 					<div class="form-group">
 						<label>Sigla</label>
-						<input type="text" class="form-control" id="sigla_curso" name="sigla_disciplina" placeholder="ex: LOPA1" style="max-width:300px;" >
+						<input maxlength="5" style="text-transform:uppercase;" type="text" class="form-control" id="sigla_curso" name="sigla_disciplina" placeholder="ex: LOPA1" style="max-width:300px;" >
 					</div>
 
 					<div class="form-group">
