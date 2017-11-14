@@ -85,9 +85,9 @@ class Turma extends MY_Controller {
   function deletar ($id) {
     try {
       Turma_model::findOrFail($id)->delete();
-      $this->session->set_flashdata('success', 'Turma deletado com sucesso');
+      $this->session->set_flashdata('success', 'Turma desativada com sucesso');
     } catch (Exception $e) {
-      $this->session->set_flashdata('danger', 'Erro ao deletar a Turma, tente novamente');
+      $this->session->set_flashdata('danger', 'Erro ao desativar a Turma, tente novamente');
     }
 
     redirect("turma");
