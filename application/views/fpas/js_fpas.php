@@ -31,15 +31,6 @@
       $('#contador').attr('data-value',qt);
       //coloca o resultado na div contador
       $('#contador').text((qt > 1 ? ' selecionados' : ' selecionado'));
-
-
-      //método que valida o numero de checkbox que podem ser selecionados!
-      if(qt >= <?= $_SESSION["usuario_logado"]["regime"] ? 20 : 40 ?> ){
-        $('input[type=checkbox]:not(:checked)').prop('disabled', true);
-      }else{
-        $('input[type=checkbox]:not(:checked)').prop('disabled', false);
-      }
-
       $("input[name=totalAula]").val(qt);
     });
 
@@ -56,7 +47,7 @@
       $('#formDisp').validate({
         errorLabelContainer:'#msgErrors',
         rules: { // regime 0 = 20h regime 1 = 40h
-          totalAula: {required: true, minAula: <?= $_SESSION["usuario_logado"]["regime"] ? 14 : 21 ?>}
+          totalAula: {required: true, minAula: <?= $_SESSION["usuario_logado"]["regime"] ? 21 : 14 ?>}
         }
       });
     });
