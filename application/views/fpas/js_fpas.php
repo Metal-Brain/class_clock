@@ -97,9 +97,11 @@
 				// index disciplina
 				var listDisc = $("label.disc");
 				for (disciplina = 0; disciplina < listDisc.length; disciplina ++) {
-					listDisc[disciplina].innerHTML = '<strong>Disciplina ' + (disciplina + 1)+'</strong>';
+					listDisc[disciplina].innerHTML = '<strong>Disciplina ' + (disciplina + 1)+'</strong>'; 
 				}
+        tmp--;
 			});
+
     });
 
 
