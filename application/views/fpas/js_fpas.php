@@ -78,15 +78,23 @@
               <?php endforeach;?>
             </select>
           </div>
-        </div>
-        <div col-md-2>
-            <button id="btnRemove" type="button" style="margin: 23px 0 0 0;" class="btn btn-danger add-field"><span class="glyphicon glyphicon-remove"></span></button>
         </div>`;
 
 
       $('#btnAdd').click(function (){
         $('#disciplinas').append(content);
       });
+      $('#disciplinas').on('click','#btnRemove',function(){
+				var row = $(this).parent().parent();
+				row.remove();
+
+				// index disciplina
+				var listDisc = $("label.disc");
+				for (disciplina = 0; disciplina < listDisc.length; disciplina ++) {
+					listDisc[disciplina].innerHTML = '<strong>Disciplina ' + (disciplina + 1)+'</strong>';
+				}
+        tmp--;
+			});
 
     });
 
