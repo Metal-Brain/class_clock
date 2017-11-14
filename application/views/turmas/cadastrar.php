@@ -55,7 +55,7 @@
 
 						<div class="form-group">
 							<label>Quantidade de alunos</label>
-							<input type="number" class="form-control" id="qtd_alunos" name="qtd_alunos" placeholder="ex: 1" style="max-width:300px;">
+							<input type="number" class="form-control" id="qtd_alunos" name="qtd_alunos" onKeyPress="var key = event.keyCode || event.charCode; if((this.value.length==3) && !(key == 8)) return false;" placeholder="ex: 1" style="max-width:300px;">
 							<span class="text-danger">
 								<?= form_error('qtd_alunos') ?>
 							</span>

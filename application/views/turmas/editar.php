@@ -45,10 +45,12 @@
 									<?php }?>
 							</select>
 						</div>
+						
+
 
 						<div class="form-group">
 							<label>Quantidade de alunos</label>
-							<input type="number" class="form-control" id="qtd_alunos" name="qtd_alunos" placeholder="ex: 1" style="max-width:300px;" value="<?= htmlspecialchars(ucwords($turma->qtd_alunos))?>">
+							<input type="number" class="form-control" id="qtd_alunos" onKeyPress="var key = event.keyCode || event.charCode; if((this.value.length==3) && !(key == 8)) return false;" name="qtd_alunos" placeholder="ex: 1" style="max-width:300px;" value="<?= htmlspecialchars(ucwords($turma->qtd_alunos))?>">
 						</div>
 
 										<div class="form-group">
