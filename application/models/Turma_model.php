@@ -12,6 +12,6 @@ class Turma_model extends Model {
         return $this->belongsTo(Turno_model::class, 'turno_id');
     }
     public function preferencias(){
-        return $this->belongsToMany(Fpa_model::class, 'preferencia', 'fpa_id', 'disciplinas_oferecidas_id')->withPivot('ordem');
+        return $this->belongsToMany(Preferencia_model::class, 'fpa_id', 'turma_id')->withPivot('ordem');
     }
 }

@@ -20,13 +20,13 @@
           <h2 class="page-header">FPA</h2>
       </div>
   </div>
-  
+
   <div class="row">
     <div class="col-md-12">
       <h4>Selecione as disciplinas que deseja lecionar (por ordem de preferência):</h4>
     </div>
 
-    <form id="formPref" action="" method="POST">
+    <form id="formPref" action="<?= site_url('fpa/salvarPreferencias')?>" method="POST">
       <div class="col-md-12 form-group">
 				<button id="btnAdd" type="button" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Adicionar Aula</button>
 			</div>

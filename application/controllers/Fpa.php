@@ -15,8 +15,8 @@ class Fpa extends MY_Controller{
   }
 
   public function cadastrarPreferencias(){
-    $disciplinas = Turma_model::all();
-    $this->load->template('fpas/fpaPreferencias', compact('disciplinas'), 'fpas/js_fpas');
+    $turmas = Turma_model::all();
+    $this->load->template('fpas/fpaPreferencias', compact('turmas'), 'fpas/js_fpas');
   }
 
   public function salvar(){
@@ -29,8 +29,7 @@ class Fpa extends MY_Controller{
       $fpa = Fpa_model::firstOrCreate($dados);
       $this->session->set_flashdata('success','FPA cadastrado com sucesso');
     } catch (Exception $e){
-      $this->session
-      ssage();
+      $this->session->set_flashdata("error",$e->getMessage());
     }
 
 
@@ -98,13 +97,13 @@ class Fpa extends MY_Controller{
     $this->load->template('fpas/fpaEditarDisponibilidade', [$fpa, $horarios, $disponibilidade], 'fpas/js_fpa');
   }
 
-  public function salvarPreferencias($id){
+  public function salvarPreferencias(){
     $this->salvar();
     $periodoAtivo = Periodo_model::periodoAtivo();
     $docente_id = Docente_model::where('pessoa_id',$_SESSION['usuario_logado']['id'])->first()->id;
-    $fpa = Fpa_model::where('docente_id', $docente_id)->where('periodo_id', $periodoAtivo->id);
+    $fpa = Fpa_model::where('docente_id', $docente_id)->where('periodo_id', $periodoAtivo->id)->first();
     $disciplinas = $this->input->post('disc');
-    $fpa->preferencia->sync([]);
+    $fpa->turmas()->sync([]);
     $ordem = 1;
     try{
       DB::transaction(function () use ($disciplinas){
