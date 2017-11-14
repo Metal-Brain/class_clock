@@ -89,6 +89,10 @@ nbdist/
 *.tmPreferences.cache
 *.stTheme.cache
 
+### PhpStorm ###
+.idea/
+
+
 # workspace files are user-specific
 *.sublime-workspace
 
