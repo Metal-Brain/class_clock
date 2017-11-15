@@ -8,13 +8,35 @@ class Fpa extends MY_Controller{
   }
 
   public function cadastrarDisponibilidade(){
-    $horarios = Horario_model::orderBy('inicio')->get();
-    $this->load->template('fpas/fpaCadastrar', compact('horarios'), 'fpas/js_fpas');
+    $periodoAtivo = Periodo_model::periodoAtivo();
+    $docente_id = Docente_model::where('pessoa_id',$_SESSION['usuario_logado']['id'])->first()->id;
+    $fpa = Fpa_model::where('docente_id', $docente_id)->where('periodo_id', $periodoAtivo->id)->first();
+    $disponibilidade = Disponibilidade_model::where('fpa_id', $fpa)->get();
+
+    if(isset($disponibilidade)){
+      $horarios = Horario_model::orderBy('inicio')->get();
+      $this->load->template('fpas/fpaCadastrar', compact('fpa', 'horarios', 'disponibilidade'), 'fpas/js_fpas');
+    }
+    else{
+      $horarios = Horario_model::orderBy('inicio')->get();
+      $this->load->template('fpas/fpaCadastrar', compact('horarios'), 'fpas/js_fpas');
+    }
   }
 
   public function cadastrarPreferencias(){
-    $turmas = Turma_model::all();
-    $this->load->template('fpas/fpaPreferencias', compact('turmas'), 'fpas/js_fpas');
+    $periodoAtivo = Periodo_model::periodoAtivo();
+    $docente_id = Docente_model::where('pessoa_id',$_SESSION['usuario_logado']['id'])->first()->id;
+    $fpa = Fpa_model::where('docente_id', $docente_id)->where('periodo_id', $periodoAtivo->id)->first();
+    $preferencia = Preferencia_model::where('fpa_id', $fpa)->get();
+
+    if(isset($preferencia)){
+      $turmas = Turma_model::all();
+      $this->load->template('fpas/fpaPreferencias', compact('fpa', 'turmas', 'disciplinas', 'disciplinasSelecionadas'), 'fpas/js_fpas');
+    }
+    else{
+      $turmas = Turma_model::all();
+      $this->load->template('fpas/fpaPreferencias', compact('turmas'), 'fpas/js_fpas');
+    }
   }
 
   public function salvar(){
@@ -86,14 +108,14 @@ class Fpa extends MY_Controller{
     }
   }
 
-  public function editarDisponibilidade(){
-    $periodoAtivo = Periodo_model::periodoAtivo();
-    $docente_id = Docente_model::where('pessoa_id',$_SESSION['usuario_logado']['id'])->first()->id;
-    $fpa = Fpa_model::where('docente_id', $docente_id)->where('periodo_id', $periodoAtivo->id);
-    $horarios = Horario::orderBy('inicio')->get();
-    $disponibilidade = $fpa->disponibilidade()->get();
-    $this->load->template('fpas/fpaEditarDisponibilidade', [$fpa, $horarios, $disponibilidade], 'fpas/js_fpa');
-  }
+  // public function editarDisponibilidade(){
+  //   $periodoAtivo = Periodo_model::periodoAtivo();
+  //   $docente_id = Docente_model::where('pessoa_id',$_SESSION['usuario_logado']['id'])->first()->id;
+  //   $fpa = Fpa_model::where('docente_id', $docente_id)->where('periodo_id', $periodoAtivo->id);
+  //   $horarios = Horario::orderBy('inicio')->get();
+  //   $disponibilidade = $fpa->disponibilidade()->get();
+  //   $this->load->template('fpas/fpaEditarDisponibilidade', [$fpa, $horarios, $disponibilidade], 'fpas/js_fpa');
+  // }
 
   public function salvarPreferencias(){
     $this->salvar();
@@ -121,12 +143,12 @@ class Fpa extends MY_Controller{
     $this->index();
   }
 
-  public function editarPreferencias(){
-    $periodoAtivo = Periodo_model::periodoAtivo();
-    $fpa = Fpa_model::where('docente_id', $_SESSION['usuarioLogado']['id'])->where('periodo_id', $periodoAtivo->id);
-    $disciplinas = Disciplina_model::all();
-    $disciplinasSelecionadas = $fpa->preferencia()->get();
-    $this->load->template('fpas/fpaEditarPreferencia', [$fpa, $disciplinas, $disciplinasSelecionadas], 'fpas/js_fpa');
-  }
+  // public function editarPreferencias(){
+  //   $periodoAtivo = Periodo_model::periodoAtivo();
+  //   $fpa = Fpa_model::where('docente_id', $_SESSION['usuarioLogado']['id'])->where('periodo_id', $periodoAtivo->id);
+  //   $disciplinas = Disciplina_model::all();
+  //   $disciplinasSelecionadas = $fpa->preferencia()->get();
+  //   $this->load->template('fpas/fpaEditarPreferencia', [$fpa, $disciplinas, $disciplinasSelecionadas], 'fpas/js_fpa');
+  // }
 
 }
