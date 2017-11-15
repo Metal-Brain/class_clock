@@ -27,16 +27,12 @@
     </div>
   </div>
 
-<<<<<<< HEAD
     <form id="formPref" action="<?= site_url('fpa/salvarPreferencias')?>" method="POST">
-=======
-  <form id="formPref" action="" method="POST">
-    <div class="row">
->>>>>>> 4c4c8d0aaea085f51d520cb28d3a58a3f3fe004e
-      <div class="col-md-12 form-group">
-        <button id="btnAdd" type="button" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Adicionar disciplina</button>
-      </div>
-    </div>
+    	<div class="row">
+      	<div class="col-md-12 form-group">
+        	<button id="btnAdd" type="button" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Adicionar disciplina</button>
+      	</div>
+    	</div>
 
     <div id="disciplinas">
 
@@ -48,7 +44,7 @@
           <button type="submit" class="btn btn-success active salvar" style="float: right; margin-right: 10px;"><span class="glyphicon glyphicon-floppy-disk"></span> Salvar</button>
       </div>
     </div>
-    
+
   </form>
 
 </div>
