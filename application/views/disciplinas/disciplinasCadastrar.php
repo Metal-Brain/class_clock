@@ -42,15 +42,19 @@
 		    			</tbody>         
 		           </table>  
 				<div>
-				<input id="csvCampo" type="file"  name="csvfile"/>	
-				<label>Selecione o arquivo CSV para importação:</label>
-
-				<h1>Orientações para criação do arquivo .csv</h1>
-					<h3>O arquivo deve conter os valores respectivos campos:</h3>
-					<p>codigo, codigo_curso, tipo_sala, nome_disciplpina, modulo, sigla_disciplina, qtd_professor, qtd_aulas, deletado_em.</p>	
-							 	 		
+				
+								 	 		
 				</div>
 				<div>
+					<h3>Orientação para criação do arquivo .csv</h3>
+					<h4>O arquivo deve conter os valores respectivos campos:</h4>
+					<span>O arquivo CSV deve ter os seus dados separados por virgulas,</br> devem estar entre aspas duplas e atender a seguinte ordem:</span>
+				</br>
+					<label>Selecione o arquivo CSV para importação:</label>
+				<input id="csvCampo" type="file"  name="csvfile"/>	
+				<a href="<?=base_url('Disciplina/download')?>">Clique para baixar o modelo de CSV</a>
+
+				
 			 <input  type="submit" value="Importar" class="btn btn-success campoImportar" style="display: none"/>
 				</div>		
          </form>   
