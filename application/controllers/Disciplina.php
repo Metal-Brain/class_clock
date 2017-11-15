@@ -203,4 +203,11 @@
                  redirect("Disciplina");
 }
 }
+function download(){
+
+$this->load->helper('download');
+
+
+force_download("disciplina.csv", file_get_contents("/uploads/disciplina.csv"));
+}
 }

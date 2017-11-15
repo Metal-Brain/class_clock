@@ -63,7 +63,7 @@ class checkUser {
             'curso'       => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
             'pessoa'      => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
             'area'        => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
-						'disciplina'  => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
+			'disciplina'  => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar', 'download','force_download'],
             'turma'       => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar']
         ];
 

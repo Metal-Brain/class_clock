@@ -19,31 +19,36 @@
 
     	<form method="post" class= "csv" style="display: none; " action="<?=base_url('Disciplina/importCsv')?>" enctype="multipart/form-data">
     		<!--      //redirecionamento BASE/ImportCsv -->
-				<a id="baixar" href=".../uploads/disciplina.csv" download>Baixar Modelo de Arquivo</a>
-		 <table id="disciplinaTable" class="table table-striped">
-    			<thead>
-    				<tr>
-    					<th class="text-center">Curso</th>
-                        <th class="text-center">ID do Curso</th>
-    				</tr>
-    			</thead>
-    			<tbody>
-    				<?php foreach($data['cursos'] as $curso){ ?>
-						<td><?=$curso['nome_curso'] ?></td>
-						<td><?=$curso['id_curso'] ?></td>
-					<?php }?>	
-    			</tbody>         
-           </table>
-            
+				
+				<a href="<?=base_url('Disciplina/download')?>">Clique para baixar o modelo de CSV</a>
+				 <table id="disciplinaTable" class="table">
+		    			<thead>
+		    				<tr>
+		    					<th class="text-center">Curso</th>
+		                        <th class="text-center">ID do Curso</th>
+		                        <th class="text-center">Tipos de Sala</th>
+		                        <th class="text-center">ID dos Tipos de Sala</th>
+		    				</tr>
+		    			</thead>
+		    			<tbody>
+		    				<?php foreach($data['cursos'] as $curso){ ?>
+								<td><?=$curso['nome_curso'] ?></td>
+								<td><?=$curso['id_curso'] ?></td>
+								<?php foreach($data['tipo_salas'] as $tipo){ ?>
+								<td><?=$tipo['nome_curso'] ?></td>
+								<td><?=$tipo['id'] ?></td>
+								<?php }?>	
+							<?php }?>	
+		    			</tbody>         
+		           </table>  
 				<div>
 				<input id="csvCampo" type="file"  name="csvfile"/>	
 				<label>Selecione o arquivo CSV para importação:</label>
 
-				<article><br><br><br><h1>Orientações para criação do arquivo .csv</h1></article>
-						 <h3>O arquivo deve conter os valores respectivos campos:</h3>
-						 	<p>codigo, codigo_curso, tipo_sala, nome_disciplpina, modulo, sigla_disciplina, qtd_professor, qtd_aulas, deletado_em.</p>
-				
-				<a>Clique para baixar arquivo de exemplo</a>			 	 		
+				<h1>Orientações para criação do arquivo .csv</h1>
+					<h3>O arquivo deve conter os valores respectivos campos:</h3>
+					<p>codigo, codigo_curso, tipo_sala, nome_disciplpina, modulo, sigla_disciplina, qtd_professor, qtd_aulas, deletado_em.</p>	
+							 	 		
 				</div>
 				<div>
 			 <input  type="submit" value="Importar" class="btn btn-success campoImportar" style="display: none"/>
