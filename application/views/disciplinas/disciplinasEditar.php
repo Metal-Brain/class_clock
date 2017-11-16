@@ -20,7 +20,9 @@
 
 					<div class="form-group">
 						<label>Nome</label>
-						<input type="text" class="form-control" name="nome_disciplina" placeholder="Nome" value="<?= htmlspecialchars($data['disciplina']['nome_disciplina']) ?>">
+						<input type="text" class="form-control" onkeypress="this.value = this.value.toLowerCase();" 
+												onChange="this.value = this.value.toLowerCase();" 
+												onpaste="this.value = this.value.toLowerCase();" name="nome_disciplina" placeholder="Nome" value="<?= htmlspecialchars($data['disciplina']['nome_disciplina']) ?>">
 					</div>
 
 					<div class="form-group">

@@ -17,7 +17,7 @@ $hook['post_controller_constructor'][] = [
   'function'  => 'check',
   'filename'  => 'checkUser.php',
   'filepath'  => 'hooks',
-  'params'    => ['login', 'autherror']
+  'params'    => ['login', 'autherror','pessoa']
 ];
 
 /* Hook para utilizazção em redirecionamentos */

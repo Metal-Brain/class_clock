@@ -6,6 +6,7 @@ class Docente_model extends Model {
     protected $fillable = [
         "pessoa_id", "area_id", "ingresso_campus",
         "ingresso_ifsp", "regime", "nascimento",
+        "titulacao", "nivel_carreira"
     ];
 
     public function setNascimentoAttribute($value) {
