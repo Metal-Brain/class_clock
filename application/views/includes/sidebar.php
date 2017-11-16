@@ -1,12 +1,14 @@
 <?php $tipoUsuario = $this->session->userdata('usuario_logado')['tipo']; ?>
 <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 sidebar" aria-expanded="false"  id="sidebar">
    <ul class="nav nav-pills nav-stacked">
+   <!--
 	   <li id="sidebar-home">
 		   <a href="">
 			   <span class="glyphicon glyphicon-home"></span> <span class="sidebar-label">Home</span>
 		   </a>
 	   </li>
-	   <li id="sidebar-turno">
+	-->
+	<li id="sidebar-turno">
 		   <a href="<?php echo base_url();?>index.php/Turno">
 			   <span class="glyphicon glyphicon-time"></span> <span class="sidebar-label">Turnos</span>
 		   </a>
@@ -19,7 +21,7 @@
 	   </li>
     <?php endif; ?>
 	   <li id="sidebar-salas">
-		   <a href="<?php echo base_url();?>index.php/tipo_sala">
+		   <a href="<?php echo base_url();?>index.php/Tipo_sala">
 			   <span class="glyphicon glyphicon-home"></span> <span class="sidebar-label">Salas</span>
 		   </a>
 	   </li>
@@ -44,7 +46,7 @@
      <?php endif; ?>
      <?php if (in_array($tipoUsuario,[1,2])) :?>
 	   <li id="sidebar-modalidades">
-		   <a href="http://localhost/class_clock/index.php/modalidade">
+		   <a href="<?php echo base_url();?>index.php/modalidade">
 			   <span class="glyphicon glyphicon-education"></span> <span class="sidebar-label">Modalidades</span>
 		   </a>
 	   </li>
@@ -69,13 +71,6 @@
 			   <span class="glyphicon glyphicon-duplicate"></span> <span class="sidebar-label">FPA</span>
 		   </a>
 	   </li>
-     <?php if (in_array($tipoUsuario,[1,2])) :?>
-     <li id="sidebar-area">
-		   <a href="http://localhost/class_clock/index.php/Area">
-			   <span class="glyphicon glyphicon-duplicate"></span> <span class="sidebar-label">Áreas</span>
-			 </a>
-		 </li>
-     <?php endif; ?>
      <?php if (in_array($tipoUsuario, [1])) :?>
 	   <li id="sidebar-pessoa">
 		   <a href="<?php echo base_url();?>index.php/pessoa">
@@ -83,7 +78,7 @@
        </a>
      </li>
      <?php endif; ?>
-     <?php if (in_array($tipoUsuario, [1,2])) :?>
+     <?php if (in_array($tipoUsuario,[1,2])) :?>
      <li id="sidebar-disciplinas">
 		   <a href="<?php echo base_url();?>index.php/disciplina">
 			   <span class="glyphicon glyphicon-tree-deciduous"></span> <span class="sidebar-label">Disciplinas</span>

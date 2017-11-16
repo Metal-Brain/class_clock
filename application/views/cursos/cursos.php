@@ -1,6 +1,6 @@
 <!--<pre>
-		<?php print_r($cursos) ?>
-</pre> -->
+		<?php print_r($data['docentes']) ?>
+</pre>-->
 	<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
 	<!-- Alertas de sucesso / erro -->
 	<div class="row" style="margin-top: 5px;">
@@ -44,13 +44,11 @@
 
 		<tbody>
 			<?php foreach ($data['cursos'] as $curso) { ?>
-
 				<tr <?php if($curso->deletado_em): echo 'class="danger"'; endif; ?>>
 					<td class="text-center"><?= ucwords($curso['codigo_curso']); ?></td>
 					<td class="text-center"><?= htmlspecialchars(ucwords($curso['nome_curso'])); ?></td>
 					<td class="text-center"><?= htmlspecialchars(ucwords($curso['sigla_curso'])); ?></td>
 					<td class="text-center"><?= ucwords($curso['qtd_semestre']); ?></td>
-
 					<td class="text-center"><?php
 						foreach($data['modalidade'] as $modalidade){
 							if($curso['modalidade_id'] == $modalidade['id']):
@@ -58,8 +56,15 @@
 							endif;
 						}
 					?></td>
-					
-					<td class="text-center"><?= ucwords($curso['coordenador']); ?></td>
+
+					<td class="text-center"><?php
+						foreach($data['docentes'] as $docente){
+							if($curso['docente_id'] == $docente->id):
+								echo $docente->nome;
+							endif;
+						}
+					?></td>
+          
 					<td class="text-center"><?= ucwords($curso['fechamento']); ?></td>
 					<td class="text-center"><?= ( empty($curso->deletado_em) ) ? 'Ativado' : 'Desativado'?></td>
 					<td class="text-center">
@@ -73,6 +78,7 @@
 						<?php endif; ?>
 					</td>
 				</tr>
+
 			<?php } ?>
 		</tbody>
 	</table>

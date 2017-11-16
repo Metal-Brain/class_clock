@@ -4,7 +4,7 @@ if(path_atual.indexOf("Turno") != -1){
   $('#sidebar-turno').addClass('active');
 }else if (path_atual.indexOf("Curso") != -1) {
 	$('#sidebar-cursos').addClass('active');
-}else if (path_atual.indexOf("Sala") != -1) {
+}else if (path_atual.indexOf("Tipo") != -1) {
 	$('#sidebar-salas').addClass('active');
 }else if (path_atual.indexOf("periodo") != -1) {
 	$('#sidebar-periodos').addClass('active');
