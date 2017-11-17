@@ -64,11 +64,11 @@
           <div class="col-md-8">
             <div class="form-group">
             <label class="disc">Disciplina `+tmp+`</label>
-              <select class="form-control" id="selectDisc" required>
+              <select class="form-control" id="selectDisc" required name="disc[`+tmp+`]">
                 <!-- Trazer do back as disciplinas cadastradas -->
                 <option  value=" " disabled selected hidden>Selecione</option>
                 <?php foreach ($turmas as  $turma) :?>
-                  <option value="<?= $turma->disciplina->id?>"><?= $turma->disciplina->nome?></option>
+                  <option value="<?= $turma->disciplina->id?>"><?= $turma->disciplina->nome_disciplina?></option>
                 <?php endforeach;?>
               </select>
             </div>
