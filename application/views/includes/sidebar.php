@@ -36,6 +36,11 @@
 			   <span class="glyphicon glyphicon-education"></span> <span class="sidebar-label">Turmas</span>
 		   </a>
 	   </li> 
+	   <li id="sidebar-modalidades">
+		   <a href="http://localhost/class_clock/index.php/modalidade">
+			   <span class="glyphicon glyphicon-education"></span> <span class="sidebar-label">Modalidades</span>
+		   </a>
+	   </li>
 	   <li id="sidebar-semestres">
 		   <a href="">
 			   <span class="glyphicon glyphicon-calendar"></span> <span class="sidebar-label">Semestres</span>
@@ -56,9 +61,14 @@
 			   <span class="glyphicon glyphicon-duplicate"></span> <span class="sidebar-label">FPA</span>
 		   </a>
 	   </li>
-	   <li id="sidebar-pessoa">
+	   <li id="sidebar-area">
+		   <a href="http://localhost/class_clock/index.php/Area">
+			   <span class="glyphicon glyphicon-duplicate"></span> <span class="sidebar-label">Áreas</span>
+			</a>
+		</li>
+	 <li id="sidebar-pessoa">
 		   <a href="<?php echo base_url();?>index.php/pessoa">
-			   <span class="glyphicon glyphicon-user"></span> <span class="sidebar-label">Pessoa</span>
+			   <span class="glyphicon glyphicon-user"></span> <span class="sidebar-label">Pessoas</span>
        </a>
      </li>
      <li id="sidebar-disciplinas">

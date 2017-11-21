@@ -67,13 +67,13 @@
 			}
 
 			var url = window.location.href;
-			var aula = 0;
 			var index = 0;
 
 			if ( url.indexOf('Turno/editar') > -1 ) {
 				var horarios = <?= (isset($turno->horarios)) ? json_encode($turno->horarios) : '{}' ?>;
 
 				horarios.forEach(function (horario) {
+					// var aula = 0;
 					var content = `
 					<div class="row">
 						<div class="col-xs-12 col-sm-12 col-md-1 form-group">

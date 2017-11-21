@@ -15,7 +15,7 @@ class Turno extends CI_Controller {
     $turnos = Turno_model::withTrashed()->get();
     $this->load->template('turnos/turnos',compact('turnos'),'turnos/js_turnos');
   }
-    
+
 
   function cadastrar () {
     $this->load->template('turnos/turnosCadastrar',[],'turnos/js_turnos');
@@ -42,24 +42,28 @@ class Turno extends CI_Controller {
           $turno->save();
 
           $horarios = $this->input->post('horario');
+          $horario_sync = [];
 
           for ($i = 0; $i < sizeof($horarios); $i += 2) {
-            $horario = new Horario_model;
+            $horario['inicio'] = $horarios[$i];
+            $horario['fim'] = $horarios[$i+1];
 
-            $horario->inicio = $horarios[$i];
-            $horario->fim = $horarios[$i+1];
-            $horario->turno_id = $turno->id;
-            $horario->save();
+            $horario_model = Horario_model::firstOrCreate($horario);
+            $horario_sync[] = $horario_model->id;
           }
+
+          $turno->horarios()->sync($horario_sync);
         });
 
         $this->session->set_flashdata('success','Turno cadastrado com sucesso');
 
       } catch (Exception $e) {
+        echo $e;
+        die();
         $this->session->set_flashdata('danger','Problemas ao cadastrar o turno, tente novamente!');
       }
 
-      redirect("turno");
+      redirect("Turno");
     } else {
       $this->cadastrar();
     }
@@ -97,19 +101,19 @@ class Turno extends CI_Controller {
     if ($this->form_validation->run()) {
       try {
         $turno->nome_turno = $this->input->post('nome_turno');
+
         $horarios = $this->input->post('horario');
+        $horario_sync = [];
 
-        $turno->horarios()->forceDelete();
         for ($i = 0; $i < sizeof($horarios); $i += 2) {
-          $horario = new Horario_model;
+          $horario['inicio'] = $horarios[$i];
+          $horario['fim'] = $horarios[$i+1];
 
-          $horario->inicio = $horarios[$i];
-          $horario->fim = $horarios[$i+1];
-          $horario->turno_id = $turno->id;
-          $horario->save();
+          $horario_model = Horario_model::firstOrCreate($horario);
+          $horario_sync[] = $horario_model->id;
         }
 
-        $turno->save();
+        $turno->horarios()->sync($horario_sync);
         $this->session->set_flashdata('success','Turno atualizado com sucesso');
       } catch (Exception $e) {
         $this->session->set_flashdata('danger','Problemas ao atualizar os dados do turno, tente novamente!');
@@ -156,7 +160,7 @@ class Turno extends CI_Controller {
       $this->session->set_flashdata('danger','Erro ao ativar o turno. Tente novamente!');
     }
 
-    redirect("turno");
+    redirect("Turno");
 
   }
 
