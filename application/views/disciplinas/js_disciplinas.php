@@ -1,10 +1,10 @@
 <script>
     $(document).ready(function(){
-
-      	$("#disciplinaTable").DataTable();
-        jQuery.validator.addMethod("alphanumeric", function(value, element) {
-          return this.optional(element) || /^[a-zA-Z0-9]+$/.test(value);
-        });
+        $('#disciplinaTable').dataTable( {
+                "language": {
+                    "url": "<?= base_url('assets/DataTables/translatePortuguese.js');?>"
+                }
+            } );
 
                  document.getElementById("sigla_curso").onkeypress = function(e) {
                    if ((this.value.length==5) && !(key == 8)){

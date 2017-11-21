@@ -15,32 +15,67 @@
     </div>
 <h1>Cadastrar Disciplina</h1>
 <input type ="checkbox" id="manipulaViewCadastroViaCSV"  class="btn btn-success">
-           <label>clique no checkbox para importar um arquivo .csv</label>	
+           <label>clique no checkbox para importar via arquivo .csv</label>	
+           <div class="csv" style="display: none;">
+           <a href="<?=base_url('Disciplina/download')?>">Clique para baixar o modelo de CSV</a>
 
-    	<form method="post" class= "csv" style="display: none; " action="<?=base_url('Disciplina/importCsv')?>" enctype="multipart/form-data">
+    	<form method="post" action="<?=base_url('Disciplina/importCsv')?>" enctype="multipart/form-data">
     		<!--      //redirecionamento BASE/ImportCsv -->
 				
-				<a href="<?=base_url('Disciplina/download')?>">Clique para baixar o modelo de CSV</a>
-				 <table id="disciplinaTable" class="table">
-		    			<thead>
-		    				<tr>
-		    					<th class="text-center">Curso</th>
-		                        <th class="text-center">ID do Curso</th>
-		                        <th class="text-center">Tipos de Sala</th>
-		                        <th class="text-center">ID dos Tipos de Sala</th>
-		    				</tr>
-		    			</thead>
-		    			<tbody>
-		    				<?php foreach($data['cursos'] as $curso){ ?>
-								<td><?=$curso['nome_curso'] ?></td>
-								<td><?=$curso['id_curso'] ?></td>
-								<?php foreach($data['tipo_salas'] as $tipo){ ?>
-								<td><?=$tipo['nome_curso'] ?></td>
-								<td><?=$tipo['id'] ?></td>
-								<?php }?>	
-							<?php }?>	
-		    			</tbody>         
-		           </table>  
+				
+				  <table id="disciplinaTable" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Disciplina</th>
+                            <th class="text-center">ID da Disciplina</th>
+                            <th class="text-center">Sigla</th>
+                            <th class="text-center">Curso</th>
+                            <th class="text-center">ID do Curso</th>
+                            <th class="text-center">Tipo de sala</th>
+                            <th class="text-center">ID do Tipo Sala</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($data['disciplinas'] as $disciplina): ?>
+                            <tr <?php if($disciplina->deletado_em): echo 'class="danger"'; endif; ?>>
+              <td class="text-center"><?= htmlspecialchars($disciplina['nome_disciplina']); ?></td>
+              <td class="text-center"><?= htmlspecialchars($disciplina['id']); ?></td>
+							<td class="text-center" style="text-transform:uppercase;"><?= $disciplina['sigla_disciplina']; ?></td>
+
+							<td class="text-center"><?php
+								foreach($data['cursos'] as $curso){
+									if($curso['id'] == $disciplina['curso_id']):
+										echo $curso['nome_curso'];
+									endif;
+								}
+							?></td>
+							<td class="text-center"><?php
+								foreach($data['cursos'] as $curso){
+									if($curso['id'] == $disciplina['curso_id']):
+										echo $curso['id'];
+									endif;
+								}
+							?></td>
+
+
+							<td class="text-center"><?php
+								foreach($data['tipo_salas'] as $tipo_sala){
+									if($tipo_sala['id'] == $disciplina['tipo_sala_id']):
+										echo $tipo_sala['nome_tipo_sala'];
+									endif;
+								}
+							?></td>
+							<td class="text-center"><?php
+								foreach($data['tipo_salas'] as $tipo_sala){
+									if($tipo_sala['id'] == $disciplina['tipo_sala_id']):
+										echo $tipo_sala['id'];
+									endif;
+								}
+							?></td>
+
+					<?php endforeach; ?>
+                    </tbody>
+                </table>
 				<div>
 				
 								 	 		
@@ -57,7 +92,8 @@
 				
 			 <input  type="submit" value="Importar" class="btn btn-success campoImportar" style="display: none"/>
 				</div>		
-         </form>   
+         </form>  
+         </div> 
 
             <form id="formDisciplina" class="formDisciplina"  action="<?= site_url('Disciplina/salvar')?>" method="post">
 
