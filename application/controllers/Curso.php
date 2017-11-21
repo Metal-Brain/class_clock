@@ -1,248 +1,182 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
   /**
-    * Essa classe contem todos as função de Curso
-    * @author Caio de Freitas
-    * @since 2017/03/20
-    */
+  * Essa classe contem todas as funções de Curso
+  * @author Nikolas Lencioni
+  * @since 2018/08/30
+  */
   class Curso extends CI_Controller {
     public function index () {
-      if (verificaSessao() && verificaNivelPagina(array(1,3)))
-        $this->cadastrar();
-      else
-        redirect('/');
+      $data = array(
+        'cursos' => Curso_model::withTrashed()->get(),
+        'modalidade' => Modalidade_model::all('id','nome_modalidade'),
+        'docentes' => Pessoa_model::join('docente', 'pessoa.id', '=', 'docente.pessoa_id')
+                                  ->select('pessoa.nome', 'docente.id', 'pessoa.prontuario')
+                                  ->get(),
+      );
+      $this->load->template('cursos/cursos', compact('data'), 'cursos/js_cursos');
     }
-    /**
-      * Essa função irá cadastrar o Curso desejado
-      * Se os dados estiverem corretos, será enviado para modelo
-      * e cadastrado no banco.
-      * @author Felipe Ribeiro da Silva
-      * @since 2017/03/21
-    */
-    public function cadastrar () {
-      if (verificaSessao() && verificaNivelPagina(array(1,3))) {
-        //Carregar as bibliotecas de validação
-        $this->load->library('form_validation');
-        $this->load->helper(array('form','dropdown'));
-        $this->load->model(array(
-          'Curso_model',
-          'CursoTemPeriodo_model',
-          'CursoTemDisciplina_model',
-          'Grau_model',
-          'Periodo_model',
-          'disciplina_model',
-          'Professor_model'
-        ));
-        //Define regras de validação do formulario!!!
-        $this->form_validation->set_rules('nome', 'nome',array('required', 'min_length[5]','is_unique[Curso.nome]','trim','ucwords'));
-        $this->form_validation->set_rules('sigla', 'sigla', array('required', 'max_length[5]','alpha', 'is_unique[Curso.sigla]', 'strtoupper'));
-        $this->form_validation->set_rules('qtdSemestres','quantidade de semestres', array('required','integer','greater_than[0]','less_than[20]'));
-        $this->form_validation->set_rules('periodo[]', 'período', array('required'));
-        $this->form_validation->set_rules('grau','grau', array('greater_than[0]'), array('greater_than' => 'Selecione o grau.'));
-        $this->form_validation->set_rules('disciplinas[]', 'disciplinas', array('required'), array('required' => 'Não é possível cadastrar um curso sem selecionar as disciplinas.'));
-        $this->form_validation->set_rules('coordenadorCurso','coordenador',array('greater_than[0]'),array('greater_than'=>'Selecione um professor coordenador'));
-        //delimitador
-        $this->form_validation->set_error_delimiters('<p class="text-danger">','</p>');
-        //condição para o formulario
-        if($this->form_validation->run() == FALSE){
-          $this->session->set_flashdata('formDanger','<strong>Não foi possível cadastrar o curso, pois existe(m) erro(s) no formulário:</strong>');
-          $dados['graus']         = convert($this->Grau_model->getAll(), True);
-          $dados['periodo']       = convert($this->Periodo_model->getAll());
-          $dados['disciplinas']   = convert($this->disciplina_model->getAll(TRUE));
-          $dados['cursos']        = $this->Curso_model->getAll();
-          $dados['professores']   = convert($this->Professor_model->getAll(),True);
-          $this->load->view('includes/header',$dados);
-          $this->load->view('includes/sidebar');
-          $this->load->view('cursos/cursos');
-          $this->load->view('includes/footer');
-          $this->load->view('cursos/js_cursos');
-        }else{
-          $curso = array(
-            'nome'          => $this->input->post('nome'),
-            'sigla'         => $this->input->post('sigla'),
-            'qtdSemestres'  => $this->input->post('qtdSemestres'),
-            'grau'          => $this->input->post('grau'),
-          );
 
-          $idProfessor = $this->input->post('coordenadorCurso');
+    public function cadastrar() {
+      $data = array(
+        'cursos' => Curso_model::withTrashed()->get(),
+        'modalidades' => Modalidade_model::withTrashed()->get(),
+        'docentes' => Pessoa_model::join('docente', 'pessoa.id', '=', 'docente.pessoa_id')
+                                  ->whereNotIn('docente.id', function($query){
+                                      $query->from('curso')
+                                            ->where('curso.docente_id', '!=', null)
+                                            ->select('curso.docente_id');
+                                    })
+                                  ->where('docente.deletado_em', null)
+                                  ->select('docente.id', 'pessoa.nome', 'pessoa.prontuario')
+                                  ->get(),
+      );
+      $this->load->template('cursos/cadastrar', compact('data'), 'cursos/js_cursos');
+    }
 
-          $disciplinas = $this->input->post('disciplinas[]');
-          $periodo = $this->input->post('periodo[]');
-          if ($this->Curso_model->insert($curso)) {
-            $idCurso = $this->db->insert_id(); // Pega o ID do Curso cadastrado
-            foreach ($periodo as $idPeriodo)
-              $this->CursoTemPeriodo_model->insert($idCurso,$idPeriodo);
-            foreach ($disciplinas as $idDisciplina)
-              $this->CursoTemDisciplina_model->insert($idCurso,$idDisciplina);
+    public function salvar() {
+      if($this->validar()) {
+        try {
+                $curso = new Curso_model();
+                $curso->nome_curso = $this->input->post('nome_curso');
+                $curso->modalidade_id = $this->input->post('modalidade_id');
+          if($this->input->post('docente_id')){
+                $curso->docente_id = $this->input->post('docente_id');
+          }else($curso->docente_id = null);
+                $curso->codigo_curso = $this->input->post('codigo_curso');
+                $curso->sigla_curso = $this->input->post('sigla_curso');
+                $curso->qtd_semestre = $this->input->post('qtd_semestre');
+                $curso->fechamento = $this->input->post('fechamento');
+                $curso->save();
 
-            // relaciona o professor coordenador ao curso
-            $this->Professor_model->setCoordenador($idProfessor,$idCurso);
-
-            $this->session->set_flashdata('success','Curso cadastrado com sucesso');
-          } else {
-            $this->session->set_flashdata('danger','Não foi possível cadastrar o curso, tente novamente ou entre em contato com o administrador do sistema.');
-          }
-          redirect('Curso/cadastrar');
-        }
-      } else {
-        redirect('/');
+          $this->session->set_flashdata('success','Curso cadastrado com sucesso');
+          redirect('curso');
+        } catch (Exception $ignored) {}
       }
+      $this->session->set_flashdata('danger','Problemas ao cadastrar o curso, tente novamente!');
+      $this->cadastrar();
     }
-    /**
-      * Essa função irá atualizar os dados do usuario.
-      * Se esses dados estiverem validos, Envia os dados para modelo.
-      * e ira altera-los.
-      * @author Felipe Ribeiro da Silva
-      * @since 2017/03/21
-    */
-    public function atualizar () {
-      if (verificaSessao() && verificaNivelPagina(array(1))) {
-        $this->load->library('form_validation');
-        $this->load->helper('dropdown');
-        $this->load->model(array('CursoTemDisciplina_model','CursoTemPeriodo_model','Curso_model','Grau_model','Periodo_model','disciplina_model','Professor_model','CoordenadorDe_model'));
-        //Define regras de validação do formulario!!!
-        $this->form_validation->set_rules('nomeCurso', 'nome do curso',array('required', 'min_length[5]','ucwords'));
-        $this->form_validation->set_rules('cursoSigla', 'sigla do curso', array('required', 'max_length[5]', 'strtoupper'));
-        $this->form_validation->set_rules('cursoQtdSemestres','quantidade de semestres', array('required','integer','greater_than[0]','less_than[20]'));
-        $this->form_validation->set_rules('cursoPeriodos[]','período',array('required'));
-        $this->form_validation->set_rules('cursoGrau','grau', array('greater_than[0]'), array('greater_than' => 'Selecione o grau.'));
-        $this->form_validation->set_rules('cursoDisciplinas[]', 'disciplinas', array('required'), array('required' => 'Não é possível atualizar um curso sem selecionar as disciplinas.'));
-        $this->form_validation->set_rules('cursoCoordenador','coordenador',array('greater_than[0]'),array('greater_than'=>'Selecione um professor coordenador'));
-        //delimitador
-        $this->form_validation->set_error_delimiters('<p class="text-danger">','</p>');
-        //condição para o formulario
-        if($this->form_validation->run() == FALSE){
-          $this->session->set_flashdata('formDanger','<strong>Não foi possível atualizar os dados do curso:</strong>');
-          $dados['graus']         = convert($this->Grau_model->getAll(), True);
-          $dados['periodo']       = convert($this->Periodo_model->getAll());
-          $dados['disciplinas']   = convert($this->disciplina_model->getAll(TRUE));
-          $dados['cursos']        = $this->Curso_model->getAll();
-          $dados['professores']   = convert($this->Professor_model->getAll(),True);
-          $this->load->view('includes/header',$dados);
-          $this->load->view('includes/sidebar');
-          $this->load->view('cursos/cursos');
-          $this->load->view('includes/footer');
-          $this->load->view('cursos/js_cursos');
-        }else{
-          $idCurso = $this->input->post('cursoId');
-          $curso = array(
-            'nome'          => $this->input->post('nomeCurso'),
-            'sigla'         => $this->input->post('cursoSigla'),
-            'qtdSemestres'  => $this->input->post('cursoQtdSemestres'),
-            'grau'          => $this->input->post('cursoGrau')
-          );
 
-          $periodo = $this->input->post('cursoPeriodos[]');
-          $disciplinas = $this->input->post('cursoDisciplinas[]');
-          $coordenador = $this->input->post('cursoCoordenador');
+    public function editar($id) {
+      $curso = Curso_model::withTrashed()->findOrFail($id);
+      $docente_id = $curso['docente_id'];
 
-          // echo '<pre>';
- 				 //      print_r($coordenador);
- 				 //  echo '</pre>';
-          // exit();
+      $data = array(
+        'curso' => $curso,
+        'modalidades' => Modalidade_model::all('id','nome_modalidade'),
+        'coordenador' => Pessoa_model::join('docente', 'pessoa.id', '=', 'docente.pessoa_id')
+                                      ->where('docente.id', '=', $docente_id)
+                                      ->select('pessoa.nome', 'docente.id','pessoa.prontuario')
+                                      ->get(),
+        'docentes' => Pessoa_model::join('docente', 'pessoa.id', '=', 'docente.pessoa_id')
+                                  ->whereNotIn('docente.id', function($query){
+                                      $query->from('curso')
+                                            ->where('curso.docente_id', '!=', null)
+                                            ->select('curso.docente_id');
+                                    })
+                                  ->where('docente.deletado_em', null)
+                                  ->select('docente.id', 'pessoa.nome', 'pessoa.prontuario')
+                                  ->get(),
+      );
+      $this->load->template('cursos/editar', compact('data','id'), 'cursos/js_cursos');
+    }
 
+    public function atualizar($id){
+      if($this->validar($id)) {
+        try {
+          $curso = Curso_model::withTrashed()->findOrFail($id);
+          $curso->nome_curso = $this->input->post('nome_curso');
+          $curso->modalidade_id = $this->input->post('modalidade_id');
+          if($this->input->post('docente_id')){
+            $curso->docente_id = $this->input->post('docente_id');
+          }else($curso->docente_id = null);
+          $curso->codigo_curso = $this->input->post('codigo_curso');
+          $curso->sigla_curso = $this->input->post('sigla_curso');
+          $curso->qtd_semestre = $this->input->post('qtd_semestre');
+          $curso->fechamento = $this->input->post('fechamento');
+          $curso->save();
 
-          if($this->Curso_model->updateCurso($idCurso, $curso)) {
-            $this->CursoTemPeriodo_model->delete($idCurso);
-            foreach ($periodo as $idPeriodo)
-              $this->CursoTemPeriodo_model->insert($idCurso,$idPeriodo);
-            $this->CursoTemDisciplina_model->delete($idCurso);
-            foreach ($disciplinas as $disciplina)
-              $this->CursoTemDisciplina_model->insert($idCurso,$disciplina);
-
-            // Retira os coordenados desse coordenador
-            $professor = $this->Professor_model->getCoordenadorCurso($idCurso);
-            if ($professor[0]['id'] != $coordenador)
-              $this->CoordenadorDe_model->delete($professor[0]['id']);
-
-            // Retira o coordenador atural
-            $this->Professor_model->setCoordenador(null,$idCurso,FALSE);
-
-            // Seta o novo coordenador
-            $this->Professor_model->setCoordenador($coordenador,$idCurso,TRUE);
-
-            // TODO: Terminar a alteração de coordenador do curso. Falta apenas alterar a relação de coordenadorDe
-
-            $this->session->set_flashdata('success','Curso atualizado com sucesso');
-          } else {
-            $this->session->set_flashdata('danger','Não foi possível atualizar os dados do curso, tente novamente ou entre em contato com o administrador do sistema. <br/> Caso tenha alterado a <b>sigla</b> e/ou <b>nome</b>, verifique se ela já não foi utilizada.');
-          }
-          redirect('Curso');
-        }
-      }else{
-        redirect('/');
+          $this->session->set_flashdata('success', 'Curso atualizado com sucesso');
+          redirect('curso');
+        } catch (Exception $ignored) {}
       }
+
+      $this->session->set_flashdata('danger', 'Problemas ao atualizar os dados do curso, tente novamente!');
+      $this->editar($id);
     }
-    /**
-      * Essa função irá procurar o id do Curso
-      * e irá alterar a propriedade dele para True ou False,
-      * assim não exclindo do banco.
-      * @author Felipe Ribeiro da Silva
-      * @since 2017/03/21
-    */
-    public function deletar ($id) {
-      if (verificaSessao() && verificaNivelPagina(array(1))) {
-        $this->load->model(array('Curso_model'));
-        if ($this->Curso_model->deleteCurso($id))
-          $this->session->set_flashdata('success','Curso desativado com sucesso');
-        else
-          $this->session->set_flashdata('danger','Não foi possível desativar o curso, tente novamente mais tarde ou entre em contato com o administrador do sistema.');
-        redirect('Curso');
-      }else{
-          redirect('/');
+
+    public function ativar($id){
+      try{
+      $curso = Curso_model::withTrashed()->findOrFail($id)->restore();
+      $this->session->set_flashdata('success', 'Curso ativado com sucesso');
+      }catch(Exception $e){
+        $this->session->set_flashdata('danger', 'Não foi possivel ativar o curso');
       }
-    }
-	   public function ativar ($id) {
-       if (verificaSessao() && verificaNivelPagina(array(1))){
-         $this->load->model('Curso_model');
-         if ( $this->Curso_model->able($id) )
-           $this->session->set_flashdata('success','Curso ativado com sucesso');
-         else
-           $this->session->set_flashdata('danger','Não foi possível ativar o Curso, tente novamente ou entre em contato com o administrador do sistema.');
-         redirect('Curso');
-       }else{
-           redirect('/');
-       }
-    }
-    /**
-      * Busca todas as disciplinas relacionadas ao curso informado
-      * @author Caio de Freitas
-      * @since 2017/03/31
-      * @param INT $id - ID do curso
-      */
-    public function disciplinas ($id) {
-      $this->load->model('CursoTemDisciplina_model');
-      $disciplinas = $this->CursoTemDisciplina_model->getAllDisciplinas($id);
-      echo json_encode($disciplinas);
+      redirect('curso');
     }
 
-	public function periodos ($id) {
-      $this->load->model('CursoTemPeriodo_model');
-      $periodos = $this->CursoTemPeriodo_model->getAllPeriodos($id);
-      echo json_encode($periodos);
+    public function deletar($id){
+      try {
+        $curso = Curso_model::findOrFail($id);
+        $curso->docente_id = null;
+        $curso->save();
+        $curso->delete();
+        $this->session->set_flashdata('success','Curso deletado com sucesso');
+        redirect("curso");
+      }catch (Exception $ignored) {}
+      $this->session->set_flashdata('danger','Erro ao deletar um curso, tente novamente');
+      redirect("curso");
     }
 
-	public function verificaNome(){
-      $validate_data = array('nome' => $this->input->get('nome'));
-      $this->form_validation->set_data($validate_data);
-      $this->form_validation->set_rules('nome', 'nome', 'is_unique[Curso.nome]');
+    public function validar($id = null) {
+      $this->form_validation->set_rules('nome_curso','nome','required|alpha_accent|min_length[5]|max_length[75]|trim|ucwords');
+      $this->form_validation->set_rules('modalidade_id','modalidade','required|integer');
+      $this->form_validation->set_rules('sigla_curso','sigla_curso','required|alpha|exact_length[3]|strtoupper');
+      $this->form_validation->set_rules('codigo_curso','codigo_curso','required|integer|greater_than[0]|less_than[100000]');
+      $this->form_validation->set_rules('qtd_semestre','semestres','required|integer|greater_than[0]');
+      $this->form_validation->set_rules('fechamento','fechamento','required');
 
-      if($this->form_validation->run() == FALSE){
-        echo "false";
-      }else{
-        echo "true";
+      $codigo = $this->input->post('codigo_curso');
+      $cursos_mesmo_codigo = Curso_model::withTrashed()->where('codigo_curso',$codigo)->where('id','!=',$id)->get();
+      if(!empty($cursos_mesmo_codigo[0])){
+          $this->form_validation->set_rules('codigo_curso','codigo','is_unique[curso.codigo_curso]');
       }
+      return $this->form_validation->run();
     }
+      
+      function ImportCsv() {
 
-    public function verificaSigla(){
-      $validate_data = array('sigla' => $this->input->get('sigla'));
-      $this->form_validation->set_data($validate_data);
-      $this->form_validation->set_rules('sigla', 'sigla', 'is_unique[Curso.sigla]');
+         $csv_array = CSVImporter::fromForm('csvfile');
+         //var_dump($csv_array);
+        
+			 if ($csv_array) {
+        // Faz a interação no array para poder gravar os dados na tabela 'disciplinas'
+				foreach ($csv_array as $row) {
+                  try {
+                  
+                    $curso = new Curso_model();
+                    $curso->nome_curso = $row[1];
+                    $curso->modalidade_id = $row[2];
+                    $curso->sigla_curso  = $row[3] ;
+                    $curso->codigo_curso = $row[4];
+                    $curso->qtd_semestre = $row[5];
+                    $curso->fechamento = $row[6];
+                    
 
-      if($this->form_validation->run() == FALSE){
-        echo "false";
-      }else{
-        echo "true";
-      }
-    }
+                    $curso->save();
+
+                    $this->session->set_flashdata('success','Curso cadastrado com sucesso');
+                    
+               
+                } catch (Exception $ignored){}
+                    
+			}
+                 redirect("Curso");
+}
   }
+  }
+
+
+
+  //select pessoa.nome, docente.id from pessoa inner join docente on pessoa.id = docente.pessoa_id
+  //where docente.id not in (SELECT docente_id from curso where docente_id is not null);
 ?>

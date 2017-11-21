@@ -17,6 +17,10 @@
       return $this->hasMany(Curso_model::class);
     }
 
+    public function setNomeModalidadeAttribute($nome_modalidade) {
+      $this->attributes['nome_modalidade'] = ucwords(mb_strtolower($nome_modalidade, "utf-8"));
+    }
+
   }
 
 

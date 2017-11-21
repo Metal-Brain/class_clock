@@ -11,7 +11,10 @@ class MY_Controller extends CI_Controller {
         if(is_null($this->name)){ $this->name = get_class($this); }
 
         // Informa o método que controlará as exceções
+
         // set_exception_handler([$this, '_exception_handler']);
+        set_exception_handler([$this, '_exception_handler']);
+
     }
 
     /**
@@ -87,11 +90,19 @@ class MY_Controller extends CI_Controller {
                 $sess->set_flashdata('danger', "{$model} não encontrado.");
                 back();
                 break;
+
             // case 'ValidationFailException':
             //     $sess->set_flashdata('danger',"O cadastro de {$this->name} falhou!");
             //     log_message('error', validation_errors());
             //     redirect($exception->getURL());
             //     break;
+
+            case 'ValidationFailException':
+                $sess->set_flashdata('danger',"O cadastro de {$this->name} falhou!");
+                log_message('error', validation_errors());
+                redirect($exception->getURL());
+                break;
+
             default:
                 // Se não for nenhum, chama o Exception Handler padrão do CodeIgniter
                 _exception_handler($exception);

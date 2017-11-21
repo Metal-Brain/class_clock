@@ -14,7 +14,8 @@
          * @since 2017/08/19
         */
         public function horarios() {
-            return $this->hasMany(Horario_model::class, 'turno_id')->orderBy('horario.inicio', 'asc');
+            return $this->belongsToMany(Horario_model::class, 'turno_horario',
+            'turno_id','horario_id')->orderBy('horario.inicio', 'asc');
         }
 
         public function getNomeAttribute(){ return $this->attributes['nome_turno']; }

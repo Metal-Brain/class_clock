@@ -1,63 +1,124 @@
-<script type="text/javascript">
-    $('#exampleModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget) // Button that triggered the modal
-        var recipient = button.data('whatever') // Extract info from data-* attributes
-        var recipientsigla = button.data('whateversigla')
-        var recipientnome = button.data('whatevernome')
-        var recipientQtdProf = button.data('whateverqtdprof')
-        var recipentSemestre = button.data('whateversemestre')
-        var recipientqtdAula = button.data('whateverqtdaula')
-        var recipientId = button.data('whateverid')
-        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-        var modal = $(this)
-        modal.find('.modal-title').text('Alterar Disciplina')
-        modal.find('#recipient-sigla').val(recipientsigla)
-        modal.find('#recipient-nome').val(recipientnome)
-        modal.find('#recipient-qtd-prof').val(recipientQtdProf)
-        modal.find('#recipient-semestre').val(recipentSemestre)
-        modal.find('#recipient-qtdAula').val(recipientqtdAula)
-        modal.find('#recipient-id').val(recipientId)
-    });
+<script>
+    $(document).ready(function(){
 
+      	$("#disciplinaTable").DataTable();
+        jQuery.validator.addMethod("alphanumeric", function(value, element) {
+          return this.optional(element) || /^[a-zA-Z0-9]+$/.test(value);
+        });
 
-	$('#exampleModal2').on('show.bs.modal', function (event) {
-		var button = $(event.relatedTarget) // Button that triggered the modal
-		var recipient = button.data('whatever') // Extract info from data-* attributes
-		var recipientsigla = button.data('whateversigla')
-		var recipientnome = button.data('whatevernome')
-		var recipientQtdProf = button.data('whateverqtdprof')
-		var recipentSemestre = button.data('whateversemestre')
-		var recipientqtdAula = button.data('whateverqtdaula')
-		var recipientId = button.data('whateverid')
-		// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-		// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-		var modal = $(this)
-		modal.find('.modal-title').text('Alterar Disciplina')
-		modal.find('#recipient-sigla').val(recipientsigla)
-		modal.find('#recipient-nome').val(recipientnome)
-		modal.find('#recipient-qtd-prof').val(recipientQtdProf)
-		modal.find('#recipient-semestre').val(recipentSemestre)
-		modal.find('#recipient-qtdAula').val(recipientqtdAula)
-		modal.find('#recipient-id').val(recipientId)
-	});
-</script>
+                // document.getElementById("sigla_curso").onkeypress = function(e) {
+                //   if ((this.value.length==5) && !(key == 8)){
+                //     return false;
+                //   }
+                //   document.getElementById("sigla_curso").onkeypress = function(e) {
+                //    var chr = /^[a-zA-Z0-9 ]$/;
+                //    var patt = new RegExp(chr);
+                //    var res = patt.test(String.fromCharCode(e.which));
+                //    return res;
+                //  }
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        $("#disciplinaTable").DataTable({
-            "language": {
-                "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Portuguese-Brasil.json"
+        $("#formDisciplina").validate({
+            rules: {
+                nome_disciplina: {
+                    required: true,
+                    minlength:5,
+                    maxlength:50
+                },
+                sigla_disciplina: {
+                    required: true,
+                    maxlength:5,
+                    minlength:3,
+                    alphanumeric: true
+                },
+                curso_id:{
+                  required:true,
+                },
+                tipo_sala_id:{
+                  required:true,
+                },
+                qtd_professor:{
+                    required:true,
+                    min:1,
+                    max:9,
+                    number:true
+                },
+                modulo:{
+                    required:true,
+                    min:1,
+                    max:99
+                },
+                qtd_aulas:{
+                    required:true,
+                    min:1,
+                    max:99
+                }
+            },
+                messages: {
+                nome_disciplina: {
+                    required:'Campo nome é obrigatório',
+                    minlength:'O nome deve conter pelo menos 5 caracteres',
+                    maxlength:'O nome deve ter no máximo 50 caracteres'
+                },
+                curso_id:{
+                    required:'Campo Curso é obrigatório',
+                },
+                tipo_sala_id:{
+                  required:'Campo Tipo de Sala é obrigatório',
+                },
+                sigla_disciplina:{
+                    required:'Campo sigla é obrigatório',
+                    maxlength: 'Tamanho maximo do campo é 5 caracteres',
+                    minlength:'Tamanho mínimo do campo é 3 caracteres',
+                    alphanumeric:'Não insira caracteres especiais.'
+                },
+                qtd_professor:{
+                    required:'Campo quantidade de professores é obrigatório',
+                    min:'Tamanho mínimo do campo é 1',
+                    max:'Tamanho maximo do campo é 1 caracter ou ate numero 9'
+                },
+                modulo:{
+                    required:'Campo modulo é obrigatório',
+                    min:'Tamanho mínimo do campo é 1',
+                    max:'Tamanho maximo do campo é 2 caracteres ou até numero 99'
+                },
+                qtd_aulas:{
+                    required:'Campo Qtd. Aulas por semana é obrigatório',
+                    min:'Tamanho mínimo do campo é 1',
+                    max:'Tamanho maximo do campo é 2 caracteres ou até numero 99'
+                }
             }
         });
     });
+
+</script>
+
+<script type="text/javascript">
+   	function confirmDelete(id, msg, funcao) {
+			bootbox.confirm({
+    		message: msg,
+    		buttons: {
+        	confirm: {
+            label: 'Sim',
+            className: 'btn-success'
+        	},
+        	cancel: {
+            label: 'Não',
+            className: 'btn-danger'
+        	}
+    		},
+    		callback: function (result) {
+        	if (result == true)
+						  window.location.href = '<?= site_url("disciplina/") ?>' + funcao + '/' + id;
+    		}
+			});
+		}
 </script>
 
 
 <script>
-    function disable(id) {
+    function exclude(id) {
         bootbox.confirm({
-            message: "Realmente deseja desativar essa disciplina?",
+            message: "Realmente deseja desativar essa Disciplina?",
             buttons: {
                 confirm: {
                     label: 'Sim',
@@ -70,14 +131,13 @@
             },
             callback: function (result) {
                 if (result)
-                    window.location.href = '<?= base_url("index.php/Disciplina/desativar/") ?>' + id
+                    window.location.href = '<?= base_url('index.php/Disciplina/deletar/') ?>' + id
             }
         });
     }
-
     function able(id) {
         bootbox.confirm({
-            message: "Realmente deseja ativar essa disciplina?",
+            message: "Realmente deseja ativar essa Disciplina?",
             buttons: {
                 confirm: {
                     label: 'Sim',
@@ -96,48 +156,5 @@
     }
 </script>
 
-<script type="text/javascript">
-	$(document).ready(function(){
-		$('#cadastrarDisciplina').validate({
-			rules: {
-				nome: { required: true, minlength: 5, remote: '<?= base_url("index.php/Disciplina/verificaNome/") ?>' },
-				sigla: { required: true, maxlength: 5, remote: '<?= base_url("index.php/Disciplina/verificaSigla/") ?>' },
-				qtdProf: { required: true, number: true, min: 1 },
-				semestre: { required: true, number: true, min: 1, max: 19 },
-				qtdAulas: { required: true, number: true, min: 1 }
-
-			},
-			messages: {
-				nome: { required: 'Campo obrigatório', minlength: 'O campo nome deve ter no mínimo 5 caracteres', remote: 'Este nome já está em uso' },
-				sigla: { required: 'Campo obrigatório', maxlength: 'O campo sigla deve ter no máximo 5 caracteres', remote: 'Esta sigla já está em uso' },
-				qtdProf: { required: 'Campo obrigatório', number: 'Digite apenas números', min: 'Digite um valor maior ou igual a 1' },
-				semestre: { required: 'Campo obrigatório', number: 'Digite apenas números', min: 'Digite um valor maior ou igual a 1', max: 'Digite um valor menor ou igual a 19'},
-				qtdAulas: { required: 'Campo obrigatório', number: 'Digite apenas números', min: 'Digite um valor maior ou igual a 1' }
-			}
-		});
-	});
-</script>
-
-<script type="text/javascript">
-	$(document).ready(function(){
-		$('#alterarDisciplina').validate({
-			rules: {
-				'recipient-nome': { required: true, minlength: 5 },
-				'recipient-sigla': { required: true, maxlength: 5 },
-				'recipient-qtd-prof': { required: true, number: true, min: 1 },
-				'recipient-semestre': { required: true, number: true, min: 1, max: 19 },
-				'recipient-qtdAula': { required: true, number: true, min: 1 }
-			},
-			messages: {
-				'recipient-nome': { required: 'Campo obrigatório', minlength: 'O campo nome deve ter no mínimo 5 caracteres' },
-				'recipient-sigla': { required: 'Campo obrigatório', maxlength: 'O campo sigla deve ter no máximo 5 caracteres' },
-				'recipient-qtd-prof': { required: 'Campo obrigatório', number: 'Digite apenas números', min: 'Digite um valor maior ou igual a 1' },
-				'recipient-semestre': { required: 'Campo obrigatório', number: 'Digite apenas números', min: 'Digite um valor maior ou igual a 1', max: 'Digite um valor menor ou igual a 19'},
-				'recipient-qtdAula': { required: 'Campo obrigatório', number: 'Digite apenas números', min: 'Digite um valor maior ou igual a 1' }
-			}
-		});
-	});
-</script>
-
-</body>
 </html>
+</body>
