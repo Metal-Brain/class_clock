@@ -6,4 +6,3 @@ class CSVImporter {
         return array_map('str_getcsv', file($_FILES[$name]['tmp_name']));
     }
 }
-

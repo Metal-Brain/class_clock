@@ -1,6 +1,6 @@
- <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10" style="padding-top: 5px">
+<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10" style="padding-top: 5px">
 
-   <div class="row" style="margin-top: 5px;">
+  <div class="row" style="margin-top: 5px;">
    <div class="col-md-12">
      <?php if ($this->session->flashdata('success')) : ?>
        <div class="alert alert-success">
@@ -20,7 +20,9 @@
 
 					<div class="form-group">
 						<label>Nome</label>
-						<input type="text" class="form-control" name="nome_disciplina" placeholder="Nome" value="<?= htmlspecialchars($data['disciplina']['nome_disciplina']) ?>">
+						<input type="text" class="form-control" onkeypress="this.value = this.value.toLowerCase();" 
+												onChange="this.value = this.value.toLowerCase();" 
+												onpaste="this.value = this.value.toLowerCase();" name="nome_disciplina" placeholder="Nome" value="<?= htmlspecialchars($data['disciplina']['nome_disciplina']) ?>">
 					</div>
 
 					<div class="form-group">
@@ -32,9 +34,22 @@
 					<div class="form-group test">
 						<label>Curso</label>
 						<select name="curso_id" class="form-control" style="max-width:400px;" value="<?= $data['disciplina']['curso_id'] ?>">
+								
                             <?php foreach($data['cursos'] as $curso){ ?>
-								<option value="<?=$curso['id'] ?>"><?=$curso['nome_curso'] ?></option>
-							<?php }?>
+								<?php if($data['disciplina']['curso_id'] == $curso['id'] ){ ?>
+										
+										<option value="<?=$curso['id'] ?>" selected><?=$curso['nome_curso'] ?></option>
+										
+								<?php 	}else{ ?>
+										<option value="<?=$curso['id'] ?>"><?=$curso['nome_curso'] ?></option>
+										
+								<?php	}
+								
+								
+								
+							
+								
+							 }?>
 						</select>
 					</div>
 
@@ -56,9 +71,18 @@
 					<div class="form-group">
 						<label>Tipo de sala Necessária</label>
 						<select name="tipo_sala_id" class="form-control" style="max-width:400px;" value="<?= $data['disciplina']['tipo_sala_id'] ?>">
+					
                             <?php foreach($data['tipo_salas'] as $curso){ ?>
-								<option value="<?=$curso['id'] ?>"><?=$curso['nome_tipo_sala'] ?></option>
-							<?php }?>
+								<?php if($data['disciplina']['tipo_sala_id'] == $curso['id'] ){ ?>
+									<option value="<?=$curso['id'] ?>" selected><?=$curso['nome_tipo_sala'] ?></option>
+								
+								<?php }else{ ?>
+									<option value="<?=$curso['id'] ?>"><?=$curso['nome_tipo_sala'] ?></option>
+									
+								<?php }
+							
+							}?>
+							
 						</select>
 					</div>
 

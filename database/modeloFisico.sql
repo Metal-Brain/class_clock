@@ -30,6 +30,7 @@ CREATE TABLE IF NOT EXISTS `horario`.`area` (
   `id` SMALLINT(6) NOT NULL AUTO_INCREMENT,
   `nome_area` VARCHAR(50) NOT NULL,
   `codigo` CHAR(5) NULL,
+  `deletado_em` TIMESTAMP NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -49,7 +50,6 @@ CREATE TABLE IF NOT EXISTS `horario`.`pessoa` (
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
-
 -- -----------------------------------------------------
 -- Table `horario`.`docente`
 -- -----------------------------------------------------
@@ -63,6 +63,8 @@ CREATE TABLE IF NOT EXISTS `horario`.`docente` (
   `ingresso_campus` DATE NOT NULL,
   `ingresso_ifsp` DATE NOT NULL,
   `regime` CHAR(1) NOT NULL,
+  `titulacao` SMALLINT NULL COMMENT 'Campo graduação armazenará os números referentes à graduação do docente, sendo 4 = graduação, 3 = especialização, 2 = mestrado e 1 = doutorado.',
+  `nivel_carreira` CHAR(4) NULL,
   `deletado_em` TIMESTAMP NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_docente_area1_idx` (`area_id` ASC),
@@ -204,7 +206,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `horario`.`turma` ;
 
 CREATE TABLE IF NOT EXISTS `horario`.`turma` (
-  `id` INT(11) NOT NULL,
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
   `disciplina_id` SMALLINT(6) NOT NULL,
   `periodo_id` INT(11) NOT NULL,
   `turno_id` TINYINT(4) NOT NULL,
@@ -242,6 +244,7 @@ CREATE TABLE IF NOT EXISTS `horario`.`fpa` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `docente_id` INT(11) NOT NULL,
   `periodo_id` INT(11) NOT NULL,
+  `deletado_em` TIMESTAMP NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_fpa_docente1_idx` (`docente_id` ASC),
   INDEX `fk_fpa_periodo1_idx` (`periodo_id` ASC),
@@ -280,8 +283,9 @@ DROP TABLE IF EXISTS `horario`.`disponibilidade` ;
 CREATE TABLE IF NOT EXISTS `horario`.`disponibilidade` (
   `fpa_id` INT(11) NOT NULL,
   `horario_id` TINYINT(4) NOT NULL,
-  PRIMARY KEY (`fpa_id`, `horario_id`),
-  INDEX `fk_fpa_has_horario_horario1_idx` (`horario_id` ASC),
+  `dia_semana` CHAR(3) NOT NULL,
+  `deletado_em` TIMESTAMP NULL DEFAULT NULL,
+  PRIMARY KEY (`fpa_id`, `horario_id`,`dia_semana` ),
   INDEX `fk_fpa_has_horario_fpa1_idx` (`fpa_id` ASC),
   CONSTRAINT `fk_fpa_has_horario_fpa1`
     FOREIGN KEY (`fpa_id`)
@@ -303,21 +307,22 @@ DROP TABLE IF EXISTS `horario`.`preferencia` ;
 
 CREATE TABLE IF NOT EXISTS `horario`.`preferencia` (
   `fpa_id` INT(11) NOT NULL,
-  `turma_id` INT(11) NOT NULL,
+  `disciplina_id` SMALLINT NOT NULL,
   `ordem` INT(11) NOT NULL,
-  PRIMARY KEY (`fpa_id`, `turma_id`),
+  `deletado_em` TIMESTAMP NULL DEFAULT NULL,
   INDEX `fk_disciplina_has_fpa_fpa1_idx` (`fpa_id` ASC),
-  INDEX `fk_preferencias_disciplinas_oferecidas1_idx` (`turma_id` ASC),
+  PRIMARY KEY (`fpa_id`, `disciplina_id`),
+  INDEX `fk_preferencias_disciplinas_oferecidas1_idx` (`disciplina_id` ASC),
   CONSTRAINT `fk_disciplina_has_fpa_fpa1`
     FOREIGN KEY (`fpa_id`)
     REFERENCES `horario`.`fpa` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_preferencias_disciplinas_oferecidas1`
-    FOREIGN KEY (`turma_id`)
-    REFERENCES `horario`.`turma` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    FOREIGN KEY (`disciplina_id`)
+    REFERENCES `horario`.`disciplina` (`id`)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -451,10 +456,58 @@ CREATE TABLE IF NOT EXISTS `horario`.`quadro` (
 ENGINE = InnoDB;
 
 
+-- -----------------------------------------------------
+-- View `horario`.`docente_preferencia`
+-- -----------------------------------------------------
+DROP VIEW IF EXISTS `docente_preferencia`;
+
+CREATE VIEW `docente_preferencia` AS
+select docente.id as docente_id, pessoa.nome, disciplina.nome_disciplina, curso.nome_curso, curso.id as curso_id from disciplina
+	join curso on disciplina.curso_id = curso.id
+	join preferencia on preferencia.disciplina_id = disciplina.id
+  join fpa on preferencia.fpa_id = fpa.id
+  join docente on fpa.docente_id = docente.id
+  join pessoa on docente.pessoa_id = pessoa.id
+  order by curso.nome_curso, disciplina.nome_disciplina ASC;
+
+  -- -----------------------------------------------------
+  -- View `horario`.`docente_classificacao`
+  -- -----------------------------------------------------
+  CREATE  OR REPLACE VIEW `docente_classificacao` AS
+  select curso.nome_curso, curso.id as curso_id, disciplina.nome_disciplina, disciplina.id, docente.id as docente_id, pessoa.nome from disciplina
+  	join curso on disciplina.curso_id = curso.id
+  	join preferencia on preferencia.disciplina_id = disciplina.id
+    join fpa on preferencia.fpa_id = fpa.id
+    join docente on fpa.docente_id = docente.id
+    join pessoa on docente.pessoa_id = pessoa.id
+    order by curso.nome_curso, disciplina.nome_disciplina, 
+    docente.titulacao, docente.nivel_carreira, docente.ingresso_campus, docente.ingresso_ifsp, docente.nascimento ASC;
+
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
+-- -----------------------------------------------------
+-- Stored procedure
+-- -----------------------------------------------------
+
+DROP procedure IF EXISTS classificacao;
+DELIMITER $$
+CREATE PROCEDURE classificacao (IN id INT)
+  BEGIN
+  	SELECT * FROM docente_classificacao WHERE curso_id = id;
+  END$$
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS ativa_periodo;
+DELIMITER $$
+CREATE PROCEDURE ativa_periodo(idPeriodo INT)
+BEGIN
+	UPDATE periodo SET ativo = 0 WHERE id != idPeriodo;
+	UPDATE periodo SET ativo = 1 WHERE id = idPeriodo;
+END$$
+DELIMITER ;
 
 
 -- -----------------------------------------------------
@@ -475,28 +528,6 @@ INSERT INTO modalidade(id, nome_modalidade, codigo) VALUES(3, "Pos Graduação",
 INSERT INTO modalidade(id, nome_modalidade, codigo) VALUES(4, "Mestrado", "001321");
 INSERT INTO modalidade(id, nome_modalidade, codigo) VALUES(5, "Doutorado", "44121");
 
-INSERT INTO curso(id, modalidade_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento)
-    VALUES(1, 1, 111, "Análise e Desenvolvimento de Sistemas", "ADS", 6, "B");
-INSERT INTO curso(id, modalidade_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento)
-    VALUES(2, 2, 222, "Processos Gerenciais", "PRG", 8, "S");
-INSERT INTO curso(id, modalidade_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento)
-    VALUES(3, 3, 333, "Fisica", "FIS", 4, "S");
-INSERT INTO curso(id, modalidade_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento)
-    VALUES(4, 4, 444, "Computação Avançada", "CPA", 3, "B");
-INSERT INTO curso(id, modalidade_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento)
-    VALUES(5, 5, 544, "Cura do Cancer", "CDC", 8, "B");
-
-INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas, modulo)
-    VALUES(1, 1, 5, "Análise de Sistemas", "ADS", 2, 4, 1);
-INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas, modulo)
-    VALUES(2, 2, 4, "Matemática", "MAT", 1, 6, 2);
-INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas, modulo)
-    VALUES(3, 3, 3, "Fisica Avancada", "FSA", 1, 8, 3);
-INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas, modulo)
-    VALUES(4, 4, 2, "Hardware", "HDW", 2, 2, 4);
-INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas, modulo)
-    VALUES(5, 5, 1, "Medicina", "MED", 2, 2, 5);
-
 INSERT INTO turno(id, nome_turno) VALUES(1, "Matutino");
 INSERT INTO turno(id, nome_turno) VALUES(2, "Vespertino");
 INSERT INTO turno(id, nome_turno) VALUES(3, "Noturno");
@@ -511,18 +542,178 @@ INSERT INTO horario(id, inicio, fim) VALUES(5, '10:10:00', '20:00');
 
 INSERT INTO turno_horario(turno_id, horario_id) VALUES(1, 1);
 INSERT INTO turno_horario(turno_id, horario_id) VALUES(1, 2);
+INSERT INTO turno_horario(turno_id, horario_id) VALUES(1, 3);
+INSERT INTO turno_horario(turno_id, horario_id) VALUES(2, 1);
+INSERT INTO turno_horario(turno_id, horario_id) VALUES(2, 2);
+INSERT INTO turno_horario(turno_id, horario_id) VALUES(2, 3);
+INSERT INTO turno_horario(turno_id, horario_id) VALUES(3, 1);
+INSERT INTO turno_horario(turno_id, horario_id) VALUES(3, 2);
+INSERT INTO turno_horario(turno_id, horario_id) VALUES(3, 3);
 
 INSERT INTO area(id, codigo, nome_area) VALUES(1, "12345", "Informática");
+INSERT INTO area(id, codigo, nome_area) VALUES(2, "54321", "Administração");
+INSERT INTO area(id, codigo, nome_area) VALUES(3, "12365", "Engenharia");
 
-INSERT INTO pessoa(id, nome, prontuario, senha, email) VALUES(1, "Adminsitrador", "151515", "$2y$10$2uOth8K7IW1YGSuCvAQDVe.6W53RSCOJWji9eCNTqN3DSfTHr.5oe
-", "email@ifsp.edu");
-INSERT INTO pessoa(id, nome, prontuario, senha, email) VALUES(2, "Docente 1", "151521", "$2y$10$2uOth8K7IW1YGSuCvAQDVe.6W53RSCOJWji9eCNTqN3DSfTHr.5oe
-", "joao@ifsp.edu");
+INSERT INTO pessoa(id, nome, prontuario, senha, email, deletado_em) VALUES
+  (1, 'Administrador', '151515', '$2y$10$uLseEnv679FVb2nJy47ecu25jofJY36htCoalU2DzgQvldniFOnDm', 'email@ifsp.edu', NULL);
+INSERT INTO pessoa(id, nome, prontuario, senha, email, deletado_em) VALUES
+  (2, 'Docente 1', '123456', '$2y$10$Iu3fV8ov7qthYeFYTmn2beFId1PKDWyAe4I1ETpbp.IjTO7n1eTKe', 'joao@ifsp.edu', NULL);
+INSERT INTO pessoa(id, nome, prontuario, senha, email, deletado_em) VALUES
+  (3, 'Docente 2', '654321', '$2y$10$wzhXIz5.a7bZEgRu21nNOeZTYw1iHLusBG2GYjEoGnrapNTuq4xB6', 'paula@ifsp.edu', NULL);
+INSERT INTO pessoa(id, nome, prontuario, senha, email, deletado_em) VALUES
+  (4, 'Docente 3', '012345', '$2y$10$dD2Fh/BT1B1HAumJhKBI0ulsP4l9i9ahXea.p4m5o72yfvMCOGvQe', 'roberto@ifsp.edu', NULL);
+INSERT INTO pessoa(id, nome, prontuario, senha, email, deletado_em) VALUES
+  (5, 'Docente 4', '543210', '$2y$10$GSYKmw1p.P2rFm5usYnSGOMu57scxoPyWZjPCH46n5MAE35uYfkXK', 'alberto@ifsp.edu', NULL);
+INSERT INTO pessoa(id, nome, prontuario, senha, email, deletado_em) VALUES
+  (6, 'Docente 5', '111111', '$2y$10$czO4JjZ0gpHvHADiD9hM7Oox2Ms5LfKFfDDxw1JEB5LQhoYMC48yC', 'gilberto@ifsp.edu', NULL);
+INSERT INTO pessoa(id, nome, prontuario, senha, email, deletado_em) VALUES
+  (7, 'Docente 6', '222222', '$2y$10$HpYQUWZOTukHlVB.82Pd6uBEgvflNit2f6Rn1LORre6y/pNj7sdbK', 'rogerio@ifsp.edu', NULL);
+INSERT INTO pessoa(id, nome, prontuario, senha, email, deletado_em) VALUES
+  (8, 'Docente 7', '333333', '$2y$10$KkxzMCsquSVJW0NYCdkwnuByUplHVmTwzZvmAzlx9Mkk1GYiunZhi', 'andreia@ifsp.edu', NULL);
+INSERT INTO pessoa(id, nome, prontuario, senha, email, deletado_em) VALUES
+  (9, 'Docente 8', '444444', '$2y$10$91rPFqB0IjLeLek3uu7dSed3pnx/aInq8IR241tY7xjlpQ37IlXYS', 'astolfo@ifsp.edu', NULL);
+INSERT INTO pessoa(id, nome, prontuario, senha, email, deletado_em) VALUES
+  (10, 'Docente 9', '555555', '$2y$10$wqU/y98qaJlaFRYVwwlQkuHjCJSCEnmnuA93gVn.3SBnvr8oxvyGu', 'lucas@ifsp.edu', NULL);
+INSERT INTO pessoa(id, nome, prontuario, senha, email, deletado_em) VALUES
+  (11, 'Docente 10', '666666', '$2y$10$4Q5HfLfYK9rFco1uFdnvG.1dnxkhLeIIztGBqirH7s2XaUTyCsB7.', 'mario@ifsp.edu', NULL);
+INSERT INTO pessoa(id, nome, prontuario, senha, email, deletado_em) VALUES
+  (12, 'Docente 11', '917336', '$2y$10$lIfGiZlNRNju/Jm2GZ9sWuUB2MrRjAChIQYkZhWpK93zJSljB2r/G', 'roberta@ifsp.edu', NULL);
+INSERT INTO pessoa(id, nome, prontuario, senha, email, deletado_em) VALUES
+  (13, 'Docente 13', '888888', '$2y$10$0YGi8SO7DhIvM5BVQrJw0eifg9viylrP1RoimRZ9FxDi7OHjvOBmO', 'gustavo@ifsp.edu', NULL);
+INSERT INTO pessoa(id, nome, prontuario, senha, email, deletado_em) VALUES
+  (14, 'Docente 14', '999999', '$2y$10$K72VjLV8miFJWPUlUGNneOPd/mh9YtdzZS5HTWzNCzj.JLGNFMkQO', 'olavo@ifsp.edu', NULL);
+INSERT INTO pessoa(id, nome, prontuario, senha, email, deletado_em) VALUES
+  (15, 'Docente 15', '127862', '$2y$10$dQdBD/I2rXkN8Sn2dYclluh1/GEPzNZdM1Yx/KR0pAhZ2PpJfdv7.', 'alexandre@ifsp.edu', NULL);
+INSERT INTO pessoa(id, nome, prontuario, senha, email, deletado_em) VALUES
+  (16, 'Docente 16', '987452', '$2y$10$U8XKxGVaCmRQXk.FUpClzuqSUr7547Ef4iSEngVKc/tPaE7d9U1vO', 'marcella@ifsp.edu', NULL);
+INSERT INTO pessoa(id, nome, prontuario, senha, email, deletado_em) VALUES
+  (17, 'Docente 17', '134671', '$2y$10$Oy5/rFzkOt.RdMP029Mz5eXAj4So4ZAxl7mW7fVoeEKhMmkGD9QSG', 'deborah@ifsp.edu', NULL);
+INSERT INTO pessoa(id, nome, prontuario, senha, email, deletado_em) VALUES
+  (18, 'Docente 18', '131619', '$2y$10$XpJivx2bdoXA7RDNzeoI2.Dj34Ffsjyya8iiDDgvBdoF/tY3naew.', 'antonio@ifsp.edu', NULL);
+INSERT INTO pessoa(id, nome, prontuario, senha, email, deletado_em) VALUES
+  (19, 'Docente 19', '020498', '$2y$10$elWAYijkeNDjYyMkDMDPauB.RgwG44JSbVblumVI6Sa/em864cwAa', 'lais@ifsp.edu', NULL);
+INSERT INTO pessoa(id, nome, prontuario, senha, email, deletado_em) VALUES
+  (20, 'Docente 20', '090895', '$2y$10$CUvr//0ZlzLetvFgrSuiFedghqxTnPEtLGVKJffk/2KlabBs2fGKu', 'rosemeire@ifsp.edu', NULL);
+INSERT INTO pessoa(id, nome, prontuario, senha, email, deletado_em) VALUES
+  (21, 'Docente 99', '165504', '$2y$10$5h3qhIXo0htitOHQl4wZPu2cUW1UqT9dpWDGSBu/Yk4CGx7YjSMgG', 'nikolas@hotmail.com', NULL);
 
-INSERT INTO docente(id, pessoa_id, area_id, nascimento, ingresso_campus, ingresso_ifsp, regime) VALUES(1, 1, 1, "1996/08/11", "2007/08/11", "2007/08/11", 1);
 
-INSERT INTO tipo_pessoa(tipo_id, pessoa_id) VALUES(1, 1), (4, 2);
+INSERT INTO docente(id, pessoa_id, area_id, nascimento, ingresso_campus, ingresso_ifsp, regime, titulacao, nivel_carreira, deletado_em) VALUES
+  (1, 2, 1, '1996-08-11', '2007-08-11', '2007-08-11', '1', 4, '102', NULL);
+INSERT INTO docente(id, pessoa_id, area_id, nascimento, ingresso_campus, ingresso_ifsp, regime, titulacao, nivel_carreira, deletado_em) VALUES
+  (2, 21, 1, '2017-11-01', '2017-11-01', '2017-11-01', '1', 4, '202', NULL);
+INSERT INTO docente(id, pessoa_id, area_id, nascimento, ingresso_campus, ingresso_ifsp, regime, titulacao, nivel_carreira, deletado_em) VALUES
+  (3, 11, 1, '2017-11-07', '2017-11-15', '2017-11-03', '0', 3, '102', NULL);
+INSERT INTO docente(id, pessoa_id, area_id, nascimento, ingresso_campus, ingresso_ifsp, regime, titulacao, nivel_carreira, deletado_em) VALUES
+  (4, 12, 1, '2017-11-07', '2017-11-08', '2017-11-30', '0', 3, '102', NULL);
+INSERT INTO docente(id, pessoa_id, area_id, nascimento, ingresso_campus, ingresso_ifsp, regime, titulacao, nivel_carreira, deletado_em) VALUES
+  (5, 13, 1, '2017-11-24', '2017-11-10', '2017-11-01', '0', 3, '102', NULL);
+INSERT INTO docente(id, pessoa_id, area_id, nascimento, ingresso_campus, ingresso_ifsp, regime, titulacao, nivel_carreira, deletado_em) VALUES
+  (6, 14, 1, '2017-11-15', '2017-11-09', '2017-11-11', '0', 4, '102', NULL);
+INSERT INTO docente(id, pessoa_id, area_id, nascimento, ingresso_campus, ingresso_ifsp, regime, titulacao, nivel_carreira, deletado_em) VALUES
+  (7, 15, 1, '2017-11-01', '2017-11-02', '2017-11-10', '1', 4, '102', NULL);
+INSERT INTO docente(id, pessoa_id, area_id, nascimento, ingresso_campus, ingresso_ifsp, regime, titulacao, nivel_carreira, deletado_em) VALUES
+  (8, 16, 1, '2017-11-09', '2017-11-09', '2017-11-25', '0', 3, '202', NULL);
+INSERT INTO docente(id, pessoa_id, area_id, nascimento, ingresso_campus, ingresso_ifsp, regime, titulacao, nivel_carreira, deletado_em) VALUES
+  (9, 17, 1, '2017-11-16', '2017-11-02', '2017-11-01', '1', 2, '104', NULL);
+INSERT INTO docente(id, pessoa_id, area_id, nascimento, ingresso_campus, ingresso_ifsp, regime, titulacao, nivel_carreira, deletado_em) VALUES
+  (10, 18, 1, '2017-11-08', '2017-11-03', '2017-11-10', '1', 1, '104', NULL);
+INSERT INTO docente(id, pessoa_id, area_id, nascimento, ingresso_campus, ingresso_ifsp, regime, titulacao, nivel_carreira, deletado_em) VALUES
+  (11, 19, 1, '2017-11-08', '2017-11-01', '2017-11-10', '1', 1, '201', NULL);
+INSERT INTO docente(id, pessoa_id, area_id, nascimento, ingresso_campus, ingresso_ifsp, regime, titulacao, nivel_carreira, deletado_em) VALUES
+  (12, 3, 1, '2017-11-09', '2017-11-14', '2017-11-04', '1', 2, '104', NULL);
+INSERT INTO docente(id, pessoa_id, area_id, nascimento, ingresso_campus, ingresso_ifsp, regime, titulacao, nivel_carreira, deletado_em) VALUES
+  (13, 20, 1, '2017-11-08', '2017-11-08', '2017-11-02', '0', 1, '202', NULL);
+INSERT INTO docente(id, pessoa_id, area_id, nascimento, ingresso_campus, ingresso_ifsp, regime, titulacao, nivel_carreira, deletado_em) VALUES
+  (14, 4, 1, '2017-11-15', '2017-11-08', '2017-11-09', '1', 2, '201', NULL);
+INSERT INTO docente(id, pessoa_id, area_id, nascimento, ingresso_campus, ingresso_ifsp, regime, titulacao, nivel_carreira, deletado_em) VALUES
+  (15, 5, 1, '2017-11-08', '2017-11-02', '2017-11-09', '0', 1, '201', NULL);
+INSERT INTO docente(id, pessoa_id, area_id, nascimento, ingresso_campus, ingresso_ifsp, regime, titulacao, nivel_carreira, deletado_em) VALUES
+  (16, 6, 1, '2017-11-02', '2017-11-03', '2017-11-04', '0', 2, '201', NULL);
+INSERT INTO docente(id, pessoa_id, area_id, nascimento, ingresso_campus, ingresso_ifsp, regime, titulacao, nivel_carreira, deletado_em) VALUES
+  (17, 7, 1, '2017-11-01', '2017-11-02', '2017-11-29', '0', 2, '201', NULL);
+INSERT INTO docente(id, pessoa_id, area_id, nascimento, ingresso_campus, ingresso_ifsp, regime, titulacao, nivel_carreira, deletado_em) VALUES
+  (18, 8, 1, '2017-11-01', '2017-11-03', '2017-11-27', '0', 2, '201', NULL);
+INSERT INTO docente(id, pessoa_id, area_id, nascimento, ingresso_campus, ingresso_ifsp, regime, titulacao, nivel_carreira, deletado_em) VALUES
+  (19, 9, 1, '2017-11-17', '2017-11-18', '2017-11-28', '0', 1, '103', NULL);
+INSERT INTO docente(id, pessoa_id, area_id, nascimento, ingresso_campus, ingresso_ifsp, regime, titulacao, nivel_carreira, deletado_em) VALUES
+  (20, 10, 1, '2017-11-24', '2017-11-10', '2017-11-16', '1', 1, '104', NULL);
+
+INSERT INTO curso (id, docente_id, modalidade_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento, deletado_em) VALUES
+  (1, 4, 1, '111', 'Análise E Desenvolvimento De Sistemas', 'ADS', 6, 'B', NULL);
+INSERT INTO curso (id, docente_id, modalidade_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento, deletado_em) VALUES
+  (2, 7, 2, '222', 'Processos Gerenciais', 'PRG', 8, 'S', NULL);
+INSERT INTO curso (id, docente_id, modalidade_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento, deletado_em) VALUES
+  (3, 19, 3, '333', 'Fisica', 'FIS', 4, 'S', NULL);
+INSERT INTO curso (id, docente_id, modalidade_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento, deletado_em) VALUES
+  (4, 5, 4, '444', 'Computação Avançada', 'CPA', 3, 'B', NULL);
+INSERT INTO curso (id, docente_id, modalidade_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento, deletado_em) VALUES
+  (5, 8, 5, '544', 'Cura Do Cancer', 'CDC', 8, 'B', NULL);
+INSERT INTO curso (id, docente_id, modalidade_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento, deletado_em) VALUES
+  (6, 2, 2, '123', 'Ciencias Contabeis', 'CCS', 8, 'B', NULL);
+INSERT INTO curso (id, docente_id, modalidade_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento, deletado_em) VALUES
+  (7, 18, 2, '669', 'Matematica', 'MAT', 8, 'B', NULL);
+INSERT INTO curso (id, docente_id, modalidade_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento, deletado_em) VALUES
+  (8, 10, 2, '445', 'Biologia', 'BIO', 8, 'B', NULL);
+INSERT INTO curso (id, docente_id, modalidade_id, codigo_curso, nome_curso, sigla_curso, qtd_semestre, fechamento, deletado_em) VALUES
+  (9, 3, 2, '999', 'Engenharia Civil', 'ENG', 9, 'B', NULL);
+
+
+INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas, modulo)
+    VALUES(1, 1, 5, "Análise de Sistemas", "ADS", 2, 4, 1);
+INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas, modulo)
+    VALUES(2, 2, 4, "Matemática", "MAT", 1, 6, 2);
+INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas, modulo)
+    VALUES(3, 3, 3, "Fisica Avancada", "FSA", 1, 8, 3);
+INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas, modulo)
+    VALUES(4, 4, 2, "Hardware", "HDW", 2, 2, 4);
+INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas, modulo)
+    VALUES(5, 5, 1, "Medicina", "MED", 2, 2, 5);
+INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas, modulo)
+    VALUES(6, 1, 5, "Topicos Avançados", "TPA", 3, 4, 5);
+INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas, modulo)
+    VALUES(7, 2, 4, "Segurança da Informação", "SEG", 4, 4, 4);
+INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas, modulo)
+    VALUES(8, 3, 3, "Redes de Computadores", "RDC", 2, 7, 5);
+INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas, modulo)
+    VALUES(9, 4, 2, "Projeto Integrado", "PRI", 2, 6, 6);
+INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas, modulo)
+    VALUES(10, 5, 1, "Desenvolvimento Web 1", "DW1", 4, 4, 3);
+INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas, modulo)
+    VALUES(11, 1, 5, "Engenharia de Software", "ENG", 3, 4, 2);
+INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas, modulo)
+    VALUES(12, 2, 4, "Gestao de TI", "GTI", 2, 3, 3);
+INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas, modulo)
+    VALUES(13, 3, 3, "Sistemas de Informações Gerencias", "SIG", 5, 6, 2);
+INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas, modulo)
+    VALUES(14, 4, 2, "Implantação de Servidores", "IPS", 2, 6, 4);
+INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas, modulo)
+    VALUES(15, 5, 1, "Banco de Dados 1", "BD1", 2, 4, 1);
+INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas, modulo)
+    VALUES(16, 1, 5, "Probabilidade e Estatistica", "PEE", 3, 2, 2);
+INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas, modulo)
+    VALUES(17, 2, 4, "Ingles", "ING", 2, 4, 3);
+INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas, modulo)
+    VALUES(18, 3, 3, "Comunicação e Expressão", "CEE", 1, 2, 1);
+INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas, modulo)
+    VALUES(19, 4, 2, "Matematica Discreta 1", "MD1", 2, 6, 4);
+INSERT INTO disciplina(id, curso_id, tipo_sala_id, nome_disciplina, sigla_disciplina, qtd_professor, qtd_aulas, modulo)
+    VALUES(20, 5, 1, "Arquitetura de Computadores", "ARC", 2, 8, 6);
+
+INSERT INTO tipo_pessoa(tipo_id, pessoa_id) VALUES (1, 1), (2, 11), (4, 2), (4, 3), (4, 4), (4, 5), (4, 6), (4, 7), (4, 8), (4, 9), (4, 10), (4, 11), (4, 12),
+  (4, 13), (4, 14), (4, 15), (4, 16), (4, 17), (4, 18), (4, 19), (4, 20), (4, 21);
 
 INSERT INTO semana(nome) VALUES ('Segunda-feira'),('Terça-feira'),('Quarta-feira'),('Quinta-feira'),('Sexta-feira'), ('Sabado');
 
-INSERT INTO periodo(nome, ativo) VALUES('2017-2', '0'), ('2018-1', '1'),('2017-1', '0');
+INSERT INTO periodo(nome, ativo) VALUES('2017-2', '0'), ('2018-1', '1'), ('2017-1', '0'), ('2016-1', '0'), ('2016-2', '0');
+
+INSERT INTO fpa(docente_id, periodo_id) VALUES ('1', '2'), ( '2', '2'), ( '3', '2'), ( '4', '2'), ( '5', '2'), ( '6', '2'), ( '7', '2'), ( '8', '2');
+
+INSERT INTO preferencia (fpa_id, disciplina_id, ordem) VALUES ('1', '2', '1'), ('1', '5', '2'), ('1', '6', '3');
+INSERT INTO preferencia (fpa_id, disciplina_id, ordem) VALUES ('2', '3', '1'), ('2', '10', '2'), ('2', '1', '3');
+INSERT INTO preferencia (fpa_id, disciplina_id, ordem) VALUES ('3', '11', '1'), ('3', '9', '2'), ('3', '20', '3');
+INSERT INTO preferencia (fpa_id, disciplina_id, ordem) VALUES ('4', '17', '1'), ('4', '7', '2'), ('4', '18', '3');
+INSERT INTO preferencia (fpa_id, disciplina_id, ordem) VALUES ('5', '6', '1'), ('5', '4', '2'), ('5', '16', '3');
+INSERT INTO preferencia (fpa_id, disciplina_id, ordem) VALUES ('6', '8', '1'), ('6', '1', '2'), ('6', '13', '3');
+INSERT INTO preferencia (fpa_id, disciplina_id, ordem) VALUES ('7', '9', '1'), ('7', '2', '2'), ('7', '8', '3');
+INSERT INTO preferencia (fpa_id, disciplina_id, ordem) VALUES ('8', '15', '1'), ('8', '12', '2'), ('8', '10', '3');

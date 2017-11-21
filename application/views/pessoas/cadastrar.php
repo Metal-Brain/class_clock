@@ -18,7 +18,7 @@
 	<form class="formPessoas" action="<?= site_url('pessoa/salvar')?>" method="post">
 		<label>Nome completo:</label>
 		<div class="form-group width-400">
-			<input id="nome" name="nome" class="form-control" type="text" placeholder="Nome" value="<?= set_value('nome')?>">
+			<input id="nome" name="nome" class="form-control" type="text" placeholder="Nome" onkeyup="mascara(this,alphanum);" value="<?= set_value('nome')?>">
 			<span class="text-danger">
 				<?= form_error('nome') ?>
 			</span>
@@ -87,18 +87,62 @@
 				</span>
 			</div>
 
-			<!-- <label>Área:</label>
-			<div class="form-group width-180">
-				<div class="dropdown">
-					<button class="btn dropdown-toggle" type="button" data-toggle="dropdown">Selecione
-					<span class="caret"></span></button>
-					<ul class="dropdown-menu">
-						<li><a href="#">HTML</a></li>
-						<li><a href="#">CSS</a></li>
-						<li><a href="#">JavaScript</a></li>
-					</ul>
-				</div>
-			</div> -->
+			<label>Área:</label>
+			<div class="form-group">
+				<?php foreach($areas as $area): ?>
+					<label for="<?= $area->nome ?>" class="radio-inline">
+						<input 
+							type  = "radio"
+							name  = "area_id"
+							id    = "<?= $area->nome ?>" 
+							value = "<?= $area->id ?>" 
+							<?= set_radio('area_id', $area->id) ?>
+						>
+						<?= $area->nome ?>
+					</label>
+				<?php endforeach; ?>
+				<span class="text-danger">
+					<?= form_error('area_id') ?>
+				</span>
+			</div>
+
+			<label>Titulação:</label>
+			<div class="form-group">
+				<?php foreach($titulacoes as $value => $titulacao): ?>
+					<label for="<?= $titulacao ?>" class="radio-inline">
+						<input 
+							type  = "radio"
+							name  = "titulacao"
+							id    = "<?= $titulacao ?>" 
+							value = "<?= $value ?>" 
+							<?= set_radio('titulacao', $value) ?>
+						>
+						<?= $titulacao ?>
+					</label>
+				<?php endforeach; ?>
+				<span class="text-danger">
+					<?= form_error('titulacao') ?>
+				</span>
+			</div>
+
+			<label>Nível de carreira:</label>
+			<div class="form-group">
+				<?php foreach($niveis as $value => $nivel): ?>
+					<label for="<?= $nivel ?>" class="radio-inline">
+						<input 
+							type  = "radio"
+							name  = "nivel_carreira"
+							id    = "<?= $nivel ?>" 
+							value = "<?= $value ?>" 
+							<?= set_radio('nivel_carreira', $value) ?>
+						>
+						<?= $nivel ?>
+					</label>
+				<?php endforeach; ?>
+				<span class="text-danger">
+					<?= form_error('nivel_carreira') ?>
+				</span>
+			</div>
 
 			<label>Regime de contrato:</label>
 			<div class="form-group">

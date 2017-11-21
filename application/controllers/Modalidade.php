@@ -43,14 +43,16 @@ class Modalidade extends CI_Controller {
                                                  'integer',
                                                  'greater_than[0]',
                                                  'max_length[5]',
-                                                 'is_unique[modalidade.codigo]'
+                                                 'is_unique[modalidade.codigo]',
+                                                 'strtolower',
+                                                 'ucfirst'
                                                  ),
                                            array('is_unique' => 'Código já existente.')
                                          );                               
         $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
 
         if($this->form_validation->run()){
-            try {
+           try {
 
                 $modalidade = new Modalidade_model();
                 $modalidade->nome_modalidade = $this->input->post('nome_modalidade');
@@ -92,7 +94,9 @@ class Modalidade extends CI_Controller {
                                           array('required',
                                                 'max_length[50]',
                                                 'trim',
-                                                'regex_match[/^\D+$/]')
+                                                'regex_match[/^\D+$/]',
+                                                'strtolower',
+                                                'ucfirst')
                                         );
         $this->form_validation->set_rules('codigo',
                                           'codigo',

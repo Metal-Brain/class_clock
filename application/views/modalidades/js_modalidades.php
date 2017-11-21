@@ -68,7 +68,7 @@
 
     },
     codigo: {
-      required: true,
+    required: true,
     maxlength: 5,
     validaCodigo:true,
     min:1
