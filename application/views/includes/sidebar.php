@@ -13,9 +13,11 @@
 			   <span class="glyphicon glyphicon-time"></span> <span class="sidebar-label">Turnos</span>
 		   </a>
 	   </li>
+
      <?php if (in_array($tipoUsuario,[1])) :?>
      <li id="sidebar-cursos">
 		   <a href="<?php echo base_url();?>index.php/Curso">
+
 			   <span class="glyphicon glyphicon-education"></span> <span class="sidebar-label">Cursos</span>
 		   </a>
 	   </li>
