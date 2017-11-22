@@ -17,7 +17,19 @@
 <input type ="checkbox" id="manipulaViewCadastroViaCSV"  class="btn btn-success">
            <label>clique no checkbox para importar via arquivo .csv</label>	
            <div class="csv" style="display: none;">
-           <a href="<?=base_url('Disciplina/download')?>">Clique para baixar o modelo de CSV</a>
+           	<h3>Orientação para criação do arquivo .csv</h3>
+					<h4>O arquivo deve conter os valores respectivos campos:</h4>
+					<article> <b><i>Disciplina, Sigla, Curso, Quantidade de Aulas, Quantidade de Módulos, Quantidade de Aulas Semanais,
+						Tipo de Sala.</i></b>
+						</br>
+						Os dados devem estar separados por vírgulas e estar entre aspas duplas. <a href="<?=base_url('Disciplina/download')?>">Clique para baixar o modelo de CSV</a>
+					</br>
+					insira os ID referentes as informações de curso e tipo de sala, para que seja preservada a relação entre as mesmas, seguindo a tabela <b>abaixo.</b>
+					</article>
+				</br>
+					
+				</br>
+           
 
     	<form method="post" action="<?=base_url('Disciplina/importCsv')?>" enctype="multipart/form-data">
     		<!--      //redirecionamento BASE/ImportCsv -->
@@ -81,13 +93,9 @@
 								 	 		
 				</div>
 				<div>
-					<h3>Orientação para criação do arquivo .csv</h3>
-					<h4>O arquivo deve conter os valores respectivos campos:</h4>
-					<span>O arquivo CSV deve ter os seus dados separados por virgulas,</br> devem estar entre aspas duplas e atender a seguinte ordem:</span>
-				</br>
+					
 					<label>Selecione o arquivo CSV para importação:</label>
 				<input id="csvCampo" type="file"  name="csvfile"/>	
-				<a href="<?=base_url('Disciplina/download')?>">Clique para baixar o modelo de CSV</a>
 
 				
 			 <input  type="submit" value="Importar" class="btn btn-success campoImportar" style="display: none"/>
