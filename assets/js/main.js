@@ -28,6 +28,8 @@ $('#sidebar-area').addClass('active');
   $('#sidebar-pessoa').addClass('active');
 }else if(path_atual.indexOf("disciplina") != -1){
   $('#sidebar-disciplinas').addClass('active');
+}else if(path_atual.indexOf("ConsultaDocente") != -1){
+  $('#sidebar-docente').addClass('active');
 }else{
   $('#sidebar-home').addClass('active');
 }

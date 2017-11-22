@@ -39,7 +39,7 @@ class Pessoa extends MY_Controller {
    }
    return FALSE;
 }
-  
+
   /**
   * Salva uma pessoa no banco
   * @author Vitor "Pliavi"
