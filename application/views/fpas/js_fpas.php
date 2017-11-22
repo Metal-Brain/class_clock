@@ -47,7 +47,7 @@
       $('#formDisp').validate({
         errorLabelContainer:'#msgErrors',
         rules: { // regime 0 = 20h regime 1 = 40h
-          totalAula: {required: true, minAula: <?= $_SESSION["usuario_logado"]["regime"] ? 21 : 14 ?>}
+          totalAula: {required: true, minAula: <?= @$_SESSION["usuario_logado"]["regime"] ? 21 : 14 ?>}
         }
       });
     });
@@ -67,7 +67,7 @@
               <select class="form-control" id="selectDisc" required name="disc[`+tmp+`]">
                 <!-- Trazer do back as disciplinas cadastradas -->
                 <option  value=" " disabled selected hidden>Selecione</option>
-                <?php foreach ($turmas as  $turma) :?>
+                <?php foreach ($turmas as $turma) :?>
                   <option value="<?= $turma->disciplina->id?>"><?= $turma->disciplina->nome_disciplina?></option>
                 <?php endforeach;?>
               </select>

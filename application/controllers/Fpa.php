@@ -3,7 +3,7 @@
 class Fpa extends MY_Controller{
 
   function index(){
-    $fpas= Fpa_model::all();
+    $fpas= Fpa_model::where('docente_id', $_SESSION['usuario_logado']['id'])->get();
     $this->load->template('fpas/fpas',compact('fpas'),'fpas/js_fpas');
   }
 
