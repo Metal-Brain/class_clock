@@ -3,7 +3,12 @@
 class Fpa extends MY_Controller{
 
   function index(){
-    $fpas= Fpa_model::where('docente_id', $_SESSION['usuario_logado']['id'])->get();
+    $docente = Pessoa_model::find($_SESSION['usuario_logado']['id'])->docente;
+
+    if(!is_null($docente)){
+      $fpas = Fpa_model::where("docente_id", $docente->id)->get();
+    }
+
     $this->load->template('fpas/fpas',compact('fpas'),'fpas/js_fpas');
   }
 
@@ -11,13 +16,12 @@ class Fpa extends MY_Controller{
     $periodoAtivo = Periodo_model::periodoAtivo();
     $docente_id = Docente_model::where('pessoa_id',$_SESSION['usuario_logado']['id'])->first()->id;
     $fpa = Fpa_model::where('docente_id', $docente_id)->where('periodo_id', $periodoAtivo->id)->first();
-    $disponibilidade = Disponibilidade_model::where('fpa_id', $fpa)->get();
+    $disponibilidade = Disponibilidade_model::where('fpa_id', $fpa->id)->get();
     $horarios = Horario_model::orderBy('inicio')->get();
 
-    if($disponibilidade->isEmpty()){
+    if(!$disponibilidade->isEmpty()){
       $this->load->template('fpas/fpaCadastrar', compact('fpa', 'horarios', 'disponibilidade'), 'fpas/js_fpas');
-    }
-    else{
+    } else {
       $this->load->template('fpas/fpaCadastrar', compact('horarios'), 'fpas/js_fpas');
     }
   }

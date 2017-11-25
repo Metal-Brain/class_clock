@@ -56,14 +56,24 @@
             </thead>
             <tbody>
               <?php foreach ($horarios as $horarios) :?>
+              <?php 
+                $disps = [];
+                if(isset($disponibilidade)){
+                  foreach($disponibilidade as $disp){
+                    if($disp->horario_id == $horarios->id){
+                      $disps[] = $disp->dia_semana;
+                    }
+                  }
+                }
+              ?>
                 <tr >
                   <td class="text-center"><?= removerSegundos($horarios->inicio) . '-' . removerSegundos($horarios->fim) ?></td>
-                  <td class="text-center"><input type="checkbox" name="disp[seg][]" value="<?= $horarios->id ?>"></td>
-                  <td class="text-center"><input type="checkbox" name="disp[ter][]" value="<?= $horarios->id ?>"></td>
-                  <td class="text-center"><input type="checkbox" name="disp[qua][]" value="<?= $horarios->id ?>"></td>
-                  <td class="text-center"><input type="checkbox" name="disp[qui][]" value="<?= $horarios->id ?>"></td>
-                  <td class="text-center"><input type="checkbox" name="disp[sex][]" value="<?= $horarios->id ?>"></td>
-                  <td class="text-center"><input type="checkbox" name="disp[sab][]" value="<?= $horarios->id ?>"></td>
+                  <td class="text-center"><input type="checkbox" name="disp[seg][]" value="<?= $horarios->id ?>" <?= (in_array("seg", $disps)) ? 'checked' : '' ?> ></td>
+                  <td class="text-center"><input type="checkbox" name="disp[ter][]" value="<?= $horarios->id ?>" <?= (in_array("ter", $disps)) ? 'checked' : '' ?> ></td>
+                  <td class="text-center"><input type="checkbox" name="disp[qua][]" value="<?= $horarios->id ?>" <?= (in_array("qua", $disps)) ? 'checked' : '' ?> ></td>
+                  <td class="text-center"><input type="checkbox" name="disp[qui][]" value="<?= $horarios->id ?>" <?= (in_array("qui", $disps)) ? 'checked' : '' ?> ></td>
+                  <td class="text-center"><input type="checkbox" name="disp[sex][]" value="<?= $horarios->id ?>" <?= (in_array("sex", $disps)) ? 'checked' : '' ?> ></td>
+                  <td class="text-center"><input type="checkbox" name="disp[sab][]" value="<?= $horarios->id ?>" <?= (in_array("sab", $disps)) ? 'checked' : '' ?> ></td>
                 </tr>
               <?php endforeach;?>
             </tbody>
