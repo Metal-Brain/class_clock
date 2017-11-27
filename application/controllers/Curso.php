@@ -142,17 +142,17 @@
       }
       return $this->form_validation->run();
     }
-      
+
       function ImportCsv() {
 
          $csv_array = CSVImporter::fromForm('csvfile');
          //var_dump($csv_array);
-        
+
 			 if ($csv_array) {
         // Faz a interação no array para poder gravar os dados na tabela 'disciplinas'
 				foreach ($csv_array as $row) {
                   try {
-                  
+
                     $curso = new Curso_model();
                     $curso->nome_curso = $row[1];
                     $curso->modalidade_id = $row[2];
@@ -160,15 +160,15 @@
                     $curso->codigo_curso = $row[4];
                     $curso->qtd_semestre = $row[5];
                     $curso->fechamento = $row[6];
-                    
+
 
                     $curso->save();
 
                     $this->session->set_flashdata('success','Curso cadastrado com sucesso');
-                    
-               
+
+
                 } catch (Exception $ignored){}
-                    
+
 			}
                  redirect("Curso");
 }

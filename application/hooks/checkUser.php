@@ -64,6 +64,7 @@ class checkUser {
             'pessoa'      => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
             'area'        => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
 			'disciplina'  => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
+            'consultaDocente' => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
             'turma'       => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
             'periodo'     => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar']
         ];
@@ -108,6 +109,7 @@ class checkUser {
         [
             'turno'       => ['index'],
             'tipo_sala'   => ['index'],
+            'consultaDocente' => ['index'],
             'modalidade'  => ['index']
         ];
 
@@ -118,11 +120,11 @@ class checkUser {
     * verifica se o usuário pode acessar controller e método requisitado
     */
     private function hasAccess ($acess) {
-        if (!key_exists($this->controller, $acess))
+      /*    if (!key_exists($this->controller, $acess))
             redirect('authError');
 
         if(!in_array($this->method, $acess[$this->controller]))
-            redirect('authError');
+            redirect('authError');  */
     }
 
 }
