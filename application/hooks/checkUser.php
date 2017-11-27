@@ -43,6 +43,9 @@ class checkUser {
                 case 4;
                     $this->setAccessToDocente();
                     break;
+                case 5;
+                    $this->setAccessToCoordenador();
+                    break;
                 default:
                     redirect('authError');
                     break;
@@ -103,6 +106,23 @@ class checkUser {
     * seta os controllers e métodos que o perfil docente pode acessar
     */
     private function setAccessToDocente(){
+        $acess =
+        [
+            'turno'       => ['index'],
+            'tipo_sala'   => ['index'],
+            'modalidade'  => ['index'],
+            'fpa'         => [
+                'index','cadastrarDisponibilidade',
+                'salvarDisponibilidade', 'cadastrarPreferencias',
+                'salvarPreferencias', 'editarPreferencias',
+                'editarDisponibilidade'
+            ]
+        ];
+
+        $this->hasAccess($acess);
+    }
+
+    private function setAccessToCoordenador(){
         $acess =
         [
             'turno'       => ['index'],
