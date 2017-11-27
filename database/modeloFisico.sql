@@ -514,7 +514,7 @@ DELIMITER ;
 -- Inserção de dados
 -- -----------------------------------------------------
 
-INSERT INTO tipo(id, nome) VALUES (1, 'Administrador'), (2, 'CRA'), (3, 'DAE'), (4, 'Docente');
+INSERT INTO tipo(id, nome) VALUES (1, 'Administrador'), (2, 'CRA'), (3, 'DAE'), (4, 'Docente'), (5, 'Coordenador');
 
 INSERT INTO tipo_sala(id, nome_tipo_sala, descricao_tipo_sala) VALUES(1, "Teorica", "Mesas e Cadeiras");
 INSERT INTO tipo_sala(id, nome_tipo_sala, descricao_tipo_sala) VALUES(2, "Pratica", "Computadores");
