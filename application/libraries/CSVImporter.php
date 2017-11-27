@@ -5,5 +5,9 @@ class CSVImporter {
     public static function fromForm($name) {
         return array_map('str_getcsv', file($_FILES[$name]['tmp_name']));
     }
+<<<<<<< HEAD
 
 }
+=======
+}
+>>>>>>> 304486ff9bcbc81226135fe3b393eb9dd213aaa5

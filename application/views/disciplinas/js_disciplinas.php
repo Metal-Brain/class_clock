@@ -1,23 +1,23 @@
 <script>
     $(document).ready(function(){
+        $('#disciplinaTable').dataTable( {
+                "language": {
+                    "url": "<?= base_url('assets/DataTables/translatePortuguese.js');?>"
+                }
+            } );
 
-      	$("#disciplinaTable").DataTable();
-        jQuery.validator.addMethod("alphanumeric", function(value, element) {
-          return this.optional(element) || /^[a-zA-Z0-9]+$/.test(value);
-        });
+                 document.getElementById("sigla_curso").onkeypress = function(e) {
+                   if ((this.value.length==5) && !(key == 8)){
+                    return false;
+                   }
+                   document.getElementById("sigla_curso").onkeypress = function(e) {
+                    var chr = /^[a-zA-Z0-9 ]$/;
+                    var patt = new RegExp(chr);
+                    var res = patt.test(String.fromCharCode(e.which));
+                   return res;
+                  }
 
-                // document.getElementById("sigla_curso").onkeypress = function(e) {
-                //   if ((this.value.length==5) && !(key == 8)){
-                //     return false;
-                //   }
-                //   document.getElementById("sigla_curso").onkeypress = function(e) {
-                //    var chr = /^[a-zA-Z0-9 ]$/;
-                //    var patt = new RegExp(chr);
-                //    var res = patt.test(String.fromCharCode(e.which));
-                //    return res;
-                //  }
-
-     /*  $("#formDisciplina").validate({
+      $("#formDisciplina").validate({
             rules: {
                 nome_disciplina: {
                     required: true,
@@ -176,6 +176,5 @@
             });
 
 </script>
-
 </html>
 </body>

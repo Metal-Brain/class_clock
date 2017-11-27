@@ -187,8 +187,8 @@
                     $disciplina->curso_id = $row[1];
                     $disciplina->tipo_sala_id = $row[2];
                     $disciplina->nome_disciplina  = $row[3] ;
-                    $disciplina->sigla_disciplina = $row[4];
-                    $disciplina->modulo = $row[5];
+                    $disciplina->modulo= $row[4];
+                    $disciplina->sigla_disciplina = $row[5];
                     $disciplina->qtd_professor = $row[6];
                     $disciplina->qtd_aulas = $row[7];
 
@@ -203,4 +203,11 @@
                  redirect("Disciplina");
 }
 }
+function download(){
+
+$this->load->helper('download');
+
+force_download("disciplina.csv", file_get_contents(base_url("uploads/disciplina.csv")));
 }
+}
+

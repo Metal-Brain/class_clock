@@ -52,4 +52,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'Login';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+<<<<<<< HEAD
 $route['importar'] = "Base/ImportCsv";
+=======
+$route['importar'] = "Disciplina/ImportCsv";
+>>>>>>> 304486ff9bcbc81226135fe3b393eb9dd213aaa5
