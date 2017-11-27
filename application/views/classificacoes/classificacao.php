@@ -1,8 +1,8 @@
-<!--
+<?php $tipoUsuario = $this->session->userdata('usuario_logado')['tipo']; ?>
 <pre>
-		<?php print_r($data['docentes']) ?>
+		<?php print_r($tipoUsuario) ?>
 </pre>
--->
+
 <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
 	
 
@@ -15,6 +15,22 @@
 			</h2>
 			</div>
 		</div>
+		<?php if (in_array($tipoUsuario,[1])) :?>
+			<div class="row">
+				<h4 class="page-header">Selecione o curso desejado.</h4>
+				<form action="" method="GET">
+					<select class="form-control" name="curso">
+
+						<?php
+						echo '<option value="1">Teste</option>';
+								
+						?>
+
+					 </select>
+					<input type="submit" class="btn btn-success" style="float: right;">
+				</form>
+			</div>
+		<?php endif; ?>
 	</div>
 	<table id="classificacaoTable" class="table table-striped">
 		<thead>
@@ -26,7 +42,15 @@
 		</thead>
 
 		<tbody>
+			<?php foreach ($classificacoes as $curso) { ?>
+				
+					<td class="text-center"><?= htmlspecialchars(ucwords($curso['nome'])); ?></td>
+					<td class="text-center"><?= htmlspecialchars(ucwords($curso['nome_curso'])); ?></td>
+					<td class="text-center"><?= htmlspecialchars(ucwords($curso['nome_disciplina'])); ?></td>
+					
+			    </tr>
 			
+			<?php } ?>
 		</tbody>
 	</table>
 
