@@ -58,8 +58,8 @@ $autoload['packages'] = array();
 |
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
-$autoload['libraries'] = array('database','form_validation','session','CSVImporter');
 
+$autoload['libraries'] = array('database','form_validation','session','CSVImporter');
 /*
 | -------------------------------------------------------------------
 |  Auto-load Drivers
@@ -89,7 +89,7 @@ $autoload['drivers'] = array();
 |
 |	$autoload['helper'] = array('url', 'file');
 */
-$autoload['helper'] = array('form','url','auth','dropdown_helper');
+$autoload['helper'] = array('form','url','auth','dropdown_helper', 'route', 'date');
 
 /*
 | -------------------------------------------------------------------
@@ -132,5 +132,11 @@ $autoload['language'] = array();
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
+<<<<<<< HEAD
 $autoload['model'] = array('DB','Model','Turno_model','Horario_model', 'Disciplina_model', 'Curso_model','TipoSala_model');
 
+=======
+$autoload['model'] = array('DB','Model','Turno_model','Horario_model','Curso_model',
+  'Disciplina_model','Docente_model','Pessoa_model','Tipo_model','Modalidade_model',
+  'TipoSala_model', 'Turma_model', 'Periodo_model','Area_model');
+>>>>>>> master

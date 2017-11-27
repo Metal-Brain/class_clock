@@ -41,15 +41,31 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($disciplinas as $disciplina): ?>
+                        <?php foreach ($data['disciplinas'] as $disciplina): ?>
                             <tr <?php if($disciplina->deletado_em): echo 'class="danger"'; endif; ?>>
               <td class="text-center"><?= htmlspecialchars($disciplina['nome_disciplina']); ?></td>
-							<td class="text-center"><?= $disciplina['sigla_disciplina']; ?></td>
-							<td class="text-center"><?= $disciplina['curso_id']; ?></td>
+							<td class="text-center" style="text-transform:uppercase;"><?= $disciplina['sigla_disciplina']; ?></td>
+
+							<td class="text-center"><?php
+								foreach($data['cursos'] as $curso){
+									if($curso['id'] == $disciplina['curso_id']):
+										echo $curso['nome_curso'];
+									endif;
+								}
+							?></td>
+
 							<td class="text-center"><?= $disciplina['qtd_professor']; ?></td>
 							<td class="text-center"><?= $disciplina['modulo']; ?></td>
 							<td class="text-center"><?= $disciplina['qtd_aulas'] ?></td>
-							<td class="text-center"><?= $disciplina['tipo_sala_id']; ?></td>
+
+							<td class="text-center"><?php
+								foreach($data['tipo_salas'] as $tipo_sala){
+									if($tipo_sala['id'] == $disciplina['tipo_sala_id']):
+										echo $tipo_sala['nome_tipo_sala'];
+									endif;
+								}
+							?></td>
+
 							<td class="text-center"><?= ( empty($disciplina->deletado_em) ) ? 'Ativado' : 'Desativado'?></td>
 							<td class="text-center">
 						<?php if ( empty($disciplina->deletado_em) ) : ?>

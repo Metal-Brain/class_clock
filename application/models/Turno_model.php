@@ -1,12 +1,10 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
-
     /**
      * Turnos que a instituição possui
      * @author Lucas Leonel
      * @since 2017/08/19
     */
     class Turno_model extends Model {
-
         protected $table = 'turno';
         protected $fillable = ['nome_turno'];
 
@@ -15,9 +13,21 @@
          * @author Lucas Leonel
          * @since 2017/08/19
         */
-
         public function horarios() {
-            return $this->hasMany(Horario_model::class, 'turno_id')->orderBy('horario.inicio', 'asc');
+            return $this->belongsToMany(Horario_model::class, 'turno_horario',
+            'turno_id','horario_id')->orderBy('horario.inicio', 'asc');
+        }
+
+        public function getNomeAttribute(){ return $this->attributes['nome_turno']; }
+        public function setNomeAttribute($nome){ $this->attributes['nome_turno'] = $nome; }
+
+        /**
+         * Retorna todos as turmas linkadas com o turno ordenadas pelo turno;
+         * @author Lucas Leonel
+         * @since 2017/08/19
+        */
+        public function turmas() {
+            return $this->hasMany(Turma::class, 'turno_id')->orderBy('turno_id', 'asc');
         }
 
         /**

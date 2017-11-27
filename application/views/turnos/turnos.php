@@ -18,7 +18,7 @@
 	<div style="padding: 0 0 15px 0">
 		<div class="row">
 			<div class="col-md-12">
-			<h2 class="page-header">Turno
+			<h2 class="page-header">Turnos
 				<a class="btn btn-success" href="<?= base_url('index.php/Turno/cadastrar')?>"><span class="glyphicon glyphicon-plus"></span> Cadastrar</a>
 			</h2>
 			</div>
@@ -53,10 +53,10 @@
 					<td class="text-center">
 						<?php if ( empty($turno->deletado_em) ) : ?>
 							<a class="btn btn-warning glyphicon glyphicon-pencil" title="Editar" href="<?= site_url('Turno/editar/'.$turno->id)?>"></a>
-							<button class="btn btn-danger" type="button" id="btn-delete" onclick="confirmDelete(<?= $turno->id ?>,'Deseja desativar o turno?','deletar')"> <i class="glyphicon glyphicon-remove"></i></button>
+							<button class="btn btn-danger" type="button" id="btn-delete" title="Desativar" onclick="confirmDelete(<?= $turno->id ?>,'Deseja desativar o turno?','deletar')"> <i class="glyphicon glyphicon-remove"></i></button>
 						<?php else : ?>
 							<a class="btn btn-warning glyphicon glyphicon-pencil disabled" title="Editar" href="<?= site_url('Turno/editar/'.$turno->id)?>"></a>
-							<button class="btn btn-success" type="button" id="btn-delete" onclick="confirmDelete(<?= $turno->id ?>,'Deseja ativar o turno?','ativar')"> <i class="glyphicon glyphicon-check"></i></button>
+							<button class="btn btn-success" type="button" id="btn-delete" title="Ativar" onclick="confirmDelete(<?= $turno->id ?>,'Deseja ativar o turno?','ativar')"> <i class="glyphicon glyphicon-check"></i></button>
 						<?php endif; ?>
 					</td>
 				</tr>
