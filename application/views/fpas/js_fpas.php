@@ -22,18 +22,24 @@
 </script>
 
 <script type="text/javascript">
+      var qt;
 
-  var qt;
+      function verificaHorarios() {
+        // pega a quantidade de selecionados
+        qt = $('input:not([disabled])[type=checkbox]:checked').length;
+        $('#contador').attr('data-value',qt);
+        //coloca o resultado na div contador
+        $('#contador').text((qt > 1 ? ' selecionados' : ' selecionado'));
+        $("input[name=totalAula]").val(qt);
+      }
 
-    $('input[type=checkbox]').on('change', function () {
-      // pega a quantidade de selecionados
-      qt = $('input:not([disabled])[type=checkbox]:checked').length;
-      $('#contador').attr('data-value',qt);
-      //coloca o resultado na div contador
-      $('#contador').text((qt > 1 ? ' selecionados' : ' selecionado'));
-      $("input[name=totalAula]").val(qt);
-    });
-
+      $(document).ready(function () {
+        verificaHorarios();
+      });
+    
+      $('input[type=checkbox]').on('change', function () {
+        verificaHorarios();
+      });
 </script>
 
 <script type="text/javascript">
