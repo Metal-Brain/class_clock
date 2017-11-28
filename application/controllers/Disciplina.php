@@ -162,4 +162,52 @@
 
             return $this->form_validation->run();
         }
-    }
+        function __construct() {
+		parent::__construct();
+		$this->load->model('Disciplina_model');
+		$this->load->library('csvimport');
+	}
+         /**
+    * Faz a improtação do CSV
+    *
+    * @access  public
+    * @return  void
+    */
+	function ImportCsv() {
+
+         $csv_array = CSVImporter::fromForm('csvfile');
+         //var_dump($csv_array);
+        
+			 if ($csv_array) {
+        // Faz a interação no array para poder gravar os dados na tabela 'disciplinas'
+				foreach ($csv_array as $row) {
+                  try {
+                  
+                    $disciplina = new Disciplina_model();
+                    $disciplina->curso_id = $row[1];
+                    $disciplina->tipo_sala_id = $row[2];
+                    $disciplina->nome_disciplina  = $row[3] ;
+                    $disciplina->modulo= $row[4];
+                    $disciplina->sigla_disciplina = $row[5];
+                    $disciplina->qtd_professor = $row[6];
+                    $disciplina->qtd_aulas = $row[7];
+
+                    $disciplina->save();
+
+                    $this->session->set_flashdata('success','Disciplina cadastrada com sucesso');
+                    
+               
+                } catch (Exception $ignored){}
+                    
+			}
+                 redirect("Disciplina");
+}
+}
+function download(){
+
+$this->load->helper('download');
+
+force_download("disciplina.csv", file_get_contents(base_url("uploads/disciplina.csv")));
+}
+}
+

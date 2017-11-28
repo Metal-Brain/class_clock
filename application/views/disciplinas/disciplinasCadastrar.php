@@ -13,10 +13,98 @@
       <?php endif; ?>
     </div>
     </div>
+<h1>Cadastrar Disciplina</h1>
+<input type ="checkbox" id="manipulaViewCadastroViaCSV"  class="btn btn-success">
+           <label>clique no checkbox para importar via arquivo .csv</label>	
+           <div class="csv" style="display: none;">
+           	<h3>Orientação para criação do arquivo .csv</h3>
+					<h4>O arquivo deve conter os valores respectivos campos:</h4>
+					<article> <b><i>Disciplina, Sigla, Curso, Quantidade de Aulas, Quantidade de Módulos, Quantidade de Aulas Semanais,
+						Tipo de Sala.</i></b>
+						</br>
+						Os dados devem estar separados por vírgulas e estar entre aspas duplas. <a href="<?=base_url('Disciplina/download')?>">Clique para baixar o modelo de CSV</a>
+					</br>
+					insira os ID referentes as informações de curso e tipo de sala, para que seja preservada a relação entre as mesmas, seguindo a tabela <b>abaixo.</b>
+					</article>
+				</br>
+					
+				</br>
+           
+
+    	<form method="post" action="<?=base_url('Disciplina/importCsv')?>" enctype="multipart/form-data">
+    		<!--      //redirecionamento BASE/ImportCsv -->
+				
+				
+				  <table id="disciplinaTable" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Disciplina</th>
+                            <th class="text-center">ID da Disciplina</th>
+                            <th class="text-center">Sigla</th>
+                            <th class="text-center">Curso</th>
+                            <th class="text-center">ID do Curso</th>
+                            <th class="text-center">Tipo de sala</th>
+                            <th class="text-center">ID do Tipo Sala</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($data['disciplinas'] as $disciplina): ?>
+                            <tr <?php if($disciplina->deletado_em): echo 'class="danger"'; endif; ?>>
+              <td class="text-center"><?= htmlspecialchars($disciplina['nome_disciplina']); ?></td>
+              <td class="text-center"><?= htmlspecialchars($disciplina['id']); ?></td>
+							<td class="text-center" style="text-transform:uppercase;"><?= $disciplina['sigla_disciplina']; ?></td>
+
+							<td class="text-center"><?php
+								foreach($data['cursos'] as $curso){
+									if($curso['id'] == $disciplina['curso_id']):
+										echo $curso['nome_curso'];
+									endif;
+								}
+							?></td>
+							<td class="text-center"><?php
+								foreach($data['cursos'] as $curso){
+									if($curso['id'] == $disciplina['curso_id']):
+										echo $curso['id'];
+									endif;
+								}
+							?></td>
 
 
-            <form id="formDisciplina" class="form-Control" action="<?= site_url('Disciplina/salvar')?>" method="post">
-            		<h1>Cadastrar Disciplina</h1>
+							<td class="text-center"><?php
+								foreach($data['tipo_salas'] as $tipo_sala){
+									if($tipo_sala['id'] == $disciplina['tipo_sala_id']):
+										echo $tipo_sala['nome_tipo_sala'];
+									endif;
+								}
+							?></td>
+							<td class="text-center"><?php
+								foreach($data['tipo_salas'] as $tipo_sala){
+									if($tipo_sala['id'] == $disciplina['tipo_sala_id']):
+										echo $tipo_sala['id'];
+									endif;
+								}
+							?></td>
+
+					<?php endforeach; ?>
+                    </tbody>
+                </table>
+				<div>
+				
+								 	 		
+				</div>
+				<div>
+					
+					<label>Selecione o arquivo CSV para importação:</label>
+				<input id="csvCampo" type="file"  name="csvfile"/>	
+
+				
+			 <input  type="submit" value="Importar" class="btn btn-success campoImportar" style="display: none"/>
+				</div>		
+         </form>  
+         </div> 
+
+            <form id="formDisciplina" class="formDisciplina"  action="<?= site_url('Disciplina/salvar')?>" method="post">
+
 
 					<div class="form-group">
 						<label>Nome</label>
@@ -71,5 +159,6 @@
 						<a class="btn btn-danger active" href="<?= base_url('index.php/Disciplina')?>" style="float: right;"><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
 						<button type="submit" class="btn btn-success active salvar" style="float: right; margin-right: 10px;"><span class="glyphicon glyphicon-floppy-disk"></span> Salvar</button>
 					</div>
-            </form>
-        </div>
+			</form>			
+    </div>
+       			
