@@ -37,6 +37,10 @@
             'tipo'  => $usuario->tipos()->first()->id,
           ];
 
+
+          $docente = Docente_model::where('pessoa_id',$usuario->id)->first();
+
+          if ($docente) $dados['regime'] = $docente->regime;
           // Joga os dados do usuário na sessão
           $this->session->set_userdata('usuario_logado',$dados);
 

@@ -1,13 +1,12 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**
-<<<<<<< HEAD
  * periodos que a instituição possui
  * @author Denny Azevedo (moodificado)
  * @since 2017/10/25
  */
   class Periodo_model extends Model
   {
-    
+
 
     protected $table = 'periodo';
     protected $fillable = ['nome'];
@@ -36,4 +35,3 @@
     }
 
 }
-

@@ -11,7 +11,7 @@ class checkUser {
     public function __construct(){
         $this->CI           = &get_instance();
         $this->controller   = strtolower($this->CI->router->class);
-        $this->method       = strtolower($this->CI->router->method);
+        $this->method       = $this->CI->router->method;
     }
 
     /*
@@ -42,6 +42,9 @@ class checkUser {
                     break;
                 case 4;
                     $this->setAccessToDocente();
+                    break;
+                case 5;
+                    $this->setAccessToCoordenador();
                     break;
                 default:
                     redirect('authError');
@@ -110,8 +113,30 @@ class checkUser {
             'turno'       => ['index'],
 			'classificacao'       => ['index'],
             'tipo_sala'   => ['index'],
-            'consultaDocente' => ['index'],
-            'modalidade'  => ['index']
+            'modalidade'  => ['index'],
+            'fpa'         => [
+                'index','cadastrarDisponibilidade',
+                'salvarDisponibilidade', 'cadastrarPreferencias',
+                'salvarPreferencias', 'editarPreferencias',
+                'editarDisponibilidade'
+            ]
+        ];
+
+        $this->hasAccess($acess);
+    }
+
+    private function setAccessToCoordenador(){
+        $acess =
+        [
+            'turno'       => ['index'],
+            'tipo_sala'   => ['index'],
+            'modalidade'  => ['index'],
+            'fpa'         => [
+                'index','cadastrarDisponibilidade',
+                'salvarDisponibilidade', 'cadastrarPreferencias',
+                'salvarPreferencias', 'editarPreferencias',
+                'editarDisponibilidade'
+            ]
         ];
 
         $this->hasAccess($acess);
