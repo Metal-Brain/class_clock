@@ -41,6 +41,9 @@
                 $curso->modalidade_id = $this->input->post('modalidade_id');
           if($this->input->post('docente_id')){
                 $curso->docente_id = $this->input->post('docente_id');
+                if($curso->docente_id){
+                  $this->db->insert('tipo_pessoa', array('tipo_id'=>5, 'pessoa_id'=>$curso->docente->pessoa->id));
+                }
           }else($curso->docente_id = null);
                 $curso->codigo_curso = $this->input->post('codigo_curso');
                 $curso->sigla_curso = $this->input->post('sigla_curso');
@@ -88,6 +91,9 @@
           $curso->modalidade_id = $this->input->post('modalidade_id');
           if($this->input->post('docente_id')){
             $curso->docente_id = $this->input->post('docente_id');
+            if($curso->docente_id){
+              $this->db->insert('tipo_pessoa', array('tipo_id'=>5, 'pessoa_id'=>$curso->docente->pessoa->id));
+            }
           }else($curso->docente_id = null);
           $curso->codigo_curso = $this->input->post('codigo_curso');
           $curso->sigla_curso = $this->input->post('sigla_curso');
@@ -117,7 +123,10 @@
     public function deletar($id){
       try {
         $curso = Curso_model::findOrFail($id);
+        $coordenador = $curso->docente->pessoa;
+        $this->db->delete('tipo_pessoa', array('tipo_id'=>5, 'pessoa_id'=>$coordenador->id));
         $curso->docente_id = null;
+        // FIXME O coordenador precisa ser deletado da tabela 'tipo_pessoa' quando o curso for desativado
         $curso->save();
         $curso->delete();
         $this->session->set_flashdata('success','Curso deletado com sucesso');
@@ -143,36 +152,29 @@
       return $this->form_validation->run();
     }
 
-      function ImportCsv() {
+    function ImportCsv() {
+      $csv_array = CSVImporter::fromForm('csvfile');
 
-         $csv_array = CSVImporter::fromForm('csvfile');
-         //var_dump($csv_array);
-
-			 if ($csv_array) {
+      if ($csv_array) {
         // Faz a interação no array para poder gravar os dados na tabela 'disciplinas'
-				foreach ($csv_array as $row) {
-                  try {
+        foreach ($csv_array as $row) {
+          try {
+            $curso = new Curso_model();
+            $curso->nome_curso = $row[1];
+            $curso->modalidade_id = $row[2];
+            $curso->sigla_curso  = $row[3] ;
+            $curso->codigo_curso = $row[4];
+            $curso->qtd_semestre = $row[5];
+            $curso->fechamento = $row[6];
+            $curso->save();
 
-                    $curso = new Curso_model();
-                    $curso->nome_curso = $row[1];
-                    $curso->modalidade_id = $row[2];
-                    $curso->sigla_curso  = $row[3] ;
-                    $curso->codigo_curso = $row[4];
-                    $curso->qtd_semestre = $row[5];
-                    $curso->fechamento = $row[6];
+            $this->session->set_flashdata('success','Curso cadastrado com sucesso');
 
-
-                    $curso->save();
-
-                    $this->session->set_flashdata('success','Curso cadastrado com sucesso');
-
-
-                } catch (Exception $ignored){}
-
-			}
-                 redirect("Curso");
-}
-  }
+          } catch (Exception $ignored){}
+        }
+        redirect("Curso");
+      }
+    }
   }
 
 
