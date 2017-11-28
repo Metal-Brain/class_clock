@@ -132,17 +132,6 @@ $autoload['language'] = array();
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-<<<<<<< HEAD
-<<<<<<< HEAD
-$autoload['model'] = array('DB','Model','Turno_model','Horario_model', 'Disciplina_model', 'Curso_model','TipoSala_model');
-
-=======
 $autoload['model'] = array('DB','Model','Turno_model','Horario_model','Curso_model',
   'Disciplina_model','Docente_model','Pessoa_model','Tipo_model','Modalidade_model',
   'TipoSala_model', 'Turma_model', 'Periodo_model','Area_model');
->>>>>>> master
-=======
-
-$autoload['model'] = array('DB','Model','Turno_model','Horario_model','Curso_model','Disciplina_model','Docente_model','Pessoa_model','Tipo_model','Modalidade_model','TipoSala_model','Area_model');
-
->>>>>>> 304486ff9bcbc81226135fe3b393eb9dd213aaa5

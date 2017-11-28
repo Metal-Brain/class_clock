@@ -57,7 +57,6 @@ class checkUser {
     private function setAccessToAdmin(){
         $acess =
         [
-<<<<<<< HEAD
             'turno'          => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
             'tipo_sala'      => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
             'modalidade'     => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
@@ -67,16 +66,7 @@ class checkUser {
             'disciplina'     => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
             'consultaDocente' => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
             'turma'          => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar']
-=======
-            'turno'       => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
-            'tipo_sala'   => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
-            'modalidade'  => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
-            'curso'       => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
-            'pessoa'      => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
-            'area'        => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
-			'disciplina'  => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar', 'download','force_download','importcsv'],
             'turma'       => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar']
->>>>>>> 304486ff9bcbc81226135fe3b393eb9dd213aaa5
         ];
 
         $this->hasAccess($acess);
@@ -118,6 +108,7 @@ class checkUser {
         $acess =
         [
             'turno'       => ['index'],
+			'classificacao'       => ['index'],
             'tipo_sala'   => ['index'],
             'consultaDocente' => ['index'],
             'modalidade'  => ['index']

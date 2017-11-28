@@ -22,6 +22,14 @@
 		   </a>
 	   </li>
     <?php endif; ?>
+	<?php if (in_array($tipoUsuario,[1,4])) :?>
+     <li id="sidebar-classificacao">
+		   <a href="<?php echo base_url();?>index.php/classificacao">
+			   <span class="glyphicon glyphicon-education"></span> <span class="sidebar-label">Classificação</span>
+		   </a>
+	   </li>
+    <?php endif; ?>
+	
 	   <li id="sidebar-salas">
 		   <a href="<?php echo base_url();?>index.php/Tipo_sala">
 			   <span class="glyphicon glyphicon-home"></span> <span class="sidebar-label">Salas</span>
