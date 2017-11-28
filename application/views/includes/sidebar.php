@@ -81,6 +81,11 @@
 			   <span class="glyphicon glyphicon-duplicate"></span> <span class="sidebar-label">FPA</span>
 		   </a>
 	   </li>
+     <li id="sidebar-docente">
+		   <a href="<?php echo base_url();?>index.php/ConsultaDocente">
+			   <span class="glyphicon glyphicon-duplicate"></span> <span class="sidebar-label">Consulta Docente</span>
+		   </a>
+	   </li>
      <?php if (in_array($tipoUsuario, [1])) :?>
 	   <li id="sidebar-pessoa">
 		   <a href="<?php echo base_url();?>index.php/pessoa">
