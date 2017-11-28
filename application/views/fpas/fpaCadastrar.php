@@ -81,7 +81,7 @@
         </div>
         <div class="form-group">
           <div class="col-md-4">
-            <input type="number" name="totalAula" class="" min="0" readonly style="color:#333;width:25px;border:none;background:transparent;-moz-appearance:textfield;appearance:textfield;">
+            <input type="number" name="totalAula" class="" min="0" readonly style="color:#333;width:30px;border:none;background:transparent;-moz-appearance:textfield;appearance:textfield;">
 						<span id="contador" data-value="0"> </span>
 						<p id="msgErrors"></p>
           </div>
