@@ -1,6 +1,6 @@
 <?php $tipoUsuario = $this->session->userdata('usuario_logado')['tipo']; ?>
 <pre>
-		<?php print_r($tipoUsuario) ?>
+		<?php print_r($data) ?>
 </pre>
 
 <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">

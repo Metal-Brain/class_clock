@@ -4,7 +4,7 @@
 class Classificacao extends MY_Controller {
 
     public function index() {
-        $user  = $this->CI->session->userdata('usuario_logado');
+        $user  = $this->session->userdata('usuario_logado');
         $curso = $this->request('curso');
 
         if (!is_null($user)) {
@@ -22,7 +22,7 @@ class Classificacao extends MY_Controller {
             }
             
             # id 3 é o do DAE
-            if($user->tipo->id == 3) {
+            if($user->tipo == 3) {
                 $cursos = Curso_model::all();
             }
         } else {
