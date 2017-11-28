@@ -1,14 +1,9 @@
 html {
-    /*position: relative;*/
     min-height: 100%;
 }
 
 #footer {
-    /*position: absolute;*/
-    /*left: 0;
-    bottom: 0;*/
-    /*height: auto;*/
-    /*width: 100%;*/
+    margin-top: 20px;
     background-color: #EAEAEA;
     padding-top: 10px;
 }
@@ -25,7 +20,6 @@ position: sticky;
 
 body {
     font-family: 'Roboto Mono', monospace;
-    /*padding-bottom: 100px;*/
 }
 
 .container-fluid {
@@ -116,7 +110,6 @@ header a:hover {
 }
 
 #content {
-    /*margin-bottom: 10px;*/
     min-height: calc(100vh - 240px);
 }
 
@@ -131,8 +124,6 @@ header a:hover {
 .width-180{
 	max-width: 180px;
 }
-
-
 
 /* Bootstrap Override */
 

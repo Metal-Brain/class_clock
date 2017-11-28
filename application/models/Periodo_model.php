@@ -1,15 +1,19 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**
-* periodos que a instituição possui
-* @author Denny Azevedo (moodificado)
-* @since 2017/10/25
-*/
-class Periodo_model extends Model {
+<<<<<<< HEAD
+ * periodos que a instituição possui
+ * @author Denny Azevedo (moodificado)
+ * @since 2017/10/25
+ */
+  class Periodo_model extends Model
+  {
+    
 
     protected $table = 'periodo';
     protected $fillable = ['nome'];
 
     //Função responsável por retornas as disciplinas oferecidas do semestre.
+
     public function turmas() {
         return $this->hasMany(Turma_model::class, 'periodo_id')->withTrashed();
     }
@@ -32,3 +36,4 @@ class Periodo_model extends Model {
     }
 
 }
+
