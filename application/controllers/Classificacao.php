@@ -7,6 +7,7 @@ class Classificacao extends MY_Controller {
         $user  = $this->session->userdata('usuario_logado');
         $tipo  = $user['tipo'];
         $curso = $this->request('curso');
+		$cursos = Curso_model::all();
 
         if (!is_null($user)) {
             
@@ -21,6 +22,7 @@ class Classificacao extends MY_Controller {
                 }
 
                 $curso = $cursos[0]; // Pega o curso que o docente coordena
+				$cursos = Classificacao_model::where('curso_id', $curso->id)->get();
             }
             
             # id 3 é o do DAE
