@@ -66,6 +66,7 @@ class Fpa extends MY_Controller{
     $disponibilidade = $this->input->post('disp');
     $indisponibilidade  = $this->request('indisponibilidade');
 
+
     try{
       DB::transaction(function () use ($fpa, $disponibilidade, $indisponibilidade){
         if(isset($disponibilidade)){

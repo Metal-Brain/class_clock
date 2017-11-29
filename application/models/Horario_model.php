@@ -20,4 +20,8 @@
         public function disponibilidade(){
             return $this->belongsToMany(Disponibilidade_model::class, 'fpa_id', 'horario_id');
         }
+
+        public function fpa(){
+            return $this->belongsToMany(Disponibilidade_model::class, 'disponibilidade', 'fpa_id'. 'horario_id');
+        }
     }

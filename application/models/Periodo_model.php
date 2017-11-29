@@ -34,4 +34,13 @@
         return $this->hasMany(Fpa_model::class, 'periodo_id');
     }
 
+    public function disciplinaOferecida(){
+      return $this->hasMany(DisciplinaOferecida_model::class, 'periodo_id');
+    }
+
+    public static function periodoAtivo(){
+      return Periodo_model::whereAtivo(true)->firstOrFail();
+    }
+
 }
+
