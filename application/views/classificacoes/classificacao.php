@@ -1,7 +1,12 @@
 <?php $tipoUsuario = $this->session->userdata('usuario_logado')['tipo']; ?>
-<pre>
-		<?php print_r($data) ?>
-</pre>
+<!--<pre>
+		<?php 
+			print_r($classificacoes);
+			print_r($tipo);
+			print_r($curso);
+			print_r($user);
+		?>
+</pre>-->
 
 <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
 	
