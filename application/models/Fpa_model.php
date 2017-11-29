@@ -19,7 +19,7 @@ class Fpa_model extends Model{
     }
 
     public function horarios(){
-      return $this->belongsToMany(Horario_model::class, 'disponibilidade', 'horario_id', "fpa_id");
+      return $this->belongsToMany(Horario_model::class, 'disponibilidade', 'fpa_id', 'horario_id');
     }
 
     public function disciplinas(){
