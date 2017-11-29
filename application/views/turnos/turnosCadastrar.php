@@ -14,7 +14,13 @@
 		</div>
 		<div id="horarios">
 
-			<?= form_error('horario[]') ?>
+			<?php if ( form_error('horario[]') ) : ?>
+				<div class="alert alert-danger alert-dismissible text-center" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<p><strong>Foram encontrados erro nos horários de aula</strong></p>
+					<?= form_error('horario[]') ?>
+				</div>
+			<?php endif; ?>
 
 			<?php $horarios = set_value('horario'); ?>
 			<?php $aula = 0; ?>
@@ -26,13 +32,10 @@
 					</div>
 					<div class="col-xs-12 col-sm-12 col-md-2 form-group">
 						<label >Horário de entrada:</label>
-						<?= $i ?>
 						<input name="horario[<?= $i ?>]" class="form-control hora" type="text" value="<?= $horarios[$i] ?>">
 					</div>
-
 				<div class="col-xs-12 col-sm-12 col-md-2 form-group">
 					<label >Horário de saída:</label>
-					<?= $i ?>
 					<input name="horario[<?= ($i+1) ?>]" class="form-control hora" type="text" value="<?= $horarios[$i+1] ?>">
 				</div>
 				<div col-md-2 style="padding: 25px 0 0 0;">

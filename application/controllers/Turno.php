@@ -208,7 +208,7 @@ class Turno extends CI_Controller {
 
       // Verifica se o horario fim é menor do que o horário de inicio
       if ($horarioFim <= $horarioInicio) {
-        $this->form_validation->set_message('horarioAula','O horário fim não pode ser maior ou igual ao horário de inicio');
+        $this->form_validation->set_message('horarioAula','O horário de saída não pode ser maior ou igual ao horário de entrada');
         $resultado = false;
         break;
       }

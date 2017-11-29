@@ -13,7 +13,13 @@
 			</div>
 		</div>
 		<div id="horarios">
-			<?= form_error('horario[]') ?>
+			<?php if ( form_error('horario[]') ) : ?>
+				<div class="alert alert-danger alert-dismissible text-center" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<p><strong>Foram encontrados erro nos horários de aula</strong></p>
+					<?= form_error('horario[]') ?>
+				</div>
+			<?php endif; ?>
 		</div>
 
 
