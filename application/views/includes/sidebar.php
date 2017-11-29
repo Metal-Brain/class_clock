@@ -29,7 +29,7 @@
 		   </a>
 	   </li>
     <?php endif; ?>
-	
+
 	   <li id="sidebar-salas">
 		   <a href="<?php echo base_url();?>index.php/Tipo_sala">
 			   <span class="glyphicon glyphicon-home"></span> <span class="sidebar-label">Salas</span>
@@ -66,16 +66,16 @@
 			   <span class="glyphicon glyphicon-calendar"></span> <span class="sidebar-label">Semestres</span>
 		   </a>
 	   </li>
-	   <li id="sidebar-funcionarios">
+	   <!-- <li id="sidebar-funcionarios">
 		   <a href="">
 			   <span class="glyphicon glyphicon-user"></span> <span class="sidebar-label">Funcionários</span>
 		   </a>
-	   </li>
-	   <li id="sidebar-instituicao">
+	   </li> -->
+	   <!-- <li id="sidebar-instituicao">
 		   <a href="">
 			   <span class="glyphicon glyphicon-briefcase"></span> <span class="sidebar-label">Instituição</span>
 		   </a>
-	   </li>
+	   </li> -->
 	   <li id="sidebar-fpa">
 		   <a href="http://localhost/class_clock/index.php/Fpa">
 			   <span class="glyphicon glyphicon-duplicate"></span> <span class="sidebar-label">FPA</span>
