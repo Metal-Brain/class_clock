@@ -41,9 +41,7 @@
                 $curso->modalidade_id = $this->input->post('modalidade_id');
           if($this->input->post('docente_id')){
                 $curso->docente_id = $this->input->post('docente_id');
-                if($curso->docente_id){
-                  $this->db->insert('tipo_pessoa', array('tipo_id'=>5, 'pessoa_id'=>$curso->docente->pessoa->id));
-                }
+                $this->db->insert('tipo_pessoa', array('tipo_id'=>5, 'pessoa_id'=>$curso->docente->pessoa->id));
           }else($curso->docente_id = null);
                 $curso->codigo_curso = $this->input->post('codigo_curso');
                 $curso->sigla_curso = $this->input->post('sigla_curso');
@@ -91,10 +89,13 @@
           $curso->modalidade_id = $this->input->post('modalidade_id');
           if($this->input->post('docente_id')){
             $curso->docente_id = $this->input->post('docente_id');
-            if($curso->docente_id){
-              $this->db->insert('tipo_pessoa', array('tipo_id'=>5, 'pessoa_id'=>$curso->docente->pessoa->id));
-            }
-          }else($curso->docente_id = null);
+            $this->db->insert('tipo_pessoa', array('tipo_id'=>5, 'pessoa_id'=>$curso->docente->pessoa->id));
+          }else{
+            try {
+              $this->db->delete('tipo_pessoa', array('tipo_id'=>5, 'pessoa_id'=>$curso->docente->pessoa->id));
+            } catch (Exception $ignored) {}
+            $curso->docente_id = null;
+          }
           $curso->codigo_curso = $this->input->post('codigo_curso');
           $curso->sigla_curso = $this->input->post('sigla_curso');
           $curso->qtd_semestre = $this->input->post('qtd_semestre');
@@ -123,10 +124,8 @@
     public function deletar($id){
       try {
         $curso = Curso_model::findOrFail($id);
-        $coordenador = $curso->docente->pessoa;
-        $this->db->delete('tipo_pessoa', array('tipo_id'=>5, 'pessoa_id'=>$coordenador->id));
+        $this->db->delete('tipo_pessoa', array('tipo_id'=>5, 'pessoa_id'=>$curso->docente->pessoa->id));
         $curso->docente_id = null;
-        // FIXME O coordenador precisa ser deletado da tabela 'tipo_pessoa' quando o curso for desativado
         $curso->save();
         $curso->delete();
         $this->session->set_flashdata('success','Curso deletado com sucesso');
@@ -176,9 +175,6 @@
       }
     }
   }
-
-
-
   //select pessoa.nome, docente.id from pessoa inner join docente on pessoa.id = docente.pessoa_id
   //where docente.id not in (SELECT docente_id from curso where docente_id is not null);
 ?>
