@@ -65,9 +65,8 @@ class Grau extends CI_Controller {
 
         $this->session->set_flashdata('danger','Problemas ao cadastrar o grau, tente novamente!');
         $this->cadastrar();
+        redirect("Grau");
     }
-    redirect("Grau");
-  }
 
   function editar($id){
    	   $this->load->model(array(
