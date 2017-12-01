@@ -128,7 +128,7 @@
         $curso->docente_id = null;
         $curso->save();
         $curso->delete();
-        $this->session->set_flashdata('success','Curso deletado com sucesso');
+        $this->session->set_flashdata('success','Curso Desativado com sucesso');
         redirect("curso");
       }catch (Exception $ignored) {}
       $this->session->set_flashdata('danger','Erro ao deletar um curso, tente novamente');
