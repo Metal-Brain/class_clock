@@ -61,11 +61,6 @@
 		   </a>
 	   </li>
       <?php endif; ?>
-	   <li id="sidebar-semestres">
-		   <a href="">
-			   <span class="glyphicon glyphicon-calendar"></span> <span class="sidebar-label">Semestres</span>
-		   </a>
-	   </li>
 	   <!-- <li id="sidebar-funcionarios">
 		   <a href="">
 			   <span class="glyphicon glyphicon-user"></span> <span class="sidebar-label">Funcionários</span>
