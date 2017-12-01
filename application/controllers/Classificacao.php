@@ -14,7 +14,8 @@ class Classificacao extends MY_Controller {
 			$cursos  = $docente->cursos;
 			
 			if($cursos->isEmpty()){
-				redirect('authError'); // Docente nao é coordenador
+				$this->session->set_flashdata("É necessário ser coordenador de algum curso para acessar a classificação");
+				redirect('/'); // Docente nao é coordenador
 			}
 
 			$curso = $cursos[0]; // Pega o curso que o docente coordena
@@ -30,6 +31,6 @@ class Classificacao extends MY_Controller {
             $classificacoes = Classificacao_model::where('curso_id', $curso)->get();
         }
 		
-	    $this->load->template('classificacoes/classificacao', compact('classificacoes', 'curso', 'tipo', 'user'), 'classificacoes/js_classificacao');
+	    $this->load->template('classificacoes/classificacao', compact('classificacoes', 'cursos', 'tipo', 'user'), 'classificacoes/js_classificacao');
     }
 }
