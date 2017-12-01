@@ -1,13 +1,9 @@
 <?php $tipoUsuario = $this->session->userdata('usuario_logado')['tipo']; ?>
-<!--<pre>
-		<?php 
-			print_r($classificacoes);
-			print_r($tipo);
-			print_r($curso);
-			print_r($user);
-		?>
-</pre>-->
-
+<!--
+<pre>
+		<?php print_r($cursos) ?>
+</pre>
+ -->
 <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
 	
 
@@ -27,7 +23,10 @@
 					<select class="form-control" name="curso">
 
 						<?php
-						echo '<option value="1">Teste</option>';
+						foreach($cursos as $curso){
+								echo '<option value="'. $curso->id .'">'.$curso->nome_curso.'</option>';
+															}
+						
 								
 						?>
 
@@ -47,6 +46,7 @@
 		</thead>
 
 		<tbody>
+		<?php if (in_array($tipoUsuario,[1])) :?>
 			<?php foreach ($classificacoes as $curso) { ?>
 				
 					<td class="text-center"><?= htmlspecialchars(ucwords($curso['nome'])); ?></td>
@@ -56,6 +56,18 @@
 			    </tr>
 			
 			<?php } ?>
+		<?php endif; ?>	
+		<?php if (in_array($tipoUsuario,[4])) :?>
+			<?php foreach ($cursos as $curso) { ?>
+				
+					<td class="text-center"><?= htmlspecialchars(ucwords($curso['nome'])); ?></td>
+					<td class="text-center"><?= htmlspecialchars(ucwords($curso['nome_curso'])); ?></td>
+					<td class="text-center"><?= htmlspecialchars(ucwords($curso['nome_disciplina'])); ?></td>
+					
+			    </tr>
+			
+			<?php } ?>
+		<?php endif; ?>	
 		</tbody>
 	</table>
 

@@ -6,6 +6,7 @@ class Classificacao extends MY_Controller {
         $user  = $this->session->userdata('usuario_logado');
         $tipo  = $user['tipo'];
         $curso = $this->request('curso');
+		$cursos = Curso_model::all();
             
 		$user = Pessoa_model::find($user['id']);
 		
@@ -15,10 +16,11 @@ class Classificacao extends MY_Controller {
 			
 			if($cursos->isEmpty()){
 				$this->session->set_flashdata("É necessário ser coordenador de algum curso para acessar a classificação");
-				redirect('/'); // Docente nao é coordenador
+				redirect('authError'); // Docente nao é coordenador
 			}
 
 			$curso = $cursos[0]; // Pega o curso que o docente coordena
+			$cursos = Classificacao_model::where('curso_id', $curso->id)->get();
 		}
 		
 		# id 3 é o do DAE
