@@ -161,3 +161,4 @@ class Grau extends CI_Controller {
   }
 
 }
+}

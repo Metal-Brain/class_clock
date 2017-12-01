@@ -71,11 +71,13 @@
 			   <span class="glyphicon glyphicon-briefcase"></span> <span class="sidebar-label">Instituição</span>
 		   </a>
 	   </li> -->
-	   <li id="sidebar-fpa">
-		   <a href="http://localhost/class_clock/index.php/Fpa">
-			   <span class="glyphicon glyphicon-duplicate"></span> <span class="sidebar-label">FPA</span>
-		   </a>
-	   </li>
+	   <?php if ($tipoUsuario != 1) :?>
+		<li id="sidebar-fpa">
+			<a href="http://localhost/class_clock/index.php/Fpa">
+				<span class="glyphicon glyphicon-duplicate"></span> <span class="sidebar-label">FPA</span>
+			</a>
+		</li>
+	   <?php endif; ?>
      <li id="sidebar-docente">
 		   <a href="<?php echo base_url();?>index.php/ConsultaDocente">
 			   <span class="glyphicon glyphicon-duplicate"></span> <span class="sidebar-label">Consulta Docente</span>
