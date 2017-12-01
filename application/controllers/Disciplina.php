@@ -165,7 +165,6 @@
         function __construct() {
 		parent::__construct();
 		$this->load->model('Disciplina_model');
-		$this->load->library('csvimport');
 	}
          /**
     * Faz a improtação do CSV
@@ -177,12 +176,12 @@
 
          $csv_array = CSVImporter::fromForm('csvfile');
          //var_dump($csv_array);
-        
+
 			 if ($csv_array) {
         // Faz a interação no array para poder gravar os dados na tabela 'disciplinas'
 				foreach ($csv_array as $row) {
                   try {
-                  
+
                     $disciplina = new Disciplina_model();
                     $disciplina->curso_id = $row[1];
                     $disciplina->tipo_sala_id = $row[2];
@@ -195,10 +194,10 @@
                     $disciplina->save();
 
                     $this->session->set_flashdata('success','Disciplina cadastrada com sucesso');
-                    
-               
+
+
                 } catch (Exception $ignored){}
-                    
+
 			}
                  redirect("Disciplina");
 }
@@ -210,4 +209,3 @@ $this->load->helper('download');
 force_download("disciplina.csv", file_get_contents(base_url("uploads/disciplina.csv")));
 }
 }
-
