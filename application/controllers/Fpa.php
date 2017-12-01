@@ -4,11 +4,7 @@ class Fpa extends MY_Controller{
 
   function index(){
     $docente = Pessoa_model::find($_SESSION['usuario_logado']['id'])->docente;
-
-    if(!is_null($docente)){
-      $fpas = Fpa_model::where("docente_id", $docente->id)->get();
-    }
-
+    $fpas = Fpa_model::where("docente_id", $docente->id)->get();
     $this->load->template('fpas/fpas',compact('fpas'),'fpas/js_fpas');
   }
 

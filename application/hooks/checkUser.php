@@ -146,11 +146,11 @@ class checkUser {
     * verifica se o usuário pode acessar controller e método requisitado
     */
     private function hasAccess ($acess) {
-      /*    if (!key_exists($this->controller, $acess))
+        if (!key_exists($this->controller, $acess))
             redirect('authError');
 
         if(!in_array($this->method, $acess[$this->controller]))
-            redirect('authError');  */
+            redirect('authError');
     }
 
 }
