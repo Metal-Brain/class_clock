@@ -1,9 +1,6 @@
 <?php $tipoUsuario = $this->session->userdata('usuario_logado')['tipo']; ?>
-<!--
-<pre>
-		<?php print_r($cursos) ?>
-</pre>
- -->
+
+ 
 <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
 	
 
@@ -20,18 +17,27 @@
 			<div class="row">
 				<h4 class="page-header">Selecione o curso desejado.</h4>
 				<form action="" method="GET">
-					<select class="form-control" name="curso">
+					<select class="form-control" name="curso" onchange="this.form.submit()">
 
 						<?php
+					
 						foreach($cursos as $curso){
-								echo '<option value="'. $curso->id .'">'.$curso->nome_curso.'</option>';
+								if($classificacoes[0]->curso_id == $curso['id']){
+							
+							echo '<option value="'. $curso->id .'" selected>'.$curso->nome_curso.'</option>';
+								
+							
+						}else{
+							echo '<option value="'. $curso->id .'">'.$curso->nome_curso.'</option>';
+								
+						}
 															}
 						
 								
 						?>
 
 					 </select>
-					<input type="submit" class="btn btn-success" style="float: right;">
+				
 				</form>
 			</div>
 		<?php endif; ?>
