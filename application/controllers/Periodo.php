@@ -39,7 +39,6 @@ class Periodo extends CI_Controller
                 {
                     $periodo = new Periodo_model();
                     $periodo->nome = $this->input->post('nome');
-                    $periodo->deletado_em = date("Y-m-d H:i:s");
                     $periodo->ativo = "0";
                     $periodo->save();
                 });
@@ -116,8 +115,15 @@ class Periodo extends CI_Controller
         try
         {
             $periodo = Periodo_model::findOrFail($id);
-            $periodo->delete();
-            $this->session->set_flashdata('success','Período desativado com sucesso');
+            if($periodo->ativo =="1")
+            {
+                $this->session->set_flashdata('Alerta','Período atual não pode ser desativado');
+            }   
+            else
+            {
+                $periodo->delete();
+                $this->session->set_flashdata('success','Período desativado com sucesso');
+            }
         }
         catch (Exception $e)
         {
@@ -191,7 +197,6 @@ class Periodo extends CI_Controller
     {
         $stored_pocedure = 'CALL ativa_periodo(?)';
         $result = $this->db->query($stored_pocedure,array('id'=>$id));
-        redirect("Periodo");
     }
 }
 
