@@ -35,17 +35,21 @@
 			   <span class="glyphicon glyphicon-home"></span> <span class="sidebar-label">Salas</span>
 		   </a>
 	   </li>
+
+		<?php if (in_array($tipoUsuario, [1, 2, 3])): ?>
 	   <li id="sidebar-periodos">
 		   <a href="<?php echo base_url();?>index.php/periodo">
 			   <span class="glyphicon glyphicon-time"></span> <span class="sidebar-label">Períodos</span>
 		   </a>
 	   </li>
+	   <?php endif; ?>
+
      <?php if (in_array($tipoUsuario,[1,2])) :?>
-     <li id="sidebar-areas">
-		   <a href="<?php echo base_url();?>index.php/area">
+     	<li id="sidebar-areas">
+		    <a href="<?php echo base_url();?>index.php/area">
 			   <span class="glyphicon glyphicon-list"></span> <span class="sidebar-label">Áreas</span>
-		   </a>
-	   </li>
+		    </a>
+	    </li>
      <?php endif; ?>
      <?php if (in_array($tipoUsuario,[1,2])) :?>
 	   <li id="sidebar-turmas">
@@ -71,18 +75,20 @@
 			   <span class="glyphicon glyphicon-briefcase"></span> <span class="sidebar-label">Instituição</span>
 		   </a>
 	   </li> -->
-	   <?php if ($tipoUsuario != 1) :?>
+	   <?php if ($tipoUsuario == 2) :?>
 		<li id="sidebar-fpa">
 			<a href="http://localhost/class_clock/index.php/Fpa">
 				<span class="glyphicon glyphicon-duplicate"></span> <span class="sidebar-label">FPA</span>
 			</a>
 		</li>
 	   <?php endif; ?>
+	   <?php if (in_array($tipoUsuario, [1, 2, 3])): ?>
      <li id="sidebar-docente">
 		   <a href="<?php echo base_url();?>index.php/ConsultaDocente">
 			   <span class="glyphicon glyphicon-duplicate"></span> <span class="sidebar-label">Consulta Docente</span>
 		   </a>
 	   </li>
+	<?php endif; ?>
      <?php if (in_array($tipoUsuario, [1])) :?>
 	   <li id="sidebar-pessoa">
 		   <a href="<?php echo base_url();?>index.php/pessoa">
@@ -91,7 +97,7 @@
      </li>
      <?php endif; ?>
      <?php if (in_array($tipoUsuario,[1,2])) :?>
-     <li id="sidebar-disciplinas">
+     	<li id="sidebar-disciplinas">
 		   <a href="<?php echo base_url();?>index.php/disciplina">
 			   <span class="glyphicon glyphicon-tree-deciduous"></span> <span class="sidebar-label">Disciplinas</span>
 		   </a>
