@@ -37,7 +37,7 @@
 			<?php foreach ($fpas as $fpa) { ?>
 				<tr>
 					<td class="text-center"><?= ($fpa->periodo->nome); ?></td>
-					<td class="text-center"><a class="btn btn-warning glyphicon glyphicon-pencil" title="Editar" href="<?= site_url('fpa/cadastrarDisponibilidade/'.$fpa->id)?>"></a></td>
+					<td class="text-center"><a class="btn btn-warning glyphicon glyphicon-pencil" title="Editar" href="<?= site_url('Fpa/editarDisponibilidade/'.$fpa->id)?>"></a></td>
 				</tr>
 			<?php } ?>
 		</tbody>

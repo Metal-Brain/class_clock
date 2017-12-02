@@ -54,3 +54,6 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route['importar'] = "Base/ImportCsv";
 $route['importar'] = "Disciplina/ImportCsv";
+
+$route['Fpa/cadastrarDisponibilidade'] = "Fpa/cadastrarDisponibilidade";
+$route['Fpa/editarDisponibilidade/(:num)'] = "Fpa/cadastrarDisponibilidade/$1";
