@@ -40,6 +40,7 @@ class Periodo extends CI_Controller
                     $periodo = new Periodo_model();
                     $periodo->nome = $this->input->post('nome');
                     $periodo->deletado_em = date("Y-m-d H:i:s");
+                    $periodo->ativo = "0";
                     $periodo->save();
                 });
                 $this->session->set_flashdata('success','Período cadastrado com sucesso');
@@ -152,8 +153,8 @@ class Periodo extends CI_Controller
     }
 
 
-    function ImportCsv() {
 
+    function ImportCsv() {
         $csv_array = CSVImporter::fromForm('csvfile');
         //var_dump($csv_array);
         
@@ -163,24 +164,32 @@ class Periodo extends CI_Controller
                 try {
                   
                     $periodo = new Periodo_model();
-                    $periodo->nome = $row[1];
+                    $periodo->nome = $row[0];
                                         
                     $periodo->save();
-
                     $this->session->set_flashdata('success','Periodo cadastrado com sucesso');    
                 } catch (Exception $ignored){}
                     
             }
                  redirect("Periodo");
         }
-
     }
 
     function download()
     {
         $this->load->helper('download');
-        force_download("disciplina.csv", file_get_contents(base_url("uploads/disciplina.csv")));
-
+        force_download("periodo.csv", file_get_contents(base_url("uploads/periodo.csv")));
+    }
+    
+    /**
+     * Seta o Período atual ("ativo")
+     * @author Denny Azevedo
+     * @since 2017/12/02
+     * @param ID do período
+     */
+    function setPeriodoAtual($id)
+    {
+        $result = $this->db->query($stored_pocedure,array('id'=>$id));
     }
 }
 

@@ -17,11 +17,24 @@
 	<!-- Início do conteúdo da view-->
 	<input type ="checkbox" id="manipulaViewCadastroViaCSV"  class="btn btn-success">
            <label>clique no checkbox para importar um arquivo .csv</label>	
-    	<form method="post" class= "csv" style="display: none; " action="<?=base_url('periodo/ImportCsv')?>" enctype="multipart/form-data">
-    		<!--      //redirecionamento BASE/ImportCsv -->
 
+    	<form method="post" class= "csv" name="csvfile" style="display: none; " action="<?=base_url('periodo/ImportCsv')?>" enctype="multipart/form-data">
+    		<!--      //redirecionamento BASE/ImportCsv -->
+    
             
 				<div>
+					<h3>Orientação para criação do arquivo .csv</h3>
+					<h4>O arquivo deve conter o campo <b><i>Nome</i></b> que significa respectivamente o ano-periodo</h4>
+					<article> 
+						</br>
+						Os dados devem estar seperados por colunas <a href="<?=base_url('Periodo/download')?>">Clique para baixar o modelo de CSV</a>.
+					
+					
+					</article>
+				</br>
+					
+				</br>	
+			
 				<input id="csvCampo" type="file"  name="csvfile"/>	
 				<label>Selecione o arquivo CSV para importação:</label>	
 				</div>
@@ -32,7 +45,7 @@
 	<form class="formPeriodos" action="<?= site_url('periodo/salvar')?>" method="post">
 		<label>Ano / semestre:</label>
 		<div class="form-group width-400">
-			<input id="nome" name="nome" class="form-control" type="text" placeholder="xxxx-x" onkeyup="mascara(this,somenteNumeros);"  value="<?= set_value('nome')?>" maxlength="5">
+			<input id ="nome" name="nome" class="form-control" type="text" placeholder="xxxx-x" onkeyup="mascara(this,somenteNumeros);"  value="<?= set_value('nome')?>" maxlength="6">
 			<span class="text-danger">
 				<?= form_error('nome') ?>
 			</span>
