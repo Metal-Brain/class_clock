@@ -38,24 +38,15 @@
 			   <span class="glyphicon glyphicon-home"></span> <span class="sidebar-label">Salas</span>
 		   </a>
 	   </li>
-<<<<<<< HEAD
 	<?php endif; ?>
 	
 	<?php if (in_array($tipoUsuario,[1])) :?>
-=======
-
-		<?php if (in_array($tipoUsuario, [1, 2, 3])): ?>
->>>>>>> 639986f189e187df202c995f1ad3c90e09106e61
 	   <li id="sidebar-periodos">
 		   <a href="<?php echo base_url();?>index.php/periodo">
 			   <span class="glyphicon glyphicon-time"></span> <span class="sidebar-label">Períodos</span>
 		   </a>
 	   </li>
-<<<<<<< HEAD
 	<?php endif; ?>
-=======
-	   <?php endif; ?>
->>>>>>> 639986f189e187df202c995f1ad3c90e09106e61
 
      <?php if (in_array($tipoUsuario,[1,2])) :?>
      	<li id="sidebar-areas">
