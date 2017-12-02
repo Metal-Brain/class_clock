@@ -37,13 +37,14 @@ class Fpa extends MY_Controller{
     $docente_id = Docente_model::where('pessoa_id',$_SESSION['usuario_logado']['id'])->first()->id;
     $fpa = Fpa_model::where('docente_id', $docente_id)->where('periodo_id', $periodoAtivo->id)->first();
     $preferencias = Preferencia_model::where('fpa_id', $fpa->id)->get();
+
     $disciplinas = [];
     foreach($preferencias as $preferencia){
        $disciplinas[] = $preferencia->disciplina;
     }
-    $turmas = Turma_model::all();
 
-    if($preferencias->isEmpty()){
+    $turmas = Turma_model::all();
+    if(!$preferencias->isEmpty()){
       $this->load->template('fpas/fpaPreferencias', compact('fpa', 'turmas', 'disciplinas'), 'fpas/js_fpas');
     }
     else{
