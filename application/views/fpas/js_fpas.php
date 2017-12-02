@@ -36,7 +36,7 @@
       $(document).ready(function () {
         verificaHorarios();
       });
-    
+
       $('input[type=checkbox]').on('change', function () {
         verificaHorarios();
       });
@@ -74,7 +74,7 @@
                 <!-- Trazer do back as disciplinas cadastradas -->
                 <option  value=" " disabled selected hidden>Selecione</option>
                 <?php foreach ($turmas as $turma) :?>
-                  <option value="<?= $turma->disciplina->id?>"><?= $turma->disciplina->nome_disciplina?></option>
+                  <option value="<?= $turma->disciplina->id?>"><?= $turma->disciplina->nome_disciplina . ' - ' . $turma->turno->nome_turno?></option>
                 <?php endforeach;?>
               </select>
             </div>
