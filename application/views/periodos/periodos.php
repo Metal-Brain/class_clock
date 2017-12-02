@@ -41,7 +41,7 @@
 					
 					<?php if(!$periodo->ativo):?>
 						<td class="text-center">
-							<a class="btn btn-success glyphicon glyphicon-check" title="Ativar" href="<?= site_url('periodo/setPeridoAtual/'.$periodo->id)?>"></a>
+							<a class="btn btn-success glyphicon glyphicon-check" title="Ativar" href="<?= site_url('periodo/setPeriodoAtual/'.$periodo->id)?>"></a>
 						</td>
 					<?php else:	?>
 						<td class="text-center">
