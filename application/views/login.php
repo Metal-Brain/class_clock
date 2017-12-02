@@ -53,63 +53,12 @@
 										<?php endif; ?>
 
 										<button type="submit" class="btn btn-def btn-block" style="background-color: #4CAF50">Entrar</button>
-										<a  data-toggle="pill" style="text-align:center;display:block;" href="#recupera">Clique aqui para recuperar a senha</a>   <!-- OBS: Liberar essa opção só quando começar a ser implementada!!! -->
-									</div>
+										</div>
 								<?= form_close() ?>
 							</div>
 							<!-- fim tela login-->
 
-							<!-- modal da recuperação de senha -->
-							<div id="recupera" class="col-md-6 col-md-offset-3 tab-pane fade">
-								<h2 style="text-align:center">Recuperar Senha</h2>
-								 <?php echo form_open('Login/enviaEmail'); ?>
-
-								<div class="help">
-									<p><strong>Ex: 0000000 </strong> Informe seu login, instruções serão enviadas para o<br> e-mail cadastrado em nosso sistema, se necessário, procure a CTI.</p>
-								</div>
-								<form>
-									<div class="form-group input-group">
-										<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-										<?= form_input('matricula',set_value('matricula'), array('class'=>'form-control','placeholder'=>'ex: 0000000','maxlength'=>'8')) ?>
-
-									</div>
-
-									<div class="form-group">
-
-											<!-- Alert de sucesso -->
-										<?php if ($this->session->flashdata('success')) : ?>
-											<div class="text-center alert alert-success" role="alert">
-												<span class="glyphicon glyphicon glyphicon-ok" aria-hidden="true"></span>
-												<span class="sr-only">Succes:</span>
-												<?= $this->session->flashdata('success') ?>
-											</div>
-										<!-- Alert de erro -->
-										<?php elseif ($this->session->flashdata('danger')) : ?>
-											<div class="text-center alert alert-danger" role="alert">
-												<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-												<span class="sr-only">Error:</span>
-												<?= $this->session->flashdata('danger') ?>
-											</div>
-										<?php endif; ?>
-
-										<?php if (validation_errors()): ?>
-											<div class="alert alert-danger text-center">
-												<p><?= $this->session->flashdata('formDanger') ?></p>
-												<?= validation_errors() ?>
-											</div>
-										<?php endif; ?>
-
-									</div>
-
-									<div class="col-md-6 col-md-offset-3 inline">
-										<button type='submit' class='btn bt-lg btn-primary' style="background-color: #4CAF50">Redefinir</button>
-										<button type='button' class='btn bt-lg btn-default'  data-toggle="pill" href="#principal">Cancelar</button>
-									</div>
-								</form>
-							</div>
-
-							<!-- Fim modal da recuperação de senha -->
-						</div>
+							
 
 						<!-- img logo -->
 						<div>
