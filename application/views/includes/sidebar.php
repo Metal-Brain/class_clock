@@ -103,7 +103,7 @@
        </a>
      </li>
      <?php endif; ?>
-     /* <?php if (in_array($tipoUsuario,[1,2])) :?> */
+     <?php if (in_array($tipoUsuario,[1,2])) :?>
      	<li id="sidebar-disciplinas">
 		   <a href="<?php echo base_url();?>index.php/disciplina">
 			   <span class="glyphicon glyphicon-tree-deciduous"></span> <span class="sidebar-label">Disciplinas</span>

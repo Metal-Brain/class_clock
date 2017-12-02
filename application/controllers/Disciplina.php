@@ -1,3 +1,4 @@
+
 <?php
     /**
     *  Regras de negócio sobre disciplinas.
@@ -59,7 +60,7 @@
             }
 
             $this->session->set_flashdata('danger','Problemas ao cadastrar a Disciplina, tente novamente!');
-            redirect("disciplina");
+            redirect("disciplina/cadastrar");
         }
 
         /**
