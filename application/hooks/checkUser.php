@@ -63,11 +63,12 @@ class checkUser {
             'turno'       => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
             'tipo_sala'   => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
             'modalidade'  => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
+            'classificacao'   => ['index'],
             'curso'       => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar','importcsv','download','force_download'],
             'pessoa'      => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
             'area'        => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar','importcsv','download','force_download'],
             'disciplina'  => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar','importcsv','download','force_download'],
-            'consultaDocente' => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
+            'consultadocente' => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
             'turma'       => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
             'periodo'     => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar','importcsv','download','force_download']
         ];
@@ -82,10 +83,14 @@ class checkUser {
     private function setAccessToCRA(){
         $acess =
         [
-            'turno'       => ['index'],
-            'tipo_sala'   => ['index'],
+            'turno'       => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
+            'curso'       => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar','importcsv','download','force_download'],
+            'tipo_sala'   => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
+            'periodo'     => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar','importcsv','download','force_download'],
+            'area'        => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar','importcsv','download','force_download'],
             'turma'       => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
-            'modalidade'  => ['index']
+            'modalidade'  => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
+            'disciplina'  => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar','importcsv','download','force_download']  
         ];
 
         $this->hasAccess($acess);
@@ -97,10 +102,8 @@ class checkUser {
     private function setAccessToDAE(){
         $acess =
         [
-            'turno'       => ['index'],
             'classificacao'   => ['index'],
-            'tipo_sala'   => ['index'],
-            'modalidade'  => ['index']
+            'consultadocente' => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
         ];
 
         $this->hasAccess($acess);
@@ -112,7 +115,6 @@ class checkUser {
     private function setAccessToDocente(){
         $acess =
         [
-            'classificacao' => ['index'],
             'fpa'         => [
                 'index','cadastrarDisponibilidade',
                 'salvarDisponibilidade', 'cadastrarPreferencias',
@@ -127,9 +129,8 @@ class checkUser {
     private function setAccessToCoordenador(){
         $acess =
         [
-            'turno'       => ['index'],
-            'tipo_sala'   => ['index'],
-            'modalidade'  => ['index'],
+            'consultadocente' => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
+            'classificacao'   => ['index'],
             'fpa'         => [
                 'index','cadastrarDisponibilidade',
                 'salvarDisponibilidade', 'cadastrarPreferencias',
