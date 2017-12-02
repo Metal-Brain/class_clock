@@ -41,7 +41,10 @@
                 $curso->modalidade_id = $this->input->post('modalidade_id');
           if($this->input->post('docente_id')){
                 $curso->docente_id = $this->input->post('docente_id');
-                $this->db->insert('tipo_pessoa', array('tipo_id'=>5, 'pessoa_id'=>$curso->docente->pessoa->id));
+                //TODO: Arrumar essa parte, ta dando exceção
+                if(DB::select("SELECT * FROM tipo_pessoa WHERE tipo_id =?, pessoa_id = ?", [5, Docente_model::find($this->input->post('docente_id'))->pessoa->id])){
+                  DB::insert("INSERT INTO tipo_pessoa(tipo_id, pessoa_id) VALUES (?, ?)", [5, Docente_model::find($this->input->post('docente_id'))->pessoa->id]);
+                }
           }else($curso->docente_id = null);
                 $curso->codigo_curso = $this->input->post('codigo_curso');
                 $curso->sigla_curso = $this->input->post('sigla_curso');
@@ -89,10 +92,19 @@
           $curso->modalidade_id = $this->input->post('modalidade_id');
           if($this->input->post('docente_id')){
             $curso->docente_id = $this->input->post('docente_id');
-            $this->db->insert('tipo_pessoa', array('tipo_id'=>5, 'pessoa_id'=>$curso->docente->pessoa->id));
+            //TODO: Arrumar essa parte, ta dando exceção
+            if(DB::select("SELECT * FROM tipo_pessoa WHERE tipo_id =?, pessoa_id = ?", [5, Docente_model::find($this->input->post('docente_id'))->pessoa->id])){
+              DB::insert("INSERT INTO tipo_pessoa(tipo_id, pessoa_id) VALUES (?, ?)", [5, Docente_model::find($this->input->post('docente_id'))->pessoa->id]);
+            }
+            //$this->db->insert('tipo_pessoa', array('tipo_id'=>5, 'pessoa_id'=>Docente_model::find($this->input->post('docente_id'))->pessoa->id));
+            // Tipo_model::firstOrCreate([
+            //   'tipo_id' => 5,
+            //   'pessoa_id' => Docente_model::find($this->input->post('docente_id'))->pessoa->id
+            // ]);
           }else{
             try {
-              $this->db->delete('tipo_pessoa', array('tipo_id'=>5, 'pessoa_id'=>$curso->docente->pessoa->id));
+              //$this->db->delete('tipo_pessoa', array('tipo_id'=>5, 'pessoa_id'=>Docente_model::find($this->input->post('docente_id'))->pessoa->id));
+              DB::delete("DELETE FROM tipo_pessoa WHERE tipo_id = ?, pessoa_id = ?", [5, Docente_model::find($this->input->post('docente_id'))->pessoa->id]);
             } catch (Exception $ignored) {}
             $curso->docente_id = null;
           }
@@ -104,8 +116,13 @@
 
           $this->session->set_flashdata('success', 'Curso atualizado com sucesso');
           redirect('curso');
-        } catch (Exception $ignored) {}
+        } catch (Exception $i) {
+          throw new Exception($i->getMessage(), 1);
+          
+        }
       }
+
+
 
       $this->session->set_flashdata('danger', 'Problemas ao atualizar os dados do curso, tente novamente!');
       $this->editar($id);

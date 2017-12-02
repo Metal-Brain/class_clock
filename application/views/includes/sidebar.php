@@ -1,4 +1,5 @@
 <?php $tipoUsuario = $this->session->userdata('usuario_logado')['tipo']; ?>
+<?php $isCoordenador = !is_null(@Pessoa_model::find(@$this->session->userdata('usuario_logado')['id'])->docente->cursos); ?>
 <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 sidebar" aria-expanded="false"  id="sidebar">
    <ul class="nav nav-pills nav-stacked">
    <!--
@@ -24,7 +25,7 @@
 		   </a>
 	   </li>
     <?php endif; ?>
-	<?php if (in_array($tipoUsuario,[1,3,5])) :?>
+	<?php if (in_array($tipoUsuario,[3,5]) || $isCoordenador) :?>
      <li id="sidebar-classificacao">
 		   <a href="<?php echo base_url();?>index.php/classificacao">
 			   <span class="glyphicon glyphicon-education"></span> <span class="sidebar-label">Classificação</span>
@@ -48,7 +49,7 @@
 	   </li>
 	<?php endif; ?>
 
-     <?php if (in_array($tipoUsuario,[1])) :?>
+     <?php if (in_array($tipoUsuario,[1,2])) :?>
      	<li id="sidebar-areas">
 		    <a href="<?php echo base_url();?>index.php/area">
 			   <span class="glyphicon glyphicon-list"></span> <span class="sidebar-label">Áreas</span>

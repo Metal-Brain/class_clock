@@ -3,6 +3,7 @@
 class Classificacao extends MY_Controller {
 
     public function index() {
+		exit;
         $user  = $this->session->userdata('usuario_logado');
         $tipo  = $user['tipo'];
         $curso = $this->request('curso');
