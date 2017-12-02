@@ -41,7 +41,7 @@
 					
 					<?php if(!$periodo->ativo):?>
 						<td class="text-center">
-							<a class="btn btn-success glyphicon glyphicon-check" title="Ativar" href="<?= site_url('periodo/setPeridoAtual/'.$periodo->id)?>"></a>
+							<a class="btn btn-success glyphicon glyphicon-check" title="Ativar" id="btn-delete" onclick="confirm(<?= $periodo->id ?>,'Deseja definir o periodo <?= $periodo->nome ?> como atual?','setPeriodoAtual/')"></a>
 						</td>
 					<?php else:	?>
 						<td class="text-center">
@@ -53,10 +53,10 @@
 					<td class="text-center">
 						<?php if (empty($periodo->deletado_em)): ?>
 						<a class="btn btn-warning glyphicon glyphicon-pencil" title="Editar" href="<?= site_url('periodo/editar/'.$periodo->id)?>"></a>
-						<a class="btn btn-danger glyphicon glyphicon-remove disabled" title="Desativar" id="btn-delete" onclick="confirm(<?= $periodo->id ?>,'Deseja desativar o período?','deletar')"></a>
+						<a class="btn btn-danger glyphicon glyphicon-remove" title="Desativar" id="btn-delete" onclick="confirm(<?= $periodo->id ?>,'Deseja desativar o período?','deletar')"></a>
 					<?php else : ?>
 
-						<a class="btn btn-warning glyphicon glyphicon-pencil disabled" title="Editar" href="<?= site_url('periodo/editar/'.$periodo->id)?>"></a>
+						<a class="btn btn-warning glyphicon glyphicon-pencil" title="Editar" href="<?= site_url('periodo/editar/'.$periodo->id)?>"></a>
 						<button class="btn btn-success" title="Ativar" type="button" id="btn-delete" onclick="confirm(<?= $periodo->id ?>,'Deseja ativar o período?','ativar')"> <i class="glyphicon glyphicon-check"></i></button>
 						<?php endif; ?>
 					</td>
