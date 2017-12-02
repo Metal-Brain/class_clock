@@ -95,7 +95,6 @@
 			</a>
 		</li>
 	   <?php endif; ?>
-<<<<<<< HEAD
 	
 	<?php if (in_array($tipoUsuario,[1])) :?>
     	<li id="sidebar-docente">
@@ -106,16 +105,6 @@
 	<?php endif; ?>
     
 	 <?php if (in_array($tipoUsuario, [1])) :?>
-=======
-	   <?php if (in_array($tipoUsuario, [1, 2, 3])): ?>
-     <li id="sidebar-docente">
-		   <a href="<?php echo base_url();?>index.php/ConsultaDocente">
-			   <span class="glyphicon glyphicon-duplicate"></span> <span class="sidebar-label">Consulta Docente</span>
-		   </a>
-	   </li>
-	<?php endif; ?>
-     <?php if (in_array($tipoUsuario, [1])) :?>
->>>>>>> 639986f189e187df202c995f1ad3c90e09106e61
 	   <li id="sidebar-pessoa">
 		   <a href="<?php echo base_url();?>index.php/pessoa">
 			   <span class="glyphicon glyphicon-user"></span> <span class="sidebar-label">Pessoas</span>
