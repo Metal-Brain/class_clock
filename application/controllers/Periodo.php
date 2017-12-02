@@ -187,7 +187,7 @@ class Periodo extends CI_Controller
      * @since 2017/12/02
      * @param ID do período
      */
-    function periodoatual($id)
+    function setPeriodoAtual($id)
     {
         $result = $this->db->query($stored_pocedure,array('id'=>$id));
     }
