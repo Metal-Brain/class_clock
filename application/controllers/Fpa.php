@@ -9,13 +9,23 @@ class Fpa extends MY_Controller{
   }
 
   public function cadastrarDisponibilidade(){
-    $periodoAtivo = Periodo_model::periodoAtivo();
-    $docente_id = Docente_model::where('pessoa_id',$_SESSION['usuario_logado']['id'])->first()->id;
-    $fpa = Fpa_model::where('docente_id', $docente_id)->where('periodo_id', $periodoAtivo->id)->first();
-    $disponibilidade = Disponibilidade_model::where('fpa_id', $fpa->id)->get();
+
+    // inicialização de variavel.
+    $fpa = null;
+    $disponibilidade = null;
+
+    $url = explode('/',uri_string());
+    // verifica a rota que esta acessando a função
+    if ($url[1] == 'editarDisponibilidade') {
+      $periodoAtivo = Periodo_model::periodoAtivo();
+      $docente_id = Docente_model::where('pessoa_id',$_SESSION['usuario_logado']['id'])->first()->id;
+      $fpa = Fpa_model::where('docente_id', $docente_id)->where('periodo_id', $periodoAtivo->id)->first();
+      $disponibilidade = Disponibilidade_model::where('fpa_id', $fpa->id)->get();
+    }
+
     $horarios = Horario_model::orderBy('inicio')->get();
 
-    if(!$disponibilidade->isEmpty()){
+    if(!is_null($disponibilidade) && !$disponibilidade->isEmpty()){
       $this->load->template('fpas/fpaCadastrar', compact('fpa', 'horarios', 'disponibilidade'), 'fpas/js_fpas');
     } else {
       $this->load->template('fpas/fpaCadastrar', compact('horarios'), 'fpas/js_fpas');
@@ -26,11 +36,15 @@ class Fpa extends MY_Controller{
     $periodoAtivo = Periodo_model::periodoAtivo();
     $docente_id = Docente_model::where('pessoa_id',$_SESSION['usuario_logado']['id'])->first()->id;
     $fpa = Fpa_model::where('docente_id', $docente_id)->where('periodo_id', $periodoAtivo->id)->first();
-    $preferencias = Preferencia_model::where('fpa_id', $fpa)->get();
+    $preferencias = Preferencia_model::where('fpa_id', $fpa->id)->get();
+    $disciplinas = [];
+    foreach($preferencias as $preferencia){
+       $disciplinas[] = $preferencia->disciplina;
+    }
     $turmas = Turma_model::all();
 
     if($preferencias->isEmpty()){
-      $this->load->template('fpas/fpaPreferencias', compact('fpa', 'turmas', 'preferencias'), 'fpas/js_fpas');
+      $this->load->template('fpas/fpaPreferencias', compact('fpa', 'turmas', 'disciplinas'), 'fpas/js_fpas');
     }
     else{
       $this->load->template('fpas/fpaPreferencias', compact('turmas'), 'fpas/js_fpas');

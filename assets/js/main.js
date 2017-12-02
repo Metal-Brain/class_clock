@@ -11,9 +11,9 @@ else if (path_atual.indexOf("Tipo") != -1) {
 	$('#sidebar-salas').addClass('active');
 }else if (path_atual.indexOf("periodo") != -1) {
 	$('#sidebar-periodos').addClass('active');
-}else if (path_atual.indexOf("Area") != -1) {
+}else if (path_atual.indexOf("area") != -1) {
 	$('#sidebar-areas').addClass('active');
-}else if (path_atual.indexOf("Turma") != -1) {
+}else if (path_atual.indexOf("turma" ) != -1) {
   $('#sidebar-turmas').addClass('active');
 }else if (path_atual.indexOf("modalidade") != -1) {
 	$('#sidebar-modalidades').addClass('active');

@@ -8,4 +8,8 @@ class Preferencia_model extends Eloquent{
     public $fillable = ['fpa_id', 'disciplina_id', 'ordem'];
     public $timestamps = false;
 
+    public function disciplina(){
+        return $this->belongsTo(Disciplina_model::class, 'disciplina_id');
+    }
+
 }
