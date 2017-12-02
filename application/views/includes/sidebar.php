@@ -79,7 +79,7 @@
 			   <span class="glyphicon glyphicon-briefcase"></span> <span class="sidebar-label">Instituição</span>
 		   </a>
 	   </li> -->
-	   <?php if ($tipoUsuario == 2) :?>
+	   <?php if ($tipoUsuario == 4) :?>
 		<li id="sidebar-fpa">
 			<a href="http://localhost/class_clock/index.php/Fpa">
 				<span class="glyphicon glyphicon-duplicate"></span> <span class="sidebar-label">FPA</span>
