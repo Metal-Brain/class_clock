@@ -176,13 +176,12 @@ class Periodo extends CI_Controller
 
     }
 
-    function download(){
-        
-$this->load->helper('download');
-force_download("disciplina.csv", file_get_contents(base_url("uploads/disciplina.csv")));
+    function download()
+    {
+        $this->load->helper('download');
+        force_download("disciplina.csv", file_get_contents(base_url("uploads/disciplina.csv")));
 
+    }
 }
-}
-
 
 ?>
