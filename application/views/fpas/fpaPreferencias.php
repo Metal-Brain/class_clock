@@ -47,7 +47,7 @@
 							<!-- Trazer do back as disciplinas cadastradas -->
 							<option  value=" " disabled selected hidden>Selecione</option>
 							<?php foreach ($turmas as $turma) :?>
-								<option value="<?= $turma->disciplina->id?>" <?php if($turma->disciplina->id == $disciplina->id){ ?>selected<?php } ?>><?= $turma->disciplina->nome_disciplina?></option>
+								<option value="<?= $turma->disciplina->id?>" <?php if($turma->disciplina->id == $disciplina->id){ ?>selected<?php } ?>><?= $turma->disciplina->nome_disciplina . ' - ' . $turma->turno->nome_turno?></option>
 							<?php endforeach;?>
 						</select>
 					</div>
