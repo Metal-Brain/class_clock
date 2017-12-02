@@ -28,6 +28,7 @@
 		<thead>
 			<tr>
 				<th class="text-center">Nome</th>
+				<th class="text-center">Periodo Atual</th>
 				<th class="text-center">Status</th>
 				<th class="text-center">Ações</th>
 			</tr>
@@ -37,6 +38,17 @@
 			<?php foreach ($periodos as $periodo) { ?>
 				<tr <?php if(empty($periodo->deletado_em)): echo 'class="success"'; endif; ?>>
 					<td class="text-center"><?= ucwords($periodo['nome']); ?></td>
+					
+					<?php if(!$periodo->ativo):?>
+						<td class="text-center">
+							<a class="btn btn-success glyphicon glyphicon-check" title="Ativar" href="<?= site_url('periodo/setPeridoAtual/'.$periodo->id)?>"></a>
+						</td>
+					<?php else:	?>
+						<td class="text-center">
+							Atual
+						</td>
+					<?php endif;?>
+
 					<td class="text-center"><?= (empty($periodo->deletado_em)) ? 'Ativado' : 'Desativado'?></td>
 					<td class="text-center">
 						<?php if (empty($periodo->deletado_em)): ?>
