@@ -189,6 +189,7 @@ class Periodo extends CI_Controller
      */
     function setPeriodoAtual($id)
     {
+        $stored_pocedure = 'CALL ativa_periodo(?)';
         $result = $this->db->query($stored_pocedure,array('id'=>$id));
     }
 }
