@@ -97,6 +97,7 @@ class checkUser {
         $acess =
         [
             'turno'       => ['index'],
+            'classificacao'   => ['index'],
             'tipo_sala'   => ['index'],
             'modalidade'  => ['index']
         ];
@@ -111,8 +112,9 @@ class checkUser {
         $acess =
         [
             'turno'       => ['index'],
-			'classificacao'       => ['index'],
+			'classificacao' => ['index'],
             'tipo_sala'   => ['index'],
+            'classificacao'   => ['index'],
             'modalidade'  => ['index'],
             'fpa'         => [
                 'index','cadastrarDisponibilidade',

@@ -16,7 +16,7 @@ class Classificacao extends MY_Controller {
 			
 			if($cursos->isEmpty()){
 				$this->session->set_flashdata("É necessário ser coordenador de algum curso para acessar a classificação");
-				redirect('authError'); // Docente nao é coordenador
+				redirect('/'); // Docente nao é coordenador
 			}
 
 			$curso = $cursos[0]; // Pega o curso que o docente coordena

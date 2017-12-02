@@ -1,0 +1,1 @@
+<h1 style="text-align: center;">Bem vindo, selecione um item do menu ao lado.</h1>

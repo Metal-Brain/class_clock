@@ -14,6 +14,10 @@
      */
     public function index(){
 
+      if(isset($_SESSION['usuario_logado'])){
+        $this->load->template('dashboard',[]);        
+      }
+
       $this->form_validation->set_rules('prontuario','prontuario',array('required','exact_length[6]'));
       $this->form_validation->set_rules('senha','Senha',array('required','trim'));
 
@@ -44,7 +48,7 @@
           // Joga os dados do usuário na sessão
           $this->session->set_userdata('usuario_logado',$dados);
 
-          redirect("Turno");
+          redirect("/");
         } catch (Exception $e) {
           $this->session->set_flashdata('danger','Prontuário ou senha incorretos, tente novamente');
           redirect("/");
