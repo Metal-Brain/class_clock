@@ -65,11 +65,11 @@ class checkUser {
             'modalidade'  => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
             'curso'       => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar','importcsv','download','force_download'],
             'pessoa'      => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
-            'area'        => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar','importcsv','download','force_download'],
-            'disciplina'  => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar','importcsv','download','force_download'],
+            'area'        => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar','importCsv','download','force_download'],
+            'disciplina'  => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar','importCsv','download','force_download'],
             'consultaDocente' => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
             'turma'       => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
-            'periodo'     => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar','importcsv','download','force_download']
+            'periodo'     => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar','importCsv','download','force_download', 'setPeriodoAtual']
         ];
 
 
