@@ -112,11 +112,7 @@ class checkUser {
     private function setAccessToDocente(){
         $acess =
         [
-            'turno'       => ['index'],
-			'classificacao' => ['index'],
-            'tipo_sala'   => ['index'],
-            'classificacao'   => ['index'],
-            'modalidade'  => ['index'],
+            'classificacao' => ['index'],
             'fpa'         => [
                 'index','cadastrarDisponibilidade',
                 'salvarDisponibilidade', 'cadastrarPreferencias',

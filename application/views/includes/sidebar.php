@@ -8,13 +8,15 @@
 		   </a>
 	   </li>
 	-->
-	<li id="sidebar-turno">
+	<?php if (in_array($tipoUsuario,[1])) :?>
+		<li id="sidebar-turno">
 		   <a href="<?php echo base_url();?>index.php/Turno">
 			   <span class="glyphicon glyphicon-time"></span> <span class="sidebar-label">Turnos</span>
 		   </a>
 	   </li>
-
-     <?php if (in_array($tipoUsuario,[1])) :?>
+	<?php endif; ?>
+    
+	<?php if (in_array($tipoUsuario,[1])) :?>
      <li id="sidebar-cursos">
 		   <a href="<?php echo base_url();?>index.php/Curso">
 
@@ -29,17 +31,23 @@
 		   </a>
 	   </li>
     <?php endif; ?>
-
+	
+	<?php if (in_array($tipoUsuario,[1])) :?>
 	   <li id="sidebar-salas">
 		   <a href="<?php echo base_url();?>index.php/Tipo_sala">
 			   <span class="glyphicon glyphicon-home"></span> <span class="sidebar-label">Salas</span>
 		   </a>
 	   </li>
+	<?php endif; ?>
+	
+	<?php if (in_array($tipoUsuario,[1])) :?>
 	   <li id="sidebar-periodos">
 		   <a href="<?php echo base_url();?>index.php/periodo">
 			   <span class="glyphicon glyphicon-time"></span> <span class="sidebar-label">Períodos</span>
 		   </a>
 	   </li>
+	<?php endif; ?>
+
      <?php if (in_array($tipoUsuario,[1,2])) :?>
      <li id="sidebar-areas">
 		   <a href="<?php echo base_url();?>index.php/area">
@@ -78,12 +86,16 @@
 			</a>
 		</li>
 	   <?php endif; ?>
-     <li id="sidebar-docente">
+	
+	<?php if (in_array($tipoUsuario,[1])) :?>
+    	<li id="sidebar-docente">
 		   <a href="<?php echo base_url();?>index.php/ConsultaDocente">
 			   <span class="glyphicon glyphicon-duplicate"></span> <span class="sidebar-label">Consulta Docente</span>
 		   </a>
-	   </li>
-     <?php if (in_array($tipoUsuario, [1])) :?>
+		</li>
+	<?php endif; ?>
+    
+	 <?php if (in_array($tipoUsuario, [1])) :?>
 	   <li id="sidebar-pessoa">
 		   <a href="<?php echo base_url();?>index.php/pessoa">
 			   <span class="glyphicon glyphicon-user"></span> <span class="sidebar-label">Pessoas</span>
