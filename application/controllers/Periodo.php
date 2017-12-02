@@ -117,7 +117,7 @@ class Periodo extends CI_Controller
             $periodo = Periodo_model::findOrFail($id);
             if($periodo->ativo =="1")
             {
-                $this->session->set_flashdata('Alerta','Período atual não pode ser desativado');
+                $this->session->set_flashdata('danger','Período atual não pode ser desativado');
             }
             else
             {
