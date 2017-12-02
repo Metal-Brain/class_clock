@@ -1,10 +1,6 @@
 <script>
     $(document).ready(function(){
-        $('#disciplinaTable').dataTable( {
-                "language": {
-                    "url": "<?= base_url('assets/DataTables/translatePortuguese.js');?>"
-                }
-            } );
+
 
                  document.getElementById("sigla_curso").onkeypress = function(e) {
                    if ((this.value.length==5) && !(key == 8)){
@@ -87,7 +83,7 @@
                     max:'Tamanho maximo do campo é 2 caracteres ou até numero 99'
                 }
             }
-       });*/ 
+       });*/
     });
 
 </script>
@@ -167,11 +163,16 @@
             });
 </script>
 <script type="text/javascript">
+$('#disciplinaTable').dataTable( {
+        "language": {
+            "url": "<?= base_url('assets/DataTables/translatePortuguese.js');?>"
+        }
+    } );
     $("#csvCampo").change(function() {
                 if(!this.checked){
                     $('.campoImportar').show();
                 } else {
-                    $('.campoImportar').hide();                   
+                    $('.campoImportar').hide();
                 }
             });
 

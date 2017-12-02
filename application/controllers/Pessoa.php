@@ -142,7 +142,7 @@ class Pessoa extends MY_Controller {
         ['nivel_carreira', 'Nível de Carreira', 'required'],
         ['regime', 'regime de contrato', 'required|in_list[0,1]'],
       ]);
-    }
+    } 
     if ($this->run_validation()) {
       $pessoa_data = $this->request_all();
       if(empty(trim($pessoa_data['senha']))){
@@ -160,7 +160,10 @@ class Pessoa extends MY_Controller {
             $docente->update($dados_docente);
           }
         } else if(!is_null($pessoa->docente)){
-          $pessoa->docente->delete();
+          foreach ($pessoa->docente->cursos as $curso){
+            $curso->docente_id = null;
+            $curso->save();
+          }
         }
         // Realinha os tipos
         $pessoa->tipos()->sync($this->request('tipos'));
@@ -178,7 +181,14 @@ class Pessoa extends MY_Controller {
   * @param $id ID da pessoa a ser desativada
   */
   function deletar($id) {
-    Pessoa_model::findOrFail($id)->delete();
+    $pessoa = Pessoa_model::findOrFail($id);
+    if(!is_null($pessoa->docente)){
+      foreach ($pessoa->docente->cursos as $curso){
+        $curso->docente_id = null;
+        $curso->save();
+      }
+    }
+    $pessoa->delete();
     $this->session->set_flashdata('success', 'Desativado com sucesso');
     redirect('/pessoa');
   }

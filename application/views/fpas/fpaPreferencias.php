@@ -35,7 +35,31 @@
     	</div>
 
     <div id="disciplinas">
-
+			<?php
+				$i = 1;
+				foreach ($disciplinas as $disciplina) {
+			?>
+			<div class="row">
+				<div class="col-md-8">
+					<div class="form-group">
+					<label class="disc">Disciplina <?=$i;?></label>
+						<select class="form-control" id="selectDisc" required name="disc[<?=$i;?>]">
+							<!-- Trazer do back as disciplinas cadastradas -->
+							<option  value=" " disabled selected hidden>Selecione</option>
+							<?php foreach ($turmas as $turma) :?>
+								<option value="<?= $turma->disciplina->id?>" <?php if($turma->disciplina->id == $disciplina->id){ ?>selected<?php } ?>><?= $turma->disciplina->nome_disciplina?></option>
+							<?php endforeach;?>
+						</select>
+					</div>
+				</div>
+				<div col-md-2>
+						<button id="btnRemove" type="button" style="margin: 23px 0 0 0;" class="btn btn-danger add-field"><span class="glyphicon glyphicon-remove"></span></button>
+				</div>
+			</div>
+			<?php
+					$i++;
+				}
+			?>
     </div>
 
     <div class="row">
