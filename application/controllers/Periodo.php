@@ -163,7 +163,7 @@ class Periodo extends CI_Controller
                 try {
                   
                     $periodo = new Periodo_model();
-                    $periodo->nome = $row[1];
+                    $periodo->nome = $row[0];
                                         
                     $periodo->save();
 
@@ -175,13 +175,15 @@ class Periodo extends CI_Controller
         }
 
     }
+ 
 
-    function download()
-    {
-        $this->load->helper('download');
-        force_download("disciplina.csv", file_get_contents(base_url("uploads/disciplina.csv")));
+    function download(){
+        
+$this->load->helper('download');
+force_download("periodo.csv", file_get_contents(base_url("uploads/periodo.csv")));
 
-    }
 }
+}
+
 
 ?>
