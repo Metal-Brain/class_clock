@@ -191,6 +191,7 @@ class Periodo extends CI_Controller
     {
         $stored_pocedure = 'CALL ativa_periodo(?)';
         $result = $this->db->query($stored_pocedure,array('id'=>$id));
+        redirect("Periodo");
     }
 }
 

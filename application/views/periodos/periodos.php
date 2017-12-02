@@ -41,7 +41,7 @@
 					
 					<?php if(!$periodo->ativo):?>
 						<td class="text-center">
-							<a class="btn btn-success glyphicon glyphicon-check" title="Ativar" href="<?= site_url('periodo/setPeriodoAtual/'.$periodo->id)?>"></a>
+							<a class="btn btn-success glyphicon glyphicon-check" title="Ativar" id="btn-delete" onclick="confirm(<?= $periodo->id ?>,'Deseja definir o periodo <?= $periodo->nome ?> como atual?','setPeriodoAtual/')"></a>
 						</td>
 					<?php else:	?>
 						<td class="text-center">
