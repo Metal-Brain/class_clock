@@ -118,7 +118,7 @@ class Periodo extends CI_Controller
             if($periodo->ativo =="1")
             {
                 $this->session->set_flashdata('Alerta','Período atual não pode ser desativado');
-            }   
+            }
             else
             {
                 $periodo->delete();
@@ -144,8 +144,8 @@ class Periodo extends CI_Controller
         {
 
             $ativo = Periodo_model::where('deletado_em', null)->first();
-            if($ativo){
-                $ativo->delete();                
+            if(!$ativo){
+                $ativo->delete();
             }
             $periodo = Periodo_model::withTrashed()->findOrFail($id);
             $periodo->restore();
@@ -163,19 +163,19 @@ class Periodo extends CI_Controller
     function ImportCsv() {
         $csv_array = CSVImporter::fromForm('csvfile');
         //var_dump($csv_array);
-        
+
         if ($csv_array) {
         // Faz a interação no array para poder gravar os dados na tabela 'disciplinas'
             foreach ($csv_array as $row) {
                 try {
-                  
+
                     $periodo = new Periodo_model();
                     $periodo->nome = $row[0];
-                                        
+
                     $periodo->save();
-                    $this->session->set_flashdata('success','Periodo cadastrado com sucesso');    
+                    $this->session->set_flashdata('success','Periodo cadastrado com sucesso');
                 } catch (Exception $ignored){}
-                    
+
             }
                  redirect("Periodo");
         }
@@ -186,7 +186,7 @@ class Periodo extends CI_Controller
         $this->load->helper('download');
         force_download("periodo.csv", file_get_contents(base_url("uploads/periodo.csv")));
     }
-    
+
     /**
      * Seta o Período atual ("ativo")
      * @author Denny Azevedo
@@ -197,6 +197,7 @@ class Periodo extends CI_Controller
     {
         $stored_pocedure = 'CALL ativa_periodo(?)';
         $result = $this->db->query($stored_pocedure,array('id'=>$id));
+        redirect("Periodo");
     }
 }
 
