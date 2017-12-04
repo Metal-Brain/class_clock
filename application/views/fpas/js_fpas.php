@@ -63,7 +63,7 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-      var tmp = 1;
+      var tmp = ($(".disc").length)+1;
       $('#btnAdd').click(function (){
         var content = `
         <div class="row">
