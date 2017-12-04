@@ -146,5 +146,37 @@ class Area extends CI_Controller {
     redirect("area");
 
   }
+
+    function importCsv() {
+
+         $csv_array = CSVImporter::fromForm('csvfile');
+         var_dump($csv_array);
+
+       if ($csv_array) {
+        // Faz a interação no array para poder gravar os dados na tabela 'disciplinas'
+        foreach ($csv_array as $row) {
+                  try {
+
+                    $area = new Area_model();
+                    $area->nome_area = $row[1];
+                    $area->codigo = $row[2];
+
+                    $area->save();
+
+                    $this->session->set_flashdata('success','Area cadastrada com sucesso');
+
+
+                } catch (Exception $ignored){}
+
+      }
+                 redirect("Area");
+        }
+    }
+  function download(){
+
+$this->load->helper('download');
+
+force_download("area.csv", file_get_contents(base_url("uploads/area.csv")));
+}
 }
 ?>

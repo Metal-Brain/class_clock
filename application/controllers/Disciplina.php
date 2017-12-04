@@ -200,8 +200,8 @@
 
 			}
                  redirect("Disciplina");
-}
-}
+        }
+    }
 function download(){
 
 $this->load->helper('download');
