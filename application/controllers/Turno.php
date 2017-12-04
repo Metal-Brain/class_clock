@@ -100,11 +100,16 @@ class Turno extends CI_Controller {
 
     if ($this->form_validation->run()) {
       try {
-        $turno->nome_turno = $this->input->post('nome_turno');
-
+          
+        
         $horarios = $this->input->post('horario');
         $horario_sync = [];
-
+        
+          
+        $turno = Turno_model::withTrashed()->findOrFail($id);
+        $turno->nome_turno = $this->input->post('nome_turno');
+        $turno->update();
+          
         for ($i = 0; $i < sizeof($horarios); $i += 2) {
           $horario['inicio'] = $horarios[$i];
           $horario['fim'] = $horarios[$i+1];
