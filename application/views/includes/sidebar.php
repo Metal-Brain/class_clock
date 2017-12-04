@@ -26,7 +26,7 @@
 		   </a>
 	   </li>
     <?php endif; ?>
-	<?php if (podeVer($tipoUsuario,[3,5])) :?>
+	<?php if (podeVer($tipoUsuario,[1,3,5])) :?>
      <li id="sidebar-classificacao">
 		   <a href="<?php echo base_url();?>index.php/classificacao">
 			   <span class="glyphicon glyphicon-education"></span> <span class="sidebar-label">Classificação</span>
