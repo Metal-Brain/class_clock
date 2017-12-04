@@ -14,21 +14,21 @@
 		</div>
 	</div>
 	<input type ="checkbox" id="manipulaViewCadastroViaCSV"  class="btn btn-success">
-		<label>clique no checkbox para importar via arquivo .csv</label>	
+		<label>clique no checkbox para importar via arquivo .csv</label>
 		<div class="csv" style="display: none;">
-	
-			<form method="post" action="<?=base_url('Area/importcsv')?>" enctype="multipart/form-data">
+
+			<form method="post" action="<?=base_url('Area/importCsv')?>" enctype="multipart/form-data">
 				<!--      //redirecionamento BASE/ImportCsv -->
 				<div>
-					
+
 					<label>Selecione o arquivo CSV para importação:</label>
-					<input id="csvCampo" type="file"  name="csvfile"/>	
+					<input id="csvCampo" type="file"  name="csvfile"/>
 
 
 					<input  type="submit" value="Importar" class="btn btn-success campoImportar" style="display: none"/>
 				</div>
 				</br>
-				</br>	
+				</br>
 				<article>
 				Para a inclusão correta do arquivo CSV o mesmo deve ter o dados inseridos entre aspas duplas </br> e separados por vírgula, contendo dados referentes aos seguintes campos:</br>
 				<b>CÓDIGO, ID DO Area, SIGLA, QUANTIDADE DE SEMESTRES, ID DA MODALIDADE, ID DO COORDENADOR E FECHAMENTO</b>

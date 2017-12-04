@@ -147,7 +147,7 @@ class Area extends CI_Controller {
 
   }
 
-    function ImportCsv() {
+    function importCsv() {
 
          $csv_array = CSVImporter::fromForm('csvfile');
          var_dump($csv_array);
@@ -158,11 +158,10 @@ class Area extends CI_Controller {
                   try {
 
                     $area = new Area_model();
-                    $area->codigo = $row[1];
-                    $area->nome_area = $row[2];
+                    $area->nome_area = $row[1];
+                    $area->codigo = $row[2];
 
-
-                    $darea->save();
+                    $area->save();
 
                     $this->session->set_flashdata('success','Area cadastrada com sucesso');
 
@@ -170,7 +169,7 @@ class Area extends CI_Controller {
                 } catch (Exception $ignored){}
 
       }
-                 redirect("Disciplina");
+                 redirect("Area");
         }
     }
   function download(){
