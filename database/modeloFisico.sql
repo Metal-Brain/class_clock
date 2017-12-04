@@ -717,3 +717,9 @@ INSERT INTO preferencia (fpa_id, disciplina_id, ordem) VALUES ('5', '6', '1'), (
 INSERT INTO preferencia (fpa_id, disciplina_id, ordem) VALUES ('6', '8', '1'), ('6', '1', '2'), ('6', '13', '3');
 INSERT INTO preferencia (fpa_id, disciplina_id, ordem) VALUES ('7', '9', '1'), ('7', '2', '2'), ('7', '8', '3');
 INSERT INTO preferencia (fpa_id, disciplina_id, ordem) VALUES ('8', '15', '1'), ('8', '12', '2'), ('8', '10', '3');
+
+INSERT INTO `horario`.`turma` (`disciplina_id`, `periodo_id`, `turno_id`, `qtd_alunos`, `dp`) VALUES ('1', '2', '3', '10', '0');
+INSERT INTO `horario`.`turma` (`disciplina_id`, `periodo_id`, `turno_id`, `qtd_alunos`, `dp`) VALUES ('2', '2', '3', '10', '0');
+INSERT INTO `horario`.`turma` (`disciplina_id`, `periodo_id`, `turno_id`, `qtd_alunos`, `dp`) VALUES ('3', '2', '3', '10', '0');
+INSERT INTO `horario`.`turma` (`disciplina_id`, `periodo_id`, `turno_id`, `qtd_alunos`, `dp`) VALUES ('4', '2', '3', '10', '0');
+INSERT INTO `horario`.`turma` (`disciplina_id`, `periodo_id`, `turno_id`, `qtd_alunos`, `dp`) VALUES ('5', '2', '3', '10', '0');
