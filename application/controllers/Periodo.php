@@ -149,7 +149,7 @@ class Periodo extends CI_Controller
         try
         {
             $ativo = Periodo_model::where('deletado_em', null)->first();
-            if($ativo){
+            if(!$ativo){
                 $ativo->delete();                
             }
             $periodo = Periodo_model::withTrashed()->findOrFail($id);
