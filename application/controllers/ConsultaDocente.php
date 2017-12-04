@@ -18,19 +18,33 @@ class ConsultaDocente extends CI_Controller {
         ->select('curso.id')
         ->first(),
       );
-      
+
       if ($data['curso']) {
         $curso_docente = array(
-          "curso" =>  Docente_preferencia_model::where('docente_preferencia.curso_id', '=', $data["curso"]["id"])
+          "curso" =>  Docente_preferencia_model::join('turno', 'docente_preferencia.turno_id', '=', 'turno.turno_id')
+          ->where('docente_preferencia.curso_id', '=', $data["curso"]["id"])
           ->select('*')
           ->get(),
-          
         );
         $preferencias = $curso_docente['curso'];
         $this->load->template('consultaDocente/consultaDocente',compact('preferencias'),'consultaDocente/js_consultaDocente');
       } else {
         redirect('authError');
+<<<<<<< HEAD
       } 
     } 
   }
+=======
+      }
+
+    }
+
+
+
+  }
+
+
+
+
+>>>>>>> 9f00cf99b945a1618d767df33947c48265da0174
 }

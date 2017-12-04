@@ -64,6 +64,12 @@ class Periodo extends CI_Controller
     function editar($id)
     {
         $periodo = Periodo_model::withTrashed()->findOrFail($id);
+
+        if($periodo->deletado_em != null){
+            $this->session->set_flashdata('danger', 'É necessário que o período esteja ativado para ser editado');
+            redirect('Periodo');
+        }
+
         $this->load->template('periodos/editar',compact('periodo','id'),'periodos/js_periodos');
     }
 
@@ -117,7 +123,7 @@ class Periodo extends CI_Controller
             $periodo = Periodo_model::findOrFail($id);
             if($periodo->ativo =="1")
             {
-                $this->session->set_flashdata('Alerta','Período atual não pode ser desativado');
+                $this->session->set_flashdata('danger','Período atual não pode ser desativado');
             }   
             else
             {
@@ -142,9 +148,8 @@ class Periodo extends CI_Controller
     {
         try
         {
-
             $ativo = Periodo_model::where('deletado_em', null)->first();
-            if($ativo){
+            if(!$ativo){
                 $ativo->delete();                
             }
             $periodo = Periodo_model::withTrashed()->findOrFail($id);
@@ -160,7 +165,7 @@ class Periodo extends CI_Controller
 
 
 
-    function ImportCsv() {
+    function importCsv() {
         $csv_array = CSVImporter::fromForm('csvfile');
         //var_dump($csv_array);
         
@@ -173,7 +178,7 @@ class Periodo extends CI_Controller
                     $periodo->nome = $row[0];
                                         
                     $periodo->save();
-                    $this->session->set_flashdata('success','Periodo cadastrado com sucesso');    
+                    $this->session->set_flashdata('success','Período cadastrado com sucesso');    
                 } catch (Exception $ignored){}
                     
             }
@@ -195,12 +200,17 @@ class Periodo extends CI_Controller
      */
     function setPeriodoAtual($id)
     {
-        $periodo = Periodo_model::findOrFail($id);
-        if($periodo->deletado_em == null)
-        {
+        $periodo = Periodo_model::withTrashed()->findOrFail($id);
+
+        if($periodo->deletado_em == null){
             $stored_pocedure = 'CALL ativa_periodo(?)';
-            $result = $this->db->query($stored_pocedure,array('id'=>$id));
+            $result = $this->db->query($stored_pocedure, array('id'=>$id));
+            $this->session->set_flashdata('success', 'periodo ' . $periodo->nome . ' definido como atual');
+        }else{
+            $this->session->set_flashdata('danger', 'O período está desativado e não pode ser definido como atual');
         }
+
+        redirect("Periodo");
     }
 }
 

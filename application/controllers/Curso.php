@@ -44,9 +44,9 @@
                 //TODO: Arrumar essa parte, ta dando exceção
                 if(is_null(
                   DB::select(
-                    "SELECT * FROM tipo_pessoa WHERE tipo_id =?, pessoa_id = ?", 
+                    "SELECT * FROM tipo_pessoa WHERE tipo_id =?, pessoa_id = ?",
                     [5, Docente_model::find($this->input->post('docente_id'))->pessoa->id])
-                  )  
+                  )
                 ){
                   DB::insert("INSERT INTO tipo_pessoa(tipo_id, pessoa_id) VALUES (?, ?)", [5, Docente_model::find($this->input->post('docente_id'))->pessoa->id]);
                 }
@@ -100,9 +100,9 @@
             //TODO: Arrumar essa parte, ta dando exceção
             if(is_null(
               DB::select(
-                "SELECT * FROM tipo_pessoa WHERE tipo_id =?, pessoa_id = ?", 
+                "SELECT * FROM tipo_pessoa WHERE tipo_id =?, pessoa_id = ?",
                 [5, Docente_model::find($this->input->post('docente_id'))->pessoa->id])
-              )  
+              )
             ){
               DB::insert("INSERT INTO tipo_pessoa(tipo_id, pessoa_id) VALUES (?, ?)", [5, Docente_model::find($this->input->post('docente_id'))->pessoa->id]);
             }
@@ -120,11 +120,12 @@
 
           $this->session->set_flashdata('success', 'Curso atualizado com sucesso');
           redirect('curso');
-        } catch (Exception $i) {}
+        } catch (Exception $i) {
+            $this->session->set_flashdata('danger', 'Problemas ao atualizar os dados do curso, tente novamente!');
+        }
+        $this->editar($id);
       }
-
-      $this->session->set_flashdata('danger', 'Problemas ao atualizar os dados do curso, tente novamente!');
-      $this->editar($id);
+      redirect('curso');
     }
 
     public function ativar($id){
@@ -190,5 +191,11 @@
         redirect("Curso");
       }
     }
+    function download(){
+
+$this->load->helper('download');
+
+force_download("curso.csv", file_get_contents(base_url("uploads/curso.csv")));
+}
   }
 ?>

@@ -1,21 +1,18 @@
-<!--<pre>
-		<?php print_r($data['docentes']) ?>
-</pre>-->
-	<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
-	<!-- Alertas de sucesso / erro -->
-	<div class="row" style="margin-top: 5px;">
-		<div class="col-sm-10 col-md-12">
-			<?php if ($this->session->flashdata('success')) : ?>
-				<div class="alert alert-success">
-					<p><span class="glyphicon glyphicon-ok-sign"></span> <?= $this->session->flashdata('success') ?></p>
-				</div>
-			<?php elseif ($this->session->flashdata('danger')) : ?>
-				<div class="alert alert-danger">
-					<p><span class="glyphicon glyphicon-remove-sign"></span> <?= $this->session->flashdata('danger') ?></p>
-				</div>
-			<?php endif; ?>
-		</div>
+<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
+<!-- Alertas de sucesso / erro -->
+<div class="row" style="margin-top: 5px;">
+	<div class="col-md-12">
+		<?php if ($this->session->flashdata('success')) : ?>
+			<div class="alert alert-success">
+				<p><span class="glyphicon glyphicon-ok-sign"></span> <?= $this->session->flashdata('success') ?></p>
+			</div>
+		<?php elseif ($this->session->flashdata('danger')) : ?>
+			<div class="alert alert-danger">
+				<p><span class="glyphicon glyphicon-remove-sign"></span> <?= $this->session->flashdata('danger') ?></p>
+			</div>
+		<?php endif;?>
 	</div>
+</div>
 
 	<!-- Início do conteúdo da view-->
 	<div class="top-bar" style="padding: 0 0 15px 0">
