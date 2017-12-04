@@ -146,7 +146,7 @@
          redirect("disciplina");
        }
 
-        public function validar () {
+        function validar () {
             $this->form_validation->set_rules('nome_disciplina','nome','required|alpha_accent|min_length[5]|max_length[50]|trim|ucwords');
 
             $this->form_validation->set_rules('sigla_disciplina','sigla','required|min_length[3]|max_length[5]|alpha_numeric');
@@ -176,7 +176,6 @@
 	function importCsv() {
 
          $csv_array = CSVImporter::fromForm('csvfile');
-         var_dump($csv_array);
 
 			 if ($csv_array) {
         // Faz a interação no array para poder gravar os dados na tabela 'disciplinas'
