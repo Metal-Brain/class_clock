@@ -30,21 +30,7 @@ class ConsultaDocente extends CI_Controller {
         $this->load->template('consultaDocente/consultaDocente',compact('preferencias'),'consultaDocente/js_consultaDocente');
       } else {
         redirect('authError');
-<<<<<<< HEAD
       } 
     } 
   }
-=======
-      }
-
-    }
-
-
-
-  }
-
-
-
-
->>>>>>> 9f00cf99b945a1618d767df33947c48265da0174
 }
