@@ -462,13 +462,16 @@ ENGINE = InnoDB;
 DROP VIEW IF EXISTS `docente_preferencia`;
 
 CREATE VIEW `docente_preferencia` AS
-select docente.id as docente_id, pessoa.nome, disciplina.nome_disciplina, curso.nome_curso, curso.id as curso_id from disciplina
+select docente.id as docente_id, pessoa.nome, disciplina.nome_disciplina, curso.nome_curso, 
+curso.id as curso_id, turno.nome_turno as turno from disciplina
 	join curso on disciplina.curso_id = curso.id
 	join preferencia on preferencia.disciplina_id = disciplina.id
-  join fpa on preferencia.fpa_id = fpa.id
-  join docente on fpa.docente_id = docente.id
-  join pessoa on docente.pessoa_id = pessoa.id
-  order by curso.nome_curso, disciplina.nome_disciplina ASC;
+	join fpa on preferencia.fpa_id = fpa.id
+	join docente on fpa.docente_id = docente.id
+	join pessoa on docente.pessoa_id = pessoa.id
+    join turma on turma.disciplina_id = disciplina.id
+    join turno on turno.id = turma.turno_id
+	order by curso.nome_curso, disciplina.nome_disciplina ASC;
 
   -- -----------------------------------------------------
   -- View `horario`.`docente_classificacao`
