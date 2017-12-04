@@ -13,8 +13,37 @@
 			<?php endif; ?>
 		</div>
 	</div>
+	<input type ="checkbox" id="manipulaViewCadastroViaCSV"  class="btn btn-success">
+		<label>clique no checkbox para importar via arquivo .csv</label>	
+		<div class="csv" style="display: none;">
+	
+			<form method="post" action="<?=base_url('Area/importcsv')?>" enctype="multipart/form-data">
+				<!--      //redirecionamento BASE/ImportCsv -->
+				<div>
+					
+					<label>Selecione o arquivo CSV para importação:</label>
+					<input id="csvCampo" type="file"  name="csvfile"/>	
+
+
+					<input  type="submit" value="Importar" class="btn btn-success campoImportar" style="display: none"/>
+				</div>
+				</br>
+				</br>	
+				<article>
+				Para a inclusão correta do arquivo CSV o mesmo deve ter o dados inseridos entre aspas duplas </br> e separados por vírgula, contendo dados referentes aos seguintes campos:</br>
+				<b>CÓDIGO, ID DO Area, SIGLA, QUANTIDADE DE SEMESTRES, ID DA MODALIDADE, ID DO COORDENADOR E FECHAMENTO</b>
+				</br>
+				Insira os IDs referentes as informações que deseja inserir no CSV de acordo com a tabela abaixo.
+				</br>
+				</br>
+				</br>
+				<a href="<?=base_url('Area/download')?>">Clique para baixar o modelo de CSV</a>
+			    </br>
+				</article>
+			</div>
 
 	<!-- Formulário para inserção de dados da view-->
+	<div class="formAreas">
 	<form class="formAreas" action="<?= site_url('area/salvar')?>" method="post">
 		<label>Código</label>
 		<div class="form-group">
@@ -37,4 +66,5 @@
 			<button type="submit" class="btn btn-success active salvar" style="float: right; margin-right: 10px;"><span class="glyphicon glyphicon-floppy-disk"></span> Salvar</button>
 		</div>
 	</form>
+	</div>
 </div>

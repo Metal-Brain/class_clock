@@ -160,7 +160,7 @@ class Periodo extends CI_Controller
 
 
 
-    function ImportCsv() {
+    function importCsv() {
         $csv_array = CSVImporter::fromForm('csvfile');
         //var_dump($csv_array);
         

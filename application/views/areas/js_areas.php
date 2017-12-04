@@ -59,5 +59,26 @@
 
   
 </script>
+<script type="text/javascript">
+    $("#manipulaViewCadastroViaCSV").change(function() {
+                if(!this.checked){
+                    $('.csv').hide();
+                    $('.formAreas').show();
+                } else {
+                    $('.csv').show();
+                      $('.formAreas').hide();
+                }
+            });
+</script>
+<script type="text/javascript">
+    $("#csvCampo").change(function() {
+                if(!this.checked){
+                    $('.campoImportar').show();
+                } else {
+                    $('.campoImportar').hide();
+                }
+            });
+
+</script>
 </body>
 </html>

@@ -18,7 +18,7 @@
 	<input type ="checkbox" id="manipulaViewCadastroViaCSV"  class="btn btn-success">
            <label>clique no checkbox para importar um arquivo .csv</label>	
 
-    	<form method="post" class= "csv" name="csvfile" style="display: none; " action="<?=base_url('periodo/ImportCsv')?>" enctype="multipart/form-data">
+    	<form method="post" class= "csv" name="csvfile" style="display: none; " action="<?=base_url('periodo/importcsv')?>" enctype="multipart/form-data">
     		<!--      //redirecionamento BASE/ImportCsv -->
     
             

@@ -191,6 +191,12 @@
         redirect("Curso");
       }
     }
+    function download(){
+
+$this->load->helper('download');
+
+force_download("curso.csv", file_get_contents(base_url("uploads/curso.csv")));
+}
   }
   //select pessoa.nome, docente.id from pessoa inner join docente on pessoa.id = docente.pessoa_id
   //where docente.id not in (SELECT docente_id from curso where docente_id is not null);
