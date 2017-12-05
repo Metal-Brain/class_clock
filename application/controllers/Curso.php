@@ -36,15 +36,10 @@
                 $curso->modalidade_id = $this->input->post('modalidade_id');
           if($this->input->post('docente_id')){
                 $curso->docente_id = $this->input->post('docente_id');
-                //TODO: Arrumar essa parte, ta dando exceção
-                if(is_null(
-                  DB::select(
-                    "SELECT * FROM tipo_pessoa WHERE tipo_id =?, pessoa_id = ?",
-                    [5, Docente_model::find($this->input->post('docente_id'))->pessoa->id])
-                  )
-                ){
-                  DB::insert("INSERT INTO tipo_pessoa(tipo_id, pessoa_id) VALUES (?, ?)", [5, Docente_model::find($this->input->post('docente_id'))->pessoa->id]);
-                }
+                TipoPessoa_model::firstOrCreate([
+                  'tipo_id' => 5,
+                  'pessoa_id' => $curso->docente->pessoa->id
+                ]);
           }else($curso->docente_id = null);
                 $curso->codigo_curso = $this->input->post('codigo_curso');
                 $curso->sigla_curso = $this->input->post('sigla_curso');
@@ -54,7 +49,9 @@
 
           $this->session->set_flashdata('success','Curso cadastrado com sucesso');
           redirect('curso');
-        } catch (Exception $ignored) {}
+        } catch (Exception $ignored) {
+          echo $ignored->getMessage();
+        }
       }
       $this->session->set_flashdata('danger','Problemas ao cadastrar o curso, tente novamente!');
       $this->cadastrar();
@@ -92,19 +89,14 @@
           $curso->modalidade_id = $this->input->post('modalidade_id');
           if($this->input->post('docente_id')){
             $curso->docente_id = $this->input->post('docente_id');
-            //TODO: Arrumar essa parte, ta dando exceção
-            if(is_null(
-              DB::select(
-                "SELECT * FROM tipo_pessoa WHERE tipo_id =?, pessoa_id = ?",
-                [5, Docente_model::find($this->input->post('docente_id'))->pessoa->id])
-              )
-            ){
-              DB::insert("INSERT INTO tipo_pessoa(tipo_id, pessoa_id) VALUES (?, ?)", [5, Docente_model::find($this->input->post('docente_id'))->pessoa->id]);
-            }
+            TipoPessoa_model::firstOrCreate([
+              'tipo_id' => 5,
+              'pessoa_id' => $curso->docente->pessoa->id
+            ]);
           }else{
-            try {
-              DB::delete("DELETE FROM tipo_pessoa WHERE tipo_id = ?, pessoa_id = ?", [5, Docente_model::find($this->input->post('docente_id'))->pessoa->id]);
-            } catch (Exception $ignored) {}
+            try{
+              TipoPessoa_model::where("tipo_id",5)->where("pessoa_id",$curso->docente->pessoa->id)->delete();
+            } catch (Exception $ignored){}
             $curso->docente_id = null;
           }
           $curso->codigo_curso = $this->input->post('codigo_curso');
@@ -116,11 +108,12 @@
           $this->session->set_flashdata('success', 'Curso atualizado com sucesso');
           redirect('curso');
         } catch (Exception $i) {
-            $this->session->set_flashdata('danger', 'Problemas ao atualizar os dados do curso, tente novamente!');
+          echo $i->getMessage();
         }
-        $this->editar($id);
       }
-      redirect('curso');
+
+      $this->session->set_flashdata('danger', 'Problemas ao atualizar os dados do curso, tente novamente!');
+      $this->editar($id);
     }
 
     public function ativar($id){
@@ -136,7 +129,7 @@
     public function deletar($id){
       try {
         $curso = Curso_model::findOrFail($id);
-        $this->db->delete('tipo_pessoa', array('tipo_id'=>5, 'pessoa_id'=>$curso->docente->pessoa->id));
+        TipoPessoa_model::where("tipo_id",5)->where("pessoa_id",$curso->docente->pessoa->id)->delete();
         $curso->docente_id = null;
         $curso->save();
         $curso->delete();
@@ -186,11 +179,5 @@
         redirect("Curso");
       }
     }
-    function download(){
-
-$this->load->helper('download');
-
-force_download("curso.csv", file_get_contents(base_url("uploads/curso.csv")));
-}
   }
 ?>
