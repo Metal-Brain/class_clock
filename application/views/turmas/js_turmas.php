@@ -1,4 +1,4 @@
-<script type="text/javascript">
+ <script type="text/javascript">
   $('#TurmaTable').dataTable();
 
   function confirmDelete(id, msg, funcao) {
@@ -23,7 +23,7 @@
 </script>
 
 <script type="text/javascript">
-	
+
 
 	$(document).ready(function () {
 		 $('#formTurma').validate({
@@ -34,8 +34,8 @@
 					turno_id: { required: true},
 					qtd_alunos: { required: true,number: true, min: 1, max: 999},
 					dp: { required: true}
-					
-				},	
+
+				},
 				messages: {
 					disciplina_id:
                         { required: 'Campo obrigatório'
