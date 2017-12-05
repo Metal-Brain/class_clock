@@ -1,7 +1,7 @@
 <!--<pre>
-		<?php print_r($data['docentes']) ?>
-		<?php print_r($data['cursos'][1]->docente_id) ?>
-		<?php print_r($data['modalidade']) ?>
+		<?php //print_r($data['teste']) ?>
+		<?php //print_r($data['cursos'][1]->docente_id) ?>
+		<?php //print_r($data['modalidades']) ?>
 	</pre>-->
 	<div class="col-xs=10 col-sm-10 col-md-10">
 		<div class="row" style="margin-top: 5px;">
@@ -42,6 +42,10 @@
 				<a href="<?=base_url('Curso/download')?>">Clique para baixar o modelo de CSV</a>
 			    </br>
 				</article>
+<<<<<<< HEAD
+			</form>
+=======
+>>>>>>> ea40253bf008ad57eedb82a7abc250d5d8c8a684
 				<table id="cursoTable" class="table table-striped">
 		<thead>
 			<tr>
@@ -66,17 +70,63 @@
 					<td class="text-center"><?= htmlspecialchars(ucwords($curso['id'])); ?></td>
 					<td class="text-center"><?= htmlspecialchars(ucwords($curso['sigla_curso'])); ?></td>
 					<td class="text-center"><?= ucwords($curso['qtd_semestre']); ?></td>
+<<<<<<< HEAD
+					<td class="text-center"><?php
+							foreach($data['modalidades'] as $modalidade){
+								if($curso['modalidade_id'] == $modalidade['id']):
+								echo $modalidade['nome_modalidade'];
+							endif;
+
+							}
+								?>
+					</td>
+					<td class="text-center"><?php
+							foreach($data['modalidades'] as $modalidade){
+								if($curso['modalidade_id'] == $modalidade['id']):
+								echo $modalidade['id'];
+							endif;
+
+							}
+								?>
+					</td>
+
+					<td class="text-center"><?php
+						foreach($data['docentes'] as $docente){
+							if($curso['docente_id'] == $docente['id']):
+									echo ''. $docente->id .'['. $docente->prontuario ."] ".$docente->nome.'';
+							endif;
+						}
+					?>
+
+					</td>
+					<td class="text-center"><?php
+						foreach($data['docentes'] as $docente){
+							if($curso['docente_id'] == $docente['id']):
+									echo $docente->id;
+							endif;
+						}
+					?>
+
+					</td>
+
+					<td class="text-center"><?= ucwords($curso['fechamento']); ?></td>
+
+=======
 					<td class="text-center"><?= htmlspecialchars($curso->modalidade->nome_modalidade) ?></td>
 					<td class="text-center"><?= ucwords($curso->modalidade->id)?></td>
 					<td class="text-center"><?= htmlspecialchars(@$curso->docente->pessoa['nome']); ?></td>
 				  <td class="text-center"><?= htmlspecialchars(@$curso->docente->pessoa['id']); ?></td>
 					<td class="text-center"><?= ucwords($curso['fechamento']); ?></td>
+>>>>>>> ea40253bf008ad57eedb82a7abc250d5d8c8a684
 				</tr>
 
 			<?php } ?>
 		</tbody>
 	</table>
+<<<<<<< HEAD
+=======
 </form>
+>>>>>>> ea40253bf008ad57eedb82a7abc250d5d8c8a684
 
 		</div>
 		<div class="formCurso">
