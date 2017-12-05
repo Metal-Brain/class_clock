@@ -1,3 +1,11 @@
+<?php
+function podeVer($tipos, $levels) {
+	$intersecao = array_intersect($tipos, $levels);
+
+	return !empty($intersecao);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 	<head>

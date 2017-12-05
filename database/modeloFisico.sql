@@ -462,13 +462,16 @@ ENGINE = InnoDB;
 DROP VIEW IF EXISTS `docente_preferencia`;
 
 CREATE VIEW `docente_preferencia` AS
-select docente.id as docente_id, pessoa.nome, disciplina.nome_disciplina, curso.nome_curso, curso.id as curso_id from disciplina
+select docente.id as docente_id, pessoa.nome, disciplina.nome_disciplina, curso.nome_curso, 
+curso.id as curso_id, turno.nome_turno as turno from disciplina
 	join curso on disciplina.curso_id = curso.id
 	join preferencia on preferencia.disciplina_id = disciplina.id
-  join fpa on preferencia.fpa_id = fpa.id
-  join docente on fpa.docente_id = docente.id
-  join pessoa on docente.pessoa_id = pessoa.id
-  order by curso.nome_curso, disciplina.nome_disciplina ASC;
+	join fpa on preferencia.fpa_id = fpa.id
+	join docente on fpa.docente_id = docente.id
+	join pessoa on docente.pessoa_id = pessoa.id
+    join turma on turma.disciplina_id = disciplina.id
+    join turno on turno.id = turma.turno_id
+	order by curso.nome_curso, disciplina.nome_disciplina ASC;
 
   -- -----------------------------------------------------
   -- View `horario`.`docente_classificacao`
@@ -717,3 +720,24 @@ INSERT INTO preferencia (fpa_id, disciplina_id, ordem) VALUES ('5', '6', '1'), (
 INSERT INTO preferencia (fpa_id, disciplina_id, ordem) VALUES ('6', '8', '1'), ('6', '1', '2'), ('6', '13', '3');
 INSERT INTO preferencia (fpa_id, disciplina_id, ordem) VALUES ('7', '9', '1'), ('7', '2', '2'), ('7', '8', '3');
 INSERT INTO preferencia (fpa_id, disciplina_id, ordem) VALUES ('8', '15', '1'), ('8', '12', '2'), ('8', '10', '3');
+
+INSERT INTO `horario`.`turma` (`disciplina_id`, `periodo_id`, `turno_id`, `qtd_alunos`, `dp`) VALUES ('1', '2', '3', '10', '0');
+INSERT INTO `horario`.`turma` (`disciplina_id`, `periodo_id`, `turno_id`, `qtd_alunos`, `dp`) VALUES ('2', '2', '3', '10', '0');
+INSERT INTO `horario`.`turma` (`disciplina_id`, `periodo_id`, `turno_id`, `qtd_alunos`, `dp`) VALUES ('3', '2', '3', '10', '0');
+INSERT INTO `horario`.`turma` (`disciplina_id`, `periodo_id`, `turno_id`, `qtd_alunos`, `dp`) VALUES ('4', '2', '3', '10', '0');
+INSERT INTO `horario`.`turma` (`disciplina_id`, `periodo_id`, `turno_id`, `qtd_alunos`, `dp`) VALUES ('5', '2', '3', '10', '0');
+INSERT INTO `horario`.`turma` (`disciplina_id`, `periodo_id`, `turno_id`, `qtd_alunos`, `dp`) VALUES ('6', '2', '3', '10', '0');
+INSERT INTO `horario`.`turma` (`disciplina_id`, `periodo_id`, `turno_id`, `qtd_alunos`, `dp`) VALUES ('7', '2', '3', '10', '0');
+INSERT INTO `horario`.`turma` (`disciplina_id`, `periodo_id`, `turno_id`, `qtd_alunos`, `dp`) VALUES ('8', '2', '3', '10', '0');
+INSERT INTO `horario`.`turma` (`disciplina_id`, `periodo_id`, `turno_id`, `qtd_alunos`, `dp`) VALUES ('9', '2', '3', '10', '0');
+INSERT INTO `horario`.`turma` (`disciplina_id`, `periodo_id`, `turno_id`, `qtd_alunos`, `dp`) VALUES ('10', '2', '3', '10', '0');
+INSERT INTO `horario`.`turma` (`disciplina_id`, `periodo_id`, `turno_id`, `qtd_alunos`, `dp`) VALUES ('11', '2', '3', '10', '0');
+INSERT INTO `horario`.`turma` (`disciplina_id`, `periodo_id`, `turno_id`, `qtd_alunos`, `dp`) VALUES ('12', '2', '3', '10', '0');
+INSERT INTO `horario`.`turma` (`disciplina_id`, `periodo_id`, `turno_id`, `qtd_alunos`, `dp`) VALUES ('13', '2', '3', '10', '0');
+INSERT INTO `horario`.`turma` (`disciplina_id`, `periodo_id`, `turno_id`, `qtd_alunos`, `dp`) VALUES ('14', '2', '3', '10', '0');
+INSERT INTO `horario`.`turma` (`disciplina_id`, `periodo_id`, `turno_id`, `qtd_alunos`, `dp`) VALUES ('15', '2', '3', '10', '0');
+INSERT INTO `horario`.`turma` (`disciplina_id`, `periodo_id`, `turno_id`, `qtd_alunos`, `dp`) VALUES ('16', '2', '3', '10', '0');
+INSERT INTO `horario`.`turma` (`disciplina_id`, `periodo_id`, `turno_id`, `qtd_alunos`, `dp`) VALUES ('17', '2', '3', '10', '0');
+INSERT INTO `horario`.`turma` (`disciplina_id`, `periodo_id`, `turno_id`, `qtd_alunos`, `dp`) VALUES ('18', '2', '3', '10', '0');
+INSERT INTO `horario`.`turma` (`disciplina_id`, `periodo_id`, `turno_id`, `qtd_alunos`, `dp`) VALUES ('19', '2', '3', '10', '0');
+INSERT INTO `horario`.`turma` (`disciplina_id`, `periodo_id`, `turno_id`, `qtd_alunos`, `dp`) VALUES ('20', '2', '3', '10', '0');

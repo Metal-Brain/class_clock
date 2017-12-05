@@ -33,23 +33,26 @@
             // Verifica a senha do usuário
             if ( !password_verify($senha, $usuario->senha) ) throw new Exception('Dados de login incorretos');
   
+            foreach($usuario->tipos as $tipo){
+              $tipos[] = $tipo->id;
+            }
+
             $dados =  [
               'id' => $usuario->id,
               'nome'  => $usuario->nome,
               'email' => $usuario->email,
-              'tipo'  => $usuario->tipos()->first()->id,
+              'tipos'  => $tipos,
             ];
-  
   
             $docente = Docente_model::where('pessoa_id',$usuario->id)->first();
   
             if ($docente) $dados['regime'] = $docente->regime;
             // Joga os dados do usuário na sessão
-            $this->session->set_userdata('usuario_logado',$dados);
+            $this->session->set_userdata('usuario_logado', $dados);
   
             redirect("/");
           } catch (Exception $e) {
-            $this->session->set_flashdata('danger','Prontuário ou senha incorretos, tente novamente');
+            $this->session->set_flashdata('danger','Prontuário ou senha incorretos, tente novamente'.$e->getMessage());
             redirect("/");
           }
         }

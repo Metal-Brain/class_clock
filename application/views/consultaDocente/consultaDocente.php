@@ -30,7 +30,8 @@
                         <tr>
                             <th class="text-center">Disciplina</th>
                             <th class="text-center">Curso</th>
-                            <th class="text-center">Nome do Docente</th>
+                            <th class="text-center">Turno</th>
+														<th class="text-center">Nome do Docente</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -38,6 +39,7 @@
 												<tr>
 													<td class="text-center"><?= $preferencia['nome_disciplina']; ?></td>
 													<td class="text-center"><?= $preferencia['nome_curso']; ?></td>
+													<td class="text-center"><?= $preferencia['turno']; ?></td>
 													<td class="text-center"><?= $preferencia['nome']; ?></td>
 												</tr>
 						<?php endforeach; ?>

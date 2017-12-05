@@ -3,9 +3,8 @@
 class Classificacao extends MY_Controller {
 
     public function index() {
-		exit;
         $user  = $this->session->userdata('usuario_logado');
-        $tipo  = $user['tipo'];
+        $tipos  = $user['tipos'];
         $curso = $this->request('curso');
 		$cursos = Curso_model::all();
             
@@ -25,7 +24,7 @@ class Classificacao extends MY_Controller {
 		}
 		
 		# id 3 é o do DAE
-		if($tipo == 3) {
+		if(in_array(3, $tipos)) {
 			$cursos = Curso_model::all();
 		}        
 
@@ -34,6 +33,6 @@ class Classificacao extends MY_Controller {
             $classificacoes = Classificacao_model::where('curso_id', $curso)->get();
         }
 		
-	    $this->load->template('classificacoes/classificacao', compact('classificacoes', 'cursos', 'tipo', 'user'), 'classificacoes/js_classificacao');
+	    $this->load->template('classificacoes/classificacao', compact('classificacoes', 'cursos', 'tipos', 'user'), 'classificacoes/js_classificacao');
     }
 }

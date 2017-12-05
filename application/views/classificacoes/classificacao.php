@@ -1,4 +1,4 @@
-<?php $tipoUsuario = $this->session->userdata('usuario_logado')['tipo']; ?>
+<?php $tipoUsuario = $this->session->userdata('usuario_logado')['tipos']; ?>
 
  
 <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
@@ -13,7 +13,7 @@
 			</h2>
 			</div>
 		</div>
-		<?php if (in_array($tipoUsuario,[1])) :?>
+		<?php if (in_array(1, $tipoUsuario)) :?>
 			<div class="row">
 				<h4 class="page-header">Selecione o curso desejado.</h4>
 				<form action="" method="GET">
@@ -52,7 +52,7 @@
 		</thead>
 
 		<tbody>
-		<?php if (in_array($tipoUsuario,[1])) :?>
+		<?php if (in_array(1, $tipoUsuario)) :?>
 			<?php foreach ($classificacoes as $curso) { ?>
 				
 					<td class="text-center"><?= htmlspecialchars(ucwords($curso['nome'])); ?></td>
@@ -63,7 +63,7 @@
 			
 			<?php } ?>
 		<?php endif; ?>	
-		<?php if (in_array($tipoUsuario,[4])) :?>
+		<?php if (in_array(4, $tipoUsuario)) :?>
 			<?php foreach ($cursos as $curso) { ?>
 				
 					<td class="text-center"><?= htmlspecialchars(ucwords($curso['nome'])); ?></td>
