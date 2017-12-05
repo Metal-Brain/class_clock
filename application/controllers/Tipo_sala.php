@@ -59,9 +59,9 @@ class Tipo_sala extends CI_Controller {
     $tipo_sala = TipoSala_model::findOrFail($id);
 
     if($tipo_sala->nome_tipo_sala != $this->input->post('nome_tipo_sala')){
-      $this->form_validation->set_rules('nome_tipo_sala','nome',array('required','max_length[30]','trim','ucwords','alpha_accent','is_unique[tipo_sala.nome_tipo_sala]'));
+      $this->form_validation->set_rules('nome_tipo_sala','nome',array('required','max_length[30]','trim','ucwords', 'is_unique[tipo_sala.nome_tipo_sala]'));
     }else{
-      $this->form_validation->set_rules('nome_tipo_sala','nome',array('required','max_length[30]','trim','ucwords','alpha_accent'));
+      $this->form_validation->set_rules('nome_tipo_sala','nome',array('required','max_length[30]','trim','ucwords'));
     }
 
     $this->form_validation->set_rules('descricao_tipo_sala','descrição',array('required','max_length[254]','trim'));
