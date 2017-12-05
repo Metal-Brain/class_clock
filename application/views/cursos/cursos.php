@@ -40,28 +40,14 @@
 		</thead>
 
 		<tbody>
-			<?php foreach ($data['cursos'] as $curso) { ?>
+			<?php foreach ($cursos as $curso) { ?>
 				<tr <?php if($curso->deletado_em): echo 'class="danger"'; endif; ?>>
 					<td class="text-center"><?= ucwords($curso['codigo_curso']); ?></td>
 					<td class="text-center"><?= htmlspecialchars(ucwords($curso['nome_curso'])); ?></td>
 					<td class="text-center"><?= htmlspecialchars(ucwords($curso['sigla_curso'])); ?></td>
 					<td class="text-center"><?= ucwords($curso['qtd_semestre']); ?></td>
-					<td class="text-center"><?php
-						foreach($data['modalidade'] as $modalidade){
-							if($curso['modalidade_id'] == $modalidade['id']):
-								echo $modalidade['nome_modalidade'];
-							endif;
-						}
-					?></td>
-
-					<td class="text-center"><?php
-						foreach($data['docentes'] as $docente){
-							if($curso['docente_id'] == $docente->id):
-								echo $docente->nome;
-							endif;
-						}
-					?></td>
-
+					<td class="text-center"><?= htmlspecialchars($curso->modalidade->nome_modalidade); ?></td>
+					<td class="text-center"><?= htmlspecialchars(@$curso->docente->pessoa->nome); ?></td>
 					<td class="text-center"><?= ucwords($curso['fechamento']); ?></td>
 					<td class="text-center"><?= ( empty($curso->deletado_em) ) ? 'Ativado' : 'Desativado'?></td>
 					<td class="text-center">

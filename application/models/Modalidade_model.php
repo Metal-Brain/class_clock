@@ -14,7 +14,7 @@
     protected $fillable = ['nome_modalidade', 'codigo'];
 
     public function curso(){
-      return $this->hasMany(Curso_model::class);
+      return $this->hasMany(Curso_model::class, 'modalidade_id');
     }
 
     public function setNomeModalidadeAttribute($nome_modalidade) {

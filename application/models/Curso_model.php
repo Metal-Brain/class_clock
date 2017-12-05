@@ -19,7 +19,7 @@ class Curso_model extends Model {
   */
 
   public function modalidade(){
-    return $this->belongsTo(Modalidade_Model::class, 'curso_id');
+    return $this->belongsTo(Modalidade_model::class, 'modalidade_id');
   }
 
   /**
@@ -29,7 +29,7 @@ class Curso_model extends Model {
   */
 
   public function disciplinas(){
-    return $this->hasMany(Disciplinas_Model::class, 'curso_id');
+    return $this->hasMany(Disciplinas_model::class, 'curso_id');
   }
 
   public function docente(){

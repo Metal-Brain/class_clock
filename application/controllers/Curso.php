@@ -6,14 +6,9 @@
   */
   class Curso extends CI_Controller {
     public function index () {
-      $data = array(
-        'cursos' => Curso_model::withTrashed()->get(),
-        'modalidade' => Modalidade_model::all('id','nome_modalidade'),
-        'docentes' => Pessoa_model::join('docente', 'pessoa.id', '=', 'docente.pessoa_id')
-                                  ->select('pessoa.nome', 'docente.id', 'pessoa.prontuario')
-                                  ->get(),
-      );
-      $this->load->template('cursos/cursos', compact('data'), 'cursos/js_cursos');
+      $cursos = Curso_model::withTrashed()->get();
+
+      $this->load->template('cursos/cursos', compact('cursos'), 'cursos/js_cursos');
     }
 
     public function cadastrar() {
