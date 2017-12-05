@@ -1,11 +1,10 @@
-
 <?php
     /**
     *  Regras de negócio sobre disciplinas.
     *  @since 2018/08/28
     *  @author Thalita Barbosa
     */
-    class Disciplina extends CI_Controller {
+    class Disciplina extends MY_Controller {
         function index () {
             $data = array(
               'disciplinas' => Disciplina_model::withTrashed()->get(),
@@ -60,7 +59,7 @@
             }
 
             $this->session->set_flashdata('danger','Problemas ao cadastrar a Disciplina, tente novamente!');
-            redirect("disciplina/cadastrar");
+            $this->cadastrar();
         }
 
         /**
@@ -87,18 +86,18 @@
             if($this->validar()){
                 try {
                   if (Disciplina_model::withTrashed()->where("sigla_disciplina", $this->input->post('sigla_disciplina'))->where("curso_id", $this->input->post('curso_id'))->first()==null || Disciplina_model::where("sigla_disciplina", $this->input->post('sigla_disciplina'))->where("curso_id", $this->input->post('curso_id'))->where("id", $id)->first()) {
-                    $disciplina = Disciplina_model::withTrashed()->findOrFail($id);
-                    $disciplina->nome_disciplina  = $this->input->post('nome_disciplina') ;
-                    $disciplina->sigla_disciplina = $this->input->post('sigla_disciplina');
-					$disciplina->curso_id		   = $this->input->post('curso_id');
-                    $disciplina->modulo           = $this->input->post('modulo')          ;
-                    $disciplina->qtd_professor    = $this->input->post('qtd_professor')   ;
-                    $disciplina->qtd_aulas        = $this->input->post('qtd_aulas')   ;
-					$disciplina->tipo_sala_id     = $this->input->post('tipo_sala_id');
-                    $disciplina->update();
+                        $disciplina = Disciplina_model::withTrashed()->findOrFail($id);
+                        $disciplina->nome_disciplina  = $this->input->post('nome_disciplina') ;
+                        $disciplina->sigla_disciplina = $this->input->post('sigla_disciplina');
+    					          $disciplina->curso_id		      = $this->input->post('curso_id');
+                        $disciplina->modulo           = $this->input->post('modulo')          ;
+                        $disciplina->qtd_professor    = $this->input->post('qtd_professor')   ;
+                        $disciplina->qtd_aulas        = $this->input->post('qtd_aulas')   ;
+    					          $disciplina->tipo_sala_id     = $this->input->post('tipo_sala_id');
+                        $disciplina->update();
 
-                    $this->session->set_flashdata('success','Disciplina atualizada com sucesso');
-                    redirect("disciplina");
+                        $this->session->set_flashdata('success','Disciplina atualizada com sucesso');
+                        redirect("disciplina");
                   }else{
                     $this->session->set_flashdata('danger','Sigla já esta cadastrada');
                     redirect('disciplina/editar/'.$id);
@@ -107,7 +106,8 @@
             }
 
             $this->session->set_flashdata('danger','Problemas ao atualizar os dados da Disciplina, tente novamente!');
-            redirect('disciplina/editar/'.$id);
+
+            $this->editar($id);
         }
 
         /**
@@ -146,7 +146,7 @@
          redirect("disciplina");
        }
 
-        public function validar () {
+        function validar () {
             $this->form_validation->set_rules('nome_disciplina','nome','required|alpha_accent|min_length[5]|max_length[50]|trim|ucwords');
 
             $this->form_validation->set_rules('sigla_disciplina','sigla','required|min_length[3]|max_length[5]|alpha_numeric');
@@ -176,7 +176,6 @@
 	function importCsv() {
 
          $csv_array = CSVImporter::fromForm('csvfile');
-         var_dump($csv_array);
 
 			 if ($csv_array) {
         // Faz a interação no array para poder gravar os dados na tabela 'disciplinas'

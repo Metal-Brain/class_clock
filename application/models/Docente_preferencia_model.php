@@ -9,6 +9,6 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 class Docente_preferencia_model extends Eloquent{
     protected $table = 'docente_preferencia';
     public $timestamps = false;
-    protected $fillable = ['docente_id', 'nome', 'nome_disciplina', 'nome_curso', 'curso_id'];
+    protected $fillable = ['docente_id', 'nome', 'nome_disciplina', 'nome_curso', 'curso_id', 'turno_id'];
 
 }

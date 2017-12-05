@@ -76,7 +76,13 @@ class Pessoa extends MY_Controller {
           $docente = Docente_model::create($dados_docente);
         }
         // Monta as relações de tipo
-        $pessoa->tipos()->sync($this->request('tipos'));
+        if(in_array(5, $pessoa->tipos)){
+          $tt = $this->request('tipos');
+          $tt[] = 5;
+          $pessoa->tipos()->sync($tt);
+        }else{
+          $pessoa->tipos()->sync($this->request('tipos'));
+        }
       });
       $this->session->set_flashdata('success', 'Cadastrado realizado com sucesso');
       redirect('/pessoa');
@@ -166,7 +172,18 @@ class Pessoa extends MY_Controller {
           }
         }
         // Realinha os tipos
-        $pessoa->tipos()->sync($this->request('tipos'));
+        $tt = [];
+        foreach($pessoa->tipos as $t){
+          $tt[] = $t->id;
+        }
+
+        if(in_array(5, $tt)){
+          $tt = $this->request('tipos');
+          $tt[] = 5;
+          $pessoa->tipos()->sync($tt);
+        }else{
+          $pessoa->tipos()->sync($this->request('tipos'));
+        }
       });
       $this->session->set_flashdata('success', 'Cadastro atualizado com sucesso');
       redirect('/pessoa');

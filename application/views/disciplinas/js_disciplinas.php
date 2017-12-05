@@ -1,30 +1,27 @@
 <script>
     $(document).ready(function(){
 
-
-                 document.getElementById("sigla_curso").onkeypress = function(e) {
-                   if ((this.value.length==5) && !(key == 8)){
-                    return false;
-                   }
-                   document.getElementById("sigla_curso").onkeypress = function(e) {
-                    var chr = /^[a-zA-Z0-9 ]$/;
-                    var patt = new RegExp(chr);
-                    var res = patt.test(String.fromCharCode(e.which));
-                   return res;
-                  }
-
+      $.validator.addMethod(
+      "regex",
+      function(value, element, regexp) {
+          var check = false;
+          return this.optional(element) || regexp.test(value);
+      },
+      "Please check your input."
+  );
       $("#formDisciplina").validate({
             rules: {
                 nome_disciplina: {
                     required: true,
                     minlength:5,
-                    maxlength:50
+                    maxlength:50,
+                    regex: /^[A-Za-z0-9áàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/
                 },
                 sigla_disciplina: {
                     required: true,
                     maxlength:5,
                     minlength:3,
-                    alphanumeric: true
+                    regex: /^[A-Za-z0-9áàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/
                 },
                 curso_id:{
                   required:true,
@@ -53,7 +50,8 @@
                 nome_disciplina: {
                     required:'Campo nome é obrigatório',
                     minlength:'O nome deve conter pelo menos 5 caracteres',
-                    maxlength:'O nome deve ter no máximo 50 caracteres'
+                    maxlength:'O nome deve ter no máximo 50 caracteres',
+                    regex:'O nome deve conter somente letras e numeros'
                 },
                 curso_id:{
                     required:'Campo Curso é obrigatório',
@@ -65,7 +63,7 @@
                     required:'Campo sigla é obrigatório',
                     maxlength: 'Tamanho maximo do campo é 5 caracteres',
                     minlength:'Tamanho mínimo do campo é 3 caracteres',
-                    alphanumeric:'Não insira caracteres especiais.'
+                    regex:'A sigla deve conter somente letras e numeros'
                 },
                 qtd_professor:{
                     required:'Campo quantidade de professores é obrigatório',
@@ -83,7 +81,7 @@
                     max:'Tamanho maximo do campo é 2 caracteres ou até numero 99'
                 }
             }
-       });*/
+       });
     });
 
 </script>

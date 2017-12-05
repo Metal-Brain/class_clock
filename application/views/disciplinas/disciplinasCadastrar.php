@@ -107,7 +107,7 @@
 				<label>Nome</label>
 				<input type="text" class="form-control" onkeypress="this.value = this.value.toLowerCase();"
 				onChange="this.value = this.value.toLowerCase();"
-				onpaste="this.value = this.value.toLowerCase();" id="nome_curso" name="nome_disciplina" placeholder="Nome" value="<?= set_value('sigla_disciplina')?>" >
+				onpaste="this.value = this.value.toLowerCase();" id="nome_disciplina" name="nome_disciplina" pattern="[A-Za-z0-9]" placeholder="Nome" value="<?= set_value('nome_disciplina')?>" >
         <span class="text-danger">
   				<?= form_error('nome_disciplina') ?>
   			</span>
@@ -115,7 +115,7 @@
 
       <label>Sigla:</label>
   		<div class="form-group width-400">
-  			<input id="sigla_disciplina" name="sigla_disciplina" class="form-control" type="text" placeholder="Sigla" onkeyup="mascara(this,alphanum);" value="<?= set_value('sigla_disciplina')?>">
+  			<input id="sigla_disciplina" name="sigla_disciplina" pattern="[A-Za-z0-9]" class="form-control" type="text" placeholder="Sigla" onkeyup="mascara(this,alphanum);" value="<?= set_value('sigla_disciplina')?>">
   			<span class="text-danger">
   				<?= form_error('sigla_disciplina') ?>
   			</span>
@@ -129,6 +129,9 @@
 					<option value="<?=$curso['id'] ?>"><?=$curso['nome_curso'] ?></option>
 					<?php }?>
 				</select>
+        <span class="text-danger">
+          <?= form_error('curso_id') ?>
+        </span>
 			</div>
 
       <div class="form-group">
@@ -143,7 +146,10 @@
 
 			<div class="form-group">
 				<label>Módulo no curso que ocorrerá</label>
-				<input type="number" class="form-control" id="modulo" name="modulo" placeholder="ex: 6" style="max-width: 300px">
+				<input type="number" class="form-control" id="modulo" name="modulo" placeholder="ex: 6" style="max-width: 300px" value="<?= set_value('modulo')?>">
+        <span class="text-danger">
+          <?= form_error('modulo') ?>
+        </span>
 			</div>
 
 			<div class="form-group">
@@ -158,11 +164,14 @@
 				<label>Tipo de sala Necessária</label>
 				<select name="tipo_sala_id" id="tipo_sala_id" class="form-control" style="max-width:400px;" value="<?= set_value('tipo_sala_id')?>">
 
-					<option value="" disabled selected>Selecione</option>
+					<option disabled selected>Selecione</option>
 					<?php foreach($data['tipo_salas'] as $curso){ ?>
 					<option value="<?=$curso['id'] ?>"><?=$curso['nome_tipo_sala'] ?></option>
 					<?php }?>
 				</select>
+        <span class="text-danger">
+          <?= form_error('tipo_sala_id') ?>
+        </span>
 			</div>
 
 			<div class="form-group">
