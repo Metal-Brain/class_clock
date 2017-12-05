@@ -27,18 +27,16 @@
 
 					<label>Selecione o arquivo CSV para importação:</label>
 					<input id="csvCampo" type="file"  name="csvfile"/>
-
-
+					</br>
 					<input  type="submit" value="Importar" class="btn btn-success campoImportar" style="display: none"/>
 				</div>
 				</br>
 				</br>
 				<article>
 				Para a inclusão correta do arquivo CSV o mesmo deve ter o dados inseridos entre aspas duplas </br> e separados por vírgula, contendo dados referentes aos seguintes campos:</br>
-				<b>ID DO CURSO, ID DO DOCENTE, ID DA MODALIDADE, ID DO COORDENADOR, FECHAMENTO, CODIGO DO CURSO, NOME DO CURSO, SIGLA, QUANTIDADE DE SEMESTRES E FECHAMENTO</b>
+				<b>ID DO DOCENTE, ID DA MODALIDADE, ID DO COORDENADOR, FECHAMENTO, CODIGO DO CURSO, NOME DO CURSO, SIGLA, QUANTIDADE DE SEMESTRES E FECHAMENTO</b>
 				</br>
 				Insira os IDs referentes as informações que deseja inserir no CSV de acordo com a tabela abaixo.
-				</br>
 				</br>
 				</br>
 				<a href="<?=base_url('Curso/download')?>">Clique para baixar o modelo de CSV</a>

@@ -23,15 +23,14 @@
 
 					<label>Selecione o arquivo CSV para importação:</label>
 					<input id="csvCampo" type="file"  name="csvfile"/>
-
-
+				  </br>
 					<input  type="submit" value="Importar" class="btn btn-success campoImportar" style="display: none"/>
 				</div>
 				</br>
 				</br>
 				<article>
 				Para a inclusão correta do arquivo CSV o mesmo deve ter o dados inseridos entre aspas duplas </br> e separados por vírgula, contendo dados referentes aos seguintes campos:</br>
-				<b>CÓDIGO, ID DO Area, SIGLA, QUANTIDADE DE SEMESTRES, ID DA MODALIDADE, ID DO COORDENADOR E FECHAMENTO</b>
+				<b>Nome da Área e o Código</b>
 				</br>
 				Insira os IDs referentes as informações que deseja inserir no CSV de acordo com a tabela abaixo.
 				</br>
