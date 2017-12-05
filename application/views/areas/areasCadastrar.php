@@ -40,6 +40,7 @@
 			    </br>
 				</article>
 			</div>
+		</form>
 
 	<!-- Formulário para inserção de dados da view-->
 	<div class="formAreas">
