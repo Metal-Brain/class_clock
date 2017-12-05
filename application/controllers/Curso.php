@@ -179,5 +179,10 @@
         redirect("Curso");
       }
     }
+
+    function download(){
+      $this->load->helper('download');
+      force_download("curso.csv", file_get_contents(base_url("uploads/curso.csv")));
+    }
   }
 ?>
