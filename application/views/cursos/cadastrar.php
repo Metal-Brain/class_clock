@@ -27,23 +27,25 @@
 
 					<label>Selecione o arquivo CSV para importação:</label>
 					<input id="csvCampo" type="file"  name="csvfile"/>
-
-
+					</br>
 					<input  type="submit" value="Importar" class="btn btn-success campoImportar" style="display: none"/>
 				</div>
 				</br>
 				</br>
 				<article>
 				Para a inclusão correta do arquivo CSV o mesmo deve ter o dados inseridos entre aspas duplas </br> e separados por vírgula, contendo dados referentes aos seguintes campos:</br>
-				<b>ID DO CURSO, ID DO DOCENTE, ID DA MODALIDADE, ID DO COORDENADOR, FECHAMENTO, CODIGO DO CURSO, NOME DO CURSO, SIGLA, QUANTIDADE DE SEMESTRES E FECHAMENTO</b>
+				<b>ID DO DOCENTE, ID DA MODALIDADE, ID DO COORDENADOR, FECHAMENTO, CODIGO DO CURSO, NOME DO CURSO, SIGLA, QUANTIDADE DE SEMESTRES E FECHAMENTO</b>
 				</br>
 				Insira os IDs referentes as informações que deseja inserir no CSV de acordo com a tabela abaixo.
-				</br>
 				</br>
 				</br>
 				<a href="<?=base_url('Curso/download')?>">Clique para baixar o modelo de CSV</a>
 			    </br>
 				</article>
+<<<<<<< HEAD
+=======
+			</form>
+>>>>>>> 3abbd3fcde302849743557b1ccb8ba3762392537
 				<table id="cursoTable" class="table table-striped">
 		<thead>
 			<tr>
@@ -68,6 +70,48 @@
 					<td class="text-center"><?= htmlspecialchars(ucwords($curso['id'])); ?></td>
 					<td class="text-center"><?= htmlspecialchars(ucwords($curso['sigla_curso'])); ?></td>
 					<td class="text-center"><?= ucwords($curso['qtd_semestre']); ?></td>
+<<<<<<< HEAD
+=======
+					<td class="text-center"><?php
+							foreach($data['modalidades'] as $modalidade){
+								if($curso['modalidade_id'] == $modalidade['id']):
+								echo $modalidade['nome_modalidade'];
+							endif;
+
+							}
+								?>
+					</td>
+					<td class="text-center"><?php
+							foreach($data['modalidades'] as $modalidade){
+								if($curso['modalidade_id'] == $modalidade['id']):
+								echo $modalidade['id'];
+							endif;
+
+							}
+								?>
+					</td>
+
+					<td class="text-center"><?php
+						foreach($data['docentes'] as $docente){
+							if($curso['docente_id'] == $docente['id']):
+									echo ''. $docente->id .'['. $docente->prontuario ."] ".$docente->nome.'';
+							endif;
+						}
+					?>
+
+					</td>
+					<td class="text-center"><?php
+						foreach($data['docentes'] as $docente){
+							if($curso['docente_id'] == $docente['id']):
+									echo $docente->id;
+							endif;
+						}
+					?>
+
+					</td>
+
+					<td class="text-center"><?= ucwords($curso['fechamento']); ?></td>
+>>>>>>> 3abbd3fcde302849743557b1ccb8ba3762392537
 					<td class="text-center"><?= htmlspecialchars($curso->modalidade->nome_modalidade) ?></td>
 					<td class="text-center"><?= ucwords($curso->modalidade->id)?></td>
 					<td class="text-center"><?= htmlspecialchars(@$curso->docente->pessoa['nome']); ?></td>

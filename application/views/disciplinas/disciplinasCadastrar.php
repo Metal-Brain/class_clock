@@ -24,14 +24,12 @@
 
 					<label>Selecione o arquivo CSV para importação:</label>
 					<input id="csvCampo" type="file"  name="csvfile"/>
-
-
+          </br>
 					<input  type="submit" value="Importar" class="btn btn-success campoImportar" style="display: none"/>
 				</div>
   		<h3>Orientação para criação do arquivo .csv</h3>
   		<h4>O arquivo deve conter os valores respectivos campos:</h4>
-  		<article> <b><i>Disciplina, Sigla, Curso, Quantidade de Aulas, Quantidade de Módulos, Quantidade de Aulas Semanais,
-  		Tipo de Sala.</i></b>
+  		<article> <b><i>Id do Curso, Id do Tipo de Sala, Nome da Disciplina, Módulo, Sigla da Disciplina, Quantidade de Professores e Quantidade de Aulas</i></b>
 		  	</br>
 		  	Os dados devem estar separados por vírgulas e estar entre aspas duplas. <a href="<?=base_url('Disciplina/download')?>">Clique para baixar o modelo de CSV</a>
 		  </br>
@@ -49,6 +47,7 @@
 						<th class="text-center">Curso</th>
 						<th class="text-center">ID do Curso</th>
 						<th class="text-center">Tipo de sala</th>
+            <th class="text-center">Módulos</th>
 						<th class="text-center">ID do Tipo Sala</th>
 					</tr>
 				</thead>
@@ -82,6 +81,7 @@
 								endif;
 							}
 							?></td>
+              <td class="text-center"><?= $disciplina['modulo']; ?></td>
 							<td class="text-center"><?php
 							foreach($data['tipo_salas'] as $tipo_sala){
 								if($tipo_sala['id'] == $disciplina['tipo_sala_id']):

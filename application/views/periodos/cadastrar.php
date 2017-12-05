@@ -16,36 +16,28 @@
 
 	<!-- Início do conteúdo da view-->
 	<input type ="checkbox" id="manipulaViewCadastroViaCSV"  class="btn btn-success">
-           <label>clique no checkbox para importar um arquivo .csv</label>	
+           <label>clique no checkbox para importar um arquivo .csv</label>
 
-<<<<<<< HEAD
-    	<form method="post" class= "csv" name="csvfile" style="display: none; " action="<?=base_url('periodo/importcsv')?>" enctype="multipart/form-data">
-=======
     	<form method="post" class= "csv" name="csvfile" style="display: none; " action="<?=base_url('periodo/importCsv')?>" enctype="multipart/form-data">
->>>>>>> 25ede16d960e1e6750393b11befd8dca1c3305db
     		<!--      //redirecionamento BASE/ImportCsv -->
-    
-            
+
 				<div>
 					<h3>Orientação para criação do arquivo .csv</h3>
-					<h4>O arquivo deve conter o campo <b><i>Nome</i></b> que significa respectivamente o ano-periodo</h4>
-					<article> 
+					<article>O arquivo deve conter o campo <b><i>Nome</i></b> que significa respectivamente o ano-periodo		 
 						</br>
 						Os dados devem estar seperados por colunas <a href="<?=base_url('Periodo/download')?>">Clique para baixar o modelo de CSV</a>.
-					
-					
 					</article>
 				</br>
-					
-				</br>	
-			
-				<input id="csvCampo" type="file"  name="csvfile"/>	
-				<label>Selecione o arquivo CSV para importação:</label>	
+
+				</br>
+
+				<input id="csvCampo" type="file"  name="csvfile"/>
+				<label>Selecione o arquivo CSV para importação:</label>
 				</div>
 				<div>
 			 <input  type="submit" value="Importar" class="btn btn-success campoImportar" style="display: none"/>
-				</div>		
-         </form>   
+				</div>
+         </form>
 	<form class="formPeriodos" action="<?= site_url('periodo/salvar')?>" method="post">
 		<label>Ano / semestre:</label>
 		<div class="form-group width-400">
