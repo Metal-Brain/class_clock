@@ -1,6 +1,5 @@
 <?php $tipoUsuario = $this->session->userdata('usuario_logado')['tipos']; ?>
 
- 
 <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
 	
 
@@ -8,31 +7,40 @@
 	<div class="top-bar" style="padding: 0 0 15px 0">
 		<div class="row">
 			<div class="col-md-12">
-			<h2 class="page-header">Classificação</h2>
+			<h2 class="page-header">Classificação
+			
+			</h2>
 			</div>
 		</div>
+		<?php if (($tipoUsuario[0]==3) || ($tipoUsuario[0] == 1)) :?>
+			<div class="row">
+				<h4 class="page-header">Selecione o curso desejado.</h4>
+				<form action="" method="GET">
+					<select class="form-control" name="curso" onchange="this.form.submit()">
+
+						<?php
+							echo '<option value=""> Nenhum Curso selecionado</option>';
+						foreach($cursos as $curso){
+								if($cursoPesquisado	 == $curso['id']){
+							
+							echo '<option value="'. $curso->id .'" selected>'.$curso->nome_curso.'</option>';
+								
+							
+						}else{
+							echo '<option value="'. $curso->id .'">'.$curso->nome_curso.'</option>';
+								
+						}
+															}
+						
+								
+						?>
+
+					 </select>
+				
+				</form>
+			</div>
+		<?php endif; ?>
 	</div>
-
-	<?php if (!$cursos->isEmpty()) :?>
-		<form method="POST">
-			<select name="curso">
-				<?php foreach ($cursos as $curso): ?>
-					<?php if($curso == $classificacoes[0]->curso_id): ?>
-						<option value="<?= $curso['id'] ?>" selected>
-							<?= htmlspecialchars(ucwords($curso['nome_curso'])); ?>
-						</option>
-					<?php else: ?>
-						<option value="<?= $curso['id'] ?>">
-							<?= htmlspecialchars(ucwords($curso['nome_curso'])); ?>
-						</option>
-					<?php endif; ?>
-				<?php endforeach; ?>
-			</select>
-			<button class="btn btn-primary">Selecionar Curso</button>
-		</form>
-	<?php endif; ?>
-	<br>
-
 	<table id="classificacaoTable" class="table table-striped">
 		<thead>
 			<tr>
@@ -43,6 +51,7 @@
 		</thead>
 
 		<tbody>
+		<?php if (($tipoUsuario[0]==3) || ($tipoUsuario[0] == 1)) :?>
 			<?php foreach ($classificacoes as $curso) { ?>
 				
 					<td class="text-center"><?= htmlspecialchars(ucwords($curso['nome'])); ?></td>
@@ -52,6 +61,20 @@
 			    </tr>
 			
 			<?php } ?>
-			</tbody>
-		</table>
+		<?php endif; ?>	
+		<?php if (in_array(4, $tipoUsuario)) :?>
+			<?php foreach ($cursos as $curso) { ?>
+				
+					<td class="text-center"><?= htmlspecialchars(ucwords($curso['nome'])); ?></td>
+					<td class="text-center"><?= htmlspecialchars(ucwords($curso['nome_curso'])); ?></td>
+					<td class="text-center"><?= htmlspecialchars(ucwords($curso['nome_disciplina'])); ?></td>
+					
+			    </tr>
+			
+			<?php } ?>
+		<?php endif; ?>	
+		</tbody>
+	</table>
+
+
 </div>
