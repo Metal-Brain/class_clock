@@ -180,18 +180,10 @@
         redirect("Curso");
       }
     }
-<<<<<<< HEAD
-    function download(){
-
-    $this->load->helper('download');
-
-    force_download("curso.csv", file_get_contents(base_url("uploads/curso.csv")));
-=======
 
     function download(){
       $this->load->helper('download');
       force_download("curso.csv", file_get_contents(base_url("uploads/curso.csv")));
->>>>>>> 0a1d3fb5333c7064e292ed2c1a52657685ab940d
     }
   }
 ?>

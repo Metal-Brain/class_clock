@@ -42,13 +42,7 @@
 				<a href="<?=base_url('Curso/download')?>">Clique par a baixar o modelo de CSV</a>
 			    </br>
 				</article>
-<<<<<<< HEAD
-
 			</form>
-
-=======
-			</form>
->>>>>>> 0a1d3fb5333c7064e292ed2c1a52657685ab940d
 				<table id="cursoTable" class="table table-striped">
 		<thead>
 			<tr>
@@ -73,14 +67,6 @@
 					<td class="text-center"><?= htmlspecialchars(ucwords($curso['id'])); ?></td>
 					<td class="text-center"><?= htmlspecialchars(ucwords($curso['sigla_curso'])); ?></td>
 					<td class="text-center"><?= ucwords($curso['qtd_semestre']); ?></td>
-<<<<<<< HEAD
-=======
-					<td class="text-center"><?php
-							foreach($data['modalidades'] as $modalidade){
-								if($curso['modalidade_id'] == $modalidade['id']):
-								echo $modalidade['nome_modalidade'];
-							endif;
->>>>>>> 0a1d3fb5333c7064e292ed2c1a52657685ab940d
 
 
 					<td class="text-center"><?= htmlspecialchars($curso->modalidade->nome_modalidade); ?></td>
@@ -88,20 +74,11 @@
 					<td class="text-center"><?= htmlspecialchars(@$curso->docente->pessoa->nome); ?></td>
 					<td class="text-center"><?= htmlspecialchars(@$curso->docente->pessoa->id); ?></td>
 
-<<<<<<< HEAD
 
 					<td class="text-center"><?= ucwords($curso['fechamento']); ?></td>
 
 
 
-=======
-					<td class="text-center"><?= ucwords($curso['fechamento']); ?></td>
-					<td class="text-center"><?= htmlspecialchars($curso->modalidade->nome_modalidade) ?></td>
-					<td class="text-center"><?= ucwords($curso->modalidade->id)?></td>
-					<td class="text-center"><?= htmlspecialchars(@$curso->docente->pessoa['nome']); ?></td>
-				  <td class="text-center"><?= htmlspecialchars(@$curso->docente->pessoa['id']); ?></td>
-					<td class="text-center"><?= ucwords($curso['fechamento']); ?></td>
->>>>>>> 0a1d3fb5333c7064e292ed2c1a52657685ab940d
 				</tr>
 
 			<?php } ?>
