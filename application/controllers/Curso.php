@@ -164,12 +164,13 @@
         foreach ($csv_array as $row) {
           try {
             $curso = new Curso_model();
-            $curso->nome_curso = $row[1];
+            $curso->nome_curso = $row[4];
             $curso->modalidade_id = $row[2];
-            $curso->sigla_curso  = $row[3] ;
-            $curso->codigo_curso = $row[4];
-            $curso->qtd_semestre = $row[5];
-            $curso->fechamento = $row[6];
+            $curso->docente_id = $row[1];
+            $curso->sigla_curso  = $row[5] ;
+            $curso->codigo_curso = $row[3];
+            $curso->qtd_semestre = $row[6];
+            $curso->fechamento = $row[7];
             $curso->save();
 
             $this->session->set_flashdata('success','Curso cadastrado com sucesso');
@@ -178,6 +179,11 @@
         }
         redirect("Curso");
       }
+    }
+
+    function download(){
+      $this->load->helper('download');
+      force_download("curso.csv", file_get_contents(base_url("uploads/curso.csv")));
     }
   }
 ?>

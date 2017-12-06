@@ -39,7 +39,7 @@
 				Insira os IDs referentes as informações que deseja inserir no CSV de acordo com a tabela abaixo.
 				</br>
 				</br>
-				<a href="<?=base_url('Curso/download')?>">Clique para baixar o modelo de CSV</a>
+				<a href="<?=base_url('Curso/download')?>">Clique par a baixar o modelo de CSV</a>
 			    </br>
 				</article>
 			</form>
@@ -67,50 +67,18 @@
 					<td class="text-center"><?= htmlspecialchars(ucwords($curso['id'])); ?></td>
 					<td class="text-center"><?= htmlspecialchars(ucwords($curso['sigla_curso'])); ?></td>
 					<td class="text-center"><?= ucwords($curso['qtd_semestre']); ?></td>
-					<td class="text-center"><?php
-							foreach($data['modalidades'] as $modalidade){
-								if($curso['modalidade_id'] == $modalidade['id']):
-								echo $modalidade['nome_modalidade'];
-							endif;
 
-							}
-								?>
-					</td>
-					<td class="text-center"><?php
-							foreach($data['modalidades'] as $modalidade){
-								if($curso['modalidade_id'] == $modalidade['id']):
-								echo $modalidade['id'];
-							endif;
 
-							}
-								?>
-					</td>
+					<td class="text-center"><?= htmlspecialchars($curso->modalidade->nome_modalidade); ?></td>
+					<td class="text-center"><?= htmlspecialchars($curso->modalidade->id); ?></td>
+					<td class="text-center"><?= htmlspecialchars(@$curso->docente->pessoa->nome); ?></td>
+					<td class="text-center"><?= htmlspecialchars(@$curso->docente->pessoa->id); ?></td>
 
-					<td class="text-center"><?php
-						foreach($data['docentes'] as $docente){
-							if($curso['docente_id'] == $docente['id']):
-									echo ''. $docente->id .'['. $docente->prontuario ."] ".$docente->nome.'';
-							endif;
-						}
-					?>
-
-					</td>
-					<td class="text-center"><?php
-						foreach($data['docentes'] as $docente){
-							if($curso['docente_id'] == $docente['id']):
-									echo $docente->id;
-							endif;
-						}
-					?>
-
-					</td>
 
 					<td class="text-center"><?= ucwords($curso['fechamento']); ?></td>
-					<td class="text-center"><?= htmlspecialchars($curso->modalidade->nome_modalidade) ?></td>
-					<td class="text-center"><?= ucwords($curso->modalidade->id)?></td>
-					<td class="text-center"><?= htmlspecialchars(@$curso->docente->pessoa['nome']); ?></td>
-				  <td class="text-center"><?= htmlspecialchars(@$curso->docente->pessoa['id']); ?></td>
-					<td class="text-center"><?= ucwords($curso['fechamento']); ?></td>
+
+
+
 				</tr>
 
 			<?php } ?>
@@ -128,7 +96,7 @@
 						<label>Nome:</label>
 						<input class="form-control" placeholder="Nome" onkeypress="this.value = this.value.toLowerCase();"
 						onChange="this.value = this.value.toLowerCase();"
-						onpaste="this.value = this.value.toLowerCase();" name="nome_curso" id="nome_curso" maxlength="75">
+						onpaste="this.value = this.value.toLowerCase();" name="nome_curso" id="nome_curso" maxlength="75" value="<?php echo set_value('nome_curso'); ?>">
 
 					</div>
 				</div>
@@ -141,7 +109,7 @@
 				<div class="row">
 					<div class="form-group col-sm-3 col-md-2">
 						<label>Sigla</label>
-						<input class="form-control" placeholder="ex: ADS" name="sigla_curso" id="sigla_curso" maxlength="3">
+						<input class="form-control" placeholder="ex: ADS" name="sigla_curso" id="sigla_curso" maxlength="3" value="<?php echo set_value('sigla_curso'); ?>">
 
 					</div>
 				</div>
@@ -155,7 +123,8 @@
 				<div class="row">
 					<div class="form-group col-sm-3 col-md-2">
 						<label>Codigo</label>
-						<input class="form-control" placeholder="ex: 123" type="number" onKeyPress="var key = event.keyCode || event.charCode; if((this.value.length==5) && !(key == 8)) return false;" name="codigo_curso" id="codigo_curso">
+						<input class="form-control" placeholder="ex: 123" type="number" onKeyPress="var key = event.keyCode || event.charCode; if((this.value.length==5) && !(key == 8)) return false;"
+						name="codigo_curso" id="codigo_curso" value="<?php echo set_value('codigo_curso'); ?>">
 
 					</div>
 				</div>
@@ -170,7 +139,8 @@
 				<div class="row">
 					<div class="form-group col-sm-3 col-md-2">
 						<label>Quantidade de semestres</label>
-						<input class="form-control" placeholder="ex: 2" type="number"  onKeyPress="var key = event.keyCode || event.charCode; if((this.value.length==2) && !(key == 8)) return false;" name="qtd_semestre" id="qtd_semestre" maxlength="2">
+						<input class="form-control" placeholder="ex: 2" type="number"  onKeyPress="var key = event.keyCode || event.charCode; if((this.value.length==2) && !(key == 8)) return false;"
+						name="qtd_semestre" id="qtd_semestre" maxlength="2" value="<?php echo set_value('qtd_semestre'); ?>">
 
 					</div>
 				</div>

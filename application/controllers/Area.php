@@ -150,7 +150,6 @@ class Area extends CI_Controller {
     function importCsv() {
 
          $csv_array = CSVImporter::fromForm('csvfile');
-         var_dump($csv_array);
 
        if ($csv_array) {
         // Faz a interação no array para poder gravar os dados na tabela 'disciplinas'
