@@ -18,13 +18,17 @@
 			<select name="curso">
 				<?php foreach ($cursos as $curso): ?>
 					<?php if($curso == $classificacoes[0]->curso_id): ?>
+						<option value="<?= $curso['id'] ?>" selected>
+							<?= htmlspecialchars(ucwords($curso['nome_curso'])); ?>
+						</option>
+					<?php else: ?>
 						<option value="<?= $curso['id'] ?>">
 							<?= htmlspecialchars(ucwords($curso['nome_curso'])); ?>
 						</option>
 					<?php endif; ?>
 				<?php endforeach; ?>
 			</select>
-			<button class="">Selecionar Curso</button>
+			<button class="btn btn-primary">Selecionar Curso</button>
 		</form>
 	<?php endif; ?>
 	<br>
