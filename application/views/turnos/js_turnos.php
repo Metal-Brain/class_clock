@@ -36,6 +36,7 @@
 			}
 			var addHorario = function () {
 				aula = $(".aula",$('#horarios')).length;
+				index = $("input.hora").length;
 
 				var content = `
 				<div class="row">
