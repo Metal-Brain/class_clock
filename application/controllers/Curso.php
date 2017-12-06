@@ -55,6 +55,7 @@
       }
       $this->session->set_flashdata('danger','Problemas ao cadastrar o curso, tente novamente!');
       $this->cadastrar();
+      redirect('curso');
     }
 
     public function editar($id) {
@@ -108,12 +109,13 @@
           $this->session->set_flashdata('success', 'Curso atualizado com sucesso');
           redirect('curso');
         } catch (Exception $i) {
-          echo $i->getMessage();
+
         }
       }
 
       $this->session->set_flashdata('danger', 'Problemas ao atualizar os dados do curso, tente novamente!');
       $this->editar($id);
+      redirect('curso');
     }
 
     public function ativar($id){

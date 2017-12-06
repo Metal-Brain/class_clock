@@ -48,7 +48,7 @@ class Modalidade extends CI_Controller {
                                                  'ucfirst'
                                                  ),
                                            array('is_unique' => 'Código já existente.')
-                                         );                               
+                                         );
         $this->form_validation->set_error_delimiters('<span class="text-danger">','</span>');
 
         if($this->form_validation->run()){
@@ -124,6 +124,8 @@ class Modalidade extends CI_Controller {
 
         $this->session->set_flashdata('danger','Problemas ao atualizar os dados da modalidade, tente novamente!');
         $this->editar($id);
+
+        redirect("modalidade");
     }
 
     /**
