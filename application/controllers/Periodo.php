@@ -173,16 +173,19 @@ class Periodo extends CI_Controller
         // Faz a interação no array para poder gravar os dados na tabela 'disciplinas'
             foreach ($csv_array as $row) {
                 try {
-                  
+                    if(count($row) > 1){
+                        $this->session->set_flashdata('danger', 'CSV fora do padrão de Períodos');
+                    }else{
                     $periodo = new Periodo_model();
                     $periodo->nome = $row[0];
                                         
                     $periodo->save();
-                    $this->session->set_flashdata('success','Período cadastrado com sucesso');    
+                    $this->session->set_flashdata('success','Período cadastrado com sucesso');
+                    }    
                 } catch (Exception $ignored){}
                     
             }
-                 redirect("Periodo");
+                redirect("Periodo");
         }
     }
 
