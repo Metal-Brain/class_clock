@@ -131,9 +131,9 @@
     public function deletar($id){
       try {
         $curso = Curso_model::findOrFail($id);
-        TipoPessoa_model::where("tipo_id",5)->where("pessoa_id",$curso->docente->pessoa->id)->delete();
-        $curso->docente_id = null;
-        $curso->save();
+        // TipoPessoa_model::where("tipo_id",5)->where("pessoa_id",$curso->docente->pessoa->id)->delete();
+        // $curso->docente_id = null;
+        // $curso->save();
         $curso->delete();
         $this->session->set_flashdata('success','Curso Desativado com sucesso');
         redirect("curso");
