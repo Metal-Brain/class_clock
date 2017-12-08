@@ -27,5 +27,3 @@ class Disciplina_model extends Model{
 		return $this->belongsToMany(TipoSala_model::class, 'tipo_sala_id');
 	}
 }
-
-?>

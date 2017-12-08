@@ -34,7 +34,7 @@
 							<select name="disciplina_id" id="disciplina_id" class="form-control" style="max-width:400px;">
 								<option disabled selected>Selecione</option>
 									<?php foreach($disciplinas as $disciplina): ?>
-									<option value="<?=$disciplina['id'] ?>"><?= $disciplina['nome_disciplina'] . ' - ' . $disciplina->curso->nome_curso ?></option>
+									<option value="<?=$disciplina['id'] ?>"><?= "[{$disciplina->curso->sigla_curso}] {$disciplina->nome_disciplina}" ?></option>
 								<?php endforeach ?>
 							</select>
 							<span class="text-danger">
