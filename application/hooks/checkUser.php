@@ -7,31 +7,31 @@ class checkUser {
     private $CI;
     private $controller;
     private $method;
-    
+
     public function __construct(){
         $this->CI           = &get_instance();
         $this->controller   = strtolower($this->CI->router->class);
         $this->method       = $this->CI->router->method;
     }
-    
+
     /*
     * Verificar se existe usuário logado e qual seu respectivo nível de accesso
     * @param controllers que não precisam de validação e/ou usuário logado
     */
     public function check($param) {
-        
+
         $user = $this->CI->session->userdata('usuario_logado');
-        
+
         if ( !in_array($this->controller, $param) ) {
-            
+
             if (!isset($user)){
                 $message = "Necessário estar logado para accessar " . $class;
                 $this->CI->session->set_flashdata('danger', $message);
                 redirect('/');
             }
-            
+
             $access = [];
-            
+
             foreach($user['tipos'] as $tipo) {
                 if($tipo == 1){
                     $access = array_merge_recursive($access, $this->setAccessToAdmin());
@@ -49,12 +49,12 @@ class checkUser {
                     $access = array_merge_recursive($access, $this->setAccessToCoordenador());
                 }
             }
-            
-            $this->hasAccess($access);   
+
+            $this->hasAccess($access);
         }
-        
+
     }
-    
+
     /*
     * seta os controllers e métodos que o perfil administrador pode accessar
     */
@@ -73,11 +73,11 @@ class checkUser {
             'turma'       => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
             'periodo'     => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar','importCsv','download','force_download', 'setPeriodoAtual']
         ];
-        
-        
+
+
         return $access;
     }
-    
+
     /*
     * seta os controllers e métodos que o perfil CRA pode accessar
     */
@@ -93,10 +93,10 @@ class checkUser {
             'modalidade'  => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
             'disciplina'  => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar','importCsv','download','force_download']
         ];
-        
+
         return $access;
     }
-    
+
     /*
     * seta os controllers e métodos que o perfil DAE pode accessar
     */
@@ -104,12 +104,12 @@ class checkUser {
         $access =
         [
             'classificacao'   => ['index'],
-            'consultadocente' => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar'],
+            'consultadocente' => ['index', 'cadastrar', 'salvar', 'editar', 'atualizar', 'deletar', 'ativar']
         ];
-        
+
         return $access;
     }
-    
+
     /*
     * seta os controllers e métodos que o perfil docente pode accessar
     */
@@ -123,10 +123,10 @@ class checkUser {
                 'editarDisponibilidade'
                 ]
             ];
-            
+
             return $access;
         }
-        
+
         private function setAccessToCoordenador(){
             $access =
             [
@@ -139,23 +139,22 @@ class checkUser {
                     'editarDisponibilidade'
                     ]
                 ];
-                
+
                 return $access;
             }
-            
+
             /*
             * verifica se o usuário pode accessar controller e método requisitado
             */
             private function hasAccess ($access) {
-                                
+
                 if (!key_exists($this->controller, $access)) {
                     redirect('authError');
                 }
-                
+
                 if(!in_array($this->method, $access[$this->controller])) {
                     redirect('authError');
                 }
             }
-            
+
         }
-        

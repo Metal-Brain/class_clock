@@ -6,7 +6,7 @@
 */
 class ConsultaDocente extends CI_Controller {
   function index () {
-    if (in_array(1, $this->session->userdata()["usuario_logado"]["tipos"])) {
+    if (in_array(1, $this->session->userdata()["usuario_logado"]["tipos"]) || in_array(3, $this->session->userdata()["usuario_logado"]["tipos"])) {
       $preferencias = Docente_preferencia_model::all();
       $this->load->template('consultaDocente/consultaDocente',compact('preferencias'),'consultaDocente/js_consultaDocente');
     } else  {
@@ -30,7 +30,7 @@ class ConsultaDocente extends CI_Controller {
         $this->load->template('consultaDocente/consultaDocente',compact('preferencias'),'consultaDocente/js_consultaDocente');
       } else {
         redirect('authError');
-      } 
-    } 
+      }
+    }
   }
 }
