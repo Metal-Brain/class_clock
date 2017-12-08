@@ -30,7 +30,7 @@
 
 									<option value="" disabled selected>Selecione</option>
 									<?php foreach($disciplinas as $disciplina): ?>
-									<option value="<?=$disciplina['id'] ?>" <?= ($turma->disciplina->id == $disciplina->id) ? 'selected' : ''  ?> ><?=$disciplina['nome_disciplina'] ?></option>
+									<option value="<?=$disciplina['id'] ?>" <?= ($turma->disciplina->id == $disciplina->id) ? 'selected' : ''  ?> ><?= $disciplina['nome_disciplina'] . ' - ' . $disciplina->curso->nome_curso ?></option>
 								<?php endforeach ?>
 							</select>
 						</div>
@@ -45,7 +45,7 @@
 									<?php }?>
 							</select>
 						</div>
-						
+
 
 
 						<div class="form-group">

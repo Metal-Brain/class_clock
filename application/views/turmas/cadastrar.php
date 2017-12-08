@@ -22,19 +22,19 @@
 							<label>Depedência</label><br />
 							<label class="radio-inline"><input value="1" type="radio" name="dp">SIM</label>
 							<label class="radio-inline"><input value="0" type="radio" name="dp" checked>NÃO</label>
-						
+
 						</div>
 						<div class="form-group">
 							<span class="text-danger">
 								<?= form_error('dp') ?>
 							</span>
-						</div>	
+						</div>
 						<div class="form-group">
 							<label>Disciplina</label>
 							<select name="disciplina_id" id="disciplina_id" class="form-control" style="max-width:400px;">
 								<option disabled selected>Selecione</option>
 									<?php foreach($disciplinas as $disciplina): ?>
-									<option value="<?=$disciplina['id'] ?>"><?=$disciplina['nome_disciplina'] ?></option>
+									<option value="<?=$disciplina['id'] ?>"><?= $disciplina['nome_disciplina'] . ' - ' . $disciplina->curso->nome_curso ?></option>
 								<?php endforeach ?>
 							</select>
 							<span class="text-danger">
