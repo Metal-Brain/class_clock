@@ -28,6 +28,7 @@
 	<thead>
 		<tr>
 			<th class="text-center">Periodo</th>
+			<th class="text-center">Curso</th>
 			<th class="text-center">Disciplina</th>
 			<th class="text-center">Turno</th>
 			<th class="text-center">Qtd. Alunos</th>
@@ -41,6 +42,7 @@
 		<?php foreach ($turmas as $turma) { ?>
 			<tr <?php if($turma->deletado_em): echo 'class="danger"'; endif; ?>>
 				<td class="text-center"><?= $turma->periodo->nome; ?></td>
+				<td class="text-center"><?= $turma->disciplina->curso->nome_curso ?></td>
 				<td class="text-center"><?= $turma->disciplina->nome_disciplina; ?></td>
 				<td class="text-center"><?= $turma->turno->nome_turno ?></td>
 				<td class="text-center"><?= $turma->qtd_alunos ?></td>
