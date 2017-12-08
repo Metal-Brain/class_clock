@@ -49,13 +49,10 @@
 
           $this->session->set_flashdata('success','Curso cadastrado com sucesso');
           redirect('curso');
-        } catch (Exception $ignored) {
-          echo $ignored->getMessage();
-        }
+        } catch (Exception $e) {}
       }
       $this->session->set_flashdata('danger','Problemas ao cadastrar o curso, tente novamente!');
       $this->cadastrar();
-      redirect('curso');
     }
 
     public function editar($id) {
@@ -97,7 +94,7 @@
           }else{
             try{
               TipoPessoa_model::where("tipo_id",5)->where("pessoa_id",$curso->docente->pessoa->id)->delete();
-            } catch (Exception $ignored){}
+            } catch (Exception $e){}
             $curso->docente_id = null;
           }
           $curso->codigo_curso = $this->input->post('codigo_curso');
@@ -108,36 +105,31 @@
 
           $this->session->set_flashdata('success', 'Curso atualizado com sucesso');
           redirect('curso');
-        } catch (Exception $i) {
-
-        }
+        } catch (Exception $e) {}
       }
-
       $this->session->set_flashdata('danger', 'Problemas ao atualizar os dados do curso, tente novamente!');
       $this->editar($id);
-      redirect('curso');
     }
 
     public function ativar($id){
       try{
-      $curso = Curso_model::withTrashed()->findOrFail($id)->restore();
-      $this->session->set_flashdata('success', 'Curso ativado com sucesso');
-      }catch(Exception $e){
-        $this->session->set_flashdata('danger', 'Não foi possivel ativar o curso');
-      }
+        $curso = Curso_model::withTrashed()->findOrFail($id)->restore();
+        $this->session->set_flashdata('success', 'Curso ativado com sucesso');
+      }catch(Exception $e) {}
+      $this->session->set_flashdata('danger', 'Não foi possivel ativar o curso');
       redirect('curso');
     }
 
     public function deletar($id){
       try {
         $curso = Curso_model::findOrFail($id);
-        // TipoPessoa_model::where("tipo_id",5)->where("pessoa_id",$curso->docente->pessoa->id)->delete();
-        // $curso->docente_id = null;
-        // $curso->save();
+        TipoPessoa_model::where("tipo_id",5)->where("pessoa_id",$curso->docente->pessoa->id)->delete();
+        $curso->docente_id = null;
+        $curso->save();
         $curso->delete();
         $this->session->set_flashdata('success','Curso Desativado com sucesso');
         redirect("curso");
-      }catch (Exception $ignored) {}
+      }catch (Exception $e) {}
       $this->session->set_flashdata('danger','Erro ao deletar um curso, tente novamente');
       redirect("curso");
     }
@@ -162,7 +154,6 @@
       $csv_array = CSVImporter::fromForm('csvfile');
 
       if ($csv_array) {
-        // Faz a interação no array para poder gravar os dados na tabela 'disciplinas'
         foreach ($csv_array as $row) {
           try {
             $curso = new Curso_model();
@@ -177,7 +168,7 @@
 
             $this->session->set_flashdata('success','Curso cadastrado com sucesso');
 
-          } catch (Exception $ignored){}
+          } catch (Exception $e){}
             $this->session->set_flashdata('danger','Erro ao cadastrar o curso, tente novamente');
         }
         redirect("Curso");
