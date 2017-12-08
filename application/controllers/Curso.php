@@ -178,6 +178,7 @@
             $this->session->set_flashdata('success','Curso cadastrado com sucesso');
 
           } catch (Exception $ignored){}
+            $this->session->set_flashdata('danger','Erro ao cadastrar o curso, tente novamente');
         }
         redirect("Curso");
       }
