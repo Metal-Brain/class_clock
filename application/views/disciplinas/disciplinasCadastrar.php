@@ -115,7 +115,7 @@
 
       <label>Sigla:</label>
   		<div class="form-group width-400">
-  			<input id="sigla_disciplina" name="sigla_disciplina" pattern="[A-Za-z0-9]" class="form-control" type="text" placeholder="Sigla" onkeyup="mascara(this,alphanum);" value="<?= set_value('sigla_disciplina')?>">
+  			<input id="sigla_disciplina" name="sigla_disciplina" pattern="[A-Za-z0-9]" class="form-control" type="text" placeholder="Sigla" onkeyup="mascara(this,alphanum);" value="<?= set_value('sigla_disciplina')?>" maxlength=5>
   			<span class="text-danger">
   				<?= form_error('sigla_disciplina') ?>
   			</span>
