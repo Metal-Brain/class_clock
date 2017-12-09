@@ -51,6 +51,13 @@ function podeVer($tipos, $levels) {
 							<span class="glyphicon glyphicon-icon-bar"></span>
 						</button>
 
+						<li class="dropdown pull-left" style="margin-left: 10px">
+							<a href="#" data-toggle="dropdown" class="dropdown-toggle usuario" role="button" style="background: #b2daa6 !important; color: #33691e !important">
+								<?php $periodoAtivoHeader = @Periodo_model::periodoAtivo()->nome ?>
+								<?=  $periodoAtivoHeader ? "Periodo: {$periodoAtivoHeader}" : "" ?>
+							</a>
+						</li>
+
 						<li class="dropdown pull-right">
 							<a href="#" data-toggle="dropdown" class="dropdown-toggle usuario" role="button" aria-haspopup="true" aria-expanded="false">
 								<?= ucwords($this->session->usuario_logado['nome']) ?> <b class="caret"></b>

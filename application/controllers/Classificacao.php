@@ -31,7 +31,7 @@ class Classificacao extends MY_Controller {
 
         $classificacoes = [];
         if(!is_null($curso)){
-            $classificacoes = Classificacao_model::where('curso_id', $curso)->get();
+			$classificacoes = Classificacao_model::where('curso_id', $curso)->get();
         }
 		
 	    $this->load->template('classificacoes/classificacao', compact('classificacoes', 'cursos', 'cursoPesquisado', 'tipos', 'user'), 'classificacoes/js_classificacao');
