@@ -48,7 +48,7 @@ class Fpa extends MY_Controller{
       $this->load->template('fpas/fpaPreferencias', compact('fpa', 'turmas', 'disciplinas'), 'fpas/js_fpas');
     }
     else{
-      $this->load->template('fpas/fpaPreferencias', compact('turmas'), 'fpas/js_fpas');
+      $this->load->template('fpas/fpaPreferencias', compact('turmas', 'disciplinas'), 'fpas/js_fpas');
     }
   }
 
