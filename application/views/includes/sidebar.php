@@ -83,7 +83,7 @@
 	   </li> -->
 	   <?php if (podeVer($tipoUsuario,[4])) :?>
 		<li id="sidebar-fpa">
-			<a href="http://localhost/class_clock/index.php/Fpa">
+			<a href="<?php echo base_url();?>index.php/Fpa">
 				<span class="glyphicon glyphicon-duplicate"></span> <span class="sidebar-label">FPA</span>
 			</a>
 		</li>

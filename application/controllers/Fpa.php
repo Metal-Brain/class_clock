@@ -4,8 +4,16 @@ class Fpa extends MY_Controller{
 
   function index(){
     $docente = Pessoa_model::find($_SESSION['usuario_logado']['id'])->docente;
-    $fpas = Fpa_model::where("docente_id", $docente->id)->get();
-    $this->load->template('fpas/fpas',compact('fpas'),'fpas/js_fpas');
+    //$fpas = Fpa_model::where("docente_id", $docente->id)->get();
+    //$this->load->template('fpas/fpas',compact('fpas'),'fpas/js_fpas');
+    
+    $periodoAtivo = Periodo_model::periodoAtivo()->id;
+    $fpa = Fpa_model::where("docente_id", $docente->id)->where('periodo_id', $periodoAtivo)->first();
+    if(is_null($fpa)) {
+      $this->cadastrarDisponibilidade();
+    } else {
+      redirect("Fpa/editarDisponibilidade/{$fpa->id}");
+    }
   }
 
   public function cadastrarDisponibilidade(){
@@ -43,7 +51,7 @@ class Fpa extends MY_Controller{
        $disciplinas[] = $preferencia->disciplina;
     }
 
-    $turmas = Turma_model::all();
+    $turmas = Turma_model::where('periodo_id', $periodoAtivo->id)->get();
     if(!$preferencias->isEmpty()){
       $this->load->template('fpas/fpaPreferencias', compact('fpa', 'turmas', 'disciplinas'), 'fpas/js_fpas');
     }
@@ -76,7 +84,6 @@ class Fpa extends MY_Controller{
     $fpa->horarios()->sync([]);
     $disponibilidade = $this->input->post('disp');
     $indisponibilidade  = $this->request('indisponibilidade');
-
 
     try{
       DB::transaction(function () use ($fpa, $disponibilidade, $indisponibilidade){
@@ -128,6 +135,9 @@ class Fpa extends MY_Controller{
     $docente_id = Docente_model::where('pessoa_id',$_SESSION['usuario_logado']['id'])->first()->id;
     $fpa = Fpa_model::where('docente_id', $docente_id)->where('periodo_id', $periodoAtivo->id)->first();
     $disciplinas = $this->input->post('disc');
+    if(is_null($disciplinas)){
+      $disciplinas = [];
+    }
     $fpa->disciplinas()->sync([]);
     $ordem = 1;
     try{
