@@ -6,7 +6,7 @@ class Fpa extends MY_Controller{
     $docente = Pessoa_model::find($_SESSION['usuario_logado']['id'])->docente;
     //$fpas = Fpa_model::where("docente_id", $docente->id)->get();
     //$this->load->template('fpas/fpas',compact('fpas'),'fpas/js_fpas');
-    
+
     $periodoAtivo = Periodo_model::periodoAtivo()->id;
     $fpa = Fpa_model::where("docente_id", $docente->id)->where('periodo_id', $periodoAtivo)->first();
     if(is_null($fpa)) {
@@ -24,7 +24,7 @@ class Fpa extends MY_Controller{
 
     $url = explode('/',uri_string());
     // verifica a rota que esta acessando a função
-    if ($url[1] == 'editarDisponibilidade') {
+    if (@$url[1] == 'editarDisponibilidade') {
       $periodoAtivo = Periodo_model::periodoAtivo();
       $docente_id = Docente_model::where('pessoa_id',$_SESSION['usuario_logado']['id'])->first()->id;
       $fpa = Fpa_model::where('docente_id', $docente_id)->where('periodo_id', $periodoAtivo->id)->first();
