@@ -1,16 +1,9 @@
-
-<script type="text/javascript">
-
-  $(document).ready(function () {
-        $('#classificacaoTable').DataTable();
-    });
-</script>
 <script type="text/javascript">
 $(document).ready(function () {
 
     //Transforms the listbox visually into a Select2.
     $("select").select2({
-     
+
     });
 
     //Initialize the validation object which will be called on form submit.
@@ -72,7 +65,9 @@ $(document).ready(function () {
     });
 });
   $(document).ready(function () {
-        $('#cursoTable').DataTable();
+        $('#classificacaoTable').DataTable({
+          "ordering": false
+        });
     });
 </script>
 
