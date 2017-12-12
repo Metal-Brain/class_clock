@@ -457,34 +457,36 @@
 
 
   -- -----------------------------------------------------
-  -- View `horario`.`docente_preferencia`
+  -- View `horario`.`docente_classificacao`
   -- -----------------------------------------------------
-  DROP VIEW IF EXISTS `docente_preferencia`;
-
-  CREATE VIEW `docente_preferencia` AS
-  select docente.id as docente_id, pessoa.nome, disciplina.nome_disciplina, curso.nome_curso, fpa.periodo_id,
-  curso.id as curso_id, turno.nome_turno as turno from disciplina
-  	join curso on disciplina.curso_id = curso.id
-  	join preferencia on preferencia.disciplina_id = disciplina.id
-  	join fpa on preferencia.fpa_id = fpa.id
-  	join docente on fpa.docente_id = docente.id
-  	join pessoa on docente.pessoa_id = pessoa.id
-      join turma on turma.disciplina_id = disciplina.id
-      join turno on turno.id = turma.turno_id
-  	order by curso.nome_curso, disciplina.nome_disciplina ASC;
+  CREATE  OR REPLACE VIEW `docente_classificacao` AS
+      select curso.nome_curso, curso.id as curso_id, disciplina.nome_disciplina, disciplina.id, docente.id as docente_id,
+      pessoa.nome, fpa.periodo_id from disciplina
+  		join curso on disciplina.curso_id = curso.id
+  		join preferencia on preferencia.disciplina_id = disciplina.id
+  		join fpa on preferencia.fpa_id = fpa.id
+  		join docente on fpa.docente_id = docente.id
+  		join pessoa on docente.pessoa_id = pessoa.id
+  		order by curso.nome_curso, disciplina.nome_disciplina,
+        docente.titulacao, docente.nivel_carreira, docente.ingresso_campus, docente.ingresso_ifsp, docente.nascimento ASC;
 
     -- -----------------------------------------------------
-    -- View `horario`.`docente_classificacao`
+    -- View `horario`.`docente_preferencia`
     -- -----------------------------------------------------
-    CREATE  OR REPLACE VIEW `docente_classificacao` AS
-    select curso.nome_curso, curso.id as curso_id, disciplina.nome_disciplina, disciplina.id, docente.id as docente_id, pessoa.nome from disciplina
+
+    DROP VIEW IF EXISTS `docente_preferencia`;
+
+    CREATE VIEW `docente_preferencia` AS
+    select distinct docente.id as docente_id, pessoa.nome, disciplina.nome_disciplina, curso.nome_curso, fpa.periodo_id,
+    curso.id as curso_id, turno.nome_turno as turno from disciplina
     	join curso on disciplina.curso_id = curso.id
     	join preferencia on preferencia.disciplina_id = disciplina.id
-      join fpa on preferencia.fpa_id = fpa.id
-      join docente on fpa.docente_id = docente.id
-      join pessoa on docente.pessoa_id = pessoa.id
-      order by curso.nome_curso, disciplina.nome_disciplina,
-      docente.titulacao, docente.nivel_carreira, docente.ingresso_campus, docente.ingresso_ifsp, docente.nascimento ASC;
+    	join fpa on preferencia.fpa_id = fpa.id
+    	join docente on fpa.docente_id = docente.id
+    	join pessoa on docente.pessoa_id = pessoa.id
+      join turma on turma.disciplina_id = disciplina.id
+      join turno on turno.id = turma.turno_id
+    	order by curso.nome_curso, disciplina.nome_disciplina ASC;
 
 
   SET SQL_MODE=@OLD_SQL_MODE;

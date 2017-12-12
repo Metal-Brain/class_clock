@@ -31,7 +31,7 @@ class Classificacao extends MY_Controller {
 
 
     if(!is_null($curso)){
-      $classificacoes = Classificacao_model::where('curso_id', $curso)->get();
+      $classificacoes = Classificacao_model::where('curso_id', $curso)->where("periodo_id", Periodo_model::periodoAtivo()->id)->get();
     }
 
 
