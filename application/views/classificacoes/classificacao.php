@@ -47,7 +47,6 @@
 				<th class="text-center">Docente</th>
 				<th class="text-center">Curso</th>
 				<th class="text-center">Disciplina</th>
-        <th class="text-center">Turno</th>
 			</tr>
 		</thead>
 
@@ -58,7 +57,6 @@
   					<td class="text-center"><?= htmlspecialchars(ucwords($classificacao['nome'])); ?></td>
   					<td class="text-center"><?= htmlspecialchars(ucwords($classificacao['nome_curso'])); ?></td>
   					<td class="text-center"><?= htmlspecialchars(ucwords($classificacao['nome_disciplina'])); ?></td>
-            <td class="text-center"><?= htmlspecialchars(ucwords($classificacao['turno'])); ?></td>
 			    </tr>
 			<?php } ?>
 
